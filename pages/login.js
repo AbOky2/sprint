@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Button from '@material-ui/core/Button';
-
 import withAuth from '../lib/withAuth';
 import withLayout from '../lib/withLayout';
 import { styleLoginButton } from '../lib/SharedStyles';

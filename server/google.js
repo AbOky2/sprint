@@ -1,6 +1,7 @@
 const passport = require('passport');
 const Strategy = require('passport-google-oauth').OAuth2Strategy;
 const User = require('./models/User');
+const { GOOGLE_CLIENT_SECRET, GOOGLE_CLIENT_ID } = require('../config');
 
 function auth({ ROOT_URL, server }) {
   const verify = async (accessToken, refreshToken, profile, verified) => {
@@ -32,8 +33,8 @@ function auth({ ROOT_URL, server }) {
   passport.use(
     new Strategy(
       {
-        clientID: process.env.Google_clientID,
-        clientSecret: process.env.Google_clientSecret,
+        clientID: GOOGLE_CLIENT_ID,
+        clientSecret: GOOGLE_CLIENT_SECRET,
         callbackURL: `${ROOT_URL}/oauth2callback`,
       },
       verify,
