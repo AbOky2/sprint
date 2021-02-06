@@ -3,7 +3,7 @@ const session = require('express-session');
 const mongoSessionStore = require('connect-mongo');
 const next = require('next');
 const mongoose = require('mongoose');
-const auth = require('./google');
+const auth = require('./basic');
 const { IS_DEV, MONGO_URL, PORT, SESSION_SECRET, ROOT_URL } = require('../config');
 
 mongoose.connect(MONGO_URL, { useNewUrlParser: true });
@@ -35,6 +35,7 @@ app.prepare().then(() => {
   server.use(session(sess));
 
   auth({ server, ROOT_URL });
+  // auth({ server, ROOT_URL });
 
   server.get('*', (req, res) => handle(req, res));
 
