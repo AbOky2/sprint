@@ -22,7 +22,7 @@ class DBModel {
 
   static async get(_id) {
     try {
-      const element = await this.findById(_id);
+      const element = await this.findById(_id, this.publicFields());
 
       if (!element) {
         throw new Error('Element not found');

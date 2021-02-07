@@ -4,36 +4,37 @@ import Link from 'next/link';
 import Menu from '@material-ui/core/Menu';
 import Avatar from '@material-ui/core/Avatar';
 
-class MenuDrop extends React.Component {
-  static propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    options: PropTypes.arrayOf(String).isRequired,
-  };
+const propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(String).isRequired,
+};
 
-  state = {
-    open: false,
-    anchorEl: undefined,
-  };
+class MenuWithAvatar extends React.Component {
+  constructor() {
+    super();
 
-  button = undefined;
+    this.state = {
+      anchorEl: undefined,
+    };
+  }
 
   handleClick = (event) => {
-    this.setState({ open: true, anchorEl: event.currentTarget });
+    this.setState({ anchorEl: event.currentTarget });
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ anchorEl: null });
   };
 
   render() {
     const { options, src, alt } = this.props;
-    const { anchorEl, open } = this.state;
+    const { anchorEl } = this.state;
+
     return (
       <div>
         <Avatar
-          role="presentation"
-          aria-owns="simple-menu"
+          aria-controls={anchorEl ? 'simple-menu' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
           onKeyPress={this.handleClick}
@@ -41,11 +42,17 @@ class MenuDrop extends React.Component {
           alt={alt}
           style={{ margin: '0px 20px 0px auto', cursor: 'pointer' }}
         />
-        <Menu id="simple-menu" anchorEl={anchorEl} open={open} onClose={this.handleClose}>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+          keepMounted
+        >
           <p />
           {options.map((option) => (
             <div id="wrappingLink" key={option.text}>
-              <Link prefetch href={option.href} as={option.as || option.href}>
+              <Link href={option.href} as={option.as || option.href}>
                 <a style={{ padding: '0px 20px' }}>{option.text}</a>
               </Link>
               <p />
@@ -57,4 +64,6 @@ class MenuDrop extends React.Component {
   }
 }
 
-export default MenuDrop;
+MenuWithAvatar.propTypes = propTypes;
+
+export default MenuWithAvatar;

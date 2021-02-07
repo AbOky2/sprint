@@ -44,8 +44,20 @@ const auth = ({ server }) => {
       verify,
     ),
   );
-  passport.serializeUser((user, done) => done(null, user));
-  passport.deserializeUser((user, done) => done(null, user));
+  passport.serializeUser((user, done) => done(null, user._id));
+  // passport.deserializeUser((user, done) => done(null, user));
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await UserModel.get(id);
+      done(null, user);
+      
+    } catch (err) {
+      done(err);
+    }
+  });
+
+  server.use(passport.initialize());
+  server.use(passport.session());
 
   SignRequsts.forEach(({ path, schema }) =>
     server.post(path, requestMiddleware(schema), (req, res, next) => {
@@ -55,23 +67,15 @@ const auth = ({ server }) => {
 
         req.login(reqUser, (error) => {
           if (error) return next(error);
-          const { user } = req;
 
-          return res.json({ authenticate: true, user });
+          res.json({user: reqUser});
         });
       })(req, res, next);
     }),
   );
-
-  server.get('/auth/logout', (req, res, next) => {
+  server.get('/logout', (req, res) => {
     req.logout();
-    req.session.destroy((err) => {
-      if (err) {
-        return next(err);
-      }
-
-      return res.send({ authenticated: false });
-    });
+    res.redirect('/login');
   });
 };
 

@@ -10,7 +10,6 @@ const {
   ucFirst,
   isValidateEmail,
 } = require('../../helpers/user');
-
 const DBModel = require('./Model');
 const msg = require('../utils/message');
 const bcrypt = require('../utils/bcrypt');
@@ -92,6 +91,7 @@ class UserClass extends DBModel {
       'school',
       'phone',
       'email',
+      'isAdmin',
       'slug',
       'role',
       'status',
@@ -100,9 +100,7 @@ class UserClass extends DBModel {
   }
 
   static async getId(where) {
-    const user = await this.findOne(where)
-      .select('_id')
-      .lean();
+    const user = await this.findOne(where).select('_id').lean();
 
     if (!user) return { userId: null };
 
@@ -110,9 +108,7 @@ class UserClass extends DBModel {
   }
 
   static async getUserZones(_id) {
-    const list = await this.findOne(_id)
-      .select('zones')
-      .lean();
+    const list = await this.findOne(_id).select('zones').lean();
 
     return { list };
   }
@@ -197,15 +193,17 @@ class UserClass extends DBModel {
     let user = await this.findOne({ email });
 
     if (!user) {
-      user = (await this.add({
-        role,
-        email,
-        password,
-        firstName,
-        provider,
-        lastName,
-        picture: avatarUrl,
-      })).user;
+      user = (
+        await this.add({
+          role,
+          email,
+          password,
+          firstName,
+          provider,
+          lastName,
+          picture: avatarUrl,
+        })
+      ).user;
     }
     user = user.toObject();
 
@@ -230,9 +228,7 @@ class UserClass extends DBModel {
   static async signUp(options) {
     let user = null;
 
-    if (await this.findOne({ email: options.email })) {
-      throw new Error(msg.alreadyExist('Email'));
-    }
+    if (await this.findOne({ email: options.email })) { throw new Error(msg.alreadyExist('Email')); }
 
     user = (await this.add(options)).user;
     user = user.toObject();

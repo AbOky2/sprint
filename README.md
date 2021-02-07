@@ -63,6 +63,12 @@ Check out [package.json](https://github.com/builderbook/builderbook/blob/master/
 .
 ├── components                  # React components
 │   ├── Header.js               # Header component
+│   ├── Form.js                 # Form
+│   |   ├── Btn.js              # Btn Component
+│   |   ├── Icon.js             # Icon Component
+│   |   ├── Input.js            # Input Component
+│   |   ├── Modal.js            # Modal Component
+│   |   ├── Select.js           # Select Component
 │   ├── MenuDrop.js             # Dropdown menu
 │   ├── SharedStyles.js         # List of _reusable_ styles
 ├── lib                         # Code available on both client and server

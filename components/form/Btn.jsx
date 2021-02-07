@@ -44,7 +44,7 @@ const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor 
       onClick={onClick}
     >
       {iconType ? <Icon type={iconType} color={iconColor} /> : ''}
-      <Link to={href}>{text}</Link>
+      {href ?<Link to={href}>{text}</Link>: text}
     </Grid>
   );
 };
@@ -52,13 +52,16 @@ const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor 
 Btn.propTypes = {
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
-  iconColor: PropTypes.oneOf(colorTypes).isRequired,
-  iconType: PropTypes.oneOf(iconTypes).isRequired,
+  href: PropTypes.string,
+  iconColor: PropTypes.oneOf(colorTypes),
+  iconType: PropTypes.oneOf(iconTypes),
   alignRight: PropTypes.bool,
   whiteColor: PropTypes.bool,
 };
 Btn.defaultProps = {
+  href: '',
+  iconColor: undefined,
+  iconType: undefined,
   alignRight: false,
   whiteColor: false,
 };

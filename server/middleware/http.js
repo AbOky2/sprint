@@ -2,9 +2,9 @@ const session = require('express-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const { SESSION_SECRET } = require('../../config');
-const { UserModel } = require('../models');
-const { jwtVerify } = require('../utils/jwt');
-const msg = require('../utils/message');
+// const { UserModel } = require('../models');
+// const { jwtVerify } = require('../utils/jwt');
+// const msg = require('../utils/message');
 
 module.exports = [
   bodyParser.urlencoded({ extended: true }),
