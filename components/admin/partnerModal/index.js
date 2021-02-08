@@ -81,9 +81,6 @@ export default function HorizontalLabelPositionBelowStepper({
 
   return (
     <div className={classes.root}>
-      <span onClick={handleClose} className={classes.closeModal}>
-        x
-      </span>
       <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label) => (
           <Step key={label}>

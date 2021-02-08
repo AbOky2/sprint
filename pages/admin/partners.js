@@ -74,7 +74,7 @@ const Header = ({ onClick }) => (
     <Grid item>
       <Grid>
         <span className="header-icon">
-          <Icon type="plus" />
+          <Icon type="sponsorship" size="small" />
         </span>
         <h1>Offres partenaires</h1>
       </Grid>

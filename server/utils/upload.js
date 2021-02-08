@@ -20,7 +20,7 @@ const unlinkFile = (filePath) => {
 };
 
 module.exports = {
-  upload: (folderName = '') => multer({ dest: `public/img/${folderName}`, fileFilter }),
+  upload: (folderName = '') => multer({ dest: `static/img/${folderName}`, fileFilter }),
   removeFiles: (files) => {
     if (!files) return;
     try {
