@@ -77,8 +77,8 @@ router.post(
     try {
       const [{ latitude, longitude }] = [{}];
       // const [{ latitude, longitude }] = await geocoder.geocode(location);
-
-      const { list } = await PropertieModel.search(maxPrice, typeOfProperty, [latitude, longitude]);
+      const coordinates = [latitude, longitude];
+      const { list } = await PropertieModel.search({ maxPrice, typeOfProperty, coordinates });
 
       res.json({ list });
     } catch (error) {

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { isNull } from 'lodash';
 import withAuth from '../../lib/withAuth';
 import { addBookmarkApiMethod, getUserSearchApiMethod } from '../../lib/api/customer';
 import { toggleArray } from '../../helpers/convertAndCheck';
@@ -76,7 +77,11 @@ const useStyles = makeStyles({
 });
 const SearchPage = ({ user }) => {
   const [state, setState] = useState([]);
-  const [queryData, setQueryData] = useState([]);
+  const [queryData, setQueryData] = useState({
+    location: '',
+    maxPrice: 0,
+    typeOfProperty: typeOfProperties[0],
+  });
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
   const classes = useStyles();
   const handleSearch = (name) => ({ target: { value } }) =>
@@ -88,6 +93,7 @@ const SearchPage = ({ user }) => {
   };
   const handleSumit = async () => {
     // const queryData = { maxPrice: '20000', typeOfProperty: 'Appartement' };
+    if (!queryData.maxPrice) queryData.maxPrice = 0;
     const { list } = await getUserSearchApiMethod(queryData);
     setState(list);
   };
@@ -141,7 +147,7 @@ const SearchPage = ({ user }) => {
           </Grid>
           <Grid item md={4}>
             <Select
-              name="typeOfProperties"
+              name="typeOfProperty"
               list={typeOfProperties.map((name) => ({ name, value: name }))}
               onChange={handleSearch}
             />
@@ -154,14 +160,14 @@ const SearchPage = ({ user }) => {
           </Grid>
         </Grid>
         <Grid container>
-          {state?.map(({ _id, title, src, address, typeOfProperties, dimensions, price }) => (
+          {state?.map(({ _id, title, src, address, typeOfProperty, dimensions, price }) => (
             <Grid item key={_id} className={classes.listContainer}>
               <Card
                 _id={_id}
                 title={title}
                 src={src}
                 address={address}
-                description={typeOfProperties}
+                description={typeOfProperty}
                 dimensions={dimensions}
                 price={price}
                 liked={liked.includes(_id)}

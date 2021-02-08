@@ -36,7 +36,7 @@ const schemas = {
   },
   student: {
     search: Joi.object().keys({
-      location: Joi.string().min(3).optional(),
+      location: Joi.string().optional().allow(''),
       typeOfProperty: Joi.string().valid(...typeOfProperties),
       maxPrice: Joi.number().min(0).optional(),
     }),
