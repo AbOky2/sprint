@@ -11,6 +11,7 @@ const {
   isValidateEmail,
 } = require('../../helpers/user');
 const DBModel = require('./Model');
+const PropertyModel = require('./Propertie');
 const msg = require('../utils/message');
 const bcrypt = require('../utils/bcrypt');
 const { ROOT_URL } = require('../../config');
@@ -49,6 +50,7 @@ const mongoSchema = new Schema({
     type: String,
     required: true,
   },
+  bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Propertie' }],
   sponsorshipCode: {
     type: String,
   },
@@ -91,6 +93,7 @@ class UserClass extends DBModel {
       'picture',
       'firstName',
       'lastName',
+      'bookmarks',
       'school',
       'phone',
       'email',
@@ -147,6 +150,20 @@ class UserClass extends DBModel {
     return { user };
   }
 
+  static async addBookmark(id, propertyId) {
+    const userDoc = await this.findById(id);
+    const property = await PropertyModel.findById(propertyId);
+    let index = -1;
+
+    // eslint-disable-next-line no-cond-assign
+    if (userDoc.bookmarks && (index = userDoc.bookmarks.indexOf(property._id)) >= 0)
+      userDoc.bookmarks.splice(index, 1);
+    else if (userDoc.bookmarks?.length) userDoc.bookmarks.push(property._id);
+    else userDoc.bookmarks = [property._id];
+    userDoc.save();
+    return { user: userDoc };
+  }
+
   /**
    * Get a User by its slug
    * @param {Object} params
@@ -172,7 +189,7 @@ class UserClass extends DBModel {
     let userDoc = null;
 
     try {
-      userDoc = await this.findOne({ _id }).select(this.publicFields());
+      userDoc = await this.findOne({ _id }).populate('bookmarks').select(this.publicFields());
       if (!_id || !userDoc) {
         throw new Error(msg.notFound('User'));
       }

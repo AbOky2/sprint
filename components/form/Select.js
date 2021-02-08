@@ -76,7 +76,7 @@ NativeSelects.propTypes = {
 NativeSelects.defaultProps = {
   label: '',
   value: '',
-  position: 'left',
+  position: '',
   list: null,
 };
 export default withStyles(styles)(NativeSelects);

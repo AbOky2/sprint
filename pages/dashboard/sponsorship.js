@@ -8,7 +8,7 @@ import FirstDivider from '../../static/img/first_divider.svg';
 import SecondDivider from '../../static/img/second_divider.svg';
 import { Btn, Input, Icon } from '../../components/form';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   tutorialConainer: {
     background: '#F0F3F9',
     boxShadow: '0px 4px 20px rgba(24, 55, 50, 0.04)',
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '1.6rem',
     },
   },
-}));
+});
 
 const PartnerPage = () => {
   const [state, setState] = useState({ email: '', firstName: '', lastName: '' });
@@ -66,7 +66,8 @@ const PartnerPage = () => {
           Faites découvrir Kit le nid à vos proches et recevez 800€
         </Typography>
         <Typography>
-          Aidez vos proches à concrétiser leur projet immobilier. Votre code parrain : FD32DJ
+          Aidez vos proches à concrétiser leur projet immobilier. Votre code parrain :
+          <strong>FD32DJ</strong>
         </Typography>
         <Grid container item justify="center">
           <Grid item md={2} className="text-center">

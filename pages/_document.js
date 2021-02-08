@@ -95,6 +95,9 @@ class MyDocument extends Document {
                 font-size: 14px;
                 background: #FFF;
               }
+              .relative {
+                position: relative;
+              }
               .no-margin {
                 margin: auto !important;
               }

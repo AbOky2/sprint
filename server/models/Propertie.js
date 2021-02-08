@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const DBModel = require('./Model');
+const { typeOfProperties } = require('../../helpers/property');
 
 const { Schema } = mongoose;
 const modelName = 'Propertie';
@@ -15,8 +16,8 @@ const mongoSchema = new Schema({
   heading: { type: String },
   description: { type: String },
   available_date: { type: String },
-  type_of_property: { type: String },
-  price: { type: String },
+  typeOfProperty: { type: String, enum: typeOfProperties },
+  price: { type: Number },
   surface: { type: String },
   land_surface: { type: String },
   nb_pieces: { type: String },
@@ -49,6 +50,37 @@ const mongoSchema = new Schema({
 
 class PropertieClass extends DBModel {
   static name = modelName;
+
+  static async search({ maxPrice, typeOfProperty, coordinates }) {
+    let query = {};
+    query = {
+      $and: [
+        { $or: [maxPrice ? { price: { $lt: parseInt(maxPrice, 10) } } : {}] },
+        // {
+        //   $or: [
+        //     coordinates
+        //       ? {
+        //           location: {
+        //             $near: {
+        //               $maxDistance: 1000,
+        //               $geometry: {
+        //                 type: 'Point',
+        //                 coordinates,
+        //               },
+        //             },
+        //           },
+        //         }
+        //       : {},
+        //   ],
+        // },
+        // { typeOfProperty },
+      ],
+    };
+
+    console.log(query.$and[0].$or, maxPrice);
+    const list = await this.find(query);
+    return { list };
+  }
 }
 mongoSchema.loadClass(PropertieClass);
 

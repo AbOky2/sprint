@@ -24,6 +24,11 @@ const schemas = {
       }),
     },
   },
+  bookmark: {
+    post: {
+      id: Joi.string().min(1).required(),
+    },
+  },
   public: {
     user: {
       signUp: {

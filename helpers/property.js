@@ -11,7 +11,7 @@ const propertiesHeader = [
   'description',
   'is_exclusive',
   'available_date',
-  'type_of_property',
+  'typeOfProperty',
   'price',
   'fee',
   'surface',
@@ -86,7 +86,7 @@ const availableProperties = {
   heading: 'Rubrique',
   description: 'Description',
   available_date: 'Date de disponibilité',
-  type_of_property: 'Type de propriété',
+  typeOfProperty: 'Type de propriété',
   price: 'Prix',
   surface: 'Surface',
   land_surface: 'Surface terrain',
@@ -119,8 +119,9 @@ const availableProperties = {
 };
 
 const filteredProperties = Object.keys(availableProperties);
-
+const typeOfProperties = ['Appartement', 'Maison', 'Terrain', 'Annexe'];
 module.exports = {
   propertiesHeader,
   filteredProperties,
+  typeOfProperties,
 };

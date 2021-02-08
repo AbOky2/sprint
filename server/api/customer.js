@@ -1,6 +1,14 @@
 const express = require('express');
-const { PartnerModel } = require('../models');
-const { listCollection, getCollection } = require('../middleware/express');
+const NodeGeocoder = require('node-geocoder');
+const { PartnerModel, UserModel, PropertieModel } = require('../models');
+const { listCollection, getCollection, handleErrors } = require('../middleware/express');
+const requestMiddleware = require('../middleware/request');
+const joiSchema = require('../middleware/schema');
+
+const options = {
+  provider: 'openstreetmap',
+};
+const geocoder = NodeGeocoder(options);
 
 // const Book = require('../models/Book');
 // const Purchase = require('../models/Purchase');
@@ -60,10 +68,38 @@ router.use((req, res, next) => {
 //     res.json({ error: err.message || err.toString() });
 //   }
 // });
+
+router.post(
+  '/search',
+  requestMiddleware(joiSchema.propertie.student.search),
+  handleErrors(async (req, res) => {
+    const { maxPrice, typeOfProperty, location } = req.body;
+    try {
+      const [{ latitude, longitude }] = [{}];
+      // const [{ latitude, longitude }] = await geocoder.geocode(location);
+
+      const { list } = await PropertieModel.search(maxPrice, typeOfProperty, [latitude, longitude]);
+
+      res.json({ list });
+    } catch (error) {
+      res.json({ errors: 'Error while searching', error });
+    }
+  }),
+);
+
 router.get(
   '/partner/:id',
   // eslint-disable-next-line no-return-await
   getCollection(async ({ id }) => await PartnerModel.get(id)),
+);
+
+router.get(
+  '/properties',
+  listCollection(async ({ offset, limit }) => {
+    const { list } = await PropertieModel.list({ offset, limit });
+
+    return { list };
+  }),
 );
 
 router.get(
@@ -72,6 +108,20 @@ router.get(
     const { list } = await PartnerModel.list({ offset, limit });
 
     return { list };
+  }),
+);
+
+router.post(
+  '/bookmark',
+  requestMiddleware(joiSchema.user.bookmark.post),
+  handleErrors(async (req, res) => {
+    try {
+      const { user } = await UserModel.addBookmark(req.user._id, req.body.id);
+
+      res.json({ user });
+    } catch (error) {
+      res.json({ errors: 'Error while adding', error });
+    }
   }),
 );
 

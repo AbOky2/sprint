@@ -78,7 +78,6 @@ const useStyles = makeStyles({
     textAlign: 'left',
     '& p': {
       fontFamily: 'Open Sans',
-      margin: '1rem 0',
       fontSize: '1.6rem',
     },
   },
