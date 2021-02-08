@@ -216,6 +216,31 @@ class MyDocument extends Document {
               .spacing {
                 padding: 0 24px;
               }
+              .admin-container #sidebar {
+                padding-top: 5rem;
+              }
+              .admin-container #sidebar h2 {
+                margin-bottom: 0;
+              }
+              .admin-container #sidebar h3 {
+                margin-top: 0;
+                margin-bottom: 5rem;
+              }
+              .admin-container #sidebar ul li {
+                list-style: none;
+              }
+              .admin-container #sidebar ul ul {
+                padding: 0;
+              }
+              .admin-container #sidebar ul ul li {
+                cursor: pointer;
+              }
+              .admin-container #sidebar ul span {
+                display: block;
+              }
+              .custom-upload-conatainer > span {
+                marginBottom: 1rem;
+              }
             `}
           </style>
           <script

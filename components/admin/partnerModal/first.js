@@ -4,7 +4,7 @@ import Upload from '../../form/upload';
 
 const First = ({ onChange, values = {} }) => (
   <>
-    <div className="text-center">
+    <div className="text-center custom-upload-conatainer">
       <span>Photo de couverture</span>
       <Upload name="cover" value={values?.upload} onChange={onChange('cover')} />
     </div>

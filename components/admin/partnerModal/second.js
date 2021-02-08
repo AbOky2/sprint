@@ -22,7 +22,7 @@ const Second = ({ onChange, values = {} }) => {
   return (
     <>
       <div className="text-center">
-        <span>Logo</span>
+        <span className="custom-upload-conatainer">Logo</span>
         <Upload name="upload" value={values?.upload} onChange={onChange('upload')} />
       </div>
       <div>
