@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { isNull } from 'lodash';
 import withAuth from '../../lib/withAuth';
 import { addBookmarkApiMethod, getUserSearchApiMethod } from '../../lib/api/customer';
 import { toggleArray } from '../../helpers/convertAndCheck';
@@ -162,17 +162,21 @@ const SearchPage = ({ user }) => {
         <Grid container>
           {state?.map(({ _id, title, src, address, typeOfProperty, dimensions, price }) => (
             <Grid item key={_id} className={classes.listContainer}>
-              <Card
-                _id={_id}
-                title={title}
-                src={src}
-                address={address}
-                description={typeOfProperty}
-                dimensions={dimensions}
-                price={price}
-                liked={liked.includes(_id)}
-                onClick={handleBookmark}
-              />
+              <Link href={`/dashboard/property/${_id}`}>
+                <a>
+                  <Card
+                    _id={_id}
+                    title={title}
+                    src={src}
+                    address={address}
+                    description={typeOfProperty}
+                    dimensions={dimensions}
+                    price={price}
+                    liked={liked.includes(_id)}
+                    onClick={handleBookmark}
+                  />
+                </a>
+              </Link>
             </Grid>
           ))}
         </Grid>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 import * as NProgress from 'nprogress';
-import { StudentSidebarComp } from './AuthWrapper';
+import { StudentSidebarComp, AdminSidebarComp } from './AuthWrapper';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -81,6 +81,14 @@ export default function withAuth(
       }
 
       if (!user) return <BaseComponent {...this.props} />;
+      if (user?.isAdmin || user?.role === 'admin')
+        return (
+          <>
+            <AdminSidebarComp user={user}>
+              <BaseComponent {...this.props} />
+            </AdminSidebarComp>
+          </>
+        );
       return (
         <>
           <StudentSidebarComp user={user}>

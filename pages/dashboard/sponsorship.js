@@ -8,7 +8,7 @@ import FirstDivider from '../../static/img/first_divider.svg';
 import SecondDivider from '../../static/img/second_divider.svg';
 import { Btn, Input, Icon } from '../../components/form';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   tutorialConainer: {
     background: '#F0F3F9',
     boxShadow: '0px 4px 20px rgba(24, 55, 50, 0.04)',
@@ -48,9 +48,14 @@ const useStyles = makeStyles({
     },
     '& > div:last-of-type': {
       marginTop: '1.6rem',
+      '& > div': {
+        [theme.breakpoints.down('sm')]: {
+          margin: 'auto',
+        },
+      },
     },
   },
-});
+}));
 
 const PartnerPage = () => {
   const [state, setState] = useState({ email: '', firstName: '', lastName: '' });

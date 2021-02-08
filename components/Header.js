@@ -65,24 +65,13 @@ function Header({ user, hideHeader, redirectUrl }) {
       <Toolbar style={styleToolbar}>
         <Grid container direction="row" justify="space-around" alignItems="center">
           <Grid item sm={8} xs={7} style={{ textAlign: 'left' }}>
-            {!user ? (
-              <Link href="/">
+            <Link href="/admin">
+              <a>
                 <Icon type="logoFull" customSize={{ width: 137, height: 50 }} />
-              </Link>
-            ) : null}
+              </a>
+            </Link>
           </Grid>
-          <Grid item sm={2} xs={2} style={{ textAlign: 'right' }}>
-            {user && user.isAdmin && !user.isGithubConnected ? (
-              <Hidden smDown>
-                <a href="/auth/github">
-                  <Button variant="contained" color="primary" style={styleRaisedButton}>
-                    Connect Github
-                  </Button>
-                </a>
-              </Hidden>
-            ) : null}
-          </Grid>
-          <Grid item sm={2} xs={3} style={{ textAlign: 'right' }}>
+          <Grid item sm={2} xs={5} style={{ textAlign: 'right' }}>
             {user ? (
               <div style={{ whiteSpace: ' nowrap' }}>
                 {!user.isAdmin ? (

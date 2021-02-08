@@ -116,8 +116,105 @@ class MyDocument extends Document {
               .text-center {
                 text-align: center;
               }
+              .inline-block {
+                display: inline-block;
+              }
               .student-content-wrapper {
                 padding: 0 3rem;
+              }
+
+              // to replace with matterial style
+              .upload {
+                position: relative;
+                display: inline-block;
+              }
+
+              .upload input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                cursor: pointer;
+              }
+              .upload img {
+                max-height: 200px;
+                display: inline-block;
+              }
+
+              .partner-filter {
+                margin: 5px;
+                cursor: pointer;
+                font-size: 1.3rem;
+              }
+              .partner-filter.active {
+                color: #475f7b;
+                text-decoration: underline;
+              }
+              .partner-add p {
+                display: inline-block;
+              }
+              .partner-add .header-icon {
+                margin-right: 5px;
+              }
+              .partner-card-list-container {
+                padding: 2rem 1rem;
+              }
+              .partner-card-list {
+                padding: 1rem;
+              }
+              
+              .modal-content-container {
+                padding: 4rem 6rem;
+              }
+              .modal-title {
+                font-family: 'Nunito';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 2.6rem;
+                line-height: 35px;
+                text-align: center;
+                margin-bottom: 4rem;
+                color: #1a2e6c;
+              }
+              .modal-action-container {
+                margin-top: 4rem;
+                border-top: 1px solid #c1cde7;
+              }
+              .modal-action-container > div:first-of-type {
+                margin-right: 1rem;
+              }
+              .modal-action-container > div:last-of-type {
+                margin-left: 1rem;
+              }
+              header-btn {
+                /* width: 41px; */
+                /* height: 17px; */
+                font-family: 'Rubik';
+                font-size: 1.44rem;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: normal;
+                color: #475f7b;
+              }
+              
+              div.header {
+                padding-top: 15px;
+                padding-bottom: 15px;
+              }
+              
+              .admin-container {
+                min-height: 100vh;
+              }
+              .student-container.admin-container #sidebar {
+                height: calc(100vh - 202px);
+                /* height: 100%; */
+              }
+              .spacing {
+                padding: 0 24px;
               }
             `}
           </style>

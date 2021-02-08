@@ -243,7 +243,7 @@ export const MobileMenu = () => {
     <Grid
       container
       alignItems="center"
-      justify="center"
+      justify="space-between"
       className={clsx(classes.navContainer, classes.mobileContainer)}
     >
       {MenuItems?.map(({ href, txt, iconType }) => (

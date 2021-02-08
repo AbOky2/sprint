@@ -54,7 +54,7 @@ const styles = (theme) => ({
       bottom: 16,
       right: 16,
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       '& > div:first-of-type': {
         marginBottom: '2rem',
       },
@@ -68,7 +68,7 @@ const styles = (theme) => ({
     '& > div': {
       display: 'none',
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       '& > div': {
         display: 'block',
         marginBottom: 15,
@@ -107,7 +107,7 @@ const styles = (theme) => ({
     '&:nth-child(3n+2)': {
       margin: '0 2.1rem 2rem',
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       '&:nth-child(3n+2)': {
         margin: '0 0 2rem',
       },

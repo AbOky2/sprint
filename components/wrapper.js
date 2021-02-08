@@ -8,7 +8,7 @@ const styles = (theme) => ({
     width: 'calc(100% - 100px)',
     margin: 'auto',
     padding: '5.6rem 0',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
       paddingTop: '3.6rem',
       paddingBottom: 95,

@@ -13,6 +13,7 @@ export { default as room } from './room.svg';
 export { default as user } from './user.svg';
 export { default as sponsorship } from './sponsorship.svg';
 export { default as phone } from './phone.svg';
+export { default as partners } from './partners.svg';
 export { default as pen } from './pen.svg';
 export { default as logo } from './logo.svg';
 export { default as logoFull } from './logo-full.svg';

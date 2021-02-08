@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
     '&:nth-child(3n+2)': {
       margin: '0 2.1rem 2rem',
     },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
   },
 }));
 const BookmarkPage = ({ user }) => {
@@ -82,7 +85,7 @@ const BookmarkPage = ({ user }) => {
           <Grid container>
             {state.map(({ _id, title, src, address, typeOfProperties, dimensions, price }) => (
               <Grid item key={_id} className={classes.listContainer}>
-                <Link href={`/propertie/type/${_id}`}>
+                <Link href={`/dashboard/property/${_id}`}>
                   <a>
                     <Card
                       _id={_id}

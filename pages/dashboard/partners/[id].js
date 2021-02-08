@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 25,
       padding: 24,
       boxSizing: 'border-box',
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('sm')]: {
         width: 125,
         height: 125,
       },
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   partnerInfo: {
     paddingTop: '10rem',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: '9rem',
     },
   },

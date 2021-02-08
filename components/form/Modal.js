@@ -21,6 +21,7 @@ const useStyles = makeStyles({
   },
   contentContainer: {
     display: 'inline-block',
+    width: '100%',
     margin: '0 auto 1rem',
     padding: '4rem 0 5rem',
     borderBottom: '1px solid #C1CDE7',

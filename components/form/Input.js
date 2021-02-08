@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-const styles = () => ({
+const styles = (theme) => ({
   container: {
     '& input': {
       display: 'block',
@@ -34,9 +34,15 @@ const styles = () => ({
   },
   left: {
     paddingRight: '1.3rem',
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: 0,
+    },
   },
   right: {
     paddingLeft: '1.3rem',
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+    },
   },
 });
 
