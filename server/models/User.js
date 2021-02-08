@@ -49,6 +49,9 @@ const mongoSchema = new Schema({
     type: String,
     required: true,
   },
+  sponsorshipCode: {
+    type: String,
+  },
   slug: {
     type: String,
     required: true,
@@ -228,7 +231,9 @@ class UserClass extends DBModel {
   static async signUp(options) {
     let user = null;
 
-    if (await this.findOne({ email: options.email })) { throw new Error(msg.alreadyExist('Email')); }
+    if (await this.findOne({ email: options.email })) {
+      throw new Error(msg.alreadyExist('Email'));
+    }
 
     user = (await this.add(options)).user;
     user = user.toObject();

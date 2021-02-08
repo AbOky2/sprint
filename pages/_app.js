@@ -45,8 +45,6 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
-    // console.log(pageProps);
-
     return (
       <ThemeProvider theme={theme}>
         {/* ThemeProvider makes the theme available down the React tree thanks to React context. */}
@@ -55,8 +53,10 @@ class MyApp extends App {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </Head>
         <CssBaseline />
-        {pageProps.chapter ? null : <Header {...pageProps} />}
-        <Component {...pageProps} />
+        <div className="main-container">
+          {!pageProps.user?.isAdmin ? null : <Header {...pageProps} />}
+          <Component {...pageProps} />
+        </div>
         <Notifier />
       </ThemeProvider>
     );

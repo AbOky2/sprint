@@ -1,6 +1,7 @@
 require('dotenv').config();
+const withImages = require('next-images');
 
-module.exports = {
+module.exports = withImages({
   env: {
     URL_APP: process.env.URL_APP,
     PRODUCTION_URL_APP: process.env.PRODUCTION_URL_APP,
@@ -16,10 +17,11 @@ module.exports = {
       },
       use: ['@svgr/webpack'],
     });
+    // eslint-disable-next-line no-param-reassign
     config.node = {
       fs: 'empty',
     };
 
     return config;
   },
-};
+});

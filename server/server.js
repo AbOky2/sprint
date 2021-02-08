@@ -5,7 +5,15 @@ const next = require('next');
 const mongoose = require('mongoose');
 const compression = require('compression');
 const helmet = require('helmet');
-const { MONGO_URL, PORT, dev, SESSION_NAME, COOKIE_DOMAIN, SESSION_SECRET, ROOT_URL } = require('../config');
+const {
+  MONGO_URL,
+  PORT,
+  dev,
+  SESSION_NAME,
+  COOKIE_DOMAIN,
+  SESSION_SECRET,
+  ROOT_URL,
+} = require('../config');
 
 const auth = require('./basic');
 const api = require('./api');
@@ -24,7 +32,7 @@ mongoose.connect(MONGO_URL, options);
 
 const URL_MAP = {
   '/login': '/public/login',
-  '/my-books': '/customer/my-books',
+  '/my-books': '/dashboard/my-books',
 };
 
 const app = next({ dev });

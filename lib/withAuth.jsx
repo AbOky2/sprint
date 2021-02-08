@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 import * as NProgress from 'nprogress';
+import { StudentSidebarComp } from './AuthWrapper';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -79,9 +80,12 @@ export default function withAuth(
         return null;
       }
 
+      if (!user) return <BaseComponent {...this.props} />;
       return (
         <>
-          <BaseComponent {...this.props} />
+          <StudentSidebarComp user={user}>
+            <BaseComponent {...this.props} />
+          </StudentSidebarComp>
         </>
       );
     }

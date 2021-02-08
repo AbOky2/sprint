@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
+import { Icon } from './form';
 
 import MenuWithAvatar from './MenuWithAvatar';
 
@@ -66,11 +67,7 @@ function Header({ user, hideHeader, redirectUrl }) {
           <Grid item sm={8} xs={7} style={{ textAlign: 'left' }}>
             {!user ? (
               <Link href="/">
-                <Avatar
-                  src="https://storage.googleapis.com/builderbook/logo.svg"
-                  alt="Builder Book logo"
-                  style={{ margin: '0px auto 0px 20px', cursor: 'pointer' }}
-                />
+                <Icon type="logoFull" customSize={{ width: 137, height: 50 }} />
               </Link>
             ) : null}
           </Grid>

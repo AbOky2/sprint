@@ -1,4 +1,7 @@
 const express = require('express');
+const { PartnerModel } = require('../models');
+const { listCollection, getCollection } = require('../middleware/express');
+
 // const Book = require('../models/Book');
 // const Purchase = require('../models/Purchase');
 // const { createSession } = require('../stripe');
@@ -6,14 +9,14 @@ const express = require('express');
 
 const router = express.Router();
 
-// router.use((req, res, next) => {
-//   if (!req.user) {
-//     res.status(401).json({ error: 'Unauthorized' });
-//     return;
-//   }
+router.use((req, res, next) => {
+  if (!req.user) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
 
-//   next();
-// });
+  next();
+});
 
 // router.post('/stripe/fetch-checkout-session', async (req, res) => {
 //   try {
@@ -57,5 +60,19 @@ const router = express.Router();
 //     res.json({ error: err.message || err.toString() });
 //   }
 // });
+router.get(
+  '/partner/:id',
+  // eslint-disable-next-line no-return-await
+  getCollection(async ({ id }) => await PartnerModel.get(id)),
+);
+
+router.get(
+  '/partners',
+  listCollection(async ({ offset, limit }) => {
+    const { list } = await PartnerModel.list({ offset, limit });
+
+    return { list };
+  }),
+);
 
 module.exports = router;

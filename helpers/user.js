@@ -2,7 +2,7 @@ const Admin = 'admin';
 const Roomer = 'roomer';
 const Buyer = 'buyer';
 const Student = 'student';
-const studentRoleList = [Roomer, Buyer];
+const studentRoleList = [Student, Buyer];
 const RoleList = [Admin, ...studentRoleList];
 
 // status
@@ -65,11 +65,17 @@ const generateSlug = async (Model, name, filter = {}) => {
 
   return createUniqueSlug(Model, origSlug, 1);
 };
+const isValidateEmail = (email) => {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
+const ucFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 module.exports = {
   // Vars
   Admin,
   Student,
+  Buyer,
   Roomer,
   Active,
   Inactive,
@@ -82,6 +88,8 @@ module.exports = {
   guarantorStrategy,
 
   // Methods
+  ucFirst,
+  isValidateEmail,
   isAdmin,
   isStudent,
   isBuyer,

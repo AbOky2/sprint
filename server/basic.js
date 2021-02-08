@@ -45,12 +45,10 @@ const auth = ({ server }) => {
     ),
   );
   passport.serializeUser((user, done) => done(null, user._id));
-  // passport.deserializeUser((user, done) => done(null, user));
   passport.deserializeUser(async (id, done) => {
     try {
       const user = await UserModel.get(id);
       done(null, user);
-      
     } catch (err) {
       done(err);
     }
@@ -68,14 +66,14 @@ const auth = ({ server }) => {
         req.login(reqUser, (error) => {
           if (error) return next(error);
 
-          res.json({user: reqUser});
+          res.json({ user: reqUser });
         });
       })(req, res, next);
     }),
   );
-  server.get('/logout', (req, res) => {
+  server.get('/auth/logout', (req, res) => {
     req.logout();
-    res.redirect('/login');
+    res.json({ success: 'sucess' });
   });
 };
 

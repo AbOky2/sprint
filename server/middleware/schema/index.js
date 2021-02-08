@@ -9,12 +9,8 @@ const idParams = Joi.object().keys({
 });
 const request = {
   list: Joi.object().keys({
-    offset: Joi.number()
-      .min(0)
-      .optional(),
-    limit: Joi.number()
-      .min(0)
-      .optional(),
+    offset: Joi.number().min(0).optional(),
+    limit: Joi.number().min(0).optional(),
   }),
   get: idParams,
   update: idParams,

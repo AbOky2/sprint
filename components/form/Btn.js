@@ -12,11 +12,13 @@ const useStyles = makeStyles((theme) => ({
     padding: '18px 23px',
     background: 'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
     boxShadow: '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
+    color: 'white',
     borderRadius: '10px',
+    cursor: 'pointer',
+    fontSize: '1.8rem',
     '& a': {
       fontStyle: 'normal',
       fontWeight: '600',
-      fontSize: '18px',
       lineHeight: '28px',
       color: 'white',
     },
@@ -25,14 +27,18 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   whiteColor: {
+    '& a': {
+      color: theme.palette.blue,
+    },
     color: theme.palette.blue,
-    backgroundColor: 'white',
+    background: 'white',
+    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
   },
 }));
 
 const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor }) => {
   const classes = useStyles();
-  const className = whiteColor ? classes.container : clsx(classes.container, classes.whiteColor);
+  const className = !whiteColor ? classes.container : clsx(classes.container, classes.whiteColor);
 
   return (
     <Grid
@@ -44,7 +50,7 @@ const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor 
       onClick={onClick}
     >
       {iconType ? <Icon type={iconType} color={iconColor} /> : ''}
-      {href ?<Link to={href}>{text}</Link>: text}
+      {href ? <Link to={href}>{text}</Link> : text}
     </Grid>
   );
 };

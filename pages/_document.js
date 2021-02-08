@@ -4,12 +4,6 @@ import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
 // import htmlescape from 'htmlescape';
 
-// const { StripePublishableKey } = process.env;
-// // console.log(StripePublishableKey);
-
-// const env = { StripePublishableKey };
-// // console.log(env);
-
 class MyDocument extends Document {
   static getInitialProps = async (ctx) => {
     // Render app and page and get the context of the page with collected side effects.
@@ -45,6 +39,12 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400:latin"
           />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap"
+            rel="stylesheet"
+          />
+
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link
             rel="stylesheet"
@@ -53,6 +53,16 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
           <style>
             {`
+              html {
+                font-size: 10px;
+              }
+              body {
+                background-color: #F7F8FA!important;
+              }
+              .main-container {
+                max-width: 1280px;
+                margin: auto;
+              }
               a, a:focus {
                 font-weight: 400;
                 color: #1565C0;
@@ -81,6 +91,27 @@ class MyDocument extends Document {
                 font-size: 14px;
                 background: #FFF;
               }
+              .no-margin {
+                margin: auto !important;
+              }
+              .fullwidth {
+                width: 100%;
+              }
+              .fullheight {
+                height: 100%;
+              }
+              .text-left {
+                text-align: left;
+              }
+              .text-right {
+                text-align: right;
+              }
+              .text-center {
+                text-align: center;
+              }
+              .student-content-wrapper {
+                padding: 0 3rem;
+              }
             `}
           </style>
           <script
@@ -100,17 +131,7 @@ class MyDocument extends Document {
             }}
           />
         </Head>
-        <body
-          style={{
-            font: '16px Roboto',
-            color: '#222',
-            margin: '0px auto',
-            fontWeight: '300',
-            lineHeight: '1.5em',
-            backgroundColor: '#F7F9FC',
-            minHeight: '100%',
-          }}
-        >
+        <body>
           <Main />
           {/* Added next.config.js
           {/* eslint-disable-next-line react/no-danger */}

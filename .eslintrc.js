@@ -5,7 +5,7 @@ module.exports = {
     browser: true,
     jest: true,
   },
-  plugins: ['react', 'jsx-a11y', 'import', 'prettier'],
+  plugins: ['react', 'import', 'prettier'],
   rules: {
     'max-len': ['error', 100],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
@@ -26,15 +26,11 @@ module.exports = {
         enforceForRenamedProperties: false,
       },
     ],
-    'import/prefer-default-export': 'off',
-    'jsx-a11y/anchor-is-valid': 'off',
+    'react/forbid-prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [
-      'error',
-      {
-        extensions: ['.js'],
-      },
-    ],
+    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-filename-extension': 'off',
+    'import/prefer-default-export': 'off',
     'prettier/prettier': [
       'error',
       {

@@ -10,7 +10,7 @@ const {
   GOOGLE_CLIENT_SECRET,
   GOOGLE_CLIENT_ID,
   SESSION_NAME,
-  COOKIE_DOMAIN
+  COOKIE_DOMAIN,
 } = process.env;
 
 const PORT = process.env.PORT || 3000;
