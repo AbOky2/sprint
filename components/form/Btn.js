@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '10px',
     cursor: 'pointer',
     fontSize: '1.8rem',
+    fontWeight: '600',
     '& a': {
       fontStyle: 'normal',
-      fontWeight: '600',
       lineHeight: '28px',
       color: 'white',
     },
@@ -50,7 +50,13 @@ const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor 
       onClick={onClick}
     >
       {iconType ? <Icon type={iconType} color={iconColor} /> : ''}
-      {href ? <Link to={href}>{text}</Link> : text}
+      {href ? (
+        <Link to={href}>
+          <a>{text}</a>
+        </Link>
+      ) : (
+        <span>{text}</span>
+      )}
     </Grid>
   );
 };

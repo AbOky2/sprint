@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
 import * as icons from '../../static/img/icons';
 
 const SIZES = { small: 16, medium: 24, large: 48, big: 67 };
@@ -14,15 +15,25 @@ const ICON_COLORS = {
 export const iconTypes = Object.keys(icons);
 export const colorTypes = Object.keys(ICON_COLORS);
 const sizeTypes = Object.keys(SIZES);
+const useStyles = makeStyles({
+  svg: {
+    '& path': {
+      fill: (props) => props.fill,
+    },
+  },
+});
 
 const Icon = ({ type, color, size, customSize, strokeColor, rotate }) => {
   const SvgIcon = icons[type];
   const svgSize = SIZES[size];
   const fill = ICON_COLORS[color] ?? color;
+  const classes = useStyles({ fill });
   // for some reason, using the css prop here does not work
   // console.log(typeof iconTypes, typeof colorTypes, typeof sizeTypes, sizeTypes);
+
   return (
     <SvgIcon
+      className={classes.svg}
       style={{
         display: 'inline-block',
         verticalAlign: 'middle',

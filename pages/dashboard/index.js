@@ -10,7 +10,7 @@ import { Icon } from '../../components/form';
 import { partnerTypes } from '../../helpers/partner';
 import { buyStrategy, isRoomer } from '../../helpers/user';
 import { ucfirst } from '../../helpers/convertAndCheck';
-import { getPartnerApiMethod } from '../../lib/api/customer';
+import { getPartnersApiMethod } from '../../lib/api/customer';
 
 const styles = (theme) => ({
   container: {
@@ -190,7 +190,7 @@ const Dashboard = ({ user, partners, classes }) => (
         <Grid item md={12} lg={6}>
           <div>
             <Link href={`/partners/${buyStrategy}`}>
-              <>
+              <a>
                 <Icon type="house" color="white" size="big" />
                 <Typography
                   variant="h4"
@@ -206,14 +206,14 @@ const Dashboard = ({ user, partners, classes }) => (
                   </Typography>
                   <Icon type="arrow" color="white" />
                 </Grid>
-              </>
+              </a>
             </Link>
           </div>
         </Grid>
         <Grid item md={12} lg={6}>
           <div>
             <Link href={`/partners/${buyStrategy}`}>
-              <>
+              <a>
                 <Icon type="location" color="white" size="big" />
                 <Typography variant="h4" className={classes.presentationCardTitle}>
                   Location
@@ -228,7 +228,7 @@ const Dashboard = ({ user, partners, classes }) => (
                   </Typography>
                   <Icon type="arrow" color="lightBlue" />
                 </Grid>
-              </>
+              </a>
             </Link>
           </div>
         </Grid>
@@ -245,8 +245,8 @@ const Dashboard = ({ user, partners, classes }) => (
     <Grid container>
       {partners?.map((elem) => (
         <Grid key={elem._id} item className={classes.partnerListContainer}>
-          <Link href={`/partners/${elem._id}`}>
-            <>
+          <Link href={`/dashboard/partners/${elem._id}`}>
+            <a>
               <div
                 className={classes.partnerListImgContainer}
                 style={{ backgroundImage: `url(${elem.picture})` }}
@@ -265,7 +265,7 @@ const Dashboard = ({ user, partners, classes }) => (
                   <Icon type="arrow" color="lightBlue" />
                 </div>
               </Grid>
-            </>
+            </a>
           </Link>
         </Grid>
       ))}
@@ -289,7 +289,7 @@ Dashboard.getInitialProps = async ({ req, res }) => {
     headers.cookie = req.headers.cookie;
   }
 
-  const { list } = await getPartnerApiMethod({ headers });
+  const { list } = await getPartnersApiMethod({ headers });
 
   return { partners: list };
 };

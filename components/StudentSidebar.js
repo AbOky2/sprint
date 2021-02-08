@@ -232,8 +232,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const MenuItems = [
   { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
-  { href: '/bookmark', iconType: 'heart', txt: 'Favoris' },
-  { href: '/sponsorship', iconType: 'sponsorship', txt: 'Parrainage' },
+  { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
+  { href: '/dashboard/sponsorship', iconType: 'sponsorship', txt: 'Parrainage' },
 ];
 export const MobileMenu = () => {
   const classes = useStyles();

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
@@ -19,6 +19,7 @@ const styles = (theme) => ({
     marginBottom: '3.2rem',
     textAlign: 'left',
     color: '#8692a6',
+    fontWeight: 'bold',
     '&::before': {
       content: "''",
       border: '1px solid #8692a6',
@@ -41,8 +42,10 @@ const AdminContentWrapper = withStyles(styles)(
     <Grid className={classes.container}>
       {redirectDashboard ? (
         <div className="text-left">
-          <Link to={redirectUri} className={classes.redirect}>
-            {redirectText}
+          <Link href={redirectUri}>
+            <Typography variant="h4" className={classes.redirect}>
+              {redirectText}
+            </Typography>
           </Link>
         </div>
       ) : (
