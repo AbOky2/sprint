@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Input, Select, Modal, Icon, Btn } from './form';
 import Calendr from '../static/img/icons/calendr.png';
 import { logOut } from '../lib/api/public';
+import LogoImg from '../static/img/logo.png';
 
 const UpdateProfile = ({ handleChange, handleSumbit, openModal, onClose, values = {} }) => (
   <Modal
@@ -87,6 +88,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '40px',
     width: '100%',
     textAlign: 'center',
+    '& img': {
+      width: 35,
+    },
   },
   navContainer: {
     width: '100%',
@@ -229,7 +233,7 @@ const useStyles = makeStyles((theme) => ({
       fill: '#4f80ff!important',
     },
     '& span': {
-      color: '#4f80ff',
+      color: `${theme.palette.newBlue}!important`,
     },
   },
 }));
@@ -299,7 +303,7 @@ const StudentProfile = ({ user }) => {
           <Grid className={classes.logoContainer}>
             <Link href="/dashboard">
               <a>
-                <Icon type="logo" customSize={logoSize} />
+                <img src={LogoImg} alt="" />
               </a>
             </Link>
           </Grid>

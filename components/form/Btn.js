@@ -51,7 +51,7 @@ const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor 
     >
       {iconType ? <Icon type={iconType} color={iconColor} /> : ''}
       {href ? (
-        <Link to={href}>
+        <Link href={href}>
           <a>{text}</a>
         </Link>
       ) : (

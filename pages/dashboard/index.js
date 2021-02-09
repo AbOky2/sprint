@@ -11,6 +11,8 @@ import { partnerTypes } from '../../helpers/partner';
 import { buyStrategy, isRoomer } from '../../helpers/user';
 import { ucfirst } from '../../helpers/convertAndCheck';
 import { getPartnersApiMethod } from '../../lib/api/customer';
+import LocationImg from '../../static/img/location.png';
+import HouseImg from '../../static/img/house.png';
 
 const styles = (theme) => ({
   container: {
@@ -37,6 +39,9 @@ const styles = (theme) => ({
     '& > div:last-of-type > div': {
       height: '100%',
       boxShadow: '0px 4px 13px rgba(0, 0, 0, 0.1), inset 0px -3px 10px rgba(149, 149, 149, 0.2)',
+    },
+    '& > div > div > a > img': {
+      width: 77,
     },
     '& > div > div > a > svg': {
       width: 'auto!important',
@@ -191,7 +196,9 @@ const Dashboard = ({ user, partners, classes }) => (
           <div>
             <Link href={`/partners/${buyStrategy}`}>
               <a>
-                <Icon type="house" color="white" size="big" />
+                {/* <Icon type="house" color="white" size="big" /> */}
+                <img src={HouseImg} alt="" />
+
                 <Typography
                   variant="h4"
                   className={clsx(classes.whiteColor, classes.presentationCardTitle)}
@@ -204,7 +211,7 @@ const Dashboard = ({ user, partners, classes }) => (
                       ? 'Je réserve un logement neuf avec une simple promesse d’embauche. Devenir proprietaire n’a jamais été aussi simple.'
                       : 'N’attendez pas 30 ans pour devenir propriétaire'}
                   </Typography>
-                  <Icon type="arrow" color="white" />
+                  {/* <Icon type="arrow" color="white" /> */}
                 </Grid>
               </a>
             </Link>
@@ -214,7 +221,8 @@ const Dashboard = ({ user, partners, classes }) => (
           <div>
             <Link href={`/partners/${buyStrategy}`}>
               <a>
-                <Icon type="location" color="white" size="big" />
+                {/* <Icon type="location" color="white" size="big" /> */}
+                <img src={LocationImg} alt="" />
                 <Typography variant="h4" className={classes.presentationCardTitle}>
                   Location
                 </Typography>

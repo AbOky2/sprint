@@ -4,18 +4,23 @@ import NProgress from 'nprogress';
 import { Grid, Checkbox, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import { Btn, Select, Input, Icon } from '../../components/form';
+import { Btn, Select, Input } from '../../components/form';
 import withAuth from '../../lib/withAuth';
 import { Student, Buyer } from '../../helpers/user';
 import { signIn, signUp } from '../../lib/api/public';
+import LogoImg from '../../static/img/logo-full.png';
 
 const useStyles = makeStyles({
   container: {
     height: '100%',
     paddingTop: '3rem',
+    '& > div > a > img': {
+      width: 137,
+    },
     '& h1': {
       display: 'block',
-      marginTop: '1rem',
+      marginTop: 0,
+      marginBottom: '1rem',
       textAlign: 'center',
       fontFamily: 'Open Sans',
       fontSize: '3rem',
@@ -63,7 +68,7 @@ const useStyles = makeStyles({
     },
   },
   signinFormContainer: {
-    padding: '2.4rem',
+    padding: '4rem 8.5rem ',
     backgroundColor: 'white',
     borderRadius: '1rem',
     borderTopLeftRadius: '0',
@@ -81,29 +86,9 @@ const useStyles = makeStyles({
       fontSize: '1.6rem',
     },
   },
-  redirectHome: {
-    display: 'flex',
-    alignSelf: 'flex-start',
-    '& a:first-of-type': {
-      position: 'relative',
-      fontFamily: 'Inter',
-      fontSize: '1.6rem',
-      lineHeight: '19px',
-      alignItems: 'center',
-      color: '#8692a6',
-    },
-    '& a:first-of-type::before': {
-      content: '',
-      border: '1px solid #8692a6',
-      borderWidth: '0 3px 3px 0',
-      display: 'inline-block',
-      padding: '3px',
-      marginRight: '1rem',
-      transform: 'rotate(135deg)',
-    },
-  },
   signinLogo: {
-    borderRadius: '1rem',
+    borderTopLeftRadius: '1rem',
+    borderBottomLeftRadius: '1rem',
     background: "url('../../static/img/login.png') no-repeat",
     backgroundSize: 'cover',
   },
@@ -256,7 +241,7 @@ const LoginTab = () => {
       <Grid container justify="center" alignItems="center" id="login" className={classes.container}>
         <div className="fullwidth text-center">
           <a href="/">
-            <Icon type="logoFull" customSize={{ width: 137, height: 50 }} />
+            <img src={LogoImg} alt="kit le nid" />
           </a>
           <Grid container item alignItems="stretch" justify="center">
             <Grid item xs={6} className={classes.signinLogo} />
@@ -272,14 +257,6 @@ const LoginTab = () => {
             >
               <Grid container item alignItems="flex-end">
                 <div className="fullwidth">
-                  <Grid
-                    container
-                    justify="space-between"
-                    alignItems="center"
-                    className={classes.redirectHome}
-                  >
-                    <a href="/">Revenir à l’accueil</a>
-                  </Grid>
                   <h1>{isRegisterinView ? 'Inscrivez-vous gratuitement !' : 'Connexion'}</h1>
                   <h2>Accéder à tout notre accompagnement.</h2>
                   <Grid container item justify="center" className={classes.formContainer}>

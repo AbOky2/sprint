@@ -19,6 +19,7 @@ const styles = (theme) => ({
     marginBottom: '3.2rem',
     textAlign: 'left',
     color: '#8692a6',
+    cursor: 'pointer',
     fontWeight: 'bold',
     '&::before': {
       content: "''",

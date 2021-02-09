@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AdminContentWrapper } from '../../components/wrapper';
 import { addBookmarkApiMethod } from '../../lib/api/customer';
 import Card from '../../components/card';
+import { Btn } from '../../components/form';
 import withAuth from '../../lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
@@ -120,18 +121,10 @@ const BookmarkPage = ({ user }) => {
               </Typography>
             </div>
             <div>
-              <div className={classes.btnContainer}>
-                <div>
-                  <Link href="/dashboard/search">
-                    <a href="https://mabanque.bnpparibas/">Rechercher un logement à acheter</a>
-                  </Link>
-                </div>
-                <div>
-                  <Link href="/dashboard/search">
-                    <a href="https://mabanque.bnpparibas/">Rechercher un logement à louer</a>
-                  </Link>
-                </div>
-              </div>
+              <Grid container justify="center" className={classes.btnContainer}>
+                <Btn href="/dashboard/search" text="Rechercher un logement à acheter" />
+                <Btn href="/dashboard/search" text="Rechercher un logement à louer" whiteColor />
+              </Grid>
             </div>
           </div>
         )}
