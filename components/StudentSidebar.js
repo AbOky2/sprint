@@ -184,6 +184,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0px 4px 13px rgba(0, 0, 0, 0.1)',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
+    padding: '.5rem 3rem',
     zIndex: 10,
     '& > div a': {
       display: 'inline-block',
@@ -206,6 +207,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '& span': {
       display: 'block',
+    },
+    [theme.breakpoints.down('md')]: {
+      margin: 'auto',
     },
   },
   calendar: {
