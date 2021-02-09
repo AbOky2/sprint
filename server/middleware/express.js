@@ -31,7 +31,9 @@ const getCollection = (listFn) => [
 const updateCollection = (middleware = defautlMiddleware, listFn) => [
   requestMiddleware(joiSchema.request.update, 'params'),
   middleware,
-  handleErrors(async (req, res) => res.json(await listFn({ id: req.params.id, data: req.body }))),
+  handleErrors(async (req, res) =>
+    res.json(await listFn({ id: req.params.id, data: req.body, req })),
+  ),
 ];
 
 const profileCollection = (middleware = defautlMiddleware, listFn) => [

@@ -62,39 +62,58 @@ sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
 
   router.post(
     `/${singular}`,
-    upload(plural).single('upload'),
+    upload(plural).fields([
+      { name: 'cover', maxCount: 1 },
+      { name: 'picture', maxCount: 1 },
+    ]),
     requestMiddleware(schema.post),
     handleErrors(async (req, res) => {
-      const newData = req.body;
-      const picture = createImagePath(req.file?.path);
+      const newData = { ...req.body };
 
-      delete newData.upload;
-      newData.picture = picture;
+      if (req.files) {
+        Object.keys(req.files).forEach((key) => {
+          const curr = req.files[key][0];
+          if (curr?.filename) newData[key] = `/${plural}/${curr.filename}`;
+        });
+      }
       res.json(await model.add(newData));
     }),
   );
 
   router.put(
     `/${singular}/:id`,
-    upload(plural).single('upload'),
+    upload(plural).fields([
+      { name: 'cover', maxCount: 1 },
+      { name: 'picture', maxCount: 1 },
+    ]),
     updateCollection(
       requestMiddleware(schema.update),
       // eslint-disable-next-line no-return-await
-      async ({ id, data }) => {
-        console.log(data);
-        await model.update(id, data);
+      async ({ req, id, data }) => {
+        const newData = { ...data };
+
+        if (req.files) {
+          const elem = await model.get(id);
+          if (!elem) throw new Error('Picture must be set');
+
+          Object.keys(req.files).forEach((key) => {
+            if (elem[key]) {
+              removeFiles(elem[key]);
+              newData[key] = null;
+            }
+            const curr = req.files[key][0];
+            if (curr?.filename) newData[key] = `/${plural}/${curr.filename}`;
+          });
+        }
+        await model.update(id, newData);
       },
     ),
   );
 
   router.delete(
     `/${singular}/:id`,
-    deleteCollection(async ({ id }) => {
-      const elem = await model.get(id);
-
-      removeFiles(elem.picture);
-      await model.delete(id);
-    }),
+    // eslint-disable-next-line no-return-await
+    deleteCollection(async ({ id }) => await model.delete(id)),
   );
 });
 // router.get('/books', async (req, res) => {

@@ -54,7 +54,6 @@ export default function HorizontalLabelPositionBelowStepper({
     setState,
   ]);
   const handleNext = () => {
-    console.log(activeStep, steps.length - 1);
     if (activeStep === steps.length - 1) {
       if (state?._id) {
         const { _id, ...form } = state;

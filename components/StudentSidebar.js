@@ -212,10 +212,13 @@ const useStyles = makeStyles((theme) => ({
   sponsorship: {
     width: '100%',
     '& > div': {
-      padding: '1.5rem',
+      padding: '1.5rem 0',
       width: '100%',
     },
-    '& a': {
+    '& svg': {
+      marginRight: '1.5rem',
+    },
+    '& span': {
       fontSize: 14,
     },
   },

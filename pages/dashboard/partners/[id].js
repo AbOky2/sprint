@@ -6,8 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { getPartnerApiMethod } from '../../../lib/api/customer';
 import { AdminContentWrapper } from '../../../components/wrapper';
 import { Btn } from '../../../components/form';
-// import BnpCover from 'assets/img/tmp/bnp-cover.png';
-// import Bnp from '../../../assets/img/tmp/bnp.png';
 import withAuth from '../../../lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
@@ -106,9 +104,9 @@ const PartnerPage = ({ partner = {} }) => {
       <div>
         <div>
           <div className={classes.coverContainer}>
-            <img src={null} alt="" className={classes.cover} />
+            <img src={partner.cover} alt="" className={classes.cover} />
             <Grid container justify="center" alignItems="center">
-              <img src={null} alt="" />
+              <img src={partner.picture} alt="" />
             </Grid>
           </div>
           <div className={classes.partnerInfo}>

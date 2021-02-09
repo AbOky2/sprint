@@ -1,6 +1,7 @@
 const { format, differenceInYears } = require('date-fns');
 
 const isArray = (arr) => Array.isArray(arr);
+const isObject = (arg) => (typeof arg === 'object' || typeof arg === 'function') && arg !== null;
 const toDate = (date) => format(new Date(date), 'dd/MM/yyyy');
 const isMajor = (age) => differenceInYears(new Date(age), new Date()) >= 18;
 const ucfirst = (name) => name.charAt(0).toUpperCase() + name.slice(1);
@@ -18,14 +19,13 @@ const toFormData = (form = {}) => {
 };
 const toggleArray = (array, name) => {
   let found = false;
-  let data;
 
-  if (!isArray(array) || (!name && name != '0')) return array;
+  if (!isArray(array) || (!name && name !== '0')) return array;
 
-  data = array.filter((elem) => {
-    if (elem == name) found = true;
+  const data = array.filter((elem) => {
+    if (elem === name) found = true;
 
-    return elem != name;
+    return elem !== name;
   });
 
   if (!found) data.push(name);
@@ -45,6 +45,7 @@ module.exports = {
   toDate,
   isMajor,
   isArray,
+  isObject,
   ucfirst,
   toFormData,
   isValidateEmail,

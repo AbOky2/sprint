@@ -11,7 +11,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
 import { AdminContentWrapper } from '../../components/wrapper';
 import { Modal, Icon } from '../../components/form';
 // import { ReactComponent as LotsIcon } from 'assets/img/svg/partners.svg';
@@ -82,7 +81,7 @@ const Header = ({ onClick }) => (
     <Grid item>
       <Grid onClick={onClick} className="submit pointer partner-add">
         <span className="header-icon">
-          <Icon type="plus" />
+          <Icon type="plus" size="small" />
         </span>
         <p>Ajouter</p>
       </Grid>

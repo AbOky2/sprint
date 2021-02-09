@@ -122,7 +122,9 @@ class MyDocument extends Document {
               .student-content-wrapper {
                 padding: 0 3rem;
               }
-
+              .pointer {
+                cursor: pointer;
+              }
               // to replace with matterial style
               .upload {
                 position: relative;

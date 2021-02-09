@@ -11,6 +11,10 @@ const mongoSchema = new Schema({
     type: String,
     required: true,
   },
+  cover: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -57,10 +61,27 @@ class PartnerClass extends DBModel {
     try {
       if (!args.picture) throw new Error('Picture must be set');
 
-      return super.add(args);
+      const newData = await this.create(args);
+      const elem = newData.toObject();
+
+      return { elem };
     } catch (error) {
+      removeFiles(args.cover);
       removeFiles(args.picture);
       throw error;
+    }
+  }
+
+  static async delete(_id) {
+    try {
+      const elem = await this.get({ _id });
+      await this.deleteOne({ _id });
+
+      removeFiles(elem.cover);
+      removeFiles(elem.picture);
+      return await this.list();
+    } catch (error) {
+      throw new Error('Error white delete');
     }
   }
 }
