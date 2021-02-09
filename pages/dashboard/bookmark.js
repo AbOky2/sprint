@@ -84,14 +84,14 @@ const BookmarkPage = ({ user }) => {
       <div>
         {state?.length ? (
           <Grid container>
-            {state.map(({ _id, title, src, address, typeOfProperties, dimensions, price }) => (
+            {state.map(({ _id, title, pictures, address, typeOfProperties, dimensions, price }) => (
               <Grid item key={_id} className={classes.listContainer}>
                 <Link href={`/dashboard/property/${_id}`}>
                   <a>
                     <Card
                       _id={_id}
                       title={title}
-                      src={src}
+                      src={pictures?.[0]}
                       address={address}
                       description={typeOfProperties}
                       dimensions={dimensions}

@@ -3,7 +3,7 @@ const fs = require('fs');
 // const NodeGeocoder = require('node-geocoder');
 const path = require('path');
 const { pick } = require('../../helpers/convertAndCheck');
-const { propertiesHeader, filteredProperties } = require('../../helpers/property');
+const { propertiesHeader, filteredProperties, tmpImg } = require('../../helpers/property');
 const { PropertieModel } = require('../models');
 const logger = require('../logs');
 
@@ -11,6 +11,8 @@ const logger = require('../logs');
 //   provider: 'openstreetmap',
 // };
 // const geocoder = NodeGeocoder(options);
+
+const tmpGetRandomArbitrary = (min, max) => parseInt(Math.random() * (max - min) + min, 10);
 
 // Using callback
 const numberTypes = ['price'];
@@ -59,13 +61,18 @@ const readMba = () => {
             }
           });
           // eslint-disable-next-line no-unused-expressions
-          Array.from({ length: 30 }, (_, j) => `picture_${j + 1}`).forEach((e) =>
-            newResult[e] ? pictures.push(`/properties/${newResult[e]}`) : '',
-          );
+          // Array.from({ length: 5 }, (_, j) => `picture_${j + 1}`).forEach((e) =>
+          //   newResult[e] ? pictures.push(`/properties/${newResult[e]}`) : '',
+          // );
+          // Array.from({ length: 30 }, (_, j) => `picture_${j + 1}`).forEach((e) =>
+          //   newResult[e] ? pictures.push(`/properties/${newResult[e]}`) : '',
+          // );
           const data = pick(newResult, filteredProperties);
 
-          data.pictures = pictures;
-
+          const tmpPictures = [1, 2, 3, 4, 5].map(
+            (e) => `/properties/${tmpImg[tmpGetRandomArbitrary(0, tmpImg.length - 1)]}`,
+          );
+          data.pictures = tmpPictures;
           return data;
         });
         // console.log(results.map((e) => e.lot_ref));

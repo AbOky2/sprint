@@ -77,7 +77,7 @@ const Card = ({ _id, title, src, address, description, dimensions, price, onClic
         <Typography variant="body1" align="right" className={classes.price}>
           <span>à partir de</span> 
 {' '}
-{price}
+{price}€
         </Typography>
       </div>
     </div>

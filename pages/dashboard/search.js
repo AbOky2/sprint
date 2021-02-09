@@ -168,14 +168,14 @@ const SearchPage = ({ user, properties, query: { type: queryType } = {} }) => {
           </Grid>
         </Grid>
         <Grid container>
-          {state?.map(({ _id, title, src, address, typeOfProperty, dimensions, price }) => (
+          {state?.map(({ _id, title, pictures, address, typeOfProperty, dimensions, price }) => (
             <Grid item key={_id} className={classes.listContainer}>
               <Link href={`/dashboard/property/${_id}`}>
                 <a>
                   <Card
                     _id={_id}
                     title={title}
-                    src={src}
+                    src={pictures?.[0]}
                     address={address}
                     description={typeOfProperty}
                     dimensions={dimensions}
