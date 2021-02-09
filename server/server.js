@@ -14,10 +14,9 @@ const {
   SESSION_SECRET,
   ROOT_URL,
 } = require('../config');
-
 const auth = require('./basic');
 const api = require('./api');
-
+const readMba = require('./utils/mba');
 const logger = require('./logs');
 // const { insertTemplates } = require('./models/EmailTemplate');
 const routesWithSlug = require('./routesWithSlug');
@@ -40,7 +39,7 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(async () => {
   const server = express();
-
+  // readMba();
   server.use(helmet({ contentSecurityPolicy: false }));
   server.use(compression());
   server.use(express.json());

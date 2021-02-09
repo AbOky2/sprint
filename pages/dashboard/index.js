@@ -194,9 +194,8 @@ const Dashboard = ({ user, partners, classes }) => (
       <Grid container justify="space-between" className={classes.presentationContainer}>
         <Grid item md={12} lg={6}>
           <div>
-            <Link href={`/partners/${buyStrategy}`}>
+            <Link href="/dashboard/search">
               <a>
-                {/* <Icon type="house" color="white" size="big" /> */}
                 <img src={HouseImg} alt="" />
 
                 <Typography
@@ -211,7 +210,7 @@ const Dashboard = ({ user, partners, classes }) => (
                       ? 'Je réserve un logement neuf avec une simple promesse d’embauche. Devenir proprietaire n’a jamais été aussi simple.'
                       : 'N’attendez pas 30 ans pour devenir propriétaire'}
                   </Typography>
-                  {/* <Icon type="arrow" color="white" /> */}
+                  <Icon type="arrow" color="white" />
                 </Grid>
               </a>
             </Link>
@@ -219,9 +218,8 @@ const Dashboard = ({ user, partners, classes }) => (
         </Grid>
         <Grid item md={12} lg={6}>
           <div>
-            <Link href={`/partners/${buyStrategy}`}>
+            <Link href="/dashboard/search?type=location">
               <a>
-                {/* <Icon type="location" color="white" size="big" /> */}
                 <img src={LocationImg} alt="" />
                 <Typography variant="h4" className={classes.presentationCardTitle}>
                   Location

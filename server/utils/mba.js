@@ -1,42 +1,84 @@
-import csv from 'csv-parser';
-import fs from 'fs';
-import path from 'path';
-import { pick } from '@kit-le-nid/shared/lib/convertAndCheck';
-import { propertiesHeader, filteredProperties } from '@kit-le-nid/shared/lib/property';
-import { PropertieModel } from '../models';
-import logger from '../logs';
+const csv = require('csv-parser');
+const fs = require('fs');
+// const NodeGeocoder = require('node-geocoder');
+const path = require('path');
+const { pick } = require('../../helpers/convertAndCheck');
+const { propertiesHeader, filteredProperties } = require('../../helpers/property');
+const { PropertieModel } = require('../models');
+const logger = require('../logs');
 
+// const options = {
+//   provider: 'openstreetmap',
+// };
+// const geocoder = NodeGeocoder(options);
+
+// Using callback
+const numberTypes = ['price'];
 const readMba = () => {
   const datas = [];
 
-  fs.createReadStream(path.resolve(__dirname, '../mba/lots.csv'), { encoding: 'utf-8' })
+  const i = 0;
+
+  fs.createReadStream(path.resolve(__dirname, '../../public/properties/Annonces.csv'), {
+    encoding: 'utf-8',
+  })
     .pipe(csv())
     .on('data', (data) => datas.push(data))
     .on('end', async () => {
       try {
-        await PropertieModel.create(datas.map((obj) => {
+        const results = datas.map((obj) => {
           const pictures = [];
-          const newResult = { };
-          const result = Object.keys(obj).reduce((res, v) => res.concat(obj[v]), '').replace(/"/g, '').split('!#');
-
+          const newResult = {};
+          const result = Object.keys(obj)
+            .reduce((res, v) => res.concat(obj[v]), '')
+            .replace(/"/g, '')
+            .split('!#');
           // eslint-disable-next-line no-return-assign
-          propertiesHeader.map((key, index) => newResult[key] = result[index]?.trim());
+          propertiesHeader.map((key, index) => {
+            // if (key === 'lot_ref') console.log(result[index], index);
+            if (numberTypes.includes(key)) {
+              newResult[key] = parseInt(result[index]?.trim(), 10);
+            } else if (key === 'address') {
+              const address = result[index]?.trim();
+              newResult[key] = address;
+              // if (i < 1) {
+              //   i += 1;
+              //   try {
+              //     console.log(address, i);
+              //     const [{ latitude, longitude }] = await geocoder.geocode(address);
+
+              //     newResult.lnt = latitude;
+              //     newResult.lat = longitude;
+              //     console.log(latitude, longitude);
+              //   } catch (error) {
+              //     console.log(error);
+              //   }
+              // }
+            } else {
+              newResult[key] = result[index]?.trim();
+            }
+          });
           // eslint-disable-next-line no-unused-expressions
-          Array.from({ length: 20 }, (_, j) => `picture_${j + 1}`).forEach((e) => (newResult[e] ? pictures.push(newResult[e]) : ''));
+          Array.from({ length: 30 }, (_, j) => `picture_${j + 1}`).forEach((e) =>
+            newResult[e] ? pictures.push(`/properties/${newResult[e]}`) : '',
+          );
           const data = pick(newResult, filteredProperties);
 
           data.pictures = pictures;
 
           return data;
-        }));
+        });
+        // console.log(results.map((e) => e.lot_ref));
+        await PropertieModel.create(results);
       } catch (err) {
-        if (err.code) { logger.info('Updated properties'); }
+        if (err.code) {
+          logger.info('Updated properties');
+        }
       }
     });
 };
 
-export default readMba;
-
+module.exports = readMba;
 // 1 Identifiant agence Texte (16) "monagence" Identifiant agence fourni par nos services
 // 2 Référence agence du bien Texte (20) "VE950" Obligatoire Référence de l’annonce
 // 3 Type d’annonce Texte (64) "Vente" Obligatoire Choisir entre : cession de bail, location, location vacances, produit d'investissement, vente, vente de prestige, vente fond de commerce, viager

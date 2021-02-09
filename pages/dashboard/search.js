@@ -6,7 +6,11 @@ import Link from 'next/link';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import withAuth from '../../lib/withAuth';
-import { addBookmarkApiMethod, getUserSearchApiMethod } from '../../lib/api/customer';
+import {
+  getPropertiesApiMethod,
+  addBookmarkApiMethod,
+  getUserSearchApiMethod,
+} from '../../lib/api/customer';
 import { toggleArray } from '../../helpers/convertAndCheck';
 import { typeOfProperties } from '../../helpers/property';
 import { AdminContentWrapper } from '../../components/wrapper';
@@ -44,6 +48,7 @@ const useStyles = makeStyles({
   },
   searchContainer: {
     marginBottom: 22,
+    boxShadow: '0px 4.15441px 16.6176px rgb(0 0 0 / 10%)',
     '& > div:last-of-type svg': {
       position: 'absolute',
       right: 0,
@@ -75,8 +80,8 @@ const useStyles = makeStyles({
     },
   },
 });
-const SearchPage = ({ user }) => {
-  const [state, setState] = useState([]);
+const SearchPage = ({ user, properties, query: { type: queryType } = {} }) => {
+  const [state, setState] = useState(properties);
   const [queryData, setQueryData] = useState({
     location: '',
     maxPrice: 0,
@@ -101,46 +106,49 @@ const SearchPage = ({ user }) => {
   return (
     <AdminContentWrapper redirectDashboard>
       <div>
-        <div className={classes.setpsContainer}>
-          <Typography variant="h2" className={classes.title}>
-            Mon premier achat en 5 étapes !
-          </Typography>
-          <Typography variant="body1" className={classes.subTitle}>
-            Comment ça marche?
-          </Typography>
-          <ul>
-            <li>
-              <Typography variant="body1">
-                <span>1</span>
-                Je sélectionne l'appartement qui me convient avec l'aide d'un conseiller Kit Le Nid
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1">
-                <span>2</span>
-                J'effectue la réservation du bien, qui est bloqué pour moi
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1">
-                <span>3</span>
-                J'effectue les démarches de prêt immobilier ou la confie à Kit Le Nid
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1">
-                <span>4</span>
-                Je signe chez le notaire et devient officiellement propriétaire
-              </Typography>
-            </li>
-            <li>
-              <Typography variant="body1">
-                <span>5</span>
-                J'attends la livraison du bien et emménage!
-              </Typography>
-            </li>
-          </ul>
-        </div>
+        {queryType !== 'location' && (
+          <div className={classes.setpsContainer}>
+            <Typography variant="h2" className={classes.title}>
+              Mon premier achat en 5 étapes !
+            </Typography>
+            <Typography variant="body1" className={classes.subTitle}>
+              Comment ça marche?
+            </Typography>
+            <ul>
+              <li>
+                <Typography variant="body1">
+                  <span>1</span>
+                  Je sélectionne l'appartement qui me convient avec l'aide d'un conseiller Kit Le
+                  Nid
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body1">
+                  <span>2</span>
+                  J'effectue la réservation du bien, qui est bloqué pour moi
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body1">
+                  <span>3</span>
+                  J'effectue les démarches de prêt immobilier ou la confie à Kit Le Nid
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body1">
+                  <span>4</span>
+                  Je signe chez le notaire et devient officiellement propriétaire
+                </Typography>
+              </li>
+              <li>
+                <Typography variant="body1">
+                  <span>5</span>
+                  J'attends la livraison du bien et emménage!
+                </Typography>
+              </li>
+            </ul>
+          </div>
+        )}
         <Grid container className={classes.searchContainer}>
           <Grid item md={4}>
             <Input name="location" onChange={handleSearch} placeholder="Localisation" />
@@ -184,12 +192,14 @@ const SearchPage = ({ user }) => {
     </AdminContentWrapper>
   );
 };
-// SearchPage.getInitialProps = async ({ req, query }) => {
-//   const headers = {};
-//   if (req && req.headers && req.headers.cookie) {
-//     headers.cookie = req.headers.cookie;
-//   }
-//   const { list } = await getPropertiesApiMethod({ headers });
-//   return { properties: list };
-// };
+
+SearchPage.getInitialProps = async ({ req, query }) => {
+  const headers = {};
+  if (req && req.headers && req.headers.cookie) {
+    headers.cookie = req.headers.cookie;
+  }
+  const { list } = await getPropertiesApiMethod({ headers });
+  return { properties: list, query };
+};
+
 export default withAuth(SearchPage);

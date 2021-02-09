@@ -51,11 +51,11 @@ const mongoSchema = new Schema({
 class PropertieClass extends DBModel {
   static name = modelName;
 
-  static async search({ maxPrice, typeOfProperty, coordinates }) {
+  static async search({ maxPrice, typeOfProperty, coordinates, limit = 10, skip = 0 }) {
     let query = {};
     query = {
       $and: [
-        { $or: [maxPrice ? { price: { $lt: parseInt(maxPrice, 10) } } : {}] },
+        { $or: [maxPrice ? { price: { $lt: parseInt(maxPrice, 9) } } : {}] },
         // {
         //   $or: [
         //     coordinates
@@ -76,9 +76,8 @@ class PropertieClass extends DBModel {
         // { typeOfProperty },
       ],
     };
-
     console.log(query.$and[0].$or, maxPrice);
-    const list = await this.find(query);
+    const list = await this.find(query).limit(limit).skip(skip);
     return { list };
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import GoogleMapReact from 'google-map-react';
+// import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -290,7 +290,7 @@ const PropertyPage = ({ property = {}, properties = [] }) => {
               <Grid key={elem._id} container>
                 <Grid item md={2} xs={5} alignItems="center">
                   <Icon type="room" color="lightBlue" />
-                  {` ${property.nb_pieces} pièce${property.nb_pieces.length > 1 ? 's' : ''}`}
+                  {` ${property.nb_pieces} pièce${property.nb_pieces?.length > 1 ? 's' : ''}`}
                 </Grid>
                 <Grid item md={3} xs={5} alignItems="center">
                   <Icon type="room" color="lightBlue" />

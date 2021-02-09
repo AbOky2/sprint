@@ -1,14 +1,14 @@
 const express = require('express');
-const NodeGeocoder = require('node-geocoder');
+// const NodeGeocoder = require('node-geocoder');
 const { PartnerModel, UserModel, PropertieModel } = require('../models');
 const { listCollection, getCollection, handleErrors } = require('../middleware/express');
 const requestMiddleware = require('../middleware/request');
 const joiSchema = require('../middleware/schema');
 
-const options = {
-  provider: 'openstreetmap',
-};
-const geocoder = NodeGeocoder(options);
+// const options = {
+//   provider: 'openstreetmap',
+// };
+// const geocoder = NodeGeocoder(options);
 
 // const Book = require('../models/Book');
 // const Purchase = require('../models/Purchase');

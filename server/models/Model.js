@@ -41,7 +41,7 @@ class DBModel {
    * @param {Number} [options.offset] - Amount of Users to skip
    * @param {Number} [options.limit] - Amount of Users to return
    */
-  static async list(where = {}, { offset = 0, limit = 10 } = {}) {
+  static async list(where = {}, { offset = 0, limit = 6 } = {}) {
     try {
       const list = await this.find(where)
         .sort({ createdAt: -1 })
