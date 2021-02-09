@@ -17,6 +17,9 @@ const useStyles = makeStyles({
     '& > div > a > img': {
       width: 137,
     },
+    '& > div > div': {
+      minHeight: 'calc(100vh - 200px)',
+    },
     '& h1': {
       display: 'block',
       marginTop: 0,
@@ -255,11 +258,17 @@ const LoginTab = () => {
               xs={12}
               className={classes.signinFormContainer}
             >
-              <Grid container item alignItems="flex-end">
+              <Grid container alignItems="center">
                 <div className="fullwidth">
                   <h1>{isRegisterinView ? 'Inscrivez-vous gratuitement !' : 'Connexion'}</h1>
                   <h2>Accéder à tout notre accompagnement.</h2>
-                  <Grid container item justify="center" className={classes.formContainer}>
+                  <Grid
+                    container
+                    item
+                    justify="center"
+                    alignItems="center"
+                    className={classes.formContainer}
+                  >
                     {isRegisterinView ? (
                       <SignUp values={state} handleChange={handleChange} onClick={onClick} />
                     ) : (

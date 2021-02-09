@@ -37,7 +37,7 @@ const readMba = () => {
             .split('!#');
           // eslint-disable-next-line no-return-assign
           propertiesHeader.map((key, index) => {
-            // if (key === 'lot_ref') console.log(result[index], index);
+            // if (key === 'typeOfProperty') console.log(result[index], index);
             if (numberTypes.includes(key)) {
               newResult[key] = parseInt(result[index]?.trim(), 10);
             } else if (key === 'address') {
@@ -75,6 +75,7 @@ const readMba = () => {
           data.pictures = tmpPictures;
           return data;
         });
+        // console.log(results.map((e) => e.lot_ref));
         // console.log(results.map((e) => e.lot_ref));
         await PropertieModel.create(results);
       } catch (err) {

@@ -186,7 +186,11 @@ const PropertyPage = ({ property = {}, properties = [] }) => {
   const classes = useStyles();
 
   return (
-    <AdminContentWrapper redirectDashboard>
+    <AdminContentWrapper
+      redirectDashboard
+      redirectUri="/dashboard/search"
+      redirectText="Revenir à la recherche"
+    >
       <div>
         <div className="relative">
           {property.pictures && <Carrousel list={property.pictures} />}

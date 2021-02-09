@@ -76,6 +76,14 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 0,
       marginBottom: 8,
     },
+    '& ul': {
+      paddingLeft: '4rem',
+    },
+    '& ul li': {
+      ...theme.typography.body1,
+      marginTop: 0,
+      marginBottom: 8,
+    },
     '& h4': {
       ...theme.typography.h4,
       marginTop: 0,
