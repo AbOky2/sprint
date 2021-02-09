@@ -80,7 +80,7 @@ const useStyles = makeStyles({
     },
   },
 });
-const SearchPage = ({ user, properties, query: { type: queryType } = {} }) => {
+const SearchPage = ({ user, properties, queryType }) => {
   const [state, setState] = useState(properties);
   const [queryData, setQueryData] = useState({
     location: '',
@@ -162,7 +162,7 @@ const SearchPage = ({ user, properties, query: { type: queryType } = {} }) => {
           </Grid>
           <Grid item md={4} className="relative">
             <Input name="maxPrice" onChange={handleSearch} placeholder="Budget maximal" />
-            <div onClick={handleSumit}>
+            <div onClick={handleSumit} className="pointer">
               <Icon type="search" size="large" />
             </div>
           </Grid>
@@ -198,8 +198,9 @@ SearchPage.getInitialProps = async ({ req, query }) => {
   if (req && req.headers && req.headers.cookie) {
     headers.cookie = req.headers.cookie;
   }
+  const queryType = query.type;
   const { list } = await getPropertiesApiMethod({ headers });
-  return { properties: list, query };
+  return { properties: list, queryType };
 };
 
 export default withAuth(SearchPage);

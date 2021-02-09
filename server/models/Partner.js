@@ -61,10 +61,9 @@ class PartnerClass extends DBModel {
     try {
       if (!args.picture) throw new Error('Picture must be set');
 
-      const newData = await this.create(args);
-      const elem = newData.toObject();
+      await this.create(args);
 
-      return { elem };
+      return await this.list();
     } catch (error) {
       removeFiles(args.cover);
       removeFiles(args.picture);

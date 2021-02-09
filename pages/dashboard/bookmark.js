@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import { AdminContentWrapper } from '../../components/wrapper';
-import { addBookmarkApiMethod } from '../../lib/api/customer';
+import { addBookmarkApiMethod, getCurrentUserkApiMethod } from '../../lib/api/customer';
 import Card from '../../components/card';
 import { Btn } from '../../components/form';
 import withAuth from '../../lib/withAuth';
@@ -78,7 +78,9 @@ const BookmarkPage = ({ user }) => {
     setState(state.filter((elem) => elem._id !== id));
     addBookmarkApiMethod({ id });
   };
-
+  useEffect(() => {
+    getCurrentUserkApiMethod().then(({ user }) => setState(user.bookmarks));
+  }, []);
   return (
     <AdminContentWrapper redirectDashboard>
       <div>

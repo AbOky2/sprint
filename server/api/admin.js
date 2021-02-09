@@ -91,7 +91,6 @@ sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
       // eslint-disable-next-line no-return-await
       async ({ req, id, data }) => {
         const newData = { ...data };
-
         if (req.files) {
           const elem = await model.get(id);
           if (!elem) throw new Error('Picture must be set');
@@ -105,7 +104,9 @@ sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
             if (curr?.filename) newData[key] = `/${plural}/${curr.filename}`;
           });
         }
-        await model.update(id, newData);
+
+        // eslint-disable-next-line no-return-await
+        return await model.update(id, newData);
       },
     ),
   );

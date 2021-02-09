@@ -51,7 +51,7 @@ const mongoSchema = new Schema({
 class PropertieClass extends DBModel {
   static name = modelName;
 
-  static async search({ maxPrice, typeOfProperty, coordinates, limit = 10, skip = 0 }) {
+  static async search({ maxPrice, typeOfProperty, coordinates, limit = 12, skip = 0 }) {
     let query = {};
     query = {
       $and: [

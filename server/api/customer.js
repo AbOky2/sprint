@@ -25,7 +25,12 @@ router.use((req, res, next) => {
 
   next();
 });
-
+router.get('/currentUser', ({ user }, res) => {
+  if (!user) {
+    return res.status(401).json({ success: false });
+  }
+  res.json({ user });
+});
 router.post(
   '/search',
   requestMiddleware(joiSchema.propertie.student.search),

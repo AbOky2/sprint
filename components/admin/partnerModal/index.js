@@ -53,12 +53,14 @@ export default function HorizontalLabelPositionBelowStepper({
     state,
     setState,
   ]);
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeStep === steps.length - 1) {
+      let data;
       if (state?._id) {
         const { _id, ...form } = state;
-        updatePartnerApiMethod(_id, form, (data) => handleSubmit(data.list));
-      } else addPartnerApiMethod(state, (data) => handleSubmit(data.list));
+        data = await updatePartnerApiMethod(_id, form);
+      } else data = await addPartnerApiMethod(state);
+      handleSubmit(data.list);
     } else setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
