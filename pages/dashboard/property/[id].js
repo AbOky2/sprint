@@ -7,13 +7,6 @@ import { AdminContentWrapper } from '../../../components/wrapper';
 import { Icon, Btn } from '../../../components/form';
 import { getPropertyApiMethod, getPropertiesApiMethod } from '../../../lib/api/customer';
 import Carrousel from '../../../components/Carrousel';
-
-// import Carrousel from '../../../components/elements/carrousel';
-// import StationCImg from '../../../assets/img/icons/station/c.png';
-// import Station4Img from '../../../assets/img/icons/station/14.png';
-// import Station3AImg from '../../../assets/img/icons/station/3a.png';
-// import TmpMap from '../../../assets/img/tmp/map.png';
-// import TmpCarrousel from '../../../assets/img/tmp/carrousel.png';
 import withAuth from '../../../lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 30,
     '& > div': {
       position: 'absolute',
-      bottom: 20,
+      bottom: 0,
       cursor: 'pointer',
       width: 'fit-content',
       padding: '20px 23px',

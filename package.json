@@ -45,6 +45,8 @@
     "react-markdown": "^5.0.3",
     "react-mde": "^11.0.6",
     "react-slick": "^0.28.0",
+    "react-swipeable-views": "^0.13.9",
+    "react-swipeable-views-utils": "^0.14.0-alpha.0",
     "react-toastify": "^6.2.0",
     "showdown": "^1.9.1",
     "winston": "3.3.3"
