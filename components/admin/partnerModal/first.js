@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import Upload from '../../form/upload';
+import Upload from '../../form/Upload';
 
 const First = ({ onChange, values = {} }) => {
   console.log(values);

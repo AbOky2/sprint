@@ -49,8 +49,6 @@ const mongoSchema = new Schema({
 });
 
 class PropertieClass extends DBModel {
-  static name = modelName;
-
   static async search({ maxPrice, typeOfProperty, coordinates, limit = 12, skip = 0 }) {
     let query = {};
     query = {
@@ -81,6 +79,8 @@ class PropertieClass extends DBModel {
     return { list };
   }
 }
+
+PropertieClass.name = modelName;
 mongoSchema.loadClass(PropertieClass);
 
 const Propertie = mongoose.model(modelName, mongoSchema);

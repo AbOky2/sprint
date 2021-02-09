@@ -2,7 +2,7 @@ import React from 'react';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Upload from '../../form/upload';
+import Upload from '../../form/Upload';
 import { partnerTypes, partnerTypeListKeys } from '../../../helpers/partner';
 
 const useStyles = makeStyles((theme) => ({

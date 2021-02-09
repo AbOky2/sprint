@@ -2,8 +2,6 @@ const logger = require('../logs');
 const msg = require('../utils/message');
 
 class DBModel {
-  static name = 'Element';
-
   static publicFields() {
     return ['-__v'];
   }
@@ -116,5 +114,6 @@ class DBModel {
     return { first, second };
   }
 }
+DBModel.name = 'Element';
 
 module.exports = DBModel;

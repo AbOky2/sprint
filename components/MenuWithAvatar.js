@@ -54,7 +54,9 @@ class MenuWithAvatar extends React.Component {
           {options.map((option) => (
             <div id="wrappingLink" key={option.text}>
               <Link href={option.href} as={option.as || option.href}>
-                <a style={{ padding: '0px 20px' }}>{option.text}</a>
+                <a onClick={option.onClick} style={{ padding: '0px 20px' }}>
+                  {option.text}
+                </a>
               </Link>
               <p />
             </div>

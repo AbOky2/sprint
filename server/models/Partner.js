@@ -50,8 +50,6 @@ const mongoSchema = new Schema({
 });
 
 class PartnerClass extends DBModel {
-  static name = modelName;
-
   /**
    * @param {Object} options
    * @param {String} options.title
@@ -84,6 +82,8 @@ class PartnerClass extends DBModel {
     }
   }
 }
+PartnerClass.name = modelName;
+
 mongoSchema.loadClass(PartnerClass);
 
 const Partner = mongoose.model(modelName, mongoSchema);

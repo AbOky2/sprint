@@ -17,7 +17,7 @@ const middleware = (schema, reqProperty = 'body') => (req, res, next) => {
       else if (isObject(req.files)) {
         Object.keys(req.files).forEach((key) => {
           const curr = req.files[key][0];
-          if (curr?.filename) removeFiles(curr.path.split('public')[1]);
+          if (curr && curr.filename) removeFiles(curr.path.split('public')[1]);
         });
       }
     }

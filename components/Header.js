@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Hidden from '@material-ui/core/Hidden';
 import Button from '@material-ui/core/Button';
 import { Icon } from './form';
+import { logOut } from '../lib/api/public';
 
 import MenuWithAvatar from './MenuWithAvatar';
 
@@ -31,6 +32,10 @@ const optionsMenuAdmin = [
   {
     text: 'Log out',
     href: '/logout',
+    onClick: (e) => {
+      e.preventDefault();
+      logOut().then(() => (window.location = '/login'));
+    },
   },
 ];
 

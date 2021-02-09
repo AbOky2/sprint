@@ -158,7 +158,7 @@ class UserClass extends DBModel {
     // eslint-disable-next-line no-cond-assign
     if (userDoc.bookmarks && (index = userDoc.bookmarks.indexOf(property._id)) >= 0)
       userDoc.bookmarks.splice(index, 1);
-    else if (userDoc.bookmarks?.length) userDoc.bookmarks.push(property._id);
+    else if (userDoc.bookmarks && userDoc.bookmarks.length) userDoc.bookmarks.push(property._id);
     else userDoc.bookmarks = [property._id];
     userDoc.save();
     return { user: userDoc };

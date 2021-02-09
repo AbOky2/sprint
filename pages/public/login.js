@@ -225,9 +225,9 @@ const LoginTab = () => {
       authReq = signIn;
     }
 
-    authReq(data).then(() => {
+    authReq(data).then(({ user }) => {
       NProgress.done();
-      window.location = '/dashboard';
+      window.location = user.role === 'admin' ? '/admin' : '/dashboard';
     });
   };
   const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
