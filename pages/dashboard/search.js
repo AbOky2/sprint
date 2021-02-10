@@ -114,6 +114,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  pagination: {
+    marginTop: '1rem',
+  },
 }));
 const SearchPage = ({ user, properties, typeOfProperty }) => {
   const [page, setPage] = useState({
@@ -238,7 +241,7 @@ const SearchPage = ({ user, properties, typeOfProperty }) => {
           ))}
         </Grid>
       </div>
-      <Grid container justify="center">
+      <Grid container justify="center" className={classes.pagination}>
         <Pagination count={page.total} page={page.offset} onChange={handlePage} />
       </Grid>
     </AdminContentWrapper>
