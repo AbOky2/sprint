@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import * as NProgress from 'nprogress';
 import { StudentSidebarComp, AdminSidebarComp } from './AuthWrapper';
+import { isAdmin, dashboardPaths } from '../helpers/user';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -51,17 +52,8 @@ export default function withAuth(
         globalUser = user;
       }
 
-      if (loginRequired && !logoutRequired && !user) {
-        Router.push('/public/login', '/login');
-        return;
-      }
-
-      if (adminRequired && (!user || !user.isAdmin)) {
-        Router.push('/customer/my-books', '/my-books');
-      }
-
       if (logoutRequired && user) {
-        Router.push('/');
+        Router.push(isAdmin(user) ? dashboardPaths.admin : dashboardPaths.student);
       }
     }
 
@@ -72,7 +64,7 @@ export default function withAuth(
         return null;
       }
 
-      if (adminRequired && (!user || !user.isAdmin)) {
+      if (adminRequired && !isAdmin(user)) {
         return null;
       }
 
@@ -81,7 +73,7 @@ export default function withAuth(
       }
 
       if (!user) return <BaseComponent {...this.props} />;
-      if (user?.isAdmin || user?.role === 'admin')
+      if (isAdmin(user))
         return (
           <>
             <AdminSidebarComp user={user}>

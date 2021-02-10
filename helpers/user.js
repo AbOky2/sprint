@@ -25,6 +25,10 @@ const strategyTypeKeys = {
   [locationStrategy]: 'Location',
   [guarantorStrategy]: 'garant',
 };
+const dashboardPaths = {
+  admin: '/admin',
+  student: '/dashboard',
+};
 // Slug
 const slugify = (slug) => {
   let str = slug;
@@ -86,6 +90,7 @@ module.exports = {
   buyStrategy,
   locationStrategy,
   guarantorStrategy,
+  dashboardPaths,
 
   // Methods
   ucFirst,
