@@ -31,6 +31,9 @@ const styles = (theme) => ({
       margin: '2rem 0 1rem',
       color: '#526190',
     },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
   },
   left: {
     paddingRight: '1.3rem',

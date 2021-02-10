@@ -38,9 +38,15 @@ const styles = (theme) => ({
   },
   left: {
     paddingRight: '1.3rem',
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: 0,
+    },
   },
   right: {
     paddingLeft: '1.3rem',
+    [theme.breakpoints.down('sm')]: {
+      paddingLeft: 0,
+    },
   },
 });
 

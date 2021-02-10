@@ -10,10 +10,13 @@ import { Student, Buyer } from '../../helpers/user';
 import { signIn, signUp } from '../../lib/api/public';
 import LogoImg from '../../static/img/logo-full.png';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     height: '100%',
     paddingTop: '3rem',
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '2rem ',
+    },
     '& > div > a > img': {
       width: 137,
     },
@@ -34,15 +37,21 @@ const useStyles = makeStyles({
     '& h2': {
       paddingLeft: '0',
       marginTop: '0',
-      marginBottom: '30px',
+      marginBottom: '3rem',
       textAlign: 'center',
       fontFamily: 'Open Sans',
       fontSize: '1.8rem',
       fontWeight: '600',
       color: 'rgba(26, 46, 108, 0.5)',
+      [theme.breakpoints.down('sm')]: {
+        marginBottom: '1.5rem ',
+      },
     },
     '& > div > a': {
       marginBottom: '3.5rem',
+      [theme.breakpoints.down('sm')]: {
+        marginBottom: '2rem ',
+      },
     },
     '& input': {
       display: 'block',
@@ -76,6 +85,7 @@ const useStyles = makeStyles({
     borderRadius: '1rem',
     borderTopLeftRadius: '0',
     borderBottomLeftRadius: '0',
+    [theme.breakpoints.down('sm')]: theme.space.bodyWrapper,
   },
   formContainerParent: {
     minHeight: '100vh',
@@ -99,12 +109,22 @@ const useStyles = makeStyles({
     padding: '2rem 0',
   },
   btnContainer: {
-    marginTop: 30,
+    marginTop: '3rem',
     '& > div:first-of-type': {
       paddingRight: 5,
+      [theme.breakpoints.down('sm')]: {
+        paddingRight: 0,
+        marginBottom: '2rem',
+      },
     },
     '& > div:last-of-type': {
       paddingLeft: 5,
+      [theme.breakpoints.down('sm')]: {
+        paddingLeft: 0,
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: '2rem',
     },
   },
   checkBoxContainer: {
@@ -114,9 +134,12 @@ const useStyles = makeStyles({
     },
     '& h3': {
       color: 'rgba(26, 46, 108, 0.5)',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '1rem',
+      },
     },
   },
-});
+}));
 const SignUp = ({ values = {}, handleChange }) => (
   <Grid container item>
     <Input
