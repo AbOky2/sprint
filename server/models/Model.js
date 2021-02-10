@@ -8,6 +8,7 @@ class DBModel {
 
   static async add(args) {
     try {
+      console.log(args);
       const newData = await this.create(args);
 
       const elem = newData.toObject();

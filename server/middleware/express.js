@@ -47,13 +47,14 @@ const deleteCollection = (listFn) => [
   handleErrors(async (req, res) => res.json(await listFn({ id: req.params.id }))),
 ];
 
-const listCollection = (listFn) => [
-  requestMiddleware(joiSchema.request.list, 'query'),
-  handleErrors(async ({ query: { offset, limit } }, res) => {
+const listCollection = (listFn, schema = joiSchema.request.list) => [
+  requestMiddleware(schema, 'query'),
+  handleErrors(async ({ query: { offset, limit, ...others } }, res) => {
     res.json(
       await listFn({
         offset: Number(offset) || undefined,
         limit: Number(limit) || undefined,
+        ...others,
       }),
     );
   }),

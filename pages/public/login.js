@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '3rem',
     [theme.breakpoints.down('sm')]: {
       paddingTop: '2rem ',
+      backgroundColor: 'white',
     },
     '& > div > a > img': {
       width: 137,
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     '& > div > a': {
       marginBottom: '3.5rem',
       [theme.breakpoints.down('sm')]: {
-        marginBottom: '2rem ',
+        marginBottom: '1rem ',
       },
     },
     '& input': {

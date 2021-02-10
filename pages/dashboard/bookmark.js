@@ -80,6 +80,12 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
+      '&:nth-child(3n+2)': {
+        margin: '0 0 2rem',
+      },
+      '&:last-child': {
+        marginBottom: 0,
+      },
     },
   },
 }));
