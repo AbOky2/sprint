@@ -48,6 +48,18 @@ const useStyles = makeStyles((theme) => ({
           color: '#4f80ff',
         },
       },
+      [theme.breakpoints.down('sm')]: {
+        marginBottom: '2rem',
+        padding: '1.8rem 1rem',
+        width: '100%',
+        '&:first-of-type': {
+          marginRight: 0,
+        },
+        '&:last-of-type': {
+          marginLeft: 0,
+          marginBottom: 0,
+        },
+      },
     },
     '& a': {
       fontFamily: 'Open Sans',
