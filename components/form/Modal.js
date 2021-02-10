@@ -9,15 +9,24 @@ import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { Icon } from '.';
 import Btn from './Btn';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     padding: '4rem 10rem',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      ...theme.space.bodyWrapper,
+      paddingTop: '2rem',
+    },
   },
   close: {
     position: 'absolute',
     top: 35,
     right: 35,
     cursor: 'pointer',
+    [theme.breakpoints.down('sm')]: {
+      top: '1rem',
+      right: '1rem',
+    },
   },
   contentContainer: {
     display: 'inline-block',
@@ -25,6 +34,9 @@ const useStyles = makeStyles({
     margin: '0 auto 1rem',
     padding: '4rem 0 5rem',
     borderBottom: '1px solid #C1CDE7',
+    [theme.breakpoints.down('sm')]: {
+      padding: '2rem 0 4rem',
+    },
   },
   btnContainer: {
     marginTop: 30,
@@ -37,8 +49,13 @@ const useStyles = makeStyles({
     '& > div:last-of-type': {
       paddingLeft: 11,
     },
+    '& > div': {
+      [theme.breakpoints.down('sm')]: {
+        paddingBottom: '2rem',
+      },
+    },
   },
-});
+}));
 const Modal = ({
   children,
   openModal,

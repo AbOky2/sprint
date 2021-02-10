@@ -8,11 +8,12 @@ import withAuth from '../../lib/withAuth';
 import { AdminContentWrapper } from '../../components/wrapper';
 import { Icon } from '../../components/form';
 import { partnerTypes } from '../../helpers/partner';
-import { buyStrategy, isRoomer } from '../../helpers/user';
+import { isRoomer } from '../../helpers/user';
 import { ucfirst } from '../../helpers/convertAndCheck';
 import { getPartnersApiMethod } from '../../lib/api/customer';
 import LocationImg from '../../static/img/location.png';
 import HouseImg from '../../static/img/house.png';
+import LogoImg from '../../static/img/logo.png';
 
 const styles = (theme) => ({
   container: {
@@ -23,6 +24,9 @@ const styles = (theme) => ({
     boxShadow: '0px 4px 20px rgb(24 55 50 / 4%)',
     borderRadius: '25px',
     textAlign: 'left',
+    [theme.breakpoints.down('md')]: {
+      padding: '2.5rem ',
+    },
   },
   presentationContainer: {
     '& > div:first-of-type': {
@@ -74,11 +78,14 @@ const styles = (theme) => ({
       display: 'none',
     },
     [theme.breakpoints.down('sm')]: {
+      textAlign: 'center',
       '& > div': {
         display: 'block',
         marginBottom: 15,
       },
-      textAlign: 'center',
+      '& img': {
+        height: 50,
+      },
     },
   },
   welcomeSub: {
@@ -172,7 +179,7 @@ const Dashboard = ({ user, partners, classes }) => (
   <AdminContentWrapper>
     <div className={classes.heading}>
       <div>
-        <Icon type="logo" size="large" />
+        <img src={LogoImg} alt="" />
       </div>
       <Typography variant="h1">
         {`Bonjour ${ucfirst(user?.firstName)} `}
