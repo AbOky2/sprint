@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate');
 const DBModel = require('./Model');
 const { typeOfProperties } = require('../../helpers/property');
 
@@ -10,6 +11,7 @@ const mongoSchema = new Schema({
   lot_ref: { type: String, unique: true },
   postal: { type: String },
   city: { type: String },
+  isNewProperty: { type: Boolean },
   country: { type: String },
   address: { type: String },
   district: { type: String },
@@ -49,11 +51,11 @@ const mongoSchema = new Schema({
 });
 
 class PropertieClass extends DBModel {
-  static async search({ maxPrice, typeOfProperty, coordinates, limit = 12, skip = 0 }) {
+  static async search({ maxPrice, typeOfProperty, coordinates, limit = 6, offset = 0 }) {
     let query = {};
     query = {
       $and: [
-        { $or: [maxPrice ? { price: { $lt: parseInt(maxPrice, 9) } } : {}] },
+        { $or: [maxPrice > 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {}] },
         // {
         //   $or: [
         //     coordinates
@@ -71,18 +73,19 @@ class PropertieClass extends DBModel {
         //       : {},
         //   ],
         // },
-        // { typeOfProperty },
+        { typeOfProperty },
       ],
     };
-    console.log(query.$and[0].$or, maxPrice);
-    const list = await this.find(query).limit(limit).skip(skip);
+    // console.log(limit, offset);
+    console.log(limit, offset);
+    const list = await this.paginate(query, { limit, offset });
     return { list };
   }
 }
 
 PropertieClass.name = modelName;
 mongoSchema.loadClass(PropertieClass);
-
+mongoSchema.plugin(mongoosePaginate);
 const Propertie = mongoose.model(modelName, mongoSchema);
 
 module.exports = Propertie;

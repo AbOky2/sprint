@@ -10,6 +10,12 @@ const isValidateEmail = (email) => {
 
   return re.test(String(email).toLowerCase());
 };
+const esc = encodeURIComponent;
+const toQueryParams = (params) =>
+  Object.keys(params)
+    .map((k) => `${esc(k)}=${esc(params[k])}`)
+    .join('&');
+
 const toFormData = (form = {}) => {
   const formData = new FormData();
 
@@ -51,4 +57,5 @@ module.exports = {
   isValidateEmail,
   pick,
   toggleArray,
+  toQueryParams,
 };

@@ -4,13 +4,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Grid, Typography } from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
 import { makeStyles } from '@material-ui/core/styles';
 import withAuth from '../../lib/withAuth';
-import {
-  getPropertiesApiMethod,
-  addBookmarkApiMethod,
-  getUserSearchApiMethod,
-} from '../../lib/api/customer';
+import { getPropertiesApiMethod, addBookmarkApiMethod } from '../../lib/api/customer';
 import { toggleArray } from '../../helpers/convertAndCheck';
 import { typeOfProperties } from '../../helpers/property';
 import { AdminContentWrapper } from '../../components/wrapper';
@@ -118,12 +115,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const SearchPage = ({ user, properties, queryType }) => {
-  const [state, setState] = useState(properties);
+const SearchPage = ({ user, properties, typeOfProperty }) => {
+  const [page, setPage] = useState({
+    limit: properties.limit,
+    offset: properties.offset,
+    total: properties.total,
+  });
+  const [state, setState] = useState(properties.docs);
   const [queryData, setQueryData] = useState({
     location: '',
     maxPrice: 0,
-    typeOfProperty: typeOfProperties[0],
+    typeOfProperty,
   });
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
   const classes = useStyles();
@@ -134,17 +136,25 @@ const SearchPage = ({ user, properties, queryType }) => {
     setLiked(toggleArray(liked, id));
     addBookmarkApiMethod({ id });
   };
-  const handleSumit = async () => {
-    // const queryData = { maxPrice: '20000', typeOfProperty: 'Appartement' };
+  const requestData = async (offset = 0) => {
     if (!queryData.maxPrice) queryData.maxPrice = 0;
-    const { list } = await getUserSearchApiMethod(queryData);
-    setState(list);
+    const {
+      list: { docs, ...pageInfo },
+    } = await getPropertiesApiMethod({
+      ...queryData,
+      limit: page.limit,
+      offset,
+    });
+    setState(docs);
+    setPage(pageInfo);
   };
+  const handleSumit = () => requestData();
 
+  const handlePage = (e, offset) => requestData(offset);
   return (
     <AdminContentWrapper redirectDashboard>
       <div>
-        {queryType !== 'location' && (
+        {typeOfProperty !== 'location' && (
           <div className={classes.setpsContainer}>
             <Typography variant="h2" className={classes.title}>
               Mon premier achat en 5 étapes !
@@ -195,6 +205,7 @@ const SearchPage = ({ user, properties, queryType }) => {
             <Select
               name="typeOfProperty"
               list={typeOfProperties.map((name) => ({ name, value: name }))}
+              value={queryData.typeOfProperty}
               onChange={handleSearch}
             />
           </Grid>
@@ -227,6 +238,9 @@ const SearchPage = ({ user, properties, queryType }) => {
           ))}
         </Grid>
       </div>
+      <Grid container justify="center">
+        <Pagination count={page.total} page={page.offset} onChange={handlePage} />
+      </Grid>
     </AdminContentWrapper>
   );
 };
@@ -236,9 +250,15 @@ SearchPage.getInitialProps = async ({ req, query }) => {
   if (req && req.headers && req.headers.cookie) {
     headers.cookie = req.headers.cookie;
   }
-  const queryType = query.type;
-  const { list } = await getPropertiesApiMethod({ headers });
-  return { properties: list, queryType };
+  const typeOfProperty = query.type === 'location' ? 'Location' : 'Vente';
+  const { list } = await getPropertiesApiMethod(
+    {
+      location: '',
+      typeOfProperty,
+    },
+    { headers },
+  );
+  return { properties: list, typeOfProperty };
 };
 
 export default withAuth(SearchPage);

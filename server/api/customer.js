@@ -31,23 +31,6 @@ router.get('/currentUser', ({ user }, res) => {
   }
   res.json({ user });
 });
-router.post(
-  '/search',
-  requestMiddleware(joiSchema.propertie.student.search),
-  handleErrors(async (req, res) => {
-    const { maxPrice, typeOfProperty, location } = req.body;
-    try {
-      const [{ latitude, longitude }] = [{}];
-      // const [{ latitude, longitude }] = await geocoder.geocode(location);
-      const coordinates = [latitude, longitude];
-      const { list } = await PropertieModel.search({ maxPrice, typeOfProperty, coordinates });
-
-      res.json({ list });
-    } catch (error) {
-      res.json({ errors: 'Error while searching', error });
-    }
-  }),
-);
 
 router.get(
   '/partner/:id',
@@ -57,11 +40,20 @@ router.get(
 
 router.get(
   '/properties',
-  listCollection(async ({ offset, limit }) => {
-    const { list } = await PropertieModel.list({ offset, limit });
+  listCollection(async ({ maxPrice, typeOfProperty, location, offset, limit }) => {
+    const [{ latitude, longitude }] = [{}];
+    // const [{ latitude, longitude }] = await geocoder.geocode(location);
+    const coordinates = [latitude, longitude];
+    const { list } = await PropertieModel.search({
+      maxPrice,
+      typeOfProperty,
+      coordinates,
+      offset,
+      limit,
+    });
 
     return { list };
-  }),
+  }, joiSchema.propertie.student.search),
 );
 
 router.get(
