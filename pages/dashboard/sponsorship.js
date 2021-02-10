@@ -33,8 +33,15 @@ const useStyles = makeStyles((theme) => ({
     '& > div > div > svg': {
       display: 'block',
       width: '100%',
-      marginTop: '50px',
+      marginTop: '5rem',
       transform: 'translateY(-75%)',
+      [theme.breakpoints.down('sm')]: {
+        opacity: 0,
+        marginTop: '3rem',
+      },
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: '2rem',
     },
   },
   formContainer: {
