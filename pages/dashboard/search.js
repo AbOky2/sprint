@@ -17,7 +17,7 @@ import { AdminContentWrapper } from '../../components/wrapper';
 import Card from '../../components/card';
 import { Icon, Input, Select } from '../../components/form';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   card: {
     width: 'calc(100% - 14px)',
   },
@@ -35,6 +35,9 @@ const useStyles = makeStyles({
     color: 'white',
     background: 'white',
     boxShadow: '0px 4px 13px rgb(0 0 0 / 10%), inset 0px -3px 10px rgb(149 149 149 / 20%)',
+    '& ul': {
+      paddingLeft: 0,
+    },
     '& li': {
       marginBottom: 15,
     },
@@ -71,6 +74,32 @@ const useStyles = makeStyles({
       borderTopLeftRadius: 0,
       borderBottomLeftRadius: 0,
     },
+    [theme.breakpoints.down('sm')]: {
+      '& > div': {
+        display: 'block',
+        width: '100%',
+      },
+      '& > div:nth-child(2) > div > div > div': {
+        backgroundColor: 'white',
+        borderRadius: 0,
+      },
+      '& > div input': {
+        borderRadius: '.6rem!important',
+      },
+      '& > div:first-of-type input': {
+        borderRight: `1px solid ${theme.palette.gray}`,
+        borderTopRightRadius: 1,
+        borderBottomLeftRadius: '0 !important',
+        borderBottomRightRadius: '0 !important',
+        borderBottom: 'none',
+      },
+      '& > div:last-of-type input': {
+        borderLeft: `1px solid ${theme.palette.gray}`,
+        borderTopLeftRadius: '0 !important',
+        borderTopRightRadius: '0 !important',
+        borderTop: 'none',
+      },
+    },
   },
   listContainer: {
     width: 'calc(33% - 11px)',
@@ -78,8 +107,17 @@ const useStyles = makeStyles({
     '&:nth-child(3n+2)': {
       margin: '0 2.1rem 2rem',
     },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      '&:nth-child(3n+2)': {
+        margin: '0 0 2rem',
+      },
+      '&:last-child': {
+        margin: 0,
+      },
+    },
   },
-});
+}));
 const SearchPage = ({ user, properties, queryType }) => {
   const [state, setState] = useState(properties);
   const [queryData, setQueryData] = useState({

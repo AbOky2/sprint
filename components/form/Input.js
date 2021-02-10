@@ -12,7 +12,7 @@ const styles = (theme) => ({
       boxSizing: 'border-box',
       width: '100%',
       height: '38px',
-      borderRadius: '6px',
+      borderRadius: '.6rem',
       border: 'solid 1px #c7cfd6',
       fontFamily: 'Rubik',
       fontSize: '1.6rem',
@@ -25,7 +25,7 @@ const styles = (theme) => ({
     },
     '& input:focus': {
       boxShadow: '0px 4px 10px 3px rgba(0, 0, 0, 0.11)',
-      border: '1px solid #4F80FF',
+      border: `1px solid ${theme.palette.gray}`,
     },
     '& h4': {
       margin: '2rem 0 1rem',
