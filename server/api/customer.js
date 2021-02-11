@@ -59,6 +59,15 @@ router.get(
 );
 
 router.get(
+  '/newProperties',
+  listCollection(async ({ offset, limit }) => {
+    const { list } = await PropertieModel.newProperties({ offset, limit });
+
+    return { list };
+  }),
+);
+
+router.get(
   '/property/:id',
   // eslint-disable-next-line no-return-await
   getCollection(async ({ id }) => await PropertieModel.get(id)),

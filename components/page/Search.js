@@ -152,8 +152,8 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
     setPage(pageInfo);
   };
   const handleSumit = () => requestData();
-
   const handlePage = (e, offset) => requestData(offset);
+
   return (
     <AdminContentWrapper redirectDashboard>
       <div>

@@ -52,6 +52,13 @@ const mongoSchema = new Schema({
 });
 
 class PropertieClass extends DBModel {
+  static async newProperties() {
+    const list = await this.find({ isNewProperty: true, typeOfAnnonce: 'Location' })
+      .sort('nb_pieces')
+      .limit(150);
+    return { list };
+  }
+
   static async search({
     maxPrice,
     typeOfAnnonce,

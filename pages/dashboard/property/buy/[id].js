@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { AdminContentWrapper } from '../../../../components/wrapper';
 import { Icon, Btn } from '../../../../components/form';
-import { getPropertyApiMethod, getPropertiesApiMethod } from '../../../../lib/api/customer';
+import {
+  getPropertyApiMethod,
+  getPropertiesApiMethod,
+  getNewPropertiesApiMethod,
+  addBookmarkApiMethod,
+} from '../../../../lib/api/customer';
 import Carrousel from '../../../../components/Carrousel';
 import withAuth from '../../../../lib/withAuth';
 
@@ -124,15 +129,13 @@ const useStyles = makeStyles((theme) => ({
     },
     '& h3': {
       color: theme.palette.blue,
+      marginBottom: 32,
     },
     '& > div:last-of-type > div h6 ': {
       color: '#526190',
     },
     '& > div:first-of-type': {
       marginBottom: 20,
-    },
-    '& h3': {
-      marginBottom: 32,
     },
     '& > div:last-of-type h6': {
       marginBottom: 9,
@@ -154,15 +157,81 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.blue,
       marginBottom: '4rem',
     },
-    '& > div > div:first-of-type': {
-      borderTop: '1px solid rgba(26, 46, 108, 0.5)',
-    },
-    '& > div > div:nht-child(3)': {
-      background: 'red',
+
+    '& > div > div:last-of-type > div:first-of-type': {
+      borderBottom: '1px solid rgba(26, 46, 108, 0.5)',
     },
     '& > div > div': {
-      padding: '2rem',
-      borderBottom: '1px solid rgba(26, 46, 108, 0.5)',
+      width: '100%',
+      '& > div:first-of-type': {
+        borderTop: '1px solid rgba(26, 46, 108, 0.5)',
+        padding: '2.5rem 0',
+        '& > div:first-of-type': {
+          display: 'none',
+          padding: '0 2rem',
+        },
+        [theme.breakpoints.down('sm')]: {
+          '& > div': {
+            display: 'none',
+          },
+          '& > div:first-of-type': {
+            display: 'flex',
+          },
+        },
+      },
+    },
+  },
+  discoveryContentHeader: {
+    paddingTop: '2.5rem',
+    fontFamily: 'Nunito',
+    borderTop: '1px solid rgba(26, 46, 108, 0.5)',
+    color: theme.palette.button,
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '1.6rem',
+    lineHeight: '2.2rem',
+    '& > div:first-of-type': {
+      display: 'none',
+    },
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+      '& > div': {
+        display: 'none',
+      },
+    },
+  },
+  discoveryContent: {
+    marginBottom: '2.4rem',
+    '& > div:first-of-type': {
+      display: 'none',
+    },
+    '& > div:last-child > div': {
+      padding: '.8rem',
+      fontSize: '1rem',
+      color: theme.palette.button,
+      border: `1px solid ${theme.palette.button}`,
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& > div': {
+        display: 'none',
+      },
+      '& > div:first-of-type': {
+        display: 'flex',
+        paddingTop: '2.5rem',
+        borderTop: '1px solid rgba(26, 46, 108, 0.5)',
+        '& > div:first-of-type': {
+          padding: '0 2rem',
+        },
+        '& > div:last-of-type': {
+          marginTop: '1.6rem',
+          width: '100%',
+          '& > div': {
+            width: '100%',
+            color: theme.palette.button,
+            border: `1px solid ${theme.palette.button}`,
+          },
+        },
+      },
     },
   },
   phoneContainer: {
@@ -180,11 +249,43 @@ const bonusList = [
   { key: 'intercom', value: 'Intercom' },
 ];
 
-const PropertyPage = ({ property = {}, properties = [] }) => {
-  const [state, setState] = useState(false);
-  const toggle = () => setState(!state);
-  const classes = useStyles();
+const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
+  const [state, setstate] = useState({});
+  const [currOpen, setCurrOpen] = useState('1');
+  const [liked, setLiked] = useState(user?.bookmarks?.find((elem) => elem._id));
+  const handleBookmark = () => {
+    setLiked(!liked);
+    addBookmarkApiMethod({ id });
+  };
+  const handleCurrOpen = (e) => setCurrOpen(currOpen === e ? null : e);
+  useEffect(() => {
+    (async () => {
+      const { list = [] } = await getNewPropertiesApiMethod();
 
+      const newState = { total: list.length };
+      list.forEach((newElem) => {
+        const elem = newState[newElem.nb_pieces];
+        if (Object.prototype.hasOwnProperty.call(newState, newElem.nb_pieces)) {
+          elem.list.push(newElem);
+          if (!elem.minPrice || elem.minPrice > newElem.price) elem.minPrice = newElem.price;
+          if (!elem.minSurface || elem.minSurface > newElem.surface)
+            elem.minSurface = newElem.surface;
+          if (!elem.maxSurface || elem.maxSurface < newElem.surface)
+            elem.maxSurface = newElem.surface;
+          newState[newElem.nb_pieces] = elem;
+        } else {
+          newState[newElem.nb_pieces] = {
+            list: [newElem],
+            minSurface: newElem.surface,
+            maxSurface: newElem.surface,
+          };
+        }
+      });
+      setstate(newState);
+    })();
+  }, []);
+  const classes = useStyles();
+  console.log(state);
   return (
     <AdminContentWrapper
       redirectDashboard
@@ -195,11 +296,11 @@ const PropertyPage = ({ property = {}, properties = [] }) => {
         <div className="relative">
           {property.pictures && <Carrousel list={property.pictures} />}
           <Grid container className={classes.save} justify="center">
-            <Grid item container onClick={toggle}>
+            <Grid item container onClick={handleBookmark}>
               <Icon
                 type="heart"
-                color={state ? 'red' : 'white'}
-                strokeColor={state ? 'red' : 'lightBlue'}
+                color={liked ? 'red' : 'white'}
+                strokeColor={liked ? 'red' : 'lightBlue'}
               />
               {` Sauvegarder`}
             </Grid>
@@ -281,30 +382,133 @@ const PropertyPage = ({ property = {}, properties = [] }) => {
           </Grid>
         </Grid>
         <Grid container className={classes.discoveryContainer}>
-          <Typography variant="h2">Découvrez nos 13 logements neufs disponibles :</Typography>
+          <Typography variant="h2">
+            Découvrez nos 
+{' '}
+{state.total} logements neufs disponibles :
+          </Typography>
           <Grid container>
-            {properties.map((elem) => (
-              <Grid key={elem._id} container>
-                <Grid item md={2} xs={5} alignItems="center">
-                  <Icon type="room" color="lightBlue" />
-                  {` ${property.nb_pieces} pièce${property.nb_pieces?.length > 1 ? 's' : ''}`}
-                </Grid>
-                <Grid item md={3} xs={5} alignItems="center">
-                  <Icon type="room" color="lightBlue" />
-                  {` de ${property.surface}`}
-                </Grid>
-                <Grid item md={3} xs={5} alignItems="center">
-                  <span>à partir de</span>
-                  <strong>{` ${property.price}€`}</strong>
-                </Grid>
-                <Grid item md={3} xs={5} alignItems="center">
-                  {`${property.price} logements disponibles`}
-                </Grid>
-                <Grid item md={1} xs={5} alignItems="center">
-                  <Icon type="plus" color="lightBlue" size="small" />
-                </Grid>
-              </Grid>
-            ))}
+            {Object.keys(state).map((elem) => {
+              const curr = state[elem];
+              const isOpen = currOpen === elem;
+              return (
+                <div key={elem}>
+                  <Grid container>
+                    <Grid container justify="space-between">
+                      <Grid item>
+                        <div>
+                          {` ${elem} pièce${elem > 1 ? 's' : ''} à partir de ${elem.surface}`}
+                        </div>
+                      </Grid>
+                      <Grid
+                        item
+                        alignItems="center"
+                        onClick={() => handleCurrOpen(elem)}
+                        className="text-center pointer"
+                      >
+                        <Icon type={isOpen ? 'less' : 'plus'} color="lightBlue" size="small" />
+                      </Grid>
+                    </Grid>
+                    <Grid item md={2} xs={5} alignItems="center">
+                      <Icon type="door" color="lightBlue" />
+                      {` ${elem} pièce${elem > 1 ? 's' : ''}`}
+                    </Grid>
+                    <Grid item md={3} xs={5} alignItems="center">
+                      <Icon type="room" color="lightBlue" />
+                      {` de ${curr.minSurface}m² à ${curr.maxSurface}m²`}
+                    </Grid>
+                    <Grid item md={3} xs={5} alignItems="center">
+                      <span>à partir de</span>
+                      <strong>{` ${curr.minPrice}€`}</strong>
+                    </Grid>
+                    <Grid item md={3} xs={5} alignItems="center">
+                      {`${property.price} logements disponibles`}
+                    </Grid>
+                    <Grid
+                      item
+                      md={1}
+                      xs={5}
+                      alignItems="center"
+                      onClick={() => handleCurrOpen(elem)}
+                      className="text-center pointer"
+                    >
+                      <Icon type={isOpen ? 'less' : 'plus'} color="lightBlue" size="small" />
+                    </Grid>
+                  </Grid>
+                  {isOpen && (
+                    <div>
+                      <Grid container className={classes.discoveryContentHeader}>
+                        <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                          Type
+                        </Grid>
+                        <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                          Prix TVA 20%
+                        </Grid>
+                        <Grid item md={1} xs={5} className="text-center" alignItems="center">
+                          Surface
+                        </Grid>
+                        <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                          Étage
+                        </Grid>
+                        <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                          Orientation
+                        </Grid>
+                        <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                          Les +
+                        </Grid>
+                        <Grid item md={1} xs={5} className="text-center" alignItems="center">
+                          Plan 2D
+                        </Grid>
+                      </Grid>
+                      {curr.list.map((elem) => (
+                        <Grid key={elem._id} container className={classes.discoveryContent}>
+                          <Grid container>
+                            <Grid container>
+                              <Grid item xs={6}>
+                                <div>{elem.typeOfProperty}</div>
+                                <div>
+                                  {elem.surface}
+                                  m²
+                                </div>
+                              </Grid>
+                              <Grid item xs={6} className="text-center">
+                                <div>Prix TVA 20%</div>
+                                <div>{elem.typeOfProperty}</div>
+                              </Grid>
+                            </Grid>
+                            <Grid item className="text-center" alignItems="center">
+                              <Btn text="Voir le plan" whiteColor />
+                            </Grid>
+                          </Grid>
+                          <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                            {elem.typeOfProperty}
+                          </Grid>
+                          <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                            Prix TVA 20%
+                          </Grid>
+                          <Grid item md={1} xs={5} className="text-center" alignItems="center">
+                            {elem.surface}
+                            m²
+                          </Grid>
+                          <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                            Étage
+                          </Grid>
+                          <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                            Orientation
+                          </Grid>
+                          <Grid item md={2} xs={5} className="text-center" alignItems="center">
+                            Les +
+                          </Grid>
+                          <Grid item md={1} xs={5} className="text-center" alignItems="center">
+                            <Btn text="Voir le plan" whiteColor />
+                          </Grid>
+                        </Grid>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </Grid>
         </Grid>
       </div>
@@ -316,14 +520,14 @@ PropertyPage.propTypes = {
   property: PropTypes.object.isRequired,
   properties: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-PropertyPage.getInitialProps = async ({ req, query }) => {
+PropertyPage.getInitialProps = async ({ req, query: { id } }) => {
   const headers = {};
   if (req && req.headers && req.headers.cookie) {
     headers.cookie = req.headers.cookie;
   }
-  const property = await getPropertyApiMethod(query.id, { headers });
+  const property = await getPropertyApiMethod(id, { headers });
   const { list: properties = [] } = await getPropertiesApiMethod({ headers });
-  return { property, properties };
+  return { property, properties, id };
 };
 
 export default withAuth(PropertyPage);
