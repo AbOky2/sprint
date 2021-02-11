@@ -123,7 +123,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
   const [page, setPage] = useState({
     limit: properties.limit,
     offset: properties.offset,
-    total: properties.total,
+    totalPages: properties.totalPages,
   });
   const [state, setState] = useState(properties.docs);
   const [queryData, setQueryData] = useState({
@@ -216,7 +216,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
           <Grid item md={4} className="relative">
             <Input name="maxPrice" onChange={handleSearch} placeholder="Budget maximal" />
             <div onClick={handleSumit} className="pointer">
-              <Icon type="search" size="large" />
+              <Icon type="search" size="large" color="white" />
             </div>
           </Grid>
         </Grid>
@@ -242,9 +242,9 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
           ))}
         </Grid>
       </div>
-      {page.total > 0 && (
+      {page.totalPages > 0 && (
         <Grid container justify="center" className={classes.pagination}>
-          <Pagination count={page.total} page={page.offset} onChange={handlePage} />
+          <Pagination count={page.totalPages} page={page.offset} onChange={handlePage} />
         </Grid>
       )}
     </AdminContentWrapper>

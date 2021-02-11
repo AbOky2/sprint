@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const DBModel = require('./Model');
 const { typeOfAnnoncies, typeOfProperties } = require('../../helpers/property');
 
@@ -58,7 +58,7 @@ class PropertieClass extends DBModel {
     typeOfProperty = [],
     coordinates,
     limit = 6,
-    offset = 0,
+    offset: page = 1,
   }) {
     const query = {
       $and: [
@@ -67,7 +67,7 @@ class PropertieClass extends DBModel {
         { typeOfAnnonce },
       ],
     };
-    const list = await this.paginate(query, { limit, offset });
+    const list = await this.paginate(query, { limit, page });
     return { list };
   }
 }

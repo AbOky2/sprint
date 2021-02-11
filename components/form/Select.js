@@ -60,6 +60,11 @@ const styles = (theme) => ({
       backgroundColor: 'white',
       paddingLeft: '1.4rem',
       border: 'solid 1px #c7cfd6',
+      fontStyle: 'normal',
+      fontWeight: '600',
+      fontSize: '1.6rem',
+      lineHeight: '2.2rem',
+      color: 'rgba(26, 46, 108, 0.5)',
     },
     '& > span': {
       position: 'absolute',
