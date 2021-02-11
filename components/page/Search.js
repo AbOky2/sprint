@@ -220,7 +220,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
           </Grid>
         </Grid>
         <Grid container>
-          {state?.map(({ _id, title, pictures, address, typeOfAnnonce, dimensions, price }) => (
+          {state?.map(({ _id, heading, pictures, address, typeOfAnnonce, dimensions, price }) => (
             <Grid item key={_id} className={classes.listContainer}>
               <Link
                 href={`/dashboard/property/${
@@ -230,7 +230,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
                 <a>
                   <Card
                     _id={_id}
-                    title={title}
+                    title={heading}
                     src={pictures?.[0]}
                     address={address}
                     description={typeOfAnnonce}

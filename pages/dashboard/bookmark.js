@@ -107,7 +107,7 @@ const BookmarkPage = ({ user }) => {
             {state.map(
               ({
                 _id,
-                title,
+                heading,
                 pictures,
                 address,
                 typeOfAnnonce,
@@ -124,7 +124,7 @@ const BookmarkPage = ({ user }) => {
                     <a>
                       <Card
                         _id={_id}
-                        title={title}
+                        title={heading}
                         src={pictures?.[0]}
                         address={address}
                         description={typeOfAnnoncies}
