@@ -76,6 +76,8 @@ const readMba = () => {
             }
           });
           if (!pictures.length) return;
+
+          // if (!pictures.length) pictures.push('/properties/no-pictures.jpg');
           const data = pick(newResult, filteredProperties);
 
           data.pictures = pictures;

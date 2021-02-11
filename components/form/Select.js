@@ -1,8 +1,11 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { FormControl, Select, Grid } from '@material-ui/core';
+import { FormControl, Select, Grid, Checkbox, Typography } from '@material-ui/core';
+import { toggleArray } from '../../helpers/convertAndCheck';
 
 const positionType = ['left', 'right'];
 
@@ -48,8 +51,90 @@ const styles = (theme) => ({
       paddingLeft: 0,
     },
   },
+  customSelectContainer: {
+    position: 'relative',
+    height: '100%',
+    '& input': {
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'white',
+      paddingLeft: '1.4rem',
+      border: 'solid 1px #c7cfd6',
+    },
+    '& > span': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      cursor: 'pointer',
+    },
+    '& > div': {
+      display: 'none',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      padding: '1.6rem .5rem',
+      transform: 'translateY(100%)',
+      backgroundColor: 'white',
+      zIndex: 3,
+      '& > div > span': {
+        padding: 6,
+      },
+      '& > div p': {
+        fontStyle: 'normal',
+        color: theme.palette.blue,
+      },
+    },
+  },
+  open: {
+    '& > div': {
+      display: 'flex',
+    },
+  },
 });
 
+const DropdownSelect = withStyles(styles)(({ onChange, position, list, classes }) => {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState([]);
+  const toggleOpen = (e) => setOpen(!open);
+  const handleSelected = (e) => {
+    const values = toggleArray(selected, e.target.value);
+
+    setSelected(values);
+    onChange(values);
+  };
+
+  return (
+    <Grid
+      item
+      md={position ? 6 : 12}
+      xs={12}
+      className={
+        open ? clsx(classes.customSelectContainer, classes.open) : classes.customSelectContainer
+      }
+    >
+      <input value={selected.join(' - ')} disabled />
+      <span onClick={toggleOpen} />
+      <Grid container>
+        {list?.map((elem) => (
+          <Grid container item key={elem.name} md={6} alignItems="center">
+            <Checkbox
+              color="primary"
+              inputProps={{ 'aria-label': 'secondary checkbox' }}
+              key={elem.name}
+              value={elem.value}
+              onClick={handleSelected}
+            />
+            <Typography variant="body2">{elem.name}</Typography>
+          </Grid>
+        ))}
+      </Grid>
+    </Grid>
+  );
+});
+export { DropdownSelect };
 const NativeSelects = ({ name, onChange, value, position, list, label, classes }) => (
   <Grid
     item

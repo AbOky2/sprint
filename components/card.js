@@ -16,6 +16,8 @@ const useStyles = makeStyles({
   },
   address: {
     marginBottom: 9,
+    height: '2.4rem',
+    overflow: 'hidden',
     color: 'rgba(26, 46, 108, 0.5)',
   },
   description: {

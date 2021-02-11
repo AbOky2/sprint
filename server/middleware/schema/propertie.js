@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { typeOfProperties } = require('../../../helpers/property');
+const { typeOfAnnoncies, typeOfProperties } = require('../../../helpers/property');
 
 const swithContent = Joi.object({
   _id: Joi.string().required(),
@@ -39,7 +39,8 @@ const schemas = {
       offset: Joi.number().min(0).optional(),
       limit: Joi.number().min(0).optional(),
       location: Joi.string().optional().allow(''),
-      typeOfProperty: Joi.string().valid(...typeOfProperties),
+      typeOfAnnonce: Joi.string().valid(...typeOfAnnoncies),
+      typeOfProperty: Joi.any(),
       maxPrice: Joi.number().min(0).optional(),
     }),
   },

@@ -12,7 +12,8 @@ import { toggleArray } from '../../helpers/convertAndCheck';
 import { typeOfProperties } from '../../helpers/property';
 import { AdminContentWrapper } from '../../components/wrapper';
 import Card from '../../components/card';
-import { Icon, Input, Select } from '../../components/form';
+import { Icon, Input } from '../../components/form';
+import { DropdownSelect } from '../../components/form/Select';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -118,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '1rem',
   },
 }));
-const SearchPage = ({ user, properties, typeOfProperty }) => {
+const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
   const [page, setPage] = useState({
     limit: properties.limit,
     offset: properties.offset,
@@ -128,12 +129,14 @@ const SearchPage = ({ user, properties, typeOfProperty }) => {
   const [queryData, setQueryData] = useState({
     location: '',
     maxPrice: 0,
-    typeOfProperty,
+    typeOfAnnonce,
+    typeOfProperty: [],
   });
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
   const classes = useStyles();
   const handleSearch = (name) => ({ target: { value } }) =>
     setQueryData({ ...queryData, [name]: value });
+  const handleSelect = (typeOfProperty) => setQueryData({ ...queryData, typeOfProperty });
 
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
@@ -141,9 +144,7 @@ const SearchPage = ({ user, properties, typeOfProperty }) => {
   };
   const requestData = async (offset = 0) => {
     if (!queryData.maxPrice) queryData.maxPrice = 0;
-    const {
-      list: { docs, ...pageInfo },
-    } = await getPropertiesApiMethod({
+    const { list: { docs, ...pageInfo } = {} } = await getPropertiesApiMethod({
       ...queryData,
       limit: page.limit,
       offset,
@@ -157,7 +158,7 @@ const SearchPage = ({ user, properties, typeOfProperty }) => {
   return (
     <AdminContentWrapper redirectDashboard>
       <div>
-        {typeOfProperty !== 'location' && (
+        {typeOfAnnonce !== 'location' && (
           <div className={classes.setpsContainer}>
             <Typography variant="h2" className={classes.title}>
               Mon premier achat en 5 étapes !
@@ -205,11 +206,11 @@ const SearchPage = ({ user, properties, typeOfProperty }) => {
             <Input name="location" onChange={handleSearch} placeholder="Localisation" />
           </Grid>
           <Grid item md={4}>
-            <Select
-              name="typeOfProperty"
+            <DropdownSelect
+              name="typeOfAnnonce"
               list={typeOfProperties.map((name) => ({ name, value: name }))}
               value={queryData.typeOfProperty}
-              onChange={handleSearch}
+              onChange={handleSelect}
             />
           </Grid>
           <Grid item md={4} className="relative">
@@ -220,7 +221,7 @@ const SearchPage = ({ user, properties, typeOfProperty }) => {
           </Grid>
         </Grid>
         <Grid container>
-          {state?.map(({ _id, title, pictures, address, typeOfProperty, dimensions, price }) => (
+          {state?.map(({ _id, title, pictures, address, typeOfAnnonce, dimensions, price }) => (
             <Grid item key={_id} className={classes.listContainer}>
               <Link href={`/dashboard/property/${_id}`}>
                 <a>
@@ -229,7 +230,7 @@ const SearchPage = ({ user, properties, typeOfProperty }) => {
                     title={title}
                     src={pictures?.[0]}
                     address={address}
-                    description={typeOfProperty}
+                    description={typeOfAnnonce}
                     dimensions={dimensions}
                     price={price}
                     liked={liked.includes(_id)}
@@ -241,9 +242,11 @@ const SearchPage = ({ user, properties, typeOfProperty }) => {
           ))}
         </Grid>
       </div>
-      <Grid container justify="center" className={classes.pagination}>
-        <Pagination count={page.total} page={page.offset} onChange={handlePage} />
-      </Grid>
+      {page.total > 0 && (
+        <Grid container justify="center" className={classes.pagination}>
+          <Pagination count={page.total} page={page.offset} onChange={handlePage} />
+        </Grid>
+      )}
     </AdminContentWrapper>
   );
 };
@@ -253,15 +256,15 @@ SearchPage.getInitialProps = async ({ req, query }) => {
   if (req && req.headers && req.headers.cookie) {
     headers.cookie = req.headers.cookie;
   }
-  const typeOfProperty = query.type === 'location' ? 'Location' : 'Vente';
+  const typeOfAnnonce = query.type === 'location' ? 'Location' : 'Vente';
   const { list } = await getPropertiesApiMethod(
     {
       location: '',
-      typeOfProperty,
+      typeOfAnnonce,
     },
     { headers },
   );
-  return { properties: list, typeOfProperty };
+  return { properties: list, typeOfAnnonce };
 };
 
 export default withAuth(SearchPage);

@@ -1,5 +1,6 @@
 const propertiesHeader = new Array(305);
-propertiesHeader[3] = 'typeOfProperty';
+propertiesHeader[3] = 'typeOfAnnonce';
+propertiesHeader[4] = 'typeOfProperty';
 propertiesHeader[5] = 'postal';
 propertiesHeader[6] = 'city';
 propertiesHeader[7] = 'country';
@@ -44,6 +45,7 @@ propertiesHeader[194] = 'stations';
 propertiesHeader[298] = 'lat';
 propertiesHeader[299] = 'lng';
 const availableProperties = {
+  typeOfAnnonce: "Type d'annonce",
   typeOfProperty: 'Type de propriété',
   price: 'Prix',
   isNewProperty: 'isNewProperty',
@@ -86,10 +88,25 @@ const availableProperties = {
 };
 
 const filteredProperties = Object.keys(availableProperties);
-const typeOfProperties = ['Vente', 'Location'];
-
+const typeOfAnnoncies = ['Vente', 'Location'];
+const typeOfProperties = [
+  'Appartement',
+  'bâtiment',
+  'boutique',
+  'bureaux',
+  'château',
+  'inconnu',
+  'hôtel particulier',
+  'immeuble',
+  'local',
+  'loft/atelier/surface',
+  'maison/villa',
+  'parking/box',
+  'terrain',
+];
 module.exports = {
   propertiesHeader,
   filteredProperties,
+  typeOfAnnoncies,
   typeOfProperties,
 };

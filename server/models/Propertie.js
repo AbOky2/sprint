@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const DBModel = require('./Model');
-const { typeOfProperties } = require('../../helpers/property');
+const { typeOfAnnoncies, typeOfProperties } = require('../../helpers/property');
 
 const { Schema } = mongoose;
 const modelName = 'Propertie';
@@ -18,6 +18,7 @@ const mongoSchema = new Schema({
   heading: { type: String },
   description: { type: String },
   available_date: { type: String },
+  typeOfAnnonce: { type: String, enum: typeOfAnnoncies },
   typeOfProperty: { type: String, enum: typeOfProperties },
   price: { type: Number },
   surface: { type: String },
@@ -51,33 +52,21 @@ const mongoSchema = new Schema({
 });
 
 class PropertieClass extends DBModel {
-  static async search({ maxPrice, typeOfProperty, coordinates, limit = 6, offset = 0 }) {
-    let query = {};
-    query = {
+  static async search({
+    maxPrice,
+    typeOfAnnonce,
+    typeOfProperty = [],
+    coordinates,
+    limit = 6,
+    offset = 0,
+  }) {
+    const query = {
       $and: [
-        { $or: [maxPrice > 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {}] },
-        // {
-        //   $or: [
-        //     coordinates
-        //       ? {
-        //           location: {
-        //             $near: {
-        //               $maxDistance: 1000,
-        //               $geometry: {
-        //                 type: 'Point',
-        //                 coordinates,
-        //               },
-        //             },
-        //           },
-        //         }
-        //       : {},
-        //   ],
-        // },
-        { typeOfProperty },
+        typeOfProperty.length > 0 ? { typeOfProperty: { $in: typeOfProperty } } : {},
+        maxPrice > 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
+        { typeOfAnnonce },
       ],
     };
-    // console.log(limit, offset);
-    console.log(limit, offset);
     const list = await this.paginate(query, { limit, offset });
     return { list };
   }
