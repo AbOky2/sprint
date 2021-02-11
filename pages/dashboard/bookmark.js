@@ -104,25 +104,40 @@ const BookmarkPage = ({ user }) => {
       <div>
         {state?.length ? (
           <Grid container>
-            {state.map(({ _id, title, pictures, address, typeOfAnnoncies, dimensions, price }) => (
-              <Grid item key={_id} className={classes.listContainer}>
-                <Link href={`/dashboard/property/${_id}`}>
-                  <a>
-                    <Card
-                      _id={_id}
-                      title={title}
-                      src={pictures?.[0]}
-                      address={address}
-                      description={typeOfAnnoncies}
-                      dimensions={dimensions}
-                      price={price}
-                      liked
-                      onClick={handleBookmark}
-                    />
-                  </a>
-                </Link>
-              </Grid>
-            ))}
+            {state.map(
+              ({
+                _id,
+                title,
+                pictures,
+                address,
+                typeOfAnnonce,
+                typeOfAnnoncies,
+                dimensions,
+                price,
+              }) => (
+                <Grid item key={_id} className={classes.listContainer}>
+                  <Link
+                    href={`/dashboard/property/${
+                      typeOfAnnonce === 'Vente' ? 'buy' : 'location'
+                    }/${_id}`}
+                  >
+                    <a>
+                      <Card
+                        _id={_id}
+                        title={title}
+                        src={pictures?.[0]}
+                        address={address}
+                        description={typeOfAnnoncies}
+                        dimensions={dimensions}
+                        price={price}
+                        liked
+                        onClick={handleBookmark}
+                      />
+                    </a>
+                  </Link>
+                </Grid>
+              ),
+            )}
           </Grid>
         ) : (
           <div className={classes.notFound}>
@@ -142,8 +157,12 @@ const BookmarkPage = ({ user }) => {
             </div>
             <div>
               <Grid container justify="center" className={classes.btnContainer}>
-                <Btn href="/dashboard/search" text="Rechercher un logement à acheter" />
-                <Btn href="/dashboard/search" text="Rechercher un logement à louer" whiteColor />
+                <Btn href="/dashboard/search/buy" text="Rechercher un logement à acheter" />
+                <Btn
+                  href="/dashboard/search/location"
+                  text="Rechercher un logement à louer"
+                  whiteColor
+                />
               </Grid>
             </div>
           </div>

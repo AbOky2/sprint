@@ -6,14 +6,13 @@ import Link from 'next/link';
 import { Grid, Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { makeStyles } from '@material-ui/core/styles';
-import withAuth from '../../lib/withAuth';
 import { getPropertiesApiMethod, addBookmarkApiMethod } from '../../lib/api/customer';
 import { toggleArray } from '../../helpers/convertAndCheck';
 import { typeOfProperties } from '../../helpers/property';
-import { AdminContentWrapper } from '../../components/wrapper';
-import Card from '../../components/card';
-import { Icon, Input } from '../../components/form';
-import { DropdownSelect } from '../../components/form/Select';
+import { AdminContentWrapper } from '../wrapper';
+import Card from '../card';
+import { Icon, Input } from '../form';
+import { DropdownSelect } from '../form/Select';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -223,7 +222,11 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
         <Grid container>
           {state?.map(({ _id, title, pictures, address, typeOfAnnonce, dimensions, price }) => (
             <Grid item key={_id} className={classes.listContainer}>
-              <Link href={`/dashboard/property/${_id}`}>
+              <Link
+                href={`/dashboard/property/${
+                  typeOfAnnonce === 'Vente' ? 'buy' : 'location'
+                }/${_id}`}
+              >
                 <a>
                   <Card
                     _id={_id}
@@ -251,20 +254,4 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
   );
 };
 
-SearchPage.getInitialProps = async ({ req, query }) => {
-  const headers = {};
-  if (req && req.headers && req.headers.cookie) {
-    headers.cookie = req.headers.cookie;
-  }
-  const typeOfAnnonce = query.type === 'location' ? 'Location' : 'Vente';
-  const { list } = await getPropertiesApiMethod(
-    {
-      location: '',
-      typeOfAnnonce,
-    },
-    { headers },
-  );
-  return { properties: list, typeOfAnnonce };
-};
-
-export default withAuth(SearchPage);
+export default SearchPage;

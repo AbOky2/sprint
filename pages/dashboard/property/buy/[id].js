@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { AdminContentWrapper } from '../../../components/wrapper';
-import { Icon, Btn } from '../../../components/form';
-import { getPropertyApiMethod, getPropertiesApiMethod } from '../../../lib/api/customer';
-import Carrousel from '../../../components/Carrousel';
-import withAuth from '../../../lib/withAuth';
+import { AdminContentWrapper } from '../../../../components/wrapper';
+import { Icon, Btn } from '../../../../components/form';
+import { getPropertyApiMethod, getPropertiesApiMethod } from '../../../../lib/api/customer';
+import Carrousel from '../../../../components/Carrousel';
+import withAuth from '../../../../lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
   card: {

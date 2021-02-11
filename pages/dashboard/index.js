@@ -201,7 +201,7 @@ const Dashboard = ({ user, partners, classes }) => (
       <Grid container justify="space-between" className={classes.presentationContainer}>
         <Grid item md={12} lg={6}>
           <div>
-            <Link href="/dashboard/search">
+            <Link href="/dashboard/search/buy">
               <a>
                 <img src={HouseImg} alt="" />
 
@@ -225,7 +225,7 @@ const Dashboard = ({ user, partners, classes }) => (
         </Grid>
         <Grid item md={12} lg={6}>
           <div>
-            <Link href="/dashboard/search?type=location">
+            <Link href="/dashboard/search/location">
               <a>
                 <img src={LocationImg} alt="" />
                 <Typography variant="h4" className={classes.presentationCardTitle}>
