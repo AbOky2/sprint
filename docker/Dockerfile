@@ -1,0 +1,44 @@
+FROM node:12
+
+RUN apk add --no-cache git
+
+WORKDIR /app
+
+ARG PORT
+ARG NODE_ENV
+ARG ROOT_URL
+ARG MONGO_URL_TEST
+ARG GOOGLE_CLIENT_ID
+ARG GOOGLE_CLIENT_SECRET
+ARG JWT_SECRET
+ARG SESSION_NAME
+ARG SESSION_SECRET
+
+ENV PORT=$PORT
+ENV NODE_ENV=$NODE_ENV
+ENV ROOT_URL=$ROOT_URL
+ENV MONGO_URL_TEST=$MONGO_URL_TEST
+ENV GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
+ENV GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
+ENV JWT_SECRET=$JWT_SECRET
+ENV SESSION_NAME=$SESSION_NAME
+ENV SESSION_SECRET=$SESSION_SECRET
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Installing dependencies
+COPY package.json /usr/src/app/
+COPY yarn.lock /usr/src/app/
+RUN yarn
+
+# Copying source files
+COPY . /usr/src/app
+
+# Building app
+RUN npm run build
+EXPOSE 3000
+
+# Running the app
+CMD "npm" "run" "dev"

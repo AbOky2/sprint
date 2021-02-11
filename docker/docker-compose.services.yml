@@ -1,0 +1,63 @@
+version: "3"
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    networks:
+      - net-nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-conf:/etc/nginx/conf.d
+      - ./nginx-vhost:/etc/nginx/vhost.d
+      # #- ./nginx.tmpl:/app/nginx.tmpl
+      - /usr/share/nginx/html
+      - ./certs:/etc/nginx/certs:ro
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+
+  letsencrypt-nginx-proxy:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt-nginx-proxy
+    restart: always
+    networks:
+      - net-nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./nginx-conf:/etc/nginx/conf.d
+      - ./nginx-vhost:/etc/nginx/vhost.d
+      - ./html:/usr/share/nginx/html
+      - ./certs:/etc/nginx/certs:rw
+    depends_on:
+      - nginx-proxy
+  nextjs:
+    ports:
+      - 3000:3000
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
+      args:
+        - PORT=${PORT}
+        - NODE_ENV=${NODE_ENV}
+        - ROOT_URL=${ROOT_URL}
+        - MONGO_URL_TEST=${MONGO_URL_TEST}
+        - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+        - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+        - JWT_SECRET=${JWT_SECRET}
+        - SESSION_NAME=${SESSION_NAME}
+        - SESSION_SECRET=${SESSION_SECRET}
+    volumes:
+      - ../:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    env_file:
+      - ../.env
+
+networks:
+  net-nginx-proxy:
+    external:
+      name: nginx-proxy
+  webappnetwork:
+    driver: bridge
