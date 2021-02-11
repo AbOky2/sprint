@@ -15,7 +15,7 @@ const logger = require('../logs');
 const gepublicPropertiesFolder = path.resolve(__dirname, '../../public/properties');
 const lot_refs = [];
 // Using callback
-const numberTypes = ['price'];
+const numberTypes = ['price', 'floor'];
 const readMba = () => {
   const datas = [];
 
@@ -35,6 +35,7 @@ const readMba = () => {
             .replace(/"/g, '')
             .split('!#');
           // eslint-disable-next-line no-return-assign
+
           propertiesHeader.forEach((key, i) => {
             const index = i - 1;
             const res = result[index]?.trim();
@@ -75,9 +76,9 @@ const readMba = () => {
               console.error(`----------${err}`);
             }
           });
-          // if (!pictures.length) return;
+          if (!pictures.length) return;
 
-          if (!pictures.length) pictures.push('/properties/no-pictures.jpg');
+          // if (!pictures.length) pictures.push('/properties/no-pictures.jpg');
           const data = pick(newResult, filteredProperties);
 
           data.pictures = pictures;

@@ -14,6 +14,28 @@ import {
 import Carrousel from '../../../../components/Carrousel';
 import withAuth from '../../../../lib/withAuth';
 
+
+const orientationObj = {
+  'south_orientation': 'Sud',
+  'east_orientation': 'Est',
+  'west_orientation': 'Ouest',
+  'north_orientation': 'Nord',
+}
+const extraObj = {
+  'terrace': 'Terrace',
+  'balcony': 'Balcon',
+  'intercom': 'Intercom',
+  'guardian': 'guardien',
+}
+
+const getExactData = (elem, obj)=> {
+  const keys = Object.keys(obj)
+  for (let i = 0; i < keys.length; i+=1)
+  if (elem[keys[i]] === 'OUI')
+    return obj[keys[i]]
+}
+const getOrientation = (elem) => getExactData(elem, orientationObj)
+const getExtra = (elem) => getExactData(elem, extraObj)
 const useStyles = makeStyles((theme) => ({
   card: {
     width: 'calc(100% - 14px)',
@@ -182,7 +204,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   discoveryContentHeader: {
-    paddingTop: '2.5rem',
+    padding: '2.5rem 0',
     fontFamily: 'Nunito',
     borderTop: '1px solid rgba(26, 46, 108, 0.5)',
     color: theme.palette.button,
@@ -190,10 +212,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontSize: '1.6rem',
     lineHeight: '2.2rem',
-    '& > div:first-of-type': {
-      display: 'none',
-    },
+
     [theme.breakpoints.down('sm')]: {
+      paddingBottom: '2.5rem',
       display: 'none',
       '& > div': {
         display: 'none',
@@ -242,6 +263,9 @@ const useStyles = makeStyles((theme) => ({
       color: 'rgba(26, 46, 108, 0.5)',
     },
   },
+  buttomBtnContainer: {
+    margin: '5rem auto'
+  }
 }));
 const bonusList = [
   { key: 'digicode', value: 'Digicode' },
@@ -250,7 +274,8 @@ const bonusList = [
 ];
 
 const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
-  const [state, setstate] = useState({});
+  const [state, setState] = useState({});
+  const [total, Total] = useState({});
   const [currOpen, setCurrOpen] = useState('1');
   const [liked, setLiked] = useState(user?.bookmarks?.find((elem) => elem._id));
   const handleBookmark = () => {
@@ -261,8 +286,8 @@ const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
   useEffect(() => {
     (async () => {
       const { list = [] } = await getNewPropertiesApiMethod();
+      const newState = { };
 
-      const newState = { total: list.length };
       list.forEach((newElem) => {
         const elem = newState[newElem.nb_pieces];
         if (Object.prototype.hasOwnProperty.call(newState, newElem.nb_pieces)) {
@@ -281,11 +306,13 @@ const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
           };
         }
       });
-      setstate(newState);
+      setState(newState);
+      Total(list.length)
     })();
   }, []);
   const classes = useStyles();
-  console.log(state);
+
+  console.log(state)
   return (
     <AdminContentWrapper
       redirectDashboard
@@ -321,10 +348,10 @@ const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
 
                   <span>{`de 1 à ${property.nb_pieces}  pièces`}</span>
                 </div>
-                <div>
+                {property.surface ? <div>
                   <Icon type="room" color="lightBlue" />
                   <span>{` de ${property.surface}`}</span>
-                </div>
+                </div>: ''}
               </Grid>
             </div>
           </Grid>
@@ -333,10 +360,9 @@ const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
               <span>à partir de</span>
               {` ${property.price}€`}
             </Typography>
-            <Typography variant="body1">
-              Disponible dès le
-              {` ${property.available_date}`}
-            </Typography>
+            {property.available_date ?<Typography variant="body1">
+              {`Disponible dès le ${property.available_date}`}
+            </Typography>: ''}
             <div className={classes.phoneContainer}>
               <Btn text="Être rappelé selon mes dispos" alignRight />
               <Typography variant="body1">ou appeler le 06.65.07.11.66</Typography>
@@ -383,9 +409,7 @@ const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
         </Grid>
         <Grid container className={classes.discoveryContainer}>
           <Typography variant="h2">
-            Découvrez nos 
-{' '}
-{state.total} logements neufs disponibles :
+            {`Découvrez nos ${total} logements neufs disponibles :`}
           </Typography>
           <Grid container>
             {Object.keys(state).map((elem) => {
@@ -491,13 +515,13 @@ const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
                             m²
                           </Grid>
                           <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                            Étage
+                            {elem.floor}
                           </Grid>
                           <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                            Orientation
+                            {getOrientation(elem)}
                           </Grid>
                           <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                            Les +
+                          {getExtra(elem)}
                           </Grid>
                           <Grid item md={1} xs={5} className="text-center" alignItems="center">
                             <Btn text="Voir le plan" whiteColor />
@@ -510,6 +534,10 @@ const PropertyPage = ({ id, user, property = {}, properties = [] }) => {
               );
             })}
           </Grid>
+          <Grid className={classes.buttomBtnContainer} justify='center'>
+          <Btn text="Être rappelé selon mes dispos" alignRight />
+          </Grid>
+
         </Grid>
       </div>
     </AdminContentWrapper>
@@ -527,6 +555,7 @@ PropertyPage.getInitialProps = async ({ req, query: { id } }) => {
   }
   const property = await getPropertyApiMethod(id, { headers });
   const { list: properties = [] } = await getPropertiesApiMethod({ headers });
+  console.log(property);
   return { property, properties, id };
 };
 

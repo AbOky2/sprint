@@ -26,6 +26,7 @@ const mongoSchema = new Schema({
   nb_pieces: { type: String },
   nb_rooms: { type: String },
   expenses: { type: String },
+  floor: { type: Number },
   nb_floors: { type: String },
   nb_bathrooms: { type: String },
   nb_washrooms: { type: String },

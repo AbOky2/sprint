@@ -13,7 +13,13 @@ propertiesHeader[19] = 'nb_rooms';
 propertiesHeader[20] = 'heading';
 propertiesHeader[21] = 'description';
 propertiesHeader[22] = 'available_date';
+propertiesHeader[24] = 'floor';
 propertiesHeader[27] = 'renew';
+propertiesHeader[35] = 'south_orientation';
+propertiesHeader[36] = 'east_orientation';
+propertiesHeader[37] = 'west_orientation';
+propertiesHeader[38] = 'north_orientation';
+propertiesHeader[39] = 'balcony';
 propertiesHeader[45] = 'digicode';
 propertiesHeader[46] = 'intercom';
 propertiesHeader[47] = 'guardian';
@@ -55,7 +61,13 @@ const availableProperties = {
   nb_pieces: 'Nombre de pieces', //
   nb_rooms: 'Nombre de rooms',
   expenses: 'Dépenses',
-  nb_floors: 'Nombre de floors',
+  floor: 'Étage',
+  south_orientation: 'sud',
+  east_orientation: 'est',
+  west_orientation: 'ouest',
+  north_orientation: 'nord',
+  balcony: 'Balcon',
+  nb_floors: "Nombre d'étage",
   nb_bathrooms: 'Nombre de salles de bains',
   nb_washrooms: 'Nombre de toilettes',
   nb_wc: 'Nombre de wc',
