@@ -1,10 +1,18 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { FormControl, Select, Grid, Checkbox, Typography } from '@material-ui/core';
+import {
+  FormControl,
+  Select,
+  Grid,
+  Checkbox,
+  Typography,
+  FormControlLabel,
+} from '@material-ui/core';
+import Icon from './Icon';
 import { toggleArray } from '../../helpers/convertAndCheck';
 
 const positionType = ['left', 'right'];
@@ -59,12 +67,17 @@ const styles = (theme) => ({
       height: '100%',
       backgroundColor: 'white',
       paddingLeft: '1.4rem',
+      paddingRight: '3rem',
       border: 'solid 1px #c7cfd6',
       fontStyle: 'normal',
       fontWeight: '600',
       fontSize: '1.6rem',
       lineHeight: '2.2rem',
       color: 'rgba(26, 46, 108, 0.5)',
+      [theme.breakpoints.down('sm')]: {
+        padding: '2.1rem 1.4rem',
+        borderRadius: '0!important',
+      },
     },
     '& > span': {
       position: 'absolute',
@@ -73,6 +86,16 @@ const styles = (theme) => ({
       width: '100%',
       height: '100%',
       cursor: 'pointer',
+      zIndex: 11,
+    },
+    '& > svg': {
+      position: 'absolute',
+      top: '50%',
+      right: '1rem',
+      width: '1.2rem!important',
+      height: '100%',
+      cursor: 'pointer',
+      transform: 'translateY(-50%) rotate(180deg)',
     },
     '& > div': {
       display: 'none',
@@ -97,19 +120,34 @@ const styles = (theme) => ({
     '& > div': {
       display: 'flex',
     },
+    '& > svg': {
+      transform: 'translateY(-50%) rotate(0deg)',
+    },
   },
 });
 
 const DropdownSelect = withStyles(styles)(({ onChange, position, list, classes }) => {
+  const node = useRef();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState([]);
-  const toggleOpen = (e) => setOpen(!open);
+  const toggleOpen = (e) => {
+    if (node.current.contains(e.target) && !open) setOpen(!open);
+    else if (!node.current.contains(e.target) && !open) setOpen(false);
+  };
   const handleSelected = (e) => {
     const values = toggleArray(selected, e.target.value);
 
     setSelected(values);
     onChange(values);
   };
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener('mousedown', toggleOpen);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener('mousedown', toggleOpen);
+    };
+  }, []);
 
   return (
     <Grid
@@ -119,9 +157,11 @@ const DropdownSelect = withStyles(styles)(({ onChange, position, list, classes }
       className={
         open ? clsx(classes.customSelectContainer, classes.open) : classes.customSelectContainer
       }
+      ref={node}
     >
       <input value={selected.join(' - ')} disabled />
       <span onClick={toggleOpen} />
+      <Icon type="triangle" size="small" />
       <Grid container>
         {list?.map((elem) => (
           <Grid container item key={elem.name} md={6} alignItems="center">

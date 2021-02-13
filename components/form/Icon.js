@@ -17,6 +17,8 @@ export const colorTypes = Object.keys(ICON_COLORS);
 const sizeTypes = Object.keys(SIZES);
 const useStyles = makeStyles({
   svg: {
+    display: 'inline-block',
+    verticalAlign: 'middle',
     '& path': {
       fill: (props) => props.fill,
     },
@@ -28,16 +30,11 @@ const Icon = ({ type, color, size, customSize, strokeColor, rotate }) => {
   const svgSize = SIZES[size];
   const fill = ICON_COLORS[color] ?? color;
   const classes = useStyles({ fill });
-  // for some reason, using the css prop here does not work
-  // console.log(typeof iconTypes, typeof colorTypes, typeof sizeTypes, sizeTypes);
 
   return (
     <SvgIcon
       className={classes.svg}
       style={{
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        fill,
         ...(strokeColor ? { stroke: strokeColor } : {}),
         ...(customSize || {
           width: svgSize,

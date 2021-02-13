@@ -42,16 +42,20 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '15px',
     cursor: 'pointer',
     maxWidth: 235,
-    '& svg:first-of-type': {},
     '& svg:last-of-type': {
       position: 'absolute',
       top: '50%',
       right: '10px',
-      width: '12px!important',
+      width: '1.2rem!important',
       transform: 'translateY(calc(50% - 13px)) rotate(180deg)',
     },
     [theme.breakpoints.down('sm')]: {
       maxWidth: '100%',
+    },
+  },
+  profileContainerOpen: {
+    '& svg:last-of-type': {
+      transform: 'translateY(calc(50% - 13px)) rotate(0deg)',
     },
   },
   userName: {
@@ -108,7 +112,11 @@ const UpdateProfile = ({ user }) => {
           container
           alignItems="center"
           justify="space-between"
-          className={classes.profileContainer}
+          className={
+            !showSubMenu
+              ? classes.profileContainer
+              : clsx(classes.profileContainer, classes.profileContainerOpen)
+          }
           onClick={toggleShowSubMenu}
         >
           <Icon type="user" />

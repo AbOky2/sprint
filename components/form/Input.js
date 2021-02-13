@@ -77,7 +77,7 @@ InputType.propTypes = {
 InputType.defaultProps = {
   label: undefined,
   type: 'text',
-  value: null,
+  value: '',
   placeholder: '',
   position: null,
   classes: {},

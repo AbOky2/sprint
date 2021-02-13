@@ -81,13 +81,11 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 0,
       },
       '& > div input': {
-        borderRadius: '.6rem!important',
+        borderRadius: '.6rem',
       },
       '& > div:first-of-type input': {
         borderRight: `1px solid ${theme.palette.gray}`,
-        borderTopRightRadius: 1,
-        borderBottomLeftRadius: '0 !important',
-        borderBottomRightRadius: '0 !important',
+        borderRadius: '0 !important',
         borderBottom: 'none',
       },
       '& > div:last-of-type input': {
