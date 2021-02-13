@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 const PartnerPage = () => {
   const [state, setState] = useState({ email: '', firstName: '', lastName: '' });
   const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
-
+  const handleSubmit = () => console.log('Submit');
   const classes = useStyles();
 
   return (
@@ -134,7 +134,7 @@ const PartnerPage = () => {
           />
         </Grid>
         <div>
-          <Btn text={`Parrainer ${ucfirst(state.firstName)}`} />
+          <Btn text={`Parrainer ${ucfirst(state.firstName)}`} onClick={handleSubmit} />
         </div>
       </div>
     </AdminContentWrapper>
