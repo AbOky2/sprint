@@ -160,8 +160,9 @@ const styles = (theme) => ({
     width: '100%',
     '& > p': {
       width: 'calc(100% - 3rem)',
-      color: '#4F80FF',
       margin: 0,
+      ...theme.typography.body1,
+      color: '#5379EF',
     },
     '& p': {
       margin: 0,
@@ -272,9 +273,7 @@ const Dashboard = ({ user, partners, classes }) => (
               </Typography>
               <Grid container justify="space-between" alignItems="flex-end">
                 <div className={classes.partnerListTextContainer}>
-                  <Typography>
-                    <ReactMarkdown>{elem.description}</ReactMarkdown>
-                  </Typography>
+                  <ReactMarkdown>{elem.description}</ReactMarkdown>
                   <Icon type="arrow" color="lightBlue" />
                 </div>
               </Grid>

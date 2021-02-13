@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Btn, Select, Input } from '../../components/form';
 import withAuth from '../../lib/withAuth';
-import { Student, Buyer } from '../../helpers/user';
+import { Student, Buyer, userRoleSelect } from '../../helpers/user';
 import { signIn, signUp } from '../../lib/api/public';
 import LogoImg from '../../static/img/logo-full.png';
 
@@ -185,10 +185,7 @@ const SignUp = ({ values = {}, handleChange }) => (
       name="status"
       value={values.role}
       onChange={handleChange}
-      list={[
-        { name: 'Etudiant', value: Student },
-        { name: 'Jeune Actif', value: Buyer },
-      ]}
+      list={userRoleSelect}
       label="Status"
       position="right"
     />

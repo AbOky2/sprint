@@ -75,6 +75,11 @@ const isValidateEmail = (email) => {
 };
 const ucFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
+const userRoleSelect = [
+  { name: 'Etudiant', value: Student },
+  { name: 'Jeune Actif', value: Buyer },
+];
+
 module.exports = {
   // Vars
   Admin,
@@ -91,6 +96,7 @@ module.exports = {
   locationStrategy,
   guarantorStrategy,
   dashboardPaths,
+  userRoleSelect,
 
   // Methods
   ucFirst,

@@ -7,6 +7,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Input, Select, Modal, Icon } from './form';
 import { logOut } from '../lib/api/public';
+import { userRoleSelect } from '../helpers/user';
 
 const useStyles = makeStyles((theme) => ({
   contextMenu: {
@@ -171,10 +172,7 @@ const UpdateProfile = ({ user }) => {
               onChange={handleChange}
               label="Status"
               position="right"
-              list={[
-                { name: 'Etudiant', value: 'student' },
-                { name: 'Jeune Travailleur', value: 'worker' },
-              ]}
+              list={userRoleSelect}
             />
           </Grid>
         </Grid>
