@@ -28,7 +28,6 @@ function update(args, callback) {
   const failure = (error) => ({ type: userConstants.UPDATE_FAILURE, error });
   return (dispatch) => {
     dispatch(request({ username: args.username }));
-
     updateUserApiMethod(args).then(
       ({ user }) => {
         dispatch(success(user));
@@ -39,6 +38,16 @@ function update(args, callback) {
         dispatch(alertActions.error(error.toString()));
       },
     );
+  };
+}
+
+function updateUserDataOnly(args, callback) {
+  const request = (user) => ({ type: userConstants.UPDATE_REQUEST, user });
+  const success = (user) => ({ type: userConstants.UPDATE_SUCCESS, user });
+  return (dispatch) => {
+    dispatch(request({ username: args.username }));
+    dispatch(success(args));
+    if (callback) callback();
   };
 }
 
@@ -57,7 +66,6 @@ function register(user) {
     signUp(user).then(
       (user) => {
         dispatch(success());
-        console.log(user);
         dispatch(alertActions.success('Registration successful'));
       },
       (error) => {
@@ -102,6 +110,7 @@ export const userActions = {
   logout,
   register,
   update,
+  updateUserDataOnly,
   // getAll,
   // delete: handleDelete,
 };

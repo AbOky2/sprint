@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { Grid, Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
@@ -96,6 +97,11 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  isLocation: {
+    '& > div:first-of-type input': {
+      borderRight: `1px solid ${theme.palette.gray}`,
+    },
+  },
   listContainer: {
     width: 'calc(33% - 11px)',
     marginBottom: '2rem',
@@ -124,7 +130,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
+
+const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ...props }) => {
   const [page, setPage] = useState({
     limit: properties.limit,
     offset: properties.offset,
@@ -133,11 +140,11 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
   const [state, setState] = useState(properties.docs);
   const [queryData, setQueryData] = useState({
     location: '',
-    maxPrice: 0,
+    maxPrice: -1,
     typeOfAnnonce,
     typeOfProperty: [],
   });
-  const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
+  const [liked, setLiked] = useState(user?.bookmarks);
   const classes = useStyles();
   const handleSearch = (name) => ({ target: { value } }) =>
     setQueryData({ ...queryData, [name]: value });
@@ -145,10 +152,10 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
 
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
-    addBookmarkApiMethod({ id });
+    addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
   const requestData = async (offset = 0) => {
-    if (!queryData.maxPrice) queryData.maxPrice = 0;
+    if (!queryData.maxPrice) queryData.maxPrice = -1;
     const { list: { docs, ...pageInfo } = {} } = await getPropertiesApiMethod({
       ...queryData,
       limit: page.limit,
@@ -159,11 +166,12 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
   };
   const handleSumit = () => requestData();
   const handlePage = (e, offset) => requestData(offset);
+  const isLocation = typeOfAnnonce === 'Location';
 
   return (
     <AdminContentWrapper redirectDashboard>
       <div>
-        {typeOfAnnonce !== 'Location' && (
+        {!isLocation && (
           <div className={classes.setpsContainer}>
             <Typography variant="h2" className={classes.title}>
               Mon premier achat en 5 étapes !
@@ -206,20 +214,27 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
             </ul>
           </div>
         )}
-        <Grid container className={classes.searchContainer}>
-          <Grid item md={4}>
+        <Grid
+          container
+          className={
+            isLocation ? clsx(classes.searchContainer, classes.isLocation) : classes.searchContainer
+          }
+        >
+          <Grid item md={isLocation ? 6 : 4}>
             <Input name="location" onChange={handleSearch} placeholder="Localisation" />
           </Grid>
-          <Grid item md={4}>
-            <DropdownSelect
-              name="typeOfAnnonce"
-              placeholder="Type de bien"
-              list={typeOfProperties.map((name) => ({ name, value: name }))}
-              value={queryData.typeOfProperty}
-              onChange={handleSelect}
-            />
-          </Grid>
-          <Grid item md={4} className="relative">
+          {!isLocation && (
+            <Grid item md={4}>
+              <DropdownSelect
+                name="typeOfAnnonce"
+                placeholder="Type de bien"
+                list={typeOfProperties.map((name) => ({ name, value: name }))}
+                value={queryData.typeOfProperty}
+                onChange={handleSelect}
+              />
+            </Grid>
+          )}
+          <Grid item md={isLocation ? 6 : 4} className="relative">
             <Input name="maxPrice" onChange={handleSearch} placeholder="Budget maximal" />
             <div onClick={handleSumit} className="pointer">
               <Icon type="search" size="large" color="white" />
@@ -244,7 +259,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
                       description={typeOfAnnonce}
                       dimensions={dimensions}
                       price={price}
-                      liked={liked.includes(_id)}
+                      liked={liked?.includes(_id)}
                       onClick={handleBookmark}
                     />
                   </a>
@@ -257,7 +272,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
                 <span role="img" aria-label="cring">
                   😢
                 </span>
-                aucun logement ne correspond à la recherche
+                Aucun résultat ne correspond à votre critère de recherche.
               </Typography>
             </div>
           )}

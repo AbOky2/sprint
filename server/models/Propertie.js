@@ -71,7 +71,7 @@ class PropertieClass extends DBModel {
     const query = {
       $and: [
         typeOfProperty.length > 0 ? { typeOfProperty: { $in: typeOfProperty } } : {},
-        maxPrice > 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
+        maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
         { typeOfAnnonce },
       ],
     };

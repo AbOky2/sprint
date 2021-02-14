@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+import { userActions } from '../../../redux/_actions';
 import withAuth from '../../../lib/withAuth';
 import { getPropertiesApiMethod } from '../../../lib/api/customer';
 import Search from '../../../components/page/Search';
@@ -19,4 +21,13 @@ SearchPage.getInitialProps = async ({ req }) => {
   return { properties: list, typeOfAnnonce };
 };
 
-export default withAuth(SearchPage);
+const mapState = (state) => {
+  const { loggingIn, user } = state.authentication;
+  return { loggingIn, user };
+};
+
+const actionCreators = {
+  update: userActions.updateUserDataOnly,
+};
+
+export default withAuth(connect(mapState, actionCreators)(SearchPage));

@@ -187,7 +187,9 @@ class UserClass extends DBModel {
     else if (userDoc.bookmarks && userDoc.bookmarks.length) userDoc.bookmarks.push(property._id);
     else userDoc.bookmarks = [property._id];
     userDoc.save();
-    return { user: userDoc };
+    const user = userDoc.toObject();
+
+    return { user: pick(user, this.publicFields()) };
   }
 
   /**

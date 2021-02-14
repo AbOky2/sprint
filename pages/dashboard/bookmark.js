@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { userActions } from '../../redux/_actions';
 import { AdminContentWrapper } from '../../components/wrapper';
 import { addBookmarkApiMethod, getCurrentUserkApiMethod } from '../../lib/api/customer';
 import Card from '../../components/card';
@@ -89,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const BookmarkPage = ({ user }) => {
+const BookmarkPage = ({ user, update }) => {
   const [state, setState] = useState(user.bookmarks);
   const classes = useStyles();
   const handleBookmark = (id) => {
@@ -97,7 +99,10 @@ const BookmarkPage = ({ user }) => {
     addBookmarkApiMethod({ id });
   };
   useEffect(() => {
-    getCurrentUserkApiMethod().then(({ user }) => setState(user.bookmarks));
+    getCurrentUserkApiMethod().then(({ user }) => {
+      setState(user.bookmarks);
+      update(user);
+    });
   }, []);
   return (
     <AdminContentWrapper redirectDashboard>
@@ -175,5 +180,12 @@ const BookmarkPage = ({ user }) => {
 BookmarkPage.propTypes = {
   user: PropTypes.object.isRequired,
 };
+const mapState = (state) => {
+  const { loggingIn, user } = state.authentication;
+  return { loggingIn, user };
+};
 
-export default withAuth(BookmarkPage);
+const actionCreators = {
+  update: userActions.updateUserDataOnly,
+};
+export default withAuth(connect(mapState, actionCreators)(BookmarkPage));

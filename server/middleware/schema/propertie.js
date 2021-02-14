@@ -41,7 +41,7 @@ const schemas = {
       location: Joi.string().optional().allow(''),
       typeOfAnnonce: Joi.string().valid(...typeOfAnnoncies),
       typeOfProperty: Joi.any(),
-      maxPrice: Joi.number().min(0).optional(),
+      maxPrice: Joi.number().min(-1).optional(),
     }),
   },
 };
