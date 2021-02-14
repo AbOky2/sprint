@@ -163,7 +163,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
   return (
     <AdminContentWrapper redirectDashboard>
       <div>
-        {typeOfAnnonce !== 'location' && (
+        {typeOfAnnonce !== 'Location' && (
           <div className={classes.setpsContainer}>
             <Typography variant="h2" className={classes.title}>
               Mon premier achat en 5 étapes !
