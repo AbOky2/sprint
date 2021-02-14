@@ -115,6 +115,14 @@ const useStyles = makeStyles((theme) => ({
   pagination: {
     marginTop: '1rem',
   },
+  notFound: {
+    width: '100%',
+    textAlign: 'center',
+    margin: '2rem 0',
+    '& span': {
+      marginRight: '1rem',
+    },
+  },
 }));
 const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
   const [page, setPage] = useState({
@@ -219,29 +227,40 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
           </Grid>
         </Grid>
         <Grid container>
-          {state?.map(({ _id, heading, pictures, address, typeOfAnnonce, dimensions, price }) => (
-            <Grid item key={_id} className={classes.listContainer}>
-              <Link
-                href={`/dashboard/property/${
-                  typeOfAnnonce === 'Vente' ? 'buy' : 'location'
-                }/${_id}`}
-              >
-                <a>
-                  <Card
-                    _id={_id}
-                    title={heading}
-                    src={pictures?.[0]}
-                    address={address}
-                    description={typeOfAnnonce}
-                    dimensions={dimensions}
-                    price={price}
-                    liked={liked.includes(_id)}
-                    onClick={handleBookmark}
-                  />
-                </a>
-              </Link>
-            </Grid>
-          ))}
+          {state?.length ? (
+            state.map(({ _id, heading, pictures, address, typeOfAnnonce, dimensions, price }) => (
+              <Grid item key={_id} className={classes.listContainer}>
+                <Link
+                  href={`/dashboard/property/${
+                    typeOfAnnonce === 'Vente' ? 'buy' : 'location'
+                  }/${_id}`}
+                >
+                  <a>
+                    <Card
+                      _id={_id}
+                      title={heading}
+                      src={pictures?.[0]}
+                      address={address}
+                      description={typeOfAnnonce}
+                      dimensions={dimensions}
+                      price={price}
+                      liked={liked.includes(_id)}
+                      onClick={handleBookmark}
+                    />
+                  </a>
+                </Link>
+              </Grid>
+            ))
+          ) : (
+            <div className={classes.notFound}>
+              <Typography variant="body1">
+                <span role="img" aria-label="cring">
+                  😢
+                </span>
+                aucun logement ne correspond à la recherche
+              </Typography>
+            </div>
+          )}
         </Grid>
       </div>
       {page.totalPages > 0 && (
