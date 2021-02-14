@@ -205,6 +205,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce }) => {
           <Grid item md={4}>
             <DropdownSelect
               name="typeOfAnnonce"
+              placeholder="Type de bien"
               list={typeOfProperties.map((name) => ({ name, value: name }))}
               value={queryData.typeOfProperty}
               onChange={handleSelect}

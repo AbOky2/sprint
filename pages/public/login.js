@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import NProgress from 'nprogress';
 import { Grid, Checkbox, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { userActions } from '../../redux/_actions';
 import { Btn, Select, Input } from '../../components/form';
 import withAuth from '../../lib/withAuth';
-import { Student, Buyer, userRoleSelect } from '../../helpers/user';
-import { signIn, signUp } from '../../lib/api/public';
+import { Student, userRoleSelect } from '../../helpers/user';
+
 import LogoImg from '../../static/img/logo-full.png';
 
 const useStyles = makeStyles((theme) => ({
@@ -219,7 +220,7 @@ const propTypes = {
 SignIn.propTypes = propTypes;
 SignUp.propTypes = propTypes;
 
-const LoginTab = () => {
+const LoginTab = ({ login, register, ...others }) => {
   const [state, setState] = useState({
     email: 'toto@test.test',
     firstName: 'toto',
@@ -230,7 +231,7 @@ const LoginTab = () => {
     role: Student,
   });
   // const [state, setState] = useState({ email: 'roomer@test.test', password: 'test' });
-  const [isRegisterinView, setIsRegisterinView] = useState(true);
+  const [isRegisterinView, setIsRegisterinView] = useState(false);
   const [checked, setChecked] = React.useState(true);
 
   const handleCheck = (event) => {
@@ -241,18 +242,14 @@ const LoginTab = () => {
 
   const onClick = () => {
     let data = state;
-    let authReq = signUp;
-    NProgress.start();
+    let authReq = register;
 
     if (!isRegisterinView) {
       data = { email: data.email, password: data.password };
-      authReq = signIn;
+      authReq = login;
     }
 
-    authReq(data).then(({ user }) => {
-      NProgress.done();
-      window.location = user.role === 'admin' ? '/admin' : '/dashboard';
-    });
+    authReq(data);
   };
   const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
   const classes = useStyles();
@@ -333,4 +330,13 @@ const LoginTab = () => {
 
 LoginTab.propTypes = {};
 
-export default withAuth(LoginTab, { logoutRequired: true });
+const mapState = (state) => {
+  const { loggingIn } = state.authentication;
+  return { loggingIn };
+};
+
+const actionCreators = {
+  login: userActions.login,
+  logout: userActions.logout,
+};
+export default withAuth(connect(mapState, actionCreators)(LoginTab), { logoutRequired: true });

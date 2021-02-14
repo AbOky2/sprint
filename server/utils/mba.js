@@ -19,9 +19,7 @@ const numberTypes = ['price', 'floor'];
 const readMba = () => {
   const datas = [];
 
-  fs.createReadStream(`${gepublicPropertiesFolder}/Annonces.csv`, {
-    encoding: 'utf-8',
-  })
+  fs.createReadStream(`${gepublicPropertiesFolder}/Lots.csv`, { encoding: 'binary' })
     .pipe(csv())
     .on('data', (data) => datas.push(data))
     .on('end', async () => {
@@ -36,6 +34,7 @@ const readMba = () => {
             .split('!#');
           // eslint-disable-next-line no-return-assign
 
+          if (result.indexOf('SQUARE DES BATELIERS') > 0) return;
           propertiesHeader.forEach((key, i) => {
             const index = i - 1;
             const res = result[index]?.trim();

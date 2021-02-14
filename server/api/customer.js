@@ -1,7 +1,12 @@
 const express = require('express');
 // const NodeGeocoder = require('node-geocoder');
 const { PartnerModel, UserModel, PropertieModel } = require('../models');
-const { listCollection, getCollection, handleErrors } = require('../middleware/express');
+const {
+  listCollection,
+  getCollection,
+  handleErrors,
+  profileCollection,
+} = require('../middleware/express');
 const requestMiddleware = require('../middleware/request');
 const joiSchema = require('../middleware/schema');
 
@@ -31,6 +36,17 @@ router.get('/currentUser', ({ user }, res) => {
   }
   res.json({ user });
 });
+router.put(
+  '/user',
+  profileCollection(
+    requestMiddleware(joiSchema.user.all.user.update),
+    async ({ user: sessUser, body } = {}) => {
+      const { user } = await UserModel.updateById(sessUser._id, body);
+
+      return { user };
+    },
+  ),
+);
 
 router.get(
   '/partner/:id',

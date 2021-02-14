@@ -63,6 +63,7 @@ const styles = (theme) => ({
     position: 'relative',
     height: '100%',
     '& input': {
+      fontFamily: 'Rubik',
       width: '100%',
       height: '100%',
       backgroundColor: 'white',
@@ -126,7 +127,7 @@ const styles = (theme) => ({
   },
 });
 
-const DropdownSelect = withStyles(styles)(({ onChange, position, list, classes }) => {
+const DropdownSelect = withStyles(styles)(({ onChange, position, list, placeholder, classes }) => {
   const node = useRef();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState([]);
@@ -159,7 +160,7 @@ const DropdownSelect = withStyles(styles)(({ onChange, position, list, classes }
       }
       ref={node}
     >
-      <input value={selected.join(' - ')} disabled />
+      <input value={selected.join(' - ')} placeholder={placeholder} disabled />
       <span onClick={toggleOpen} />
       <Icon type="triangle" size="small" />
       <Grid container>

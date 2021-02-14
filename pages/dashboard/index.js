@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { Grid, Typography } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 import withAuth from '../../lib/withAuth';
 import { AdminContentWrapper } from '../../components/wrapper';
 import { Icon } from '../../components/form';
 import { partnerTypes } from '../../helpers/partner';
-import { isRoomer } from '../../helpers/user';
+import { isBuyer } from '../../helpers/user';
 import { ucfirst } from '../../helpers/convertAndCheck';
 import { getPartnersApiMethod } from '../../lib/api/customer';
 import LocationImg from '../../static/img/location.png';
@@ -176,7 +177,7 @@ const styles = (theme) => ({
   },
 });
 
-const Dashboard = ({ user, partners, classes }) => (
+const Dashboard = ({ user = {}, partners, classes }) => (
   <AdminContentWrapper>
     <div className={classes.heading}>
       <div>
@@ -214,7 +215,7 @@ const Dashboard = ({ user, partners, classes }) => (
                 </Typography>
                 <Grid container justify="space-between" alignItems="flex-end">
                   <Typography className={classes.whiteColor}>
-                    {isRoomer(user)
+                    {isBuyer(user)
                       ? 'Je réserve un logement neuf avec une simple promesse d’embauche. Devenir proprietaire n’a jamais été aussi simple.'
                       : 'N’attendez pas 30 ans pour devenir propriétaire'}
                   </Typography>
@@ -302,8 +303,10 @@ Dashboard.getInitialProps = async ({ req, res }) => {
   }
 
   const { list } = await getPartnersApiMethod({ headers });
-
   return { partners: list };
 };
-
-export default withAuth(withStyles(styles)(Dashboard));
+const mapState = (state) => {
+  const { loggingIn, user } = state?.authentication;
+  return { loggingIn, user };
+};
+export default withAuth(withStyles(styles)(connect(mapState)(Dashboard)));

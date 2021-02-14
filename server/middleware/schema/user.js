@@ -2,18 +2,19 @@ const Joi = require('joi');
 const { studentRoleList, StatusList } = require('../../../helpers/user');
 
 const update = {
+  _id: Joi.any().optional(),
   picture: Joi.any().optional(),
+  bookmarks: Joi.array().optional(),
   firstName: Joi.string().min(1).optional(),
   lastName: Joi.string().min(1).optional(),
   slug: Joi.string().optional(),
+  sponsorshipCode: Joi.string().optional(),
   age: Joi.date().optional(),
   email: Joi.string().email().optional(),
   password: Joi.string().min(4).optional(),
   phone: Joi.string().min(5).optional(),
   role: Joi.string().valid(...studentRoleList),
   status: Joi.string().valid(...StatusList),
-  budget: Joi.number().min(0).optional(),
-  school: Joi.string().optional(),
 };
 
 const schemas = {

@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Input, Select, Modal, Icon } from './form';
-import { logOut } from '../lib/api/public';
 import { userRoleSelect } from '../helpers/user';
 
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateProfile = ({ user }) => {
+const UpdateProfile = ({ user, update, logout }) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState(user);
@@ -88,10 +87,9 @@ const UpdateProfile = ({ user }) => {
     setOpenModal(false);
   };
   // eslint-disable-next-line no-return-assign
-  const handleLogOut = () => logOut().then(() => (window.location = '/login'));
+  const handleLogOut = () => logout(() => (window.location = '/login'));
   const handleSumbit = () => {
-    handleModalClose();
-    console.log('Submit');
+    update(state, handleModalClose);
   };
   const classes = useStyles();
 
@@ -175,8 +173,8 @@ const UpdateProfile = ({ user }) => {
               position="left"
             />
             <Select
-              name="status"
-              value={state.status}
+              name="role"
+              value={state.role}
               onChange={handleChange}
               label="Status"
               position="right"

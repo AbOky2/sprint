@@ -56,8 +56,7 @@ class DBModel {
 
   static async updateById(_id, updates) {
     try {
-      const elementDoc = await this.findById(_id);
-
+      const elementDoc = await this.findById(_id).select(this.publicFields());
       if (!elementDoc) {
         throw new Error(msg.notFound(this.name));
       }

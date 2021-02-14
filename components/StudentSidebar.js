@@ -4,7 +4,8 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { connect } from 'react-redux';
+import { userActions } from '../redux/_actions';
 import { Icon, Btn } from './form';
 import Calendr from '../static/img/icons/calendr.png';
 import LogoImg from '../static/img/logo.png';
@@ -163,7 +164,7 @@ export const MobileMenu = () => {
   );
 };
 
-const StudentProfile = ({ user }) => {
+const StudentProfile = ({ user = {}, logout, update }) => {
   const { asPath } = useRouter();
   const classes = useStyles();
 
@@ -198,12 +199,22 @@ const StudentProfile = ({ user }) => {
             />
           </div>
         </Grid>
-        <UpdateProfile user={user} />
+        <UpdateProfile user={user} logout={logout} update={update} />
       </Grid>
     </div>
   );
 };
 StudentProfile.propTypes = {
   user: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
 };
-export default StudentProfile;
+const mapState = (state) => {
+  const { loggingIn, user } = state?.authentication;
+  return { loggingIn, user };
+};
+const actionCreators = {
+  logout: userActions.logout,
+  update: userActions.update,
+};
+export default connect(mapState, actionCreators)(StudentProfile);

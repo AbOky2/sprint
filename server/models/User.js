@@ -94,6 +94,7 @@ class UserClass extends DBModel {
       'firstName',
       'lastName',
       'bookmarks',
+      'sponsorshipCode',
       'school',
       'phone',
       'email',
@@ -111,6 +112,31 @@ class UserClass extends DBModel {
     if (!user) return { userId: null };
 
     return { userId: user._id };
+  }
+
+  static async updateById(_id, updates) {
+    const userDoc = await this.findOne({ _id }).select(this.publicFields());
+    const salt = await bcrypt.genSalt(10);
+
+    if (!userDoc) {
+      throw new Error(msg.notFound('User'));
+    }
+
+    if (!isValidateEmail(updates.email)) throw new Error(msg.invalidInfo('Email'));
+    Object.entries(updates)
+      // eslint-disable-next-line no-unused-vars
+      .filter(([_, value]) => value !== undefined)
+      .forEach(([key, value]) => {
+        userDoc[key] = value;
+      });
+    userDoc.firstName = ucFirst(userDoc.firstName);
+    userDoc.lastName = ucFirst(userDoc.lastName);
+
+    if (userDoc.password) userDoc.password = await bcrypt.hash(userDoc.password, salt);
+    await userDoc.save();
+    const user = userDoc.toObject();
+
+    return { user: pick(user, this.publicFields()) };
   }
 
   static async getUserZones(_id) {
