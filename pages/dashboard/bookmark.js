@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { userActions } from '../../redux/_actions';
 import { AdminContentWrapper } from '../../components/wrapper';
-import { addBookmarkApiMethod, getCurrentUserkApiMethod } from '../../lib/api/customer';
+import { addBookmarkApiMethod } from '../../lib/api/customer';
 import Card from '../../components/card';
 import { Btn } from '../../components/form';
 import withAuth from '../../lib/withAuth';
@@ -92,18 +92,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const BookmarkPage = ({ user, update }) => {
-  const [state, setState] = useState(user.bookmarks);
+  const [state, setState] = useState(user?.bookmarks);
   const classes = useStyles();
   const handleBookmark = (id) => {
     setState(state.filter((elem) => elem._id !== id));
-    addBookmarkApiMethod({ id });
+    addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
-  useEffect(() => {
-    getCurrentUserkApiMethod().then(({ user }) => {
-      setState(user.bookmarks);
-      update(user);
-    });
-  }, []);
   return (
     <AdminContentWrapper redirectDashboard>
       <div>

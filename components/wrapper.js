@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import { withRouter } from 'next/router';
 import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -33,28 +33,22 @@ const styles = (theme) => ({
   },
 });
 const AdminContentWrapper = withStyles(styles)(
-  ({
-    classes,
-    children,
-    redirectDashboard,
-    redirectUri = '/dashboard',
-    redirectText = 'Revenir à l’accueil',
-  }) => (
+  withRouter(({ classes, router, children }) => (
     <Grid className={classes.container}>
-      {redirectDashboard ? (
-        <div className="text-left">
-          <Link href={redirectUri}>
-            <Typography variant="h4" className={classes.redirect}>
-              {redirectText}
-            </Typography>
-          </Link>
-        </div>
-      ) : (
-        ''
-      )}
+      <div
+        className="text-left"
+        onClick={(e) => {
+          // e.preventDefault();
+          router.back();
+        }}
+      >
+        <Typography variant="h4" className={classes.redirect}>
+          Revenir en arrière
+        </Typography>
+      </div>
       {children}
     </Grid>
-  ),
+  )),
 );
 
 export { AdminContentWrapper };

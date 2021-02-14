@@ -144,7 +144,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
     typeOfAnnonce,
     typeOfProperty: [],
   });
-  const [liked, setLiked] = useState(user?.bookmarks);
+  const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
   const classes = useStyles();
   const handleSearch = (name) => ({ target: { value } }) =>
     setQueryData({ ...queryData, [name]: value });

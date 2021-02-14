@@ -332,11 +332,7 @@ const PropertyPage = ({ id, user, property = {}, properties = [], isLocation = f
   const classes = useStyles();
 
   return (
-    <AdminContentWrapper
-      redirectDashboard
-      redirectUri="/dashboard/search"
-      redirectText="Revenir à la recherche"
-    >
+    <AdminContentWrapper redirectDashboard>
       <div>
         <div className="relative">
           {property.pictures && <Carrousel list={property.pictures} />}
@@ -476,7 +472,6 @@ const PropertyPage = ({ id, user, property = {}, properties = [], isLocation = f
               {Object.keys(state).map((elem) => {
                 const curr = state[elem];
                 const isOpen = currOpen === elem;
-                console.log(curr);
                 return (
                   <div key={elem}>
                     <Grid container>
@@ -485,11 +480,7 @@ const PropertyPage = ({ id, user, property = {}, properties = [], isLocation = f
                           <div>
                             {` ${elem} pièce${elem > 1 ? 's' : ''} à partir de `}
 
-                            <strong> 
-{' '}
-{` ${curr.minPrice}€`}
-{' '}
- </strong>
+                            <strong> {` ${curr.minPrice}€`} </strong>
                           </div>
                         </Grid>
                         <Grid

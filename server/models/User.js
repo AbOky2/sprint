@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { isMajor, pick } = require('../../helpers/convertAndCheck');
+const { isMajor, pick, toggleArrayOfObj } = require('../../helpers/convertAndCheck');
 const {
   RoleList,
   StatusList,
@@ -107,7 +107,7 @@ class UserClass extends DBModel {
   }
 
   static async getId(where) {
-    const user = await this.findOne(where).select('_id').lean();
+    const user = await this.findOne(where).populate('bookmarks').select('_id').lean();
 
     if (!user) return { userId: null };
 
@@ -177,15 +177,10 @@ class UserClass extends DBModel {
   }
 
   static async addBookmark(id, propertyId) {
-    const userDoc = await this.findById(id);
+    const userDoc = await this.findById(id).populate('bookmarks');
     const property = await PropertyModel.findById(propertyId);
-    let index = -1;
 
-    // eslint-disable-next-line no-cond-assign
-    if (userDoc.bookmarks && (index = userDoc.bookmarks.indexOf(property._id)) >= 0)
-      userDoc.bookmarks.splice(index, 1);
-    else if (userDoc.bookmarks && userDoc.bookmarks.length) userDoc.bookmarks.push(property._id);
-    else userDoc.bookmarks = [property._id];
+    userDoc.bookmarks = toggleArrayOfObj(userDoc.bookmarks, property, (e) => e._id);
     userDoc.save();
     const user = userDoc.toObject();
 
@@ -261,7 +256,7 @@ class UserClass extends DBModel {
   static async signIn(options) {
     const { email, password } = options;
 
-    let user = await this.findOne({ email });
+    let user = await this.findOne({ email }).populate('bookmarks');
 
     if (!user) throw new Error(msg.notFound('Email'));
     if (!user.password) throw new Error('Account has no password.');
@@ -276,7 +271,7 @@ class UserClass extends DBModel {
   static async signUp(options) {
     let user = null;
 
-    if (await this.findOne({ email: options.email })) {
+    if (await this.findOne({ email: options.email }).populate('bookmarks')) {
       throw new Error(msg.alreadyExist('Email'));
     }
 
@@ -288,18 +283,6 @@ class UserClass extends DBModel {
 }
 
 mongoSchema.loadClass(UserClass);
-// mongoSchema.pre("save", async () => {
-//   const user = this;
-
-//   console.log(user, this);
-//   if (!isValidateEmail(user.email)) throw "Invalid email";
-//   user.firstName = ucFirst(user.firstName);
-//   user.lastName = ucFirst(user.lastName);
-//   if (!user.password || !user.isModified("password")) return;
-//   const salt = await bcrypt.genSalt(10);
-
-//   user.password = await bcrypt.hash(user.password, salt);
-// });
 
 const User = mongoose.model('User', mongoSchema);
 

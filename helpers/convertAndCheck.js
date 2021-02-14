@@ -37,6 +37,13 @@ const toggleArray = (array, name) => {
   if (!found) data.push(name);
   return data;
 };
+
+const toggleArrayOfObj = (arr, item, getValue = (e) => e) => {
+  const filtered = arr.filter((i) => String(getValue(i)) !== String(getValue(item)));
+  if (arr.length === filtered.length) return [...arr, item];
+  return filtered;
+};
+
 const pick = (object, keys) =>
   keys.reduce((obj, key) => {
     if (object && Object.prototype.hasOwnProperty.call(object, key)) {
@@ -57,5 +64,6 @@ module.exports = {
   isValidateEmail,
   pick,
   toggleArray,
+  toggleArrayOfObj,
   toQueryParams,
 };
