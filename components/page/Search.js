@@ -86,8 +86,8 @@ const useStyles = makeStyles((theme) => ({
       },
       '& > div:first-of-type input': {
         borderRight: `1px solid ${theme.palette.gray}`,
+        borderBottom: `1px solid ${theme.palette.gray}`,
         borderRadius: '0 !important',
-        borderBottom: 'none',
       },
       '& > div:last-of-type input': {
         borderLeft: `1px solid ${theme.palette.gray}`,
@@ -105,14 +105,8 @@ const useStyles = makeStyles((theme) => ({
   listContainer: {
     width: 'calc(33% - 11px)',
     marginBottom: '2rem',
-    '&:nth-child(3n+2)': {
-      margin: '0 2.1rem 2rem',
-    },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
-      '&:nth-child(3n+2)': {
-        margin: '0 0 2rem',
-      },
       '&:last-child': {
         margin: 0,
       },
@@ -241,7 +235,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
             </div>
           </Grid>
         </Grid>
-        <Grid container>
+        <Grid container justify="space-between">
           {state?.length ? (
             state.map(({ _id, heading, pictures, address, typeOfAnnonce, dimensions, price }) => (
               <Grid item key={_id} className={classes.listContainer}>

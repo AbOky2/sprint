@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
       padding: '1.8rem 3rem',
       background: '#4f80ff',
       borderRadius: '10px',
+      marginBottom: '1rem',
       '&:first-of-type': {
         marginRight: 12,
       },

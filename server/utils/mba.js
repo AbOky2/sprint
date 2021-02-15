@@ -18,7 +18,7 @@ const { PropertieModel } = require('../models');
 const logger = require('../logs');
 
 const options = {
-  provider: 'openstreetmap',
+  provider: 'google',
   // apiKey: 'AIzaSyBFoKvgfoJLvp4jaDTCawhZSgea8j7owFc', // for Mapquest, OpenCage, Google Premier
 };
 
@@ -80,11 +80,16 @@ const readMba = () => {
 
             const pictures = getPictures(newResult);
 
-            const fullAddress = `${newResult.address} ${newResult.postal ? newResult.postal : ''} ${
-              newResult.city ? newResult.city : ''
-            }`;
-            console.log(fullAddress);
-            const address = await geocoder.geocode(fullAddress);
+            // console.log({
+            //   address: newResult.address,
+            //   zipcode: newResult.postal,
+            //   country: 'france',
+            // });
+            const address = await geocoder.geocode({
+              address: newResult.address,
+              zipcode: newResult.postal,
+              country: 'france',
+            });
             console.log(address);
             const data = pick(newResult, filteredProperties);
             data.advantage = advantages;

@@ -177,17 +177,6 @@ const useStyles = makeStyles((theme) => ({
       marginRight: 8,
     },
   },
-  extraInfoBtn: {
-    marginTop: '4rem!important',
-    padding: '0!important',
-    boxSizing: 'inital!important',
-    backgroundColor: 'none!important',
-    boxShadow: 'none!important',
-    '& > div': {
-      width: '100%',
-      padding: '18px 20px',
-    },
-  },
   mapContainer: {
     marginTop: 24,
     '& img': {
@@ -374,12 +363,6 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
                 {/* <img src={Station4Img} /> */}
                 {/* <img src={Station3AImg} /> */}
               </Grid>
-            </div>
-            <div className={classes.extraInfoBtn}>
-              <Btn
-                text={isLocation ? 'Déposer mon dossier' : 'Être rappelé selon mes dispos'}
-                alignRight
-              />
             </div>
           </Grid>
         </Grid>

@@ -118,7 +118,7 @@ class UserClass extends DBModel {
   }
 
   static async updateById(_id, updates) {
-    const userDoc = await this.findOne({ _id }).select(this.publicFields());
+    const userDoc = await this.findOne({ _id }).populate('bookmarks');
     const salt = await bcrypt.genSalt(10);
 
     if (!userDoc) {
@@ -137,7 +137,7 @@ class UserClass extends DBModel {
 
     if (userDoc.password) userDoc.password = await bcrypt.hash(userDoc.password, salt);
     await userDoc.save();
-    const user = userDoc.toObject();
+    const user = await this.findOne({ _id }).populate('bookmarks').lean();
 
     return { user: pick(user, this.publicFields()) };
   }

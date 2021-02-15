@@ -201,7 +201,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
         vous aide à avoir un bon garant.
       </Typography>
       <Grid container justify="space-between" className={classes.presentationContainer}>
-        <Grid item md={12} lg={6}>
+        <Grid item md={12} md={6}>
           <div>
             <Link href="/dashboard/search/buy">
               <a>
@@ -216,8 +216,8 @@ const Dashboard = ({ user = {}, partners, classes }) => (
                 <Grid container justify="space-between" alignItems="flex-end">
                   <Typography className={classes.whiteColor}>
                     {isBuyer(user)
-                      ? 'Je réserve un logement neuf avec une simple promesse d’embauche. Devenir proprietaire n’a jamais été aussi simple.'
-                      : 'N’attendez pas 30 ans pour devenir propriétaire'}
+                      ? 'N’attendez pas 30 ans pour devenir propriétaire'
+                      : 'Je réserve un logement neuf avec une simple promesse d’embauche. Devenir proprietaire n’a jamais été aussi simple.'}
                   </Typography>
                   <Icon type="arrow" color="white" />
                 </Grid>
@@ -225,7 +225,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
             </Link>
           </div>
         </Grid>
-        <Grid item md={12} lg={6}>
+        <Grid item md={12} md={6}>
           <div>
             <Link href="/dashboard/search/location">
               <a>
