@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { useState, useEffect } from 'react';
 // import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
@@ -342,7 +343,9 @@ const PropertyPage = ({ id, user, property = {}, isLocation = false }) => {
           <Grid item md={8} className={classes.setpsContainer}>
             <div>
               <Typography variant="h3">À propos du logement !</Typography>
-              <Typography variant="body1">{property.description}</Typography>
+              <Typography variant="body1">
+                <div dangerouslySetInnerHTML={{ __html: property.description }} />
+              </Typography>
             </div>
             <div className={classes.extras}>
               <Typography variant="h3">Les petits plus :</Typography>

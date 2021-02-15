@@ -1,151 +1,172 @@
 const comodityDivider = 'comodity__';
 
-const residenceLotsPropertiesHeader = new Array(21);
-residenceLotsPropertiesHeader[1] = 'lot_ref';
-residenceLotsPropertiesHeader[2] = 'residence_ref';
-residenceLotsPropertiesHeader[3] = 'door';
-residenceLotsPropertiesHeader[4] = 'typeOfProperty';
-residenceLotsPropertiesHeader[5] = 'pieces';
-residenceLotsPropertiesHeader[6] = 'surface';
-residenceLotsPropertiesHeader[7] = 'floor';
-residenceLotsPropertiesHeader[8] = 'price';
-residenceLotsPropertiesHeader[9] = 'Honoraires';
-residenceLotsPropertiesHeader[10] = 'guarantee';
-// residenceLotsPropertiesHeader[11] = 'Redevance journalière';
-residenceLotsPropertiesHeader[12] = 'available_date';
-// residenceLotsPropertiesHeader[13] = 'Locataire contrat en cours';
-// residenceLotsPropertiesHeader[14] = 'Date début contrat avenir';
-// residenceLotsPropertiesHeader[15] = 'Locataire du contrat avenir';
-// residenceLotsPropertiesHeader[16] = 'Motif non commercialisation';
-// residenceLotsPropertiesHeader[17] = 'Conso énergie';
-// residenceLotsPropertiesHeader[18] = 'Bilan énergie';
-// residenceLotsPropertiesHeader[19] = 'Conso GES';
-// residenceLotsPropertiesHeader[20] = 'Bilan GES';
-// residenceLotsPropertiesHeader[21] = 'Copro règle';
+const lotsResidencesHeader = new Array(21);
+lotsResidencesHeader[1] = 'lot_ref';
+lotsResidencesHeader[2] = 'residence_ref';
+lotsResidencesHeader[3] = 'door';
+lotsResidencesHeader[4] = 'typeOfProperty';
+lotsResidencesHeader[5] = 'pieces';
+lotsResidencesHeader[6] = 'surface';
+lotsResidencesHeader[7] = 'floor';
+lotsResidencesHeader[8] = 'price';
+lotsResidencesHeader[9] = 'Honoraires';
+lotsResidencesHeader[10] = 'guarantee';
+lotsResidencesHeader[12] = 'available_date';
+// lotsResidencesHeader[14] = 'Date début contrat avenir';
 
-const residencePropertiesHeader = new Array(305);
-residencePropertiesHeader[1] = 'lot_ref';
-residencePropertiesHeader[2] = 'heading';
-residencePropertiesHeader[3] = 'address';
-residencePropertiesHeader[5] = 'postal';
-residencePropertiesHeader[6] = 'city';
-residencePropertiesHeader[19] = `${comodityDivider}Point phone`;
-residencePropertiesHeader[20] = `${comodityDivider}Cafétéria linge`;
-residencePropertiesHeader[21] = `${comodityDivider}Intendant`;
-residencePropertiesHeader[22] = `${comodityDivider}ALS`;
-residencePropertiesHeader[23] = `${comodityDivider}Déjeuné`;
-residencePropertiesHeader[24] = `${comodityDivider}Télévision`;
-residencePropertiesHeader[25] = `${comodityDivider}Salle réunion`;
-residencePropertiesHeader[26] = `${comodityDivider}Parking`;
-residencePropertiesHeader[27] = `${comodityDivider}Piscine`;
-residencePropertiesHeader[28] = `${comodityDivider}Linge maison`;
-residencePropertiesHeader[29] = `${comodityDivider}Service ménage`;
-residencePropertiesHeader[30] = `${comodityDivider}Photocopieuse`;
-residencePropertiesHeader[31] = `${comodityDivider}Interphone`;
-residencePropertiesHeader[32] = `${comodityDivider}Local deux roues`;
-residencePropertiesHeader[33] = `${comodityDivider}Internet illimité offert`;
-residencePropertiesHeader[35] = 'description';
-residencePropertiesHeader[77] = `${comodityDivider}salle de sport`;
-residencePropertiesHeader[78] = `${comodityDivider}location vaisselle`;
-residencePropertiesHeader[79] = `${comodityDivider}Internet fibre optique offert`;
-residencePropertiesHeader[80] = `${comodityDivider}Distributeur de boissons`;
-residencePropertiesHeader[81] = `${comodityDivider}Vidéo Surveillance`;
-residencePropertiesHeader[82] = `${comodityDivider}Distributeur Plats Chauds`;
-residencePropertiesHeader[41] = 'picture_1';
-residencePropertiesHeader[42] = 'picture_2';
-residencePropertiesHeader[43] = 'picture_3';
-residencePropertiesHeader[44] = 'picture_4';
-residencePropertiesHeader[45] = 'picture_5';
-residencePropertiesHeader[46] = 'picture_6';
-residencePropertiesHeader[47] = 'picture_7';
-residencePropertiesHeader[48] = 'picture_8';
-residencePropertiesHeader[49] = 'picture_9';
-residencePropertiesHeader[50] = 'picture_10';
-residencePropertiesHeader[51] = 'picture_11';
-residencePropertiesHeader[52] = 'picture_12';
-residencePropertiesHeader[53] = 'picture_13';
-residencePropertiesHeader[54] = 'picture_14';
-residencePropertiesHeader[55] = 'picture_15';
-residencePropertiesHeader[56] = 'picture_16';
-residencePropertiesHeader[57] = 'picture_17';
-residencePropertiesHeader[58] = 'picture_18';
-residencePropertiesHeader[59] = 'picture_19';
-residencePropertiesHeader[60] = 'picture_20';
-residencePropertiesHeader[108] = `${comodityDivider}Autopartage`;
-residencePropertiesHeader[109] = `${comodityDivider}Accès Internet (Wifi)`;
-residencePropertiesHeader[111] = `${comodityDivider}Accueil (Gouvernant)`;
-residencePropertiesHeader[112] = `${comodityDivider}Salle Activité`;
-residencePropertiesHeader[113] = `${comodityDivider}Salon Tisanerie`;
-residencePropertiesHeader[114] = `${comodityDivider}Téléassistance`;
-residencePropertiesHeader[115] = `${comodityDivider}Portage Repas à domicile`;
-residencePropertiesHeader[116] = `${comodityDivider}Aide-Ménagère`;
-residencePropertiesHeader[117] = `${comodityDivider}Accompagnement (non) véhiculé`;
-residencePropertiesHeader[118] = `${comodityDivider}Livraison Course Aide rangement`;
-residencePropertiesHeader[119] = `${comodityDivider}Préparation des repas`;
-residencePropertiesHeader[120] = `${comodityDivider}Aide Hygiène Corporel`;
-residencePropertiesHeader[121] = `${comodityDivider}Stimulation Compagnie Jeux`;
-residencePropertiesHeader[122] = `${comodityDivider}Garde malade`;
-residencePropertiesHeader[123] = `${comodityDivider}Dépannage Petits Bricolages`;
-residencePropertiesHeader[124] = `${comodityDivider}Travaux de Jardinage`;
-residencePropertiesHeader[125] = `${comodityDivider}Coiffure`;
-residencePropertiesHeader[126] = `${comodityDivider}Assistance Informatique et Internet`;
-residencePropertiesHeader[127] = `${comodityDivider}Livraison des courses`;
-residencePropertiesHeader[128] = `${comodityDivider}Livraison des médicaments`;
-residencePropertiesHeader[129] = `${comodityDivider}Aide au logement`;
-residencePropertiesHeader[130] = `${comodityDivider}Défiscalisation`;
+const residenceHeader = new Array(305);
+residenceHeader[1] = 'lot_ref';
+residenceHeader[2] = 'heading';
+residenceHeader[3] = 'address';
+residenceHeader[5] = 'postal';
+residenceHeader[6] = 'city';
+residenceHeader[19] = `${comodityDivider}Point phone`;
+residenceHeader[20] = `${comodityDivider}Cafétéria linge`;
+residenceHeader[21] = `${comodityDivider}Intendant`;
+residenceHeader[22] = `${comodityDivider}ALS`;
+residenceHeader[23] = `${comodityDivider}Déjeuné`;
+residenceHeader[24] = `${comodityDivider}Télévision`;
+residenceHeader[25] = `${comodityDivider}Salle réunion`;
+residenceHeader[26] = `${comodityDivider}Parking`;
+residenceHeader[27] = `${comodityDivider}Piscine`;
+residenceHeader[28] = `${comodityDivider}Linge maison`;
+residenceHeader[29] = `${comodityDivider}Service ménage`;
+residenceHeader[30] = `${comodityDivider}Photocopieuse`;
+residenceHeader[31] = `${comodityDivider}Interphone`;
+residenceHeader[32] = `${comodityDivider}Local deux roues`;
+residenceHeader[33] = `${comodityDivider}Internet illimité offert`;
+residenceHeader[35] = 'description';
+residenceHeader[77] = `${comodityDivider}salle de sport`;
+residenceHeader[78] = `${comodityDivider}location vaisselle`;
+residenceHeader[79] = `${comodityDivider}Internet fibre optique offert`;
+residenceHeader[80] = `${comodityDivider}Distributeur de boissons`;
+residenceHeader[81] = `${comodityDivider}Vidéo Surveillance`;
+residenceHeader[82] = `${comodityDivider}Distributeur Plats Chauds`;
+residenceHeader[41] = 'picture_1';
+residenceHeader[42] = 'picture_2';
+residenceHeader[43] = 'picture_3';
+residenceHeader[44] = 'picture_4';
+residenceHeader[45] = 'picture_5';
+residenceHeader[46] = 'picture_6';
+residenceHeader[47] = 'picture_7';
+residenceHeader[48] = 'picture_8';
+residenceHeader[49] = 'picture_9';
+residenceHeader[50] = 'picture_10';
+residenceHeader[51] = 'picture_11';
+residenceHeader[52] = 'picture_12';
+residenceHeader[53] = 'picture_13';
+residenceHeader[54] = 'picture_14';
+residenceHeader[55] = 'picture_15';
+residenceHeader[56] = 'picture_16';
+residenceHeader[57] = 'picture_17';
+residenceHeader[58] = 'picture_18';
+residenceHeader[59] = 'picture_19';
+residenceHeader[60] = 'picture_20';
+residenceHeader[108] = `${comodityDivider}Autopartage`;
+residenceHeader[109] = `${comodityDivider}Accès Internet (Wifi)`;
+residenceHeader[111] = `${comodityDivider}Accueil (Gouvernant)`;
+residenceHeader[112] = `${comodityDivider}Salle Activité`;
+residenceHeader[113] = `${comodityDivider}Salon Tisanerie`;
+residenceHeader[114] = `${comodityDivider}Téléassistance`;
+residenceHeader[115] = `${comodityDivider}Portage Repas à domicile`;
+residenceHeader[116] = `${comodityDivider}Aide-Ménagère`;
+residenceHeader[117] = `${comodityDivider}Accompagnement (non) véhiculé`;
+residenceHeader[118] = `${comodityDivider}Livraison Course Aide rangement`;
+residenceHeader[119] = `${comodityDivider}Préparation des repas`;
+residenceHeader[120] = `${comodityDivider}Aide Hygiène Corporel`;
+residenceHeader[121] = `${comodityDivider}Stimulation Compagnie Jeux`;
+residenceHeader[122] = `${comodityDivider}Garde malade`;
+residenceHeader[123] = `${comodityDivider}Dépannage Petits Bricolages`;
+residenceHeader[124] = `${comodityDivider}Travaux de Jardinage`;
+residenceHeader[125] = `${comodityDivider}Coiffure`;
+residenceHeader[126] = `${comodityDivider}Assistance Informatique et Internet`;
+residenceHeader[127] = `${comodityDivider}Livraison des courses`;
+residenceHeader[128] = `${comodityDivider}Livraison des médicaments`;
+residenceHeader[129] = `${comodityDivider}Aide au logement`;
+residenceHeader[130] = `${comodityDivider}Défiscalisation`;
 
-const propertiesHeader = new Array(305);
-propertiesHeader[3] = 'typeOfAnnonce';
-propertiesHeader[4] = 'typeOfProperty';
-propertiesHeader[5] = 'postal';
-propertiesHeader[6] = 'city';
-propertiesHeader[7] = 'country';
-propertiesHeader[8] = 'address';
-propertiesHeader[11] = 'price';
-propertiesHeader[16] = 's';
-propertiesHeader[17] = 'land_surface';
-propertiesHeader[18] = 'nb_pieces';
-propertiesHeader[19] = 'nb_rooms';
-propertiesHeader[20] = 'heading';
-propertiesHeader[21] = 'description';
-propertiesHeader[22] = 'available_date';
-propertiesHeader[24] = 'floor';
-propertiesHeader[27] = 'renew';
-propertiesHeader[35] = 'south_orientation';
-propertiesHeader[36] = 'east_orientation';
-propertiesHeader[37] = 'west_orientation';
-propertiesHeader[38] = 'north_orientation';
-propertiesHeader[39] = 'balcony';
-propertiesHeader[45] = 'digicode';
-propertiesHeader[46] = 'intercom';
-propertiesHeader[47] = 'guardian';
-propertiesHeader[48] = 'terrace';
-propertiesHeader[85] = 'picture_1';
-propertiesHeader[86] = 'picture_2';
-propertiesHeader[87] = 'picture_3';
-propertiesHeader[88] = 'picture_4';
-propertiesHeader[89] = 'picture_5';
-propertiesHeader[90] = 'picture_6';
-propertiesHeader[91] = 'picture_7';
-propertiesHeader[92] = 'picture_8';
-propertiesHeader[93] = 'picture_9';
-propertiesHeader[137] = 'isNewProperty';
-propertiesHeader[164] = 'picture_10';
-propertiesHeader[165] = 'picture_11';
-propertiesHeader[166] = 'picture_12';
-propertiesHeader[167] = 'picture_13';
-propertiesHeader[168] = 'picture_14';
-propertiesHeader[169] = 'picture_15';
-propertiesHeader[170] = 'picture_16';
-propertiesHeader[171] = 'picture_17';
-propertiesHeader[172] = 'picture_18';
-propertiesHeader[173] = 'picture_19';
-propertiesHeader[174] = 'picture_20';
-propertiesHeader[175] = 'lot_ref';
-propertiesHeader[193] = 'transport_lines';
-propertiesHeader[194] = 'stations';
-propertiesHeader[298] = 'lat';
-propertiesHeader[299] = 'lng';
+const programsHeader = new Array(155);
+programsHeader[3] = 'postal';
+programsHeader[4] = 'city';
+programsHeader[5] = 'country';
+programsHeader[6] = 'address';
+programsHeader[8] = 'heading';
+programsHeader[9] = 'description';
+programsHeader[11] = 'available_date';
+programsHeader[15] = 'minPieces';
+programsHeader[16] = 'maxPieces';
+programsHeader[17] = 'nb_floor';
+
+programsHeader[18] = `${comodityDivider}Piscine`;
+programsHeader[19] = `${comodityDivider}Climatisation`;
+programsHeader[88] = `${comodityDivider}Calme`;
+programsHeader[89] = `${comodityDivider}Câble TV`;
+programsHeader[114] = 'picture_1';
+programsHeader[115] = 'picture_2';
+programsHeader[116] = 'picture_3';
+programsHeader[117] = 'picture_4';
+programsHeader[118] = 'picture_5';
+programsHeader[119] = 'picture_6';
+programsHeader[120] = 'picture_7';
+programsHeader[121] = 'picture_8';
+programsHeader[122] = 'picture_9';
+programsHeader[123] = 'picture_10';
+programsHeader[124] = 'picture_11';
+programsHeader[125] = 'picture_12';
+programsHeader[126] = 'picture_13';
+programsHeader[127] = 'picture_14';
+programsHeader[128] = 'picture_15';
+programsHeader[129] = 'picture_16';
+programsHeader[130] = 'picture_17';
+programsHeader[131] = 'picture_18';
+programsHeader[132] = 'picture_19';
+programsHeader[133] = 'picture_20';
+programsHeader[142] = 'transport_lines';
+programsHeader[143] = 'stations';
+programsHeader[154] = 'file';
+programsHeader[155] = 'lot_ref';
+
+const lotsHeader = new Array(75);
+lotsHeader[2] = 'residence_ref';
+lotsHeader[7] = 'floor';
+
+lotsHeader[11] = `${comodityDivider}Exclusivité`;
+lotsHeader[12] = 'available_date';
+lotsHeader[14] = 'price';
+lotsHeader[13] = 'typeOfProperty';
+lotsHeader[16] = 'surface';
+lotsHeader[18] = 'pieces';
+lotsHeader[26] = `${comodityDivider}WC séparés`;
+lotsHeader[35] = `${comodityDivider}Ascenseur`;
+lotsHeader[36] = `${comodityDivider}Cave`;
+lotsHeader[39] = `${comodityDivider}Digicode`;
+lotsHeader[40] = `${comodityDivider}Interphone`;
+lotsHeader[41] = `${comodityDivider}Gardien`;
+lotsHeader[42] = `${comodityDivider}Terrasse`;
+lotsHeader[43] = 'picture_1';
+lotsHeader[44] = 'picture_2';
+lotsHeader[45] = 'picture_3';
+lotsHeader[46] = 'picture_4';
+lotsHeader[47] = 'picture_5';
+lotsHeader[48] = 'picture_6';
+lotsHeader[49] = 'picture_7';
+lotsHeader[50] = 'picture_8';
+lotsHeader[51] = 'picture_9';
+lotsHeader[52] = 'picture_10';
+lotsHeader[53] = 'picture_11';
+lotsHeader[54] = 'picture_12';
+lotsHeader[55] = 'picture_13';
+lotsHeader[56] = 'picture_14';
+lotsHeader[57] = 'picture_15';
+lotsHeader[58] = 'picture_16';
+lotsHeader[59] = 'picture_17';
+lotsHeader[60] = 'picture_18';
+lotsHeader[61] = 'picture_19';
+lotsHeader[62] = 'picture_20';
+lotsHeader[72] = 'transport_lines';
+lotsHeader[73] = 'stations';
+lotsHeader[74] = 'file';
+
 const availableProperties = {
   typeOfAnnonce: "Type d'annonce",
   typeOfProperty: 'Type de propriété',
@@ -193,49 +214,6 @@ const availableProperties = {
   file: 'fichier',
   lat: 'latitude',
   lng: 'longitude',
-  // 'comodity__Point phone': '',
-  // 'comodity__Cafétéria linge': '',
-  // comodity__Intendant: '',
-  // comodity__ALS: '',
-  // comodity__Déjeuné: '',
-  // comodity__Télévision: '',
-  // 'comodity__Salle réunion': '',
-  // comodity__Parking: '',
-  // comodity__Piscine: '',
-  // 'comodity__Linge maison': '',
-  // 'comodity__Service ménage': '',
-  // comodity__Photocopieuse: '',
-  // comodity__Interphone: '',
-  // 'comodity__Local deux roues': '',
-  // 'comodity__Internet illimité offert': '',
-  // 'comodity__salle de sport': '',
-  // 'comodity__location vaisselle': '',
-  // 'comodity__Internet fibre optique offert': '',
-  // 'comodity__Distributeur de boissons': '',
-  // 'comodity__Vidéo Surveillance': '',
-  // 'comodity__Distributeur Plats Chauds': '',
-  // comodity__Autopartage: '',
-  // 'comodity__Accès Internet (Wifi)': '',
-  // 'comodity__Accueil (Gouvernant)': '',
-  // 'comodity__Salle Activité': '',
-  // 'comodity__Salon Tisanerie': '',
-  // comodity__Téléassistance: '',
-  // 'comodity__Portage Repas à domicile': '',
-  // 'comodity__Aide-Ménagère': '',
-  // 'comodity__Accompagnement (non) véhiculé': '',
-  // 'comodity__Livraison Course Aide rangement': '',
-  // 'comodity__Préparation des repas': '',
-  // 'comodity__Aide Hygiène Corporel': '',
-  // 'comodity__Stimulation Compagnie Jeux': '',
-  // 'comodity__Garde malade': '',
-  // 'comodity__Dépannage Petits Bricolages': '',
-  // 'comodity__Travaux de Jardinage': '',
-  // comodity__Coiffure: '',
-  // 'comodity__Assistance Informatique et Internet': '',
-  // 'comodity__Livraison des courses': '',
-  // 'comodity__Livraison des médicaments': '',
-  // 'comodity__Aide au logement': '',
-  // comodity__Défiscalisation: '',
 };
 
 const filteredProperties = Object.keys(availableProperties);
@@ -256,9 +234,10 @@ const typeOfProperties = [
   'terrain',
 ];
 module.exports = {
-  residencePropertiesHeader,
-  residenceLotsPropertiesHeader,
-  propertiesHeader,
+  residenceHeader,
+  lotsResidencesHeader,
+  programsHeader,
+  lotsHeader,
   filteredProperties,
   typeOfAnnoncies,
   typeOfProperties,

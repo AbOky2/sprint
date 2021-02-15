@@ -5,10 +5,11 @@ const path = require('path');
 const { result } = require('lodash');
 const { pick } = require('../../helpers/convertAndCheck');
 const {
-  propertiesHeader,
+  programsHeader,
+  lotsHeader,
   typeOfAnnoncies,
-  residencePropertiesHeader,
-  residenceLotsPropertiesHeader,
+  residenceHeader,
+  lotsResidencesHeader,
   filteredProperties,
   comodityDivider,
 } = require('../../helpers/property');
@@ -21,19 +22,26 @@ const logger = require('../logs');
 // const geocoder = NodeGeocoder(options);
 
 const gepublicPropertiesFolder = path.resolve(__dirname, '../../public/properties');
-const lot_refs = [];
+
+const getPictures = (data) => {
+  const pictures = [];
+  Array.from({ length: 20 }, (_, j) => `picture_${j + 1}`).forEach((e) => {
+    if (!data[e]) return;
+    try {
+      if (fs.existsSync(`${gepublicPropertiesFolder}/${data[e]}`))
+        pictures.push(`/properties/${data[e]}`);
+    } catch (err) {
+      console.error(`----------${err}`);
+    }
+  });
+  return pictures;
+};
 // Using callback
-const numberTypes = ['price', 'floor', 'surface'];
+const numberTypes = ['price', 'floor', 'surface', 'pieces'];
 const readMba = () => {
   const datas = [];
-  const customMap = ({
-    typeOfAnnonce,
-    fileName,
-    header,
-    pictureNb,
-    lots = {},
-    encoding = 'binary',
-  }) => {
+  const customMap = async ({ typeOfAnnonce, fileName, header, lots = {}, encoding = 'binary' }) => {
+    const lot_refs = [];
     fs.createReadStream(`${gepublicPropertiesFolder}/${fileName}.csv`, { encoding })
       .pipe(csv())
       .on('data', (data) => datas.push(data))
@@ -42,24 +50,21 @@ const readMba = () => {
         try {
           const r = [];
           datas.forEach((obj) => {
-            const pictures = [];
             const newResult = {};
             const result = Object.keys(obj)
               .reduce((res, v) => res.concat(obj[v]), '')
               .replace(/"/g, '')
               .split('!#');
-            // eslint-disable-next-line no-return-assign
 
             const advantages = [];
             header.forEach((key, i) => {
               const index = i - 1;
               const res = result[index]?.trim();
-
+              // console.log(key, res);
               if (key === 'lot_ref') {
                 if (!res || res.length < 1 || lot_refs.includes(res)) return;
                 lot_refs.push(res);
               }
-              // console.log('okkk----', key);
               if (numberTypes.includes(key)) {
                 newResult[key] = parseInt(res, 10);
               } else if (key === 'address') {
@@ -67,16 +72,15 @@ const readMba = () => {
                 // if (i < 1) {
                 //   i += 1;
                 //   try {
-                //     console.log(address, i);
                 //     const [{ latitude, longitude }] = await geocoder.geocode(address);
 
                 //     newResult.lnt = latitude;
                 //     newResult.lat = longitude;
-                //     console.log(latitude, longitude);
                 //   } catch (error) {
                 //     console.log(error);
                 //   }
                 // }
+                // if (key.includes(comodityDivider)) console.log(res);
               } else if (key.includes(comodityDivider) && res === 'True') {
                 advantages.push(key.split(comodityDivider)[1]);
               } else if (key === 'isNewProperty') newResult[key] = res === 'Neuf';
@@ -84,19 +88,9 @@ const readMba = () => {
                 newResult[key] = res;
               }
             });
-            // eslint-disable-next-line no-unused-expressions
-            Array.from({ length: pictureNb }, (_, j) => `picture_${j + 1}`).forEach((e) => {
-              if (!newResult[e]) return;
-              try {
-                if (fs.existsSync(`${gepublicPropertiesFolder}/${newResult[e]}`))
-                  pictures.push(`/properties/${newResult[e]}`);
-              } catch (err) {
-                console.error(`----------${err}`);
-              }
-            });
-            // console.log(advantage, pictures.length);
-            if (!pictures.length) return;
-            // if (!pictures.length) pictures.push('/properties/no-pictures.jpg');
+
+            const pictures = getPictures(newResult);
+
             const data = pick(newResult, filteredProperties);
             data.advantage = advantages;
             data.typeOfAnnonce = typeOfAnnonce;
@@ -143,8 +137,11 @@ const readMba = () => {
                 });
 
                 const data = newResult;
+                // if (isNaN(data.price)) console.log('no  ', data.residence_ref);
+                // else console.log('yes ', data.residence_ref);
                 data.advantage = advantages;
                 data.typeOfAnnonce = typeOfAnnonce;
+                // console.log(entries[0].lot_ref, data.residence_ref);
                 const lotIndex = entries.findIndex((elem) => elem.lot_ref === data.residence_ref);
 
                 if (lotIndex >= 0) {
@@ -180,18 +177,30 @@ const readMba = () => {
           });
       });
   };
-  customMap({
-    encoding: 'utf-8',
-    typeOfAnnonce: typeOfAnnoncies[1],
-    fileName: 'residences',
-    header: residencePropertiesHeader,
-    pictureNb: 20,
-    lots: {
-      fileName: 'lots_residences',
-      header: residenceLotsPropertiesHeader,
+  (async () => {
+    await customMap({
+      encoding: 'binary',
+      typeOfAnnonce: typeOfAnnoncies[0],
+      fileName: 'Programmes',
+      header: programsHeader,
+      lots: {
+        fileName: 'lots',
+        header: lotsHeader,
+        encoding: 'utf-8',
+      },
+    });
+    await customMap({
       encoding: 'utf-8',
-    },
-  });
+      typeOfAnnonce: typeOfAnnoncies[1],
+      fileName: 'residences',
+      header: residenceHeader,
+      lots: {
+        fileName: 'lots_residences',
+        header: lotsResidencesHeader,
+        encoding: 'utf-8',
+      },
+    });
+  })();
 };
 
 module.exports = readMba;
