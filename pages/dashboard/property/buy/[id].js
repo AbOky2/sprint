@@ -1,5 +1,4 @@
-// import GoogleMapReact from 'google-map-react';
-import { getPropertyApiMethod, getPropertiesApiMethod } from '../../../../lib/api/customer';
+import { getPropertyApiMethod } from '../../../../lib/api/customer';
 import Single from '../../../../components/page/single';
 import withAuth from '../../../../lib/withAuth';
 
@@ -10,8 +9,7 @@ PropertyPage.getInitialProps = async ({ req, query: { id } }) => {
     headers.cookie = req.headers.cookie;
   }
   const property = await getPropertyApiMethod(id, { headers });
-  const { list: properties = [] } = await getPropertiesApiMethod({ headers });
-  return { property, properties, id };
+  return { property, id };
 };
 
 export default withAuth(PropertyPage);

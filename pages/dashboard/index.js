@@ -178,7 +178,7 @@ const styles = (theme) => ({
 });
 
 const Dashboard = ({ user = {}, partners, classes }) => (
-  <AdminContentWrapper>
+  <AdminContentWrapper noRedirect>
     <div className={classes.heading}>
       <div>
         <img src={LogoImg} alt="" />

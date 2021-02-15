@@ -100,7 +100,7 @@ const BookmarkPage = ({ user, update }) => {
     addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
   return (
-    <AdminContentWrapper redirectDashboard>
+    <AdminContentWrapper noRedirect>
       <div>
         {state?.length ? (
           <Grid container>

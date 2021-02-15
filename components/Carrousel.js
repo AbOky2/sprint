@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
       position: 'absolute',
       width: '100%',
       top: '50%',
+      color: 'transparent',
       backgroundColor: 'transparent',
     },
     '& > div:last-of-type > button:first-of-type': {
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     height: 50,
     paddingLeft: theme.spacing(4),
-    // backgroundColor: theme.palette.background.default,
   },
   img: {
     height: 450,
@@ -62,7 +62,7 @@ function SwipeableTextMobileStepper({ list = [] }) {
   return (
     <div className={classes.root}>
       <AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        // axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
@@ -74,7 +74,6 @@ function SwipeableTextMobileStepper({ list = [] }) {
                 className={classes.img}
                 style={{
                   backgroundImage: `url(${path})`,
-                  backgroundSize: 'contain',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',

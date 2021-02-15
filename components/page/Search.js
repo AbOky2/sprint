@@ -163,7 +163,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
   const isLocation = typeOfAnnonce === 'Location';
 
   return (
-    <AdminContentWrapper redirectDashboard>
+    <AdminContentWrapper redirectDashboard href="/dashboard">
       <div>
         {!isLocation && (
           <div className={classes.setpsContainer}>

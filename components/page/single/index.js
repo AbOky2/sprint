@@ -59,9 +59,7 @@ const useStyles = makeStyles((theme) => ({
       },
       '& span': {
         padding: '0 5px',
-        color: 'white',
         marginRight: 10,
-        background: '#4F80FF',
         borderRadius: '3px',
       },
     },
@@ -267,7 +265,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
   const classes = useStyles();
 
   return (
-    <AdminContentWrapper redirectDashboard>
+    <AdminContentWrapper>
       <div>
         <div className="relative">
           {property.pictures && <Carrousel list={property.pictures} />}
@@ -336,7 +334,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
             <div>
               <Typography variant="h3">À propos du logement !</Typography>
               <Typography variant="body1">
-                <div dangerouslySetInnerHTML={{ __html: property.description }} />
+                <span dangerouslySetInnerHTML={{ __html: property.description }} />
               </Typography>
             </div>
             <div className={classes.extras}>

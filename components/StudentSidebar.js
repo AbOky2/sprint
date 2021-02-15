@@ -14,7 +14,6 @@ import UpdateProfile from './UpdateProfile';
 const useStyles = makeStyles((theme) => ({
   container: {
     height: 'calc(100vh - 60px)',
-    padding: '3rem 0 0',
   },
   logoContainer: {
     marginBottom: '40px',

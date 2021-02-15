@@ -33,19 +33,23 @@ const styles = (theme) => ({
   },
 });
 const AdminContentWrapper = withStyles(styles)(
-  withRouter(({ classes, router, children }) => (
+  withRouter(({ classes, router, href, noRedirect, children }) => (
     <Grid className={classes.container}>
-      <div
-        className="text-left"
-        onClick={(e) => {
-          // e.preventDefault();
-          router.back();
-        }}
-      >
-        <Typography variant="h4" className={classes.redirect}>
-          Revenir en arrière
-        </Typography>
-      </div>
+      {noRedirect ? (
+        ''
+      ) : (
+        <div
+          className="text-left"
+          onClick={(e) => {
+            if (href) router.push(href);
+            else router.back();
+          }}
+        >
+          <Typography variant="h4" className={classes.redirect}>
+            Revenir en arrière
+          </Typography>
+        </div>
+      )}
       {children}
     </Grid>
   )),

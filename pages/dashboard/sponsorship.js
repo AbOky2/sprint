@@ -75,7 +75,7 @@ const PartnerPage = ({ user }) => {
   const classes = useStyles();
 
   return (
-    <AdminContentWrapper>
+    <AdminContentWrapper noRedirect>
       <Typography variant="h1">Parrainer l’un de vos proches</Typography>
       <div className={classes.tutorialConainer}>
         <Typography variant="h2">
