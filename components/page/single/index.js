@@ -300,7 +300,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
               {property.address}
               {` - ${property.postal} ${property.city}`}
             </Typography>
-            <Typography variant="h2">Programme immobilier neuf</Typography>
+            {!isLocation && <Typography variant="h2">Programme immobilier neuf</Typography>}
             <div className={classes.houseInfo}>
               <Grid container>
                 <div>
