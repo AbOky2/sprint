@@ -15,8 +15,6 @@ const Header = ({ headerList = [] }) => (
 const UserList = ({ contentList = [], headerList }) => {
   const list = contentList; /* .splice(state.offset, state.limit) */
 
-  console.log(list);
-
   return (
     <Grid container item>
       <Header headerList={headerList} />
@@ -44,7 +42,7 @@ const UserList = ({ contentList = [], headerList }) => {
             <span>{elem.referer}</span>
           </Grid>
           <Grid item container alignItems="center" xs={2}>
-            <span>{elem.referer}</span>
+            <span>{elem.sponsorshipCode}</span>
           </Grid>
         </Grid>
       ))}

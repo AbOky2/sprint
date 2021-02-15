@@ -12,8 +12,10 @@ function login(args) {
 
     signIn(args)
       .then(({ user }) => {
-        dispatch(success(user));
-        window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
+        if (user && user._id) {
+          dispatch(success(user));
+          window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
+        }
       })
       .catch((error) => {
         dispatch(failure(error.toString()));
@@ -30,8 +32,10 @@ function update(args, callback) {
     dispatch(request({ username: args.username }));
     updateUserApiMethod(args).then(
       ({ user }) => {
-        dispatch(success(user));
-        if (callback) callback();
+        if (user && user._id) {
+          dispatch(success(user));
+          if (callback) callback();
+        }
       },
       (error) => {
         dispatch(failure(error.toString()));
@@ -65,9 +69,11 @@ function register(user) {
 
     signUp(user).then(
       ({ user }) => {
-        dispatch(success(user));
-        window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
-        dispatch(alertActions.success('Registration successful'));
+        if (user && user._id) {
+          dispatch(success(user));
+          window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
+          dispatch(alertActions.success('Registration successful'));
+        }
       },
       (error) => {
         dispatch(failure(error.toString()));

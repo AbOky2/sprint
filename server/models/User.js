@@ -271,6 +271,9 @@ class UserClass extends DBModel {
   static async signUp(options) {
     let user = null;
 
+    if (options.sponsorshipCode && !(await this.findOne({ slug: options.sponsorshipCode })))
+      throw new Error(msg.invalidInfo('Code de parrainage'));
+
     if (await this.findOne({ email: options.email }).populate('bookmarks')) {
       throw new Error(msg.alreadyExist('Email'));
     }
