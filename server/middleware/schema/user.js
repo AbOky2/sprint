@@ -30,6 +30,14 @@ const schemas = {
       id: Joi.string().min(1).required(),
     },
   },
+  sponsorship: {
+    post: {
+      firstName: Joi.string().min(1).required(),
+      lastName: Joi.string().min(1).required(),
+      email: Joi.string().email().required(),
+      phone: Joi.string().min(5).required(),
+    },
+  },
   public: {
     user: {
       signUp: {

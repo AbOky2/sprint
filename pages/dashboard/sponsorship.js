@@ -7,6 +7,7 @@ import withAuth from '../../lib/withAuth';
 import FirstDivider from '../../static/img/first_divider.svg';
 import SecondDivider from '../../static/img/second_divider.svg';
 import { Btn, Input, Icon } from '../../components/form';
+import { addSponsorshipApiMethod } from '../../lib/api/customer';
 
 const useStyles = makeStyles((theme) => ({
   tutorialConainer: {
@@ -64,10 +65,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PartnerPage = () => {
+const PartnerPage = ({ user }) => {
   const [state, setState] = useState({ email: '', firstName: '', lastName: '' });
   const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
-  const handleSubmit = () => console.log('Submit');
+  const handleSubmit = () => {
+    if (!state.email || !state.firstName || !state.lastName || !state.phone) return;
+    addSponsorshipApiMethod(state).then(() => console.log('ok'));
+  };
   const classes = useStyles();
 
   return (
@@ -79,7 +83,7 @@ const PartnerPage = () => {
         </Typography>
         <Typography>
           Aidez vos proches à concrétiser leur projet immobilier. Votre code parrain :
-          <strong>FD32DJ</strong>
+          <strong>{user?.slug}</strong>
         </Typography>
         <Grid container item justify="center">
           <Grid item md={2} className="text-center">

@@ -9,6 +9,7 @@ const {
 } = require('../middleware/express');
 const requestMiddleware = require('../middleware/request');
 const joiSchema = require('../middleware/schema');
+const sms = require('../utils/sms');
 
 // const options = {
 //   provider: 'openstreetmap',
@@ -46,6 +47,21 @@ router.put(
       return { user };
     },
   ),
+);
+router.post(
+  '/sponsorship',
+  requestMiddleware(joiSchema.user.sponsorship.post),
+  handleErrors(async ({ user }, res) => {
+    try {
+      await sms.create({
+        body: `${user.firstName} ${user.lastName} send you a sponsorhip code: ${user.slug}`,
+        from: '+33645100284',
+        to: '+33645100284',
+      });
+    } catch (error) {
+      res.json({ errors: 'Error while sending', error });
+    }
+  }),
 );
 
 router.get(

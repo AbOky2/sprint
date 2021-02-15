@@ -11,6 +11,8 @@ const {
   GOOGLE_CLIENT_ID,
   SESSION_NAME,
   COOKIE_DOMAIN,
+  TWILIO_ACCOUNT_SID,
+  TWILIO_TOKEN,
 } = process.env;
 
 const PORT = process.env.PORT || 3000;
@@ -31,4 +33,6 @@ module.exports = {
   GOOGLE_CLIENT_SECRET,
   GOOGLE_CLIENT_ID,
   COOKIE_DOMAIN,
+  TWILIO_ACCOUNT_SID,
+  TWILIO_TOKEN,
 };
