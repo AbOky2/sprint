@@ -13,11 +13,18 @@ const useStyles = makeStyles({
   },
   title: {
     color: '#4F80FF',
+    height: '2.7rem',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
   },
   address: {
     marginBottom: 9,
     height: '2.4rem',
+    lineHeight: '2.6rem',
     overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
     color: 'rgba(26, 46, 108, 0.5)',
   },
   description: {
