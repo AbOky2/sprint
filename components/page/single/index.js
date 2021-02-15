@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { userActions } from '../../../redux/_actions';
 import { AdminContentWrapper } from '../../wrapper';
 import { Icon, Btn } from '../../form';
 import { addBookmarkApiMethod } from '../../../lib/api/customer';
@@ -236,31 +238,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PropertyPage = ({ id, user, property = {}, isLocation = false }) => {
+const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) => {
   const [state, setState] = useState({});
   const [total, Total] = useState({});
-  const [currOpen, setCurrOpen] = useState('3');
-  const [liked, setLiked] = useState(user?.bookmarks?.find((elem) => elem._id));
+  const [currOpen, setCurrOpen] = useState('');
+  const [liked, setLiked] = useState(user?.bookmarks?.find((elem) => elem._id === id));
   const handleBookmark = () => {
     setLiked(!liked);
-    addBookmarkApiMethod({ id });
+    addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
   const handleCurrOpen = (e) => setCurrOpen(currOpen === e ? null : e);
   useEffect(() => {
     (async () => {
       const newState = {};
       property.lots.forEach((newElem) => {
-        const elem = newState[newElem.pieces];
-        if (Object.prototype.hasOwnProperty.call(newState, newElem.pieces)) {
+        const pieces = newElem.pieces == 0 ? 1 : newElem.pieces;
+        const elem = newState[pieces];
+        if (Object.prototype.hasOwnProperty.call(newState, pieces)) {
           elem.list.push(newElem);
           if (!elem.minPrice || elem.minPrice > newElem.price) elem.minPrice = newElem.price;
           if (!elem.minSurface || elem.minSurface > newElem.surface)
             elem.minSurface = newElem.surface;
           if (!elem.maxSurface || elem.maxSurface < newElem.surface)
             elem.maxSurface = newElem.surface;
-          newState[newElem.pieces] = elem;
+          newState[pieces] = elem;
         } else {
-          newState[newElem.pieces] = {
+          newState[pieces] = {
             list: [newElem],
             minSurface: newElem.surface,
             maxSurface: newElem.surface,
@@ -405,5 +408,12 @@ const PropertyPage = ({ id, user, property = {}, isLocation = false }) => {
 PropertyPage.propTypes = {
   property: PropTypes.object.isRequired,
 };
+const mapState = (state) => {
+  const { loggingIn, user } = state.authentication;
+  return { loggingIn, user };
+};
 
-export default PropertyPage;
+const actionCreators = {
+  update: userActions.updateUserDataOnly,
+};
+export default connect(mapState, actionCreators)(PropertyPage);
