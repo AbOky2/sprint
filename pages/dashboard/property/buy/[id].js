@@ -1,6 +1,6 @@
 // import GoogleMapReact from 'google-map-react';
 import { getPropertyApiMethod, getPropertiesApiMethod } from '../../../../lib/api/customer';
-import Single from '../../../../components/page/Single';
+import Single from '../../../../components/page/single';
 import withAuth from '../../../../lib/withAuth';
 
 const PropertyPage = (props) => <Single {...props} />;

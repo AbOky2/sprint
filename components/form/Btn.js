@@ -62,7 +62,7 @@ const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor 
 };
 
 Btn.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   text: PropTypes.string.isRequired,
   href: PropTypes.string,
   iconColor: PropTypes.oneOf(colorTypes),
@@ -72,6 +72,7 @@ Btn.propTypes = {
 };
 Btn.defaultProps = {
   href: '',
+  onClick: undefined,
   iconColor: undefined,
   iconType: undefined,
   alignRight: false,
