@@ -3,6 +3,7 @@ const fs = require('fs');
 // const NodeGeocoder = require('node-geocoder');
 const path = require('path');
 const { result } = require('lodash');
+const NodeGeocoder = require('node-geocoder');
 const { pick } = require('../../helpers/convertAndCheck');
 const {
   programsHeader,
@@ -16,10 +17,12 @@ const {
 const { PropertieModel } = require('../models');
 const logger = require('../logs');
 
-// const options = {
-//   provider: 'openstreetmap',
-// };
-// const geocoder = NodeGeocoder(options);
+const options = {
+  provider: 'openstreetmap',
+  // apiKey: 'AIzaSyBFoKvgfoJLvp4jaDTCawhZSgea8j7owFc', // for Mapquest, OpenCage, Google Premier
+};
+
+const geocoder = NodeGeocoder(options);
 
 const gepublicPropertiesFolder = path.resolve(__dirname, '../../public/properties');
 
@@ -49,7 +52,7 @@ const readMba = () => {
         const entries = [];
         try {
           const r = [];
-          datas.forEach((obj) => {
+          datas.forEach(async (obj) => {
             const newResult = {};
             const result = Object.keys(obj)
               .reduce((res, v) => res.concat(obj[v]), '')
@@ -67,20 +70,6 @@ const readMba = () => {
               }
               if (numberTypes.includes(key)) {
                 newResult[key] = parseInt(res, 10);
-              } else if (key === 'address') {
-                newResult[key] = res;
-                // if (i < 1) {
-                //   i += 1;
-                //   try {
-                //     const [{ latitude, longitude }] = await geocoder.geocode(address);
-
-                //     newResult.lnt = latitude;
-                //     newResult.lat = longitude;
-                //   } catch (error) {
-                //     console.log(error);
-                //   }
-                // }
-                // if (key.includes(comodityDivider)) console.log(res);
               } else if (key.includes(comodityDivider) && res === 'True') {
                 advantages.push(key.split(comodityDivider)[1]);
               } else if (key === 'isNewProperty') newResult[key] = res === 'Neuf';
@@ -91,6 +80,12 @@ const readMba = () => {
 
             const pictures = getPictures(newResult);
 
+            const fullAddress = `${newResult.address} ${newResult.postal ? newResult.postal : ''} ${
+              newResult.city ? newResult.city : ''
+            }`;
+            console.log(fullAddress);
+            const address = await geocoder.geocode(fullAddress);
+            console.log(address);
             const data = pick(newResult, filteredProperties);
             data.advantage = advantages;
             data.typeOfAnnonce = typeOfAnnonce;
@@ -167,7 +162,7 @@ const readMba = () => {
                     entries[lotIndex].maxPieces = data.pieces;
                 }
               });
-              await PropertieModel.create(entries);
+              // await PropertieModel.create(entries);
             } catch (err) {
               if (err.code) {
                 logger.info('Updated properties', err);

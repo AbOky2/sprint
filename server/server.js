@@ -28,12 +28,10 @@ const options = {
   useUnifiedTopology: true,
 };
 mongoose.connect(MONGO_URL, options);
-
 const URL_MAP = {
   '/login': '/public/login',
   '/my-books': '/dashboard/my-books',
 };
-
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
