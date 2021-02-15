@@ -8,8 +8,8 @@ import { userActions } from '../../redux/_actions';
 import { Btn, Select, Input } from '../../components/form';
 import withAuth from '../../lib/withAuth';
 import { Student, userRoleSelect } from '../../helpers/user';
-
 import LogoImg from '../../static/img/logo-full.png';
+import { pick } from '../../helpers/convertAndCheck';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -183,7 +183,7 @@ const SignUp = ({ values = {}, handleChange }) => (
       position="left"
     />
     <Select
-      name="status"
+      name="role"
       value={values.role}
       onChange={handleChange}
       list={userRoleSelect}
@@ -220,14 +220,14 @@ const propTypes = {
 SignIn.propTypes = propTypes;
 SignUp.propTypes = propTypes;
 
-const LoginTab = ({ login, register, ...others }) => {
+const LoginTab = ({ login, register }) => {
   const [state, setState] = useState({
     email: 'toto@test.test',
     firstName: 'toto',
     lastName: 'toto',
     password: 'test',
-    phone: '000000000',
-    sponsorshipCode: 'sdfsdf',
+    // phone: '000000000',
+    // sponsorshipCode: null,
     role: Student,
   });
   // const [state, setState] = useState({ email: 'roomer@test.test', password: 'test' });
@@ -241,7 +241,7 @@ const LoginTab = ({ login, register, ...others }) => {
   const toggleView = () => setIsRegisterinView(!isRegisterinView);
 
   const onClick = () => {
-    let data = state;
+    let data = { ...state };
     let authReq;
 
     if (!isRegisterinView) {
@@ -249,17 +249,23 @@ const LoginTab = ({ login, register, ...others }) => {
       if (!data.email || !data.password) return;
       authReq = login;
     } else {
+      const pickdata = ['email', 'firstName', 'lastName', 'role', 'password'];
       if (
         !data.email ||
         !data.firstName ||
         !data.lastName ||
         !data.password ||
-        !data.sponsorshipCode ||
         !data.role ||
         !checked
       )
         return;
-
+      if (data.sponsorshipCode?.length) pickdata.push('sponsorshipCode');
+      if (data.phone?.length) pickdata.push('phone');
+      if (document.referrer) {
+        data.referrer_url = document.referrer;
+        pickdata.push('referrer_url');
+      }
+      data = pick(data, pickdata);
       authReq = register;
     }
 

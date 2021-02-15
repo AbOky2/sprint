@@ -48,6 +48,7 @@ const schemas = {
         password: Joi.string().min(4).required(),
         role: Joi.string().valid(...studentRoleList),
         sponsorshipCode: Joi.string().min(1).optional(),
+        referrer_url: Joi.string().min(1).optional(),
       },
       signIn: {
         email: Joi.string().email().required(),

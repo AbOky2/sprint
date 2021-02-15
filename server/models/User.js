@@ -84,6 +84,9 @@ const mongoSchema = new Schema({
   provider: {
     type: String,
   },
+  referrer_url: {
+    type: String,
+  },
 });
 
 class UserClass extends DBModel {
