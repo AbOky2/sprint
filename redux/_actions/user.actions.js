@@ -64,8 +64,9 @@ function register(user) {
     dispatch(request(user));
 
     signUp(user).then(
-      (user) => {
-        dispatch(success());
+      ({ user }) => {
+        dispatch(success(user));
+        window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
         dispatch(alertActions.success('Registration successful'));
       },
       (error) => {
@@ -75,42 +76,10 @@ function register(user) {
     );
   };
 }
-
-// function getAll() {
-//   const request = () => ({ type: userConstants.GETALL_REQUEST });
-//   const success = (users) => ({ type: userConstants.GETALL_SUCCESS, users });
-//   const failure = (error) => ({ type: userConstants.GETALL_FAILURE, error });
-//   return (dispatch) => {
-//     dispatch(request());
-
-//     authService.getAll().then(
-//       (users) => dispatch(success(users)),
-//       (error) => dispatch(failure(error.toString())),
-//     );
-//   };
-// }
-
-// // prefixed function name with underscore because delete is a reserved word in javascript
-// function handleDelete(id) {
-//   const request = (id) => ({ type: userConstants.DELETE_REQUEST, id });
-//   const success = (id) => ({ type: userConstants.DELETE_SUCCESS, id });
-//   const failure = (id, error) => ({ type: userConstants.DELETE_FAILURE, id, error });
-//   return (dispatch) => {
-//     dispatch(request(id));
-
-//     authService.delete(id).then(
-//       (user) => dispatch(success(id)),
-//       (error) => dispatch(failure(id, error.toString())),
-//     );
-//   };
-// }
-
 export const userActions = {
   login,
   logout,
   register,
   update,
   updateUserDataOnly,
-  // getAll,
-  // delete: handleDelete,
 };

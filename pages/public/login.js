@@ -232,7 +232,7 @@ const LoginTab = ({ login, register, ...others }) => {
   });
   // const [state, setState] = useState({ email: 'roomer@test.test', password: 'test' });
   const [isRegisterinView, setIsRegisterinView] = useState(false);
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
 
   const handleCheck = (event) => {
     setChecked(event.target.checked);
@@ -242,11 +242,25 @@ const LoginTab = ({ login, register, ...others }) => {
 
   const onClick = () => {
     let data = state;
-    let authReq = register;
+    let authReq;
 
     if (!isRegisterinView) {
       data = { email: data.email, password: data.password };
+      if (!data.email || !data.password) return;
       authReq = login;
+    } else {
+      if (
+        !data.email ||
+        !data.firstName ||
+        !data.lastName ||
+        !data.password ||
+        !data.sponsorshipCode ||
+        !data.role ||
+        !checked
+      )
+        return;
+
+      authReq = register;
     }
 
     authReq(data);
@@ -298,6 +312,7 @@ const LoginTab = ({ login, register, ...others }) => {
                       <Checkbox
                         color="primary"
                         inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        onClick={handleCheck}
                       />
                       <Typography variant="h3">J’accepte les conditions générales</Typography>
                     </Grid>
@@ -336,6 +351,7 @@ const mapState = (state) => {
 };
 
 const actionCreators = {
+  register: userActions.register,
   login: userActions.login,
   logout: userActions.logout,
 };

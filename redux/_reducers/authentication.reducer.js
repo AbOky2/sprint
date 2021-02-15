@@ -17,6 +17,11 @@ export const authentication = (state = initialState, action) => {
         loggedIn: true,
         user: action.user,
       };
+    case userConstants.REGISTER_SUCCESS:
+      return {
+        loggedIn: true,
+        user: action.user,
+      };
     case userConstants.UPDATE_SUCCESS:
       return {
         loggedIn: true,
