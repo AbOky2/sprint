@@ -51,12 +51,22 @@ const useStyles = makeStyles((theme) => ({
   searchContainer: {
     marginBottom: 22,
     boxShadow: '0px 4.15441px 16.6176px rgb(0 0 0 / 10%)',
-    '& > div:first-of-type > div:first-of-type, & > div:first-of-type > div:first-of-type > div, & > div:first-of-type > div:first-of-type > div , & > div:first-of-type > div:first-of-type > div>div:first-of-type': {
-      minHeight: 62,
-      borderRadius: '.6rem',
-      borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
-      borderRight: 0,
+    '& > div:first-of-type > div > div': {
+      '&:first-of-type': {
+        minHeight: 62,
+        borderRadius: '.6rem',
+        borderTopRightRadius: 0,
+        borderBottomRightRadius: 0,
+        borderRight: 0,
+        border: `solid 1px ${theme.palette.gray}`,
+        [theme.breakpoints.down('sm')]: {},
+        borderBottomLeftRadius: 0,
+        borderTopRightRadius: '.6rem',
+        borderRight: `1px solid ${theme.palette.gray}`,
+      },
+      '&:last-of-type': {
+        zIndex: 3,
+      },
     },
     '& > div:last-of-type svg': {
       position: 'absolute',
@@ -113,8 +123,14 @@ const useStyles = makeStyles((theme) => ({
   listContainer: {
     width: 'calc(33% - 11px)',
     marginBottom: '2rem',
+    '&:nth-child(3n+2)': {
+      margin: '0 2.1rem 2rem',
+    },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
+      '&:nth-child(3n+2)': {
+        margin: '0 0 2rem',
+      },
       '&:last-child': {
         margin: 0,
       },
@@ -244,7 +260,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
             </div>
           </Grid>
         </Grid>
-        <Grid container justify="space-between">
+        <Grid container>
           {state?.length ? (
             state.map(({ _id, heading, pictures, address, typeOfAnnonce, dimensions, price }) => (
               <Grid item key={_id} className={classes.listContainer}>

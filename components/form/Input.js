@@ -5,21 +5,17 @@ import { Grid, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
-export const GoogleMaps = ({ onChange }) => {
-  return (
-    <div id="test">
-      <GooglePlacesAutocomplete
-        apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
-        selectProps={{
-          styles: {
-            height: '100%',
-          },
-          onChange,
-        }}
-      />
-    </div>
-  );
-};
+export const GoogleMaps = ({ onChange }) => (
+  <GooglePlacesAutocomplete
+    apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
+    selectProps={{
+      styles: {
+        height: '100%',
+      },
+      onChange,
+    }}
+  />
+);
 
 const styles = (theme) => ({
   container: {
@@ -30,7 +26,7 @@ const styles = (theme) => ({
       width: '100%',
       height: '38px',
       borderRadius: '.6rem',
-      border: 'solid 1px #c7cfd6',
+      border: `solid 1px ${theme.palette.gray}`,
       fontFamily: 'Open Sans',
       fontSize: '1.6rem',
       fontWeight: '600',

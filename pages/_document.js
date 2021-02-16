@@ -244,6 +244,9 @@ class MyDocument extends Document {
               .custom-upload-conatainer > span {
                 marginBottom: 1rem;
               }
+              .css-1okebmr-indicatorSeparator {
+                display: none;
+              }
             `}
           </style>
           <script
