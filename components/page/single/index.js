@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
     color: 'rgba(26, 46, 108, 0.75)',
   },
   setpsContainer: {
-    paddingRight: 20,
     '& h3': {
       marginBottom: 8,
     },
@@ -223,9 +222,6 @@ const useStyles = makeStyles((theme) => ({
       color: 'rgba(26, 46, 108, 0.5)',
     },
   },
-  buttomBtnContainer: {
-    margin: '5rem auto',
-  },
 }));
 const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) => {
   const [state, setState] = useState({});
@@ -237,6 +233,8 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
     addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
   const handleCurrOpen = (e) => setCurrOpen(currOpen === e ? null : e);
+  const myRef = useRef(null);
+  const executeScroll = () => myRef.current.scrollIntoView();
   useEffect(() => {
     (async () => {
       const newState = {};
@@ -319,6 +317,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
               <Btn
                 text={isLocation ? 'Déposer mon dossier' : 'Être rappelé selon mes dispos'}
                 alignRight
+                onClick={executeScroll}
               />
               {isLocation ? (
                 ''
@@ -329,7 +328,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
           </Grid>
         </Grid>
         <Grid container alignItems="flex-start">
-          <Grid item md={8} className={classes.setpsContainer}>
+          <Grid item className={classes.setpsContainer}>
             <div>
               <Typography variant="h3">À propos du logement !</Typography>
               <Typography variant="body1">
@@ -340,7 +339,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
               <Typography variant="h3">Les petits plus :</Typography>
               <Grid container>
                 {property.advantage?.map((elem) => (
-                  <Grid container item key={elem} md={6} alignItems="center">
+                  <Grid container item key={elem} md={4} sm={6} alignItems="center">
                     <Icon type="elevator" />
                     <Typography variant="subtitle1">{elem}</Typography>
                   </Grid>
@@ -351,18 +350,9 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
               <Maps loc={property.loc?.coordinates} />
             </div>
           </Grid>
-          <Grid item md={4} className={classes.extraInfo}>
-            <div>
-              <Typography variant="h3">Les transports à proximité :</Typography>
-              <Grid container justify="space-around">
-                {/* <img src={Station4Img} /> */}
-                {/* <img src={Station3AImg} /> */}
-              </Grid>
-            </div>
-          </Grid>
         </Grid>
 
-        <Grid container className={classes.discoveryContainer}>
+        <Grid container className={classes.discoveryContainer} ref={myRef}>
           <Typography variant="h2">
             {`Découvrez nos ${total} logements${isLocation ? '' : '  neufs disponibles'} :`}
           </Typography>
@@ -372,12 +362,6 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
               property={property}
               currOpen={currOpen}
               handleCurrOpen={handleCurrOpen}
-            />
-          </Grid>
-          <Grid className={classes.buttomBtnContainer}>
-            <Btn
-              text={isLocation ? 'Déposer mon dossier' : 'Être rappelé selon mes dispos'}
-              alignRight
             />
           </Grid>
         </Grid>

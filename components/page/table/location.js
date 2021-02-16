@@ -27,7 +27,7 @@ const styles = (theme) => ({
     '& > div:first-of-type': {
       display: 'none',
     },
-    '& > div:last-child > div': {
+    '& > div:last-child > div > div': {
       margin: 'auto',
       fontSize: '1rem',
       color: theme.palette.button,
@@ -143,32 +143,34 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     <span>{curr.available_date}</span>
                   </Grid>
                   <Grid item className="text-center">
-                    <Btn text="Formulaire" whiteColor />
+                    <Btn text="Reserver" whiteColor />
                   </Grid>
                 </Grid>
-                <Grid item md={2} xs={5} className="text-center">
-                  {`${curr.surface}m²`}
-                </Grid>
-                <Grid item md={2} xs={5} className="text-center">
-                  {curr.floor}
-                </Grid>
-                <Grid item md={2} xs={5} className="text-center">
-                  {curr.available_date}
-                </Grid>
-                <Grid item md={2} xs={5} className="text-center">
-                  {`${curr.price}€`}
-                </Grid>
-                <Grid item md={2} xs={5} className="text-center">
-                  {`${curr.guarantee}€`}
-                </Grid>
-                <Grid item md={2} xs={5}>
-                  <Btn
-                    href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
-                    target="_blank"
-                    dataMode="popup"
-                    text="Formulaire"
-                    whiteColor
-                  />
+                <Grid container alignItems="center">
+                  <Grid item md={2} xs={5} className="text-center">
+                    {`${curr.surface}m²`}
+                  </Grid>
+                  <Grid item md={2} xs={5} className="text-center">
+                    {curr.floor}
+                  </Grid>
+                  <Grid item md={2} xs={5} className="text-center">
+                    {curr.available_date}
+                  </Grid>
+                  <Grid item md={2} xs={5} className="text-center">
+                    {`${curr.price}€`}
+                  </Grid>
+                  <Grid item md={2} xs={5} className="text-center">
+                    {`${curr.guarantee}€`}
+                  </Grid>
+                  <Grid item md={2} xs={5}>
+                    <Btn
+                      href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
+                      target="_blank"
+                      dataMode="popup"
+                      text="Reserver"
+                      whiteColor
+                    />
+                  </Grid>
                 </Grid>
               </Grid>
             ))}
