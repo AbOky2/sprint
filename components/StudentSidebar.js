@@ -66,13 +66,15 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0px 4px 13px rgba(0, 0, 0, 0.1)',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    padding: '.5rem 3rem',
+    padding: '.5rem 1rem',
+    boxSizing: 'border-box',
     zIndex: 10,
     '& > div a': {
       display: 'inline-block',
       width: 'fit-content',
       marginBottom: 0,
       textAlign: 'center',
+      padding: '1rem .3rem',
     },
     '& > div .active-nav-link': {
       backgroundColor: 'initial',
@@ -127,7 +129,7 @@ const MenuItems = [
   { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
   { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
   { href: '/dashboard/sponsorship', iconType: 'sponsorship', txt: 'Parrainage' },
-  { href: '/dashboard/jackpot', iconType: 'jackpot', txt: 'La cagnotte' },
+  { href: '/dashboard/jackpot', iconType: 'jackpot', txt: 'Cagnotte' },
 ];
 export const MobileMenu = () => {
   const classes = useStyles();

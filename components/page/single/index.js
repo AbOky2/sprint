@@ -378,7 +378,10 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
             />
           </Grid>
           <Grid className={classes.buttomBtnContainer}>
-            <Btn text="Être rappelé selon mes dispos" alignRight />
+            <Btn
+              text={isLocation ? 'Déposer mon dossier' : 'Être rappelé selon mes dispos'}
+              alignRight
+            />
           </Grid>
         </Grid>
       </div>

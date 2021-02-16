@@ -141,7 +141,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     <span>{curr.available_date}</span>
                   </Grid>
                   <Grid item className="text-center">
-                    <Btn text="Voir le plan" whiteColor />
+                    <Btn text="Formulaire" whiteColor />
                   </Grid>
                 </Grid>
                 <Grid item md={2} xs={5} className="text-center">
@@ -164,7 +164,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
                     target="_blank"
                     dataMode="popup"
-                    text="Voir le plan"
+                    text="Formulaire"
                     whiteColor
                   />
                 </Grid>
