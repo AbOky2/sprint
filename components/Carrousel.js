@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     overflow: 'hidden',
     width: '100%',
+    [theme.breakpoints.down('sm')]: {
+      height: 200,
+    },
   },
 }));
 
@@ -90,7 +93,7 @@ function SwipeableTextMobileStepper({ list = [] }) {
         position="static"
         variant="text"
         activeStep={activeStep}
-        nextButton={(
+        nextButton={
           <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
             {theme.direction === 'rtl' ? (
               <Icon type="carrouselArrow" color="white" />
@@ -98,8 +101,8 @@ function SwipeableTextMobileStepper({ list = [] }) {
               <Icon type="carrouselArrow" color="white" />
             )}
           </Button>
-        )}
-        backButton={(
+        }
+        backButton={
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === 'rtl' ? (
               <Icon type="carrouselArrow" color="white" />
@@ -107,7 +110,7 @@ function SwipeableTextMobileStepper({ list = [] }) {
               <Icon type="carrouselArrow" color="white" />
             )}
           </Button>
-        )}
+        }
       />
     </div>
   );

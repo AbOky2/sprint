@@ -59,10 +59,11 @@ const useStyles = makeStyles((theme) => ({
         borderBottomRightRadius: 0,
         borderRight: 0,
         border: `solid 1px ${theme.palette.gray}`,
-        [theme.breakpoints.down('sm')]: {},
-        borderBottomLeftRadius: 0,
-        borderTopRightRadius: '.6rem',
-        borderRight: `1px solid ${theme.palette.gray}`,
+        [theme.breakpoints.down('sm')]: {
+          borderBottomLeftRadius: 0,
+          borderTopRightRadius: '.6rem',
+          borderRight: `1px solid ${theme.palette.gray}`,
+        },
       },
       '&:last-of-type': {
         zIndex: 3,
