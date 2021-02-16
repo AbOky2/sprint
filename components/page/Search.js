@@ -13,6 +13,7 @@ import { typeOfProperties } from '../../helpers/property';
 import { AdminContentWrapper } from '../wrapper';
 import Card from '../card';
 import { Icon, Input } from '../form';
+import { GoogleMaps } from '../form/Input';
 import { DropdownSelect } from '../form/Select';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
   searchContainer: {
     marginBottom: 22,
     boxShadow: '0px 4.15441px 16.6176px rgb(0 0 0 / 10%)',
+    '& > div:first-of-type > div:first-of-type, & > div:first-of-type > div:first-of-type > div, & > div:first-of-type > div:first-of-type > div , & > div:first-of-type > div:first-of-type > div>div:first-of-type': {
+      minHeight: 62,
+      borderRadius: 0,
+      borderRight: 0,
+    },
     '& > div:last-of-type svg': {
       position: 'absolute',
       right: 0,
@@ -98,8 +104,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   isLocation: {
-    '& > div:first-of-type input': {
-      borderRight: `1px solid ${theme.palette.gray}`,
+    '& > div:last-of-type input': {
+      borderLeft: `1px solid ${theme.palette.gray}`,
     },
   },
   listContainer: {
@@ -142,8 +148,8 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
   const classes = useStyles();
   const handleSearch = (name) => ({ target: { value } }) =>
     setQueryData({ ...queryData, [name]: value });
+  const handleMapSearch = (value) => setQueryData({ ...queryData, loc: value?.label });
   const handleSelect = (typeOfProperty) => setQueryData({ ...queryData, typeOfProperty });
-
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
     addBookmarkApiMethod({ id }).then(({ user }) => update(user));
@@ -215,7 +221,8 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
           }
         >
           <Grid item md={isLocation ? 6 : 4}>
-            <Input name="loc" onChange={handleSearch} placeholder="Localisation" />
+            {/* <Input name="loc" onChange={handleSearch} placeholder="Localisation" /> */}
+            <GoogleMaps name="loc" onChange={handleMapSearch} placeholder="Localisation" />
           </Grid>
           {!isLocation && (
             <Grid item md={4}>

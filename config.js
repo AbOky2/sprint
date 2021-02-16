@@ -13,6 +13,7 @@ const {
   COOKIE_DOMAIN,
   TWILIO_ACCOUNT_SID,
   TWILIO_TOKEN,
+  GOOGLE_GEOLOCATION,
 } = process.env;
 
 const PORT = process.env.PORT || 3000;
@@ -35,4 +36,5 @@ module.exports = {
   COOKIE_DOMAIN,
   TWILIO_ACCOUNT_SID,
   TWILIO_TOKEN,
+  GOOGLE_GEOLOCATION,
 };

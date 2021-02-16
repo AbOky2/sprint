@@ -15,13 +15,7 @@ const {
 } = require('../../helpers/property');
 const { PropertieModel } = require('../models');
 const logger = require('../logs');
-
-const options = {
-  provider: 'google',
-  apiKey: 'AIzaSyC59sI-cU0pmzMBVVtxBAcJeokj0S8ra3s', // for Mapquest, OpenCage, Google Premier
-};
-
-const geocoder = NodeGeocoder(options);
+const maps = require('./maps');
 
 const gepublicPropertiesFolder = path.resolve(__dirname, '../../public/properties');
 
@@ -139,7 +133,7 @@ const readMba = () => {
                       const data = pick(newResult, filteredProperties);
                       if ((!foundElement && newResult.lot_ref, newResult.address)) {
                         console.log(newResult.address);
-                        const geo = await geocoder.geocode({
+                        const geo = await maps.geocode({
                           address: newResult.address,
                           zipcode: newResult.postal,
                           country: 'france',

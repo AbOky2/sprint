@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const DBModel = require('./Model');
 const { typeOfAnnoncies, typeOfProperties } = require('../../helpers/property');
+const maps = require('../utils/maps');
 
 const { Schema } = mongoose;
 const modelName = 'Propertie';
@@ -85,15 +86,35 @@ class PropertieClass extends DBModel {
     limit = 6,
     offset: page = 1,
   }) {
-    console.log(loc);
+    let near = [];
+    if (loc) {
+      const geo = await maps.geocode({
+        address: loc,
+        country: 'france',
+      });
+      if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
+    }
     const query = {
       $and: [
         typeOfProperty.length > 0 ? { typeOfProperty: { $in: typeOfProperty } } : {},
         maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
+        near.length > 0
+          ? {
+              loc: {
+                $near: {
+                  $geometry: {
+                    type: 'Point',
+                    coordinates: near,
+                  },
+                  $maxDistance: 10000,
+                },
+              },
+            }
+          : {},
         { typeOfAnnonce },
       ],
     };
-    const list = await this.paginate(query, { limit, page });
+    const list = await this.paginate(query, { limit, page, forceCountFn: true });
     return { list };
   }
 }

@@ -3,6 +3,23 @@ import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+
+export const GoogleMaps = ({ onChange }) => {
+  return (
+    <div id="test">
+      <GooglePlacesAutocomplete
+        apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
+        selectProps={{
+          styles: {
+            height: '100%',
+          },
+          onChange,
+        }}
+      />
+    </div>
+  );
+};
 
 const styles = (theme) => ({
   container: {

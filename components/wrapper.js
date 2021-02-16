@@ -16,19 +16,21 @@ const styles = (theme) => ({
   },
   redirect: {
     display: 'inline-block',
-    marginBottom: '3.2rem',
-    textAlign: 'left',
-    color: '#8692a6',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    '&::before': {
-      content: "''",
-      border: '1px solid #8692a6',
-      borderWidth: '0 3px 3px 0',
-      display: 'inline-block',
-      padding: '3px',
-      marginRight: '1rem',
-      transform: 'rotate(135deg);-webkit-transform: rotate(135deg)',
+    '& h4': {
+      marginBottom: '3.2rem',
+      textAlign: 'left',
+      color: '#8692a6',
+      cursor: 'pointer',
+      fontWeight: 'bold',
+      '&::before': {
+        content: "''",
+        border: '1px solid #8692a6',
+        borderWidth: '0 3px 3px 0',
+        display: 'inline-block',
+        padding: '3px',
+        marginRight: '1rem',
+        transform: 'rotate(135deg);-webkit-transform: rotate(135deg)',
+      },
     },
   },
 });
@@ -39,15 +41,13 @@ const AdminContentWrapper = withStyles(styles)(
         ''
       ) : (
         <div
-          className="text-left"
+          className={classes.redirect}
           onClick={(e) => {
             if (href) router.push(href);
             else router.back();
           }}
         >
-          <Typography variant="h4" className={classes.redirect}>
-            Revenir en arrière
-          </Typography>
+          <Typography variant="h4">Revenir en arrière</Typography>
         </div>
       )}
       {children}
