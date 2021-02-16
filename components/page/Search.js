@@ -53,7 +53,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0px 4.15441px 16.6176px rgb(0 0 0 / 10%)',
     '& > div:first-of-type > div:first-of-type, & > div:first-of-type > div:first-of-type > div, & > div:first-of-type > div:first-of-type > div , & > div:first-of-type > div:first-of-type > div>div:first-of-type': {
       minHeight: 62,
-      borderRadius: 0,
+      borderRadius: '.6rem',
+      borderTopRightRadius: 0,
+      borderBottomRightRadius: 0,
       borderRight: 0,
     },
     '& > div:last-of-type svg': {

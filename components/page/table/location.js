@@ -1,6 +1,7 @@
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Icon, Btn } from '../../form';
+import Typeform from '../../typeform';
 
 const styles = (theme) => ({
   discoveryContentHeader: {
@@ -66,6 +67,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
     return (
       <div key={elem}>
         <Grid container>
+          {/* <Typeform /> */}
           <Grid container justify="space-between">
             <Grid item>
               <div>

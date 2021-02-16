@@ -37,7 +37,7 @@ const handle = app.getRequestHandler();
 
 app.prepare().then(async () => {
   const server = express();
-  readMba();
+  // readMba();
   server.use(helmet({ contentSecurityPolicy: false }));
   server.use(compression());
   server.use(express.json());
