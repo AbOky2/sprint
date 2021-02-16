@@ -25,7 +25,7 @@ const styles = (theme) => ({
     boxShadow: '0px 4px 20px rgb(24 55 50 / 4%)',
     borderRadius: '25px',
     textAlign: 'left',
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: '2.5rem ',
     },
   },

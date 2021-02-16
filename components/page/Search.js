@@ -55,6 +55,9 @@ const useStyles = makeStyles((theme) => ({
       '&:first-of-type': {
         minHeight: 62,
         borderRadius: '.6rem',
+        fontFamily: 'Open Sans',
+        fontSize: '1.6rem',
+        fontWeight: '600',
         borderTopRightRadius: 0,
         borderBottomRightRadius: 0,
         borderRight: 0,

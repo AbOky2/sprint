@@ -214,7 +214,6 @@ class MyDocument extends Document {
               .student-container.admin-container #sidebar {
                 position: fixed;
                 max-width: 215px;
-                height: calc(100vh - 202px);
               }
               .spacing {
                 padding: 0 24px;

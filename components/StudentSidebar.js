@@ -14,6 +14,7 @@ import UpdateProfile from './UpdateProfile';
 const useStyles = makeStyles((theme) => ({
   container: {
     height: 'calc(100vh - 60px)',
+    paddingLeft: '1rem',
   },
   logoContainer: {
     marginBottom: '40px',
@@ -92,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     '& span': {
       display: 'block',
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: 'auto',
     },
   },

@@ -5,18 +5,6 @@ import { Grid, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
-export const GoogleMaps = ({ onChange }) => (
-  <GooglePlacesAutocomplete
-    apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
-    selectProps={{
-      styles: {
-        height: '100%',
-      },
-      onChange,
-    }}
-  />
-);
-
 const styles = (theme) => ({
   container: {
     '& input': {
@@ -61,6 +49,19 @@ const styles = (theme) => ({
     },
   },
 });
+
+export const GoogleMaps = ({ onChange }) => (
+  <GooglePlacesAutocomplete
+    apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
+    selectProps={{
+      placeholder: 'Localisation',
+      onChange,
+    }}
+  />
+);
+GoogleMaps.propTypes = {
+  onChange: PropTypes.func.isRequired,
+};
 
 const positionType = ['left', 'right'];
 
