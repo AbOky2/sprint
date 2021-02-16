@@ -31,7 +31,7 @@ const styles = (theme) => ({
       height: '38px',
       borderRadius: '.6rem',
       border: 'solid 1px #c7cfd6',
-      fontFamily: 'Rubik',
+      fontFamily: 'Open Sans',
       fontSize: '1.6rem',
       fontWeight: '600',
       fontStretch: 'normal',

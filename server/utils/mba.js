@@ -34,28 +34,32 @@ const getPictures = (data) => {
 };
 // Using callback
 const numberTypes = ['price', 'floor', 'surface', 'pieces'];
-// const data = newResult;
-// data.advantage = advantages;
-// data.typeOfAnnonce = typeOfAnnonce;
-// const lotIndex = entries.findIndex((elem) => elem.lot_ref === data.residence_ref);
 
-// if (lotIndex >= 0) {
-//   entries[lotIndex].lots.push(data);
-//   if (!entries[lotIndex].price) entries[lotIndex].price = data.price;
-//   else if (entries[lotIndex].price > data.price) entries[lotIndex].price = data.price;
+const getExtraInfo = (annonce = {}, lotList = []) => {
+  const data = { ...annonce, lots: [] };
 
-//   if (!entries[lotIndex].minSurface) entries[lotIndex].minSurface = data.surface;
-//   else if (entries[lotIndex].minSurface > data.surface) entries[lotIndex].minSurface = data.surface;
+  data.lots = lotList
+    .filter((elem) => elem.residence_ref === data.lot_ref)
+    .map((elem) => {
+      if (!data.price) data.price = elem.price;
+      else if (data.price > elem.price) data.price = elem.price;
 
-//   if (!entries[lotIndex].maxSurface) entries[lotIndex].maxSurface = data.surface;
-//   else if (entries[lotIndex].maxSurface < data.surface) entries[lotIndex].maxSurface = data.surface;
+      if (!data.minSurface) data.minSurface = elem.surface;
+      else if (data.minSurface > elem.surface) data.minSurface = elem.surface;
 
-//   if (!entries[lotIndex].minPieces) entries[lotIndex].minPieces = data.pieces;
-//   else if (entries[lotIndex].minPieces > data.pieces) entries[lotIndex].minPieces = data.pieces;
+      if (!data.maxSurface) data.maxSurface = elem.surface;
+      else if (data.maxSurface < elem.surface) data.maxSurface = elem.surface;
 
-//   if (!entries[lotIndex].maxPieces) entries[lotIndex].maxPieces = data.pieces;
-//   else if (entries[lotIndex].maxPieces < data.pieces) entries[lotIndex].maxPieces = data.pieces;
-// }
+      if (!data.minPieces) data.minPieces = elem.pieces;
+      else if (data.minPieces > elem.pieces) data.minPieces = elem.pieces;
+
+      if (!data.maxPieces) data.maxPieces = elem.pieces;
+      else if (data.maxPieces < elem.pieces) data.maxPieces = elem.pieces;
+      return elem;
+    });
+  // console.log(data);
+  return data;
+};
 const readMba = () => {
   const lotsDatas = [];
   const datas = [];
@@ -130,31 +134,33 @@ const readMba = () => {
                       const pictures = getPictures(newResult);
 
                       const foundElement = await PropertieModel.findByRef(newResult.lot_ref);
-                      const data = pick(newResult, filteredProperties);
-                      if ((!foundElement && newResult.lot_ref, newResult.address)) {
-                        console.log(newResult.address);
-                        const geo = await maps.geocode({
-                          address: newResult.address,
-                          zipcode: newResult.postal,
-                          country: 'france',
-                        });
-                        data.advantage = advantages;
-                        data.typeOfAnnonce = typeOfAnnonce;
-                        data.lots = [];
-                        data.pictures = pictures;
-                        if (geo && geo[0]) {
-                          data.fullAddress = geo[0].formattedAddress;
-                          data.loc = {
-                            type: 'Point',
-                            coordinates: [geo[0].longitude, geo[0].latitude],
-                          };
-                        }
-                        const { elem } = await PropertieModel.add(data);
-                        console.log(elem);
-                      } else console.log('found', data.lot_ref);
+                      const data = getExtraInfo(pick(newResult, filteredProperties), lotList);
+                      data.advantage = advantages;
+                      data.typeOfAnnonce = typeOfAnnonce;
+                      data.pictures = pictures;
+                      // console.log(extra.minPieces, extra.maxPieces, extra.lots.length);
+                      if (!foundElement && newResult.lot_ref && newResult.address) {
+                        // const geo = await maps.geocode({
+                        //   address: newResult.address,
+                        //   zipcode: newResult.postal,
+                        //   country: 'france',
+                        // });
+                        // if (geo && geo[0]) {
+                        //   data.fullAddress = geo[0].formattedAddress;
+                        //   data.loc = {
+                        //     type: 'Point',
+                        //     coordinates: [geo[0].longitude, geo[0].latitude],
+                        //   };
+                        //   await PropertieModel.add(data);
+                        // }
+                      } else {
+                        if (foundElement && foundElement._id)
+                          await PropertieModel.updateById(foundElement._id, data);
+                        console.log('found', foundElement?._id);
+                      }
                       console.log('finish');
                     },
-                    900,
+                    10000,
                     obj,
                   );
                 });

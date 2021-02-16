@@ -367,7 +367,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
 
         <Grid container className={classes.discoveryContainer}>
           <Typography variant="h2">
-            {`Découvrez nos ${total} logements neufs disponibles :`}
+            {`Découvrez nos ${total} logements${isLocation ? '' : '  neufs disponibles'} :`}
           </Typography>
           <Grid container>
             <LocationTable

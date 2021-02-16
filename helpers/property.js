@@ -212,8 +212,6 @@ const availableProperties = {
   stations: 'Stations',
   property_sub_type: 'Sous type de bien',
   file: 'fichier',
-  lat: 'latitude',
-  lng: 'longitude',
 };
 
 const filteredProperties = Object.keys(availableProperties);
