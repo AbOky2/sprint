@@ -25,13 +25,11 @@ router.use((req, res, next) => {
 });
 router.get(
   '/users/:role?',
-  requestMiddleware(joiSchema.user.admin.user.listByRole, 'params'),
-  handleErrors(async (req, res) => {
-    const role = req.params.role ? { role: req.params.role } : { role: { $ne: Admin } };
-    const { list } = await UserModel.list(role);
+  listCollection(async ({ offset, limit }) => {
+    const { list = [] } = await UserModel.listStudents({ offset, limit });
 
-    res.json({ list });
-  }),
+    return { list };
+  }, joiSchema.user.admin.user.listByRole),
 );
 sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
   router.get(

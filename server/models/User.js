@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const { isMajor, pick, toggleArrayOfObj } = require('../../helpers/convertAndCheck');
 const {
   RoleList,
   StatusList,
-  Student,
+  Admin,
   Inactive,
   generateSlug,
   Roomer,
   ucFirst,
   isValidateEmail,
 } = require('../../helpers/user');
+const { defaultLimit, defaultOffset } = require('../../helpers/query');
 const DBModel = require('./Model');
 const PropertyModel = require('./Propertie');
 const msg = require('../utils/message');
@@ -20,6 +22,7 @@ const { ROOT_URL } = require('../../config');
 const logger = require('../logs');
 
 const { Schema } = mongoose;
+const modelName = 'User';
 
 const mongoSchema = new Schema({
   picture: {
@@ -152,10 +155,11 @@ class UserClass extends DBModel {
     return this.getId({ slug });
   }
 
-  static async listStudents(options) {
-    const { users: students } = await this.list({ role: Student }, options);
+  static async listStudents({ limit = defaultLimit, offset: page = defaultOffset } = {}) {
+    const query = { role: { $ne: Admin } };
+    const list = await this.paginate(query, { limit, page, forceCountFn: true });
 
-    return { students };
+    return { list };
   }
 
   static async add(options) {
@@ -288,8 +292,9 @@ class UserClass extends DBModel {
   }
 }
 
+UserClass.name = modelName;
 mongoSchema.loadClass(UserClass);
-
-const User = mongoose.model('User', mongoSchema);
+mongoSchema.plugin(mongoosePaginate);
+const User = mongoose.model(modelName, mongoSchema);
 
 module.exports = User;

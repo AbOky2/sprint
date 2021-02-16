@@ -21,7 +21,8 @@ const schemas = {
   admin: {
     user: {
       listByRole: Joi.object().keys({
-        role: Joi.string().valid(...studentRoleList),
+        offset: Joi.number().min(0).optional(),
+        limit: Joi.number().min(0).optional(),
       }),
     },
   },

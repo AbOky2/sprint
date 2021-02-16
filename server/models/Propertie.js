@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const DBModel = require('./Model');
 const { typeOfAnnoncies, typeOfProperties } = require('../../helpers/property');
+const { defaultLimit, defaultOffset } = require('../../helpers/query');
 const maps = require('../utils/maps');
 
 const { Schema } = mongoose;
@@ -83,8 +84,8 @@ class PropertieClass extends DBModel {
     typeOfAnnonce,
     typeOfProperty = [],
     loc,
-    limit = 6,
-    offset: page = 1,
+    limit = defaultLimit,
+    offset: page = defaultOffset,
   }) {
     let near = [];
     if (loc) {

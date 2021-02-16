@@ -31,7 +31,7 @@ const Dashboard = () => {
     })();
   }, []);
 
-  const { users } = state;
+  const { users = [] } = state;
   const headerList = [
     { name: 'Nom', size: { xs: 3 } },
     { name: 'Mail', size: { xs: 3 } },
@@ -87,7 +87,7 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Grid>
-      <UserList headerList={headerList} contentList={users} />
+      <UserList headerList={headerList} contentList={users.docs} />
     </AdminContentWrapper>
   );
 };
