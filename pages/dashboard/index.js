@@ -36,7 +36,7 @@ const styles = (theme) => ({
     '& > div:last-of-type': {
       paddingLeft: '1.5rem',
     },
-    '& > div:first-of-type > div': {
+    '& > div:first-of-type > div > a': {
       height: '100%',
       background: 'linear-gradient(99.78deg, #CC95DF -24.64%, #4F80FF 62.6%)',
       boxShadow: '0px 6px 15px rgba(79, 128, 255, 0.3), inset 0px -3px 10px rgba(12, 37, 100, 0.3)',
@@ -52,7 +52,8 @@ const styles = (theme) => ({
       width: 'auto!important',
       height: 'auto!important',
     },
-    '& > div > div': {
+    '& > div > div > a': {
+      display: 'block',
       position: 'relative',
       padding: 32,
       ...theme.ui.bordered,
