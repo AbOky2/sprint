@@ -72,16 +72,12 @@ router.get(
 
 router.get(
   '/properties',
-  listCollection(async ({ maxPrice, typeOfAnnonce, typeOfProperty, location, offset, limit }) => {
-    const [{ latitude, longitude }] = [{}];
-    // const [{ latitude, longitude }] = await geocoder.geocode(location);
-    const coordinates = [latitude, longitude];
-
+  listCollection(async ({ maxPrice, typeOfAnnonce, typeOfProperty, loc, offset, limit }) => {
     const { list } = await PropertieModel.search({
       maxPrice,
       typeOfAnnonce,
       typeOfProperty: typeOfProperty && typeOfProperty.length > 0 ? typeOfProperty.split(',') : [],
-      coordinates,
+      loc,
       offset,
       limit,
     });

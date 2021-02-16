@@ -13,7 +13,7 @@ SearchPage.getInitialProps = async ({ req }) => {
   const typeOfAnnonce = 'Location';
   const { list } = await getPropertiesApiMethod(
     {
-      location: '',
+      loc: '',
       typeOfAnnonce,
     },
     { headers },

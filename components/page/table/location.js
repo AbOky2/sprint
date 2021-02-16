@@ -161,8 +161,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 </Grid>
                 <Grid item md={2} xs={5}>
                   <Btn
-                    className="typeform-share button"
-                    href="https://form.typeform.com/to/HxbVGDrG?typeform-medium=embed-snippet"
+                    href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
                     target="_blank"
                     dataMode="popup"
                     text="Voir le plan"

@@ -15,6 +15,7 @@ const mongoSchema = new Schema({
   isNewProperty: { type: Boolean, default: false },
   country: { type: String },
   address: { type: String },
+  fullAddress: { type: String },
   district: { type: String },
   heading: { type: String },
   description: { type: String },
@@ -56,6 +57,10 @@ const mongoSchema = new Schema({
   stations: { type: String },
   property_sub_type: { type: String },
   file: { type: String },
+  loc: {
+    type: { type: String },
+    coordinates: [],
+  },
 });
 
 class PropertieClass extends DBModel {
@@ -66,14 +71,21 @@ class PropertieClass extends DBModel {
     return { list };
   }
 
+  static async findByRef(lot_ref) {
+    const element = await this.findOne({ lot_ref });
+
+    return element;
+  }
+
   static async search({
     maxPrice,
     typeOfAnnonce,
     typeOfProperty = [],
-    coordinates,
+    loc,
     limit = 6,
     offset: page = 1,
   }) {
+    console.log(loc);
     const query = {
       $and: [
         typeOfProperty.length > 0 ? { typeOfProperty: { $in: typeOfProperty } } : {},
@@ -87,6 +99,7 @@ class PropertieClass extends DBModel {
 }
 
 PropertieClass.name = modelName;
+mongoSchema.index({ loc: '2dsphere' });
 mongoSchema.loadClass(PropertieClass);
 mongoSchema.plugin(mongoosePaginate);
 const Propertie = mongoose.model(modelName, mongoSchema);

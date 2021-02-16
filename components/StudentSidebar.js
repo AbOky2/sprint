@@ -127,6 +127,7 @@ const MenuItems = [
   { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
   { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
   { href: '/dashboard/sponsorship', iconType: 'sponsorship', txt: 'Parrainage' },
+  { href: '/dashboard/jackpot', iconType: 'jackpot', txt: 'La cagnotte' },
 ];
 export const MobileMenu = () => {
   const classes = useStyles();

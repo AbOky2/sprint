@@ -133,7 +133,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
   });
   const [state, setState] = useState(properties.docs);
   const [queryData, setQueryData] = useState({
-    location: '',
+    loc: '',
     maxPrice: -1,
     typeOfAnnonce,
     typeOfProperty: [],
@@ -215,7 +215,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
           }
         >
           <Grid item md={isLocation ? 6 : 4}>
-            <Input name="location" onChange={handleSearch} placeholder="Localisation" />
+            <Input name="loc" onChange={handleSearch} placeholder="Localisation" />
           </Grid>
           {!isLocation && (
             <Grid item md={4}>

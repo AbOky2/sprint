@@ -1,10 +1,10 @@
 /* eslint-disable react/no-danger */
 import React, { useState, useEffect } from 'react';
-// import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import Maps from '../../Maps';
 import { userActions } from '../../../redux/_actions';
 import { AdminContentWrapper } from '../../wrapper';
 import { Icon, Btn } from '../../form';
@@ -177,6 +177,9 @@ const useStyles = makeStyles((theme) => ({
   },
   mapContainer: {
     marginTop: 24,
+    '& > div': {
+      minHeight: 400,
+    },
     '& img': {
       display: 'block',
       width: '100%',
@@ -224,7 +227,6 @@ const useStyles = makeStyles((theme) => ({
     margin: '5rem auto',
   },
 }));
-
 const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) => {
   const [state, setState] = useState({});
   const [total, Total] = useState({});
@@ -349,9 +351,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
               </Grid>
             </div>
             <div className={classes.mapContainer}>
-              {/* <GoogleMapReact bootstrapURLKeys={{ key: '' }} defaultCenter={property.address}>
-                <LocationPin lat={location.lat} lng={location.lng} text={location.address} />
-              </GoogleMapReact> */}
+              <Maps loc={property.loc?.coordinates} />
             </div>
           </Grid>
           <Grid item md={4} className={classes.extraInfo}>

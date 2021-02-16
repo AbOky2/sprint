@@ -38,7 +38,7 @@ const schemas = {
     search: Joi.object().keys({
       offset: Joi.number().min(0).optional(),
       limit: Joi.number().min(0).optional(),
-      location: Joi.string().optional().allow(''),
+      loc: Joi.string().optional().allow(''),
       typeOfAnnonce: Joi.string().valid(...typeOfAnnoncies),
       typeOfProperty: Joi.any(),
       maxPrice: Joi.number().min(-1).optional(),
