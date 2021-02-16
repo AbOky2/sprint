@@ -266,29 +266,31 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
         </Grid>
         <Grid container>
           {state?.length ? (
-            state.map(({ _id, heading, pictures, address, typeOfAnnonce, dimensions, price }) => (
-              <Grid item key={_id} className={classes.listContainer}>
-                <Link
-                  href={`/dashboard/property/${
-                    typeOfAnnonce === 'Vente' ? 'buy' : 'location'
-                  }/${_id}`}
-                >
-                  <a>
-                    <Card
-                      _id={_id}
-                      title={heading}
-                      src={pictures?.[0]}
-                      address={address}
-                      description={typeOfAnnonce}
-                      dimensions={dimensions}
-                      price={price}
-                      liked={liked?.includes(_id)}
-                      onClick={handleBookmark}
-                    />
-                  </a>
-                </Link>
-              </Grid>
-            ))
+            state.map(
+              ({ _id, heading, pictures, fullAddress, typeOfAnnonce, dimensions, price }) => (
+                <Grid item key={_id} className={classes.listContainer}>
+                  <Link
+                    href={`/dashboard/property/${
+                      typeOfAnnonce === 'Vente' ? 'buy' : 'location'
+                    }/${_id}`}
+                  >
+                    <a>
+                      <Card
+                        _id={_id}
+                        title={heading}
+                        src={pictures?.[0]}
+                        address={fullAddress}
+                        description={typeOfAnnonce}
+                        dimensions={dimensions}
+                        price={price}
+                        liked={liked?.includes(_id)}
+                        onClick={handleBookmark}
+                      />
+                    </a>
+                  </Link>
+                </Grid>
+              ),
+            )
           ) : (
             <div className={classes.notFound}>
               <Typography variant="body1">

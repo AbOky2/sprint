@@ -285,10 +285,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
         <Grid container justify="space-between" className={classes.description}>
           <Grid item md={6}>
             <Typography variant="h1">{property.heading}</Typography>
-            <Typography variant="subtitle1">
-              {property.address}
-              {` - ${property.postal} ${property.city}`}
-            </Typography>
+            <Typography variant="subtitle1">{property.fullAddress}</Typography>
             {!isLocation && <Typography variant="h2">Programme immobilier neuf</Typography>}
             <div className={classes.houseInfo}>
               <Grid container>

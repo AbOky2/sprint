@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
@@ -109,7 +109,7 @@ const BookmarkPage = ({ user, update }) => {
                 _id,
                 heading,
                 pictures,
-                address,
+                fullAddress,
                 typeOfAnnonce,
                 typeOfAnnoncies,
                 dimensions,
@@ -126,7 +126,7 @@ const BookmarkPage = ({ user, update }) => {
                         _id={_id}
                         title={heading}
                         src={pictures?.[0]}
-                        address={address}
+                        address={fullAddress}
                         description={typeOfAnnoncies}
                         dimensions={dimensions}
                         price={price}
