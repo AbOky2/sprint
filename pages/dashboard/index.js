@@ -112,24 +112,16 @@ const styles = (theme) => ({
     margin: '.5rem 0 2rem',
   },
   partnerListContainer: {
-    width: 'calc(33% - 11px)',
-    background: '#ffffff',
-    boxShadow: '0px 0px 2px rgb(0 0 0 / 25%)',
-    ...theme.ui.bordered,
-    padding: '2rem',
-    marginBottom: '2rem',
-    '&:nth-child(3n+2)': {
-      margin: '0 2.1rem 2rem',
+    width: '33.33%',
+    '& > a': {
+      display: 'block',
+      background: '#ffffff',
+      boxShadow: '0px 0px 2px rgb(0 0 0 / 25%)',
+      ...theme.ui.bordered,
+      padding: '2rem',
+      marginBottom: '2rem',
     },
-    [theme.breakpoints.down('sm')]: {
-      '&:nth-child(3n+2)': {
-        margin: '0 0 2rem',
-      },
-      width: '100%',
-      '&:last-of-type': {
-        marginBottom: 0,
-      },
-    },
+    ...theme.ui.listContainer,
   },
   whiteColor: {
     color: 'white',
@@ -165,6 +157,8 @@ const styles = (theme) => ({
       margin: 0,
       ...theme.typography.body1,
       color: '#5379EF',
+      height: '6.5rem',
+      overflow: 'hidden',
     },
     '& p': {
       margin: 0,

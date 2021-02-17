@@ -75,22 +75,7 @@ const useStyles = makeStyles((theme) => ({
       color: '#ffffff',
     },
   },
-  listContainer: {
-    width: 'calc(33% - 11px)',
-    marginBottom: '2rem',
-    '&:nth-child(3n+2)': {
-      margin: '0 2.1rem 2rem',
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-      '&:nth-child(3n+2)': {
-        margin: '0 0 2rem',
-      },
-      '&:last-child': {
-        marginBottom: 0,
-      },
-    },
-  },
+  listContainer: theme.ui.listContainer,
 }));
 const BookmarkPage = ({ user, update }) => {
   const [state, setState] = useState(user?.bookmarks);
