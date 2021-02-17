@@ -236,7 +236,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
             <GoogleMaps name="loc" onChange={handleMapSearch} placeholder="Localisation" />
           </Grid>
           {!isLocation ||
-            (true && (
+            (false && (
               <Grid item md={4}>
                 <DropdownSelect
                   name="typeOfAnnonce"
