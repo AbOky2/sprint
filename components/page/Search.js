@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { getPropertiesApiMethod, addBookmarkApiMethod } from '../../lib/api/customer';
 import { toggleArray } from '../../helpers/convertAndCheck';
 import { typeOfProperties } from '../../helpers/property';
@@ -188,6 +188,8 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
   };
   const handleSumit = () => requestData();
   const handlePage = (e, offset) => requestData(offset);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const isLocation = typeOfAnnonce === 'Location';
 
   return (
@@ -305,7 +307,12 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
       </div>
       {page.totalPages > 0 && (
         <Grid container justify="center" className={classes.pagination}>
-          <Pagination count={page.totalPages} page={page.offset} onChange={handlePage} />
+          <Pagination
+            count={page.totalPages}
+            page={page.offset}
+            siblingCount={matches ? 0 : 1}
+            onChange={handlePage}
+          />
         </Grid>
       )}
     </AdminContentWrapper>
