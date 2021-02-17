@@ -26,8 +26,8 @@ const styles = (theme) => ({
     '& > div:first-of-type': {
       display: 'none',
     },
-    '& > div:last-child > div': {
-      padding: '.8rem',
+    '& > div:last-child > div > div': {
+      margin: 'auto',
       fontSize: '1rem',
       color: theme.palette.button,
       border: `1px solid ${theme.palette.button}`,
@@ -35,16 +35,17 @@ const styles = (theme) => ({
     [theme.breakpoints.down('sm')]: {
       '& > div': {
         display: 'none',
+        '& > div': {
+          padding: '0 2rem',
+        },
       },
       '& > div:first-of-type': {
         display: 'flex',
         paddingTop: '2.5rem',
         borderTop: '1px solid rgba(26, 46, 108, 0.5)',
-        '& > div:first-of-type': {
-          padding: '0 2rem',
-        },
         '& > div:last-of-type': {
           marginTop: '1.6rem',
+          padding: 0,
           width: '100%',
           '& > div': {
             width: '100%',
@@ -57,74 +58,46 @@ const styles = (theme) => ({
   },
 });
 
-const orientationObj = {
-  south_orientation: 'Sud',
-  east_orientation: 'Est',
-  west_orientation: 'Ouest',
-  north_orientation: 'Nord',
-};
-const extraObj = {
-  terrace: 'Terrace',
-  balcony: 'Balcon',
-  intercom: 'Intercom',
-  guardian: 'guardien',
-};
-
-const getExactData = (elem, obj) => {
-  const keys = Object.keys(obj);
-  for (let i = 0; i < keys.length; i += 1) if (elem[keys[i]] === 'OUI') return obj[keys[i]];
-};
-const getOrientation = (elem) => getExactData(elem, orientationObj);
-const getExtra = (elem) => getExactData(elem, extraObj);
-
-const LocationTable = ({ classes, state, property, currOpen, handleCurrOpen }) =>
+const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
   Object.keys(state).map((elem) => {
-    const curr = state[elem];
+    const current = state[elem];
     const isOpen = currOpen === elem;
+
     return (
       <div key={elem}>
         <Grid container>
+          {/* <Typeform /> */}
           <Grid container justify="space-between">
             <Grid item>
               <div>
                 {` ${elem} pièce${elem > 1 ? 's' : ''} à partir de `}
 
-                <strong> 
-{' '}
-{` ${curr.minPrice}€`}
-{' '}
- </strong>
+                <strong>{` ${current.minPrice}€`}</strong>
               </div>
             </Grid>
-            <Grid
-              item
-              alignItems="center"
-              onClick={() => handleCurrOpen(elem)}
-              className="text-center pointer"
-            >
+            <Grid item onClick={() => handleCurrOpen(elem)} className="text-center pointer">
               <Icon type={isOpen ? 'less' : 'plus'} color="lightBlue" size="small" />
             </Grid>
           </Grid>
-          <Grid item md={2} xs={5} alignItems="center">
+          <Grid item md={2} xs={5}>
             <Icon type="door" color="lightBlue" />
             {` ${elem} pièce${elem > 1 ? 's' : ''}`}
           </Grid>
-          <Grid item md={3} xs={5} alignItems="center">
+          <Grid item md={3} xs={5}>
             <Icon type="room" color="lightBlue" />
-            {` de ${curr.minSurface}m² à ${curr.maxSurface}m²`}
+            {` de ${current.minSurface}m² à ${current.maxSurface}m²`}
           </Grid>
-          <Grid item md={3} xs={5} alignItems="center">
+          <Grid item md={3} xs={5}>
             <span>à partir de</span>
-            <strong>{` ${curr.minPrice}€`}</strong>
+            <strong>{` ${current.minPrice}€`}</strong>
           </Grid>
-          <Grid item md={3} xs={5} alignItems="center">
-            {`${property.price} logements disponibles`}
+          <Grid item md={3} xs={5}>
+            {`${current.list.length} logements disponibles`}
           </Grid>
           <Grid
             item
             md={1}
             xs={5}
-            alignItems="center"
             onClick={() => handleCurrOpen(elem)}
             className="text-center pointer"
           >
@@ -134,70 +107,62 @@ const LocationTable = ({ classes, state, property, currOpen, handleCurrOpen }) =
         {isOpen && (
           <div>
             <Grid container className={classes.discoveryContentHeader}>
-              <Grid item md={2} xs={5} className="text-center" alignItems="center">
+              <Grid item md={3} xs={5} className="text-center">
                 Superficie
               </Grid>
-              <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                Étage
-              </Grid>
-              <Grid item md={1} xs={5} className="text-center" alignItems="center">
+              <Grid item md={3} xs={5} className="text-center">
                 disponibilité
               </Grid>
-              <Grid item md={2} xs={5} className="text-center" alignItems="center">
+              <Grid item md={3} xs={5} className="text-center">
                 Loyer/mois
               </Grid>
-              <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                Orientation
-              </Grid>
-              <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                Les +
-              </Grid>
-              <Grid item md={1} xs={5} className="text-center" alignItems="center">
+              <Grid item md={3} xs={5} className="text-center">
                 Plan 2D
               </Grid>
             </Grid>
-            {curr.list.map((elem) => (
-              <Grid key={elem._id} container className={classes.discoveryContent}>
+            {current.list.map((curr) => (
+              <Grid key={curr.lot_ref} container className={classes.discoveryContent}>
                 <Grid container>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <div>{elem.typeOfProperty}</div>
-                      <div>
-                        {elem.surface}
-                        m²
-                      </div>
-                    </Grid>
-                    <Grid item xs={6} className="text-center">
-                      <div>Prix TVA 20%</div>
-                      <div>{elem.typeOfProperty}</div>
-                    </Grid>
+                  <Grid container justify="space-between">
+                    <span>Loyer/mois</span>
+                    <span>{`${curr.price}€`}</span>
                   </Grid>
-                  <Grid item className="text-center" alignItems="center">
-                    <Btn text="Voir le plan" whiteColor />
+                  <Grid container justify="space-between">
+                    <span>Superficie</span>
+                    <span>{`${curr.surface}m²`}</span>
                   </Grid>
+                  <Grid container justify="space-between">
+                    <span>disponibilité</span>
+                    <span>{curr.available_date}</span>
+                  </Grid>
+                  {curr.file && (
+                    <Grid item className="text-center">
+                      <Btn text="Télécharger" whiteColor href={curr.file} download />
+                    </Grid>
+                  )}
                 </Grid>
-                <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                  {elem.surface}
-                  m²
-                </Grid>
-                <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                  {elem.floor}
-                </Grid>
-                <Grid item md={1} xs={5} className="text-center" alignItems="center">
-                  {elem.surface}
-                  m²
-                </Grid>
-                <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                  {elem.price}€
-                </Grid>
-                <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                  {getOrientation(elem)}
-                </Grid>
-                <Grid item md={2} xs={5} className="text-center" alignItems="center">
-                  {getExtra(elem)}
-                </Grid>
-                <Grid item md={1} xs={5} className="text-center" alignItems="center">
-                  <Btn text="Voir le plan" whiteColor />
+                <Grid container alignItems="center">
+                  <Grid item md={3} xs={5} className="text-center">
+                    {`${curr.surface}m²`}
+                  </Grid>
+                  <Grid item md={3} xs={5} className="text-center">
+                    {curr.available_date}
+                  </Grid>
+                  <Grid item md={3} xs={5} className="text-center">
+                    {`${curr.price}€`}
+                  </Grid>
+                  <Grid item md={3} xs={5}>
+                    {curr.file && (
+                      <Btn
+                        href={curr.file}
+                        download
+                        target="_blank"
+                        dataMode="popup"
+                        text="Télécharger"
+                        whiteColor
+                      />
+                    )}
+                  </Grid>
                 </Grid>
               </Grid>
             ))}

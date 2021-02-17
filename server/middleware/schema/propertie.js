@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { typeOfAnnoncies, typeOfProperties } = require('../../../helpers/property');
+const { typeOfAnnoncies } = require('../../../helpers/property');
 
 const swithContent = Joi.object({
   _id: Joi.string().required(),

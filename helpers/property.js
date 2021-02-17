@@ -129,7 +129,6 @@ programsHeader[155] = 'lot_ref';
 const lotsHeader = new Array(75);
 lotsHeader[2] = 'residence_ref';
 lotsHeader[7] = 'floor';
-
 lotsHeader[11] = `${comodityDivider}Exclusivité`;
 lotsHeader[12] = 'available_date';
 lotsHeader[14] = 'price';
@@ -211,6 +210,7 @@ const availableProperties = {
   transport_lines: 'lignes',
   stations: 'Stations',
   property_sub_type: 'Sous type de bien',
+  piecesType: 'Type de piece',
   file: 'fichier',
 };
 
@@ -231,13 +231,66 @@ const typeOfProperties = [
   'parking/box',
   'terrain',
 ];
+
+const buyDatas = {
+  encoding: 'binary',
+  typeOfAnnonce: typeOfAnnoncies[0],
+  fileName: 'Programmes',
+  header: programsHeader,
+  lots: {
+    fileName: 'lots',
+    header: lotsHeader,
+    encoding: 'utf-8',
+  },
+};
+const rentDatas = {
+  encoding: 'utf-8',
+  typeOfAnnonce: typeOfAnnoncies[1],
+  fileName: 'residences',
+  header: residenceHeader,
+  lots: {
+    fileName: 'lots_residences',
+    header: lotsResidencesHeader,
+    encoding: 'utf-8',
+    piecesMatch: {
+      3: { name: 'Studio', nb: 1 },
+      4: { name: 'Type1', nb: 2 },
+      5: { name: 'Type1bis', nb: 2 },
+      6: { name: 'Type2', nb: 3 },
+      21: { name: 'Type2bis', nb: 3 },
+      22: { name: 'Type3', nb: 4 },
+      23: { name: 'Type4', nb: 5 },
+      25: { name: 'Studiome', nb: 1 },
+    },
+    floorMatch: {
+      2: 11,
+      3: 4,
+      4: -3,
+      5: 10,
+      6: 8,
+      7: 13,
+      8: 12,
+      10: -1,
+      11: 0,
+      12: 14,
+      13: -2,
+      14: 2,
+      15: 9,
+      16: 5,
+      19: 7,
+      20: 1,
+      21: 6,
+      22: 3,
+    },
+  },
+};
+
 module.exports = {
-  residenceHeader,
-  lotsResidencesHeader,
-  programsHeader,
-  lotsHeader,
-  filteredProperties,
+  buyDatas,
+  rentDatas,
+
   typeOfAnnoncies,
   typeOfProperties,
+  filteredProperties,
   comodityDivider,
 };

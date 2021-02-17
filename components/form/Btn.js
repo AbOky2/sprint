@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor }) => {
+const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor, download }) => {
   const classes = useStyles();
   const className = !whiteColor ? classes.container : clsx(classes.container, classes.whiteColor);
 
@@ -52,7 +52,9 @@ const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor 
       {iconType ? <Icon type={iconType} color={iconColor} /> : ''}
       {href ? (
         <Link href={href}>
-          <a>{text}</a>
+          <a download={download} target={download ? '_blank' : ''}>
+            {text}
+          </a>
         </Link>
       ) : (
         <span>{text}</span>
@@ -69,6 +71,7 @@ Btn.propTypes = {
   iconType: PropTypes.oneOf(iconTypes),
   alignRight: PropTypes.bool,
   whiteColor: PropTypes.bool,
+  download: PropTypes.bool,
 };
 Btn.defaultProps = {
   href: '',
@@ -77,6 +80,7 @@ Btn.defaultProps = {
   iconType: undefined,
   alignRight: false,
   whiteColor: false,
+  download: false,
 };
 
 export default Btn;

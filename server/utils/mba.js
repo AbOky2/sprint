@@ -5,11 +5,8 @@ const path = require('path');
 const NodeGeocoder = require('node-geocoder');
 const { pick } = require('../../helpers/convertAndCheck');
 const {
-  programsHeader,
-  lotsHeader,
-  typeOfAnnoncies,
-  residenceHeader,
-  lotsResidencesHeader,
+  buyDatas,
+  rentDatas,
   filteredProperties,
   comodityDivider,
 } = require('../../helpers/property');
@@ -85,16 +82,22 @@ const readMba = () => {
               const index = i - 1;
               const res = result[index]?.trim();
 
-              if (numberTypes.includes(key)) {
-                newLot[key] = parseInt(res, 10);
-              } else if (key.includes(comodityDivider) && res === 'True') {
+              if (numberTypes.includes(key)) newLot[key] = parseInt(res, 10);
+              else if (key.includes(comodityDivider) && (res === 'True' || res === 'OUI'))
                 advantages.push(key.split(comodityDivider)[1]);
-              } else if (key === 'isNewProperty') newLot[key] = res === 'Neuf';
+              else if (key === 'isNewProperty') newLot[key] = res === 'Neuf';
               else {
                 newLot[key] = res;
               }
+              if (key === 'pieces' && lots.piecesMatch && lots.piecesMatch[res]) {
+                newLot.pieces = lots.piecesMatch[res].nb;
+                newLot.piecesType = lots.piecesMatch[res].name;
+              } else if (key === 'floor' && lots.floorMatch) newLot[key] = lots.floorMatch[res];
+              if (key === 'file' && res && fs.existsSync(`${gepublicPropertiesFolder}/${res}`))
+                newLot.file = `/properties/${res}`;
+              else newLot.file = null;
             });
-            lotList.push(newLot);
+            if (newLot.surface > 1) lotList.push(newLot);
           });
 
           const lotRefs = [];
@@ -102,7 +105,6 @@ const readMba = () => {
             .pipe(csv())
             .on('data', (data) => datas.push(data))
             .on('end', async () => {
-              const entries = [];
               try {
                 datas.forEach((obj, i) => {
                   setTimeout(
@@ -116,21 +118,32 @@ const readMba = () => {
                       header.forEach((key, i) => {
                         const index = i - 1;
                         const res = result[index]?.trim();
-                        // console.log(key, res);
                         if (key === 'lot_ref') {
                           if (!res || res.length < 1 || lotRefs.includes(res)) return;
                           lotRefs.push(res);
                         }
                         if (numberTypes.includes(key)) {
                           newResult[key] = parseInt(res, 10);
-                        } else if (key.includes(comodityDivider) && res === 'True') {
+                        } else if (
+                          key.includes(comodityDivider) &&
+                          (res === 'True' || res === 'OUI')
+                        )
                           advantages.push(key.split(comodityDivider)[1]);
-                        } else if (key === 'isNewProperty') newResult[key] = res === 'Neuf';
+                        else if (key === 'address')
+                          newResult[key] = res.trim().replace(/\b0+/g, '');
+                        else if (key === 'isNewProperty') newResult[key] = res === 'Neuf';
                         else {
                           newResult[key] = res;
                         }
                       });
 
+                      if (
+                        !newResult.lot_ref ||
+                        !newResult.price ||
+                        !newResult.minSurface ||
+                        !newResult.minPieces
+                      )
+                        return;
                       const pictures = getPictures(newResult);
 
                       const foundElement = await PropertieModel.findByRef(newResult.lot_ref);
@@ -138,26 +151,22 @@ const readMba = () => {
                       data.advantage = advantages;
                       data.typeOfAnnonce = typeOfAnnonce;
                       data.pictures = pictures;
-                      // console.log(extra.minPieces, extra.maxPieces, extra.lots.length);
                       if (!foundElement && newResult.lot_ref && newResult.address) {
-                        // const geo = await maps.geocode({
-                        //   address: newResult.address,
-                        //   zipcode: newResult.postal,
-                        //   country: 'france',
-                        // });
-                        // if (geo && geo[0]) {
-                        //   data.fullAddress = geo[0].formattedAddress;
-                        //   data.loc = {
-                        //     type: 'Point',
-                        //     coordinates: [geo[0].longitude, geo[0].latitude],
-                        //   };
-                        //   await PropertieModel.add(data);
-                        // }
-                      } else {
-                        if (foundElement && foundElement._id)
-                          await PropertieModel.updateById(foundElement._id, data);
-                        console.log('found', foundElement?._id);
-                      }
+                        const geo = await maps.geocode({
+                          address: newResult.address,
+                          zipcode: newResult.postal,
+                          country: 'france',
+                        });
+                        if (geo && geo[0] && geo[0].formattedAddress) {
+                          data.fullAddress = geo[0].formattedAddress;
+                          data.loc = {
+                            type: 'Point',
+                            coordinates: [geo[0].longitude, geo[0].latitude],
+                          };
+                          await PropertieModel.add(data);
+                        }
+                      } else if (foundElement && foundElement._id && foundElement.lot_ref)
+                        await PropertieModel.updateById(foundElement._id, data);
                       console.log('finish');
                     },
                     10000,
@@ -179,28 +188,8 @@ const readMba = () => {
       });
   };
   (async () => {
-    await customMap({
-      encoding: 'binary',
-      typeOfAnnonce: typeOfAnnoncies[0],
-      fileName: 'Programmes',
-      header: programsHeader,
-      lots: {
-        fileName: 'lots',
-        header: lotsHeader,
-        encoding: 'utf-8',
-      },
-    });
-    await customMap({
-      encoding: 'utf-8',
-      typeOfAnnonce: typeOfAnnoncies[1],
-      fileName: 'residences',
-      header: residenceHeader,
-      lots: {
-        fileName: 'lots_residences',
-        header: lotsResidencesHeader,
-        encoding: 'utf-8',
-      },
-    });
+    await customMap(buyDatas);
+    // await customMap(rentDatas);
   })();
 };
 

@@ -9,8 +9,10 @@ import { userActions } from '../../../redux/_actions';
 import { AdminContentWrapper } from '../../wrapper';
 import { Icon, Btn } from '../../form';
 import { addBookmarkApiMethod } from '../../../lib/api/customer';
+import { typeOfAnnoncies } from '../../../helpers/property';
 import Carrousel from '../../Carrousel';
 import LocationTable from '../table/location';
+import BuyTable from '../table/buy';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -335,17 +337,21 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
                 <span dangerouslySetInnerHTML={{ __html: property.description }} />
               </Typography>
             </div>
-            <div className={classes.extras}>
-              <Typography variant="h3">Les petits plus :</Typography>
-              <Grid container>
-                {property.advantage?.map((elem) => (
-                  <Grid container item key={elem} md={4} sm={6} alignItems="center">
-                    <Icon type="elevator" />
-                    <Typography variant="subtitle1">{elem}</Typography>
-                  </Grid>
-                ))}
-              </Grid>
-            </div>
+            {property.advantage.length ? (
+              <div className={classes.extras}>
+                <Typography variant="h3">Les petits plus :</Typography>
+                <Grid container>
+                  {property.advantage?.map((elem) => (
+                    <Grid container item key={elem} md={4} sm={6} alignItems="center">
+                      <Icon type="elevator" />
+                      <Typography variant="subtitle1">{elem}</Typography>
+                    </Grid>
+                  ))}
+                </Grid>
+              </div>
+            ) : (
+              ''
+            )}
             <div className={classes.mapContainer}>
               <Maps loc={property.loc?.coordinates} />
             </div>
@@ -357,12 +363,21 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
             {`Découvrez nos ${total} logements${isLocation ? '' : '  neufs disponibles'} :`}
           </Typography>
           <Grid container>
-            <LocationTable
-              state={state}
-              property={property}
-              currOpen={currOpen}
-              handleCurrOpen={handleCurrOpen}
-            />
+            {property.typeOfAnnonce === typeOfAnnoncies[0] ? (
+              <BuyTable
+                state={state}
+                property={property}
+                currOpen={currOpen}
+                handleCurrOpen={handleCurrOpen}
+              />
+            ) : (
+              <LocationTable
+                state={state}
+                property={property}
+                currOpen={currOpen}
+                handleCurrOpen={handleCurrOpen}
+              />
+            )}
           </Grid>
         </Grid>
       </div>
