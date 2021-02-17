@@ -8,10 +8,12 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import { useStore } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ToastContainer, toast } from 'react-toastify';
 import { theme } from '../lib/theme';
 import { wrapper } from '../redux';
 import Notifier from '../components/Notifier';
 import Header from '../components/Header';
+import 'react-toastify/dist/ReactToastify.css';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -60,6 +62,16 @@ const MyApp = ({ Component, pageProps }) => {
         </PersistGate>
       </div>
       <Notifier />
+      <ToastContainer
+        position="top-right"
+        autoClose={8000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        draggable={false}
+        pauseOnVisibilityChange
+        closeOnClick
+        pauseOnHover
+      />
     </ThemeProvider>
   );
 };

@@ -246,6 +246,9 @@ class MyDocument extends Document {
               .css-1okebmr-indicatorSeparator {
                 display: none;
               }
+              .Toastify__toast {
+                border-radius: 15px!important;
+              }
             `}
           </style>
           <script
