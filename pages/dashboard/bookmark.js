@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     '& > div': {
       display: 'inline-block',
-      padding: '1.8rem 3rem',
       background: '#4f80ff',
       borderRadius: '10px',
       marginBottom: '1rem',

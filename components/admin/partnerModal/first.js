@@ -3,7 +3,6 @@ import TextField from '@material-ui/core/TextField';
 import Upload from '../../form/Upload';
 
 const First = ({ onChange, values = {} }) => {
-  console.log(values);
   return (
     <>
       <div className="text-center custom-upload-conatainer">

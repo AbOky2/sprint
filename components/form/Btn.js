@@ -9,7 +9,6 @@ import Icon, { iconTypes, colorTypes } from './Icon';
 const useStyles = makeStyles((theme) => ({
   container: {
     width: 'fit-content',
-    padding: '18px 23px',
     background: 'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
     boxShadow: '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
     color: 'white',
@@ -17,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     fontSize: '1.8rem',
     fontWeight: '600',
-    '& a': {
+    '& a, & > span': {
+      padding: '18px 23px',
       fontStyle: 'normal',
       lineHeight: '28px',
       color: 'white',
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   whiteColor: {
-    '& a': {
+    '& a, & > span': {
       color: theme.palette.blue,
     },
     color: theme.palette.blue,

@@ -113,6 +113,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '& span': {
       fontSize: 14,
+      padding: 0,
     },
   },
   activeLink: {
