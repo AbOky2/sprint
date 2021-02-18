@@ -12,7 +12,7 @@ const fileFilter = (req, file, cb) => {
 };
 const unlinkFile = (filePath) => {
   let newPath = filePath;
-  const rootPath = path.resolve(__dirname, '..', '..', 'public');
+  const rootPath = path.resolve(__dirname, '..', '..', 'static');
 
   if (restrictedPath.find((e) => newPath.includes(e))) return;
   if (!newPath) return;
@@ -21,7 +21,7 @@ const unlinkFile = (filePath) => {
 };
 
 module.exports = {
-  upload: (folderName = '') => multer({ dest: `public/${folderName}`, fileFilter }),
+  upload: (folderName = '') => multer({ dest: `static/${folderName}`, fileFilter }),
   removeFiles: (files) => {
     if (!files) return;
     try {

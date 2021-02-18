@@ -27,7 +27,7 @@ const modelName = 'User';
 const mongoSchema = new Schema({
   picture: {
     type: String,
-    default: `${ROOT_URL}/public/img/users/default-picture.png`,
+    default: `${ROOT_URL}/static/img/users/default-picture.png`,
     // required: true,
   },
   firstName: {
