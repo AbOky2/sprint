@@ -106,7 +106,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 const PartnerPage = ({ partner = {} }) => {
   const classes = useStyles();
-  const handleSubmit = () => console.log('Submit');
 
   return (
     <AdminContentWrapper redirectDashboard>
@@ -126,7 +125,7 @@ const PartnerPage = ({ partner = {} }) => {
               </Typography>
             </div>
             <div className={classes.btnContainer}>
-              <Btn text="Accéder à l’offre partenaire" onClick={handleSubmit} />
+              <Btn text="Accéder à l’offre partenaire" href={partner.link} />
             </div>
           </div>
         </div>
@@ -139,7 +138,7 @@ const PartnerPage = ({ partner = {} }) => {
           </div>
         </div>
         <div className={classes.btnContainer}>
-          <Btn text="Accéder à l’offre partenaire" onClick={handleSubmit} />
+          <Btn text="Accéder à l’offre partenaire" href={partner.link} />
         </div>
       </div>
     </AdminContentWrapper>
