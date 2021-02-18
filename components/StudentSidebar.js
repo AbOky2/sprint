@@ -132,7 +132,12 @@ const MenuItems = [
   { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
   { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
   { href: '/dashboard/sponsorship', iconType: 'sponsorship', txt: 'Parrainage' },
-  { href: '/dashboard/jackpot', iconType: 'jackpot', txt: 'Cagnotte' },
+  {
+    href: 'https://cagnotte-immobiliere.nexity.fr',
+    iconType: 'jackpot',
+    txt: 'Cagnotte',
+    target: '_blank',
+  },
 ];
 export const MobileMenu = () => {
   const classes = useStyles();
