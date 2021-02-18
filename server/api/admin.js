@@ -90,7 +90,7 @@ sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
       if (req.files) {
         Object.keys(req.files).forEach((key) => {
           const curr = req.files[key][0];
-          if (curr && curr.filename)
+          if (curr && curr.buffer)
             newData[key] = `data:image/png;base64,${curr.buffer.toString('base64')}`;
         });
       }
