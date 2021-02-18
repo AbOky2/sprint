@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { connect } from 'react-redux';
 import { useRouter } from 'next/router';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,6 +18,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Icon } from '../form';
 import LogoImg from '../../static/img/logo-full.png';
+import { userActions } from '../../redux/_actions';
 
 const drawerWidth = 240;
 
@@ -63,6 +65,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  logout: {
+    marginLeft: 'auto',
+    cursor: 'pointer',
+  },
 }));
 
 const menuList = [
@@ -81,7 +87,7 @@ const menuList = [
     iconType: 'house',
   },
 ];
-function ResponsiveDrawer({ children, window }) {
+function ResponsiveDrawer({ children, window, logout }) {
   const classes = useStyles();
   const router = useRouter();
   const theme = useTheme();
@@ -140,6 +146,9 @@ function ResponsiveDrawer({ children, window }) {
           <Typography variant="h6" noWrap>
             {currNamElem ? currNamElem.name : ''}
           </Typography>
+          <div onClick={logout} className={classes.logout}>
+            Se déconnecter
+          </div>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -186,4 +195,9 @@ ResponsiveDrawer.propTypes = {
   window: PropTypes.func,
 };
 
-export default ResponsiveDrawer;
+const mapState = () => ({});
+
+const actionCreators = {
+  logout: userActions.logout,
+};
+export default connect(mapState, actionCreators)(ResponsiveDrawer);
