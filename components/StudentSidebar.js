@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
+import { openPopupWidget } from 'react-calendly';
 import { userActions } from '../redux/_actions';
 import { Icon, Btn } from './form';
 import Calendr from '../static/img/icons/calendr.png';
@@ -199,7 +200,7 @@ const StudentProfile = ({ user = {}, logout, update }) => {
             <Btn
               text="Prendre rendez-vous"
               iconType="calendar"
-              onClick={() => console.log('Implement calendly')}
+              onClick={() => openPopupWidget({ url: 'https://calendly.com/kitlenid' })}
             />
           </div>
         </Grid>
