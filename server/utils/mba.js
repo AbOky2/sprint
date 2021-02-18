@@ -79,7 +79,7 @@ const readMba = () => {
             const advantages = [];
             lots.header.forEach((key, i) => {
               const index = i - 1;
-              const res = result[index] ? result[index].trim() : undefined;
+              const res = result[index] ? result[index].trim() : '';
 
               if (numberTypes.includes(key)) newLot[key] = parseInt(res, 10);
               else if (key.includes(comodityDivider) && (res === 'True' || res === 'OUI'))
@@ -116,7 +116,7 @@ const readMba = () => {
                       const advantages = [];
                       header.forEach((key, i) => {
                         const index = i - 1;
-                        const res = result[index] ? result[index].trim() : undefined;
+                        const res = result[index] ? result[index].trim() : '';
                         if (key === 'lot_ref') {
                           if (!res || res.length < 1 || lotRefs.includes(res)) return;
                           lotRefs.push(res);
@@ -147,7 +147,7 @@ const readMba = () => {
                           newResult.price,
                           newResult.minSurface,
                           newResult.minPieces,
-                          newResult.lots,
+                          newResult,
                         );
                       const pictures = getPictures(newResult);
 

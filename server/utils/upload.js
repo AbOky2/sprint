@@ -4,6 +4,7 @@ const path = require('path');
 const { isArray } = require('../../helpers/convertAndCheck');
 const logger = require('../logs');
 
+const storage = multer.memoryStorage();
 const restrictedPath = ['default-picture.png'];
 const fileFilter = (req, file, cb) => {
   if (!file.fieldname || !req.user || !req.user.slug) return cb(null, false);
@@ -21,7 +22,7 @@ const unlinkFile = (filePath) => {
 };
 
 module.exports = {
-  upload: (folderName = '') => multer({ dest: `static/${folderName}`, fileFilter }),
+  upload: (folderName = '') => multer({ storage }),
   removeFiles: (files) => {
     if (!files) return;
     try {
