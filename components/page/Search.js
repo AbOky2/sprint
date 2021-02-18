@@ -231,23 +231,22 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
               : classes.searchContainer
           }
         >
-          <Grid item md={isLocation || true ? 6 : 4}>
+          <Grid item md={isLocation ? 6 : 4}>
             {/* <Input name="loc" onChange={handleSearch} placeholder="Localisation" /> */}
             <GoogleMaps name="loc" onChange={handleMapSearch} placeholder="Localisation" />
           </Grid>
-          {!isLocation ||
-            (false && (
-              <Grid item md={4}>
-                <DropdownSelect
-                  name="typeOfAnnonce"
-                  placeholder="Type de bien"
-                  list={typeOfProperties.map((name) => ({ name, value: name }))}
-                  value={queryData.typeOfProperty}
-                  onChange={handleSelect}
-                />
-              </Grid>
-            ))}
-          <Grid item md={isLocation || true ? 6 : 4} className="relative">
+          {!isLocation && (
+            <Grid item md={4}>
+              <DropdownSelect
+                name="typeOfAnnonce"
+                placeholder="Type de bien"
+                list={typeOfProperties.map((name) => ({ name, value: name }))}
+                value={queryData.typeOfProperty}
+                onChange={handleSelect}
+              />
+            </Grid>
+          )}
+          <Grid item md={isLocation ? 6 : 4} className="relative">
             <Input name="maxPrice" onChange={handleSearch} placeholder="Budget maximal" />
             <div onClick={handleSumit} className="pointer">
               <Icon type="search" size="large" color="white" />

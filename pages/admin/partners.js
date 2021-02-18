@@ -51,7 +51,7 @@ function ListCard({ data }) {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia className={classes.media} image={data?.picture} title="Contemplative Reptile" />
+        <img className={classes.media} src={data?.picture} title="Contemplative Reptile" alt="" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {data.name}

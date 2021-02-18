@@ -36,6 +36,9 @@ const styles = (theme) => ({
     '& > div:last-of-type': {
       paddingLeft: '1.5rem',
     },
+    '& > div:first-of-type > div': {
+      height: '100%',
+    },
     '& > div:first-of-type > div > a': {
       height: '100%',
       background: 'linear-gradient(99.78deg, #CC95DF -24.64%, #4F80FF 62.6%)',

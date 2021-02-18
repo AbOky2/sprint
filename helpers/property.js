@@ -172,9 +172,9 @@ const availableProperties = {
   price: 'Prix',
   isNewProperty: 'isNewProperty',
   renew: 'renew',
-  surface: 'Surface', //
-  land_surface: 'Surface terrain', //
-  nb_pieces: 'Nombre de pieces', //
+  surface: 'Surface',
+  land_surface: 'Surface terrain',
+  nb_pieces: 'Nombre de pieces',
   nb_rooms: 'Nombre de rooms',
   expenses: 'Dépenses',
   floor: 'Étage',
@@ -193,15 +193,15 @@ const availableProperties = {
   nb_parking: 'Nombre de parking',
   digicode: 'Digicode',
   intercom: 'Intercom',
-  lot_ref: 'identifiant technique', //
+  lot_ref: 'identifiant technique',
   postal: 'Code postal',
-  city: 'Ville', //
-  country: 'Pays', //
-  address: 'Adresse', //
+  city: 'Ville',
+  country: 'Pays',
+  address: 'Adresse',
   district: 'Quartier',
-  heading: 'Rubrique', //
-  description: 'Description', //
-  available_date: 'Date de disponibilité', //
+  heading: 'Rubrique',
+  description: 'Description',
+  available_date: 'Date de disponibilité',
   guardian: 'Gardien',
   terrace: 'Terrasse',
   phone: 'Téléphone',
@@ -216,21 +216,7 @@ const availableProperties = {
 
 const filteredProperties = Object.keys(availableProperties);
 const typeOfAnnoncies = ['Vente', 'Location'];
-const typeOfProperties = [
-  'Appartement',
-  'bâtiment',
-  'boutique',
-  'bureaux',
-  'château',
-  'inconnu',
-  'hôtel particulier',
-  'immeuble',
-  'local',
-  'loft/atelier/surface',
-  'maison/villa',
-  'parking/box',
-  'terrain',
-];
+const typeOfProperties = ['Appartement', 'maison', 'terrain'];
 
 const buyDatas = {
   encoding: 'binary',

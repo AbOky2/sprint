@@ -23,7 +23,7 @@ const auth = ({ server }) => {
     try {
       if (reqPath === signInPath) user = await UserModel.signIn(data);
       else if (reqPath === signUpPath) user = await UserModel.signUp(data);
-      else throw msg.wrongInfo('path');
+      else return msg.wrongInfo('path');
 
       cb(null, user);
     } catch (error) {
