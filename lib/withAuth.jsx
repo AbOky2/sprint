@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Router from 'next/router';
 import * as NProgress from 'nprogress';
 import { StudentSidebarComp, AdminSidebarComp } from './AuthWrapper';
+import AdminDrawer from '../components/admin/drawer';
 import { isAdmin, dashboardPaths } from '../helpers/user';
 
 Router.events.on('routeChangeStart', () => {
@@ -76,9 +77,9 @@ export default function withAuth(
       if (isAdmin(user))
         return (
           <>
-            <AdminSidebarComp user={user}>
+            <AdminDrawer user={user}>
               <BaseComponent {...this.props} />
-            </AdminSidebarComp>
+            </AdminDrawer>
           </>
         );
       return (
