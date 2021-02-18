@@ -936,6 +936,13 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
+"@didomi/react@^1.7.3":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@didomi/react/-/react-1.7.3.tgz#2aff5012e7407492f8cc648561e6359e9c7cbb71"
+  integrity sha512-XCq1eru3YSJ9Q/xCyk424jAMolVxCfELZkV+9qyrEHEKTPjEpdVMc+bUciydKkIQoNlHPwrN61vKZdFz3A1vgw==
+  dependencies:
+    dset "^2.0.1"
+
 "@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"
@@ -3683,6 +3690,11 @@ dotenv@8.2.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
+dset@^2.0.1:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/dset/-/dset-2.1.0.tgz#cd1e99e55cf32366d8f144f906c42f7fb3bf431e"
+  integrity sha512-hlQYwNEdW7Qf8zxysy+yN1E8C/SxRst3Z9n+IvXOR35D9bPVwNHhnL8ZBeoZjvinuGrlvGg6pAMDwhmjqFDgjA==
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -7922,6 +7934,11 @@ rc@^1.2.7, rc@^1.2.8:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-calendly@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-calendly/-/react-calendly-1.3.0.tgz#325dc473df5e65ae067a94e53aafbbb0fb15da47"
+  integrity sha512-UocqWshQfnC6ZaYWLV0TEUqbryjROiBuIYyHHtrk6zSBL85z+4NgfjTxmAXze4pPDiMWSvjLfMzC5F0J2ooAWw==
 
 react-display-name@^0.2.4:
   version "0.2.5"

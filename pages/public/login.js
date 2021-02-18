@@ -201,6 +201,7 @@ const SignIn = ({ values = {}, handleChange }) => (
       onChange={handleChange}
       name="email"
       type="email"
+      placeholder="Votre e-mail"
       position="left"
     />
     <Input
@@ -209,6 +210,7 @@ const SignIn = ({ values = {}, handleChange }) => (
       onChange={handleChange}
       name="password"
       type="password"
+      placeholder="Password"
       position="right"
     />
   </>
@@ -222,12 +224,10 @@ SignUp.propTypes = propTypes;
 
 const LoginTab = ({ login, register }) => {
   const [state, setState] = useState({
-    email: 'toto@test.test',
-    firstName: 'toto',
-    lastName: 'toto',
-    password: 'test',
-    // phone: '000000000',
-    // sponsorshipCode: null,
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
     role: Student,
   });
   // const [state, setState] = useState({ email: 'roomer@test.test', password: 'test' });

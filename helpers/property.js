@@ -1,8 +1,8 @@
 const comodityDivider = 'comodity__';
 
 const lotsResidencesHeader = new Array(21);
-lotsResidencesHeader[1] = 'lot_ref';
-lotsResidencesHeader[2] = 'residence_ref';
+// lotsResidencesHeader[1] = 'residence_ref';
+lotsResidencesHeader[2] = 'lot_ref';
 lotsResidencesHeader[3] = 'door';
 lotsResidencesHeader[4] = 'typeOfProperty';
 lotsResidencesHeader[5] = 'pieces';
@@ -93,6 +93,9 @@ programsHeader[6] = 'address';
 programsHeader[8] = 'heading';
 programsHeader[9] = 'description';
 programsHeader[11] = 'available_date';
+programsHeader[12] = 'is_house';
+programsHeader[13] = 'is_appart';
+programsHeader[14] = 'is_lend';
 programsHeader[15] = 'minPieces';
 programsHeader[16] = 'maxPieces';
 programsHeader[17] = 'nb_floor';
