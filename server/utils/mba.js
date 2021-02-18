@@ -98,7 +98,7 @@ const readMba = () => {
             });
             if (newLot.surface > 1) lotList.push(newLot);
           });
-
+          // console.log(header);
           const lotRefs = [];
           fs.createReadStream(`${gepublicPropertiesFolder}/${fileName}.csv`, { encoding })
             .pipe(csv())
@@ -121,6 +121,13 @@ const readMba = () => {
                           if (!res || res.length < 1 || lotRefs.includes(res)) return;
                           lotRefs.push(res);
                         }
+                        if (numberTypes.includes(key)) newResult[key] = parseInt(res, 10);
+                        else if (key === 'is_house' && res === 'OUI')
+                          newResult.typeOfProperty = 'maison';
+                        else if (key === 'is_appart' && res === 'OUI')
+                          newResult.typeOfProperty = 'Appartement';
+                        else if (key === 'is_lend' && res === 'OUI')
+                          newResult.typeOfProperty = 'terrain';
                         if (numberTypes.includes(key)) {
                           newResult[key] = parseInt(res, 10);
                         } else if (
@@ -136,19 +143,6 @@ const readMba = () => {
                         }
                       });
 
-                      if (
-                        !newResult.lot_ref ||
-                        !newResult.price ||
-                        !newResult.minSurface ||
-                        !newResult.minPieces
-                      )
-                        return console.log(
-                          newResult.lot_ref,
-                          newResult.price,
-                          newResult.minSurface,
-                          newResult.minPieces,
-                          newResult,
-                        );
                       const pictures = getPictures(newResult);
 
                       const foundElement = await PropertieModel.findByRef(newResult.lot_ref);
@@ -170,8 +164,10 @@ const readMba = () => {
                           };
                           await PropertieModel.add(data);
                         }
-                      } else if (foundElement && foundElement._id && foundElement.lot_ref)
+                      } else if (foundElement && foundElement._id && foundElement.lot_ref) {
+                        // console.log(foundElement);
                         await PropertieModel.updateById(foundElement._id, data);
+                      }
                       console.log('finish');
                     },
                     10000,
