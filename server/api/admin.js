@@ -90,7 +90,7 @@ sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
       if (req.files) {
         Object.keys(req.files).forEach((key) => {
           const curr = req.files[key][0];
-          if (curr && curr.filename) newData[key] = `/${plural}/${curr.filename}`;
+          if (curr && curr.filename) newData[key] = `/static/${plural}/${curr.filename}`;
         });
       }
       res.json(await model.add(newData));
@@ -118,7 +118,7 @@ sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
               newData[key] = null;
             }
             const curr = req.files[key][0];
-            if (curr && curr.filename) newData[key] = `/${plural}/${curr.filename}`;
+            if (curr && curr.filename) newData[key] = `/static/${plural}/${curr.filename}`;
           });
         }
 
