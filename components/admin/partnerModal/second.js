@@ -1,7 +1,7 @@
 import React from 'react';
-import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import CreatableSelect from 'react-select/creatable';
 import Upload from '../../form/Upload';
 import { partnerTypes, partnerTypeListKeys } from '../../../helpers/partner';
 
@@ -17,8 +17,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
 }));
-const Second = ({ onChange, values = {} }) => {
+const Second = ({ onChange, values = {}, selectDefaultOptions, handleCustomSelectCreate }) => {
   const classes = useStyles();
+  const handelSelect = (e) => {
+    if (e?.__isNew__ && handleCustomSelectCreate) {
+      handleCustomSelectCreate(e);
+      onChange('type')(e.value);
+    } else if (e) {
+      onChange('type')(e.name);
+    }
+  };
   return (
     <>
       <div className="text-center">
@@ -42,25 +50,13 @@ const Second = ({ onChange, values = {} }) => {
       <div className={classes.divider}>
         <div className={classes.formControl}>
           <span>Type</span>
-          <Select
+          <CreatableSelect
+            isClearable
             fullWidth
-            value={values.type}
-            // onChange={onChange}
-            onChange={(e) => onChange('type')(e.target.value)}
-            inputProps={{
-              name: 'type',
-              id: 'type-native-simple',
-            }}
-          >
-            <option aria-label="None" value="" />
-            {partnerTypeListKeys.map((elem) => (
-              <option key={elem} value={elem}>
-                {partnerTypes[elem]}
-              </option>
-            ))}
-            {/* <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option> */}
-          </Select>
+            onChange={handelSelect}
+            defaultValue={{ name: values.type, label: values.type }}
+            options={selectDefaultOptions}
+          />
         </div>
       </div>
     </>

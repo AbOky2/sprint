@@ -1,5 +1,5 @@
 const express = require('express');
-const { UserModel } = require('../models');
+const { UserModel, PartnerTypeModel } = require('../models');
 const {
   listCollection,
   updateCollection,
@@ -31,13 +31,32 @@ router.get(
     return { list };
   }, joiSchema.user.admin.user.listByRole),
 );
+router.get(
+  '/partnerTypes',
+  listCollection(async ({ offset, limit }) => {
+    const { list = [] } = await PartnerTypeModel.list({ offset, limit });
+
+    return { list };
+  }, joiSchema.user.admin.user.listByRole),
+);
+router.post(
+  '/partnerType',
+  requestMiddleware(joiSchema.partnerType.admin.partnerType.post),
+  handleErrors(async ({ body: { name } }, res) => {
+    try {
+      const { list = [] } = await PartnerTypeModel.add(name);
+      res.json({ list });
+    } catch (error) {
+      res.json({ errors: 'Error while sending', error });
+    }
+  }),
+);
+
 sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
   router.get(
     `/${plural}`,
     listCollection(async ({ offset, limit }) => {
       const { list } = await model.list({ offset, limit });
-
-      list.sort((a, b) => a.position - b.position);
 
       return { list };
     }),
@@ -115,79 +134,5 @@ sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
     deleteCollection(async ({ id }) => await model.delete(id)),
   );
 });
-// router.get('/books', async (req, res) => {
-//   try {
-//     const books = await Book.list();
-//     res.json(books);
-//   } catch (err) {
-//     res.json({ error: err.message || err.toString() });
-//   }
-// });
-
-// router.post('/books/add', async (req, res) => {
-//   try {
-//     const book = await Book.add({ userId: req.user.id, ...req.body });
-//     res.json(book);
-//   } catch (err) {
-//     logger.error(err);
-//     res.json({ error: err.message || err.toString() });
-//   }
-// });
-
-// router.post('/books/edit', async (req, res) => {
-//   try {
-//     const editedBook = await Book.edit(req.body);
-//     res.json(editedBook);
-//   } catch (err) {
-//     res.json({ error: err.message || err.toString() });
-//   }
-// });
-
-// router.get('/books/detail/:slug', async (req, res) => {
-//   try {
-//     const book = await Book.getBySlug({ slug: req.params.slug });
-//     res.json(book);
-//   } catch (err) {
-//     res.json({ error: err.message || err.toString() });
-//   }
-// });
-
-// // github-related
-
-// router.get('/github/repos', async (req, res) => {
-//   const user = await User.findById(req.user._id, 'isGithubConnected githubAccessToken');
-
-//   if (!user.isGithubConnected || !user.githubAccessToken) {
-//     res.json({ error: 'Github not connected' });
-//     return;
-//   }
-
-//   try {
-//     const response = await getRepos({ user, request: req });
-//     res.json({ repos: response.data });
-//   } catch (err) {
-//     logger.error(err);
-//     res.json({ error: err.message || err.toString() });
-//   }
-// });
-
-// router.post('/books/sync-content', async (req, res) => {
-//   const { bookId } = req.body;
-
-//   const user = await User.findById(req.user._id, 'isGithubConnected githubAccessToken');
-
-//   if (!user.isGithubConnected || !user.githubAccessToken) {
-//     res.json({ error: 'Github not connected' });
-//     return;
-//   }
-
-//   try {
-//     await Book.syncContent({ id: bookId, user, request: req });
-//     res.json({ done: 1 });
-//   } catch (err) {
-//     logger.error(err);
-//     res.json({ error: err.message || err.toString() });
-//   }
-// });
 
 module.exports = router;

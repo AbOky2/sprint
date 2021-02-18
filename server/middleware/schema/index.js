@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const partner = require('./partner');
+const partnerType = require('./partnerType');
 const propertie = require('./propertie');
 const user = require('./user');
 // import agency from './agency';
@@ -22,5 +23,6 @@ module.exports = {
   partner,
   user,
   propertie,
+  partnerType,
   // agency,
 };

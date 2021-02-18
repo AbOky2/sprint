@@ -22,7 +22,6 @@ const mongoSchema = new Schema({
   },
   type: {
     type: String,
-    enum: partnerTypeList,
     required: true,
   },
   description: {

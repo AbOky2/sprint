@@ -11,11 +11,18 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import CreatableSelect from 'react-select/creatable';
 import { AdminContentWrapper } from '../../components/wrapper';
 import { Modal, Icon } from '../../components/form';
+
 // import { ReactComponent as LotsIcon } from 'assets/img/svg/partners.svg';
 // import { ReactComponent as AddIcon } from 'assets/img/svg/add.svg';
-import { getPartnersApiMethod, deletePartnerApiMethod } from '../../lib/api/admin';
+import {
+  getPartnersApiMethod,
+  getPartnerTypesApiMethod,
+  deletePartnerApiMethod,
+  addPartnerTypeMethod,
+} from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
 import { partnerTypeListKeys, partnerTypes } from '../../helpers/partner';
 import PartnerModal from '../../components/admin/partnerModal';
@@ -68,31 +75,11 @@ const defaultAddNew = {
   link: 'cccc',
   position: 5,
 };
-const Header = ({ onClick }) => (
-  <Grid container justify="space-between" alignItems="center">
-    <Grid item>
-      <Grid>
-        <span className="header-icon">
-          <Icon type="sponsorship" size="small" />
-        </span>
-        <h1>Offres partenaires</h1>
-      </Grid>
-    </Grid>
-    <Grid item>
-      <Grid onClick={onClick} className="submit pointer partner-add">
-        <span className="header-icon">
-          <Icon type="plus" size="small" />
-        </span>
-        <p>Ajouter</p>
-      </Grid>
-    </Grid>
-  </Grid>
-);
-
 const noFilter = null;
 const PartnersDashboard = () => {
   const [filter, setFilter] = useState(noFilter);
   const [partners, setPartners] = useState([]);
+  const [partnerTypesList, setPartnerTypesList] = useState([]);
   const [state, setState] = useState({
     openModal: false,
     editElement: {},
@@ -114,6 +101,9 @@ const PartnersDashboard = () => {
   const reloadPartners = useCallback(async () => {
     const { list } = await getPartnersApiMethod();
     setPartners(list);
+    const tmp = await getPartnerTypesApiMethod();
+    setPartnerTypesList(tmp?.list.map(({ name }) => ({ name, label: name })));
+
     resetState();
   }, [resetState, setPartners]);
   const handleEditSelect = (id) => {
@@ -126,82 +116,94 @@ const PartnersDashboard = () => {
   useEffect(() => {
     reloadPartners();
   }, []);
-  const filteredList = filter ? partners.filter((elem) => elem.type === filter) : partners;
+  const filteredList = filter
+    ? partners.filter((elem) => {
+        return elem.type === filter;
+      })
+    : partners;
   const classes = useStyles();
-
+  const handleCustomSelectCreate = async (value) => {
+    // eslint-disable-next-line no-underscore-dangle
+    if (value?.__isNew__) {
+      const { list } = await addPartnerTypeMethod(value.value);
+      if (list?.length) {
+        setPartnerTypesList(list.map(({ name }) => ({ name, label: name })));
+      }
+    }
+  };
   return (
     <>
-      <AdminContentWrapper>
-        <Modal
-          openModal={state.openModal}
-          onClose={handleClose}
-          onClick={onClick}
-          showActions={false}
-        >
-          <Grid container item xs={12} justify="flex-start">
-            <PartnerModal
-              current={state.editElement}
-              handleSubmit={reloadPartners}
-              handleClose={handleClose}
-            />
-            {/* <Input /> */}
-          </Grid>
-        </Modal>
+      <Modal
+        openModal={state.openModal}
+        onClose={handleClose}
+        onClick={onClick}
+        showActions={false}
+      >
+        <Grid container item xs={12} justify="flex-start">
+          <PartnerModal
+            current={state.editElement}
+            handleSubmit={reloadPartners}
+            handleClose={handleClose}
+            handleCustomSelectCreate={handleCustomSelectCreate}
+            selectDefaultOptions={partnerTypesList}
+          />
+        </Grid>
+      </Modal>
+      <Grid container alignItems="center" justify="flex-end">
         <Grid
           container
-          direction="row"
-          justify="space-between"
+          item
+          onClick={onClick}
           alignItems="center"
-          className="spacing header"
+          justify="flex-end"
+          className="submit pointer partner-add fitwidth"
         >
-          <Grid item container xs={12} justify="flex-start">
-            <Grid item container alignItems="center">
-              <Header onClick={onClick} />
-            </Grid>
-          </Grid>
+          <span className="header-icon">
+            <Icon type="plus" size="small" />
+          </span>
+          <p>Ajouter</p>
         </Grid>
-        <Grid container>
-          <Grid container justify="center">
-            <div onClick={() => handleActiveFilter(noFilter)} className="partner-filter">
-              Tout
+      </Grid>
+      <Grid container>
+        <Grid container justify="center">
+          <div onClick={() => handleActiveFilter(noFilter)} className="partner-filter">
+            Tout
+          </div>
+          {partnerTypesList.map((elem) => (
+            <div
+              key={elem.name}
+              onClick={() => handleActiveFilter(elem.name)}
+              className={`partner-filter ${elem.name === filter ? 'active' : ''}`}
+            >
+              {elem.name}
             </div>
-            {partnerTypeListKeys.map((elem) => (
-              // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-              <div
-                key={elem}
-                onClick={() => handleActiveFilter(elem)}
-                className={`partner-filter ${elem === filter ? 'active' : ''}`}
-              >
-                {partnerTypes[elem]}
-              </div>
-            ))}
-          </Grid>
-          <Grid container className="partner-card-list-container" justify="space-arround">
-            {filteredList.map((elem) => (
-              <Grid
-                item
-                key={elem._id}
-                alignItems="center"
-                md={4}
-                onClick={() => handleEditSelect(elem._id)}
-                className="partner-card-list relative"
-              >
-                <span
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleDelete(elem._id);
-                  }}
-                  className={classes.closeModal}
-                >
-                  x
-                </span>
-                <ListCard data={elem} />
-              </Grid>
-            ))}
-          </Grid>
+          ))}
         </Grid>
-      </AdminContentWrapper>
+        <Grid container className="partner-card-list-container" justify="space-arround">
+          {filteredList.map((elem) => (
+            <Grid
+              item
+              key={elem._id}
+              alignItems="center"
+              md={4}
+              onClick={() => handleEditSelect(elem._id)}
+              className="partner-card-list relative"
+            >
+              <span
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleDelete(elem._id);
+                }}
+                className={classes.closeModal}
+              >
+                x
+              </span>
+              <ListCard data={elem} />
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
       {/* <ListMaker {...props} /> */}
     </>
   );

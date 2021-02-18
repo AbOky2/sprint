@@ -42,6 +42,8 @@ export default function HorizontalLabelPositionBelowStepper({
   current = {},
   handleSubmit,
   handleClose,
+  handleCustomSelectCreate,
+  selectDefaultOptions,
 }) {
   const classes = useStyles();
   const [state, setState] = useState(current);
@@ -69,7 +71,14 @@ export default function HorizontalLabelPositionBelowStepper({
       case 0:
         return <First onChange={handleChange} values={state} />;
       case 1:
-        return <Second onChange={handleChange} values={state} />;
+        return (
+          <Second
+            onChange={handleChange}
+            values={state}
+            selectDefaultOptions={selectDefaultOptions}
+            handleCustomSelectCreate={handleCustomSelectCreate}
+          />
+        );
       case 2:
         return <Third onChange={handleChange} values={state} />;
       default:

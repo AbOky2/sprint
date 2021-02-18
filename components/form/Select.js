@@ -4,14 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {
-  FormControl,
-  Select,
-  Grid,
-  Checkbox,
-  Typography,
-  FormControlLabel,
-} from '@material-ui/core';
+import { FormControl, Select, Grid, Checkbox, Typography } from '@material-ui/core';
 import Icon from './Icon';
 import { toggleArray } from '../../helpers/convertAndCheck';
 
