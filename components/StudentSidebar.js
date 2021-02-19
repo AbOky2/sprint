@@ -119,6 +119,9 @@ const useStyles = makeStyles((theme) => ({
   },
   activeLink: {
     backgroundColor: 'rgba(79, 128, 255, 0.19)',
+    [theme.breakpoints.down('sm')]: {
+      backgroundColor: 'initial',
+    },
     border: '1px solid #c1cde7',
     '& svg path': {
       fill: '#4f80ff!important',

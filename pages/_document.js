@@ -193,18 +193,6 @@ class MyDocument extends Document {
               .modal-action-container > div:last-of-type {
                 margin-left: 1rem;
               }
-              header-btn {
-                /* width: 41px; */
-                /* height: 17px; */
-                font-family: 'Rubik';
-                font-size: 1.44rem;
-                font-weight: normal;
-                font-stretch: normal;
-                font-style: normal;
-                line-height: normal;
-                letter-spacing: normal;
-                color: #475f7b;
-              }
               
               div.header {
                 padding-top: 15px;

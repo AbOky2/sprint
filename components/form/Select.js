@@ -56,7 +56,7 @@ const styles = (theme) => ({
     position: 'relative',
     height: '100%',
     '& input': {
-      fontFamily: 'Rubik',
+      fontFamily: 'Open Sans',
       width: '100%',
       height: '100%',
       backgroundColor: 'white',
@@ -124,15 +124,19 @@ const DropdownSelect = withStyles(styles)(({ onChange, position, list, placehold
   const node = useRef();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState([]);
-  const toggleOpen = (e) => {
-    if (node.current.contains(e.target) && !open) setOpen(!open);
-    else if (!node.current.contains(e.target) && !open) setOpen(false);
-  };
+
   const handleSelected = (e) => {
     const values = toggleArray(selected, e.target.value);
 
     setSelected(values);
     onChange(values);
+  };
+
+  const toggleOpen = (e) => {
+    if (node.current.contains(e.target) && open && e.target.nodeName === 'SPAN') setOpen(false);
+    else if (node.current.contains(e.target) && !open) setOpen(true);
+    else if (!node.current.contains(e.target)) setOpen(false);
+    console.log(e.target.nodeName, open);
   };
   useEffect(() => {
     // add when mounted
@@ -141,7 +145,7 @@ const DropdownSelect = withStyles(styles)(({ onChange, position, list, placehold
     return () => {
       document.removeEventListener('mousedown', toggleOpen);
     };
-  }, []);
+  }, [open]);
 
   return (
     <Grid
@@ -154,8 +158,8 @@ const DropdownSelect = withStyles(styles)(({ onChange, position, list, placehold
       ref={node}
     >
       <input value={selected.join(' - ')} placeholder={placeholder} disabled />
-      <span onClick={toggleOpen} />
-      <Icon type="triangle" size="small" />
+      <span />
+      <Icon type="triangle" size="small" color="gray" />
       <Grid container>
         {list?.map((elem) => (
           <Grid container item key={elem.name} md={6} alignItems="center">

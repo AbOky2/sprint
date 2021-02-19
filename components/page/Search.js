@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
           borderBottomLeftRadius: 0,
           borderTopRightRadius: '.6rem',
           borderRight: `1px solid ${theme.palette.gray}`,
+          borderBottom: 0,
         },
       },
       '&:last-of-type': {
@@ -135,6 +136,12 @@ const useStyles = makeStyles((theme) => ({
     '& span': {
       marginRight: '1rem',
     },
+  },
+  search: {
+    position: 'relative',
+  },
+  locationMaxBudget: {
+    borderTop: `solid 1px ${theme.palette.gray}`,
   },
 }));
 
@@ -246,7 +253,13 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
               />
             </Grid>
           )}
-          <Grid item md={isLocation ? 6 : 4} className="relative">
+          <Grid
+            item
+            md={isLocation ? 6 : 4}
+            className={
+              isLocation ? clsx(classes.search, classes.locationMaxBudget) : classes.search
+            }
+          >
             <Input name="maxPrice" onChange={handleSearch} placeholder="Budget maximal" />
             <div onClick={handleSumit} className="pointer">
               <Icon type="search" size="large" color="white" />
