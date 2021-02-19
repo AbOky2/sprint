@@ -4,11 +4,11 @@ import { Grid, Checkbox, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 import { userActions } from '../../redux/_actions';
 import { Btn, Select, Input } from '../../components/form';
 import withAuth from '../../lib/withAuth';
 import { Student, userRoleSelect } from '../../helpers/user';
-import LogoImg from '../../static/img/logo-full.png';
 import { pick } from '../../helpers/convertAndCheck';
 
 const useStyles = makeStyles((theme) => ({
@@ -175,7 +175,7 @@ const SignUp = ({ values = {}, handleChange }) => (
       position="right"
     />
     <Input
-      label="Mot de passe"
+      label="Mot de passe*"
       placeholder="Mot de passe"
       onChange={handleChange}
       name="password"
@@ -187,7 +187,7 @@ const SignUp = ({ values = {}, handleChange }) => (
       value={values.role}
       onChange={handleChange}
       list={userRoleSelect}
-      label="Status"
+      label="Status*"
       position="right"
     />
     <Input label="Code parrain" placeholder="Code" onChange={handleChange} name="sponsorshipCode" />
@@ -205,7 +205,7 @@ const SignIn = ({ values = {}, handleChange }) => (
       position="left"
     />
     <Input
-      label="Mot de passe"
+      label="Mot de passe*"
       value={values.password}
       onChange={handleChange}
       name="password"
@@ -249,18 +249,24 @@ const LoginTab = ({ login, register }) => {
       if (!data.email || !data.password) return;
       authReq = login;
     } else {
-      const pickdata = ['email', 'firstName', 'lastName', 'role', 'password'];
+      const pickdata = ['email', 'firstName', 'lastName', 'role', 'password', 'phone'];
       if (
         !data.email ||
         !data.firstName ||
         !data.lastName ||
         !data.password ||
         !data.role ||
-        !checked
-      )
+        !data.phone
+      ) {
+        toast.warn('Veuillez remplir les champs obligatoires.');
         return;
+      }
+
+      if (!checked) {
+        toast.warn('Veuillez accepter les conditions générales.');
+        return;
+      }
       if (data.sponsorshipCode?.length) pickdata.push('sponsorshipCode');
-      if (data.phone?.length) pickdata.push('phone');
       if (document.referrer) {
         data.referrer_url = document.referrer;
         pickdata.push('referrer_url');
@@ -282,7 +288,7 @@ const LoginTab = ({ login, register }) => {
       <Grid container justify="center" alignItems="center" id="login" className={classes.container}>
         <div className="fullwidth text-center">
           <a href="/">
-            <img src={LogoImg} alt="kit le nid" />
+            <img src="/logo.png" alt="kit le nid" />
           </a>
           <Grid container item alignItems="stretch" justify="center">
             <Grid item xs={6} className={classes.signinLogo} />

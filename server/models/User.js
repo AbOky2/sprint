@@ -159,7 +159,7 @@ class UserClass extends DBModel {
 
   static async listStudents({ limit = defaultLimit, offset: page = defaultOffset } = {}) {
     const query = { role: { $ne: Admin } };
-    const list = await this.paginate(query, { limit, page, forceCountFn: true });
+    const list = await this.paginate(query, { forceCountFn: true });
 
     return { list };
   }

@@ -17,7 +17,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Icon } from '../form';
-import LogoImg from '../../static/img/logo-full.png';
 import { userActions } from '../../redux/_actions';
 
 const drawerWidth = 240;
@@ -102,7 +101,7 @@ function ResponsiveDrawer({ children, window, logout }) {
       <div className={classes.toolbar}>
         <Link href="/admin">
           <a>
-            <img src={LogoImg} alt="kit le nid" />
+            <img src="/logo.png" alt="kit le nid" />
           </a>
         </Link>
       </div>
