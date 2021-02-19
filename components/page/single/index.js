@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       position: 'absolute',
       bottom: 0,
       cursor: 'pointer',
-      width: 'fit-content',
+      width: 'auto',
       padding: '20px 23px',
       background: '#FFFFFF',
       border: '2px solid #4F80FF',
