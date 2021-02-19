@@ -22,6 +22,7 @@ import {
   getPartnerTypesApiMethod,
   deletePartnerApiMethod,
   addPartnerTypeMethod,
+  deletePartnerTypekApiMethod,
 } from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
 import { partnerTypeListKeys, partnerTypes } from '../../helpers/partner';
@@ -102,7 +103,7 @@ const PartnersDashboard = () => {
     const { list } = await getPartnersApiMethod();
     setPartners(list);
     const tmp = await getPartnerTypesApiMethod();
-    setPartnerTypesList(tmp?.list.map(({ name }) => ({ name, label: name })));
+    setPartnerTypesList(tmp?.list.map(({ name, _id }) => ({ name, label: name, _id })));
 
     resetState();
   }, [resetState, setPartners]);
@@ -112,6 +113,12 @@ const PartnersDashboard = () => {
   const handleDelete = async (id) => {
     await deletePartnerApiMethod(id);
     reloadPartners();
+  };
+  const handleDeleteType = async (id) => {
+    if (!id) return;
+    const { list = [] } = await deletePartnerTypekApiMethod(id);
+    setPartnerTypesList(list.map(({ name, _id }) => ({ name, label: name, _id })));
+    setFilter(noFilter);
   };
   useEffect(() => {
     reloadPartners();
@@ -166,16 +173,22 @@ const PartnersDashboard = () => {
       </Grid>
       <Grid container>
         <Grid container justify="center">
-          <div onClick={() => handleActiveFilter(noFilter)} className="partner-filter">
+          <div
+            onClick={() => handleActiveFilter(noFilter)}
+            className={`partner-filter ${filter === noFilter ? 'active' : ''}`}
+          >
             Tout
           </div>
           {partnerTypesList.map((elem) => (
             <div
               key={elem.name}
               onClick={() => handleActiveFilter(elem.name)}
-              className={`partner-filter ${elem.name === filter ? 'active' : ''}`}
+              className={`partner-filter relative ${elem.name === filter ? 'active' : ''}`}
             >
               {elem.name}
+              <div className="icon-container" onClick={() => handleDeleteType(elem._id)}>
+                <Icon type="plus" size="small" />
+              </div>
             </div>
           ))}
         </Grid>

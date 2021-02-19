@@ -4,10 +4,10 @@ const invalidToken = 'Invalid token provided';
 const notAuthorized = 'User has not authorized';
 const notMajor = 'is not Major!';
 const variabless = {
-  wrong: 'Wrong',
-  invalid: 'Invalid',
-  notFound: 'not found',
-  alreadyExist: 'already exist',
+  wrong: 'Mauvais',
+  invalid: 'Invalide',
+  notFound: 'introuvable',
+  alreadyExist: 'existe déjà',
 };
 const formatNameValue = (name = '', value) => `${name} ${value}`;
 
@@ -17,11 +17,11 @@ const invalidInfo = (value) => formatNameValue(variabless.invalid, value);
 const alreadyExist = (name) => formatNameValue(name, variabless.alreadyExist);
 
 const httpVariabless = {
-  phone: 'Téléphone',
-  invalid: 'Invalid',
-  wrong: 'Wrong',
-  notFound: 'not found',
-  alreadyExist: 'already exist',
+  phone: 'Le numéro de téléphone',
+  invalid: 'Invalide',
+  wrong: 'Mauvais',
+  notFound: 'introuvable',
+  alreadyExist: 'existe déjà',
 };
 
 const convertHttpErrors = (err) => {

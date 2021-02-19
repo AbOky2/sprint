@@ -149,9 +149,21 @@ class MyDocument extends Document {
               }
 
               .partner-filter {
-                margin: 5px;
+                margin: 0 5px 5px;
                 cursor: pointer;
                 font-size: 1.3rem;
+                padding-top: 3.5rem;
+              }
+              .partner-filter:hover .icon-container {
+                display: block;
+              }
+              .partner-filter .icon-container {
+                position: absolute;
+                display: none;
+                bottom: 3.5rem;
+                width: 100%;
+                text-align: center;
+                transform: rotate(45deg);
               }
               .partner-filter.active {
                 color: #475f7b;

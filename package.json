@@ -33,7 +33,7 @@
     "googleapis": "^67.0.0",
     "helmet": "4.1.0-rc.2",
     "isomorphic-unfetch": "^3.0.0",
-    "joi": "^14.3.1",
+    "joi": "^17.4.0",
     "lodash": "4.17.20",
     "method-override": "^3.0.0",
     "mongoose": "5.10.0",

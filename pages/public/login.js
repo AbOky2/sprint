@@ -167,7 +167,7 @@ const SignUp = ({ values = {}, handleChange }) => (
       position="left"
     />
     <Input
-      label="Téléphone"
+      label="Téléphone*"
       placeholder="Téléphone"
       onChange={handleChange}
       name="phone"

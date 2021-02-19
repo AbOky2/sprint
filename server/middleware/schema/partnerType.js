@@ -9,6 +9,9 @@ const schemas = {
       update: Joi.object().keys({
         name: Joi.string().min(1).max(20).required(),
       }),
+      delete: Joi.object().keys({
+        name: Joi.string().min(1).max(20).required(),
+      }),
     },
   },
 };

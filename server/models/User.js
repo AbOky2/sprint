@@ -40,6 +40,8 @@ const mongoSchema = new Schema({
   },
   phone: {
     type: String,
+    trim: true,
+    index: true,
     unique: true,
     sparse: true,
   },
@@ -280,8 +282,10 @@ class UserClass extends DBModel {
 
     if (options.sponsorshipCode && !(await this.findOne({ slug: options.sponsorshipCode })))
       throw new Error(msg.invalidInfo('Code de parrainage'));
-
-    if (await this.findOne({ email: options.email }).populate('bookmarks')) {
+    const existingUser = await this.findOne({
+      $or: [{ email: options.email }, { phone: options.phone }],
+    });
+    if (existingUser) {
       throw new Error(msg.alreadyExist('Email'));
     }
 

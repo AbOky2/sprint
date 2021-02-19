@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const { msg, keys } = require('./messages');
 
 const swithContent = Joi.object({
   _id: Joi.string().required(),
@@ -9,24 +10,67 @@ const schemas = {
   admin: {
     partner: {
       post: Joi.object().keys({
-        name: Joi.string().min(3).max(20).required(),
-        cover: Joi.string().optional().allow(''),
-        type: Joi.string().min(2).max(20).required(),
-        description: Joi.string().required(),
-        why: Joi.string().required(),
-        content: Joi.string().required(),
-        link: Joi.string().uri().required(),
+        name: Joi.string()
+          .min(3)
+          .max(20)
+          .required()
+          .messages(msg({ name: keys.partner.name })),
+        cover: Joi.string()
+          .optional()
+          .allow('')
+          .messages(msg({ name: keys.partner.cover })),
+        type: Joi.string()
+          .min(2)
+          .max(20)
+          .required()
+          .messages(msg({ name: keys.partner.type })),
+        description: Joi.string()
+          .required()
+          .messages(msg({ name: keys.partner.description })),
+        why: Joi.string()
+          .required()
+          .messages(msg({ name: keys.partner.why })),
+        content: Joi.string()
+          .required()
+          .messages(msg({ name: keys.partner.content })),
+        link: Joi.string()
+          .uri()
+          .required()
+          .messages(msg({ name: keys.partner.link })),
         position: Joi.number().min(0),
       }),
       update: Joi.object().keys({
-        picture: Joi.string().optional().allow(''),
-        cover: Joi.string().optional().allow(''),
-        name: Joi.string().min(3).max(20).required(),
-        type: Joi.string().min(2).max(20).required(),
-        description: Joi.string().optional(),
-        why: Joi.string().optional(),
-        content: Joi.string().optional(),
-        link: Joi.string().uri().optional(),
+        picture: Joi.string()
+          .optional()
+          .allow('')
+          .messages(msg({ name: keys.partner.picture })),
+        cover: Joi.string()
+          .optional()
+          .allow('')
+          .messages(msg({ name: keys.partner.cover })),
+        name: Joi.string()
+          .min(3)
+          .max(20)
+          .required()
+          .messages(msg({ name: keys.partner.name })),
+        type: Joi.string()
+          .min(2)
+          .max(20)
+          .required()
+          .messages(msg({ name: keys.partner.type })),
+        description: Joi.string()
+          .optional()
+          .messages(msg({ name: keys.partner.description })),
+        why: Joi.string()
+          .optional()
+          .messages(msg({ name: keys.partner.why })),
+        content: Joi.string()
+          .optional()
+          .messages(msg({ name: keys.partner.content })),
+        link: Joi.string()
+          .uri()
+          .optional()
+          .messages(msg({ name: keys.partner.link })),
         position: Joi.number().min(0),
       }),
       swapPosition: Joi.object().keys({

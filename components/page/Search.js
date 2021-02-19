@@ -51,6 +51,9 @@ const useStyles = makeStyles((theme) => ({
   searchContainer: {
     marginBottom: 22,
     boxShadow: '0px 4.15441px 16.6176px rgb(0 0 0 / 10%)',
+    '& input:focus': {
+      border: `solid 1px ${theme.palette.gray}`,
+    },
     '& > div:first-of-type > div > div': {
       '&:first-of-type': {
         minHeight: 62,
@@ -62,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
         borderBottomRightRadius: 0,
         borderRight: 0,
         border: `solid 1px ${theme.palette.gray}`,
+        borderColor: theme.palette.gray,
         [theme.breakpoints.down('sm')]: {
           borderBottomLeftRadius: 0,
           borderTopRightRadius: '.6rem',

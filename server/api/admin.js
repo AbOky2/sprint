@@ -52,6 +52,12 @@ router.post(
   }),
 );
 
+router.delete(
+  `/partnerType/:id`,
+  // eslint-disable-next-line no-return-await
+  deleteCollection(async ({ id }) => await PartnerTypeModel.delete(id)),
+);
+
 sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
   router.get(
     `/${plural}`,
@@ -111,7 +117,7 @@ sameQueries.forEach(({ name: { singular, plural }, model, schema }) => {
         const newData = { ...data };
         if (req.files) {
           const elem = await model.get(id);
-          if (!elem) throw new Error('Picture must be set');
+          if (!elem) throw new Error('La photo doit être presente');
 
           Object.keys(req.files).forEach((key) => {
             if (elem[key]) {
