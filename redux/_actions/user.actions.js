@@ -55,7 +55,7 @@ function updateUserDataOnly(args, callback) {
   };
 }
 
-function logout(callback) {
+function logout() {
   logOut().then(() => {
     window.location = '/login';
   });

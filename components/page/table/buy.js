@@ -1,62 +1,7 @@
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Icon, Btn } from '../../form';
-
-const styles = (theme) => ({
-  discoveryContentHeader: {
-    padding: '2.5rem 0',
-    fontFamily: 'Nunito',
-    borderTop: '1px solid rgba(26, 46, 108, 0.5)',
-    color: theme.palette.button,
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: '1.6rem',
-    lineHeight: '2.2rem',
-
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: '2.5rem',
-      display: 'none',
-      '& > div': {
-        display: 'none',
-      },
-    },
-  },
-  discoveryContent: {
-    marginBottom: '2.4rem',
-    '& > div:first-of-type': {
-      display: 'none',
-    },
-    '& > div:last-child > div > div': {
-      margin: 'auto',
-      fontSize: '1rem',
-      color: theme.palette.button,
-      border: `1px solid ${theme.palette.button}`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      '& > div': {
-        display: 'none',
-        '& > div': {
-          padding: '0 2rem',
-        },
-      },
-      '& > div:first-of-type': {
-        display: 'flex',
-        paddingTop: '2.5rem',
-        borderTop: '1px solid rgba(26, 46, 108, 0.5)',
-        '& > div:last-of-type': {
-          marginTop: '1.6rem',
-          padding: 0,
-          width: '100%',
-          '& > div': {
-            width: '100%',
-            color: theme.palette.button,
-            border: `1px solid ${theme.palette.button}`,
-          },
-        },
-      },
-    },
-  },
-});
+import styles from './styles';
 
 const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
   Object.keys(state).map((elem) => {
@@ -111,10 +56,10 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 Superficie
               </Grid>
               <Grid item md={3} xs={5} className="text-center">
-                disponibilité
+                Disponibilité
               </Grid>
               <Grid item md={3} xs={5} className="text-center">
-                Loyer/mois
+                Prix
               </Grid>
               <Grid item md={3} xs={5} className="text-center">
                 Plan 2D
@@ -124,7 +69,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
               <Grid key={curr.lot_ref} container className={classes.discoveryContent}>
                 <Grid container>
                   <Grid container justify="space-between">
-                    <span>Loyer/mois</span>
+                    <span>Prix</span>
                     <span>{`${curr.price}€`}</span>
                   </Grid>
                   <Grid container justify="space-between">
@@ -132,11 +77,12 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     <span>{`${curr.surface}m²`}</span>
                   </Grid>
                   <Grid container justify="space-between">
-                    <span>disponibilité</span>
+                    <span>Disponibilité</span>
                     <span>{curr.available_date}</span>
                   </Grid>
                   {curr.file && (
-                    <Grid item className="text-center">
+                    // eslint-disable-next-line react/jsx-no-duplicate-props
+                    <Grid item className="text-center" className={classes.btnContainer}>
                       <Btn text="Télécharger" whiteColor href={curr.file} download />
                     </Grid>
                   )}
@@ -151,7 +97,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                   <Grid item md={3} xs={5} className="text-center">
                     {`${curr.price}€`}
                   </Grid>
-                  <Grid item md={3} xs={5}>
+                  <Grid item md={3} xs={5} className={classes.btnContainer}>
                     {curr.file && (
                       <Btn
                         href={curr.file}

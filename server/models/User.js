@@ -138,7 +138,7 @@ class UserClass extends DBModel {
     userDoc.firstName = ucFirst(userDoc.firstName);
     userDoc.lastName = ucFirst(userDoc.lastName);
 
-    if (userDoc.password) userDoc.password = await bcrypt.hash(userDoc.password, salt);
+    if (updates.password) userDoc.password = await bcrypt.hash(updates.password, salt);
     await userDoc.save();
     const user = await this.findOne({ _id }).populate('bookmarks').lean();
 
