@@ -63,7 +63,7 @@ function ListCard({ data }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <div className="auto">{partnerTypes[data.type]}</div>
+        <div className="auto">{data.type}</div>
       </CardActions>
     </Card>
   );

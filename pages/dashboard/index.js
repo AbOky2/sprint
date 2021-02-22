@@ -265,7 +265,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
                 style={{ backgroundImage: `url(${elem.picture})` }}
               />
               <Typography variant="h5" className={classes.partnerCardType}>
-                {partnerTypes[elem.type]}
+                {elem.type}
               </Typography>
               <Typography variant="h4" className={classes.partnerCardTitle}>
                 {elem.name}
