@@ -1,6 +1,7 @@
 /* eslint-disable react/no-danger */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { openPopupWidget } from 'react-calendly';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
@@ -235,8 +236,6 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
     addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
   const handleCurrOpen = (e) => setCurrOpen(currOpen === e ? null : e);
-  const myRef = useRef(null);
-  const executeScroll = () => myRef.current.scrollIntoView();
   useEffect(() => {
     (async () => {
       const newState = {};
@@ -319,7 +318,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
               <Btn
                 text={isLocation ? 'Déposer mon dossier' : 'Être rappelé selon mes dispos'}
                 alignRight
-                onClick={executeScroll}
+                onClick={() => openPopupWidget({ url: 'https://calendly.com/kitlenid' })}
               />
               {isLocation ? (
                 ''
@@ -358,7 +357,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
           </Grid>
         </Grid>
 
-        <Grid container className={classes.discoveryContainer} ref={myRef}>
+        <Grid container className={classes.discoveryContainer}>
           <Typography variant="h2">
             {`Découvrez nos ${total} logements${isLocation ? '' : '  neufs disponibles'} :`}
           </Typography>

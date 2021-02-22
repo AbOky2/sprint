@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
+import Router, { withRouter } from 'next/router';
 import Link from 'next/link';
 import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
@@ -149,7 +150,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ...props }) => {
+const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ...props }) => {
   const [page, setPage] = useState({
     limit: properties.limit,
     offset: properties.offset,
@@ -187,7 +188,7 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const isLocation = typeOfAnnonce === 'Location';
-
+  console.log(props, properties.limit);
   return (
     <AdminContentWrapper redirectDashboard href="/dashboard">
       <div>
@@ -323,4 +324,4 @@ const SearchPage = ({ user, properties = { limit: 6 }, typeOfAnnonce, update, ..
   );
 };
 
-export default SearchPage;
+export default withRouter(SearchPage);

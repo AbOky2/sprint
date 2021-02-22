@@ -58,6 +58,7 @@ const MyApp = ({ Component, pageProps }) => {
       <DidomiSDK
         apiKey="923bcadb-dc92-44c8-b6eb-1dc9fe53085d"
         iabVersion={2}
+        sdkPath="https://sdk.privacy-center.org/"
         gdprAppliesGlobally
         onReady={(didomi) => console.log('Didomi SDK is loaded and ready', didomi)}
         onConsentChanged={(cwtToken) => console.log('A consent has been given/withdrawn', cwtToken)}
