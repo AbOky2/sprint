@@ -145,9 +145,6 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
   },
-  locationMaxBudget: {
-    borderTop: `solid 1px ${theme.palette.gray}`,
-  },
 }));
 
 const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ...props }) => {
