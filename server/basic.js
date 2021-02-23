@@ -2,6 +2,7 @@ const passport = require('passport');
 const { Strategy } = require('passport-local');
 const { UserModel } = require('./models');
 const msg = require('./utils/message');
+const sms = require('./utils/sms');
 const joiSchema = require('./middleware/schema');
 const requestMiddleware = require('./middleware/request');
 
@@ -19,11 +20,12 @@ const auth = ({ server }) => {
     const data = { ...req.body, email, password };
 
     let user = null;
-
     try {
       if (reqPath === signInPath) user = await UserModel.signIn(data);
-      else if (reqPath === signUpPath) user = await UserModel.signUp(data);
-      else return msg.wrongInfo('path');
+      else if (reqPath === signUpPath) {
+        // data.phone = sms.check(data.phone);
+        user = await UserModel.signUp(data);
+      } else return msg.wrongInfo('path');
 
       cb(null, user);
     } catch (error) {

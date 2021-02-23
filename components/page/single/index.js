@@ -315,11 +315,21 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
               ''
             )}
             <div className={classes.phoneContainer}>
-              <Btn
-                text={isLocation ? 'Déposer mon dossier' : 'Être rappelé selon mes dispos'}
-                alignRight
-                onClick={() => openPopupWidget({ url: 'https://calendly.com/kitlenid' })}
-              />
+              {isLocation ? (
+                <Btn
+                  text="Déposer mon dossier"
+                  alignRight
+                  href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
+                  target="_blank"
+                  dataMode="popup"
+                />
+              ) : (
+                <Btn
+                  text="Être rappelé selon mes dispos"
+                  alignRight
+                  onClick={() => openPopupWidget({ url: 'https://calendly.com/kitlenid' })}
+                />
+              )}
               {isLocation ? (
                 ''
               ) : (

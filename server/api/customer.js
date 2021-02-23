@@ -1,5 +1,4 @@
 const express = require('express');
-// const NodeGeocoder = require('node-geocoder');
 const { PartnerModel, UserModel, PropertieModel } = require('../models');
 const {
   listCollection,
@@ -42,9 +41,15 @@ router.put(
   profileCollection(
     requestMiddleware(joiSchema.user.all.user.update),
     async ({ user: sessUser, body } = {}) => {
-      const { user } = await UserModel.updateById(sessUser._id, body);
-
-      return { user };
+      const data = { ...body };
+      try {
+        // if (data.phone) {data.phone = sms.check(data.phone);}
+        const { user } = await UserModel.updateById(sessUser._id, data);
+        return { user };
+      } catch (error) {
+        // console.log(error);
+        return error;
+      }
     },
   ),
 );
@@ -53,7 +58,7 @@ router.post(
   requestMiddleware(joiSchema.user.sponsorship.post),
   handleErrors(async ({ user }, res) => {
     try {
-      await sms.create({
+      await sms.messages.create({
         body: `${user.firstName} ${user.lastName} send you a sponsorhip code: ${user.slug}`,
         from: '+33645100284',
         to: '+33645100284',
