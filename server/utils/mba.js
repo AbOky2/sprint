@@ -53,7 +53,6 @@ const getExtraInfo = (annonce = {}, lotList = []) => {
       else if (data.maxPieces < elem.pieces) data.maxPieces = elem.pieces;
       return elem;
     });
-  // console.log(data);
   return data;
 };
 const readMba = () => {
@@ -98,7 +97,6 @@ const readMba = () => {
             });
             if (newLot.surface > 1) lotList.push(newLot);
           });
-          // console.log(header);
           const lotRefs = [];
           fs.createReadStream(`${gepublicPropertiesFolder}/${fileName}.csv`, { encoding })
             .pipe(csv())
@@ -165,10 +163,8 @@ const readMba = () => {
                           await PropertieModel.add(data);
                         }
                       } else if (foundElement && foundElement._id && foundElement.lot_ref) {
-                        // console.log(foundElement);
                         await PropertieModel.updateById(foundElement._id, data);
                       }
-                      console.log('finish');
                     },
                     10000,
                     obj,
@@ -184,7 +180,6 @@ const readMba = () => {
           if (err.code) {
             logger.info('Updated properties', err);
           }
-          console.log('err', err);
         }
       });
   };

@@ -181,11 +181,11 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
     setPage(pageInfo);
   };
   const handleSumit = () => requestData();
-  const handlePage = (e, offset) => requestData(offset);
+  const handlePage = (e, pageOffset) => requestData(pageOffset);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const isLocation = typeOfAnnonce === 'Location';
-  console.log(props, properties.limit);
+
   return (
     <AdminContentWrapper redirectDashboard href="/dashboard">
       <div>

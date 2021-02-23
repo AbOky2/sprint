@@ -136,7 +136,6 @@ const DropdownSelect = withStyles(styles)(({ onChange, position, list, placehold
     if (node.current.contains(e.target) && open && e.target.nodeName === 'SPAN') setOpen(false);
     else if (node.current.contains(e.target) && !open) setOpen(true);
     else if (!node.current.contains(e.target)) setOpen(false);
-    console.log(e.target.nodeName, open);
   };
   useEffect(() => {
     // add when mounted

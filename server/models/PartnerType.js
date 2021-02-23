@@ -26,7 +26,7 @@ class PartnerClass extends DBModel {
 
       return await this.list();
     } catch (error) {
-      console.log(error);
+      throw new Error('Error while add');
     }
   }
 

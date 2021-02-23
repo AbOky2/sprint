@@ -70,7 +70,7 @@ const PartnerPage = ({ user }) => {
   const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
   const handleSubmit = () => {
     if (!state.email || !state.firstName || !state.lastName || !state.phone) return;
-    addSponsorshipApiMethod(state).then(() => console.log('ok'));
+    addSponsorshipApiMethod(state);
   };
   const classes = useStyles();
 

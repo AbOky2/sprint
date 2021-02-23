@@ -55,7 +55,7 @@ const MyApp = ({ Component, pageProps }) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <DidomiSDK
+      {/* <DidomiSDK
         apiKey="923bcadb-dc92-44c8-b6eb-1dc9fe53085d"
         iabVersion={2}
         sdkPath="https://sdk.privacy-center.org/"
@@ -64,7 +64,7 @@ const MyApp = ({ Component, pageProps }) => {
         onConsentChanged={(cwtToken) => console.log('A consent has been given/withdrawn', cwtToken)}
         onNoticeShown={() => console.log('Didomi Notice Shown')}
         onNoticeHidden={() => console.log('Didomi Notice Hidden')}
-      />
+      /> */}
       <CssBaseline />
       <div className="main-container">
         <PersistGate persistor={store.__persistor}>
