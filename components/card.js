@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { spaceCurrency } from '../helpers/convertAndCheck';
 import { Icon } from './form';
 
 const useStyles = makeStyles({
@@ -85,7 +86,7 @@ const Card = ({ _id, title, src, address, description, dimensions, price, onClic
         </Typography>
         <Typography variant="body1" align="right" className={classes.price}>
           <span>à partir de</span>
-          {` ${price}€`}
+          {` ${spaceCurrency(price)}€`}
         </Typography>
       </div>
     </div>

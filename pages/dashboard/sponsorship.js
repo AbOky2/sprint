@@ -79,7 +79,7 @@ const PartnerPage = ({ user }) => {
       <Typography variant="h1">Parrainer l’un de vos proches</Typography>
       <div className={classes.tutorialConainer}>
         <Typography variant="h2">
-          Faites découvrir Kit le nid à vos proches et recevez 800€
+          Faites découvrir Kit le nid à vos proches et recevez 400€
         </Typography>
         <Typography>
           Aidez vos proches à concrétiser leur projet immobilier. Votre code parrain :

@@ -37,7 +37,7 @@ const toggleArray = (array, name) => {
   if (!found) data.push(name);
   return data;
 };
-
+const spaceCurrency = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 const toggleArrayOfObj = (arr, item, getValue = (e) => e) => {
   const filtered = arr.filter((i) => String(getValue(i)) !== String(getValue(item)));
   if (arr.length === filtered.length) return [...arr, item];
@@ -66,4 +66,5 @@ module.exports = {
   toggleArray,
   toggleArrayOfObj,
   toQueryParams,
+  spaceCurrency,
 };

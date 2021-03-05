@@ -14,6 +14,7 @@ import { typeOfAnnoncies } from '../../../helpers/property';
 import Carrousel from '../../Carrousel';
 import LocationTable from '../table/location';
 import BuyTable from '../table/buy';
+import { spaceCurrency } from '../../../helpers/convertAndCheck';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -304,7 +305,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
           <Grid item md={6} className="text-right">
             <Typography variant="h1">
               <span>à partir de</span>
-              {` ${property.price}€`}
+              {` ${spaceCurrency(property.price)}€`}
               <span>{isLocation ? 'CC/mois' : ''}</span>
             </Typography>
             {property.available_date && !isLocation ? (
