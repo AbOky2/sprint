@@ -55,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
     '& input:focus': {
       border: `solid 1px ${theme.palette.gray}`,
     },
+    '& > div:first-of-type': {
+      position: 'relative',
+      zIndex: 30,
+    },
     '& > div:first-of-type > div > div': {
       '&:first-of-type': {
         minHeight: 62,
@@ -170,6 +174,7 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
     setLiked(toggleArray(liked, id));
     addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
+
   const requestData = async (offset = 0) => {
     if (!queryData.maxPrice) queryData.maxPrice = -1;
     const { list: { docs, ...pageInfo } = {} } = await getPropertiesApiMethod({

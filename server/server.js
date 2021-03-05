@@ -30,6 +30,7 @@ const options = {
 mongoose.connect(MONGO_URL, options);
 const URL_MAP = {
   '/login': '/public/login',
+  '/': '/dashboard',
 };
 const app = next({ dev });
 const handle = app.getRequestHandler();
