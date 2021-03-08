@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
+const PartnershipPrice = 400;
 const PartnerPage = ({ user }) => {
   const [state, setState] = useState({ email: '', firstName: '', lastName: '' });
   const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
@@ -79,7 +79,8 @@ const PartnerPage = ({ user }) => {
       <Typography variant="h1">Parrainer l’un de vos proches</Typography>
       <div className={classes.tutorialConainer}>
         <Typography variant="h2">
-          Faites découvrir Kit le nid à vos proches et recevez 400€
+          {`Faites découvrir Kit le nid à vos proches et recevez
+          ${PartnershipPrice}€`}
         </Typography>
         <Typography>
           Aidez vos proches à concrétiser leur projet immobilier. Votre code parrain :
@@ -112,7 +113,8 @@ const PartnerPage = ({ user }) => {
             </Grid>
             <Typography variant="h3">Etapes 03</Typography>
             <Typography>
-              Dès sa signature chez le notaire, vous percevrez 800€ par virement.
+              {`Dès sa signature chez le notaire, vous percevrez
+              ${PartnershipPrice}€ par virement.`}
             </Typography>
           </Grid>
         </Grid>
