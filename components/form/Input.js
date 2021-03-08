@@ -56,6 +56,7 @@ export const GoogleMaps = ({ onChange }) => (
     selectProps={{
       placeholder: 'Localisation',
       onChange,
+      isClearable: true,
     }}
   />
 );
