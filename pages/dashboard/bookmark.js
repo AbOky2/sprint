@@ -93,7 +93,8 @@ const BookmarkPage = ({ user, update }) => {
                 _id,
                 heading,
                 pictures,
-                fullAddress,
+                city,
+                postal,
                 typeOfAnnonce,
                 typeOfAnnoncies,
                 dimensions,
@@ -110,7 +111,7 @@ const BookmarkPage = ({ user, update }) => {
                         _id={_id}
                         title={heading}
                         src={pictures?.[0]}
-                        address={fullAddress}
+                        address={`${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}`}
                         description={typeOfAnnoncies}
                         dimensions={dimensions}
                         price={price}

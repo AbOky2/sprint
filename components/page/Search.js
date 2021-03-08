@@ -276,7 +276,7 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
         <Grid container>
           {state?.length ? (
             state.map(
-              ({ _id, heading, pictures, fullAddress, typeOfAnnonce, dimensions, price }) => (
+              ({ _id, heading, pictures, city, postal, typeOfAnnonce, dimensions, price }) => (
                 <Grid item key={_id} className={classes.listContainer}>
                   <Link
                     href={`/dashboard/property/${
@@ -288,7 +288,7 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
                         _id={_id}
                         title={heading}
                         src={pictures?.[0]}
-                        address={fullAddress}
+                        address={`${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}`}
                         description={typeOfAnnonce}
                         dimensions={dimensions}
                         price={price}
