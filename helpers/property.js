@@ -219,7 +219,7 @@ const availableProperties = {
 
 const filteredProperties = Object.keys(availableProperties);
 const typeOfAnnoncies = ['Vente', 'Location'];
-const typeOfProperties = ['Appartement', 'maison', 'terrain'];
+const typeOfProperties = ['Appartement', 'Maison'];
 
 const buyDatas = {
   encoding: 'binary',

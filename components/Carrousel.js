@@ -4,6 +4,7 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
+import { NEXT_PUBLIC_UPLOAD_URL } from '../config';
 import { Icon } from './form';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -76,7 +77,7 @@ function SwipeableTextMobileStepper({ list = [] }) {
               <div
                 className={classes.img}
                 style={{
-                  backgroundImage: `url(${path})`,
+                  backgroundImage: `url(${NEXT_PUBLIC_UPLOAD_URL + path})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
@@ -93,7 +94,7 @@ function SwipeableTextMobileStepper({ list = [] }) {
         position="static"
         variant="text"
         activeStep={activeStep}
-        nextButton={
+        nextButton={(
           <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
             {theme.direction === 'rtl' ? (
               <Icon type="carrouselArrow" color="white" />
@@ -101,8 +102,8 @@ function SwipeableTextMobileStepper({ list = [] }) {
               <Icon type="carrouselArrow" color="white" />
             )}
           </Button>
-        }
-        backButton={
+        )}
+        backButton={(
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === 'rtl' ? (
               <Icon type="carrouselArrow" color="white" />
@@ -110,7 +111,7 @@ function SwipeableTextMobileStepper({ list = [] }) {
               <Icon type="carrouselArrow" color="white" />
             )}
           </Button>
-        }
+        )}
       />
     </div>
   );

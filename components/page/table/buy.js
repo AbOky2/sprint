@@ -1,6 +1,8 @@
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Icon, Btn } from '../../form';
+import { NEXT_PUBLIC_UPLOAD_URL } from '../../../config';
+
 import styles from './styles';
 
 const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
@@ -83,7 +85,12 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                   {curr.file && (
                     // eslint-disable-next-line react/jsx-no-duplicate-props
                     <Grid item className="text-center" className={classes.btnContainer}>
-                      <Btn text="Télécharger" whiteColor href={curr.file} download />
+                      <Btn
+                        text="Télécharger"
+                        whiteColor
+                        href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                        download
+                      />
                     </Grid>
                   )}
                 </Grid>
@@ -100,7 +107,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                   <Grid item md={3} xs={5} className={classes.btnContainer}>
                     {curr.file && (
                       <Btn
-                        href={curr.file}
+                        href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
                         download
                         target="_blank"
                         dataMode="popup"

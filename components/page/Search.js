@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { NEXT_PUBLIC_UPLOAD_URL } from '../../config';
 import { getPropertiesApiMethod, addBookmarkApiMethod } from '../../lib/api/customer';
 import { toggleArray } from '../../helpers/convertAndCheck';
 import { typeOfProperties } from '../../helpers/property';
@@ -287,7 +288,7 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
                       <Card
                         _id={_id}
                         title={heading}
-                        src={pictures?.[0]}
+                        src={NEXT_PUBLIC_UPLOAD_URL + pictures?.[0]}
                         address={`${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}`}
                         description={typeOfAnnonce}
                         dimensions={dimensions}
