@@ -53,6 +53,12 @@ const styles = (theme) => ({
 export const GoogleMaps = ({ onChange }) => (
   <GooglePlacesAutocomplete
     apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
+    apiOptions={{ language: 'fr', region: 'fr' }}
+    autocompletionRequest={{
+      componentRestrictions: {
+        country: ['fr'],
+      },
+    }}
     selectProps={{
       placeholder: 'Localisation',
       onChange,
