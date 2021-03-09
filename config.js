@@ -15,6 +15,7 @@ const {
   TWILIO_TOKEN,
   GOOGLE_GEOLOCATION,
   NEXT_PUBLIC_UPLOAD_URL,
+  NEXT_PUBLIC_ROOT_URL,
 } = process.env;
 
 const PORT = process.env.PORT || 3000;
@@ -39,4 +40,5 @@ module.exports = {
   TWILIO_TOKEN,
   GOOGLE_GEOLOCATION,
   NEXT_PUBLIC_UPLOAD_URL,
+  NEXT_PUBLIC_ROOT_URL,
 };
