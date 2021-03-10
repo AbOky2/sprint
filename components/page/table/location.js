@@ -75,55 +75,66 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
             </Grid>
             {current.list
               ?.sort((a, b) => a.price - b.price)
-              .map((curr, index) => (
-                <Grid key={index} container className={classes.discoveryContent}>
-                  <Grid container>
-                    <Grid container justify="space-between">
-                      <span>Loyer/mois</span>
-                      <strong>{curr.price}</strong>€
+              .map((curr, index) => {
+                const availableDate = locationAvailableDate(
+                  curr.available_date,
+                  curr.contract_end_date,
+                );
+                return (
+                  <Grid key={index} container className={classes.discoveryContent}>
+                    <Grid container>
+                      <Grid container justify="space-between">
+                        <span>Loyer/mois</span>
+                        <span>
+                          <strong>{curr.price}</strong>
+€
+</span>
+                      </Grid>
+                      <Grid container justify="space-between">
+                        <span>Superficie</span>
+                        <span>{`${curr.surface}m²`}</span>
+                      </Grid>
+                      <Grid container justify="space-between">
+                        <span>Étage</span>
+                        <span>{curr.floor}</span>
+                      </Grid>
+                      <Grid container justify="space-between">
+                        <span>disponibilité</span>
+                        <span>{availableDate}</span>
+                      </Grid>
+                      <Grid item className="text-center" className={classes.btnContainer}>
+                        <Btn text="Réserver" whiteColor />
+                      </Grid>
                     </Grid>
-                    <Grid container justify="space-between">
-                      <span>Superficie</span>
-                      <span>{`${curr.surface}m²`}</span>
-                    </Grid>
-                    <Grid container justify="space-between">
-                      <span>disponibilité</span>
-                      <span>
-                        {locationAvailableDate(curr.available_date, curr.contract_end_date)}
-                      </span>
-                    </Grid>
-                    <Grid item className="text-center" className={classes.btnContainer}>
-                      <Btn text="Réserver" whiteColor />
+                    <Grid container alignItems="center">
+                      <Grid item md={2} xs={5} className="text-center">
+                        {`${curr.surface}m²`}
+                      </Grid>
+                      <Grid item md={2} xs={5} className="text-center">
+                        {curr.floor}
+                      </Grid>
+                      <Grid item md={2} xs={5} className="text-center">
+                        {availableDate}
+                      </Grid>
+                      <Grid item md={2} xs={5} className="text-center">
+                        <strong>{curr.price}</strong>€
+                      </Grid>
+                      <Grid item md={2} xs={5} className="text-center">
+                        {`${curr.guarantee}€`}
+                      </Grid>
+                      <Grid item md={2} xs={5} className={classes.btnContainer}>
+                        <Btn
+                          href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
+                          target="_blank"
+                          dataMode="popup"
+                          text="Réserver"
+                          whiteColor
+                        />
+                      </Grid>
                     </Grid>
                   </Grid>
-                  <Grid container alignItems="center">
-                    <Grid item md={2} xs={5} className="text-center">
-                      {`${curr.surface}m²`}
-                    </Grid>
-                    <Grid item md={2} xs={5} className="text-center">
-                      {curr.floor}
-                    </Grid>
-                    <Grid item md={2} xs={5} className="text-center">
-                      {locationAvailableDate(curr.available_date, curr.contract_end_date)}
-                    </Grid>
-                    <Grid item md={2} xs={5} className="text-center">
-                      <strong>{curr.price}</strong>€
-                    </Grid>
-                    <Grid item md={2} xs={5} className="text-center">
-                      {`${curr.guarantee}€`}
-                    </Grid>
-                    <Grid item md={2} xs={5} className={classes.btnContainer}>
-                      <Btn
-                        href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
-                        target="_blank"
-                        dataMode="popup"
-                        text="Réserver"
-                        whiteColor
-                      />
-                    </Grid>
-                  </Grid>
-                </Grid>
-              ))}
+                );
+              })}
           </div>
         )}
       </div>
