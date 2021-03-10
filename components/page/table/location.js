@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { spaceCurrency, locationAvailableDate } from '../../../helpers/convertAndCheck';
 import { Icon, Btn } from '../../form';
 import styles from './styles';
 
@@ -18,7 +19,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
               <div>
                 {` ${elem} pièce${elem > 1 ? 's' : ''} à partir de `}
 
-                <strong>{` ${current.minPrice}€`}</strong>
+                <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
               </div>
             </Grid>
             <Grid item onClick={() => handleCurrOpen(elem)} className="text-center pointer">
@@ -35,7 +36,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
           </Grid>
           <Grid item md={3} xs={5}>
             <span>à partir de</span>
-            <strong>{` ${current.minPrice}€`}</strong>
+            <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
           </Grid>
           <Grid item md={3} xs={5}>
             {`${current.list.length} logements disponibles`}
@@ -72,53 +73,57 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 Plan 2D
               </Grid>
             </Grid>
-            {current.list.map((curr) => (
-              <Grid key={curr.lot_ref} container className={classes.discoveryContent}>
-                <Grid container>
-                  <Grid container justify="space-between">
-                    <span>Loyer/mois</span>
-                    <span>{`${curr.price}€`}</span>
+            {current.list
+              ?.sort((a, b) => a.price - b.price)
+              .map((curr, index) => (
+                <Grid key={index} container className={classes.discoveryContent}>
+                  <Grid container>
+                    <Grid container justify="space-between">
+                      <span>Loyer/mois</span>
+                      <strong>{curr.price}</strong>€
+                    </Grid>
+                    <Grid container justify="space-between">
+                      <span>Superficie</span>
+                      <span>{`${curr.surface}m²`}</span>
+                    </Grid>
+                    <Grid container justify="space-between">
+                      <span>disponibilité</span>
+                      <span>
+                        {locationAvailableDate(curr.available_date, curr.contract_end_date)}
+                      </span>
+                    </Grid>
+                    <Grid item className="text-center" className={classes.btnContainer}>
+                      <Btn text="Réserver" whiteColor />
+                    </Grid>
                   </Grid>
-                  <Grid container justify="space-between">
-                    <span>Superficie</span>
-                    <span>{`${curr.surface}m²`}</span>
-                  </Grid>
-                  <Grid container justify="space-between">
-                    <span>disponibilité</span>
-                    <span>{curr.available_date}</span>
-                  </Grid>
-                  <Grid item className="text-center" className={classes.btnContainer}>
-                    <Btn text="Réserver" whiteColor />
+                  <Grid container alignItems="center">
+                    <Grid item md={2} xs={5} className="text-center">
+                      {`${curr.surface}m²`}
+                    </Grid>
+                    <Grid item md={2} xs={5} className="text-center">
+                      {curr.floor}
+                    </Grid>
+                    <Grid item md={2} xs={5} className="text-center">
+                      {locationAvailableDate(curr.available_date, curr.contract_end_date)}
+                    </Grid>
+                    <Grid item md={2} xs={5} className="text-center">
+                      <strong>{curr.price}</strong>€
+                    </Grid>
+                    <Grid item md={2} xs={5} className="text-center">
+                      {`${curr.guarantee}€`}
+                    </Grid>
+                    <Grid item md={2} xs={5} className={classes.btnContainer}>
+                      <Btn
+                        href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
+                        target="_blank"
+                        dataMode="popup"
+                        text="Réserver"
+                        whiteColor
+                      />
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid container alignItems="center">
-                  <Grid item md={2} xs={5} className="text-center">
-                    {`${curr.surface}m²`}
-                  </Grid>
-                  <Grid item md={2} xs={5} className="text-center">
-                    {curr.floor}
-                  </Grid>
-                  <Grid item md={2} xs={5} className="text-center">
-                    {curr.available_date}
-                  </Grid>
-                  <Grid item md={2} xs={5} className="text-center">
-                    {`${curr.price}€`}
-                  </Grid>
-                  <Grid item md={2} xs={5} className="text-center">
-                    {`${curr.guarantee}€`}
-                  </Grid>
-                  <Grid item md={2} xs={5} className={classes.btnContainer}>
-                    <Btn
-                      href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
-                      target="_blank"
-                      dataMode="popup"
-                      text="Réserver"
-                      whiteColor
-                    />
-                  </Grid>
-                </Grid>
-              </Grid>
-            ))}
+              ))}
           </div>
         )}
       </div>
