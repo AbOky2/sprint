@@ -79,70 +79,84 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 Plan 2D/3D
               </Grid>
             </Grid>
-            {current.list.map((curr, index) => (
-              <Grid key={index} container className={classes.discoveryContent}>
-                <Grid container>
-                  <Grid container justify="space-between">
-                    <span>Prix</span>
-                    <span>{`${curr.price}€`}</span>
-                  </Grid>
-                  <Grid container justify="space-between">
-                    <span>Superficie</span>
-                    <span>{`${curr.surface}m²`}</span>
-                  </Grid>
-                  <Grid container justify="space-between">
-                    <span>Disponibilité</span>
-                    <span>{curr.available_date}</span>
-                  </Grid>
-                  {curr.file && (
-                    // eslint-disable-next-line react/jsx-no-duplicate-props
-                    <Grid item className="text-center" className={classes.btnContainer}>
-                      <Btn
-                        text="Voir"
-                        whiteColor
-                        href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
-                        download
-                      />
+            {current.list.map((curr, index) => {
+              const price = spaceCurrency(curr.price);
+              const available_date = getDateQuarter(curr.available_date);
+              const typeOfProperty = ucfirst(curr.typeOfProperty);
+
+              return (
+                <Grid key={index} container className={classes.discoveryContent}>
+                  <Grid container>
+                    <Grid container justify="space-between">
+                      <span>Type</span>
+                      <span>{typeOfProperty}</span>
                     </Grid>
-                  )}
-                </Grid>
-                <Grid container alignItems="center">
-                  <Grid item md={1} xs={1} className="text-center">
-                    {ucfirst(curr.typeOfProperty)}
-                  </Grid>
-                  <Grid item md={2} xs={2} className="text-center">
-                    {`${spaceCurrency(curr.price)}€`}
-                  </Grid>
-                  <Grid item md={1} xs={1} className="text-center">
-                    {getDateQuarter(curr.available_date)}
-                  </Grid>
-                  <Grid item md={1} xs={1} className="text-center">
-                    {`${curr.surface}m²`}
-                  </Grid>
-                  <Grid item md={2} xs={2} className="text-center">
-                    {curr.floor ? `Étage ${curr.floor}` : 'RDC'}
-                  </Grid>
-                  <Grid item md={2} xs={2} className="text-center">
-                    {curr.nb_parking ? `${curr.nb_parking} inclus` : '-'}
-                  </Grid>
-                  <Grid item md={2} xs={2} className="text-center">
-                    {curr.advantages.join(', ')}
-                  </Grid>
-                  <Grid item md={1} xs={1} className={classes.btnContainer}>
+                    <Grid container justify="space-between">
+                      <span>Prix</span>
+                      <strong>{`${price}€`}</strong>
+                    </Grid>
+                    <Grid container justify="space-between">
+                      <span>Superficie</span>
+                      <span>{`${curr.surface}m²`}</span>
+                    </Grid>
+                    <Grid container justify="space-between">
+                      <span>Étage</span>
+                      <span>{curr.floor}</span>
+                    </Grid>
+                    <Grid container justify="space-between">
+                      <span>Disponibilité</span>
+                      <span>{available_date}</span>
+                    </Grid>
                     {curr.file && (
-                      <Btn
-                        href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
-                        download
-                        target="_blank"
-                        dataMode="popup"
-                        text="Voir"
-                        whiteColor
-                      />
+                      // eslint-disable-next-line react/jsx-no-duplicate-props
+                      <Grid item className="text-center" className={classes.btnContainer}>
+                        <Btn
+                          text="Voir"
+                          whiteColor
+                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                          download
+                        />
+                      </Grid>
                     )}
                   </Grid>
+                  <Grid container alignItems="center">
+                    <Grid item md={1} xs={1} className="text-center">
+                      {typeOfProperty}
+                    </Grid>
+                    <Grid item md={2} xs={2} className="text-center">
+                      {`${price}€`}
+                    </Grid>
+                    <Grid item md={1} xs={1} className="text-center">
+                      {available_date}
+                    </Grid>
+                    <Grid item md={1} xs={1} className="text-center">
+                      {`${curr.surface}m²`}
+                    </Grid>
+                    <Grid item md={2} xs={2} className="text-center">
+                      {curr.floor ? `Étage ${curr.floor}` : 'RDC'}
+                    </Grid>
+                    <Grid item md={2} xs={2} className="text-center">
+                      {curr.nb_parking ? `${curr.nb_parking} inclus` : '-'}
+                    </Grid>
+                    <Grid item md={2} xs={2} className="text-center">
+                      {curr.advantages.join(', ')}
+                    </Grid>
+                    <Grid item md={1} xs={1} className={classes.btnContainer}>
+                      {curr.file && (
+                        <Btn
+                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                          download
+                          target="_blank"
+                          dataMode="popup"
+                          text="Voir"
+                          whiteColor
+                        />
+                      )}
+                    </Grid>
+                  </Grid>
                 </Grid>
-              </Grid>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
