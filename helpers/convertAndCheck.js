@@ -52,7 +52,7 @@ const locationAvailableDate = (availableDate, contractEndDate) => {
   if ((!date && !endDate) || isBefore(endDate, new Date())) return 'Disponible';
   return `Loué jusqu'au ${contractEndDate}`;
 };
-const spaceCurrency = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+const spaceCurrency = (x) => (x ? x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : x);
 const toggleArrayOfObj = (arr, item, getValue = (e) => e) => {
   const filtered = arr.filter((i) => String(getValue(i)) !== String(getValue(item)));
   if (arr.length === filtered.length) return [...arr, item];
