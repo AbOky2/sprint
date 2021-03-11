@@ -144,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
   },
   resetPassword: {
     marginTop: '2rem',
-    textAlign: 'left',
+    textAlign: 'center',
     fontSize: '1.5rem',
     color: `${theme.palette.primary.main}!important`,
   },
