@@ -135,6 +135,22 @@ const schemas = {
           .required()
           .messages(msg({ name: keys.user.password })),
       }),
+      forgotPassword: Joi.object({
+        email: Joi.string()
+          .email({ tlds: false })
+          .required()
+          .messages(msg({ name: keys.user.email })),
+      }),
+      resetPassword: Joi.object({
+        token: Joi.string()
+          .min(4)
+          .required()
+          .messages(msg({ name: keys.user.token })),
+        password: Joi.string()
+          .min(4)
+          .required()
+          .messages(msg({ name: keys.user.password })),
+      }),
     },
   },
   all: {

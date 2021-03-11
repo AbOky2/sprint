@@ -9,6 +9,7 @@ module.exports = {
   keys: {
     id: 'Identifiant',
     user: {
+      token: 'Token',
       picture: "L'image",
       bookmarks: 'Les favories',
       firstName: 'Le nom',

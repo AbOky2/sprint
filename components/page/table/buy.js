@@ -79,13 +79,13 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 Plan 2D/3D
               </Grid>
             </Grid>
-            {current.list.map((curr, index) => {
+            {current.list.map((curr) => {
               const price = spaceCurrency(curr.price);
               const available_date = getDateQuarter(curr.available_date);
               const typeOfProperty = ucfirst(curr.typeOfProperty);
 
               return (
-                <Grid key={index} container className={classes.discoveryContent}>
+                <Grid key={curr.ref} container className={classes.discoveryContent}>
                   <Grid container>
                     <Grid container justify="space-between">
                       <span>Type</span>

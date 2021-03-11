@@ -1,5 +1,5 @@
 import { userConstants } from '../_constants';
-import { signIn, signUp, logOut } from '../../lib/api/public';
+import { signIn, signUp, logOut, resetPassword } from '../../lib/api/public';
 import { updateUserApiMethod } from '../../lib/api/customer';
 import { alertActions } from './alert.actions';
 
@@ -84,10 +84,28 @@ function register(user) {
     );
   };
 }
+function resetPass(args) {
+  const success = (user) => ({ type: userConstants.LOGIN_SUCCESS, user });
+  const failure = (error) => ({ type: userConstants.LOGIN_FAILURE, error });
+  return (dispatch) => {
+    resetPassword(args)
+      .then(({ user }) => {
+        if (user && user._id) {
+          dispatch(success(user));
+          window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
+        }
+      })
+      .catch((error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      });
+  };
+}
 export const userActions = {
   login,
   logout,
   register,
   update,
+  resetPass,
   updateUserDataOnly,
 };

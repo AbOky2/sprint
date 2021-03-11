@@ -6,19 +6,20 @@ const bcrypt = require('bcrypt');
  * @param {String} minor
  * @returns {Promise<*>}
  */
-const genSalt = async (rounds, minor) => new Promise((resolve, reject) => {
-  const cb = (err, salt) => {
-    if (err) return reject(err);
+const genSalt = async (rounds, minor) =>
+  new Promise((resolve, reject) => {
+    const cb = (err, salt) => {
+      if (err) return reject(err);
 
-    return resolve(salt);
-  };
+      return resolve(salt);
+    };
 
-  return bcrypt.genSalt(
-    rounds,
-    minor !== undefined ? minor : cb,
-    minor === undefined ? cb : undefined,
-  );
-});
+    return bcrypt.genSalt(
+      rounds,
+      minor !== undefined ? minor : cb,
+      minor === undefined ? cb : undefined,
+    );
+  });
 
 /**
  * Hash some data with a given salt
@@ -27,11 +28,14 @@ const genSalt = async (rounds, minor) => new Promise((resolve, reject) => {
  * @returns {Promise<String>}
  */
 // eslint-disable-next-line max-len
-const hash = (data, salt) => new Promise((resolve, reject) => bcrypt.hash(data, salt, (err, hashedData) => {
-  if (err) return reject(err);
+const hash = (data, salt) =>
+  new Promise((resolve, reject) =>
+    bcrypt.hash(data, salt, (err, hashedData) => {
+      if (err) return reject(err);
 
-  return resolve(hashedData);
-}));
+      return resolve(hashedData);
+    }),
+  );
 
 /**
  * Compare clear data and hashed data
@@ -39,13 +43,14 @@ const hash = (data, salt) => new Promise((resolve, reject) => bcrypt.hash(data, 
  * @param {String} hashed
  * @returns {Promise<boolean>}
  */
-const compare = (data, hashed) => new Promise((resolve, reject) => {
-  bcrypt.compare(data, hashed, (err, isMatch) => {
-    if (err) return reject(err);
+const compare = (data, hashed) =>
+  new Promise((resolve, reject) => {
+    bcrypt.compare(data, hashed, (err, isMatch) => {
+      if (err) return reject(err);
 
-    return resolve(isMatch);
+      return resolve(isMatch);
+    });
   });
-});
 
 module.exports = {
   genSalt,

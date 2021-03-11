@@ -15,6 +15,7 @@ const { defaultLimit, defaultOffset } = require('../../helpers/query');
 const DBModel = require('./Model');
 const PropertyModel = require('./Propertie');
 const msg = require('../utils/message');
+const { sendForgotPassword } = require('../utils/mail');
 const bcrypt = require('../utils/bcrypt');
 const { ROOT_URL } = require('../../config');
 
@@ -92,6 +93,8 @@ const mongoSchema = new Schema({
   referrer_url: {
     type: String,
   },
+  resetPasswordToken: String,
+  resetPasswordExpires: Date,
 });
 
 class UserClass extends DBModel {
@@ -145,6 +148,36 @@ class UserClass extends DBModel {
     const user = await this.findOne({ _id }).populate('bookmarks').lean();
 
     return { user: pick(user, this.publicFields()) };
+  }
+
+  static async forgotPassword({ email }) {
+    const userDoc = await this.findOne({ email });
+    const token = await bcrypt.genSalt(10);
+
+    if (!userDoc) throw new Error(msg.notFound('Email'));
+
+    userDoc.resetPasswordToken = token;
+    userDoc.resetPasswordExpires = Date.now() + 3600000;
+    userDoc.save();
+    const to = userDoc.email;
+    sendForgotPassword({ token, to });
+    return { user: to };
+  }
+
+  static async resetPassword({ token, password }) {
+    const userDoc = await this.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+    const salt = await bcrypt.genSalt(10);
+
+    if (!userDoc) throw new Error(`${msg.notFound('Token')} ou expiré`);
+
+    userDoc.password = await bcrypt.hash(password, salt);
+    userDoc.resetPasswordToken = null;
+    userDoc.resetPasswordExpires = null;
+    userDoc.save();
+    return { user: pick(userDoc.toObject(), this.publicFields()) };
   }
 
   static async getUserZones(_id) {

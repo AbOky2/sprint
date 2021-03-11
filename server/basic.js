@@ -73,10 +73,41 @@ const auth = ({ server }) => {
       })(req, res, next);
     }),
   );
+
   server.get('/auth/logout', (req, res) => {
     req.logout();
     res.json({ success: 'sucess' });
   });
-};
 
+  server.post(
+    '/auth/forgotPassword',
+    requestMiddleware(joiSchema.user.public.user.forgotPassword),
+    async ({ body } = {}, res) => {
+      try {
+        const { user } = await UserModel.forgotPassword(body);
+        res.json({ user });
+      } catch (error) {
+        console.log(error.message);
+        res.status(401).json({ message: error.message });
+      }
+    },
+  );
+
+  server.post(
+    '/auth/resetPassword',
+    requestMiddleware(joiSchema.user.public.user.resetPassword),
+    async (req, res) => {
+      try {
+        const { user } = await UserModel.resetPassword(req.body);
+        req.login(user, (error) => {
+          if (error) return res.status(401).json({ message: error.message });
+
+          res.json({ user });
+        });
+      } catch (error) {
+        res.status(401).json({ message: error.message });
+      }
+    },
+  );
+};
 module.exports = auth;

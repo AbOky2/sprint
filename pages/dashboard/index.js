@@ -304,7 +304,7 @@ Dashboard.getInitialProps = async ({ req, res }) => {
   return { partners: list };
 };
 const mapState = (state) => {
-  const { loggingIn, user } = state?.authentication;
-  return { loggingIn, user };
+  const { user } = state?.authentication;
+  return { user };
 };
 export default withAuth(withStyles(styles)(connect(mapState)(Dashboard)));

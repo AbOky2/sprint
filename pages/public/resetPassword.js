@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { Grid, Checkbox, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { userActions } from '../../redux/_actions';
-import { Btn, Select, Input } from '../../components/form';
+import { Btn, Input } from '../../components/form';
+import { forgotPassword } from '../../lib/api/public';
 import withAuth from '../../lib/withAuth';
-import { Student, userRoleSelect } from '../../helpers/user';
-import { pick } from '../../helpers/convertAndCheck';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -142,146 +141,72 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  resetPassword: {
-    marginTop: '2rem',
-    textAlign: 'left',
-    fontSize: '1.5rem',
-    color: `${theme.palette.primary.main}!important`,
-  },
 }));
-const SignUp = ({ values = {}, handleChange }) => (
-  <Grid container item>
-    <Input
-      label="Nom*"
-      placeholder="Nom*"
-      onChange={handleChange}
-      name="lastName"
-      position="left"
-    />
-    <Input
-      label="Prénom*"
-      placeholder="Prénom*"
-      onChange={handleChange}
-      name="firstName"
-      position="right"
-    />
-    <Input
-      label="E-mail*"
-      placeholder="Votre e-mail"
-      onChange={handleChange}
-      name="email"
-      type="email"
-      position="left"
-    />
-    <Input
-      label="Téléphone*"
-      placeholder="Téléphone"
-      onChange={handleChange}
-      name="phone"
-      type="phone"
-      position="right"
-    />
-    <Input
-      label="Mot de passe*"
-      placeholder="Mot de passe"
-      onChange={handleChange}
-      name="password"
-      type="password"
-      position="left"
-    />
-    <Select
-      name="role"
-      value={values.role}
-      onChange={handleChange}
-      list={userRoleSelect}
-      label="Status*"
-      position="right"
-    />
-    <Input label="Code parrain" placeholder="Code" onChange={handleChange} name="sponsorshipCode" />
-  </Grid>
-);
-const SignIn = ({ values = {}, handleChange }) => (
+const SignIn = ({ token, values = {}, handleChange }) => (
   <>
-    <Input
-      label="E-mail*"
-      value={values.email}
-      onChange={handleChange}
-      name="email"
-      type="email"
-      placeholder="Votre e-mail"
-      position="left"
-    />
-    <Input
-      label="Mot de passe*"
-      value={values.password}
-      onChange={handleChange}
-      name="password"
-      type="password"
-      placeholder="Password"
-      position="right"
-    />
+    {token ? (
+      <>
+        <Input
+          label="Mot de passe*"
+          value={values.password}
+          onChange={handleChange}
+          name="password"
+          type="password"
+          placeholder="Password"
+        />
+        <Input
+          label="Confirmer votre mot de passe*"
+          value={values.confirmPassword}
+          onChange={handleChange}
+          name="confirmPassword"
+          type="password"
+          placeholder="Password"
+        />
+      </>
+    ) : (
+      <Input
+        label="E-mail*"
+        value={values.email}
+        onChange={handleChange}
+        name="email"
+        type="email"
+        placeholder="Votre e-mail"
+      />
+    )}
   </>
 );
 const propTypes = {
   values: PropTypes.objectOf(PropTypes.object).isRequired,
   handleChange: PropTypes.func.isRequired,
+  token: PropTypes.string,
 };
 SignIn.propTypes = propTypes;
-SignUp.propTypes = propTypes;
+SignIn.defaultProps = {
+  token: null,
+};
 
-const LoginTab = ({ login, register }) => {
+const LoginTab = ({ resetPass }) => {
   const [state, setState] = useState({
     email: '',
-    firstName: '',
-    lastName: '',
     password: '',
-    role: Student,
+    confirmPassword: '',
   });
-  const [isRegisterinView, setIsRegisterinView] = useState(false);
-  const [checked, setChecked] = React.useState(false);
+  const {
+    query: { token },
+    push,
+  } = useRouter();
 
-  const handleCheck = (event) => {
-    setChecked(event.target.checked);
-  };
-
-  const toggleView = () => setIsRegisterinView(!isRegisterinView);
-
-  const onClick = () => {
-    let data = { ...state };
-    let authReq;
-
-    if (!isRegisterinView) {
-      data = { email: data.email, password: data.password };
-      if (!data.email || !data.password) return;
-      authReq = login;
+  const onClick = async () => {
+    if (!token) {
+      const { user } = await forgotPassword({ email: state.email });
+      if (user) {
+        toast.success(`Un email a été envoyé sur ${user} avec des instructions supplémentaires.`);
+        push('/public/login');
+      }
     } else {
-      const pickdata = ['email', 'firstName', 'lastName', 'role', 'password', 'phone'];
-      if (
-        !data.email ||
-        !data.firstName ||
-        !data.lastName ||
-        !data.password ||
-        !data.role ||
-        !data.phone
-      ) {
-        toast.warn('Veuillez remplir les champs obligatoires.');
-        return;
-      }
-
-      if (!checked) {
-        toast.warn('Veuillez accepter les conditions générales.');
-        return;
-      }
-      if (data.sponsorshipCode?.length) pickdata.push('sponsorshipCode');
-      if (document.referrer) {
-        data.referrer_url = document.referrer;
-        pickdata.push('referrer_url');
-      }
-      data = pick(data, pickdata);
-      authReq = register;
+      if (state.password !== state.confirmPassword) return toast.warn('Mot de passe différent');
+      resetPass({ password: state.password, token });
     }
-
-    authReq(data);
   };
   const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
   const classes = useStyles();
@@ -302,7 +227,7 @@ const LoginTab = ({ login, register }) => {
               container
               item
               direction="column"
-              justify="space-between"
+              justify="center"
               alignItems="center"
               md={6}
               xs={12}
@@ -310,7 +235,7 @@ const LoginTab = ({ login, register }) => {
             >
               <Grid container alignItems="center">
                 <div className="fullwidth">
-                  <h1>{isRegisterinView ? 'Inscrivez-vous gratuitement !' : 'Connexion'}</h1>
+                  <h1>Mot de passe oublié</h1>
                   <h2>Accéder à tout notre accompagnement.</h2>
                   <Grid
                     container
@@ -319,42 +244,23 @@ const LoginTab = ({ login, register }) => {
                     alignItems="center"
                     className={classes.formContainer}
                   >
-                    {isRegisterinView ? (
-                      <SignUp values={state} handleChange={handleChange} onClick={onClick} />
-                    ) : (
-                      <SignIn values={state} handleChange={handleChange} onClick={onClick} />
-                    )}
+                    <SignIn
+                      token={token}
+                      values={state}
+                      handleChange={handleChange}
+                      onClick={onClick}
+                    />
                   </Grid>
-                  {isRegisterinView && (
-                    <Grid container alignItems="center" className={classes.checkBoxContainer}>
-                      <Checkbox
-                        color="primary"
-                        inputProps={{ 'aria-label': 'secondary checkbox' }}
-                        onClick={handleCheck}
-                      />
-                      <Typography variant="h3">J’accepte les conditions générales</Typography>
-                    </Grid>
-                  )}
                   <Grid container justify="center" className={classes.btnContainer}>
                     <Grid item>
                       <Btn
-                        text={isRegisterinView ? 'Créer un compte' : 'Connectez-vous'}
+                        text="Soumettre"
                         onClick={onClick}
                         className="blueColor full login-btn"
                       />
                     </Grid>
-                    <Grid item>
-                      <Btn
-                        text={isRegisterinView ? 'Connectez-vous' : 'Créer un compte'}
-                        onClick={toggleView}
-                        whiteColor
-                      />
-                    </Grid>
                   </Grid>
                 </div>
-                <Link href="/public/resetPassword">
-                  <a className={classes.resetPassword}>Mot de passe oublié</a>
-                </Link>
               </Grid>
             </Grid>
           </Grid>
@@ -364,17 +270,16 @@ const LoginTab = ({ login, register }) => {
   );
 };
 
-LoginTab.propTypes = {};
+LoginTab.propTypes = {
+  resetPass: PropTypes.func.isRequired,
+};
 
 const mapState = (state) => {
-  const { loggedIn } = state.authentication;
-  console.log(state);
-  return { loggedIn };
+  const { loggingIn } = state.authentication;
+  return { loggingIn };
 };
 
 const actionCreators = {
-  register: userActions.register,
-  login: userActions.login,
-  logout: userActions.logout,
+  resetPass: userActions.resetPass,
 };
 export default withAuth(connect(mapState, actionCreators)(LoginTab), { logoutRequired: true });

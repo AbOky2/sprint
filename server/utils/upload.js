@@ -6,11 +6,7 @@ const logger = require('../logs');
 
 const storage = multer.memoryStorage();
 const restrictedPath = ['default-picture.png'];
-const fileFilter = (req, file, cb) => {
-  if (!file.fieldname || !req.user || !req.user.slug) return cb(null, false);
 
-  return cb(null, true);
-};
 const unlinkFile = (filePath) => {
   let newPath = filePath;
   const rootPath = path.resolve(__dirname, '..', '..', 'static');
@@ -22,7 +18,7 @@ const unlinkFile = (filePath) => {
 };
 
 module.exports = {
-  upload: (folderName = '') => multer({ storage }),
+  upload: () => multer({ storage }),
   removeFiles: (files) => {
     if (!files) return;
     try {

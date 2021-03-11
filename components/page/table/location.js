@@ -70,18 +70,20 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 Dépot de garrantie
               </Grid>
               <Grid item md={2} xs={5} className="text-center">
-                Plan 2D
+                Réserver
               </Grid>
             </Grid>
             {current.list
               ?.sort((a, b) => a.price - b.price)
-              .map((curr, index) => {
+              .map((curr) => {
                 const availableDate = locationAvailableDate(
                   curr.available_date,
                   curr.contract_end_date,
                 );
+                const floor = curr.floor ? `Étage ${curr.floor}` : 'RDC';
+
                 return (
-                  <Grid key={index} container className={classes.discoveryContent}>
+                  <Grid key={curr.ref} container className={classes.discoveryContent}>
                     <Grid container>
                       <Grid container justify="space-between">
                         <span>Loyer/mois</span>
@@ -96,7 +98,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       </Grid>
                       <Grid container justify="space-between">
                         <span>Étage</span>
-                        <span>{curr.floor}</span>
+                        <span>{floor}</span>
                       </Grid>
                       <Grid container justify="space-between">
                         <span>disponibilité</span>
@@ -111,7 +113,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                         {`${curr.surface}m²`}
                       </Grid>
                       <Grid item md={2} xs={5} className="text-center">
-                        {curr.floor}
+                        {floor}
                       </Grid>
                       <Grid item md={2} xs={5} className="text-center">
                         {availableDate}
