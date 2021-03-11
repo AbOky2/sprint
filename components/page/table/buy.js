@@ -139,7 +139,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       {curr.nb_parking ? `${curr.nb_parking} inclus` : '-'}
                     </Grid>
                     <Grid item md={2} xs={2} className="text-center">
-                      {curr.advantages.join(', ')}
+                      {curr.advantages?.join(', ')}
                     </Grid>
                     <Grid item md={1} xs={1} className={classes.btnContainer}>
                       {curr.file && (
