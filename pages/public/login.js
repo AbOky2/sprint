@@ -217,7 +217,7 @@ const SignIn = ({ values = {}, handleChange }) => (
       onChange={handleChange}
       name="password"
       type="password"
-      placeholder="Password"
+      placeholder="Mot de passe"
       position="right"
     />
   </>
@@ -351,10 +351,10 @@ const LoginTab = ({ login, register }) => {
                       />
                     </Grid>
                   </Grid>
+                  <Link href="/public/resetPassword">
+                    <a className={classes.resetPassword}>Mot de passe oublié</a>
+                  </Link>
                 </div>
-                <Link href="/public/resetPassword">
-                  <a className={classes.resetPassword}>Mot de passe oublié</a>
-                </Link>
               </Grid>
             </Grid>
           </Grid>
