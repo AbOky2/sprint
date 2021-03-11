@@ -44,6 +44,7 @@
     "next-images": "^1.7.0",
     "next-redux-wrapper": "^6.0.2",
     "node-fetch": "^2.6.0",
+    "node-geocoder": "^3.27.0",
     "nprogress": "0.2.0",
     "passport": "0.4.1",
     "passport-local": "^1.0.0",
