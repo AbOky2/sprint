@@ -5,8 +5,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { FormControl, Select, Grid, Checkbox, Typography } from '@material-ui/core';
+import { toggleArray, isArray } from 'helpers/convertAndCheck';
 import Icon from './Icon';
-import { toggleArray } from '../../helpers/convertAndCheck';
 
 const positionType = ['left', 'right'];
 
@@ -120,62 +120,66 @@ const styles = (theme) => ({
   },
 });
 
-const DropdownSelect = withStyles(styles)(({ onChange, position, list, placeholder, classes }) => {
-  const node = useRef();
-  const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState([]);
+const DropdownSelect = withStyles(styles)(
+  ({ onChange, value, position, list, placeholder, classes }) => {
+    const node = useRef();
+    const [open, setOpen] = useState(false);
+    const [selected, setSelected] = useState(
+      (isArray(value) ? value : [value]).filter((e) => e?.length),
+    );
 
-  const handleSelected = (e) => {
-    const values = toggleArray(selected, e.target.value);
+    const handleSelected = (e) => {
+      const values = toggleArray(selected, e.target.value);
 
-    setSelected(values);
-    onChange(values);
-  };
-
-  const toggleOpen = (e) => {
-    if (node.current.contains(e.target) && open && e.target.nodeName === 'SPAN') setOpen(false);
-    else if (node.current.contains(e.target) && !open) setOpen(true);
-    else if (!node.current.contains(e.target)) setOpen(false);
-  };
-  useEffect(() => {
-    // add when mounted
-    document.addEventListener('mousedown', toggleOpen);
-    // return function to be called when unmounted
-    return () => {
-      document.removeEventListener('mousedown', toggleOpen);
+      setSelected(values);
+      onChange(values);
     };
-  }, [open]);
 
-  return (
-    <Grid
-      item
-      md={position ? 6 : 12}
-      xs={12}
-      className={
-        open ? clsx(classes.customSelectContainer, classes.open) : classes.customSelectContainer
-      }
-      ref={node}
-    >
-      <input value={selected.join(' - ')} placeholder={placeholder} disabled />
-      <span />
-      <Icon type="triangle" size="small" color="gray" />
-      <Grid container>
-        {list?.map((elem) => (
-          <Grid container item key={elem.name} md={6} alignItems="center">
-            <Checkbox
-              color="primary"
-              inputProps={{ 'aria-label': 'secondary checkbox' }}
-              key={elem.name}
-              value={elem.value}
-              onClick={handleSelected}
-            />
-            <Typography variant="body2">{elem.name}</Typography>
-          </Grid>
-        ))}
+    const toggleOpen = (e) => {
+      if (node.current.contains(e.target) && open && e.target.nodeName === 'SPAN') setOpen(false);
+      else if (node.current.contains(e.target) && !open) setOpen(true);
+      else if (!node.current.contains(e.target)) setOpen(false);
+    };
+    useEffect(() => {
+      // add when mounted
+      document.addEventListener('mousedown', toggleOpen);
+      // return function to be called when unmounted
+      return () => {
+        document.removeEventListener('mousedown', toggleOpen);
+      };
+    }, [open]);
+
+    return (
+      <Grid
+        item
+        md={position ? 6 : 12}
+        xs={12}
+        className={
+          open ? clsx(classes.customSelectContainer, classes.open) : classes.customSelectContainer
+        }
+        ref={node}
+      >
+        <input value={selected.join(' - ')} placeholder={placeholder} disabled />
+        <span />
+        <Icon type="triangle" size="small" color="gray" />
+        <Grid container>
+          {list?.map((elem) => (
+            <Grid container item key={elem.name} md={6} alignItems="center">
+              <Checkbox
+                color="primary"
+                key={elem.name}
+                value={elem.value}
+                onClick={handleSelected}
+                checked={selected.includes(elem.name)}
+              />
+              <Typography variant="body2">{elem.name}</Typography>
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
-    </Grid>
-  );
-});
+    );
+  },
+);
 export { DropdownSelect };
 const NativeSelects = ({ name, onChange, value, position, list, label, classes }) => (
   <Grid

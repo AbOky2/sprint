@@ -8,10 +8,10 @@ import Link from 'next/link';
 import { Grid, Typography, useMediaQuery } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { NEXT_PUBLIC_UPLOAD_URL } from '../../config';
-import { getPropertiesApiMethod, addBookmarkApiMethod } from '../../lib/api/customer';
-import { toggleArray } from '../../helpers/convertAndCheck';
-import { typeOfProperties } from '../../helpers/property';
+import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
+import { getPropertiesApiMethod, addBookmarkApiMethod } from 'lib/api/customer';
+import { toggleArray, pick } from 'helpers/convertAndCheck';
+import { typeOfProperties } from 'helpers/property';
 import { AdminContentWrapper } from '../wrapper';
 import Card from '../card';
 import { Icon, Input } from '../form';
@@ -151,47 +151,68 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
   },
 }));
-
-const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ...props }) => {
-  const [page, setPage] = useState({
-    limit: properties.limit,
-    offset: properties.offset,
-    totalPages: properties.totalPages,
-  });
+const pagePropertyWhilist = ['page', 'limit', 'offset', 'totalPages'];
+const SearchPage = ({
+  user,
+  properties = {},
+  typeOfProperty = [],
+  typeOfAnnonce,
+  update,
+  loc,
+  page: defaultPage,
+  maxPrice,
+}) => {
+  const [page, setPage] = useState({ ...pick(properties, pagePropertyWhilist), page: defaultPage });
   const [state, setState] = useState(properties.docs);
   const [queryData, setQueryData] = useState({
-    loc: '',
-    maxPrice: -1,
+    loc,
+    maxPrice,
     typeOfAnnonce,
-    typeOfProperty: [],
+    typeOfProperty,
   });
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
-  const classes = useStyles();
   const handleSearch = (name) => ({ target: { value } }) =>
     setQueryData({ ...queryData, [name]: value });
   const handleMapSearch = (value) => setQueryData({ ...queryData, loc: value?.label });
-  const handleSelect = (typeOfProperty) => setQueryData({ ...queryData, typeOfProperty });
+  const handleSelect = (newTypeOfProperty) =>
+    setQueryData({ ...queryData, typeOfProperty: newTypeOfProperty });
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
-    addBookmarkApiMethod({ id }).then(({ user }) => update(user));
+    addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
   };
 
-  const requestData = async (offset = 0) => {
+  const isLocation = typeOfAnnonce === 'Location';
+  const requestData = async (offset = 1) => {
     if (!queryData.maxPrice) queryData.maxPrice = -1;
+    if (!queryData.loc) queryData.loc = null;
+
+    const { typeOfProperty, ...requestParams } = queryData;
     const { list: { docs, ...pageInfo } = {} } = await getPropertiesApiMethod({
-      ...queryData,
-      limit: page.limit,
+      ...(isLocation ? {} : { typeOfProperty }),
+      ...requestParams,
       offset,
     });
     setState(docs);
-    setPage(pageInfo);
+    setPage(pick(pageInfo, pagePropertyWhilist));
+
+    Router.push(
+      {
+        query: {
+          page: pageInfo.page,
+          loc: queryData.loc,
+          maxPrice: queryData.maxPrice,
+          ...(isLocation ? {} : { typeOfProperty }),
+        },
+      },
+      undefined,
+      { shallow: true },
+    );
   };
   const handleSumit = () => requestData();
   const handlePage = (e, pageOffset) => requestData(pageOffset);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
-  const isLocation = typeOfAnnonce === 'Location';
-
+  const classes = useStyles();
   return (
     <AdminContentWrapper redirectDashboard href="/dashboard">
       <div>
@@ -241,14 +262,16 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
         <Grid
           container
           className={
-            isLocation || true
-              ? clsx(classes.searchContainer, classes.isLocation)
-              : classes.searchContainer
+            isLocation ? clsx(classes.searchContainer, classes.isLocation) : classes.searchContainer
           }
         >
           <Grid item md={isLocation ? 6 : 4}>
-            {/* <Input name="loc" onChange={handleSearch} placeholder="Localisation" /> */}
-            <GoogleMaps name="loc" onChange={handleMapSearch} placeholder="Localisation" />
+            <GoogleMaps
+              name="loc"
+              value={queryData.loc}
+              onChange={handleMapSearch}
+              placeholder="Localisation"
+            />
           </Grid>
           {!isLocation && (
             <Grid item md={4}>
@@ -268,7 +291,16 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
               isLocation ? clsx(classes.search, classes.locationMaxBudget) : classes.search
             }
           >
-            <Input name="maxPrice" onChange={handleSearch} placeholder="Budget maximal" />
+            <Input
+              name="maxPrice"
+              value={
+                queryData.maxPrice > 0 && !Number.isNaN(queryData.maxPrice)
+                  ? queryData.maxPrice
+                  : ''
+              }
+              onChange={handleSearch}
+              placeholder="Budget maximal"
+            />
             <div onClick={handleSumit} className="pointer">
               <Icon type="search" size="large" color="white" />
             </div>
@@ -317,7 +349,7 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
         <Grid container justify="center" className={classes.pagination}>
           <Pagination
             count={page.totalPages}
-            page={page.offset}
+            page={!isNaN(page.page) ? Number(page.page) : 1}
             siblingCount={matches ? 0 : 1}
             onChange={handlePage}
           />
@@ -326,5 +358,20 @@ const SearchPage = ({ user, properties, offset, limit, typeOfAnnonce, update, ..
     </AdminContentWrapper>
   );
 };
-
+SearchPage.propTypes = {
+  user: PropTypes.object.isRequired,
+  properties: PropTypes.object.isRequired,
+  maxPrice: PropTypes.string,
+  page: PropTypes.string,
+  typeOfAnnonce: PropTypes.string.isRequired,
+  typeOfProperty: PropTypes.any,
+  update: PropTypes.func.isRequired,
+  loc: PropTypes.string,
+};
+SearchPage.defaultProps = {
+  loc: '',
+  page: '1',
+  maxPrice: null,
+  typeOfProperty: [],
+};
 export default withRouter(SearchPage);

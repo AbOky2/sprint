@@ -50,24 +50,35 @@ const styles = (theme) => ({
   },
 });
 
-export const GoogleMaps = ({ onChange }) => (
-  <GooglePlacesAutocomplete
-    apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
-    apiOptions={{ language: 'fr', region: 'fr' }}
-    autocompletionRequest={{
-      componentRestrictions: {
-        country: ['fr'],
-      },
-    }}
-    selectProps={{
-      placeholder: 'Localisation',
-      onChange,
-      isClearable: true,
-    }}
-  />
-);
+export const GoogleMaps = ({ onChange, value }) => {
+  const [inputValue, setInputValue] = React.useState(value);
+  const onInputChange = (e) => setInputValue(e);
+
+  return (
+    <GooglePlacesAutocomplete
+      apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
+      apiOptions={{ language: 'fr', region: 'fr' }}
+      autocompletionRequest={{
+        componentRestrictions: {
+          country: ['fr'],
+        },
+      }}
+      selectProps={{
+        placeholder: 'Localisation',
+        onChange,
+        onInputChange,
+        inputValue,
+        isClearable: true,
+      }}
+    />
+  );
+};
 GoogleMaps.propTypes = {
   onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+};
+GoogleMaps.defaultProps = {
+  value: '',
 };
 
 const positionType = ['left', 'right'];

@@ -1,24 +1,24 @@
 import { connect } from 'react-redux';
-import { userActions } from '../../../redux/_actions';
-import withAuth from '../../../lib/withAuth';
-import { getPropertiesApiMethod } from '../../../lib/api/customer';
-import Search from '../../../components/page/Search';
+import { typeOfAnnonciesObj } from 'helpers/property';
+import { searchQueryWhitelist } from 'helpers/query';
+import { pick } from 'helpers/convertAndCheck';
+import { userActions } from 'redux/_actions';
+import withAuth from 'lib/withAuth';
+import { getPropertiesApiMethod } from 'lib/api/customer';
+import Search from 'components/page/Search';
 
 const SearchPage = (props) => <Search {...props} />;
-SearchPage.getInitialProps = async ({ req }) => {
+SearchPage.getInitialProps = async ({ req, query }) => {
   const headers = {};
   if (req && req.headers && req.headers.cookie) {
     headers.cookie = req.headers.cookie;
   }
-  const typeOfAnnonce = 'Vente';
-  const { list } = await getPropertiesApiMethod(
-    {
-      loc: '',
-      typeOfAnnonce,
-    },
-    { headers },
-  );
-  return { properties: list, typeOfAnnonce };
+
+  const queryParams = pick(query, searchQueryWhitelist);
+  queryParams.typeOfAnnonce = typeOfAnnonciesObj.buy;
+
+  const { list } = await getPropertiesApiMethod(queryParams, { headers });
+  return { properties: list, ...queryParams };
 };
 
 const mapState = (state) => {

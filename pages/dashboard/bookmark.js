@@ -4,12 +4,13 @@ import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import { userActions } from '../../redux/_actions';
-import { AdminContentWrapper } from '../../components/wrapper';
-import { addBookmarkApiMethod } from '../../lib/api/customer';
-import Card from '../../components/card';
-import { Btn } from '../../components/form';
-import withAuth from '../../lib/withAuth';
+import { userActions } from 'redux/_actions';
+import { AdminContentWrapper } from 'components/wrapper';
+import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
+import { addBookmarkApiMethod } from 'lib/api/customer';
+import Card from 'components/card';
+import { Btn } from 'components/form';
+import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
   notFound: {
@@ -81,7 +82,7 @@ const BookmarkPage = ({ user, update }) => {
   const classes = useStyles();
   const handleBookmark = (id) => {
     setState(state.filter((elem) => elem._id !== id));
-    addBookmarkApiMethod({ id }).then(({ user }) => update(user));
+    addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
   };
   return (
     <AdminContentWrapper noRedirect>
@@ -110,7 +111,7 @@ const BookmarkPage = ({ user, update }) => {
                       <Card
                         _id={_id}
                         title={heading}
-                        src={pictures?.[0]}
+                        src={NEXT_PUBLIC_UPLOAD_URL + pictures?.[0]}
                         address={`${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}`}
                         description={typeOfAnnoncies}
                         dimensions={dimensions}
@@ -159,6 +160,7 @@ const BookmarkPage = ({ user, update }) => {
 
 BookmarkPage.propTypes = {
   user: PropTypes.object.isRequired,
+  update: PropTypes.func.isRequired,
 };
 const mapState = (state) => {
   const { loggingIn, user } = state.authentication;

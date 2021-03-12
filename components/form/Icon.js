@@ -10,6 +10,7 @@ const ICON_COLORS = {
   lightBlue: '#5379EF',
   white: '#fff',
   red: '#E02A50',
+  gray: 'gray',
 };
 
 export const iconTypes = Object.keys(icons);

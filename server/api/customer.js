@@ -8,17 +8,7 @@ const {
 } = require('../middleware/express');
 const requestMiddleware = require('../middleware/request');
 const joiSchema = require('../middleware/schema');
-const sms = require('../utils/sms');
-
-// const options = {
-//   provider: 'openstreetmap',
-// };
-// const geocoder = NodeGeocoder(options);
-
-// const Book = require('../models/Book');
-// const Purchase = require('../models/Purchase');
-// const { createSession } = require('../stripe');
-// const logger = require('../logger');
+// const sms = require('../utils/sms');
 
 const router = express.Router();
 
