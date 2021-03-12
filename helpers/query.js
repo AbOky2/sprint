@@ -1,6 +1,6 @@
 const defaultLimit = 6;
 const defaultOffset = 1;
-const searchQueryWhitelist = ['limit', 'page', 'offset', 'loc', 'maxPrice', 'typeOfProperty'];
+const searchQueryWhitelist = ['limit', 'page', 'loc', 'maxPrice', 'typeOfProperty'];
 
 module.exports = {
   defaultLimit,

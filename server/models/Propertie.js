@@ -85,7 +85,7 @@ class PropertieClass extends DBModel {
     typeOfProperty = [],
     loc,
     limit = defaultLimit,
-    offset: page = defaultOffset,
+    page = defaultOffset,
   }) {
     let near = [];
     if (loc) {

@@ -66,13 +66,13 @@ router.get(
 
 router.get(
   '/properties',
-  listCollection(async ({ maxPrice, typeOfAnnonce, typeOfProperty, loc, offset, limit }) => {
+  listCollection(async ({ maxPrice, typeOfAnnonce, typeOfProperty, loc, page, limit }) => {
     const { list } = await PropertieModel.search({
       maxPrice,
       typeOfAnnonce,
       typeOfProperty: typeOfProperty && typeOfProperty.length > 0 ? typeOfProperty.split(',') : [],
       loc,
-      offset,
+      page,
       limit,
     });
 

@@ -151,7 +151,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
   },
 }));
-const pagePropertyWhilist = ['page', 'limit', 'offset', 'totalPages'];
+const pagePropertyWhilist = ['page', 'limit', 'totalPages'];
 const SearchPage = ({
   user,
   properties = {},
@@ -182,7 +182,7 @@ const SearchPage = ({
   };
 
   const isLocation = typeOfAnnonce === 'Location';
-  const requestData = async (offset = 1) => {
+  const requestData = async (page = 1) => {
     if (!queryData.maxPrice) queryData.maxPrice = -1;
     if (!queryData.loc) queryData.loc = null;
 
@@ -190,7 +190,7 @@ const SearchPage = ({
     const { list: { docs, ...pageInfo } = {} } = await getPropertiesApiMethod({
       ...(isLocation ? {} : { typeOfProperty }),
       ...requestParams,
-      offset,
+      page,
     });
     setState(docs);
     setPage(pick(pageInfo, pagePropertyWhilist));
