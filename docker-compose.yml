@@ -1,0 +1,81 @@
+version: "3"
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    networks:
+      - default
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./docker/nginx-conf:/etc/nginx/conf.d
+      - ./docker/nginx-vhost:/etc/nginx/vhost.d
+      # #- ./docker/nginx.tmpl:/app/nginx.tmpl
+      - /usr/share/nginx/html
+      - ./docker/certs:/etc/nginx/certs:ro
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+
+  letsencrypt-nginx-proxy:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt-nginx-proxy
+    restart: always
+    networks:
+      - default
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./docker/nginx-conf:/etc/nginx/conf.d
+      - ./docker/nginx-vhost:/etc/nginx/vhost.d
+      - ./docker/html:/usr/share/nginx/html
+      - ./docker/certs:/etc/nginx/certs:rw
+    depends_on:
+      - nginx-proxy
+
+  nextjs:
+    ports:
+      - 3000:3000
+    build:
+      context: .
+      args:
+        - COOKIE_DOMAIN=${COOKIE_DOMAIN}
+        - CLIENT_VIRTUAL_HOST=${CLIENT_VIRTUAL_HOST}
+        - CLIENT_VIRTUAL_PORT=${CLIENT_VIRTUAL_PORT}
+        - CLIENT_LETSENCRYPT_HOST=${CLIENT_LETSENCRYPT_HOST}
+        - CLIENT_LETSENCRYPT_EMAIL=${CLIENT_LETSENCRYPT_EMAIL}
+        - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+        - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+        - GOOGLE_GEOLOCATION=${GOOGLE_GEOLOCATION}
+        - GOOGLE_MAIL_CLIENT=${GOOGLE_MAIL_CLIENT}
+        - GOOGLE_MAIL_SECRET=${GOOGLE_MAIL_SECRET}
+        - JWT_SECRET=${JWT_SECRET}
+        - MAIL_USER=${MAIL_USER}
+        - MONGO_URL_TEST=${MONGO_URL_TEST}
+        - MONGO_URL_PROD=${MONGO_URL_PROD}
+        - NEXT_PUBLIC_ROOT_URL=${NEXT_PUBLIC_ROOT_URL}
+        - NEXT_PUBLIC_UPLOAD_URL=${NEXT_PUBLIC_UPLOAD_URL}
+        - NODE_ENV=${NODE_ENV}
+        - PORT=${PORT}
+        - ROOT_URL=${ROOT_URL}
+        - SESSION_NAME=${SESSION_NAME}
+        - SESSION_SECRET=${SESSION_SECRET}
+        - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+        - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+        - TWILIO_TOKEN=${TWILIO_TOKEN}
+    environment:
+      VIRTUAL_HOST: ${CLIENT_VIRTUAL_HOST}
+      VIRTUAL_PORT: ${CLIENT_VIRTUAL_PORT}
+      LETSENCRYPT_HOST: ${CLIENT_LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${CLIENT_LETSENCRYPT_EMAIL}
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    networks:
+      - default
+    depends_on:
+      - letsencrypt-nginx-proxy
+
+networks:
+  default:

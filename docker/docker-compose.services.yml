@@ -1,5 +1,36 @@
 version: "3"
 services:
+  goodwatt-database:
+    image: mdillon/postgis:latest
+    container_name: goodwatt-database
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - ./volumes/db/data:/var/lib/postgresql/data
+      - ./volumes/db/logs:/var/log/postgresql
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASS: ${POSTGRES_PASS}
+      POSTGRES_DB: ${POSTGRES_DB}
+    networks:
+      - webappnetwork
+
+  goodwatt-minio:
+    image: minio/minio
+    container_name: goodwatt-minio
+    ports:
+      - "9001:9000"
+    restart: always
+    volumes:
+      - ./volumes/minio/data:/data
+    command: server /data
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    networks:
+      - webappnetwork
+
   nginx-proxy:
     image: jwilder/nginx-proxy
     ports:
@@ -32,29 +63,6 @@ services:
       - ./certs:/etc/nginx/certs:rw
     depends_on:
       - nginx-proxy
-  nextjs:
-    ports:
-      - 3000:3000
-    build:
-      context: ../
-      dockerfile: ./Dockerfile
-      args:
-        - PORT=${PORT}
-        - NODE_ENV=${NODE_ENV}
-        - ROOT_URL=${ROOT_URL}
-        - NEXT_PUBLIC_ROOT_URL=${NEXT_PUBLIC_ROOT_URL}
-        - MONGO_URL_TEST=${MONGO_URL_TEST}
-        - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
-        - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
-        - JWT_SECRET=${JWT_SECRET}
-        - SESSION_NAME=${SESSION_NAME}
-        - SESSION_SECRET=${SESSION_SECRET}
-    volumes:
-      - ../:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/.next
-    env_file:
-      - ../.env
 
 networks:
   net-nginx-proxy:
