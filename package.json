@@ -1,0 +1,9 @@
+{
+    "name": "kit-le-nid",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "services": "docker-compose -f docker/docker-compose.services.yml up -d",
+      "start": "docker-compose -f docker/docker-compose.yml up"
+    }
+}
