@@ -1,0 +1,81 @@
+version: "3"
+services:
+  media:
+    ports:
+      - 3000:3000
+    build:
+      context: ../mbi
+      args:
+        - MONGO_URL_TEST=${MONGO_URL_TEST}
+        - MONGO_URL_PROD=${MONGO_URL_PROD}
+        - GOOGLE_GEOLOCATION=${GOOGLE_GEOLOCATION}
+        - FTP_HOST=${FTP_HOST}
+        - FTP_USER=${FTP_USER}
+        - FTP_PASSWORD=${FTP_PASSWORD}
+    restart: always
+    env_file:
+      - .env
+    environment:
+      VIRTUAL_HOST: ${MEDIA_URL}
+      VIRTUAL_PORT: ${CLIENT_VIRTUAL_PORT}
+      LETSENCRYPT_HOST: ${MEDIA_URL}
+      LETSENCRYPT_EMAIL: ${CLIENT_LETSENCRYPT_EMAIL}
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    networks:
+      - default
+  app:
+    ports:
+      - 3000:3000
+    build:
+      context: ../app
+      args:
+        - COOKIE_DOMAIN=${COOKIE_DOMAIN}
+        - CLIENT_VIRTUAL_HOST=${CLIENT_VIRTUAL_HOST}
+        - CLIENT_VIRTUAL_PORT=${CLIENT_VIRTUAL_PORT}
+        - CLIENT_LETSENCRYPT_HOST=${CLIENT_LETSENCRYPT_HOST}
+        - CLIENT_LETSENCRYPT_EMAIL=${CLIENT_LETSENCRYPT_EMAIL}
+        - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+        - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+        - GOOGLE_GEOLOCATION=${GOOGLE_GEOLOCATION}
+        - GOOGLE_MAIL_CLIENT=${GOOGLE_MAIL_CLIENT}
+        - GOOGLE_MAIL_SECRET=${GOOGLE_MAIL_SECRET}
+        - JWT_SECRET=${JWT_SECRET}
+        - MAIL_USER=${MAIL_USER}
+        - MONGO_URL_TEST=${MONGO_URL_TEST}
+        - MONGO_URL_PROD=${MONGO_URL_PROD}
+        - NEXT_PUBLIC_ROOT_URL=${NEXT_PUBLIC_ROOT_URL}
+        - NEXT_PUBLIC_UPLOAD_URL=${MEDIA_URL}
+        - NODE_ENV=${NODE_ENV}
+        - PORT=${PORT}
+        - ROOT_URL=${ROOT_URL}
+        - SESSION_NAME=${SESSION_NAME}
+        - SESSION_SECRET=${SESSION_SECRET}
+        - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+        - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+        - TWILIO_TOKEN=${TWILIO_TOKEN}
+    restart: always
+    env_file:
+      - .env
+    environment:
+      VIRTUAL_HOST: ${CLIENT_VIRTUAL_HOST}
+      VIRTUAL_PORT: ${CLIENT_VIRTUAL_PORT}
+      LETSENCRYPT_HOST: ${CLIENT_LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${CLIENT_LETSENCRYPT_EMAIL}
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    depends_on:
+      - media
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
+  webappnetwork:
+    driver: bridge

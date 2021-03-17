@@ -1,4 +1,4 @@
-docker
 .env
+./docker/*
 !*/docker/docker-compose*
 !*/docker/.env.sample
