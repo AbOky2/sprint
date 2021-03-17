@@ -1,0 +1,9 @@
+npm-debug.log
+.DS_Store
+
+public
+.vscode/
+node_modules/
+.env
+logs/*
+!logs/index.js

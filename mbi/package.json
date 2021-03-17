@@ -1,0 +1,50 @@
+{
+  "name": "kit-le-nid-mbi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "NODE_ENV=production node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kacoulib/kit-le-nid-mbi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kacoulib/kit-le-nid-mbi/issues"
+  },
+  "homepage": "https://github.com/kacoulib/kit-le-nid-mbi#readme",
+  "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.16",
+    "adm-zip": "^0.5.3",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "date-fns": "^2.17.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "ftp": "^0.3.10",
+    "helmet": "^4.4.1",
+    "image-size": "^0.9.4",
+    "mongoose": "^5.11.17",
+    "node-geocoder": "^3.27.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.13",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.13",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
+  }
+}
