@@ -2,10 +2,11 @@ version: "3"
 services:
   media:
     ports:
-      - 3000:3000
+      - 3001:3001
     build:
       context: ../mbi
       args:
+        - PORT=${MEDIA_PORT}
         - MONGO_URL_TEST=${MONGO_URL_TEST}
         - MONGO_URL_PROD=${MONGO_URL_PROD}
         - GOOGLE_GEOLOCATION=${GOOGLE_GEOLOCATION}
@@ -14,16 +15,13 @@ services:
         - FTP_PASSWORD=${FTP_PASSWORD}
     restart: always
     env_file:
-      - .env
+      - ./.env
     environment:
-      VIRTUAL_HOST: ${MEDIA_URL}
+      PORT: ${MEDIA_PORT}
+      VIRTUAL_HOST: ${NEXT_PUBLIC_UPLOAD_URL}
       VIRTUAL_PORT: ${CLIENT_VIRTUAL_PORT}
-      LETSENCRYPT_HOST: ${MEDIA_URL}
+      LETSENCRYPT_HOST: ${NEXT_PUBLIC_UPLOAD_URL}
       LETSENCRYPT_EMAIL: ${CLIENT_LETSENCRYPT_EMAIL}
-    volumes:
-      - ./:/usr/src/app
-      - /usr/src/app/node_modules
-      - /usr/src/app/.next
     networks:
       - default
   app:
@@ -47,7 +45,7 @@ services:
         - MONGO_URL_TEST=${MONGO_URL_TEST}
         - MONGO_URL_PROD=${MONGO_URL_PROD}
         - NEXT_PUBLIC_ROOT_URL=${NEXT_PUBLIC_ROOT_URL}
-        - NEXT_PUBLIC_UPLOAD_URL=${MEDIA_URL}
+        - NEXT_PUBLIC_UPLOAD_URL=${NEXT_PUBLIC_UPLOAD_URL}
         - NODE_ENV=${NODE_ENV}
         - PORT=${PORT}
         - ROOT_URL=${ROOT_URL}
@@ -55,11 +53,12 @@ services:
         - SESSION_SECRET=${SESSION_SECRET}
         - SENDGRID_API_KEY=${SENDGRID_API_KEY}
         - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
-        - TWILIO_TOKEN=${TWILIO_TOKEN}
+        - TWILIO_TOKEN=$${TWILIO_TOKEN}
     restart: always
     env_file:
-      - .env
+      - ./.env
     environment:
+      NEXT_PUBLIC_UPLOAD_URL: ${NEXT_PUBLIC_UPLOAD_URL}
       VIRTUAL_HOST: ${CLIENT_VIRTUAL_HOST}
       VIRTUAL_PORT: ${CLIENT_VIRTUAL_PORT}
       LETSENCRYPT_HOST: ${CLIENT_LETSENCRYPT_HOST}
