@@ -4,9 +4,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
 import { openPopupWidget } from 'react-calendly';
-import { userActions } from '../redux/_actions';
 import { Icon, Btn } from './form';
 import Calendr from '../static/img/icons/calendr.png';
 import LogoImg from '../static/img/logo.png';
@@ -222,12 +220,5 @@ StudentProfile.propTypes = {
   logout: PropTypes.func.isRequired,
   update: PropTypes.func.isRequired,
 };
-const mapState = (state) => {
-  const { loggingIn, user } = state?.authentication;
-  return { loggingIn, user };
-};
-const actionCreators = {
-  logout: userActions.logout,
-  update: userActions.update,
-};
-export default connect(mapState, actionCreators)(StudentProfile);
+
+export default StudentProfile;

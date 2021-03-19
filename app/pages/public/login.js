@@ -223,7 +223,7 @@ const SignIn = ({ values = {}, handleChange }) => (
   </>
 );
 const propTypes = {
-  values: PropTypes.objectOf(PropTypes.object).isRequired,
+  values: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 SignIn.propTypes = propTypes;
@@ -368,7 +368,7 @@ LoginTab.propTypes = {};
 
 const mapState = (state) => {
   const { loggedIn } = state.authentication;
-  console.log(state);
+
   return { loggedIn };
 };
 

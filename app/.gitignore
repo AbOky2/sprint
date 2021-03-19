@@ -6,7 +6,6 @@ npm-debug.log
 
 
 .build/*
-.next
 .vscode/
 node_modules/
 .coverage
