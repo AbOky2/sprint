@@ -239,7 +239,7 @@ const buyDatas = {
   fileName: 'Programmes',
   header: programsHeader,
   lots: {
-    fileName: 'lots',
+    fileName: 'Lots',
     header: lotsHeader,
     encoding: 'utf-8',
   },
