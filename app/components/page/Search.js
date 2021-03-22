@@ -52,9 +52,8 @@ const useStyles = makeStyles((theme) => ({
   },
   searchContainer: {
     marginBottom: 22,
-    boxShadow: '0px 4.15441px 16.6176px rgb(0 0 0 / 10%)',
     '& input:focus': {
-      border: `solid 1px ${theme.palette.gray}`,
+      border: `solid 1px ${theme.palette.lightGray}`,
     },
     '& > div:first-of-type': {
       position: 'relative',
@@ -70,12 +69,12 @@ const useStyles = makeStyles((theme) => ({
         borderTopRightRadius: 0,
         borderBottomRightRadius: 0,
         borderRight: 0,
-        border: `solid 1px ${theme.palette.gray}`,
-        borderColor: theme.palette.gray,
+        border: `solid 1px ${theme.palette.lightGray}`,
+        borderColor: theme.palette.lightGray,
         [theme.breakpoints.down('sm')]: {
           borderBottomLeftRadius: 0,
           borderTopRightRadius: '.6rem',
-          borderRight: `1px solid ${theme.palette.gray}`,
+          borderRight: `1px solid ${theme.palette.lightGray}`,
           borderBottom: 0,
         },
       },
@@ -118,12 +117,12 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '.6rem',
       },
       '& > div:first-of-type input': {
-        borderRight: `1px solid ${theme.palette.gray}`,
-        borderBottom: `1px solid ${theme.palette.gray}`,
+        borderRight: `1px solid ${theme.palette.lightGray}`,
+        borderBottom: `1px solid ${theme.palette.lightGray}`,
         borderRadius: '0 !important',
       },
       '& > div:last-of-type input': {
-        borderLeft: `1px solid ${theme.palette.gray}`,
+        borderLeft: `1px solid ${theme.palette.lightGray}`,
         borderTopLeftRadius: '0 !important',
         borderTopRightRadius: '0 !important',
         borderTop: 'none',
@@ -132,7 +131,7 @@ const useStyles = makeStyles((theme) => ({
   },
   isLocation: {
     '& > div:last-of-type input': {
-      borderLeft: `1px solid ${theme.palette.gray}`,
+      borderLeft: `1px solid ${theme.palette.lightGray}`,
     },
   },
   listContainer: theme.ui.listContainer,
@@ -150,6 +149,11 @@ const useStyles = makeStyles((theme) => ({
   search: {
     position: 'relative',
   },
+  locationMaxBudget: {
+    '& input': {
+      border: `1px solid ${theme.palette.lightGray}`,
+    }
+  }
 }));
 const pagePropertyWhilist = ['page', 'limit', 'totalPages'];
 const SearchPage = ({
@@ -287,9 +291,7 @@ const SearchPage = ({
           <Grid
             item
             md={isLocation ? 6 : 4}
-            className={
-              isLocation ? clsx(classes.search, classes.locationMaxBudget) : classes.search
-            }
+            className={clsx(classes.search, classes.locationMaxBudget)}
           >
             <Input
               name="maxPrice"

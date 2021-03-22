@@ -6,7 +6,8 @@ import { Icon } from './form';
 
 const useStyles = makeStyles({
   container: {
-    boxShadow: '0px 4.15441px 16.6176px rgba(0, 0, 0, 0.1)',
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #E2E2E2',
     borderRadius: 15,
     '& > div:last-of-type': {
       padding: 16,
