@@ -2,6 +2,25 @@ const Joi = require('joi');
 const { studentRoleList, StatusList } = require('../../../helpers/user');
 const { msg, keys } = require('./messages');
 
+const userContactInfo = {
+  firstName: Joi.string()
+    .min(1)
+    .required()
+    .messages(msg({ name: keys.user.firstName })),
+  lastName: Joi.string()
+    .min(1)
+    .required()
+    .messages(msg({ name: keys.user.lastName })),
+  email: Joi.string()
+    .email({ tlds: false })
+    .required()
+    .messages(msg({ name: keys.user.email })),
+  phone: Joi.string()
+    .min(5)
+    .required()
+    .messages(msg({ name: keys.user.phone })),
+}
+
 const update = {
   _id: Joi.any().optional(),
   picture: Joi.any()
@@ -71,24 +90,7 @@ const schemas = {
     }),
   },
   sponsorship: {
-    post: Joi.object({
-      firstName: Joi.string()
-        .min(1)
-        .required()
-        .messages(msg({ name: keys.user.firstName })),
-      lastName: Joi.string()
-        .min(1)
-        .required()
-        .messages(msg({ name: keys.user.lastName })),
-      email: Joi.string()
-        .email({ tlds: false })
-        .required()
-        .messages(msg({ name: keys.user.email })),
-      phone: Joi.string()
-        .min(5)
-        .required()
-        .messages(msg({ name: keys.user.phone })),
-    }),
+    post: Joi.object(userContactInfo),
   },
   public: {
     user: {
@@ -161,6 +163,12 @@ const schemas = {
           .messages(msg({ name: keys.user.id })),
         ...update,
       }),
+      requestNewLocation: {
+        updateUser: userContactInfo,
+        message: Joi.string()
+        .min(10)
+        .messages(msg({ name: keys.message }))
+      },
       update: Joi.object(update),
     },
   },

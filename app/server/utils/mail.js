@@ -38,4 +38,11 @@ const sendSuccessResetPassword = async ({ email, to }) =>
         Ceci est une confirmation que le mot de passe de votre compte ${email} vient d'être modifié.`,
   });
 
-module.exports = { sendMail, sendForgotPassword, sendSuccessResetPassword };
+const sendNewLocation = async ({  subject, content }) =>
+  sendMail({
+    to: 'studea@email.com',
+    subject,
+    content
+  });
+
+module.exports = { sendMail, sendForgotPassword, sendSuccessResetPassword, sendNewLocation };

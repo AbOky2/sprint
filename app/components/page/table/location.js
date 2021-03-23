@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { spaceCurrency, locationAvailableDate } from '../../../helpers/convertAndCheck';
-import { Icon, Btn } from '../../form';
+import { spaceCurrency, locationAvailableDate } from 'helpers/convertAndCheck';
+import { Icon, Btn } from 'components/form';
 import styles from './styles';
 
-const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
+const LocationTable = ({ classes, state, currOpen, handleCurrOpen, handleSelect }) =>
   Object.keys(state).map((elem) => {
     const current = state[elem];
     const isOpen = currOpen === elem;
@@ -105,7 +105,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                         <span>{availableDate}</span>
                       </Grid>
                       <Grid item className="text-center" className={classes.btnContainer}>
-                        <Btn text="Réserver" whiteColor />
+                        <Btn text="Réserver" whiteColor onClick={()=>handleSelect(curr)}/>
                       </Grid>
                     </Grid>
                     <Grid container alignItems="center">
@@ -126,7 +126,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       </Grid>
                       <Grid item md={2} xs={5} className={classes.btnContainer}>
                         <Btn
-                          href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
+                          onClick={()=>handleSelect(curr)}
                           target="_blank"
                           dataMode="popup"
                           text="Réserver"

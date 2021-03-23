@@ -8,6 +8,7 @@ module.exports = {
   }),
   keys: {
     id: 'Identifiant',
+    message: 'Message',
     user: {
       token: 'Token',
       picture: "L'image",

@@ -15,7 +15,7 @@ const { defaultLimit, defaultOffset } = require('../../helpers/query');
 const DBModel = require('./Model');
 const PropertyModel = require('./Propertie');
 const msg = require('../utils/message');
-const { sendForgotPassword } = require('../utils/mail');
+const { sendForgotPassword, sendNewLocation } = require('../utils/mail');
 const bcrypt = require('../utils/bcrypt');
 const { ROOT_URL } = require('../../config');
 
@@ -163,21 +163,31 @@ class UserClass extends DBModel {
     sendForgotPassword({ token, to });
     return { user: to };
   }
-
+  
   static async resetPassword({ token, password }) {
     const userDoc = await this.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() },
     });
     const salt = await bcrypt.genSalt(10);
-
+    
     if (!userDoc) throw new Error(`${msg.notFound('Token')} ou expiré`);
-
+    
     userDoc.password = await bcrypt.hash(password, salt);
     userDoc.resetPasswordToken = null;
     userDoc.resetPasswordExpires = null;
     userDoc.save();
     return { user: pick(userDoc.toObject(), this.publicFields()) };
+  }
+
+  static async requestNewLocation(_id, data) {
+    const userDoc = await this.findOne({ _id });
+
+    if (!userDoc) throw new Error(msg.notFound('Utilisateur'));
+
+    console.log(userDoc)
+    // sendNewLocation({ token, to });
+    return { user: to };
   }
 
   static async getUserZones(_id) {

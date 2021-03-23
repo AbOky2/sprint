@@ -7,7 +7,7 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 const styles = (theme) => ({
   container: {
-    '& input': {
+    '& input, & textarea': {
       display: 'block',
       padding: '3rem 1.4rem',
       boxSizing: 'border-box',
@@ -23,6 +23,9 @@ const styles = (theme) => ({
       lineHeight: 'normal',
       letterSpacing: 'normal',
       color: '#1A2E6C',
+    },
+    '& textarea': {
+      height: 'auto',
     },
     '& input:focus': {
       boxShadow: '0px 4px 10px 3px rgba(0, 0, 0, 0.11)',
@@ -84,16 +87,45 @@ GoogleMaps.defaultProps = {
 const positionType = ['left', 'right'];
 
 const InputType = withStyles(styles)(
-  ({ name, label, type, onChange, value, position, placeholder, classes }) => (
+  ({
+    name,
+    label,
+    type,
+    onChange,
+    value,
+    position,
+    placeholder,
+    classes,
+    rows = 10,
+  }) => (
     <Grid
       item
       md={position ? 6 : 12}
-      className={position ? clsx(classes.container, classes[position]) : classes.container}
+      className={
+        position
+          ? clsx(classes.container, classes[position])
+          : classes.container
+      }
     >
       {label ? <Typography variant="h4">{label}</Typography> : ''}
-      <input value={value} onChange={onChange(name)} type={type} placeholder={placeholder} />
+      {type !== 'textarea' ? (
+        <input
+          value={value}
+          onChange={onChange(name)}
+          type={type}
+          placeholder={placeholder}
+        />
+      ) : (
+        <textarea
+          onChange={onChange(name)}
+          placeholder={placeholder}
+          rows={rows}
+        >
+          {value}
+        </textarea>
+      )}
     </Grid>
-  ),
+  )
 );
 
 InputType.propTypes = {

@@ -42,6 +42,22 @@ router.put(
     },
   ),
 );
+router.put(
+  '/requestNewLocation',
+  profileCollection(
+    requestMiddleware(joiSchema.user.all.user.requestNewLocation),
+    async ({ user: sessUser, body } = {}) => {
+      const data = { ...body };
+      try {
+        // if (data.phone) {data.phone = sms.check(data.phone);}
+        const { user } = await UserModel.requestNewLocation(sessUser._id, data);
+        return { user };
+      } catch (error) {
+        return error;
+      }
+    },
+  ),
+);
 router.post(
   '/sponsorship',
   requestMiddleware(joiSchema.user.sponsorship.post),

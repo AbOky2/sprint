@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { openPopupWidget } from 'react-calendly';
+import { pages } from 'helpers/query';
 import { Icon, Btn } from './form';
 import Calendr from '../static/img/icons/calendr.png';
 import LogoImg from '../static/img/logo.png';
@@ -132,7 +133,11 @@ const useStyles = makeStyles((theme) => ({
 const MenuItems = [
   { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
   { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
-  { href: '/dashboard/sponsorship', iconType: 'sponsorship', txt: 'Parrainage' },
+  {
+    href: '/dashboard/sponsorship',
+    iconType: 'sponsorship',
+    txt: 'Parrainage',
+  },
   {
     href: 'https://cagnotte-immobiliere.nexity.fr',
     iconType: 'jackpot',
@@ -181,10 +186,15 @@ const StudentProfile = ({ user = {}, logout, update }) => {
 
   return (
     <div id="sidebar">
-      <Grid container direction="column" justify="space-between" className={classes.container}>
+      <Grid
+        container
+        direction="column"
+        justify="space-between"
+        className={classes.container}
+      >
         <Grid container>
           <Grid className={classes.logoContainer}>
-            <Link href="/dashboard">
+            <Link href={pages.dashboard}>
               <a>
                 <img src={LogoImg} alt="" />
               </a>
@@ -206,7 +216,9 @@ const StudentProfile = ({ user = {}, logout, update }) => {
             <Btn
               text="Prendre rendez-vous"
               iconType="calendar"
-              onClick={() => openPopupWidget({ url: 'https://calendly.com/kitlenid' })}
+              onClick={() =>
+                openPopupWidget({ url: 'https://calendly.com/kitlenid' })
+              }
             />
           </div>
         </Grid>

@@ -35,6 +35,11 @@ export const updateUserApiMethod = (args) =>
     method: 'PUT',
     body: JSON.stringify(args),
   });
+export const requestNewLocation = (args) =>
+  sendRequest(`${BASE_PATH}/requestNewLocation`, {
+    method: 'POST',
+    body: JSON.stringify(args),
+  });
 export const getPartnerApiMethod = (id, options = {}) =>
   sendRequest(`${BASE_PATH}/partner/${id}`, {
     method: 'GET',
