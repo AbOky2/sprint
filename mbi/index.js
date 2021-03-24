@@ -26,7 +26,7 @@ app.use(express.static('public'));
 //   const d = new Date();
 //   logger.log('Starting mbi at sync', d)
   // ftp(readMbi);
-  readMbi();
+  // readMbi();
 // });
 // job.start();
 

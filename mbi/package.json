@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/kacoulib/kit-le-nid-mbi#readme",
   "dependencies": {
-    "@googlemaps/google-maps-services-js": "^3.1.16",
     "adm-zip": "^0.5.3",
     "cors": "^2.8.5",
     "cron": "^1.8.2",

@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { typeOfAnnonciesObj } from 'helpers/property';
 import { searchQueryWhitelist } from 'helpers/query';
-import { pick } from 'helpers/convertAndCheck';
+import { pick, unPick } from 'helpers/convertAndCheck';
 import { userActions } from 'redux/_actions';
 import withAuth from 'lib/withAuth';
 import { getPropertiesApiMethod } from 'lib/api/customer';
-import Search from 'components/page/Search';
+import Search from 'components/page/search';
 
 const SearchPage = (props) => <Search {...props} />;
 SearchPage.getInitialProps = async ({ req, query }) => {
@@ -17,7 +17,10 @@ SearchPage.getInitialProps = async ({ req, query }) => {
   const queryParams = pick(query, searchQueryWhitelist);
   queryParams.typeOfAnnonce = typeOfAnnonciesObj.buy;
 
-  const { list } = await getPropertiesApiMethod(queryParams, { headers });
+  const { list } = await getPropertiesApiMethod(
+    unPick(queryParams, ['listView']),
+    { headers }
+  );
   return { properties: list, ...queryParams };
 };
 

@@ -1,5 +1,4 @@
 const fs = require('fs');
-const {Client} = require("@googlemaps/google-maps-services-js");
 const sizeOf = require('image-size');
 const {  addMonths, isBefore, isAfter } = require('date-fns')
 const { pick, stringToDate } = require('../helpers/convertAndCheck');
@@ -18,10 +17,8 @@ const maps = require('./maps');
 const {
   PROPERTIES_DIR,
 PUBLIC_PROPERTIES_DIR,
-GOOGLE_GEOLOCATION
 } = require('../config');
 
-const client = new Client({});
 
 const getPictures = (data) => {
   const pictures = [];
@@ -134,24 +131,6 @@ const getLotsList = (list, lots) => list.reduce((acc, curr) => {
 }, []);
 
 const readMba = () =>  {
-  
-// client
-// .geolocate({
-//   params: {
-//     address: "9 rue de aven",
-//     countryCode: 'fr',
-//     key: GOOGLE_GEOLOCATION,
-//   },
-//   timeout: 1000, // milliseconds
-// })
-// .then((r) => {
-//   console.log('************/', r.data.results[0].elevation);
-// })
-// .catch((e) => {
-//   // console.log('************', e);
-//   console.log('************', e.response.data.error_message);
-// });
-  // return ;
   const lotRefs = [];
 
   const customMap = async ({
@@ -253,14 +232,14 @@ const readMba = () =>  {
                     coordinates: [geo[0].longitude, geo[0].latitude],
                   };
                   await PropertieModel.add(data);
-                  returnLog(readedDatasArray, i, `'added'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`)
+                  logger.info(`${i}, 'added'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`)
                 }else
                 returnLog(readedDatasArray, i, `lot_ref: ${data.lot_ref}; address: ${data.postal} | ${data.address};  geo: ${geo}; typeOfAnnonce: ${data.typeOfAnnonce}; 'address not found'`)
               } else if (foundElement && foundElement._id) {
                 await PropertieModel.updateById(foundElement._id, data);
-                returnLog(readedDatasArray, i, `'updated'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`)
+                logger.info(`${i}, 'updated'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`)
               }
-              returnLog(readedDatasArray, i)
+              logger.info(`${i} 'done'`)
           }, interval * i, obj, i);
         });
       }
@@ -295,7 +274,7 @@ const readMba = () =>  {
         return [...acc, newLot];
         }, []);
       }
-    await customMap(buyDatas, extraProgramsList);
+    // await customMap(buyDatas, extraProgramsList);
     await customMap(rentDatas);
   })();
 };

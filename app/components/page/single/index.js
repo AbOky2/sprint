@@ -5,16 +5,16 @@ import { openPopupWidget } from 'react-calendly';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
-import Maps from '../../Maps';
-import { userActions } from '../../../redux/_actions';
-import { AdminContentWrapper } from '../../wrapper';
-import { Icon, Btn } from '../../form';
-import { addBookmarkApiMethod } from '../../../lib/api/customer';
-import { typeOfAnnoncies } from '../../../helpers/property';
-import Carrousel from '../../Carrousel';
-import LocationTable from '../table/location';
-import BuyTable from '../table/buy';
-import { spaceCurrency } from '../../../helpers/convertAndCheck';
+import Maps from 'components/Maps';
+import { userActions } from 'redux/_actions';
+import { AdminContentWrapper } from 'components/wrapper';
+import { Icon, Btn } from 'components/form';
+import { addBookmarkApiMethod } from 'lib/api/customer';
+import { typeOfAnnoncies } from 'helpers/property';
+import Carrousel from 'components/Carrousel';
+import { spaceCurrency } from 'helpers/convertAndCheck';
+import { BuyTable, LocationTable } from '../table';
+import LocationModal from '../table/locationModal';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -229,6 +229,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) => {
   const [state, setState] = useState({});
+  const [selectedLot, setSelectedLot] = useState(null);
   const [total, Total] = useState({});
   const [currOpen, setCurrOpen] = useState('');
   const [liked, setLiked] = useState(user?.bookmarks?.find((elem) => elem._id === id));
@@ -236,6 +237,7 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
     setLiked(!liked);
     addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
+  const handleSelectLot = (elem)=> setSelectedLot(elem);
   const handleCurrOpen = (e) => setCurrOpen(currOpen === e ? null : e);
   useEffect(() => {
     (async () => {
@@ -265,7 +267,6 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
     })();
   }, [property.lots]);
   const classes = useStyles();
-
   return (
     <AdminContentWrapper>
       <div>
@@ -385,11 +386,18 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
                 state={state}
                 property={property}
                 currOpen={currOpen}
+                handleSelect={handleSelectLot}
                 handleCurrOpen={handleCurrOpen}
               />
             )}
           </Grid>
         </Grid>
+      <LocationModal
+        user={user}
+        residenceName={property.heading}
+        curr={selectedLot}
+        handleClose={()=>handleSelectLot(null)}
+      />
       </div>
     </AdminContentWrapper>
   );
