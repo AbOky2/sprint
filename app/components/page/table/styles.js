@@ -3,7 +3,7 @@ export default (theme) => ({
     padding: '2.5rem 0',
     fontFamily: 'Nunito',
     borderTop: '1px solid rgba(26, 46, 108, 0.5)',
-    color: theme.palette.button,
+    color: theme.palette.newBlue,
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: '1.6rem',
@@ -25,8 +25,8 @@ export default (theme) => ({
     '& > div:last-child > div > div': {
       margin: 'auto',
       fontSize: '1rem',
-      color: theme.palette.button,
-      border: `1px solid ${theme.palette.button}`,
+      color: theme.palette.newBlue,
+      border: `1px solid ${theme.palette.newBlue}`,
     },
     [theme.breakpoints.down('sm')]: {
       '& > div': {
@@ -45,8 +45,8 @@ export default (theme) => ({
           width: '100%',
           '& > div': {
             width: '100%',
-            color: theme.palette.button,
-            border: `1px solid ${theme.palette.button}`,
+            color: theme.palette.newBlue,
+            border: `1px solid ${theme.palette.newBlue}`,
           },
         },
       },
@@ -57,7 +57,7 @@ export default (theme) => ({
       padding: '10px 23px',
       fontSize: '1.4rem',
       fontWeight: 'bold',
-      color: theme.palette.button,
+      color: theme.palette.newBlue,
     },
   },
 });

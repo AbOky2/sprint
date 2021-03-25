@@ -4,11 +4,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { FormControl, Select, Grid, Checkbox, Typography } from '@material-ui/core';
+import {
+  FormControl,
+  Select,
+  Grid,
+  Checkbox,
+  Typography,
+} from '@material-ui/core';
 import { toggleArray, isArray } from 'helpers/convertAndCheck';
 import Icon from './Icon';
 
-const positionType = ['left', 'right'];
+const positionType = ['', 'left', 'right'];
 
 const styles = (theme) => ({
   container: {
@@ -125,7 +131,7 @@ const DropdownSelect = withStyles(styles)(
     const node = useRef();
     const [open, setOpen] = useState(false);
     const [selected, setSelected] = useState(
-      (isArray(value) ? value : [value]).filter((e) => e?.length),
+      (isArray(value) ? value : [value]).filter((e) => e?.length)
     );
 
     const handleSelected = (e) => {
@@ -136,7 +142,12 @@ const DropdownSelect = withStyles(styles)(
     };
 
     const toggleOpen = (e) => {
-      if (node.current.contains(e.target) && open && e.target.nodeName === 'SPAN') setOpen(false);
+      if (
+        node.current.contains(e.target) &&
+        open &&
+        e.target.nodeName === 'SPAN'
+      )
+        setOpen(false);
       else if (node.current.contains(e.target) && !open) setOpen(true);
       else if (!node.current.contains(e.target)) setOpen(false);
     };
@@ -155,11 +166,17 @@ const DropdownSelect = withStyles(styles)(
         md={position ? 6 : 12}
         xs={12}
         className={
-          open ? clsx(classes.customSelectContainer, classes.open) : classes.customSelectContainer
+          open
+            ? clsx(classes.customSelectContainer, classes.open)
+            : classes.customSelectContainer
         }
         ref={node}
       >
-        <input value={selected.join(' - ')} placeholder={placeholder} disabled />
+        <input
+          value={selected.join(' - ')}
+          placeholder={placeholder}
+          disabled
+        />
         <span />
         <Icon type="triangle" size="small" color="gray" />
         <Grid container>
@@ -178,19 +195,35 @@ const DropdownSelect = withStyles(styles)(
         </Grid>
       </Grid>
     );
-  },
+  }
 );
 export { DropdownSelect };
-const NativeSelects = ({ name, onChange, value, position, list, label, classes }) => (
+const NativeSelects = ({
+  name,
+  onChange,
+  value,
+  position,
+  list,
+  label,
+  classes,
+}) => (
   <Grid
     item
     md={position ? 6 : 12}
     xs={12}
-    className={position ? clsx(classes.container, classes[position]) : classes.container}
+    className={
+      position ? clsx(classes.container, classes[position]) : classes.container
+    }
   >
     <FormControl variant="outlined" className={classes.formControl}>
       {label ? <p>{label}</p> : ''}
-      <Select native autoWidth value={value} onChange={onChange(name)} inputProps={{ name }}>
+      <Select
+        native
+        autoWidth
+        value={value}
+        onChange={onChange(name)}
+        inputProps={{ name }}
+      >
         {list?.map((elem) => (
           <option key={elem.name} value={elem.value}>
             {elem.name}

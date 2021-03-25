@@ -3,10 +3,13 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const shared = {
   colors: {
     primary: '#1A2E6C',
-    button: '#4f80ff',
     newBlue: '#4F80FF',
+    lightBlue: '#D2DCF5',
+    iconBlue: '#5379EF',
     gray: '#c7cfd6',
     lightGray: '#E2E2E2',
+    white: '#fff',
+    red: '#E02A50',
   },
   fonts: {
     titles: {
@@ -42,6 +45,7 @@ const theme = createMuiTheme({
     blue: shared.colors.primary,
     gray: shared.colors.gray,
     lightGray: shared.colors.lightGray,
+    lightBlue: shared.colors.lightBlue,
     button: shared.colors.button,
   },
   space: {
@@ -116,4 +120,4 @@ theme.ui.listContainer = {
     },
   },
 };
-export { theme };
+export { theme, shared };

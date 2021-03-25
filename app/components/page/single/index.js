@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#4F80FF',
   },
   save: {
-    color: theme.palette.button,
+    color: theme.palette.newBlue,
     fontSize: '1.8rem',
     marginBottom: 30,
     '& > div': {
@@ -227,17 +227,25 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) => {
+const PropertyPage = ({
+  id,
+  user,
+  update,
+  property = {},
+  isLocation = false,
+}) => {
   const [state, setState] = useState({});
   const [selectedLot, setSelectedLot] = useState(null);
   const [total, Total] = useState({});
   const [currOpen, setCurrOpen] = useState('');
-  const [liked, setLiked] = useState(user?.bookmarks?.find((elem) => elem._id === id));
+  const [liked, setLiked] = useState(
+    user?.bookmarks?.find((elem) => elem._id === id)
+  );
   const handleBookmark = () => {
     setLiked(!liked);
     addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
-  const handleSelectLot = (elem)=> setSelectedLot(elem);
+  const handleSelectLot = (elem) => setSelectedLot(elem);
   const handleCurrOpen = (e) => setCurrOpen(currOpen === e ? null : e);
   useEffect(() => {
     (async () => {
@@ -247,7 +255,8 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
         const elem = newState[pieces];
         if (Object.prototype.hasOwnProperty.call(newState, pieces)) {
           elem.list.push(newElem);
-          if (!elem.minPrice || elem.minPrice > newElem.price) elem.minPrice = newElem.price;
+          if (!elem.minPrice || elem.minPrice > newElem.price)
+            elem.minPrice = newElem.price;
           if (!elem.minSurface || elem.minSurface > newElem.surface)
             elem.minSurface = newElem.surface;
           if (!elem.maxSurface || elem.maxSurface < newElem.surface)
@@ -287,17 +296,19 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
           <Grid item md={6}>
             <Typography variant="h1">{property.heading}</Typography>
             <Typography variant="subtitle1">{property.fullAddress}</Typography>
-            {!isLocation && <Typography variant="h2">Programme immobilier neuf</Typography>}
+            {!isLocation && (
+              <Typography variant="h2">Programme immobilier neuf</Typography>
+            )}
             <div className={classes.houseInfo}>
               <Grid container>
                 <div>
-                  <Icon type="door" color="lightBlue" />
+                  <Icon type="door" color="iconBlue" />
 
                   <span>{`de ${property.minPieces} à ${property.maxPieces}  pièces`}</span>
                 </div>
 
                 <div>
-                  <Icon type="room" color="lightBlue" />
+                  <Icon type="room" color="iconBlue" />
                   <span>{` de ${property.minSurface}m² à ${property.maxSurface}m²`}</span>
                 </div>
               </Grid>
@@ -329,13 +340,17 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
                 <Btn
                   text="Être rappelé selon mes dispos"
                   alignRight
-                  onClick={() => openPopupWidget({ url: 'https://calendly.com/kitlenid' })}
+                  onClick={() =>
+                    openPopupWidget({ url: 'https://calendly.com/kitlenid' })
+                  }
                 />
               )}
               {isLocation ? (
                 ''
               ) : (
-                <Typography variant="body1">ou appeler le 06.65.07.11.66</Typography>
+                <Typography variant="body1">
+                  ou appeler le 06.65.07.11.66
+                </Typography>
               )}
             </div>
           </Grid>
@@ -345,7 +360,9 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
             <div>
               <Typography variant="h3">À propos du logement !</Typography>
               <Typography variant="body1">
-                <span dangerouslySetInnerHTML={{ __html: property.description }} />
+                <span
+                  dangerouslySetInnerHTML={{ __html: property.description }}
+                />
               </Typography>
             </div>
             {property.advantage.length ? (
@@ -353,7 +370,14 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
                 <Typography variant="h3">Les petits plus :</Typography>
                 <Grid container>
                   {property.advantage?.map((elem) => (
-                    <Grid container item key={elem} md={4} sm={6} alignItems="center">
+                    <Grid
+                      container
+                      item
+                      key={elem}
+                      md={4}
+                      sm={6}
+                      alignItems="center"
+                    >
                       <Icon type="elevator" />
                       <Typography variant="subtitle1">{elem}</Typography>
                     </Grid>
@@ -371,7 +395,9 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
 
         <Grid container className={classes.discoveryContainer}>
           <Typography variant="h2">
-            {`Découvrez nos ${total} logements${isLocation ? '' : '  neufs disponibles'} :`}
+            {`Découvrez nos ${total} logements${
+              isLocation ? '' : '  neufs disponibles'
+            } :`}
           </Typography>
           <Grid container>
             {property.typeOfAnnonce === typeOfAnnoncies[0] ? (
@@ -392,12 +418,12 @@ const PropertyPage = ({ id, user, update, property = {}, isLocation = false }) =
             )}
           </Grid>
         </Grid>
-      <LocationModal
-        user={user}
-        residenceName={property.heading}
-        curr={selectedLot}
-        handleClose={()=>handleSelectLot(null)}
-      />
+        <LocationModal
+          user={user}
+          residenceName={property.heading}
+          curr={selectedLot}
+          handleClose={() => handleSelectLot(null)}
+        />
       </div>
     </AdminContentWrapper>
   );

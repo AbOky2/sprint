@@ -1,6 +1,10 @@
 import { Grid } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { spaceCurrency, ucfirst, getDateQuarter } from '../../../helpers/convertAndCheck';
+import {
+  spaceCurrency,
+  ucfirst,
+  getDateQuarter,
+} from '../../../helpers/convertAndCheck';
 import { Icon, Btn } from '../../form';
 import { NEXT_PUBLIC_UPLOAD_URL } from '../../../config';
 
@@ -22,16 +26,24 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
               </div>
             </Grid>
-            <Grid item onClick={() => handleCurrOpen(elem)} className="text-center pointer">
-              <Icon type={isOpen ? 'less' : 'plus'} color="lightBlue" size="small" />
+            <Grid
+              item
+              onClick={() => handleCurrOpen(elem)}
+              className="text-center pointer"
+            >
+              <Icon
+                type={isOpen ? 'less' : 'plus'}
+                color="iconBlue"
+                size="small"
+              />
             </Grid>
           </Grid>
           <Grid item md={2} xs={5}>
-            <Icon type="door" color="lightBlue" />
+            <Icon type="door" color="iconBlue" />
             {` ${elem} pièce${elem > 1 ? 's' : ''}`}
           </Grid>
           <Grid item md={3} xs={5}>
-            <Icon type="room" color="lightBlue" />
+            <Icon type="room" color="iconBlue" />
             {` de ${current.minSurface}m² à ${current.maxSurface}m²`}
           </Grid>
           <Grid item md={3} xs={5}>
@@ -48,7 +60,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
             onClick={() => handleCurrOpen(elem)}
             className="text-center pointer"
           >
-            <Icon type={isOpen ? 'less' : 'plus'} color="lightBlue" size="small" />
+            <Icon
+              type={isOpen ? 'less' : 'plus'}
+              color="iconBlue"
+              size="small"
+            />
           </Grid>
         </Grid>
         {isOpen && (
@@ -85,7 +101,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
               const typeOfProperty = ucfirst(curr.typeOfProperty);
 
               return (
-                <Grid key={curr.ref} container className={classes.discoveryContent}>
+                <Grid
+                  key={curr.ref}
+                  container
+                  className={classes.discoveryContent}
+                >
                   <Grid container>
                     <Grid container justify="space-between">
                       <span>Type</span>
@@ -109,7 +129,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     </Grid>
                     {curr.file && (
                       // eslint-disable-next-line react/jsx-no-duplicate-props
-                      <Grid item className="text-center" className={classes.btnContainer}>
+                      <Grid
+                        item
+                        className="text-center"
+                        className={classes.btnContainer}
+                      >
                         <Btn
                           text="Voir"
                           whiteColor

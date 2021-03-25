@@ -49,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '3.8rem',
     padding: '4rem',
     backgroundColor: 'white',
-    boxShadow: '0px 4px 13px rgb(0 0 0 / 10%), inset 0px -3px 10px rgb(149 149 149 / 20%)',
+    boxShadow:
+      '0px 4px 13px rgb(0 0 0 / 10%), inset 0px -3px 10px rgb(149 149 149 / 20%)',
     borderRadius: 15,
     '& > h3': {
       marginBottom: '2rem',
@@ -66,10 +67,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 const PartnershipPrice = 400;
 const PartnerPage = ({ user }) => {
-  const [state, setState] = useState({ email: '', firstName: '', lastName: '' });
-  const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
+  const [state, setState] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+  });
+  const handleChange = (name) => ({ target: { value } }) =>
+    setState({ ...state, [name]: value });
   const handleSubmit = () => {
-    if (!state.email || !state.firstName || !state.lastName || !state.phone) return;
+    if (!state.email || !state.firstName || !state.lastName || !state.phone)
+      return;
     addSponsorshipApiMethod(state);
   };
   const classes = useStyles();
@@ -83,33 +90,37 @@ const PartnerPage = ({ user }) => {
           ${PartnershipPrice}€`}
         </Typography>
         <Typography>
-          Aidez vos proches à concrétiser leur projet immobilier. Votre code parrain :
-          <strong>{user?.slug}</strong>
+          Aidez vos proches à concrétiser leur projet immobilier. Votre code
+          parrain :<strong>{user?.slug}</strong>
         </Typography>
         <Grid container item justify="center">
           <Grid item md={2} className="text-center">
             <Grid container justify="center" alignItems="center">
-              <Icon type="addUser" color="lightBlue" size="large" />
+              <Icon type="addUser" color="iconBlue" size="large" />
             </Grid>
             <Typography variant="h3">Etapes 01</Typography>
-            <Typography>Renseigner les coordonés de votre contact ci-dessous.</Typography>
+            <Typography>
+              Renseigner les coordonés de votre contact ci-dessous.
+            </Typography>
           </Grid>
           <Grid item md={2}>
             <FirstDivider />
           </Grid>
           <Grid item md={2} className="text-center">
             <Grid container justify="center" alignItems="center">
-              <Icon type="phone" color="lightBlue" size="large" />
+              <Icon type="phone" color="iconBlue" size="large" />
             </Grid>
             <Typography variant="h3">Etapes 02</Typography>
-            <Typography>Nous prenons contact avec lui pour lui présenter nos offres.</Typography>
+            <Typography>
+              Nous prenons contact avec lui pour lui présenter nos offres.
+            </Typography>
           </Grid>
           <Grid item md={2}>
             <SecondDivider />
           </Grid>
           <Grid item md={2} className="text-center">
             <Grid container justify="center" alignItems="center">
-              <Icon type="pen" color="lightBlue" size="big" />
+              <Icon type="pen" color="iconBlue" size="big" />
             </Grid>
             <Typography variant="h3">Etapes 03</Typography>
             <Typography>
@@ -122,8 +133,18 @@ const PartnerPage = ({ user }) => {
       <div className={classes.formContainer}>
         <Typography variant="h3">Inviter vos proches</Typography>
         <Grid container item justify="center">
-          <Input label="Prénom*" onChange={handleChange} name="firstName" position="left" />
-          <Input label="Nom*" onChange={handleChange} name="lastName" position="right" />
+          <Input
+            label="Prénom*"
+            onChange={handleChange}
+            name="firstName"
+            position="left"
+          />
+          <Input
+            label="Nom*"
+            onChange={handleChange}
+            name="lastName"
+            position="right"
+          />
           <Input
             label="E-mail*"
             onChange={handleChange}
@@ -140,7 +161,10 @@ const PartnerPage = ({ user }) => {
           />
         </Grid>
         <div>
-          <Btn text={`Parrainer ${ucfirst(state.firstName)}`} onClick={handleSubmit} />
+          <Btn
+            text={`Parrainer ${ucfirst(state.firstName)}`}
+            onClick={handleSubmit}
+          />
         </div>
       </div>
     </AdminContentWrapper>

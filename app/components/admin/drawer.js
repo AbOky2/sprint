@@ -113,7 +113,7 @@ function ResponsiveDrawer({ children, window, logout }) {
               <ListItem button>
                 <ListItemIcon>
                   <a>
-                    <Icon type={iconType} color="lightBlue" />
+                    <Icon type={iconType} color="iconBlue" />
                   </a>
                 </ListItemIcon>
                 <ListItemText primary={text} />
@@ -126,7 +126,8 @@ function ResponsiveDrawer({ children, window, logout }) {
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <div className={classes.root}>

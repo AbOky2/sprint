@@ -1,4 +1,6 @@
-const style = (theme) => ({
+import { withStyles } from '@material-ui/core';
+
+const styles = (theme) => ({
   card: {
     width: 'calc(100% - 14px)',
   },
@@ -32,7 +34,7 @@ const style = (theme) => ({
     },
   },
   searchContainer: {
-    marginBottom: 22,
+    marginBottom: '1.6rem',
     '& input:focus': {
       border: `solid 1px ${theme.palette.lightGray}`,
     },
@@ -132,15 +134,57 @@ const style = (theme) => ({
     },
   },
   changeView: {
+    ...theme.ui.bordered,
+    display: 'flex',
     marginTop: 0,
-    transform: 'translateY(-1.5rem)',
+    padding: '.8rem 1.4rem',
+    border: `1px solid ${theme.palette.lightGray}`,
+    backgroundColor: 'white',
     textAlign: 'right',
     fontSize: '1rem',
+    cursor: 'pointer',
     '& span': {
-      cursor: 'pointer',
+      paddingLeft: '1rem',
+      ...theme.typography.body1,
+      fontSize: '1.4rem',
+      marginLeft: 'auto',
+      color: theme.palette.blue,
     },
   },
   listContainer: theme.ui.listContainer,
+  mapsListContainer: {
+    width: '100%',
+    border: `1px solid ${theme.palette.lightGray}`,
+    ...theme.ui.bordered,
+    padding: '1rem',
+    backgroundColor: 'white',
+    marginTop: '.8rem',
+    '&:first-of-type': {
+      marginTop: 0,
+    },
+    '& > a > div': {
+      display: 'flex',
+      '& > div:first-of-type': {
+        width: '40%',
+        height: 'auto',
+        ...theme.ui.bordered,
+        '& > span': {
+          top: 10,
+          left: 10,
+        },
+      },
+      '& > div:last-of-type': {
+        width: '60%',
+        padding: '0 1.6rem',
+        '& > p:last-of-type': {
+          textAlign: 'left',
+        },
+      },
+    },
+  },
+  mapsContainer: {
+    paddingLeft: '2.5rem',
+  },
   pagination: {
     marginTop: '1rem',
   },
@@ -152,5 +196,42 @@ const style = (theme) => ({
       marginRight: '1rem',
     },
   },
+  sortContainer: {
+    marginBottom: '1.6rem',
+    '& > div': {
+      [theme.breakpoints.down('sm')]: {
+        padding: '0!important',
+        '&:last-of-type': {
+          marginTop: '.8rem',
+          textAlign: 'center',
+          '& span': {
+            marginLeft: 'initial',
+          },
+        },
+      },
+      '&:first-of-type': {
+        paddingRight: '1rem',
+        '& select': {
+          ...theme.ui.bordered,
+          backgroundColor: theme.palette.lightBlue,
+          padding: '1.27rem 1.4rem',
+          color: theme.palette.newBlue,
+        },
+        '& fieldset': {
+          border: 'none',
+        },
+        '& svg': {
+          fill: theme.palette.newBlue,
+        },
+      },
+      '&:last-of-type': {
+        paddingLeft: '1rem',
+        '& > div': {
+          display: 'flex',
+          alignItems: 'center',
+        },
+      },
+    },
+  },
 });
-export default style;
+export default withStyles(styles);

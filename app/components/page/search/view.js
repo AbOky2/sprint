@@ -1,31 +1,23 @@
 import PropTypes from 'prop-types';
 import Pagination from '@material-ui/lab/Pagination';
 import { Grid, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 import Link from 'next/link';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import Card from 'components/card';
-import styles from './styles';
+import withStyles from './styles';
 
-const ListFooter = ({ classes, page, matches, handlePage }) =>
+const ListFooter = ({ classes, page, matches, isMapsView, handlePage }) =>
   page.totalPages > 0 && (
     <Grid container justify="center" className={classes.pagination}>
       <Pagination
         count={page.totalPages}
         page={!isNaN(page.page) ? Number(page.page) : 1}
-        siblingCount={matches ? 0 : 1}
+        siblingCount={matches || isMapsView ? 0 : 1}
         onChange={handlePage}
       />
     </Grid>
   );
-const ListWrapper = ({
-  children,
-  classes,
-  hasData,
-  page,
-  matches,
-  handlePage,
-}) => (
+const ListWrapper = ({ children, classes, hasData, ...footerProps }) => (
   <Grid container>
     {hasData ? (
       children
@@ -39,12 +31,7 @@ const ListWrapper = ({
         </Typography>
       </div>
     )}
-    <ListFooter
-      classes={classes}
-      page={page}
-      matches={matches}
-      handlePage={handlePage}
-    />
+    <ListFooter classes={classes} {...footerProps} />
   </Grid>
 );
 const ListElement = ({
@@ -83,14 +70,24 @@ const ListElement = ({
   </Grid>
 );
 
-const ListView = withStyles(styles)(
-  ({ classes, data, liked, handleBookmark, page, matches, handlePage }) => (
+const ListView = withStyles(
+  ({
+    classes,
+    data,
+    liked,
+    isMapsView,
+    handleBookmark,
+    page,
+    matches,
+    handlePage,
+  }) => (
     <ListWrapper
       classes={classes}
       hasData={data.length}
       page={page}
       matches={matches}
       handlePage={handlePage}
+      isMapsView={isMapsView}
     >
       {data?.map((elems) => (
         <ListElement
@@ -105,21 +102,31 @@ const ListView = withStyles(styles)(
   )
 );
 
-const MapsView = withStyles(styles)(
-  ({ classes, data, liked, handleBookmark, page, matches, handlePage }) => (
+const MapsView = withStyles(
+  ({
+    classes,
+    liked,
+    handleBookmark,
+    data,
+    page,
+    matches,
+    handlePage,
+    isMapsView,
+  }) => (
     <Grid container>
-      <Grid item xs={4}>
+      <Grid item xs={5}>
         <ListWrapper
           classes={classes}
           hasData={data.length}
           page={page}
           matches={matches}
           handlePage={handlePage}
+          isMapsView={isMapsView}
         >
           {data?.map((elems) => (
             <ListElement
               key={elems._id}
-              className={classes.listContainer}
+              className={classes.mapsListContainer}
               liked={liked}
               handleBookmark={handleBookmark}
               {...elems}
@@ -127,7 +134,7 @@ const MapsView = withStyles(styles)(
           ))}
         </ListWrapper>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item xs={7} className={classes.mapsContainer}>
         Maps
       </Grid>
     </Grid>
@@ -138,6 +145,7 @@ const sharedProptypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
   liked: PropTypes.array.isRequired,
+  isMapsView: PropTypes.bool.isRequired,
   handleBookmark: PropTypes.func.isRequired,
   page: PropTypes.object.isRequired,
   matches: PropTypes.bool.isRequired,

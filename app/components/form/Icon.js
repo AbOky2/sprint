@@ -2,14 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import * as icons from '../../static/img/icons';
+import { shared } from 'lib/theme';
 
 const SIZES = { small: 16, medium: 24, large: 48, big: 67 };
 const ICON_COLORS = {
-  darkBlue: '#1A2E6C',
-  skyBlue: '#9B7B0A',
-  lightBlue: '#5379EF',
-  white: '#fff',
-  red: '#E02A50',
+  ...shared.colors,
   gray: 'gray',
 };
 
@@ -59,7 +56,7 @@ Icon.propTypes = {
   rotate: PropTypes.string,
 };
 Icon.defaultProps = {
-  color: 'darkBlue',
+  color: 'primary',
   size: 'medium',
   customSize: undefined,
   strokeColor: undefined,

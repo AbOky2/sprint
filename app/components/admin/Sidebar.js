@@ -39,7 +39,7 @@ const Sidebar = ({ notifications = {} }) => {
                 <Link href={path} exact activeClassName="active" key={i}>
                   <li>
                     <h3>
-                      <Icon type={iconType} color="lightBlue" />
+                      <Icon type={iconType} color="iconBlue" />
                       <span className="link-title">{name}</span>
                       {notifications[slug] ? (
                         <span className="info">{notifications[slug]}</span>

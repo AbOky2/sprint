@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import withAuth from '../../lib/withAuth';
 import { AdminContentWrapper } from '../../components/wrapper';
 import { Icon } from '../../components/form';
-import { partnerTypes } from '../../helpers/partner';
 import { isBuyer } from '../../helpers/user';
 import { ucfirst } from '../../helpers/convertAndCheck';
 import { getPartnersApiMethod } from '../../lib/api/customer';
@@ -42,11 +41,13 @@ const styles = (theme) => ({
     '& > div:first-of-type > div > a': {
       height: '100%',
       background: 'linear-gradient(99.78deg, #CC95DF -24.64%, #4F80FF 62.6%)',
-      boxShadow: '0px 6px 15px rgba(79, 128, 255, 0.3), inset 0px -3px 10px rgba(12, 37, 100, 0.3)',
+      boxShadow:
+        '0px 6px 15px rgba(79, 128, 255, 0.3), inset 0px -3px 10px rgba(12, 37, 100, 0.3)',
     },
     '& > div:last-of-type > div': {
       height: '100%',
-      boxShadow: '0px 4px 13px rgba(0, 0, 0, 0.1), inset 0px -3px 10px rgba(149, 149, 149, 0.2)',
+      boxShadow:
+        '0px 4px 13px rgba(0, 0, 0, 0.1), inset 0px -3px 10px rgba(149, 149, 149, 0.2)',
     },
     '& > div > div > a > img': {
       width: 77,
@@ -186,7 +187,9 @@ const Dashboard = ({ user = {}, partners, classes }) => (
         <span role="img" aria-label="">
           🎉
         </span>
-        <span className={classes.welcomeSub}>Bienvenue sur votre espace personel Kit le Nid.</span>
+        <span className={classes.welcomeSub}>
+          Bienvenue sur votre espace personel Kit le Nid.
+        </span>
       </Typography>
     </div>
     <div className={classes.container}>
@@ -198,7 +201,11 @@ const Dashboard = ({ user = {}, partners, classes }) => (
         <br />
         vous aide à avoir un bon garant.
       </Typography>
-      <Grid container justify="space-between" className={classes.presentationContainer}>
+      <Grid
+        container
+        justify="space-between"
+        className={classes.presentationContainer}
+      >
         <Grid item md={12} md={6}>
           <div>
             <Link href="/dashboard/search/buy">
@@ -207,7 +214,10 @@ const Dashboard = ({ user = {}, partners, classes }) => (
 
                 <Typography
                   variant="h4"
-                  className={clsx(classes.whiteColor, classes.presentationCardTitle)}
+                  className={clsx(
+                    classes.whiteColor,
+                    classes.presentationCardTitle
+                  )}
                 >
                   Mon premier achat
                 </Typography>
@@ -228,7 +238,10 @@ const Dashboard = ({ user = {}, partners, classes }) => (
             <Link href="/dashboard/search/location">
               <a>
                 <img src={LocationImg} alt="" />
-                <Typography variant="h4" className={classes.presentationCardTitle}>
+                <Typography
+                  variant="h4"
+                  className={classes.presentationCardTitle}
+                >
                   Location
                 </Typography>
                 <Grid container justify="space-between" alignItems="flex-end">
@@ -239,7 +252,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
                     <br />
                     en France.
                   </Typography>
-                  <Icon type="arrow" color="lightBlue" />
+                  <Icon type="arrow" color="iconBlue" />
                 </Grid>
               </a>
             </Link>
@@ -273,7 +286,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
               <Grid container justify="space-between" alignItems="flex-end">
                 <div className={classes.partnerListTextContainer}>
                   <ReactMarkdown>{elem.description}</ReactMarkdown>
-                  <Icon type="arrow" color="lightBlue" />
+                  <Icon type="arrow" color="iconBlue" />
                 </div>
               </Grid>
             </a>

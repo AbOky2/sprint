@@ -5,7 +5,13 @@ import { spaceCurrency, locationAvailableDate } from 'helpers/convertAndCheck';
 import { Icon, Btn } from 'components/form';
 import styles from './styles';
 
-const LocationTable = ({ classes, state, currOpen, handleCurrOpen, handleSelect }) =>
+const LocationTable = ({
+  classes,
+  state,
+  currOpen,
+  handleCurrOpen,
+  handleSelect,
+}) =>
   Object.keys(state).map((elem) => {
     const current = state[elem];
     const isOpen = currOpen === elem;
@@ -22,16 +28,24 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen, handleSelect 
                 <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
               </div>
             </Grid>
-            <Grid item onClick={() => handleCurrOpen(elem)} className="text-center pointer">
-              <Icon type={isOpen ? 'less' : 'plus'} color="lightBlue" size="small" />
+            <Grid
+              item
+              onClick={() => handleCurrOpen(elem)}
+              className="text-center pointer"
+            >
+              <Icon
+                type={isOpen ? 'less' : 'plus'}
+                color="iconBlue"
+                size="small"
+              />
             </Grid>
           </Grid>
           <Grid item md={2} xs={5}>
-            <Icon type="door" color="lightBlue" />
+            <Icon type="door" color="iconBlue" />
             {` ${elem} pièce${elem > 1 ? 's' : ''}`}
           </Grid>
           <Grid item md={3} xs={5}>
-            <Icon type="room" color="lightBlue" />
+            <Icon type="room" color="iconBlue" />
             {` de ${current.minSurface}m² à ${current.maxSurface}m²`}
           </Grid>
           <Grid item md={3} xs={5}>
@@ -48,7 +62,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen, handleSelect 
             onClick={() => handleCurrOpen(elem)}
             className="text-center pointer"
           >
-            <Icon type={isOpen ? 'less' : 'plus'} color="lightBlue" size="small" />
+            <Icon
+              type={isOpen ? 'less' : 'plus'}
+              color="iconBlue"
+              size="small"
+            />
           </Grid>
         </Grid>
         {isOpen && (
@@ -78,19 +96,22 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen, handleSelect 
               .map((curr) => {
                 const availableDate = locationAvailableDate(
                   curr.available_date,
-                  curr.contract_end_date,
+                  curr.contract_end_date
                 );
                 const floor = curr.floor ? `Étage ${curr.floor}` : 'RDC';
 
                 return (
-                  <Grid key={curr.ref} container className={classes.discoveryContent}>
+                  <Grid
+                    key={curr.ref}
+                    container
+                    className={classes.discoveryContent}
+                  >
                     <Grid container>
                       <Grid container justify="space-between">
                         <span>Loyer/mois</span>
                         <span>
-                          <strong>{curr.price}</strong>
-€
-</span>
+                          <strong>{curr.price}</strong>€
+                        </span>
                       </Grid>
                       <Grid container justify="space-between">
                         <span>Superficie</span>
@@ -104,8 +125,16 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen, handleSelect 
                         <span>disponibilité</span>
                         <span>{availableDate}</span>
                       </Grid>
-                      <Grid item className="text-center" className={classes.btnContainer}>
-                        <Btn text="Réserver" whiteColor onClick={()=>handleSelect(curr)}/>
+                      <Grid
+                        item
+                        className="text-center"
+                        className={classes.btnContainer}
+                      >
+                        <Btn
+                          text="Réserver"
+                          whiteColor
+                          onClick={() => handleSelect(curr)}
+                        />
                       </Grid>
                     </Grid>
                     <Grid container alignItems="center">
@@ -126,7 +155,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen, handleSelect 
                       </Grid>
                       <Grid item md={2} xs={5} className={classes.btnContainer}>
                         <Btn
-                          onClick={()=>handleSelect(curr)}
+                          onClick={() => handleSelect(curr)}
                           target="_blank"
                           dataMode="popup"
                           text="Réserver"
