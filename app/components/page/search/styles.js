@@ -127,6 +127,36 @@ const styles = (theme) => ({
   },
   search: {
     position: 'relative',
+    '& > div > div:last-of-type': {
+      // display: 'none',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      padding: '2.1rem',
+      transform: 'translateY(100%)',
+      backgroundColor: 'white',
+      boxShadow: '0px 4.15441px 16.6176px rgba(0, 0, 0, 0.1)',
+      borderRadius: '0px 0px 15px 15px',
+      zIndex: 3,
+      '& input': {
+        borderRadius: '1rem',
+        border: `1px solid ${theme.palette.lightGray}`,
+        marginTop: '1.6rem',
+      },
+      '& > p': {
+        fontSize: '1.2rem',
+        '&:first-of-type': {
+          marginTop: '1.6rem',
+        },
+        '&:last-of-type': {
+          marginTop: '1.6rem',
+          fontWeight: '600',
+          fontStyle: 'italic',
+          color: '#526190',
+        },
+      },
+    },
   },
   locationMaxBudget: {
     '& input': {

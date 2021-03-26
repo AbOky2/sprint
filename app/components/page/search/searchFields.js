@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
-import { Icon, Input } from 'components/form';
-import { GoogleMaps } from 'components/form/Input';
+import { GoogleMaps, CustomInput } from 'components/form/Input';
 import { DropdownSelect } from 'components/form/Select';
 import { propertyPiecesSelectMap } from 'helpers/property';
 import withStyles from './styles';
@@ -50,19 +49,19 @@ const searchFields = withStyles(
           md={isLocation ? 6 : 4}
           className={clsx(classes.search, classes.locationMaxBudget)}
         >
-          <Input
+          <CustomInput
             name="maxPrice"
             value={
               queryData.maxPrice > 0 && !Number.isNaN(queryData.maxPrice)
                 ? queryData.maxPrice
                 : ''
             }
+            queryData={queryData}
             onChange={handleSearch}
             placeholder="Budget maximal"
+            handleSearch={handleSearch}
+            handleSumit={handleSumit}
           />
-          <div onClick={handleSumit} className="pointer">
-            <Icon type="search" size="large" color="white" />
-          </div>
         </Grid>
       </Grid>
     </>

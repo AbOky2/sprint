@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
+import { Icon } from 'components/form';
 import PropTypes from 'prop-types';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
@@ -127,8 +128,66 @@ const InputType = withStyles(styles)(
     </Grid>
   )
 );
+const CustomInput = withStyles(styles)(
+  ({ classes, handleSumit, handleSearch, queryData, ...inputProps }) => {
+    const [value, setValue] = useState(queryData.value);
+    const [state, setState] = useState({
+      salary: 0,
+      contributtion: 0,
+    });
 
-InputType.propTypes = {
+    const handleChange = (name) => ({ target: { value } }) =>
+      setState({ ...state, [name]: value });
+
+    useEffect(() => {
+      const { salary, contributtion } = state;
+
+      if (salary > 0 && contributtion > 0)
+        setValue(salary * 83.33 + contributtion);
+    }, [state]);
+
+    return (
+      <Grid container>
+        <InputType {...inputProps} value={value} />
+        <div onClick={handleSumit} className="pointer">
+          <Icon type="search" size="large" color="white" />
+        </div>
+        <Grid container>
+          <Typography variant="h4">Quel est votre budget ?</Typography>
+          <Typography>
+            Nous vous aidons à déterminer votre budget maximal en simulant le
+            montant que vous pouvez emprunter.
+          </Typography>
+          <InputType
+            name="salary"
+            value={
+              state.salary > 0 && !Number.isNaN(state.salary)
+                ? state.salary
+                : ''
+            }
+            onChange={handleChange}
+            placeholder="Votre salaire net mensuel"
+          />
+          <InputType
+            name="contributtion"
+            value={
+              state.contributtion > 0 && !Number.isNaN(state.contributtion)
+                ? state.contributtion
+                : ''
+            }
+            onChange={handleChange}
+            placeholder="Votre apport personnel"
+          />
+          <Typography>
+            Ce calcul est réalisé avec les hypothèses suivantes : durée de prêt
+            : 25 ans taux d’intérêt : 1,5%
+          </Typography>
+        </Grid>
+      </Grid>
+    );
+  }
+);
+const samePropTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
@@ -138,7 +197,7 @@ InputType.propTypes = {
   value: PropTypes.string,
   position: PropTypes.oneOf(positionType),
 };
-InputType.defaultProps = {
+const sameDefaultProps = {
   label: undefined,
   type: 'text',
   value: undefined,
@@ -146,4 +205,15 @@ InputType.defaultProps = {
   position: null,
   classes: {},
 };
+CustomInput.propTypes = {
+  ...samePropTypes,
+  queryData: PropTypes.object.isRequired,
+  handleSearch: PropTypes.func.isRequired,
+  handleSumit: PropTypes.func.isRequired,
+};
+CustomInput.defaultProps = sameDefaultProps;
+InputType.propTypes = samePropTypes;
+InputType.defaultProps = sameDefaultProps;
+
+export { CustomInput };
 export default InputType;
