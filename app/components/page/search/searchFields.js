@@ -3,12 +3,8 @@ import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { Icon, Input } from 'components/form';
 import { GoogleMaps } from 'components/form/Input';
-import Select, { DropdownSelect } from 'components/form/Select';
-import {
-  typeOfProperties,
-  sortByKeys,
-  sortBySelectMap,
-} from 'helpers/property';
+import { DropdownSelect } from 'components/form/Select';
+import { typeOfProperties, sortByKeys } from 'helpers/property';
 import withStyles from './styles';
 
 const searchFields = withStyles(
@@ -20,10 +16,6 @@ const searchFields = withStyles(
     handleSearch,
     handleSumit,
     handleSelect,
-    handleSortSelect,
-    sortBy,
-    toggleView,
-    isMapsView,
   }) => (
     <>
       <Grid
@@ -73,34 +65,6 @@ const searchFields = withStyles(
           </div>
         </Grid>
       </Grid>
-      <Grid
-        container
-        item
-        md={5}
-        xs={12}
-        alignItems="center"
-        justify="space-between"
-        className={classes.sortContainer}
-      >
-        <Grid item md={6} xs={12}>
-          <Select
-            name="sort"
-            placeholder="Type de bien"
-            list={sortBySelectMap}
-            value={sortBy}
-            onChange={handleSortSelect}
-          />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <div className={classes.changeView} onClick={toggleView}>
-            <Icon
-              type={isMapsView ? 'eyeClosed' : 'eyeOpened'}
-              color="newBlue"
-            />
-            <span>{`${isMapsView ? 'Masquer' : 'Afficher'} la carte`}</span>
-          </div>
-        </Grid>
-      </Grid>
     </>
   )
 );
@@ -108,13 +72,9 @@ searchFields.PropTypes = {
   classes: PropTypes.object.isRequired,
   isLocation: PropTypes.bool.isRequired,
   queryData: PropTypes.object.isRequired,
-  isMapsView: PropTypes.bool.isRequired,
-  sortBy: PropTypes.oneOf(sortByKeys).isRequired,
   handleMapSearch: PropTypes.func.isRequired,
   handleSearch: PropTypes.func.isRequired,
   handleSumit: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleSortSelect: PropTypes.func.isRequired,
-  toggleView: PropTypes.func.isRequired,
 };
 export default searchFields;

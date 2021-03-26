@@ -16,13 +16,15 @@ const {
   GOOGLE_GEOLOCATION,
   NEXT_PUBLIC_UPLOAD_URL,
   NEXT_PUBLIC_ROOT_URL,
+  NEXT_PUCLIC_GOOGLE_MAPS_KEY,
   MAIL_USER,
   SENDGRID_API_KEY,
 } = process.env;
 
 const PORT = process.env.PORT || 3000;
 const ROOT_URL = process.env.ROOT_URL || `http://localhost:${PORT}`;
-const SESSION_SECRET = process.env.SESSION_SECRET || 'M87kjdsfs876d98hdshhfjsecret';
+const SESSION_SECRET =
+  process.env.SESSION_SECRET || 'M87kjdsfs876d98hdshhfjsecret';
 const dev = NODE_ENV !== 'production';
 const MONGO_URL = dev ? MONGO_URL_TEST : MONGO_URL_PROD;
 
@@ -43,6 +45,7 @@ module.exports = {
   GOOGLE_GEOLOCATION,
   NEXT_PUBLIC_UPLOAD_URL,
   NEXT_PUBLIC_ROOT_URL,
+  NEXT_PUCLIC_GOOGLE_MAPS_KEY,
   MAIL_USER,
   SENDGRID_API_KEY,
 };

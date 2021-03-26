@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     color: '#4F80FF',
   },
   save: {
-    color: theme.palette.newBlue,
+    color: theme.palette.button,
     fontSize: '1.8rem',
     marginBottom: 30,
     '& > div': {
@@ -302,13 +302,13 @@ const PropertyPage = ({
             <div className={classes.houseInfo}>
               <Grid container>
                 <div>
-                  <Icon type="door" color="iconBlue" />
+                  <Icon type="door" color="lightBlue" />
 
                   <span>{`de ${property.minPieces} à ${property.maxPieces}  pièces`}</span>
                 </div>
 
                 <div>
-                  <Icon type="room" color="iconBlue" />
+                  <Icon type="room" color="lightBlue" />
                   <span>{` de ${property.minSurface}m² à ${property.maxSurface}m²`}</span>
                 </div>
               </Grid>
