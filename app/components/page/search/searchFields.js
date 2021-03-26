@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import { Icon, Input } from 'components/form';
 import { GoogleMaps } from 'components/form/Input';
 import { DropdownSelect } from 'components/form/Select';
-import { typeOfProperties, sortByKeys } from 'helpers/property';
+import { propertyPiecesSelectMap } from 'helpers/property';
 import withStyles from './styles';
 
 const searchFields = withStyles(
@@ -38,8 +38,8 @@ const searchFields = withStyles(
           <Grid item md={4}>
             <DropdownSelect
               name="typeOfAnnonce"
-              placeholder="Type de bien"
-              list={typeOfProperties.map((name) => ({ name, value: name }))}
+              placeholder="Nombre de pièces"
+              list={propertyPiecesSelectMap}
               value={queryData.typeOfProperty}
               onChange={handleSelect}
             />

@@ -106,6 +106,8 @@ const styles = (theme) => ({
       padding: '1.6rem .5rem',
       transform: 'translateY(100%)',
       backgroundColor: 'white',
+      boxShadow: '0px 4.15441px 16.6176px rgba(0, 0, 0, 0.1)',
+      borderRadius: '0px 0px 15px 15px',
       zIndex: 3,
       '& > div > span': {
         padding: 6,
@@ -184,10 +186,10 @@ const DropdownSelect = withStyles(styles)(
             <Grid container item key={elem.name} md={6} alignItems="center">
               <Checkbox
                 color="primary"
-                key={elem.name}
+                key={elem.value}
                 value={elem.value}
                 onClick={handleSelected}
-                checked={selected.includes(elem.name)}
+                checked={selected.includes(elem.value)}
               />
               <Typography variant="body2">{elem.name}</Typography>
             </Grid>
