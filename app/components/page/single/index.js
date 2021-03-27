@@ -12,6 +12,7 @@ import { Icon, Btn } from 'components/form';
 import { addBookmarkApiMethod } from 'lib/api/customer';
 import { typeOfAnnoncies } from 'helpers/property';
 import Carrousel from 'components/Carrousel';
+import NotFound from 'components/NotFound';
 import { spaceCurrency } from 'helpers/convertAndCheck';
 import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';
@@ -282,7 +283,7 @@ const PropertyPage = ({
   useEffect(() => {
     (async () => {
       const newState = {};
-      property.lots.forEach((newElem) => {
+      property.lots?.forEach((newElem) => {
         const pieces = newElem.pieces == 0 ? 1 : newElem.pieces;
         const elem = newState[pieces];
         if (Object.prototype.hasOwnProperty.call(newState, pieces)) {
@@ -304,10 +305,12 @@ const PropertyPage = ({
         }
       });
       setState(newState);
-      Total(property.lots.length);
+      Total(property.lots?.length);
     })();
   }, [property.lots]);
   const classes = useStyles();
+
+  if (!id) return <NotFound showLink={false} />;
   return (
     <AdminContentWrapper>
       <div>
@@ -393,7 +396,7 @@ const PropertyPage = ({
                 />
               </Typography>
             </div>
-            {property.advantage.length ? (
+            {property.advantage?.length ? (
               <div className={classes.extras}>
                 <Typography variant="h3">Les petits plus :</Typography>
                 <Grid container>

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
-import Button from '@material-ui/core/Button';
 import { Icon } from './form';
 import { logOut } from '../lib/api/public';
 
@@ -68,7 +66,12 @@ function Header({ user, hideHeader, redirectUrl }) {
       }}
     >
       <Toolbar style={styleToolbar}>
-        <Grid container direction="row" justify="space-around" alignItems="center">
+        <Grid
+          container
+          direction="row"
+          justify="space-around"
+          alignItems="center"
+        >
           <Grid item sm={8} xs={7} style={{ textAlign: 'left' }}>
             <Link href="/admin">
               <a>
