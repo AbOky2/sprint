@@ -1,0 +1,13 @@
+*~
+*.swp
+tmp/
+npm-debug.log
+.DS_Store
+
+
+.build/*
+.vscode/
+node_modules
+.coverage
+.env
+.next

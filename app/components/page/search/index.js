@@ -44,8 +44,8 @@ const SearchPage = ({
 
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
-  const handleSearch = (name) => ({ target: { value } }) =>
-    setQueryData({ ...queryData, [name]: value });
+  const handleBudget = (value) =>
+    setQueryData({ ...queryData, maxPrice: value });
   const handleMapSearch = (value) =>
     setQueryData({ ...queryData, loc: value?.label });
   const handleSelect = (newTypeOfProperty) =>
@@ -99,7 +99,7 @@ const SearchPage = ({
           isLocation={isLocation}
           queryData={queryData}
           handleMapSearch={handleMapSearch}
-          handleSearch={handleSearch}
+          handleBudget={handleBudget}
           handleSumit={handleSumit}
           handleSelect={handleSelect}
         />

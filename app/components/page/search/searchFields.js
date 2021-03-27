@@ -12,7 +12,7 @@ const searchFields = withStyles(
     isLocation,
     queryData,
     handleMapSearch,
-    handleSearch,
+    handleBudget,
     handleSumit,
     handleSelect,
   }) => (
@@ -57,9 +57,8 @@ const searchFields = withStyles(
                 : ''
             }
             queryData={queryData}
-            onChange={handleSearch}
+            onChange={handleBudget}
             placeholder="Budget maximal"
-            handleSearch={handleSearch}
             handleSumit={handleSumit}
           />
         </Grid>
@@ -72,7 +71,7 @@ searchFields.PropTypes = {
   isLocation: PropTypes.bool.isRequired,
   queryData: PropTypes.object.isRequired,
   handleMapSearch: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired,
+  handleBudget: PropTypes.func.isRequired,
   handleSumit: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
 };

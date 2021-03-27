@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Icon } from 'components/form';
-import PropTypes from 'prop-types';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { useToggleOpen } from 'helpers/hooks';
 
 const styles = (theme) => ({
   container: {
@@ -52,10 +53,48 @@ const styles = (theme) => ({
       paddingLeft: 0,
     },
   },
+  custom: {
+    position: 'relative',
+    '& > div:last-of-type': {
+      display: 'none',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '100%',
+      padding: '2.1rem',
+      transform: 'translateY(100%)',
+      backgroundColor: 'white',
+      boxShadow: '0px 4.15441px 16.6176px rgba(0, 0, 0, 0.1)',
+      borderRadius: '0px 0px 15px 15px',
+      zIndex: 3,
+      '& input': {
+        borderRadius: '1rem!important',
+        borderLeft: `1px solid ${theme.palette.lightGray}!important`,
+        marginTop: '1.6rem',
+      },
+      '& > p': {
+        fontSize: '1.2rem',
+        '&:first-of-type': {
+          marginTop: '1.6rem',
+        },
+        '&:last-of-type': {
+          marginTop: '1.6rem',
+          fontWeight: '600',
+          fontStyle: 'italic',
+          color: '#526190',
+        },
+      },
+    },
+  },
+  customOpen: {
+    '& > div:last-of-type': {
+      display: 'flex',
+    },
+  },
 });
 
 export const GoogleMaps = ({ onChange, value }) => {
-  const [inputValue, setInputValue] = React.useState(value);
+  const [inputValue, setInputValue] = useState(value);
   const onInputChange = (e) => setInputValue(e);
 
   return (
@@ -87,7 +126,7 @@ GoogleMaps.defaultProps = {
 
 const positionType = ['left', 'right'];
 
-const InputType = withStyles(styles)(
+const InputBase = withStyles(styles)(
   ({
     name,
     label,
@@ -129,26 +168,48 @@ const InputType = withStyles(styles)(
   )
 );
 const CustomInput = withStyles(styles)(
-  ({ classes, handleSumit, handleSearch, queryData, ...inputProps }) => {
-    const [value, setValue] = useState(queryData.value);
+  ({ classes, handleSumit, ...inputProps }) => {
+    const [value, setValue] = useState(inputProps.value);
+    const [node, open] = useToggleOpen();
     const [state, setState] = useState({
       salary: 0,
       contributtion: 0,
     });
+    const calc = (value) => {
+      const val =
+        value ||
+        parseInt(state.salary, 10) * 83.33 +
+          parseInt(state.contributtion, 10) +
+          '';
+      setValue(val);
+      inputProps.onChange(val);
+    };
+    const onChange = () => (e) => {
+      const { salary, contributtion } = state;
 
+      if (salary && contributtion) return;
+      calc(e.target.value);
+    };
     const handleChange = (name) => ({ target: { value } }) =>
       setState({ ...state, [name]: value });
 
     useEffect(() => {
       const { salary, contributtion } = state;
 
-      if (salary > 0 && contributtion > 0)
-        setValue(salary * 83.33 + contributtion);
+      if (salary > 0 && contributtion > 0) calc();
+      else setValue('');
     }, [state]);
+    useEffect(() => setValue(inputProps.value), [inputProps.value]);
 
     return (
-      <Grid container>
-        <InputType {...inputProps} value={value} />
+      <Grid
+        container
+        className={
+          open ? clsx(classes.custom, classes.customOpen) : classes.custom
+        }
+        ref={node}
+      >
+        <InputBase {...inputProps} onChange={onChange} value={value} />
         <div onClick={handleSumit} className="pointer">
           <Icon type="search" size="large" color="white" />
         </div>
@@ -158,7 +219,7 @@ const CustomInput = withStyles(styles)(
             Nous vous aidons à déterminer votre budget maximal en simulant le
             montant que vous pouvez emprunter.
           </Typography>
-          <InputType
+          <InputBase
             name="salary"
             value={
               state.salary > 0 && !Number.isNaN(state.salary)
@@ -168,7 +229,7 @@ const CustomInput = withStyles(styles)(
             onChange={handleChange}
             placeholder="Votre salaire net mensuel"
           />
-          <InputType
+          <InputBase
             name="contributtion"
             value={
               state.contributtion > 0 && !Number.isNaN(state.contributtion)
@@ -207,13 +268,11 @@ const sameDefaultProps = {
 };
 CustomInput.propTypes = {
   ...samePropTypes,
-  queryData: PropTypes.object.isRequired,
-  handleSearch: PropTypes.func.isRequired,
   handleSumit: PropTypes.func.isRequired,
 };
 CustomInput.defaultProps = sameDefaultProps;
-InputType.propTypes = samePropTypes;
-InputType.defaultProps = sameDefaultProps;
+InputBase.propTypes = samePropTypes;
+InputBase.defaultProps = sameDefaultProps;
 
 export { CustomInput };
-export default InputType;
+export default InputBase;

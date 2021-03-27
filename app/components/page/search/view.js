@@ -184,7 +184,6 @@ const MapsView = withStyles(
   }) => {
     useEffect(() => {
       handleSetShowMaps(true);
-      console.log('ok');
     }, []);
 
     return (

@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import { toggleArray, isArray } from 'helpers/convertAndCheck';
 import Icon from './Icon';
+import { useToggleOpen } from 'helpers/hooks';
 
 const positionType = ['', 'left', 'right'];
 
@@ -130,37 +131,17 @@ const styles = (theme) => ({
 
 const DropdownSelect = withStyles(styles)(
   ({ onChange, value, position, list, placeholder, classes }) => {
-    const node = useRef();
-    const [open, setOpen] = useState(false);
+    const [node, open] = useToggleOpen();
     const [selected, setSelected] = useState(
       (isArray(value) ? value : [value]).filter((e) => e?.length)
     );
 
-    const handleSelected = (e) => {
-      const values = toggleArray(selected, e.target.value);
+    const handleSelected = (value) => {
+      const values = toggleArray(selected, value);
 
       setSelected(values);
       onChange(values);
     };
-
-    const toggleOpen = (e) => {
-      if (
-        node.current.contains(e.target) &&
-        open &&
-        e.target.nodeName === 'SPAN'
-      )
-        setOpen(false);
-      else if (node.current.contains(e.target) && !open) setOpen(true);
-      else if (!node.current.contains(e.target)) setOpen(false);
-    };
-    useEffect(() => {
-      // add when mounted
-      document.addEventListener('mousedown', toggleOpen);
-      // return function to be called when unmounted
-      return () => {
-        document.removeEventListener('mousedown', toggleOpen);
-      };
-    }, [open]);
 
     return (
       <Grid
@@ -183,12 +164,17 @@ const DropdownSelect = withStyles(styles)(
         <Icon type="triangle" size="small" color="gray" />
         <Grid container>
           {list?.map((elem) => (
-            <Grid container item key={elem.name} md={6} alignItems="center">
+            <Grid
+              container
+              item
+              key={elem.name}
+              md={6}
+              alignItems="center"
+              className="pointer"
+              onClick={() => handleSelected(elem.value)}
+            >
               <Checkbox
                 color="primary"
-                key={elem.value}
-                value={elem.value}
-                onClick={handleSelected}
                 checked={selected.includes(elem.value)}
               />
               <Typography variant="body2">{elem.name}</Typography>
