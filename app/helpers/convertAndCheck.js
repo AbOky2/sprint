@@ -79,6 +79,7 @@ const unPick = (object, keys) =>
     object,
     Object.keys(object).filter((e) => !keys.includes(e))
   );
+const stripTags = (text) => text.replace(/(<([^>]+)>)/gi, '');
 
 module.exports = {
   toDate,
@@ -97,4 +98,5 @@ module.exports = {
   toggleArrayOfObj,
   toQueryParams,
   spaceCurrency,
+  stripTags,
 };

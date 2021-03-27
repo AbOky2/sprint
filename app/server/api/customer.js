@@ -39,24 +39,8 @@ router.put(
       } catch (error) {
         return error;
       }
-    },
-  ),
-);
-router.put(
-  '/requestNewLocation',
-  profileCollection(
-    requestMiddleware(joiSchema.user.all.user.requestNewLocation),
-    async ({ user: sessUser, body } = {}) => {
-      const data = { ...body };
-      try {
-        // if (data.phone) {data.phone = sms.check(data.phone);}
-        const { user } = await UserModel.requestNewLocation(sessUser._id, data);
-        return { user };
-      } catch (error) {
-        return error;
-      }
-    },
-  ),
+    }
+  )
 );
 router.post(
   '/sponsorship',
@@ -71,29 +55,35 @@ router.post(
     } catch (error) {
       res.json({ errors: 'Error while sending', error });
     }
-  }),
+  })
 );
 
 router.get(
   '/partner/:id',
   // eslint-disable-next-line no-return-await
-  getCollection(async ({ id }) => await PartnerModel.get(id)),
+  getCollection(async ({ id }) => await PartnerModel.get(id))
 );
 
 router.get(
   '/properties',
-  listCollection(async ({ maxPrice, typeOfAnnonce, typeOfProperty, loc, page, limit }) => {
-    const { list } = await PropertieModel.search({
-      maxPrice,
-      typeOfAnnonce,
-      typeOfProperty: typeOfProperty && typeOfProperty.length > 0 ? typeOfProperty.split(',') : [],
-      loc,
-      page,
-      limit,
-    });
+  listCollection(
+    async ({ maxPrice, typeOfAnnonce, typeOfProperty, loc, page, limit }) => {
+      const { list } = await PropertieModel.search({
+        maxPrice,
+        typeOfAnnonce,
+        typeOfProperty:
+          typeOfProperty && typeOfProperty.length > 0
+            ? typeOfProperty.split(',')
+            : [],
+        loc,
+        page,
+        limit,
+      });
 
-    return { list };
-  }, joiSchema.propertie.student.search),
+      return { list };
+    },
+    joiSchema.propertie.student.search
+  )
 );
 
 router.get(
@@ -102,13 +92,13 @@ router.get(
     const { list } = await PropertieModel.newProperties({ offset, limit });
 
     return { list };
-  }),
+  })
 );
 
 router.get(
   '/property/:id',
   // eslint-disable-next-line no-return-await
-  getCollection(async ({ id }) => await PropertieModel.get(id)),
+  getCollection(async ({ id }) => await PropertieModel.get(id))
 );
 
 router.get(
@@ -117,7 +107,7 @@ router.get(
     const { list } = await PartnerModel.list({ offset, limit });
 
     return { list };
-  }),
+  })
 );
 
 router.post(
@@ -131,7 +121,7 @@ router.post(
     } catch (error) {
       res.json({ errors: 'Error while adding', error });
     }
-  }),
+  })
 );
 
 module.exports = router;

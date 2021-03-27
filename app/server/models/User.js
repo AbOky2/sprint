@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
-const { isMajor, pick, toggleArrayOfObj } = require('../../helpers/convertAndCheck');
+const {
+  isMajor,
+  pick,
+  toggleArrayOfObj,
+} = require('../../helpers/convertAndCheck');
 const {
   RoleList,
   StatusList,
@@ -118,7 +122,10 @@ class UserClass extends DBModel {
   }
 
   static async getId(where) {
-    const user = await this.findOne(where).populate('bookmarks').select('_id').lean();
+    const user = await this.findOne(where)
+      .populate('bookmarks')
+      .select('_id')
+      .lean();
 
     if (!user) return { userId: null };
 
@@ -133,7 +140,8 @@ class UserClass extends DBModel {
       throw new Error(msg.notFound('User'));
     }
 
-    if (!isValidateEmail(updates.email)) throw new Error(msg.invalidInfo('Email'));
+    if (!isValidateEmail(updates.email))
+      throw new Error(msg.invalidInfo('Email'));
     Object.entries(updates)
       // eslint-disable-next-line no-unused-vars
       .filter(([_, value]) => value !== undefined)
@@ -143,7 +151,8 @@ class UserClass extends DBModel {
     userDoc.firstName = ucFirst(userDoc.firstName);
     userDoc.lastName = ucFirst(userDoc.lastName);
 
-    if (updates.password) userDoc.password = await bcrypt.hash(updates.password, salt);
+    if (updates.password)
+      userDoc.password = await bcrypt.hash(updates.password, salt);
     await userDoc.save();
     const user = await this.findOne({ _id }).populate('bookmarks').lean();
 
@@ -163,31 +172,21 @@ class UserClass extends DBModel {
     sendForgotPassword({ token, to });
     return { user: to };
   }
-  
+
   static async resetPassword({ token, password }) {
     const userDoc = await this.findOne({
       resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() },
     });
     const salt = await bcrypt.genSalt(10);
-    
+
     if (!userDoc) throw new Error(`${msg.notFound('Token')} ou expiré`);
-    
+
     userDoc.password = await bcrypt.hash(password, salt);
     userDoc.resetPasswordToken = null;
     userDoc.resetPasswordExpires = null;
     userDoc.save();
     return { user: pick(userDoc.toObject(), this.publicFields()) };
-  }
-
-  static async requestNewLocation(_id, data) {
-    const userDoc = await this.findOne({ _id });
-
-    if (!userDoc) throw new Error(msg.notFound('Utilisateur'));
-
-    console.log(userDoc)
-    // sendNewLocation({ token, to });
-    return { user: to };
   }
 
   static async getUserZones(_id) {
@@ -200,7 +199,10 @@ class UserClass extends DBModel {
     return this.getId({ slug });
   }
 
-  static async listStudents({ limit = defaultLimit, offset: page = defaultOffset } = {}) {
+  static async listStudents({
+    limit = defaultLimit,
+    offset: page = defaultOffset,
+  } = {}) {
     const query = { role: { $ne: Admin } };
     const list = await this.paginate(query, { forceCountFn: true });
 
@@ -232,7 +234,11 @@ class UserClass extends DBModel {
     const userDoc = await this.findById(id).populate('bookmarks');
     const property = await PropertyModel.findById(propertyId);
 
-    userDoc.bookmarks = toggleArrayOfObj(userDoc.bookmarks, property, (e) => e._id);
+    userDoc.bookmarks = toggleArrayOfObj(
+      userDoc.bookmarks,
+      property,
+      (e) => e._id
+    );
     userDoc.save();
     const user = userDoc.toObject();
 
@@ -264,7 +270,9 @@ class UserClass extends DBModel {
     let userDoc = null;
 
     try {
-      userDoc = await this.findOne({ _id }).populate('bookmarks').select(this.publicFields());
+      userDoc = await this.findOne({ _id })
+        .populate('bookmarks')
+        .select(this.publicFields());
       if (!_id || !userDoc) {
         throw new Error(msg.notFound('User'));
       }
@@ -323,7 +331,10 @@ class UserClass extends DBModel {
   static async signUp(options) {
     let user = null;
 
-    if (options.sponsorshipCode && !(await this.findOne({ slug: options.sponsorshipCode })))
+    if (
+      options.sponsorshipCode &&
+      !(await this.findOne({ slug: options.sponsorshipCode }))
+    )
       throw new Error(msg.invalidInfo('Code de parrainage'));
     const existingUser = await this.findOne({
       $or: [{ email: options.email }, { phone: options.phone }],

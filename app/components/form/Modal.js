@@ -115,7 +115,7 @@ const Modal = ({
 Modal.propTypes = {
   title: PropTypes.string,
   openModal: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   onClose: PropTypes.func.isRequired,
   showActions: PropTypes.bool,
   confirmText: PropTypes.string,
@@ -126,6 +126,7 @@ Modal.defaultProps = {
   title: '',
   openModal: false,
   showActions: true,
+  onClick: null,
   confirmText: 'Confirmer',
 };
 

@@ -226,6 +226,38 @@ const useStyles = makeStyles((theme) => ({
       color: 'rgba(26, 46, 108, 0.5)',
     },
   },
+  modal: {
+    '& > div > div': {
+      '& > span': {
+        fontFamily: 'Open Sans',
+        fontStyle: 'normal',
+        fontWeight: '600',
+        fontSize: '16px',
+        lineHeight: '22px',
+        display: 'inline-block',
+        alignItems: 'center',
+        color: '#4F80FF',
+        background: '#FFFFFF',
+        border: '1px solid #4F80FF',
+        boxSizing: 'border-box',
+        borderRadius: '10px',
+        padding: '1.6rem',
+      },
+    },
+  },
+  anchorLink: {
+    width: 'fit-content',
+    background:
+      'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
+    boxShadow:
+      '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
+    color: 'white',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    fontSize: '1.8rem',
+    fontWeight: '600',
+    padding: '18px 23px',
+  },
 }));
 const PropertyPage = ({
   id,
@@ -329,13 +361,9 @@ const PropertyPage = ({
             )}
             <div className={classes.phoneContainer}>
               {isLocation ? (
-                <Btn
-                  text="Déposer mon dossier"
-                  alignRight
-                  href="https://form.typeform.com/to/GmNScezn?typeform-medium=embed-snippet"
-                  target="_blank"
-                  dataMode="popup"
-                />
+                <a href="#table" className={classes.anchorLink}>
+                  Déposer mon dossier
+                </a>
               ) : (
                 <Btn
                   text="Être rappelé selon mes dispos"
@@ -399,7 +427,7 @@ const PropertyPage = ({
               isLocation ? '' : '  neufs disponibles'
             } :`}
           </Typography>
-          <Grid container>
+          <Grid container id="table">
             {property.typeOfAnnonce === typeOfAnnoncies[0] ? (
               <BuyTable
                 state={state}
@@ -419,9 +447,11 @@ const PropertyPage = ({
           </Grid>
         </Grid>
         <LocationModal
+          className={classes.modal}
           user={user}
           residenceName={property.heading}
           curr={selectedLot}
+          fullAddress={property.fullAddress}
           handleClose={() => handleSelectLot(null)}
         />
       </div>

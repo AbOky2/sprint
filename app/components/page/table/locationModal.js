@@ -1,80 +1,93 @@
-import React, { useState } from 'react';
-import { Grid } from '@material-ui/core';
-import { Input,  Modal } from 'components/form';
-import {ucfirst, pick} from 'helpers/convertAndCheck'
-import {requestNewLocation} from 'lib/api/customer'
+import React from 'react';
+import { toast } from 'react-toastify';
+import { Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Modal, Icon } from 'components/form';
+import { ucfirst, stripTags } from 'helpers/convertAndCheck';
+import copy from 'copy-to-clipboard';
+import styles from './styles';
 
+const Copy = ({ data }) => (
+  <Grid
+    container
+    item
+    onClick={() => {
+      copy(stripTags(data));
+      toast.dismiss();
+      toast.success('Copié');
+    }}
+  >
+    <Icon type="copy" color="iconBlue" />
+    Copier
+  </Grid>
+);
 
-const ReserveLocation = ({ user, curr, residenceName, handleClose }) => {
-  const [state, setState] = useState(pick(user, ["lastName", "firstName", "email", "phone"]));
-  const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
-
-  const placeholder = `Bonjour,
-
-Je me permets de vous contacter car je suis intéressé(e) par la location de la chambre étudiante dont la référence est ${curr?.ref}, au sein de la résidence ${ucfirst(residenceName)}.
-
-Je reste à votre entière disposition pour échanger avec vous et vous transmettre les éléments nécessaires à mon dossier, 
-Vous pouvez me joindre sur mon portable au ${state.phone},
-
-Bien cordialement,
-${ucfirst(state.firstName)}
-  `
-
-  // eslint-disable-next-line no-return-assign
-  const handleSumbit = async () => {
-    const {message = placeholder, ...updateUser} = state;
-    await requestNewLocation({message, updateUser})
-  };
-
+const useStyles = makeStyles(styles);
+const ReserveLocation = ({
+  user,
+  className,
+  curr,
+  residenceName,
+  fullAddress,
+  handleClose,
+}) => {
+  const classes = useStyles();
+  const receiver = 'resa-tudea@nexity.fr';
+  const subject = `Kit le nid - demande location (<strong> référence ${curr?.ref}</strong> )`;
+  const message = `Bonjour,
+  <br/><br/>
+  Je me permets de vous contacter car je suis intéressé(e) par la location de la chambre étudiante dont la référence est <strong>${
+    curr?.ref
+  }</strong>, au sein de la résidence <strong>${ucfirst(
+    residenceName
+  )}</strong>  située à <strong>${fullAddress}</strong> , à compter du (../../..) et pour une durée de ... .
+  <br/><br/>
+  Je reste à votre entière disposition pour échanger avec vous et vous transmettre les éléments nécessaires à mon dossier.
+  Vous pouvez me joindre sur mon portable au <strong>${
+    user?.phone || '...'
+  }</strong>,
+  <br/><br/>
+  Bien cordialement,
+  <br/>
+  ${ucfirst(user.firstName)}`;
+  const datas = [
+    { label: 'Destinataire', data: receiver },
+    { label: 'Object', data: subject },
+    { label: 'Message', data: message },
+  ];
   return (
     <div>
       <Modal
         openModal={curr}
+        showActions={false}
         onClose={handleClose}
-        onClick={handleSumbit}
-        title="Votre demande pour une location"
+        title="Votre demande de location à compléter et à envoyer à :RESA-STUDEA@nexity.fr"
         confirmText="Envoyer"
       >
-        <Grid container item justify="center" className="form-container">
-          <Grid container item>
-            <Input
-              value={state.lastName}
-              label="Nom*"
-              onChange={handleChange}
-              name="lastName"
-              position="left"
-            />
-            <Input
-              value={state.firstName}
-              label="Prénom*"
-              onChange={handleChange}
-              name="firstName"
-              position="right"
-            />
-            <Input
-              value={state.email}
-              label="E-mail*"
-              onChange={handleChange}
-              name="email"
-              type="email"
-              position="left"
-            />
-            <Input
-              value={state.phone}
-              label="Téléphone"
-              onChange={handleChange}
-              name="phone"
-              type="phone"
-              position="right"
-            />
-            <Input
-              value={state.message}
-              label="Message"
-              onChange={handleChange}
-              name="message"
-              type="textarea"
-              placeholder={placeholder}
-            />
+        <Grid
+          container
+          item
+          justify="center"
+          className="form-container"
+          className={className}
+        >
+          <Grid container item className={classes.mail}>
+            {datas.map(({ label, data }, key) => (
+              <Grid key={key} container item xs={12}>
+                <Grid item xs={12} md={2}>
+                  <Typography variant="h4">{label}</Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={8}
+                  md={8}
+                  dangerouslySetInnerHTML={{ __html: data }}
+                ></Grid>
+                <Grid container item xs={4} md={2}>
+                  <Copy data={data} />
+                </Grid>
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Modal>

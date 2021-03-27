@@ -60,4 +60,45 @@ export default (theme) => ({
       color: theme.palette.newBlue,
     },
   },
+  mail: {
+    '& > div': {
+      marginBottom: '1.6rem',
+      '&:last-of-type': {
+        marginTop: '2.4rem',
+      },
+      '& > div:first-of-type': {
+        textAlign: 'right',
+        padding: '1.25rem 1rem 0 0',
+        [theme.breakpoints.down('sm')]: {
+          textAlign: 'left',
+        },
+      },
+      '& > div:nth-child(2)': {
+        padding: '1.5rem 2rem',
+        borderRadius: '1rem',
+        border: '1px solid #F4F5F7',
+      },
+      '& > div:last-child': {
+        paddingLeft: '1rem',
+        '& > div': {
+          width: 'fit-content',
+          height: 'fit-content',
+          padding: '1.5rem 2rem',
+          borderRadius: '1rem',
+          color: theme.palette.newBlue,
+          border: `1px solid ${theme.palette.newBlue}`,
+          cursor: 'pointer',
+          [theme.breakpoints.down('sm')]: {
+            justifyContent: 'center',
+          },
+          '& svg': {
+            marginRight: '1rem',
+            [theme.breakpoints.down('sm')]: {
+              marginRight: 0,
+            },
+          },
+        },
+      },
+    },
+  },
 });
