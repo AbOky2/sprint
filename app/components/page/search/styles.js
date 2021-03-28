@@ -190,6 +190,11 @@ const styles = (theme) => ({
   },
   mapsContainer: {
     paddingLeft: '2.5rem',
+    minHeight: '85vh',
+    '& > div': {
+      ...theme.ui.bordered,
+      overflow: 'hidden',
+    },
   },
   pagination: {
     marginTop: '1rem',
