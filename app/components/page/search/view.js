@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import Pagination from '@material-ui/lab/Pagination';
 import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
@@ -8,7 +9,7 @@ import Card from 'components/card';
 import { Icon } from 'components/form';
 import Select from 'components/form/Select';
 import { MultipleMarkers } from 'components/Maps';
-import { sortBySelectMap, sortByKeys } from 'helpers/property';
+import { sortBySelectMap, sortByKeys, getAddress } from 'helpers/property';
 import withStyles from './styles';
 
 const ListHeader = ({
@@ -113,7 +114,7 @@ const ListElement = ({
           _id={_id}
           title={heading}
           src={NEXT_PUBLIC_UPLOAD_URL + pictures?.[0]}
-          address={`${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}`}
+          address={getAddress({ city, postal })}
           description={typeOfAnnonce}
           dimensions={dimensions}
           price={price}
@@ -170,8 +171,6 @@ const MapsView = withStyles(
   ({
     classes,
     liked,
-    showMaps,
-    handleSetShowMaps,
     handleBookmark,
     toggleView,
     data,
@@ -182,9 +181,29 @@ const MapsView = withStyles(
     sortBy,
     handleSortSelect,
   }) => {
-    useEffect(() => {
-      handleSetShowMaps(true);
-    }, []);
+    const locs = data.map((e, index) => ({
+      index,
+      _id: e._id,
+      coor: e.loc.coordinates,
+    }));
+    const [curr, setCurr] = useState(data[0]);
+    const handleChildClick = (id) => {
+      const found = locs.find((e) => e._id == id);
+
+      if (found) setCurr(found);
+    };
+    const handleNext = (id) => {
+      let currIndex = data.findIndex((e) => e._id === id);
+      currIndex = currIndex < data.length - 1 ? currIndex + 1 : 0;
+
+      setCurr(data[currIndex]);
+    };
+    const handlePrev = (id) => {
+      let currIndex = data.findIndex((e) => e._id === id);
+
+      currIndex = currIndex === 0 ? data.length - 1 : currIndex - 1;
+      setCurr(data[currIndex]);
+    };
 
     return (
       <Grid container>
@@ -204,7 +223,14 @@ const MapsView = withStyles(
             {data?.map((elems) => (
               <ListElement
                 key={elems._id}
-                className={classes.mapsListContainer}
+                className={
+                  elems._id !== curr._id
+                    ? classes.mapsListContainer
+                    : clsx(
+                        classes.mapsListContainer,
+                        classes.mapsCurrListContainer
+                      )
+                }
                 liked={liked}
                 handleBookmark={handleBookmark}
                 {...elems}
@@ -213,7 +239,13 @@ const MapsView = withStyles(
           </ListWrapper>
         </Grid>
         <Grid item xs={7} className={classes.mapsContainer}>
-          {showMaps && <MultipleMarkers locs={data} />}
+          <MultipleMarkers
+            data={data}
+            curr={curr}
+            handleChildClick={handleChildClick}
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+          />
         </Grid>
       </Grid>
     );
@@ -226,10 +258,8 @@ const sharedProptypes = {
   sortBy: PropTypes.oneOf(sortByKeys).isRequired,
   liked: PropTypes.array.isRequired,
   isMapsView: PropTypes.bool.isRequired,
-  showMaps: PropTypes.bool.isRequired,
   toggleView: PropTypes.func.isRequired,
   handleSortSelect: PropTypes.func.isRequired,
-  handleSetShowMaps: PropTypes.func.isRequired,
   handleBookmark: PropTypes.func.isRequired,
   page: PropTypes.object.isRequired,
   matches: PropTypes.bool.isRequired,

@@ -162,12 +162,18 @@ const styles = (theme) => ({
     '& > a > div': {
       display: 'flex',
       '& > div:first-of-type': {
+        display: 'flex',
+        jsutifyContent: 'stretch',
         width: '40%',
-        height: 'auto',
-        ...theme.ui.bordered,
-        '& > span': {
-          top: 10,
-          left: 10,
+        minHeight: '100%',
+        '& > div': {
+          ...theme.ui.bordered,
+          width: '100%',
+          height: '100%',
+          '& > span': {
+            top: 10,
+            left: 10,
+          },
         },
       },
       '& > div:last-of-type': {
@@ -178,6 +184,9 @@ const styles = (theme) => ({
         },
       },
     },
+  },
+  mapsCurrListContainer: {
+    border: `1px solid ${theme.palette.newBlue}`,
   },
   mapsContainer: {
     paddingLeft: '2.5rem',

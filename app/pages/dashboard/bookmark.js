@@ -10,6 +10,7 @@ import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import { addBookmarkApiMethod } from 'lib/api/customer';
 import Card from 'components/card';
 import { Btn } from 'components/form';
+import { getAddress } from 'helpers/property';
 import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
@@ -112,7 +113,7 @@ const BookmarkPage = ({ user, update }) => {
                         _id={_id}
                         title={heading}
                         src={NEXT_PUBLIC_UPLOAD_URL + pictures?.[0]}
-                        address={`${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}`}
+                        address={getAddress({ city, postal })}
                         description={typeOfAnnoncies}
                         dimensions={dimensions}
                         price={price}
@@ -122,7 +123,7 @@ const BookmarkPage = ({ user, update }) => {
                     </a>
                   </Link>
                 </Grid>
-              ),
+              )
             )}
           </Grid>
         ) : (
@@ -136,14 +137,18 @@ const BookmarkPage = ({ user, update }) => {
                 Vous n’avez pas encore de logements sauvegardés en favoris
               </Typography>
               <Typography variant="body1">
-                Pour ajouter un logement dans vos favoris, il vous suffit de cliquer sur la coeur en
-                haut à gauche quand vous effectuez une recherche de logements. Ou bien, vous pouvez
-                cliquer sur le boutton “sauvegarder” quand vous êtes sur la page d’un logement.
+                Pour ajouter un logement dans vos favoris, il vous suffit de
+                cliquer sur la coeur en haut à gauche quand vous effectuez une
+                recherche de logements. Ou bien, vous pouvez cliquer sur le
+                boutton “sauvegarder” quand vous êtes sur la page d’un logement.
               </Typography>
             </div>
             <div>
               <Grid container justify="center" className={classes.btnContainer}>
-                <Btn href="/dashboard/search/buy" text="Rechercher un logement à acheter" />
+                <Btn
+                  href="/dashboard/search/buy"
+                  text="Rechercher un logement à acheter"
+                />
                 <Btn
                   href="/dashboard/search/location"
                   text="Rechercher un logement à louer"

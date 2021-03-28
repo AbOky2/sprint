@@ -1,7 +1,9 @@
 import GoogleMapReact from 'google-map-react';
 import Marker from '../static/img/icons/marker.svg';
 import CustomMarker from '../static/img/icons/customMarker.svg';
-import { NEXT_PUCLIC_GOOGLE_MAPS_KEY } from '../config';
+import SelectedCustomMarker from '../static/img/icons/selectedCustomMarker.svg';
+import { MapsCard } from 'components/card';
+import { NEXT_PUCLIC_GOOGLE_MAPS_KEY, NEXT_PUBLIC_UPLOAD_URL } from '../config';
 
 const AnyReactComponent = () => (
   <div style={{ position: 'relative', width: 20 }}>
@@ -10,12 +12,28 @@ const AnyReactComponent = () => (
     </span>
   </div>
 );
-const CustomAnyReactComponent = () => (
-  <div style={{ position: 'relative', width: 20 }}>
-    <span style={{ position: 'absolute', top: -50, left: -30 }}>
-      <CustomMarker style={{ width: 50 }} />
-    </span>
-  </div>
+const CustomAnyReactComponent = ({ show, data, handleNext, handlePrev }) => (
+  <>
+    <div style={{ position: 'relative', width: 20 }}>
+      <span style={{ position: 'absolute', top: -50, left: -30 }}>
+        {show ? (
+          <SelectedCustomMarker
+            style={{ width: 50, position: 'absolute', zIndex: 6 }}
+          />
+        ) : (
+          <CustomMarker style={{ width: 50, position: 'absolute' }} />
+        )}
+      </span>
+    </div>
+    {show && (
+      <MapsCard
+        {...data}
+        src={NEXT_PUBLIC_UPLOAD_URL + data?.pictures[0]}
+        handleNext={handleNext}
+        handlePrev={handlePrev}
+      />
+    )}
+  </>
 );
 
 const Maps = ({ loc: [lng, lat] = [] }) => (
@@ -31,23 +49,46 @@ const Maps = ({ loc: [lng, lat] = [] }) => (
   </GoogleMapReact>
 );
 
-const MultipleMarkers = ({ locs = [] }) => (
+const MultipleMarkers = ({
+  data = [],
+  curr: {
+    loc: { coordinates: [lng, lat] } = { coordinates: [] },
+    _id: currId,
+  } = {},
+  handleChildClick,
+  handleNext,
+  handlePrev,
+}) => (
   <GoogleMapReact
     bootstrapURLKeys={{ key: 'AIzaSyD7NrR47b_NReW4PF6kCDd1vGSUrm9xkzo' }}
     defaultCenter={{
-      lng: locs[0][0],
-      lat: locs[0][1],
+      lng,
+      lat,
     }}
-    defaultZoom={15}
+    center={{
+      lat,
+      lng,
+    }}
+    defaultZoom={13}
+    onChildClick={handleChildClick}
   >
-    <CustomAnyReactComponent
-      lng={locs[0][0]}
-      lat={locs[0][1]}
-      text="My Marker"
-    />
-    {/* {locs.map(({ loc: { coordinates: [lat, lng] } }, key) => (
-      <CustomAnyReactComponent key={key} lat={lat} lng={lng} text="My Marker" />
-    ))} */}
+    {data.map((elem) => {
+      const {
+        loc: { coordinates: [lng, lat] } = { coordinates: [] },
+        _id,
+      } = elem;
+      return (
+        <CustomAnyReactComponent
+          key={_id}
+          lat={lat}
+          lng={lng}
+          show={currId === _id}
+          data={elem}
+          handleNext={handleNext}
+          handlePrev={handlePrev}
+        />
+      );
+    })}
   </GoogleMapReact>
 );
 export { MultipleMarkers };

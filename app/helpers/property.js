@@ -26,6 +26,9 @@ const propertyPiecesSelectMap = Object.keys(propertyPieces).map((name) => ({
   value: name,
   name: propertyPieces[name],
 }));
+const getAddress = ({ postal, city }) =>
+  `${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}`;
+
 module.exports = {
   typeOfAnnonciesObj,
   typeOfAnnoncies,
@@ -34,4 +37,5 @@ module.exports = {
   sortByKeys,
   sortBySelectMap,
   propertyPiecesSelectMap,
+  getAddress,
 };

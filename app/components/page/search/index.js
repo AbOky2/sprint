@@ -21,7 +21,6 @@ const SearchPage = ({
   properties = {},
   typeOfProperty = [],
   typeOfAnnonce,
-  listView,
   update,
   loc,
   page: defaultPage,
@@ -40,7 +39,6 @@ const SearchPage = ({
     typeOfProperty,
   });
   const [sortBy, setSortBy] = useState(sortByKeys[0]);
-  const [showMaps, setShowMaps] = useState(false);
 
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
@@ -50,7 +48,6 @@ const SearchPage = ({
     setQueryData({ ...queryData, loc: value?.label });
   const handleSelect = (newTypeOfProperty) =>
     setQueryData({ ...queryData, typeOfProperty: newTypeOfProperty });
-  const handleSetShowMaps = (e) => setShowMaps(true);
   const handleSortSelect = () => ({ target: { value } }) => setSortBy(value);
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
@@ -107,8 +104,6 @@ const SearchPage = ({
           data={state}
           liked={liked}
           sortBy={sortBy}
-          showMaps={showMaps}
-          handleSetShowMaps={handleSetShowMaps}
           handleBookmark={handleBookmark}
           handleSortSelect={handleSortSelect}
           toggleView={toggleView}

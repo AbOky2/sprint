@@ -28,3 +28,4 @@ export { default as eyeClosed } from './eye-closed.svg';
 export { default as eyeOpened } from './eye-opened.svg';
 export { default as plus } from './plus.svg';
 export { default as carrouselArrow } from './carrousel-arrow.svg';
+export { default as sliderArrow } from './slider-arrow.svg';
