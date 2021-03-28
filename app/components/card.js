@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { spaceCurrency } from '../helpers/convertAndCheck';
-import { getAddress } from '../helpers/property';
+import { getAddress, getNbPieces } from '../helpers/property';
 import { Icon } from './form';
 
 const useStyles = makeStyles((theme) => ({
@@ -146,11 +146,12 @@ const Card = ({
 const MapsCard = ({
   _id,
   heading,
-  typeOfAnnonce,
   city,
   postal,
   handleNext,
   handlePrev,
+  minPieces,
+  maxPieces,
   ...mapsProps
 }) => {
   const classes = useStyles();
@@ -162,7 +163,7 @@ const MapsCard = ({
         title={heading}
         address={getAddress({ city, postal })}
         showLikes={false}
-        description={typeOfAnnonce}
+        description={getNbPieces(minPieces, maxPieces)}
       />
       <span onClick={() => handlePrev(_id)}>
         <Icon

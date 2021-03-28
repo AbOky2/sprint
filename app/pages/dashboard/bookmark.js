@@ -10,7 +10,7 @@ import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import { addBookmarkApiMethod } from 'lib/api/customer';
 import Card from 'components/card';
 import { Btn } from 'components/form';
-import { getAddress } from 'helpers/property';
+import { getAddress, getNbPieces } from 'helpers/property';
 import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
@@ -98,7 +98,8 @@ const BookmarkPage = ({ user, update }) => {
                 city,
                 postal,
                 typeOfAnnonce,
-                typeOfAnnoncies,
+                minPieces,
+                maxPieces,
                 dimensions,
                 price,
               }) => (
@@ -114,7 +115,7 @@ const BookmarkPage = ({ user, update }) => {
                         title={heading}
                         src={NEXT_PUBLIC_UPLOAD_URL + pictures?.[0]}
                         address={getAddress({ city, postal })}
-                        description={typeOfAnnoncies}
+                        description={getNbPieces(minPieces, maxPieces)}
                         dimensions={dimensions}
                         price={price}
                         liked

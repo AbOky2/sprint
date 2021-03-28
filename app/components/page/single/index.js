@@ -14,6 +14,7 @@ import { typeOfAnnoncies } from 'helpers/property';
 import Carrousel from 'components/Carrousel';
 import NotFound from 'components/NotFound';
 import { spaceCurrency } from 'helpers/convertAndCheck';
+import { getNbPieces } from 'helpers/property';
 import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';
 
@@ -339,7 +340,9 @@ const PropertyPage = ({
                 <div>
                   <Icon type="door" color="lightBlue" />
 
-                  <span>{`de ${property.minPieces} à ${property.maxPieces}  pièces`}</span>
+                  <span>
+                    {getNbPieces(property.minPieces, property.maxPieces)}
+                  </span>
                 </div>
 
                 <div>

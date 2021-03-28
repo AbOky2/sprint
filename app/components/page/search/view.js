@@ -9,7 +9,12 @@ import Card from 'components/card';
 import { Icon } from 'components/form';
 import Select from 'components/form/Select';
 import { MultipleMarkers } from 'components/Maps';
-import { sortBySelectMap, sortByKeys, getAddress } from 'helpers/property';
+import {
+  sortBySelectMap,
+  sortByKeys,
+  getAddress,
+  getNbPieces,
+} from 'helpers/property';
 import withStyles from './styles';
 
 const ListHeader = ({
@@ -100,6 +105,8 @@ const ListElement = ({
   city,
   postal,
   typeOfAnnonce,
+  minPieces,
+  maxPieces,
   dimensions,
   price,
 }) => (
@@ -115,7 +122,7 @@ const ListElement = ({
           title={heading}
           src={NEXT_PUBLIC_UPLOAD_URL + pictures?.[0]}
           address={getAddress({ city, postal })}
-          description={typeOfAnnonce}
+          description={getNbPieces(minPieces, maxPieces)}
           dimensions={dimensions}
           price={price}
           liked={liked?.includes(_id)}
