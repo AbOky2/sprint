@@ -1,9 +1,12 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 
-const ReactTypeformEmbed = dynamic(() => import('react-typeform-embed/lib/ReactTypeformEmbed'), {
-  ssr: false,
-});
+const ReactTypeformEmbed = dynamic(
+  () => import('react-typeform-embed/lib/ReactTypeformEmbed'),
+  {
+    ssr: false,
+  }
+);
 
 export default () => (
   <div>

@@ -131,7 +131,12 @@ const Card = ({
       </div>
       <div>
         <Typography variant="h4">{title}</Typography>
-        <Typography variant="body1">{address}</Typography>
+        <Typography
+          variant="body1"
+          style={{ display: address ? 'block' : 'none' }}
+        >
+          {address}
+        </Typography>
         <Typography variant="body1">{description}</Typography>
         <Typography variant="body1">{dimensions}</Typography>
         <Typography variant="body1" align="right">

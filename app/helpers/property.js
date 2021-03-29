@@ -27,7 +27,7 @@ const propertyPiecesSelectMap = Object.keys(propertyPieces).map((name) => ({
   name: propertyPieces[name],
 }));
 const getAddress = ({ postal, city }) =>
-  `${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}`;
+  postal && city ? `${city} ${postal ? `/ ${postal.slice(0, 2)}` : ''}` : null;
 
 const getNbPieces = (minPieces, maxPieces) =>
   minPieces !== maxPieces

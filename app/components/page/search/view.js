@@ -9,6 +9,7 @@ import Card from 'components/card';
 import { Icon } from 'components/form';
 import Select from 'components/form/Select';
 import { MultipleMarkers } from 'components/Maps';
+import { MapsCarousel } from 'components/Carrousel';
 import {
   sortBySelectMap,
   sortByKeys,
@@ -109,6 +110,7 @@ const ListElement = ({
   maxPieces,
   dimensions,
   price,
+  showLikes,
 }) => (
   <Grid item key={_id} className={className}>
     <Link
@@ -127,6 +129,7 @@ const ListElement = ({
           price={price}
           liked={liked?.includes(_id)}
           onClick={handleBookmark}
+          showLikes={showLikes}
         />
       </a>
     </Link>
@@ -185,6 +188,7 @@ const MapsView = withStyles(
     matches,
     handlePage,
     isMapsView,
+    isMdView,
     sortBy,
     handleSortSelect,
   }) => {
@@ -194,8 +198,12 @@ const MapsView = withStyles(
       coor: e.loc.coordinates,
     }));
     const [curr, setCurr] = useState(data[0]);
+    const [carrouselIndex, setCarrouselIndex] = useState(0);
     const handleChildClick = (id) => {
-      const found = locs.find((e) => e._id == id);
+      const currIndex = locs.findIndex((e) => e._id == id);
+      const found = data[currIndex];
+
+      setCarrouselIndex(currIndex);
 
       if (found) setCurr(found);
     };
@@ -211,9 +219,10 @@ const MapsView = withStyles(
       currIndex = currIndex === 0 ? data.length - 1 : currIndex - 1;
       setCurr(data[currIndex]);
     };
+    const handleCarouselChange = (index) => setCurr(data[index]);
 
     return (
-      <Grid container>
+      <Grid container className={classes.mapsViewContainer}>
         <Grid item xs={5}>
           <ListWrapper
             classes={classes}
@@ -225,7 +234,6 @@ const MapsView = withStyles(
             page={page}
             matches={matches}
             handlePage={handlePage}
-            isMapsView={isMapsView}
           >
             {data?.map((elems) => (
               <ListElement
@@ -245,14 +253,34 @@ const MapsView = withStyles(
             ))}
           </ListWrapper>
         </Grid>
-        <Grid item xs={7} className={classes.mapsContainer}>
+        <Grid item md={7} xs={12}>
           <MultipleMarkers
             data={data}
             curr={curr}
             handleChildClick={handleChildClick}
             handleNext={handleNext}
             handlePrev={handlePrev}
+            isMobile={isMdView}
           />
+          <Grid container>
+            <MapsCarousel
+              index={carrouselIndex}
+              handleChange={handleCarouselChange}
+            >
+              {data?.map(({ city, postal, ...elems }) => (
+                <ListElement
+                  key={elems._id}
+                  className={clsx(
+                    classes.mapsListContainer,
+                    classes.mapsMobileListContainer
+                  )}
+                  showLikes={false}
+                  handleBookmark={handleBookmark}
+                  {...elems}
+                />
+              ))}
+            </MapsCarousel>
+          </Grid>
         </Grid>
       </Grid>
     );
@@ -265,6 +293,7 @@ const sharedProptypes = {
   sortBy: PropTypes.oneOf(sortByKeys).isRequired,
   liked: PropTypes.array.isRequired,
   isMapsView: PropTypes.bool.isRequired,
+  isMdView: PropTypes.bool.isRequired,
   toggleView: PropTypes.func.isRequired,
   handleSortSelect: PropTypes.func.isRequired,
   handleBookmark: PropTypes.func.isRequired,

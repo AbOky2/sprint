@@ -1,15 +1,19 @@
-import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Button from '@material-ui/core/Button';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+import React, { useRef, useEffect } from 'react';
+import Slider from 'react-slick';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
 import { NEXT_PUBLIC_UPLOAD_URL } from '../config';
 import { Icon } from './form';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
-
 const useStyles = makeStyles((theme) => ({
+  container: {
+    borderRadius: '2.5rem',
+    overflow: 'hidden',
+    width: '100%',
+  },
+  mapsContainer: {
+    borderRadius: 0,
+  },
   root: {
     '& > div': {
       borderRadius: '2.5rem',
@@ -44,77 +48,99 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+const SampleNextArrow = ({ className, style, onClick }) => (
+  <div
+    className={className}
+    style={{
+      ...style,
+      display: 'block',
+      position: 'absolute',
+      top: '50%',
+      cursor: 'pointer',
+      transform: 'translateY(-50%)',
+      right: '1.6rem',
+      zIndex: 3,
+    }}
+    onClick={onClick}
+  >
+    <Icon type="carrouselArrow" color="white" />
+  </div>
+);
 
-function SwipeableTextMobileStepper({ list = [] }) {
+const SamplePrevArrow = ({ className, style, onClick }) => (
+  <div
+    className={className}
+    style={{
+      ...style,
+      display: 'block',
+      position: 'absolute',
+      top: '50%',
+      cursor: 'pointer',
+      transform: 'translateY(-50%) rotate(180deg)',
+      left: '1.6rem',
+      zIndex: 3,
+    }}
+    onClick={onClick}
+  >
+    <Icon type="carrouselArrow" color="white" />
+  </div>
+);
+
+const settings = {
+  infinite: true,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+};
+const SingleCarousel = ({ list = [] }) => {
   const classes = useStyles();
-  const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = list.length;
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
 
   return (
-    <div className={classes.root}>
-      <AutoPlaySwipeableViews
-        // axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-      >
-        {list.map((path, index) => (
-          <div key={path}>
-            {Math.abs(activeStep - index) <= 2 ? (
-              <div
-                className={classes.img}
-                style={{
-                  backgroundImage: `url(${NEXT_PUBLIC_UPLOAD_URL + path})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundColor: 'black',
-                }}
-                alt=""
-              />
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-      <MobileStepper
-        steps={maxSteps}
-        position="static"
-        variant="text"
-        activeStep={activeStep}
-        nextButton={(
-          <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-            {theme.direction === 'rtl' ? (
-              <Icon type="carrouselArrow" color="white" />
-            ) : (
-              <Icon type="carrouselArrow" color="white" />
-            )}
-          </Button>
-        )}
-        backButton={(
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === 'rtl' ? (
-              <Icon type="carrouselArrow" color="white" />
-            ) : (
-              <Icon type="carrouselArrow" color="white" />
-            )}
-          </Button>
-        )}
-      />
-    </div>
+    <Slider {...settings} className={classes.container}>
+      {list.map((path) => (
+        <div key={path}>
+          <div
+            className={classes.img}
+            style={{
+              backgroundImage: `url(${NEXT_PUBLIC_UPLOAD_URL + path})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: 'black',
+            }}
+            alt=""
+          />
+        </div>
+      ))}
+    </Slider>
   );
-}
+};
 
-export default SwipeableTextMobileStepper;
+const MapsCarousel = ({ index = 0, handleChange, children }) => {
+  const classes = useStyles();
+  const node = useRef();
+
+  const settings = {
+    className: 'center',
+    centerMode: true,
+    infinite: true,
+    centerPadding: '15px',
+    slidesToShow: 1,
+    speed: 500,
+    arrows: false,
+    slickGoTo: index,
+    afterChange: handleChange,
+  };
+  useEffect(() => node?.current?.slickGoTo(index), [index]);
+
+  return (
+    <Slider
+      ref={node}
+      {...settings}
+      className={clsx(classes.container, classes.mapsContainer)}
+    >
+      {children}
+    </Slider>
+  );
+};
+export { MapsCarousel };
+export default SingleCarousel;

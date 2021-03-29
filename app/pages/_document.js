@@ -20,7 +20,10 @@ class MyDocument extends Document {
     return {
       ...initialProps,
       // Styles fragment is rendered after the app and page rendering finish.
-      styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
+      styles: [
+        ...React.Children.toArray(initialProps.styles),
+        sheets.getStyleElement(),
+      ],
     };
   };
 
@@ -49,12 +52,24 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
 
-          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
           <link
             rel="stylesheet"
             href="https://storage.googleapis.com/builderbook/nprogress.min.css"
           />
-          <link rel="stylesheet" href="https://storage.googleapis.com/builderbook/vs.min.css" />
+          <link
+            rel="stylesheet"
+            href="https://storage.googleapis.com/builderbook/vs.min.css"
+          />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            charset="UTF-8"
+            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+          />
           <style>
             {`
               html {
@@ -251,6 +266,9 @@ class MyDocument extends Document {
               }
               .Toastify__toast {
                 border-radius: 15px!important;
+              }
+              .slick-center {
+                padding: 0 10px;
               }
             `}
           </style>

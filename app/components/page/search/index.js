@@ -86,6 +86,7 @@ const SearchPage = ({
   const handlePage = (e, pageOffset) => requestData(pageOffset);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
   const View = currView ? MapsView : ListView;
 
   return (
@@ -109,6 +110,7 @@ const SearchPage = ({
           toggleView={toggleView}
           page={page}
           matches={matches}
+          isMdView={isMdView}
           handlePage={handlePage}
           isMapsView={currView}
         />

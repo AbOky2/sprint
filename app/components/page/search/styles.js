@@ -188,14 +188,55 @@ const styles = (theme) => ({
   mapsCurrListContainer: {
     border: `1px solid ${theme.palette.newBlue}`,
   },
-  mapsContainer: {
-    paddingLeft: '2.5rem',
-    minHeight: '85vh',
-    '& > div': {
-      ...theme.ui.bordered,
-      overflow: 'hidden',
+  mapsMobileListContainer: {
+    padding: 0,
+    '& > a > div > div:first-of-type > div': {
+      borderTopRightRadius: 0,
+      borderBottomRightRadius: 0,
+    },
+    '& > a > div > div:last-of-type': {
+      padding: '1.6rem',
+      '& h4': {
+        fontSize: '1.4rem',
+      },
+      '& p': {
+        fontSize: '1.2rem',
+      },
     },
   },
+  mapsViewContainer: {
+    '& > div': {
+      '&:last-of-type': {
+        position: 'relative',
+        paddingLeft: '2.5rem',
+        minHeight: '85vh',
+        '& > div': {
+          '&:first-of-type': {
+            ...theme.ui.bordered,
+            overflow: 'hidden',
+          },
+          '&:last-of-type': {
+            display: 'none',
+          },
+        },
+      },
+      [theme.breakpoints.down('sm')]: {
+        '&:first-of-type': {
+          display: 'none',
+        },
+        '&:last-of-type': {
+          paddingLeft: 0,
+          minHeight: '65vh',
+          '& > div:last-of-type': {
+            display: 'flex!important',
+            position: 'absolute',
+            bottom: '2rem',
+          },
+        },
+      },
+    },
+  },
+  mapsContainer: {},
   pagination: {
     marginTop: '1rem',
   },

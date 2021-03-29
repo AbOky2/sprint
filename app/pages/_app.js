@@ -12,8 +12,8 @@ import { theme } from '../lib/theme';
 import { wrapper } from '../redux';
 import Notifier from '../components/Notifier';
 import Header from '../components/Header';
-import 'react-toastify/dist/ReactToastify.css';
 import CookieConsent from 'lib/cookieConsent';
+import 'react-toastify/dist/ReactToastify.css';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -54,7 +54,7 @@ const MyApp = ({ Component, pageProps }) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <CookieConsent/>
+      <CookieConsent />
       <CssBaseline />
       <div className="main-container">
         <PersistGate persistor={store.__persistor}>
