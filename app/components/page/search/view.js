@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Pagination from '@material-ui/lab/Pagination';
@@ -220,6 +220,8 @@ const MapsView = withStyles(
       setCurr(data[currIndex]);
     };
     const handleCarouselChange = (index) => setCurr(data[index]);
+
+    useEffect(() => setCurr(data[0]), [data]);
 
     return (
       <Grid container className={classes.mapsViewContainer}>

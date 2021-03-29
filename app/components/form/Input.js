@@ -99,7 +99,6 @@ export const GoogleMaps = ({ onChange, value }) => {
 
   return (
     <GooglePlacesAutocomplete
-      apiKey="AIzaSyAbFT5TLCN_JPoPoZTZ9vOCd1fhkgKpAhs"
       apiOptions={{ language: 'fr', region: 'fr' }}
       autocompletionRequest={{
         componentRestrictions: {

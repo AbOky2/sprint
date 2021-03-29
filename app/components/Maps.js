@@ -44,7 +44,6 @@ const CustomAnyReactComponent = ({
 
 const Maps = ({ loc: [lng, lat] = [] }) => (
   <GoogleMapReact
-    bootstrapURLKeys={{ key: 'AIzaSyD7NrR47b_NReW4PF6kCDd1vGSUrm9xkzo' }}
     defaultCenter={{
       lat,
       lng,
