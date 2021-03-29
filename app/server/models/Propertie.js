@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const DBModel = require('./Model');
-const { typeOfAnnoncies, typeOfProperties } = require('../../helpers/property');
+const {
+  typeOfAnnoncies,
+  typeOfProperties,
+  sortByKeys,
+} = require('../../helpers/property');
+
 const { defaultLimit, defaultOffset } = require('../../helpers/query');
 const maps = require('../utils/maps');
 
@@ -89,7 +94,7 @@ class PropertieClass extends DBModel {
     loc,
     limit = defaultLimit,
     page = defaultOffset,
-    sort,
+    sort = sortByKeys[0],
   }) {
     let near = [];
     if (loc) {
@@ -121,12 +126,13 @@ class PropertieClass extends DBModel {
         { typeOfAnnonce },
       ],
     };
-    console.log(sort);
+
+    const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
     const list = await this.paginate(query, {
       limit,
       page,
       forceCountFn: true,
-      sort: { price: sort },
+      sort: { price: priceSort },
     });
     return { list };
   }

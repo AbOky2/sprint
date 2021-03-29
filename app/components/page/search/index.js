@@ -9,6 +9,7 @@ import { getPropertiesApiMethod, addBookmarkApiMethod } from 'lib/api/customer';
 import { toggleArray, pick } from 'helpers/convertAndCheck';
 import { typeOfAnnonciesObj, sortByKeys } from 'helpers/property';
 import { pages } from 'helpers/query';
+import NotFound from 'components/NotFound';
 import { AdminContentWrapper } from 'components/wrapper';
 import { ListView, MapsView } from './view';
 import SearchFields from './searchFields';
@@ -81,8 +82,8 @@ const SearchPage = ({
           listView: currView,
           page: pageInfo.page,
           loc: queryData.loc,
-          maxPrice: queryData.maxPrice,
           sort: sortBy,
+          maxPrice: queryData.maxPrice,
           ...(isLocation ? {} : { typeOfProperty }),
         },
       },
@@ -96,6 +97,8 @@ const SearchPage = ({
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
   const View = currView ? MapsView : ListView;
+
+  if (!state) return <NotFound showLink={false} />;
 
   return (
     <AdminContentWrapper redirectDashboard href={pages.dashboard}>

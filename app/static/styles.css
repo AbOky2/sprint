@@ -1,0 +1,217 @@
+html {
+  font-size: 10px;
+}
+body {
+  background-color: #f7f8fa !important;
+}
+.main-container {
+  max-width: 1280px;
+  margin: auto;
+}
+a,
+a:focus {
+  font-weight: 400;
+  color: #1565c0;
+  text-decoration: none;
+  outline: none;
+}
+a:hover,
+button:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
+blockquote {
+  padding: 0 1em;
+  color: #555;
+  border-left: 0.25em solid #dfe2e5;
+}
+pre {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+code {
+  font-size: 14px;
+  background: #fff;
+}
+.relative {
+  position: relative;
+}
+.no-margin {
+  margin: auto !important;
+}
+div.fitwidth {
+  width: fit-content;
+}
+.fullwidth {
+  width: 100%;
+}
+.fullheight {
+  height: 100%;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-center {
+  text-align: center;
+}
+.inline-block {
+  display: inline-block;
+}
+.student-content-wrapper {
+  padding: 0 3rem;
+}
+.pointer {
+  cursor: pointer;
+}
+// to replace with matterial style
+.upload {
+  position: relative;
+  display: inline-block;
+}
+
+.upload input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.upload img {
+  max-height: 200px;
+  display: inline-block;
+}
+
+.partner-filter {
+  margin: 0 5px 5px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  padding-top: 3.5rem;
+}
+.partner-filter:hover .icon-container {
+  display: block;
+}
+.partner-filter .icon-container {
+  position: absolute;
+  display: none;
+  bottom: 3.5rem;
+  width: 100%;
+  text-align: center;
+  transform: rotate(45deg);
+}
+.partner-filter.active {
+  color: #475f7b;
+  text-decoration: underline;
+}
+.partner-add p {
+  display: inline-block;
+}
+.partner-add .header-icon {
+  margin-right: 5px;
+}
+.partner-card-list-container {
+  padding: 2rem 1rem;
+}
+.partner-card-list {
+  padding: 1rem;
+}
+
+.modal-content-container {
+  padding: 4rem 6rem;
+}
+.modal-title {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2.6rem;
+  line-height: 35px;
+  text-align: center;
+  margin-bottom: 4rem;
+  color: #1a2e6c;
+}
+.modal-action-container {
+  margin-top: 4rem;
+  border-top: 1px solid #c1cde7;
+}
+.modal-action-container > div:first-of-type {
+  margin-right: 1rem;
+}
+.modal-action-container > div:last-of-type {
+  margin-left: 1rem;
+}
+
+div.header {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.admin-container {
+  min-height: 100vh;
+}
+.student-container.admin-container #sidebar {
+  position: fixed;
+  max-width: 215px;
+}
+.spacing {
+  padding: 0 24px;
+}
+.admin-container #sidebar {
+  padding-top: 5rem;
+}
+.admin-container #sidebar h2 {
+  margin-bottom: 0;
+}
+.admin-container #sidebar h3 {
+  margin-top: 0;
+  margin-bottom: 5rem;
+}
+.admin-container #sidebar ul li {
+  list-style: none;
+}
+.admin-container #sidebar ul ul {
+  padding: 0;
+}
+.admin-container #sidebar ul ul li {
+  cursor: pointer;
+}
+.admin-container #sidebar ul span {
+  display: block;
+}
+.custom-upload-conatainer > span {
+  marginbottom: 1rem;
+}
+.css-1okebmr-indicatorSeparator {
+  display: none;
+}
+.Toastify__toast {
+  border-radius: 15px !important;
+}
+.slick-center {
+  padding: 0 10px;
+}
+a[href^="http://maps.google.com/maps"]
+{
+  display: none !important;
+}
+a[href^="https://maps.google.com/maps"]
+{
+  display: none !important;
+}
+
+.gmnoprint a,
+.gmnoprint span,
+.gm-style-cc {
+  display: none;
+}
+.gmnoprint div {
+  background: none !important;
+}

@@ -192,7 +192,7 @@ const MapsView = withStyles(
     sortBy,
     handleSortSelect,
   }) => {
-    const locs = data.map((e, index) => ({
+    const locs = data?.map((e, index) => ({
       index,
       _id: e._id,
       coor: e.loc.coordinates,
