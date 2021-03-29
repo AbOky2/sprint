@@ -8,6 +8,7 @@ const searchQueryWhitelist = [
   'loc',
   'maxPrice',
   'typeOfProperty',
+  'pieces',
 ];
 const pages = {
   dashboard: '/dashboard',

@@ -32,13 +32,14 @@ const mongoSchema = new Schema({
   price: { type: Number },
   surface: { type: String },
   land_surface: { type: String },
-  nb_pieces: { type: String },
   nb_rooms: { type: String },
   expenses: { type: String },
   advantage: { type: [String] },
   floor: { type: Number },
   minSurface: { type: Number },
   maxSurface: { type: Number },
+  pieces: { type: [Number] },
+  nb_pieces: { type: String },
   minPieces: { type: Number },
   maxPieces: { type: Number },
   nb_floors: { type: String },
@@ -90,7 +91,7 @@ class PropertieClass extends DBModel {
   static async search({
     maxPrice,
     typeOfAnnonce,
-    typeOfProperty = [],
+    pieces = [],
     loc,
     limit = defaultLimit,
     page = defaultOffset,
@@ -104,11 +105,10 @@ class PropertieClass extends DBModel {
       });
       if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
     }
+
     const query = {
       $and: [
-        typeOfProperty.length > 0
-          ? { typeOfProperty: { $in: typeOfProperty } }
-          : {},
+        pieces.length > 0 ? { pieces: { $in: pieces } } : {},
         maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
         near.length > 0
           ? {

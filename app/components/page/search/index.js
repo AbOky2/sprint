@@ -6,7 +6,7 @@ import Router, { withRouter } from 'next/router';
 import { useMediaQuery } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import { getPropertiesApiMethod, addBookmarkApiMethod } from 'lib/api/customer';
-import { toggleArray, pick } from 'helpers/convertAndCheck';
+import { toggleArray, isArray, pick } from 'helpers/convertAndCheck';
 import { typeOfAnnonciesObj, sortByKeys } from 'helpers/property';
 import { pages } from 'helpers/query';
 import NotFound from 'components/NotFound';
@@ -22,13 +22,13 @@ const SearchPage = ({
   classes,
   user,
   properties = {},
-  typeOfProperty = [],
   typeOfAnnonce,
   update,
   loc,
   page: defaultPage,
   maxPrice,
   sort,
+  pieces = [],
 }) => {
   const [page, setPage] = useState({
     ...pick(properties, pagePropertyWhilist),
@@ -41,8 +41,8 @@ const SearchPage = ({
     loc,
     maxPrice,
     typeOfAnnonce,
-    typeOfProperty,
     sort,
+    pieces,
   });
 
   const toggleView = () => setCurrView(!currView);
@@ -51,8 +51,12 @@ const SearchPage = ({
     setQueryData({ ...queryData, maxPrice: value });
   const handleMapSearch = (value) =>
     setQueryData({ ...queryData, loc: value?.label });
-  const handleSelect = (newTypeOfProperty) =>
-    setQueryData({ ...queryData, typeOfProperty: newTypeOfProperty });
+  const handleSelect = (arg) => {
+    let pieces = isArray(arg) ? arg : [arg];
+
+    pieces = pieces.map((e) => parseInt(e, 10));
+    setQueryData({ ...queryData, pieces });
+  };
   const handleSortSelect = () => ({ target: { value } }) => {
     setSortBy(value);
     setQueryData({ ...queryData, sort: value });
@@ -67,10 +71,8 @@ const SearchPage = ({
     if (!queryData.maxPrice) queryData.maxPrice = -1;
     if (!queryData.loc) queryData.loc = null;
 
-    const { typeOfProperty, ...requestParams } = queryData;
     const { list: { docs, ...pageInfo } = {} } = await getPropertiesApiMethod({
-      ...(isLocation ? {} : { typeOfProperty }),
-      ...requestParams,
+      ...queryData,
       page,
     });
     setState(docs);
@@ -84,7 +86,7 @@ const SearchPage = ({
           loc: queryData.loc,
           sort: sortBy,
           maxPrice: queryData.maxPrice,
-          ...(isLocation ? {} : { typeOfProperty }),
+          ...(isLocation ? {} : { pieces: queryData.pieces }),
         },
       },
       undefined,
@@ -138,7 +140,7 @@ SearchPage.propTypes = {
   maxPrice: PropTypes.string,
   page: PropTypes.string,
   typeOfAnnonce: PropTypes.string.isRequired,
-  typeOfProperty: PropTypes.any,
+  pieces: PropTypes.array,
   update: PropTypes.func.isRequired,
   loc: PropTypes.string,
 };
@@ -146,6 +148,6 @@ SearchPage.defaultProps = {
   loc: '',
   page: '1',
   maxPrice: null,
-  typeOfProperty: [],
+  pieces: [],
 };
 export default withRouter(withStyles(SearchPage));

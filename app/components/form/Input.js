@@ -183,11 +183,13 @@ const CustomInput = withStyles(styles)(
       contributtion: 0,
     });
     const calc = (value) => {
-      const val =
+      let val =
         value ||
-        parseInt(state.salary, 10) * 83.33 +
-          parseInt(state.contributtion, 10) +
-          '';
+        (
+          parseInt(state.salary, 10) * 83.33 +
+          parseInt(state.contributtion, 10)
+        ).toFixed(2);
+
       setValue(val);
       inputProps.onChange(val);
     };

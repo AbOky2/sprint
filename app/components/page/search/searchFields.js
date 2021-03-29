@@ -44,7 +44,7 @@ const searchFields = withStyles(
               name="typeOfAnnonce"
               placeholder="Nombre de pièces"
               list={propertyPiecesSelectMap}
-              value={queryData.typeOfProperty}
+              value={queryData.pieces}
               onChange={handleSelect}
             />
           </Grid>

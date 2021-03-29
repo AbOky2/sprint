@@ -43,6 +43,7 @@ const schemas = {
       typeOfProperty: Joi.any(),
       sort: Joi.string().optional(),
       maxPrice: Joi.number().min(-1).optional(),
+      pieces: Joi.any().optional(),
     }),
   },
 };

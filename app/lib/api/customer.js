@@ -16,8 +16,8 @@ export const getCurrentUserkApiMethod = (options = {}) =>
 
 export const getPropertiesApiMethod = (args, options = {}) =>
   sendRequest(`${BASE_PATH}/properties?${toQueryParams(args)}`, {
-    method: 'GET',
     ...options,
+    body: JSON.stringify(args),
   });
 
 export const addBookmarkApiMethod = (args) =>

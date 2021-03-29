@@ -22,7 +22,8 @@ const sortBySelectMap = sortByKeys.map((name) => ({
   value: name,
   name: sortByObj[name],
 }));
-const propertyPiecesSelectMap = Object.keys(propertyPieces).map((name) => ({
+const propertyPiecesKeys = Object.keys(propertyPieces);
+const propertyPiecesSelectMap = propertyPiecesKeys.map((name) => ({
   value: name,
   name: propertyPieces[name],
 }));
@@ -41,6 +42,7 @@ module.exports = {
   sortByObj,
   sortByKeys,
   sortBySelectMap,
+  propertyPiecesKeys,
   propertyPiecesSelectMap,
   getAddress,
   getNbPieces,

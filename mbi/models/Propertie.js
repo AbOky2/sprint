@@ -25,15 +25,16 @@ const mongoSchema = new Schema({
   price: { type: Number },
   surface: { type: String },
   land_surface: { type: String },
-  nb_pieces: { type: String },
   nb_rooms: { type: String },
   expenses: { type: String },
   advantages: { type: [String] },
   floor: { type: Number },
   minSurface: { type: Number },
+  nb_pieces: { type: String },
   maxSurface: { type: Number },
   minPieces: { type: Number },
   maxPieces: { type: Number },
+  pieces: { type: [Number] },
   nb_bathrooms: { type: String },
   nb_washrooms: { type: String },
   nb_wc: { type: String },
@@ -64,7 +65,10 @@ const mongoSchema = new Schema({
 
 class PropertieClass extends DBModel {
   static async newProperties() {
-    const list = await this.find({ isNewProperty: true, typeOfAnnonce: 'Location' })
+    const list = await this.find({
+      isNewProperty: true,
+      typeOfAnnonce: 'Location',
+    })
       .sort('nb_pieces')
       .limit(150);
     return { list };
@@ -75,7 +79,6 @@ class PropertieClass extends DBModel {
 
     return element;
   }
-
 }
 
 PropertieClass.name = modelName;
