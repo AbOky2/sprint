@@ -64,9 +64,9 @@ router.get(
   getCollection(async ({ id }) => await PartnerModel.get(id))
 );
 
-router.get(
+router.post(
   '/properties',
-  listCollection(async ({ typeOfProperty, ...args }) => {
+  listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
     const { list } = await PropertieModel.search({
       ...args,
       typeOfProperty:

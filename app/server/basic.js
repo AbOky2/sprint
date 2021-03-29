@@ -1,10 +1,22 @@
 const passport = require('passport');
+const ExpressBrute = require('express-brute');
+const MongooseStore = require('express-brute-mongoose');
+const BruteForceSchema = require('express-brute-mongoose/dist/schema');
 const { Strategy } = require('passport-local');
 const { UserModel } = require('./models');
 const msg = require('./utils/message');
 const sms = require('./utils/sms');
 const joiSchema = require('./middleware/schema');
 const requestMiddleware = require('./middleware/request');
+const mongoose = require('mongoose');
+
+const model = mongoose.model(
+  'bruteforce',
+  new mongoose.Schema(BruteForceSchema)
+);
+const store = new MongooseStore(model);
+
+const bruteforce = new ExpressBrute(store);
 
 const signUpPath = '/auth/signup';
 const signInPath = '/auth/signin';
@@ -43,8 +55,8 @@ const auth = ({ server }) => {
         passwordField: 'password',
         passReqToCallback: true,
       },
-      verify,
-    ),
+      verify
+    )
   );
   passport.serializeUser((user, done) => done(null, user._id));
   passport.deserializeUser(async (id, done) => {
@@ -60,18 +72,23 @@ const auth = ({ server }) => {
   server.use(passport.session());
 
   SignRequsts.forEach(({ path, schema }) =>
-    server.post(path, requestMiddleware(schema), (req, res, next) => {
-      passport.authenticate('local', (err, reqUser, info) => {
-        if (err) return next(err);
-        if (!reqUser) return res.status(401).json({ message: info.message });
+    server.post(
+      path,
+      bruteforce.prevent,
+      requestMiddleware(schema),
+      (req, res, next) => {
+        passport.authenticate('local', (err, reqUser, info) => {
+          if (err) return next(err);
+          if (!reqUser) return res.status(401).json({ message: info.message });
 
-        req.login(reqUser, (error) => {
-          if (error) return next(error);
+          req.login(reqUser, (error) => {
+            if (error) return next(error);
 
-          res.json({ user: reqUser });
-        });
-      })(req, res, next);
-    }),
+            res.json({ user: reqUser });
+          });
+        })(req, res, next);
+      }
+    )
   );
 
   server.get('/auth/logout', (req, res) => {
@@ -90,7 +107,7 @@ const auth = ({ server }) => {
         console.log(error.message);
         res.status(401).json({ message: error.message });
       }
-    },
+    }
   );
 
   server.post(
@@ -107,7 +124,7 @@ const auth = ({ server }) => {
       } catch (error) {
         res.status(401).json({ message: error.message });
       }
-    },
+    }
   );
 };
 module.exports = auth;

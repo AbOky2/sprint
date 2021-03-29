@@ -14,7 +14,9 @@ const handleErrors = (fn) => async (req, res, next) => {
     await fn(req, res, next);
   } catch (err) {
     logger.error(err);
-    res.status(400).json({ error: err.message || err.Message || err.toString() });
+    res
+      .status(400)
+      .json({ error: err.message || err.Message || err.toString() });
   }
 };
 const defautlMiddleware = (req, res, next) => next();
@@ -26,13 +28,15 @@ const defautlMiddleware = (req, res, next) => next();
  */
 const getCollection = (listFn) => [
   requestMiddleware(joiSchema.request.get, 'params'),
-  handleErrors(async (req, res) => res.json(await listFn({ id: req.params.id }))),
+  handleErrors(async (req, res) =>
+    res.json(await listFn({ id: req.params.id }))
+  ),
 ];
 const updateCollection = (middleware = defautlMiddleware, listFn) => [
   requestMiddleware(joiSchema.request.update, 'params'),
   middleware,
   handleErrors(async (req, res) =>
-    res.json(await listFn({ id: req.params.id, data: req.body, req })),
+    res.json(await listFn({ id: req.params.id, data: req.body, req }))
   ),
 ];
 
@@ -44,18 +48,25 @@ const profileCollection = (middleware = defautlMiddleware, listFn) => [
 
 const deleteCollection = (listFn) => [
   requestMiddleware(joiSchema.request.delete, 'params'),
-  handleErrors(async (req, res) => res.json(await listFn({ id: req.params.id }))),
+  handleErrors(async (req, res) =>
+    res.json(await listFn({ id: req.params.id }))
+  ),
 ];
 
-const listCollection = (listFn, schema = joiSchema.request.list) => [
-  requestMiddleware(schema, 'query'),
-  handleErrors(async ({ query: { offset, limit, ...others } }, res) => {
+const listCollection = (
+  listFn,
+  schema = joiSchema.request.list,
+  queryType = 'query'
+) => [
+  requestMiddleware(schema, queryType),
+  handleErrors(async ({ query: { offset, limit, ...others }, ...req }, res) => {
     res.json(
       await listFn({
         offset: Number(offset) || undefined,
         limit: Number(limit) || undefined,
         ...others,
-      }),
+        req,
+      })
     );
   }),
 ];
