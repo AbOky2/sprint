@@ -241,7 +241,7 @@ const MapsView = withStyles(
               <ListElement
                 key={elems._id}
                 className={
-                  elems._id !== curr._id
+                  elems._id !== curr?._id
                     ? classes.mapsListContainer
                     : clsx(
                         classes.mapsListContainer,

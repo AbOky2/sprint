@@ -8,6 +8,9 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { useToggleOpen } from 'helpers/hooks';
 
 const styles = (theme) => ({
+  wrapper: {
+    position: 'relative',
+  },
   container: {
     '& input, & textarea': {
       display: 'block',
@@ -90,6 +93,14 @@ const styles = (theme) => ({
     '& > div:last-of-type': {
       display: 'flex',
     },
+  },
+  submit: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    right: 0,
+    zIndex: 1,
   },
 });
 
@@ -201,49 +212,51 @@ const CustomInput = withStyles(styles)(
     useEffect(() => setValue(inputProps.value), [inputProps.value]);
 
     return (
-      <Grid
-        container
-        className={
-          open ? clsx(classes.custom, classes.customOpen) : classes.custom
-        }
-        ref={node}
-      >
-        <InputBase {...inputProps} onChange={onChange} value={value} />
-        <div onClick={handleSumit} className="pointer">
+      <div className={classes.wrapper}>
+        <Grid
+          container
+          className={
+            open ? clsx(classes.custom, classes.customOpen) : classes.custom
+          }
+          ref={node}
+        >
+          <InputBase {...inputProps} onChange={onChange} value={value} />
+          <Grid container>
+            <Typography variant="h4">Quel est votre budget ?</Typography>
+            <Typography>
+              Nous vous aidons à déterminer votre budget maximal en simulant le
+              montant que vous pouvez emprunter.
+            </Typography>
+            <InputBase
+              name="salary"
+              value={
+                state.salary > 0 && !Number.isNaN(state.salary)
+                  ? state.salary
+                  : ''
+              }
+              onChange={handleChange}
+              placeholder="Votre salaire net mensuel"
+            />
+            <InputBase
+              name="contributtion"
+              value={
+                state.contributtion > 0 && !Number.isNaN(state.contributtion)
+                  ? state.contributtion
+                  : ''
+              }
+              onChange={handleChange}
+              placeholder="Votre apport personnel"
+            />
+            <Typography>
+              Ce calcul est réalisé avec les hypothèses suivantes : durée de
+              prêt : 25 ans taux d’intérêt : 1,5%
+            </Typography>
+          </Grid>
+        </Grid>
+        <div onClick={handleSumit} className={classes.submit}>
           <Icon type="search" size="large" color="white" />
         </div>
-        <Grid container>
-          <Typography variant="h4">Quel est votre budget ?</Typography>
-          <Typography>
-            Nous vous aidons à déterminer votre budget maximal en simulant le
-            montant que vous pouvez emprunter.
-          </Typography>
-          <InputBase
-            name="salary"
-            value={
-              state.salary > 0 && !Number.isNaN(state.salary)
-                ? state.salary
-                : ''
-            }
-            onChange={handleChange}
-            placeholder="Votre salaire net mensuel"
-          />
-          <InputBase
-            name="contributtion"
-            value={
-              state.contributtion > 0 && !Number.isNaN(state.contributtion)
-                ? state.contributtion
-                : ''
-            }
-            onChange={handleChange}
-            placeholder="Votre apport personnel"
-          />
-          <Typography>
-            Ce calcul est réalisé avec les hypothèses suivantes : durée de prêt
-            : 25 ans taux d’intérêt : 1,5%
-          </Typography>
-        </Grid>
-      </Grid>
+      </div>
     );
   }
 );
