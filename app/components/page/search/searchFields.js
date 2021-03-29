@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { GoogleMaps, CustomInput } from 'components/form/Input';
+import { Icon } from 'components/form';
 import { DropdownSelect } from 'components/form/Select';
 import { propertyPiecesSelectMap } from 'helpers/property';
 import withStyles from './styles';
@@ -10,6 +11,7 @@ const searchFields = withStyles(
   ({
     classes,
     isLocation,
+    isMdView,
     queryData,
     handleMapSearch,
     handleBudget,
@@ -32,8 +34,11 @@ const searchFields = withStyles(
             onChange={handleMapSearch}
             placeholder="Localisation"
           />
+          <div onClick={handleSumit} className={classes.submit}>
+            <Icon type="search" size="large" color="white" />
+          </div>
         </Grid>
-        {!isLocation && (
+        {!isLocation && !isMdView && (
           <Grid item md={4}>
             <DropdownSelect
               name="typeOfAnnonce"
@@ -44,24 +49,26 @@ const searchFields = withStyles(
             />
           </Grid>
         )}
-        <Grid
-          item
-          md={isLocation ? 6 : 4}
-          className={clsx(classes.search, classes.locationMaxBudget)}
-        >
-          <CustomInput
-            name="maxPrice"
-            value={
-              queryData.maxPrice > 0 && !Number.isNaN(queryData.maxPrice)
-                ? queryData.maxPrice
-                : ''
-            }
-            queryData={queryData}
-            onChange={handleBudget}
-            placeholder="Budget maximal"
-            handleSumit={handleSumit}
-          />
-        </Grid>
+        {!isMdView && (
+          <Grid
+            item
+            md={isLocation ? 6 : 4}
+            className={clsx(classes.search, classes.locationMaxBudget)}
+          >
+            <CustomInput
+              name="maxPrice"
+              value={
+                queryData.maxPrice > 0 && !Number.isNaN(queryData.maxPrice)
+                  ? queryData.maxPrice
+                  : ''
+              }
+              queryData={queryData}
+              onChange={handleBudget}
+              placeholder="Budget maximal"
+              handleSumit={handleSumit}
+            />
+          </Grid>
+        )}
       </Grid>
     </>
   )
@@ -69,6 +76,7 @@ const searchFields = withStyles(
 searchFields.PropTypes = {
   classes: PropTypes.object.isRequired,
   isLocation: PropTypes.bool.isRequired,
+  isMdView: PropTypes.bool.isRequired,
   queryData: PropTypes.object.isRequired,
   handleMapSearch: PropTypes.func.isRequired,
   handleBudget: PropTypes.func.isRequired,

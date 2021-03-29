@@ -66,24 +66,17 @@ router.get(
 
 router.get(
   '/properties',
-  listCollection(
-    async ({ maxPrice, typeOfAnnonce, typeOfProperty, loc, page, limit }) => {
-      const { list } = await PropertieModel.search({
-        maxPrice,
-        typeOfAnnonce,
-        typeOfProperty:
-          typeOfProperty && typeOfProperty.length > 0
-            ? typeOfProperty.split(',')
-            : [],
-        loc,
-        page,
-        limit,
-      });
+  listCollection(async ({ typeOfProperty, ...args }) => {
+    const { list } = await PropertieModel.search({
+      ...args,
+      typeOfProperty:
+        typeOfProperty && typeOfProperty.length > 0
+          ? typeOfProperty.split(',')
+          : [],
+    });
 
-      return { list };
-    },
-    joiSchema.propertie.student.search
-  )
+    return { list };
+  }, joiSchema.propertie.student.search)
 );
 
 router.get(

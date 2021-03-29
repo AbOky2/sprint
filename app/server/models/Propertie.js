@@ -67,7 +67,10 @@ const mongoSchema = new Schema({
 
 class PropertieClass extends DBModel {
   static async newProperties() {
-    const list = await this.find({ isNewProperty: true, typeOfAnnonce: 'Location' })
+    const list = await this.find({
+      isNewProperty: true,
+      typeOfAnnonce: 'Location',
+    })
       .sort('nb_pieces')
       .limit(150);
     return { list };
@@ -86,6 +89,7 @@ class PropertieClass extends DBModel {
     loc,
     limit = defaultLimit,
     page = defaultOffset,
+    sort,
   }) {
     let near = [];
     if (loc) {
@@ -97,7 +101,9 @@ class PropertieClass extends DBModel {
     }
     const query = {
       $and: [
-        typeOfProperty.length > 0 ? { typeOfProperty: { $in: typeOfProperty } } : {},
+        typeOfProperty.length > 0
+          ? { typeOfProperty: { $in: typeOfProperty } }
+          : {},
         maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
         near.length > 0
           ? {
@@ -115,7 +121,13 @@ class PropertieClass extends DBModel {
         { typeOfAnnonce },
       ],
     };
-    const list = await this.paginate(query, { limit, page, forceCountFn: true });
+    console.log(sort);
+    const list = await this.paginate(query, {
+      limit,
+      page,
+      forceCountFn: true,
+      sort: { price: sort },
+    });
     return { list };
   }
 }

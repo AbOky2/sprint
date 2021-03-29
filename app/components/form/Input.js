@@ -8,9 +8,6 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { useToggleOpen } from 'helpers/hooks';
 
 const styles = (theme) => ({
-  wrapper: {
-    position: 'relative',
-  },
   container: {
     '& input, & textarea': {
       display: 'block',
@@ -212,7 +209,7 @@ const CustomInput = withStyles(styles)(
     useEffect(() => setValue(inputProps.value), [inputProps.value]);
 
     return (
-      <div className={classes.wrapper}>
+      <div className="relative">
         <Grid
           container
           className={

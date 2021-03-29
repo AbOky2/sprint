@@ -1,6 +1,30 @@
 import { withStyles } from '@material-ui/core';
 
 const styles = (theme) => ({
+  searchMapContainer: {
+    position: 'relative',
+    '& > div:first-of-type > div:first-of-type > div:last-of-type > svg ': {
+      display: 'none',
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& > div:first-of-type': {
+        position: 'absolute',
+        top: 0,
+        left: '15%',
+        transform: 'translateY(calc(10% + 1rem))',
+        zIndex: 1,
+        width: '70%',
+        '& > div:first-of-type > div:last-of-type > svg': {
+          display: 'block',
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          zIndex: 3,
+          transform: 'initial',
+        },
+      },
+    },
+  },
   card: {
     width: 'calc(100% - 14px)',
   },
@@ -55,10 +79,10 @@ const styles = (theme) => ({
         border: `solid 1px ${theme.palette.lightGray}`,
         borderColor: theme.palette.lightGray,
         [theme.breakpoints.down('sm')]: {
-          borderBottomLeftRadius: 0,
-          borderTopRightRadius: '.6rem',
+          borderRadius: '.6rem!important',
           borderRight: `1px solid ${theme.palette.lightGray}`,
           borderBottom: 0,
+          minHeight: 46,
         },
       },
       '&:last-of-type': {

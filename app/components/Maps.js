@@ -66,7 +66,6 @@ const MultipleMarkers = ({
   isMobile = true,
 }) => (
   <GoogleMapReact
-    bootstrapURLKeys={{ key: 'AIzaSyD7NrR47b_NReW4PF6kCDd1vGSUrm9xkzo' }}
     defaultCenter={{
       lng,
       lat,
@@ -77,6 +76,10 @@ const MultipleMarkers = ({
     }}
     defaultZoom={13}
     onChildClick={handleChildClick}
+    options={{
+      fullscreenControl: !isMobile,
+      zoomControl: !isMobile,
+    }}
   >
     {data.map((elem) => {
       const {

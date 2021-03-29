@@ -13,10 +13,12 @@ import { AdminContentWrapper } from 'components/wrapper';
 import { ListView, MapsView } from './view';
 import SearchFields from './searchFields';
 import Instructions from './instructions';
+import withStyles from './styles';
 
 const pagePropertyWhilist = ['page', 'limit', 'totalPages'];
 const isMapsView = true;
 const SearchPage = ({
+  classes,
   user,
   properties = {},
   typeOfProperty = [],
@@ -25,6 +27,7 @@ const SearchPage = ({
   loc,
   page: defaultPage,
   maxPrice,
+  sort,
 }) => {
   const [page, setPage] = useState({
     ...pick(properties, pagePropertyWhilist),
@@ -32,13 +35,14 @@ const SearchPage = ({
   });
   const [currView, setCurrView] = useState(isMapsView);
   const [state, setState] = useState(properties.docs);
+  const [sortBy, setSortBy] = useState(sortByKeys[0]);
   const [queryData, setQueryData] = useState({
     loc,
     maxPrice,
     typeOfAnnonce,
     typeOfProperty,
+    sort,
   });
-  const [sortBy, setSortBy] = useState(sortByKeys[0]);
 
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
@@ -48,7 +52,10 @@ const SearchPage = ({
     setQueryData({ ...queryData, loc: value?.label });
   const handleSelect = (newTypeOfProperty) =>
     setQueryData({ ...queryData, typeOfProperty: newTypeOfProperty });
-  const handleSortSelect = () => ({ target: { value } }) => setSortBy(value);
+  const handleSortSelect = () => ({ target: { value } }) => {
+    setSortBy(value);
+    setQueryData({ ...queryData, sort: value });
+  };
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
     addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
@@ -75,6 +82,7 @@ const SearchPage = ({
           page: pageInfo.page,
           loc: queryData.loc,
           maxPrice: queryData.maxPrice,
+          sort: sortBy,
           ...(isLocation ? {} : { typeOfProperty }),
         },
       },
@@ -93,27 +101,30 @@ const SearchPage = ({
     <AdminContentWrapper redirectDashboard href={pages.dashboard}>
       <div>
         {!isLocation && <Instructions />}
-        <SearchFields
-          isLocation={isLocation}
-          queryData={queryData}
-          handleMapSearch={handleMapSearch}
-          handleBudget={handleBudget}
-          handleSumit={handleSumit}
-          handleSelect={handleSelect}
-        />
-        <View
-          data={state}
-          liked={liked}
-          sortBy={sortBy}
-          handleBookmark={handleBookmark}
-          handleSortSelect={handleSortSelect}
-          toggleView={toggleView}
-          page={page}
-          matches={matches}
-          isMdView={isMdView}
-          handlePage={handlePage}
-          isMapsView={currView}
-        />
+        <div className={classes.searchMapContainer}>
+          <SearchFields
+            isLocation={isLocation}
+            queryData={queryData}
+            isMdView={isMdView}
+            handleMapSearch={handleMapSearch}
+            handleBudget={handleBudget}
+            handleSumit={handleSumit}
+            handleSelect={handleSelect}
+          />
+          <View
+            data={state}
+            liked={liked}
+            sortBy={sortBy}
+            handleBookmark={handleBookmark}
+            handleSortSelect={handleSortSelect}
+            toggleView={toggleView}
+            page={page}
+            matches={matches}
+            isMdView={isMdView}
+            handlePage={handlePage}
+            isMapsView={currView}
+          />
+        </div>
       </div>
     </AdminContentWrapper>
   );
@@ -134,4 +145,4 @@ SearchPage.defaultProps = {
   maxPrice: null,
   typeOfProperty: [],
 };
-export default withRouter(SearchPage);
+export default withRouter(withStyles(SearchPage));

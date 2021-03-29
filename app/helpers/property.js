@@ -3,8 +3,8 @@ const typeOfAnnonciesObj = {
   location: 'Location',
 };
 const sortByObj = {
-  increasingPrice: 'Prix croissant',
-  decreasingPrice: 'Prix décroissant',
+  asc: 'Prix croissant',
+  desc: 'Prix décroissant',
 };
 const propertyPieces = {
   1: 'Studio',
