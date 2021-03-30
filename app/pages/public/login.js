@@ -107,6 +107,11 @@ const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: '1rem',
     background: "url('../../static/img/login.png') no-repeat",
     backgroundSize: 'cover',
+    [theme.breakpoints.down('sm')]: {
+      borderRadius: 0,
+      minHeight: '30vh',
+      backgroundPosition: 'center',
+    },
   },
   loginBtn: {
     padding: '2rem 0',
@@ -197,7 +202,12 @@ const SignUp = ({ values = {}, handleChange }) => (
       label="Status*"
       position="right"
     />
-    <Input label="Code parrain" placeholder="Code" onChange={handleChange} name="sponsorshipCode" />
+    <Input
+      label="Code parrain"
+      placeholder="Code"
+      onChange={handleChange}
+      name="sponsorshipCode"
+    />
   </Grid>
 );
 const SignIn = ({ values = {}, handleChange }) => (
@@ -255,7 +265,14 @@ const LoginTab = ({ login, register }) => {
       if (!data.email || !data.password) return;
       authReq = login;
     } else {
-      const pickdata = ['email', 'firstName', 'lastName', 'role', 'password', 'phone'];
+      const pickdata = [
+        'email',
+        'firstName',
+        'lastName',
+        'role',
+        'password',
+        'phone',
+      ];
       if (
         !data.email ||
         !data.firstName ||
@@ -283,7 +300,8 @@ const LoginTab = ({ login, register }) => {
 
     authReq(data);
   };
-  const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
+  const handleChange = (name) => ({ target: { value } }) =>
+    setState({ ...state, [name]: value });
   const classes = useStyles();
 
   return (
@@ -291,13 +309,19 @@ const LoginTab = ({ login, register }) => {
       <Head>
         <title>Login</title>
       </Head>
-      <Grid container justify="center" alignItems="center" id="login" className={classes.container}>
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        id="login"
+        className={classes.container}
+      >
         <div className="fullwidth text-center">
           <a href="/">
             <img src="/logo.png" alt="kit le nid" />
           </a>
           <Grid container item alignItems="stretch" justify="center">
-            <Grid item xs={6} className={classes.signinLogo} />
+            <Grid item md={6} xs={12} className={classes.signinLogo} />
             <Grid
               container
               item
@@ -310,7 +334,11 @@ const LoginTab = ({ login, register }) => {
             >
               <Grid container alignItems="center">
                 <div className="fullwidth">
-                  <h1>{isRegisterinView ? 'Inscrivez-vous gratuitement !' : 'Connexion'}</h1>
+                  <h1>
+                    {isRegisterinView
+                      ? 'Inscrivez-vous gratuitement !'
+                      : 'Connexion'}
+                  </h1>
                   <h2>Accéder à tout notre accompagnement.</h2>
                   <Grid
                     container
@@ -320,39 +348,67 @@ const LoginTab = ({ login, register }) => {
                     className={classes.formContainer}
                   >
                     {isRegisterinView ? (
-                      <SignUp values={state} handleChange={handleChange} onClick={onClick} />
+                      <SignUp
+                        values={state}
+                        handleChange={handleChange}
+                        onClick={onClick}
+                      />
                     ) : (
-                      <SignIn values={state} handleChange={handleChange} onClick={onClick} />
+                      <SignIn
+                        values={state}
+                        handleChange={handleChange}
+                        onClick={onClick}
+                      />
                     )}
                   </Grid>
                   {isRegisterinView && (
-                    <Grid container alignItems="center" className={classes.checkBoxContainer}>
+                    <Grid
+                      container
+                      alignItems="center"
+                      className={classes.checkBoxContainer}
+                    >
                       <Checkbox
                         color="primary"
                         inputProps={{ 'aria-label': 'secondary checkbox' }}
                         onClick={handleCheck}
                       />
-                      <Typography variant="h3">J’accepte les conditions générales</Typography>
+                      <Typography variant="h3">
+                        J’accepte les conditions générales
+                      </Typography>
                     </Grid>
                   )}
-                  <Grid container justify="center" className={classes.btnContainer}>
+                  <Grid
+                    container
+                    justify="center"
+                    className={classes.btnContainer}
+                  >
                     <Grid item>
                       <Btn
-                        text={isRegisterinView ? 'Créer un compte' : 'Connectez-vous'}
+                        text={
+                          isRegisterinView
+                            ? 'Créer un compte'
+                            : 'Connectez-vous'
+                        }
                         onClick={onClick}
                         className="blueColor full login-btn"
                       />
                     </Grid>
                     <Grid item>
                       <Btn
-                        text={isRegisterinView ? 'Connectez-vous' : 'Créer un compte'}
+                        text={
+                          isRegisterinView
+                            ? 'Connectez-vous'
+                            : 'Créer un compte'
+                        }
                         onClick={toggleView}
                         whiteColor
                       />
                     </Grid>
                   </Grid>
                   <Link href="/public/resetPassword">
-                    <a className={classes.resetPassword}>Mot de passe oublié</a>
+                    <a className={classes.resetPassword}>
+                      Mot de passe oublié ?
+                    </a>
                   </Link>
                 </div>
               </Grid>
@@ -377,4 +433,6 @@ const actionCreators = {
   login: userActions.login,
   logout: userActions.logout,
 };
-export default withAuth(connect(mapState, actionCreators)(LoginTab), { logoutRequired: true });
+export default withAuth(connect(mapState, actionCreators)(LoginTab), {
+  logoutRequired: true,
+});

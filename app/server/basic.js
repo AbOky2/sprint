@@ -74,7 +74,7 @@ const auth = ({ server }) => {
   SignRequsts.forEach(({ path, schema }) =>
     server.post(
       path,
-      bruteforce.prevent,
+      // bruteforce.prevent,
       requestMiddleware(schema),
       (req, res, next) => {
         passport.authenticate('local', (err, reqUser, info) => {

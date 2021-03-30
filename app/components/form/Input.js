@@ -175,7 +175,7 @@ const InputBase = withStyles(styles)(
   )
 );
 const CustomInput = withStyles(styles)(
-  ({ classes, handleSumit, ...inputProps }) => {
+  ({ classes, handleSumit, showSub, ...inputProps }) => {
     const [value, setValue] = useState(inputProps.value);
     const [node, open] = useToggleOpen();
     const [state, setState] = useState({
@@ -215,7 +215,9 @@ const CustomInput = withStyles(styles)(
         <Grid
           container
           className={
-            open ? clsx(classes.custom, classes.customOpen) : classes.custom
+            showSub && open
+              ? clsx(classes.custom, classes.customOpen)
+              : classes.custom
           }
           ref={node}
         >
@@ -263,6 +265,7 @@ const samePropTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
+  showSub: PropTypes.bool.isRequired,
   type: PropTypes.string,
   placeholder: PropTypes.string,
   label: PropTypes.string,
