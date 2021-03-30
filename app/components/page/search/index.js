@@ -13,7 +13,6 @@ import NotFound from 'components/NotFound';
 import { AdminContentWrapper } from 'components/wrapper';
 import { ListView, MapsView } from './view';
 import SearchFields from './searchFields';
-import Instructions from './instructions';
 import withStyles from './styles';
 
 const pagePropertyWhilist = ['page', 'limit', 'totalPages'];
@@ -105,7 +104,6 @@ const SearchPage = ({
   return (
     <AdminContentWrapper redirectDashboard href={pages.dashboard}>
       <div>
-        {!isLocation && <Instructions />}
         <div className={classes.searchMapContainer}>
           <SearchFields
             isLocation={isLocation}

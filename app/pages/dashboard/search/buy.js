@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { typeOfAnnonciesObj } from 'helpers/property';
-import { searchQueryWhitelist } from 'helpers/query';
+import { searchQueryWhitelist, defaultLoc } from 'helpers/query';
 import { pick, unPick } from 'helpers/convertAndCheck';
 import { userActions } from 'redux/_actions';
 import withAuth from 'lib/withAuth';
@@ -16,6 +16,7 @@ SearchPage.getInitialProps = async ({ req, query }) => {
 
   const queryParams = pick(query, searchQueryWhitelist);
   queryParams.typeOfAnnonce = typeOfAnnonciesObj.buy;
+  queryParams.loc = queryParams.loc || defaultLoc;
 
   const { list } = await getPropertiesApiMethod(
     unPick(queryParams, ['listView']),
