@@ -1,5 +1,5 @@
 const session = require('express-session');
-const toobusy = require('toobusy-js');
+// const toobusy = require('toobusy-js');
 const mongoose = require('mongoose');
 const mongoSessionStore = require('connect-mongo');
 const compression = require('compression');
@@ -23,8 +23,8 @@ module.exports = (server, express) => {
       maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
     },
   };
-  const server2Busy = (req, res, next) =>
-    toobusy() ? res.send(503, 'Server Too Busy') : next();
+  // const server2Busy = (req, res, next) =>
+  //   toobusy() ? res.send(503, 'Server Too Busy') : next();
 
   // if (!dev) {
   //   server.set('trust proxy', 1); // sets req.hostname, req.ip
@@ -33,7 +33,7 @@ module.exports = (server, express) => {
   // }
 
   return [
-    server2Busy,
+    // server2Busy,
     helmet({ contentSecurityPolicy: false }),
     compression(),
     express.urlencoded({ extended: true, limit }),
