@@ -16,7 +16,7 @@ SearchPage.getInitialProps = async ({ req, query }) => {
 
   const queryParams = pick(query, searchQueryWhitelist);
   queryParams.typeOfAnnonce = typeOfAnnonciesObj.buy;
-  queryParams.loc = queryParams.loc || defaultLoc;
+  queryParams.loc = queryParams.loc || defaultLoc.buy;
 
   const { list } = await getPropertiesApiMethod(
     unPick(queryParams, ['listView']),

@@ -62,6 +62,7 @@ const searchFields = withStyles(
                   ? queryData.maxPrice
                   : ''
               }
+              showSub={!isLocation}
               queryData={queryData}
               onChange={handleBudget}
               placeholder="Budget maximal"

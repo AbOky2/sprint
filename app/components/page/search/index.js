@@ -11,7 +11,7 @@ import { typeOfAnnonciesObj, sortByKeys } from 'helpers/property';
 import { pages } from 'helpers/query';
 import NotFound from 'components/NotFound';
 import { AdminContentWrapper } from 'components/wrapper';
-import { ListView, MapsView } from './view';
+import { ListView, MapsView } from './views';
 import SearchFields from './searchFields';
 import withStyles from './styles';
 

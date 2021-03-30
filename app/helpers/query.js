@@ -1,6 +1,9 @@
 const defaultLimit = 6;
 const defaultOffset = 1;
-const defaultLoc = 'Paris, France';
+const defaultLoc = {
+  location: 'Paris, France',
+  buy: 'Île-de-France, France',
+};
 const searchQueryWhitelist = [
   'sort',
   'listView',

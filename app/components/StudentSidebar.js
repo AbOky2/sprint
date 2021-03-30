@@ -138,12 +138,6 @@ const MenuItems = [
     iconType: 'sponsorship',
     txt: 'Parrainage',
   },
-  {
-    href: 'https://cagnotte-immobiliere.nexity.fr',
-    iconType: 'jackpot',
-    txt: 'Cagnotte',
-    target: '_blank',
-  },
 ];
 export const MobileMenu = () => {
   const classes = useStyles();
