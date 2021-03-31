@@ -88,7 +88,9 @@ const styles = (theme) => ({
       '& input': {
         borderRadius: '1rem!important',
         borderLeft: `1px solid ${theme.palette.lightGray}!important`,
-        marginTop: '1.6rem',
+        '&:first-of-type': {
+          margin: '1.6rem 0',
+        },
       },
       '& > p': {
         fontSize: '1.2rem',
@@ -195,7 +197,7 @@ const InputBase = withStyles(styles)(
 const CustomInput = withStyles(styles)(
   ({ classes, handleSumit, showSub, ...inputProps }) => {
     const [value, setValue] = useState(inputProps.value);
-    const [node, open] = useToggleOpen();
+    const [node, open] = useToggleOpen({ isOpen: true });
     const [state, setState] = useState({
       salary: '',
       contributtion: '',

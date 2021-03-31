@@ -111,6 +111,7 @@ const styles = (theme) => ({
       borderRight: 'none',
     },
     '& > div:last-of-type input': {
+      margin: 0,
       borderLeft: 'none',
       borderTopLeftRadius: 0,
       borderBottomLeftRadius: 0,
