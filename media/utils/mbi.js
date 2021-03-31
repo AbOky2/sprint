@@ -166,7 +166,7 @@ const readMba = () => {
       );
       if (readedLots) {
         const readedDatasArray = readedDatas.split('\n');
-        const interval = 50 * 100;
+        const interval = 10 * 100;
         readedDatasArray.forEach((obj, i) => {
           setTimeout(
             async (obj, i) => {
@@ -230,59 +230,57 @@ const readMba = () => {
                 pick(newResult, filteredProperties),
                 lotList
               );
-              if (!data || !data.lots.length)
-                return returnLog(
-                  readedDatasArray,
-                  i,
-                  `lot_ref: ${data.lot_ref}; typeOfAnnonce: ${lots.fileName}; lots length: ${data.lots.length}, ${lotList.length}; 'data or not found'`
-                );
-              else if (!data.pictures.length || !data.address)
-                return returnLog(
-                  readedDatasArray,
-                  i,
-                  `lot_ref: ${data.lot_ref}; typeOfAnnonce: ${lots.fileName}; 'pictures found'`
-                );
-              else if (!data.address)
-                return returnLog(
-                  readedDatasArray,
-                  i,
-                  `lot_ref: ${data.lot_ref}; typeOfAnnonce: ${lots.fileName}; address: ${data.address}; 'address found'`
-                );
-              else if (
+              let message = null;
+              if (!data) {
+                message = `lot_ref: ${data.lot_ref}; typeOfAnnonce: ${lots.fileName}; lots length: ${data.lots.length}, ${lotList.length}; 'data or not found'`;
+              } else if (!data.pictures.length) {
+                message = `lot_ref: ${data.lot_ref}; typeOfAnnonce: ${lots.fileName}; 'pictures found'`;
+              } else if (!data.address) {
+                message = `lot_ref: ${data.lot_ref}; typeOfAnnonce: ${lots.fileName}; address: ${data.address}; 'address found'`;
+              } else if (
                 buyDatas.fileName === fileName &&
                 !typeOfProperties.includes(newResult.typeOfProperty)
-              )
-                return returnLog(
-                  readedDatasArray,
-                  i,
-                  `lot_ref: ${data.lot_ref}; typeOfProperty: ${lots.typeOfProperty}; address: ${data.address}; 'Invalid type of property'`
-                );
+              ) {
+                message = `lot_ref: ${data.lot_ref}; typeOfProperty: ${lots.typeOfProperty}; address: ${data.address}; 'Invalid type of property'`;
+              }
 
+              if (!data) return returnLog(message);
               const foundElement = await PropertieModel.findByRef(data.lot_ref);
+
               if (!foundElement || !foundElement._id) {
-                const geo = await maps.geocode({
-                  address: data.address,
-                  zipcode: data.postal,
-                  countryCode: 'fr',
-                });
+                let geo = [];
+                if (data.address)
+                  geo = await maps.geocode({
+                    address: data.address,
+                    zipcode: data.postal,
+                    countryCode: 'fr',
+                  });
+
                 if (geo && geo[0] && geo[0].formattedAddress) {
-                  console.log(geo);
                   data.fullAddress = geo[0].formattedAddress;
                   data.loc = {
                     type: 'Point',
                     coordinates: [geo[0].longitude, geo[0].latitude],
                   };
+                  if (message) data.available = false;
+                  else data.available = true;
+                  data.unavalableReason = message;
                   await PropertieModel.add(data);
                   logger.info(
                     `${i}, 'added'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`
                   );
-                } else
-                  returnLog(
-                    readedDatasArray,
-                    i,
-                    `lot_ref: ${data.lot_ref}; address: ${data.postal} | ${data.address};  geo: ${geo}; typeOfAnnonce: ${data.typeOfAnnonce}; 'address not found'`
-                  );
+                } else {
+                  if (!message)
+                    message = `lot_ref: ${data.lot_ref}; address: ${data.postal} | ${data.address};  geo: ${geo}; typeOfAnnonce: ${data.typeOfAnnonce}; 'address not found'`;
+                  data.available = false;
+                  data.unavalableReason = message;
+                  await PropertieModel.add(data);
+                  returnLog(readedDatasArray, i, message);
+                }
               } else if (foundElement && foundElement._id) {
+                if (message) data.available = false;
+                else data.available = true;
+                data.unavalableReason = message;
                 await PropertieModel.updateById(foundElement._id, data);
                 logger.info(
                   `${i}, 'updated'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`

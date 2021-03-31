@@ -3,7 +3,6 @@ import Marker from '../static/img/icons/marker.svg';
 import CustomMarker from '../static/img/icons/customMarker.svg';
 import SelectedCustomMarker from '../static/img/icons/selectedCustomMarker.svg';
 import { MapsCard } from 'components/card';
-import { NEXT_PUBLIC_UPLOAD_URL } from '../config';
 
 const AnyReactComponent = () => (
   <div style={{ position: 'relative', width: 20 }}>
@@ -12,13 +11,7 @@ const AnyReactComponent = () => (
     </span>
   </div>
 );
-const CustomAnyReactComponent = ({
-  show,
-  isMobile,
-  data,
-  handleNext,
-  handlePrev,
-}) => (
+const CustomAnyReactComponent = ({ show, isMobile, data }) => (
   <>
     <div style={{ position: 'relative', width: 20 }}>
       <span style={{ position: 'absolute', top: -50, left: -30 }}>
@@ -31,14 +24,7 @@ const CustomAnyReactComponent = ({
         )}
       </span>
     </div>
-    {show && !isMobile && (
-      <MapsCard
-        {...data}
-        src={NEXT_PUBLIC_UPLOAD_URL + data?.pictures[0]}
-        handleNext={handleNext}
-        handlePrev={handlePrev}
-      />
-    )}
+    {show && !isMobile && <MapsCard {...data} />}
   </>
 );
 
@@ -61,8 +47,6 @@ const MultipleMarkers = ({
     _id: currId,
   } = {},
   handleChildClick,
-  handleNext,
-  handlePrev,
   isMobile = true,
 }) => (
   <GoogleMapReact
@@ -93,8 +77,6 @@ const MultipleMarkers = ({
           lng={lng}
           show={currId === _id}
           data={elem}
-          handleNext={handleNext}
-          handlePrev={handlePrev}
           isMobile={isMobile}
         />
       );

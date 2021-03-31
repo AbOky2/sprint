@@ -66,27 +66,31 @@ const styles = (theme) => ({
       position: 'relative',
       zIndex: 30,
     },
-    '& > div:first-of-type > div > div': {
-      '&:first-of-type': {
-        minHeight: 62,
-        borderRadius: '.6rem',
-        fontFamily: 'Open Sans',
-        fontSize: '1.6rem',
-        fontWeight: '600',
-        borderTopRightRadius: 0,
-        borderBottomRightRadius: 0,
-        borderRight: 0,
-        border: `solid 1px ${theme.palette.lightGray}`,
-        borderColor: theme.palette.lightGray,
-        [theme.breakpoints.down('sm')]: {
-          borderRadius: '.6rem!important',
-          borderRight: `1px solid ${theme.palette.lightGray}`,
-          borderBottom: 0,
-          minHeight: 46,
+    '& > div:first-of-type > div': {
+      height: '100%',
+      '& > div': {
+        '&:first-of-type': {
+          minHeight: 62,
+          borderRadius: '.6rem',
+          fontFamily: 'Open Sans',
+          fontSize: '1.6rem',
+          fontWeight: '600',
+          borderTopRightRadius: 0,
+          borderBottomRightRadius: 0,
+          borderRight: 0,
+          border: `solid 1px ${theme.palette.lightGray}`,
+          borderColor: theme.palette.lightGray,
+          [theme.breakpoints.down('sm')]: {
+            borderRadius: '.6rem!important',
+            borderRight: `1px solid ${theme.palette.lightGray}`,
+            borderBottom: 0,
+            minHeight: 46,
+          },
         },
-      },
-      '&:last-of-type': {
-        zIndex: 3,
+        '&:last-of-type': {
+          zIndex: 3,
+          height: '100%',
+        },
       },
     },
     '& > div:last-of-type svg': {

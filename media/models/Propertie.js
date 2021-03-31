@@ -12,6 +12,8 @@ const mongoSchema = new Schema({
   postal: { type: String },
   city: { type: String },
   isNewProperty: { type: Boolean, default: false },
+  available: { type: Boolean, default: false },
+  unavalableReason: { type: String },
   country: { type: String },
   vat: { type: String },
   address: { type: String },

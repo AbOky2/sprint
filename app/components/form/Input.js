@@ -195,7 +195,7 @@ const InputBase = withStyles(styles)(
 const CustomInput = withStyles(styles)(
   ({ classes, handleSumit, showSub, ...inputProps }) => {
     const [value, setValue] = useState(inputProps.value);
-    const [node, open] = useToggleOpen({ isOpen: true });
+    const [node, open] = useToggleOpen();
     const [state, setState] = useState({
       salary: '',
       contributtion: '',

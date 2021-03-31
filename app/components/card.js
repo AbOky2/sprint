@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { spaceCurrency } from '../helpers/convertAndCheck';
-import { getAddress, getNbPieces } from '../helpers/property';
+import { spaceCurrency } from 'helpers/convertAndCheck';
+import { getAddress, getNbPieces } from 'helpers/property';
+import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
+
 import { Icon } from './form';
 
 const useStyles = makeStyles((theme) => ({
@@ -153,19 +155,26 @@ const MapsCard = ({
   heading,
   city,
   postal,
-  handleNext,
-  handlePrev,
   minPieces,
   maxPieces,
+  pictures = [],
   ...mapsProps
 }) => {
+  const [state, setState] = useState(0);
   const classes = useStyles();
+  const handleNext = () => {
+    setState(state < pictures.length - 1 ? state + 1 : 0);
+  };
+  const handlePrev = () => {
+    setState(state === 0 ? pictures.length - 1 : state - 1);
+  };
 
   return (
     <div className={classes.mapsContainer}>
       <Card
         {...mapsProps}
         title={heading}
+        src={NEXT_PUBLIC_UPLOAD_URL + pictures[state]}
         address={getAddress({ city, postal })}
         showLikes={false}
         description={getNbPieces(minPieces, maxPieces)}

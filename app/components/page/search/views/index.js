@@ -79,18 +79,6 @@ const MapsView = withStyles(
 
       if (found) setCurr(found);
     };
-    const handleNext = (id) => {
-      let currIndex = data.findIndex((e) => e._id === id);
-      currIndex = currIndex < data.length - 1 ? currIndex + 1 : 0;
-
-      setCurr(data[currIndex]);
-    };
-    const handlePrev = (id) => {
-      let currIndex = data.findIndex((e) => e._id === id);
-
-      currIndex = currIndex === 0 ? data.length - 1 : currIndex - 1;
-      setCurr(data[currIndex]);
-    };
     const handleCarouselChange = (index) => setCurr(data[index]);
     const handleHover = (id) => () => {
       const currIndex = data.findIndex((e) => e._id === id);
@@ -136,8 +124,6 @@ const MapsView = withStyles(
             data={data}
             curr={curr}
             handleChildClick={handleChildClick}
-            handleNext={handleNext}
-            handlePrev={handlePrev}
             isMobile={isMdView}
           />
           <Grid container>
