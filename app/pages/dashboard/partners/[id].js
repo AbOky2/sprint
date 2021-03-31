@@ -101,6 +101,9 @@ const useStyles = makeStyles((theme) => ({
   btnContainer: {
     '& > div': {
       margin: 'auto',
+      '& a': {
+        fontWeight: 600,
+      },
     },
   },
 }));

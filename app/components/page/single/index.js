@@ -40,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
       boxSizing: 'border-box',
       borderRadius: '10px',
       transform: 'translateY(calc(50%))',
+      fontWeight: 600,
+      color: theme.palette.newBlue,
     },
     '& svg': {
       marginRight: 15,
@@ -338,7 +340,7 @@ const PropertyPage = ({
             <div className={classes.houseInfo}>
               <Grid container>
                 <div>
-                  <Icon type="door" color="lightBlue" />
+                  <Icon type="door" color="newBlue" />
 
                   <span>
                     {getNbPieces(property.minPieces, property.maxPieces)}
@@ -346,7 +348,7 @@ const PropertyPage = ({
                 </div>
 
                 <div>
-                  <Icon type="room" color="lightBlue" />
+                  <Icon type="room" color="newBlue" />
                   <span>{` de ${property.minSurface}m² à ${property.maxSurface}m²`}</span>
                 </div>
               </Grid>
@@ -412,7 +414,7 @@ const PropertyPage = ({
                       sm={6}
                       alignItems="center"
                     >
-                      <Icon type="elevator" />
+                      <Icon type="elevator" color="newBlue" />
                       <Typography variant="subtitle1">{elem}</Typography>
                     </Grid>
                   ))}

@@ -188,7 +188,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
           🎉
         </span>
         <span className={classes.welcomeSub}>
-          Bienvenue sur votre espace personel Kit le Nid.
+          Bienvenue sur votre espace personnel Kit le Nid.
         </span>
       </Typography>
     </div>
@@ -199,7 +199,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
       <Typography variant="subtitle1" className={classes.subTitle}>
         Kit le nid vous accompagne pour votre premier achat, votre location,
         <br />
-        vous aide à avoir un bon garant.
+        et vous aide à avoir un bon garant.
       </Typography>
       <Grid
         container
