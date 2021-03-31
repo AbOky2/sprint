@@ -53,7 +53,7 @@ module.exports = (cbl) => {
               logger.info('Starting mbi');
               return cbl();
             }
-            return;
+            return logger.info('Done without starting mbi');
           }
           listData.forEach((l, i) => {
             logger.info(l.name, 'starting');
@@ -65,6 +65,7 @@ module.exports = (cbl) => {
                   logger.info('Starting mbi');
                   return cbl();
                 }
+                return logger.info('Done without starting mbi');
               }
             });
           });
