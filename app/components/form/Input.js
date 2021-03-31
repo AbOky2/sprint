@@ -1,12 +1,22 @@
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import NumberFormat from 'react-number-format';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Icon } from 'components/form';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { useToggleOpen } from 'helpers/hooks';
 
+const sharedInputStyle = {
+  fontFamily: 'Open Sans',
+  fontSize: '1.6rem',
+  fontWeight: '600',
+  fontStretch: 'normal',
+  fontStyle: 'normal',
+  lineHeight: 'normal',
+  letterSpacing: 'normal',
+};
 const styles = (theme) => ({
   container: {
     '& input, & textarea': {
@@ -17,14 +27,8 @@ const styles = (theme) => ({
       height: '38px',
       borderRadius: '.6rem',
       border: `solid 1px ${theme.palette.gray}`,
-      fontFamily: 'Open Sans',
-      fontSize: '1.6rem',
-      fontWeight: '600',
-      fontStretch: 'normal',
-      fontStyle: 'normal',
-      lineHeight: 'normal',
-      letterSpacing: 'normal',
       color: '#1A2E6C',
+      ...sharedInputStyle,
     },
     '& textarea': {
       height: 'auto',
@@ -53,8 +57,22 @@ const styles = (theme) => ({
       paddingLeft: 0,
     },
   },
+  customWrapper: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    borderTopRightRadius: 15,
+  },
   custom: {
     position: 'relative',
+    height: '100%',
+    '&  input': {
+      width: '100%',
+      padding: '2rem',
+      borderBottomRightRadius: '.6rem',
+      borderTopRightRadius: '.6rem',
+      ...sharedInputStyle,
+    },
     '& > div:last-of-type': {
       display: 'none',
       position: 'absolute',
@@ -177,27 +195,25 @@ const InputBase = withStyles(styles)(
 const CustomInput = withStyles(styles)(
   ({ classes, handleSumit, showSub, ...inputProps }) => {
     const [value, setValue] = useState(inputProps.value);
-    const [node, open] = useToggleOpen();
+    const [node, open] = useToggleOpen({ isOpen: true });
     const [state, setState] = useState({
-      salary: 0,
-      contributtion: 0,
+      salary: '',
+      contributtion: '',
     });
     const calc = (value) => {
-      let val =
-        value ||
-        (
-          parseInt(state.salary, 10) * 83.33 +
-          parseInt(state.contributtion, 10)
-        ).toFixed(2);
-
+      const s = state.salary.split(' ').join('');
+      const c = state.contributtion.split(' ').join('');
+      const v = value ? parseInt(value.split(' ').join(''), 10) : value;
+      let val = v || parseInt(s, 10) * 83.33 + parseInt(c, 10);
+      val = Math.trunc(val);
       setValue(val);
       inputProps.onChange(val);
     };
-    const onChange = () => (e) => {
+    const onChange = ({ target: { value } }) => {
       const { salary, contributtion } = state;
 
       if (salary && contributtion) return;
-      calc(e.target.value);
+      calc(value);
     };
     const handleChange = (name) => ({ target: { value } }) =>
       setState({ ...state, [name]: value });
@@ -205,13 +221,13 @@ const CustomInput = withStyles(styles)(
     useEffect(() => {
       const { salary, contributtion } = state;
 
-      if (salary > 0 && contributtion > 0) calc();
+      if (salary && contributtion) calc();
       else setValue('');
     }, [state]);
     useEffect(() => setValue(inputProps.value), [inputProps.value]);
 
     return (
-      <div className="relative">
+      <div className={classes.customWrapper}>
         <Grid
           container
           className={
@@ -221,32 +237,34 @@ const CustomInput = withStyles(styles)(
           }
           ref={node}
         >
-          <InputBase {...inputProps} onChange={onChange} value={value} />
+          <NumberFormat
+            thousandSeparator=" "
+            suffix=" €"
+            {...inputProps}
+            value={value}
+            placeholder="Budget maximal"
+            onChange={onChange}
+            className={classes.container}
+          />
           <Grid container>
             <Typography variant="h4">Quel est votre budget ?</Typography>
             <Typography>
               Nous vous aidons à déterminer votre budget maximal en simulant le
               montant que vous pouvez emprunter.
             </Typography>
-            <InputBase
-              name="salary"
-              value={
-                state.salary > 0 && !Number.isNaN(state.salary)
-                  ? state.salary
-                  : ''
-              }
-              onChange={handleChange}
+            <NumberFormat
+              thousandSeparator=" "
+              suffix=" €"
+              value={state.salary}
+              onChange={handleChange('salary')}
               placeholder="Votre salaire net mensuel"
             />
-            <InputBase
-              name="contributtion"
-              value={
-                state.contributtion > 0 && !Number.isNaN(state.contributtion)
-                  ? state.contributtion
-                  : ''
-              }
-              onChange={handleChange}
+            <NumberFormat
+              thousandSeparator=" "
+              suffix=" €"
+              value={state.contributtion}
               placeholder="Votre apport personnel"
+              onChange={handleChange('contributtion')}
             />
             <Typography>
               Ce calcul est réalisé avec les hypothèses suivantes : durée de
