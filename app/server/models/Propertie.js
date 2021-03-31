@@ -125,6 +125,8 @@ class PropertieClass extends DBModel {
               },
             }
           : {},
+        { price: { $ne: null } },
+        { available: true },
         { typeOfAnnonce },
       ],
     };
