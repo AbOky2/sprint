@@ -105,6 +105,7 @@ class PropertieClass extends DBModel {
         address: loc,
         country: 'france',
       });
+      console.log(geo);
       if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
     }
 
@@ -120,7 +121,7 @@ class PropertieClass extends DBModel {
                     type: 'Point',
                     coordinates: near,
                   },
-                  $maxDistance: 10000,
+                  $maxDistance: 100000,
                 },
               },
             }
