@@ -80,6 +80,7 @@ const styles = (theme) => ({
           borderRight: 0,
           border: `solid 1px ${theme.palette.lightGray}`,
           borderColor: theme.palette.lightGray,
+          height: '100%',
           [theme.breakpoints.down('sm')]: {
             borderRadius: '.6rem!important',
             borderRight: `1px solid ${theme.palette.lightGray}`,
@@ -89,7 +90,6 @@ const styles = (theme) => ({
         },
         '&:last-of-type': {
           zIndex: 3,
-          height: '100%',
         },
       },
     },

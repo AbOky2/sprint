@@ -67,7 +67,7 @@ const MapsView = withStyles(
     const locs = data?.map((e, index) => ({
       index,
       _id: e._id,
-      coor: e.loc.coordinates,
+      coor: e.loc?.coordinates,
     }));
     const [curr, setCurr] = useState(data[0]);
     const [carrouselIndex, setCarrouselIndex] = useState(0);
