@@ -9,8 +9,10 @@ import Icon, { iconTypes, colorTypes } from './Icon';
 const useStyles = makeStyles((theme) => ({
   container: {
     width: 'fit-content',
-    background: 'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
-    boxShadow: '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
+    background:
+      'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
+    boxShadow:
+      '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
     color: 'white',
     borderRadius: '10px',
     cursor: 'pointer',
@@ -36,9 +38,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor, download }) => {
+const Btn = ({
+  onClick,
+  href,
+  text,
+  iconType,
+  iconColor,
+  alignRight,
+  whiteColor,
+  download,
+  target,
+}) => {
   const classes = useStyles();
-  const className = !whiteColor ? classes.container : clsx(classes.container, classes.whiteColor);
+  const className = !whiteColor
+    ? classes.container
+    : clsx(classes.container, classes.whiteColor);
 
   return (
     <Grid
@@ -52,7 +66,7 @@ const Btn = ({ onClick, href, text, iconType, iconColor, alignRight, whiteColor,
       {iconType ? <Icon type={iconType} color={iconColor} /> : ''}
       {href ? (
         <Link href={href}>
-          <a download={download} target={download ? '_blank' : ''}>
+          <a download={download} target={download || target ? '_blank' : ''}>
             {text}
           </a>
         </Link>

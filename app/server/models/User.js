@@ -319,7 +319,7 @@ class UserClass extends DBModel {
     let user = await this.findOne({ email }).populate('bookmarks');
 
     if (!user) throw new Error(msg.notFound('Email'));
-    if (!user.password) throw new Error('Account has no password.');
+    if (!user.password) throw new Error('Account has no password');
 
     const isMatch = await bcrypt.compare(password, user.password);
 
@@ -340,7 +340,7 @@ class UserClass extends DBModel {
       $or: [{ email: options.email }, { phone: options.phone }],
     });
     if (existingUser) {
-      throw new Error(msg.alreadyExist('Email'));
+      throw new Error('Cet email est déjà associé à un compte.');
     }
 
     user = (await this.add(options)).user;

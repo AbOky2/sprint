@@ -128,7 +128,11 @@ const PartnerPage = ({ partner = {} }) => {
               </Typography>
             </div>
             <div className={classes.btnContainer}>
-              <Btn text="Accéder à l’offre partenaire" href={partner.link} />
+              <Btn
+                text="Accéder à l’offre partenaire"
+                href={partner.link}
+                target
+              />
             </div>
           </div>
         </div>
@@ -141,7 +145,7 @@ const PartnerPage = ({ partner = {} }) => {
           </div>
         </div>
         <div className={classes.btnContainer}>
-          <Btn text="Accéder à l’offre partenaire" href={partner.link} />
+          <Btn text="Accéder à l’offre partenaire" href={partner.link} target />
         </div>
       </div>
     </AdminContentWrapper>

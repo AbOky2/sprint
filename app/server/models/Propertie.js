@@ -120,7 +120,7 @@ class PropertieClass extends DBModel {
                     type: 'Point',
                     coordinates: near,
                   },
-                  $maxDistance: 100000,
+                  $maxDistance: 10000,
                 },
               },
             }

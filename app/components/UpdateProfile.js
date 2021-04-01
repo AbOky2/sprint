@@ -7,6 +7,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Input, Select, Modal, Icon } from './form';
 import { userRoleSelect } from '../helpers/user';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
   contextMenu: {
@@ -25,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.6rem',
     lineHeight: '22px',
     cursor: 'pointer',
-    boxShadow: '0px 4px 13px rgb(0 0 0 / 10%), inset 0px -3px 10px rgb(149 149 149 / 20%)',
+    boxShadow:
+      '0px 4px 13px rgb(0 0 0 / 10%), inset 0px -3px 10px rgb(149 149 149 / 20%)',
   },
   openMenu: {
     display: 'block',
@@ -79,17 +81,20 @@ const UpdateProfile = ({ user, update, logout }) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState(user);
-  const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
+  const handleChange = (name) => ({ target: { value } }) =>
+    setState({ ...state, [name]: value });
   const handleOpenModal = () => setOpenModal(true);
   const toggleShowSubMenu = () => setShowSubMenu(!showSubMenu);
-  const handleModalClose = () => {
+  const handleModalClose = (showMessage) => {
+    if (showMessage && JSON.stringify(user) !== JSON.stringify(state))
+      toast.success('Profil mis à jour');
     toggleShowSubMenu();
     setOpenModal(false);
   };
   // eslint-disable-next-line no-return-assign
   const handleLogOut = () => logout(() => (window.location = '/login'));
   const handleSumbit = () => {
-    update(state, handleModalClose);
+    update(state, () => handleModalClose(true));
   };
   const classes = useStyles();
 
@@ -98,7 +103,9 @@ const UpdateProfile = ({ user, update, logout }) => {
       <div className="relative">
         <div
           className={
-            !showSubMenu ? classes.contextMenu : clsx(classes.contextMenu, classes.openMenu)
+            !showSubMenu
+              ? classes.contextMenu
+              : clsx(classes.contextMenu, classes.openMenu)
           }
         >
           <div onClick={handleLogOut} className={classes.logoutBtn}>

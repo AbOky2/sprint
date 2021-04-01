@@ -91,16 +91,16 @@ const PartnerPage = ({ user }) => {
         </Typography>
         <Typography>
           Aidez vos proches à concrétiser leur projet immobilier. Votre code
-          parrain :<strong>{user?.slug}</strong>
+          parrain : <strong>{user?.slug}</strong>
         </Typography>
         <Grid container item justify="center">
           <Grid item md={2} className="text-center">
             <Grid container justify="center" alignItems="center">
               <Icon type="addUser" color="iconBlue" size="large" />
             </Grid>
-            <Typography variant="h3">Etapes 01</Typography>
+            <Typography variant="h3">Etape 1</Typography>
             <Typography>
-              Renseigner les coordonés de votre contact ci-dessous.
+              Renseignez les coordonnées de votre contact ci-dessous.
             </Typography>
           </Grid>
           <Grid item md={2}>
@@ -110,7 +110,7 @@ const PartnerPage = ({ user }) => {
             <Grid container justify="center" alignItems="center">
               <Icon type="phone" color="iconBlue" size="large" />
             </Grid>
-            <Typography variant="h3">Etapes 02</Typography>
+            <Typography variant="h3">Etape 2</Typography>
             <Typography>
               Nous prenons contact avec lui pour lui présenter nos offres.
             </Typography>
@@ -122,7 +122,7 @@ const PartnerPage = ({ user }) => {
             <Grid container justify="center" alignItems="center">
               <Icon type="pen" color="iconBlue" size="big" />
             </Grid>
-            <Typography variant="h3">Etapes 03</Typography>
+            <Typography variant="h3">Etape 3</Typography>
             <Typography>
               {`Dès sa signature chez le notaire, vous percevrez
               ${PartnershipPrice}€ par virement.`}
@@ -131,7 +131,9 @@ const PartnerPage = ({ user }) => {
         </Grid>
       </div>
       <div className={classes.formContainer}>
-        <Typography variant="h3">Inviter vos proches</Typography>
+        <Typography variant="h3">
+          Invitez vos proches dès maintenant :
+        </Typography>
         <Grid container item justify="center">
           <Input
             label="Prénom*"
