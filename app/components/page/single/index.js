@@ -272,7 +272,7 @@ const PropertyPage = ({
 }) => {
   const [state, setState] = useState({});
   const [selectedLot, setSelectedLot] = useState(null);
-  const [total, Total] = useState({});
+  const [total, setTotal] = useState(0);
   const [currOpen, setCurrOpen] = useState('');
   const [liked, setLiked] = useState(
     user?.bookmarks?.find((elem) => elem._id === id)
@@ -308,7 +308,7 @@ const PropertyPage = ({
         }
       });
       setState(newState);
-      Total(property.lots?.length);
+      setTotal(property.lots?.length);
     })();
   }, [property.lots]);
   const classes = useStyles();
@@ -431,9 +431,11 @@ const PropertyPage = ({
 
         <Grid container className={classes.discoveryContainer}>
           <Typography variant="h2">
-            {`Découvrez nos ${total} logements${
-              isLocation ? '' : '  neufs disponibles'
-            } :`}
+            {total > 1
+              ? `Découvrez nos ${total} logements${
+                  isLocation ? '' : '  neufs disponibles'
+                } :`
+              : `Découvrez le logements${isLocation ? '' : '  neufs'} :`}
           </Typography>
           <Grid container id="table">
             {property.typeOfAnnonce === typeOfAnnoncies[0] ? (

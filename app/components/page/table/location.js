@@ -15,6 +15,7 @@ const LocationTable = ({
   Object.keys(state).map((elem) => {
     const current = state[elem];
     const isOpen = currOpen === elem;
+    const countList = current.list.length;
 
     return (
       <div key={elem}>
@@ -53,7 +54,9 @@ const LocationTable = ({
             <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
           </Grid>
           <Grid item md={3} xs={5}>
-            {`${current.list.length} logements disponibles`}
+            {`${countList} logement${countList > 1 ? 's' : ''} disponible${
+              countList > 1 ? 's' : ''
+            }`}
           </Grid>
           <Grid
             item

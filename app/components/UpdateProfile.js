@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     '& svg:last-of-type': {
       position: 'absolute',
       top: '50%',
-      right: '10px',
+      right: '2rem',
       width: '1.2rem!important',
       transform: 'translateY(calc(50% - 13px)) rotate(180deg)',
     },
