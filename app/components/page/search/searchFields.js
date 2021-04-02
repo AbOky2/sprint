@@ -17,6 +17,8 @@ const searchFields = withStyles(
     handleBudget,
     handleSumit,
     handleSelect,
+    toggleView,
+    isMapsView,
   }) => (
     <>
       <Grid
@@ -34,10 +36,19 @@ const searchFields = withStyles(
             onChange={handleMapSearch}
             placeholder="Localisation"
           />
-          {isMdView && (
-            <div onClick={handleSumit} className={classes.submit}>
-              <Icon type="search" size="nearBig" color="white" />
-            </div>
+          {isMdView && isMapsView && (
+            <>
+              <div onClick={handleSumit} className={classes.submit}>
+                <Icon type="search" size="nearBig" color="white" />
+              </div>
+              {/* <span className={classes.changeView} onClick={toggleView}>
+                <Icon
+                  type={isMapsView ? 'eyeClosed' : 'eyeOpened'}
+                  color="newBlue"
+                />
+                <span>Carte</span>
+              </span> */}
+            </>
           )}
         </Grid>
         {!isLocation && !isMdView && (
@@ -78,8 +89,10 @@ const searchFields = withStyles(
 searchFields.PropTypes = {
   classes: PropTypes.object.isRequired,
   isLocation: PropTypes.bool.isRequired,
+  isMapsView: PropTypes.bool.isRequired,
   isMdView: PropTypes.bool.isRequired,
   queryData: PropTypes.object.isRequired,
+  toggleView: PropTypes.func.isRequired,
   handleMapSearch: PropTypes.func.isRequired,
   handleBudget: PropTypes.func.isRequired,
   handleSumit: PropTypes.func.isRequired,

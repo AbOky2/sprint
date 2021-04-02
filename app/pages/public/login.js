@@ -290,12 +290,12 @@ const LoginTab = ({
         !data.role ||
         !data.phone
       ) {
-        toast.warn('Veuillez remplir les champs obligatoires.');
+        toast.warn('Veuillez remplir les champs obligatoires');
         return;
       }
 
       if (!checked) {
-        toast.warn('Veuillez accepter les conditions générales.');
+        toast.warn('Veuillez accepter les conditions générales');
         return;
       }
       if (data.sponsorshipCode?.length) pickdata.push('sponsorshipCode');

@@ -121,7 +121,9 @@ const SearchPage = ({
             handleMapSearch={handleMapSearch}
             handleBudget={handleBudget}
             handleSumit={handleSumit}
+            toggleView={toggleView}
             handleSelect={handleSelect}
+            isMapsView={currView}
           />
           <View
             data={state}

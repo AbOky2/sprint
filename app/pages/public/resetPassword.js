@@ -200,15 +200,19 @@ const LoginTab = ({ resetPass }) => {
     if (!token) {
       const { user } = await forgotPassword({ email: state.email });
       if (user) {
-        toast.success(`Un email a été envoyé sur ${user} avec des instructions supplémentaires.`);
+        toast.success(
+          `Un email a été envoyé sur ${user} avec des instructions supplémentaires`
+        );
         push('/public/login');
       }
     } else {
-      if (state.password !== state.confirmPassword) return toast.warn('Mot de passe différent');
+      if (state.password !== state.confirmPassword)
+        return toast.warn('Mot de passe différent');
       resetPass({ password: state.password, token });
     }
   };
-  const handleChange = (name) => ({ target: { value } }) => setState({ ...state, [name]: value });
+  const handleChange = (name) => ({ target: { value } }) =>
+    setState({ ...state, [name]: value });
   const classes = useStyles();
 
   return (
@@ -216,7 +220,13 @@ const LoginTab = ({ resetPass }) => {
       <Head>
         <title>Login</title>
       </Head>
-      <Grid container justify="center" alignItems="center" id="login" className={classes.container}>
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        id="login"
+        className={classes.container}
+      >
         <div className="fullwidth text-center">
           <a href="/">
             <img src="/logo.png" alt="kit le nid" />
@@ -251,7 +261,11 @@ const LoginTab = ({ resetPass }) => {
                       onClick={onClick}
                     />
                   </Grid>
-                  <Grid container justify="center" className={classes.btnContainer}>
+                  <Grid
+                    container
+                    justify="center"
+                    className={classes.btnContainer}
+                  >
                     <Grid item>
                       <Btn
                         text="Soumettre"
@@ -282,4 +296,6 @@ const mapState = (state) => {
 const actionCreators = {
   resetPass: userActions.resetPass,
 };
-export default withAuth(connect(mapState, actionCreators)(LoginTab), { logoutRequired: true });
+export default withAuth(connect(mapState, actionCreators)(LoginTab), {
+  logoutRequired: true,
+});

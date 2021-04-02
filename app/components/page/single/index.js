@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
       boxSizing: 'border-box',
       borderRadius: '10px',
       transform: 'translateY(calc(50%))',
-      fontWeight: 600,
+      fontWeight: 'bold',
       color: theme.palette.newBlue,
     },
     '& svg': {
@@ -131,6 +131,11 @@ const useStyles = makeStyles((theme) => ({
     },
     '& > div:last-of-type > div': {
       marginTop: 22,
+    },
+    [theme.breakpoints.down('sm')]: {
+      '& h2, & h1 ': {
+        marginTop: '1rem',
+      },
     },
   },
 
