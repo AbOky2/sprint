@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Router, { withRouter } from 'next/router';
 import { useMediaQuery } from '@material-ui/core';
@@ -34,8 +34,9 @@ const SearchPage = ({
     page: defaultPage,
   });
   const [currView, setCurrView] = useState(isMapsView);
+  const [makeRequest, setMakeRequest] = useState(false);
   const [state, setState] = useState(properties.docs);
-  const [sortBy, setSortBy] = useState(sortByKeys[0]);
+  const [sortBy, setSortBy] = useState(sort || sortByKeys[0]);
   const [queryData, setQueryData] = useState({
     loc,
     maxPrice,
@@ -59,6 +60,7 @@ const SearchPage = ({
   const handleSortSelect = () => ({ target: { value } }) => {
     setSortBy(value);
     setQueryData({ ...queryData, sort: value });
+    setMakeRequest(true);
   };
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
@@ -98,6 +100,13 @@ const SearchPage = ({
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
   const View = currView ? MapsView : ListView;
+
+  useEffect(() => {
+    if (makeRequest) {
+      requestData();
+      setMakeRequest(false);
+    }
+  }, [makeRequest]);
 
   if (!state) return <NotFound showLink={false} />;
 

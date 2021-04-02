@@ -59,7 +59,6 @@ const searchFields = withStyles(
                   : ''
               }
               showSub={!isLocation}
-              queryData={queryData}
               onChange={handleBudget}
               placeholder="Budget maximal"
               handleSumit={handleSumit}
