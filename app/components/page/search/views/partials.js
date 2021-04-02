@@ -6,6 +6,7 @@ import Select from 'components/form/Select';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import Card from 'components/card';
 import { getAddress, getNbPieces, sortBySelectMap } from 'helpers/property';
+import { singlePath } from 'helpers/query';
 
 const ListHeader = ({
   classes,
@@ -104,11 +105,7 @@ const ListElement = ({
   handleHover,
 }) => (
   <Grid item key={_id} className={className} onMouseEnter={handleHover}>
-    <Link
-      href={`/dashboard/property/${
-        typeOfAnnonce === 'Vente' ? 'buy' : 'location'
-      }/${_id}`}
-    >
+    <Link href={singlePath({ typeOfAnnonce, _id })}>
       <a>
         <Card
           _id={_id}

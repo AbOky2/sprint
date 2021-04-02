@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { singlePath } from 'helpers/query';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { spaceCurrency } from 'helpers/convertAndCheck';
@@ -65,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
     zIndex: 1,
     transform: 'translate(-50%, calc(-100% - 4rem))',
-    '& > div': {
+    '& > a > div': {
       border: `1px solid ${theme.palette.lightGray}`,
       '& > div': {
         '&:first-of-type': {
@@ -158,6 +160,7 @@ const MapsCard = ({
   minPieces,
   maxPieces,
   pictures = [],
+  typeOfAnnonce,
   ...mapsProps
 }) => {
   const [state, setState] = useState(0);
@@ -171,14 +174,19 @@ const MapsCard = ({
 
   return (
     <div className={classes.mapsContainer}>
-      <Card
-        {...mapsProps}
-        title={heading}
-        src={NEXT_PUBLIC_UPLOAD_URL + pictures[state]}
-        address={getAddress({ city, postal })}
-        showLikes={false}
-        description={getNbPieces(minPieces, maxPieces)}
-      />
+      <Link href={singlePath({ typeOfAnnonce, _id })}>
+        <a>
+          <Card
+            {...mapsProps}
+            title={heading}
+            src={NEXT_PUBLIC_UPLOAD_URL + pictures[state]}
+            address={getAddress({ city, postal })}
+            showLikes={false}
+            description={getNbPieces(minPieces, maxPieces)}
+            typeOfAnnonce={typeOfAnnonce}
+          />
+        </a>
+      </Link>
       <span onClick={() => handlePrev(_id)}>
         <Icon
           type="sliderArrow"

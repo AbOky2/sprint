@@ -11,6 +11,7 @@ import { addBookmarkApiMethod } from 'lib/api/customer';
 import Card from 'components/card';
 import { Btn } from 'components/form';
 import { getAddress, getNbPieces } from 'helpers/property';
+import { singlePath } from 'helpers/query';
 import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
@@ -104,11 +105,7 @@ const BookmarkPage = ({ user, update }) => {
                 price,
               }) => (
                 <Grid item key={_id} className={classes.listContainer}>
-                  <Link
-                    href={`/dashboard/property/${
-                      typeOfAnnonce === 'Vente' ? 'buy' : 'location'
-                    }/${_id}`}
-                  >
+                  <Link href={singlePath({ typeOfAnnonce, _id })}>
                     <a>
                       <Card
                         _id={_id}
