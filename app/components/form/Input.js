@@ -177,12 +177,20 @@ const InputBase = withStyles(styles)(
     >
       {label ? <Typography variant="h4">{label}</Typography> : ''}
       {type !== 'textarea' ? (
-        <input
-          value={value}
-          onChange={onChange(name)}
-          type={type}
-          placeholder={placeholder}
-        />
+        type === 'phone' ? (
+          <NumberFormat
+            value={value}
+            onChange={onChange(name)}
+            format="##.##.##.##.##"
+          />
+        ) : (
+          <input
+            value={value}
+            onChange={onChange(name)}
+            type={type}
+            placeholder={placeholder}
+          />
+        )
       ) : (
         <textarea
           onChange={onChange(name)}
