@@ -22,7 +22,7 @@ app.use(express.static('public'));
 try {
   // const d = new Date();
   // logger.log('Starting mbi at sync', d);
-  ftp(readMbi);
+  // ftp(readMbi);
 } catch (err) {
   logger.error(err);
 }

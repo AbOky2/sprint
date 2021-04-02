@@ -346,7 +346,13 @@ const PropertyPage = ({
     <AdminContentWrapper>
       <div>
         <div className="relative">
-          {property.pictures && <Carrousel list={property.pictures} />}
+          {property.pictures && (
+            <Carrousel
+              list={
+                property.pictures.length ? property.pictures : [getCardImg()]
+              }
+            />
+          )}
           <Grid container className={classes.save} justify="center">
             <Grid item container onClick={handleBookmark}>
               <Icon

@@ -120,13 +120,13 @@ class PropertieClass extends DBModel {
                     type: 'Point',
                     coordinates: near,
                   },
-                  $maxDistance: 10000,
+                  $maxDistance: 50000,
                 },
               },
             }
           : {},
         { price: { $ne: null } },
-        { available: true },
+        // { available: true },
         { typeOfAnnonce },
       ],
     };

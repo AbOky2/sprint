@@ -3,9 +3,13 @@ import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import { Icon } from 'components/form';
 import Select from 'components/form/Select';
-import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import Card from 'components/card';
-import { getAddress, getNbPieces, sortBySelectMap } from 'helpers/property';
+import {
+  getAddress,
+  getNbPieces,
+  sortBySelectMap,
+  getCardImg,
+} from 'helpers/property';
 import { singlePath } from 'helpers/query';
 
 const ListHeader = ({
@@ -110,7 +114,7 @@ const ListElement = ({
         <Card
           _id={_id}
           title={heading}
-          src={NEXT_PUBLIC_UPLOAD_URL + pictures?.[0]}
+          src={getCardImg(pictures?.[0])}
           address={getAddress({ city, postal })}
           description={getNbPieces(minPieces, maxPieces)}
           dimensions={dimensions}

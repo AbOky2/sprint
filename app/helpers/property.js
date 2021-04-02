@@ -1,3 +1,5 @@
+const { NEXT_PUBLIC_UPLOAD_URL } = require('../config');
+const defaultPropertie = require('../public/default-property.jpg');
 const typeOfAnnonciesObj = {
   buy: 'Vente',
   location: 'Location',
@@ -7,13 +9,16 @@ const sortByObj = {
   desc: 'Prix décroissant',
 };
 const propertyPieces = {
-  1: 'Studio',
-  2: '2 pièces',
-  2: '2 pièces',
-  3: '3 pièces',
-  3: '3 pièces',
-  4: '4 pièces',
-  5: '5 pièces',
+  // 1: 'Studio',
+  // 2: '2 pièces',
+  // 3: '3 pièces',
+  // 4: '4 pièces',
+  // 5: '5 pièces',
+  Studio: 'Studio',
+  '3 pièces': '3 pièces',
+  '2 pièces': '2 pièces',
+  '5 pièces': '5 pièces',
+  '4 pièces': '4 pièces',
 };
 const typeOfAnnoncies = Object.values(typeOfAnnonciesObj);
 const typeOfProperties = ['Appartement', 'Maison'];
@@ -35,6 +40,8 @@ const getNbPieces = (minPieces, maxPieces) =>
     ? `de ${minPieces} à ${maxPieces}  pièces`
     : `${minPieces} pièce${minPieces === 1 ? '' : 's'}`;
 
+getCardImg = (src) => (src ? NEXT_PUBLIC_UPLOAD_URL + src : defaultPropertie);
+
 module.exports = {
   typeOfAnnonciesObj,
   typeOfAnnoncies,
@@ -46,4 +53,5 @@ module.exports = {
   propertyPiecesSelectMap,
   getAddress,
   getNbPieces,
+  getCardImg,
 };
