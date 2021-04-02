@@ -1,5 +1,6 @@
 const { NEXT_PUBLIC_UPLOAD_URL } = require('../config');
-const defaultPropertie = require('../public/default-property.jpg');
+
+const defaultPropertyImg = '/properties/default-property.jpg';
 const typeOfAnnonciesObj = {
   buy: 'Vente',
   location: 'Location',
@@ -40,7 +41,7 @@ const getNbPieces = (minPieces, maxPieces) =>
     ? `de ${minPieces} à ${maxPieces}  pièces`
     : `${minPieces} pièce${minPieces === 1 ? '' : 's'}`;
 
-getCardImg = (src) => (src ? NEXT_PUBLIC_UPLOAD_URL + src : defaultPropertie);
+getCardImg = (src) => NEXT_PUBLIC_UPLOAD_URL + (src || defaultPropertyImg);
 
 module.exports = {
   typeOfAnnonciesObj,
@@ -51,6 +52,7 @@ module.exports = {
   sortBySelectMap,
   propertyPiecesKeys,
   propertyPiecesSelectMap,
+  defaultPropertyImg,
   getAddress,
   getNbPieces,
   getCardImg,

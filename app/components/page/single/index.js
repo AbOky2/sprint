@@ -10,7 +10,7 @@ import { userActions } from 'redux/_actions';
 import { AdminContentWrapper } from 'components/wrapper';
 import { Icon, Btn } from 'components/form';
 import { addBookmarkApiMethod } from 'lib/api/customer';
-import { typeOfAnnoncies } from 'helpers/property';
+import { typeOfAnnoncies, defaultPropertyImg } from 'helpers/property';
 import Carrousel from 'components/Carrousel';
 import NotFound from 'components/NotFound';
 import { spaceCurrency } from 'helpers/convertAndCheck';
@@ -349,7 +349,9 @@ const PropertyPage = ({
           {property.pictures && (
             <Carrousel
               list={
-                property.pictures.length ? property.pictures : [getCardImg()]
+                property.pictures.length
+                  ? property.pictures
+                  : [defaultPropertyImg]
               }
             />
           )}
