@@ -1,5 +1,7 @@
 import { withStyles } from '@material-ui/core';
 
+const inputRadius = '1.5rem';
+
 const styles = (theme) => ({
   searchMapContainer: {
     position: 'relative',
@@ -66,12 +68,16 @@ const styles = (theme) => ({
       position: 'relative',
       zIndex: 30,
     },
+    '& > div:last-of-type > div > div:first-of-type > input': {
+      borderTopRightRadius: inputRadius,
+      borderBottomRightRadius: inputRadius,
+    },
     '& > div:first-of-type > div': {
       height: '100%',
       '& > div': {
         '&:first-of-type': {
           minHeight: 62,
-          borderRadius: '.6rem',
+          borderRadius: inputRadius,
           fontFamily: 'Open Sans',
           fontSize: '1.6rem',
           fontWeight: '600',
@@ -82,7 +88,7 @@ const styles = (theme) => ({
           borderColor: theme.palette.lightGray,
           height: '100%',
           [theme.breakpoints.down('sm')]: {
-            borderRadius: '.6rem!important',
+            borderRadius: '1.1rem!important',
             borderRight: `1px solid ${theme.palette.lightGray}`,
             borderBottom: 0,
             minHeight: 46,
@@ -126,7 +132,7 @@ const styles = (theme) => ({
         borderRadius: 0,
       },
       '& > div input': {
-        borderRadius: '.6rem',
+        borderRadius: inputRadius,
       },
       '& > div:first-of-type input': {
         borderRight: `1px solid ${theme.palette.lightGray}`,
