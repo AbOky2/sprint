@@ -36,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
     background: 'white',
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
   },
+  disabled: {
+    background: theme.palette.lighterGray,
+    opacity: 0.5,
+    pointerEvents: 'none',
+    '& a, & > span': {
+      color: 'white!important',
+    },
+  },
 }));
 
 const Btn = ({
@@ -47,12 +55,14 @@ const Btn = ({
   alignRight,
   whiteColor,
   download,
+  disabled,
   target,
 }) => {
   const classes = useStyles();
-  const className = !whiteColor
+  let className = !whiteColor
     ? classes.container
     : clsx(classes.container, classes.whiteColor);
+  className = disabled ? clsx(className, classes.disabled) : className;
 
   return (
     <Grid

@@ -8,7 +8,7 @@ const {
 } = require('../middleware/express');
 const requestMiddleware = require('../middleware/request');
 const joiSchema = require('../middleware/schema');
-// const sms = require('../utils/sms');
+const { sendSponsorship } = require('../utils/mail');
 
 const router = express.Router();
 
@@ -45,14 +45,17 @@ router.put(
 router.post(
   '/sponsorship',
   requestMiddleware(joiSchema.user.sponsorship.post),
-  handleErrors(async ({ user }, res) => {
+  handleErrors(async ({ user, body }, res) => {
     try {
-      await sms.messages.create({
-        body: `${user.firstName} ${user.lastName} send you a sponsorhip code: ${user.slug}`,
-        from: '+33645100284',
-        to: '+33645100284',
-      });
+      await sendSponsorship({ sender: user, receiver: body });
+      // await sms.messages.create({
+      //   body: `${user.firstName} ${user.lastName} send you a sponsorhip code: ${user.slug}`,
+      //   from: '+33645100284',
+      //   to: '+33645100284',
+      // });
+      res.json({ user });
     } catch (error) {
+      console.log(error);
       res.json({ errors: 'Error while sending', error });
     }
   })

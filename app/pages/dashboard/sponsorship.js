@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { AdminContentWrapper } from '../../components/wrapper';
@@ -74,10 +75,13 @@ const PartnerPage = ({ user }) => {
   });
   const handleChange = (name) => ({ target: { value } }) =>
     setState({ ...state, [name]: value });
-  const handleSubmit = () => {
-    if (!state.email || !state.firstName || !state.lastName || !state.phone)
-      return;
-    addSponsorshipApiMethod(state);
+  const handleSubmit = async () => {
+    // if (!state.email || !state.firstName || !state.lastName || !state.phone)
+    //   return;
+    try {
+      await addSponsorshipApiMethod(state);
+      toast.success('Envoyé');
+    } catch (err) {}
   };
   const classes = useStyles();
 

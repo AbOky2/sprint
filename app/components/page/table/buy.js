@@ -130,21 +130,20 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       <span>Disponibilité</span>
                       <span>{available_date}</span>
                     </Grid>
-                    {curr.file && (
-                      // eslint-disable-next-line react/jsx-no-duplicate-props
-                      <Grid
-                        item
-                        className="text-center"
-                        className={classes.btnContainer}
-                      >
-                        <Btn
-                          text="Voir"
-                          whiteColor
-                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
-                          download
-                        />
-                      </Grid>
-                    )}
+
+                    <Grid
+                      item
+                      className="text-center"
+                      className={classes.btnContainer}
+                    >
+                      <Btn
+                        text={curr.file ? 'Voir' : '-'}
+                        whiteColor
+                        href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                        download
+                        disabled
+                      />
+                    </Grid>
                   </Grid>
                   <Grid container alignItems="center">
                     <Grid item md={1} xs={1} className="text-center">
@@ -169,16 +168,15 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       {curr.advantages?.join(', ')}
                     </Grid>
                     <Grid item md={1} xs={1} className={classes.btnContainer}>
-                      {curr.file && (
-                        <Btn
-                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
-                          download
-                          target="_blank"
-                          dataMode="popup"
-                          text="Voir"
-                          whiteColor
-                        />
-                      )}
+                      <Btn
+                        text={curr.file ? 'Voir' : '-'}
+                        href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                        download
+                        disabled
+                        target="_blank"
+                        dataMode="popup"
+                        whiteColor
+                      />
                     </Grid>
                   </Grid>
                 </Grid>

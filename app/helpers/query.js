@@ -1,4 +1,4 @@
-import { typeOfAnnonciesObj } from './property';
+const { typeOfAnnonciesObj } = require('./property');
 
 const defaultLimit = 6;
 const defaultOffset = 1;

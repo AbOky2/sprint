@@ -19,7 +19,7 @@ const { defaultLimit, defaultOffset } = require('../../helpers/query');
 const DBModel = require('./Model');
 const PropertyModel = require('./Propertie');
 const msg = require('../utils/message');
-const { sendForgotPassword, sendNewLocation } = require('../utils/mail');
+const { sendForgotPassword, sucessSponsorshipUsed } = require('../utils/mail');
 const bcrypt = require('../utils/bcrypt');
 const { ROOT_URL } = require('../../config');
 
@@ -330,12 +330,12 @@ class UserClass extends DBModel {
 
   static async signUp(options) {
     let user = null;
+    let receiver = null;
 
-    if (
-      options.sponsorshipCode &&
-      !(await this.findOne({ slug: options.sponsorshipCode }))
-    )
-      throw new Error(msg.invalidInfo('Code de parrainage'));
+    if (options.sponsorshipCode) {
+      receiver = await this.findOne({ slug: options.sponsorshipCode });
+      if (!receiver) throw new Error(msg.invalidInfo('Code de parrainage'));
+    }
     const existingUser = await this.findOne({
       $or: [{ email: options.email }, { phone: options.phone }],
     });
@@ -346,6 +346,8 @@ class UserClass extends DBModel {
     user = (await this.add(options)).user;
     user = user.toObject();
 
+    if (options.sponsorshipCode)
+      sucessSponsorshipUsed({ sender: user, receiver });
     return pick(user, this.publicFields());
   }
 }

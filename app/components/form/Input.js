@@ -72,6 +72,7 @@ const styles = (theme) => ({
       borderBottomRightRadius: '.6rem',
       borderTopRightRadius: '.6rem',
       ...sharedInputStyle,
+      paddingLeft: '.8rem',
     },
     '& > div:last-of-type': {
       display: 'none',

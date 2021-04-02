@@ -17,7 +17,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
 }));
-const Second = ({ onChange, values = {}, selectDefaultOptions, handleCustomSelectCreate }) => {
+const Second = ({
+  onChange,
+  values = {},
+  selectDefaultOptions,
+  handleCustomSelectCreate,
+}) => {
   const classes = useStyles();
   const handelSelect = (e) => {
     if (e?.__isNew__ && handleCustomSelectCreate) {
@@ -30,8 +35,12 @@ const Second = ({ onChange, values = {}, selectDefaultOptions, handleCustomSelec
   return (
     <>
       <div className="text-center">
-        <span className="custom-upload-conatainer">Logo</span>
-        <Upload name="picture" value={values?.picture} onChange={onChange('picture')} />
+        <span className="custom-upload-container">Logo</span>
+        <Upload
+          name="picture"
+          value={values?.picture}
+          onChange={onChange('picture')}
+        />
       </div>
       <div>
         <span>Url</span>

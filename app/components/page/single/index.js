@@ -82,6 +82,14 @@ const useStyles = makeStyles((theme) => ({
     '& svg': {
       marginRight: 8,
     },
+    [theme.breakpoints.down('sm')]: {
+      '& > div > div': {
+        marginLeft: 'auto',
+        '&:first-of-type': {
+          marginRight: 0,
+        },
+      },
+    },
   },
   searchContainer: {
     marginBottom: 22,
@@ -229,6 +237,14 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
       color: 'rgba(26, 46, 108, 0.5)',
     },
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+      textAlign: 'center',
+      '& > div': {
+        margin: 'auto!important',
+        textAlign: 'center',
+      },
+    },
   },
   modal: {
     '& > div > div': {
@@ -261,6 +277,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.8rem',
     fontWeight: '600',
     padding: '18px 23px',
+  },
+  priceCta: {
+    width: '100%',
+    textAlign: 'right',
+    [theme.breakpoints.down('sm')]: {
+      textAlign: 'left',
+    },
   },
 }));
 const PropertyPage = ({
@@ -354,7 +377,7 @@ const PropertyPage = ({
               </Grid>
             </div>
           </Grid>
-          <Grid item md={6} className="text-right">
+          <Grid item md={6} className={classes.priceCta}>
             <Typography variant="h1">
               <span>à partir de</span>
               {` ${spaceCurrency(property.price)}€`}

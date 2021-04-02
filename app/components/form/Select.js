@@ -67,7 +67,7 @@ const styles = (theme) => ({
       width: '100%',
       height: '100%',
       backgroundColor: 'white',
-      paddingLeft: '1.4rem',
+      paddingLeft: '.8rem',
       paddingRight: '3rem',
       border: `solid 1px ${theme.palette.lightGray}`,
       fontStyle: 'normal',

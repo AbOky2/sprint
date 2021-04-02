@@ -1,6 +1,10 @@
 const sgMail = require('@sendgrid/mail');
-const { MAIL_USER, NEXT_PUBLIC_ROOT_URL, SENDGRID_API_KEY } = require('../../config');
-
+const {
+  MAIL_USER,
+  NEXT_PUBLIC_ROOT_URL,
+  SENDGRID_API_KEY,
+} = require('../../config');
+const { ucfirst } = require('../../helpers/convertAndCheck');
 sgMail.setApiKey(SENDGRID_API_KEY);
 
 /**
@@ -38,11 +42,42 @@ const sendSuccessResetPassword = async ({ email, to }) =>
         Ceci est une confirmation que le mot de passe de votre compte ${email} vient d'être modifié.`,
   });
 
-const sendNewLocation = async ({  subject, content }) =>
+const sendNewLocation = async ({ subject, content }) =>
   sendMail({
     to: 'studea@email.com',
     subject,
-    content
+    content,
   });
 
-module.exports = { sendMail, sendForgotPassword, sendSuccessResetPassword, sendNewLocation };
+const sendSponsorship = async ({ sender, receiver }) =>
+  sendMail({
+    to: receiver.email,
+    subject: 'Code parrainage',
+    content: `Bonjour ${ucfirst(receiver.firstName)},\n\n
+      ${ucfirst(sender.firstName)} ${ucfirst(
+      sender.lastName
+    )} vous a envoyé un code de parrainage: <a href='${`${NEXT_PUBLIC_ROOT_URL}/login?sponsorshipCode=${sender.slug}`}'>${
+      sender.slug
+    }</a>.
+      `,
+  });
+
+const sucessSponsorshipUsed = async ({ sender, receiver }) =>
+  sendMail({
+    to: receiver.email,
+    subject: 'Code parrainage',
+    content: `Bonjour ${ucfirst(receiver.firstName)},\n\n
+      Felicitations ! ${ucfirst(sender.firstName)} ${ucfirst(
+      sender.lastName
+    )} a utilisé votre code de parrainage :)
+      `,
+  });
+
+module.exports = {
+  sendMail,
+  sendForgotPassword,
+  sendSuccessResetPassword,
+  sendNewLocation,
+  sendSponsorship,
+  sucessSponsorshipUsed,
+};

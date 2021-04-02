@@ -161,14 +161,16 @@ export const MobileMenu = () => {
         </Grid>
       ))}
       <Grid item className={classes.calendar}>
-        <Link href="#">
-          <a>
-            <div>
-              <img src={Calendr} alt="" />
-            </div>
-            <p>Rendez-vous</p>
-          </a>
-        </Link>
+        <a
+          onClick={() =>
+            openPopupWidget({ url: 'https://calendly.com/kitlenid' })
+          }
+        >
+          <div>
+            <img src={Calendr} alt="" />
+          </div>
+          <p>Rendez-vous</p>
+        </a>
       </Grid>
     </Grid>
   );

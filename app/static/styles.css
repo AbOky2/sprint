@@ -186,8 +186,8 @@ div.header {
 .admin-container #sidebar ul span {
   display: block;
 }
-.custom-upload-conatainer > span {
-  marginbottom: 1rem;
+.custom-upload-container > span {
+  margin-bottom: 1rem;
 }
 .css-1okebmr-indicatorSeparator {
   display: none;
@@ -212,6 +212,7 @@ a[href^="https://maps.google.com/maps"]
 .gm-style-cc {
   display: none;
 }
+.gm-fullscreen-control,
 .gmnoprint div {
-  background: none !important;
+  background-color: #e2e2e2 !important;
 }

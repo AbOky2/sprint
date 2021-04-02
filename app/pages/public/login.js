@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { withRouter } from 'next/router';
 import { Grid, Checkbox, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -203,6 +204,7 @@ const SignUp = ({ values = {}, handleChange }) => (
       position="right"
     />
     <Input
+      value={values.sponsorshipCode}
       label="Code parrain"
       placeholder="Code"
       onChange={handleChange}
@@ -239,21 +241,28 @@ const propTypes = {
 SignIn.propTypes = propTypes;
 SignUp.propTypes = propTypes;
 
-const LoginTab = ({ login, register }) => {
+const LoginTab = ({
+  login,
+  register,
+  router: {
+    query: { sponsorshipCode },
+  },
+}) => {
   const [state, setState] = useState({
     email: '',
     firstName: '',
     lastName: '',
     password: '',
+    sponsorshipCode,
     role: Student,
   });
-  const [isRegisterinView, setIsRegisterinView] = useState(false);
+
+  const [isRegisterinView, setIsRegisterinView] = useState(!!sponsorshipCode);
   const [checked, setChecked] = React.useState(false);
 
   const handleCheck = (event) => {
     setChecked(event.target.checked);
   };
-
   const toggleView = () => setIsRegisterinView(!isRegisterinView);
 
   const onClick = () => {
@@ -433,6 +442,9 @@ const actionCreators = {
   login: userActions.login,
   logout: userActions.logout,
 };
-export default withAuth(connect(mapState, actionCreators)(LoginTab), {
-  logoutRequired: true,
-});
+export default withAuth(
+  connect(mapState, actionCreators)(withRouter(LoginTab)),
+  {
+    logoutRequired: true,
+  }
+);
