@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
+import { Icon } from 'components/form';
 import { GoogleMaps, CustomInput } from 'components/form/Input';
 import { DropdownSelect } from 'components/form/Select';
 import { propertyPiecesSelectMap } from 'helpers/property';
@@ -33,6 +34,11 @@ const searchFields = withStyles(
             onChange={handleMapSearch}
             placeholder="Localisation"
           />
+          {isMdView && (
+            <div onClick={handleSumit} className={classes.submit}>
+              <Icon type="search" size="nearBig" color="white" />
+            </div>
+          )}
         </Grid>
         {!isLocation && !isMdView && (
           <Grid item md={4}>

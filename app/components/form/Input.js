@@ -275,7 +275,7 @@ const CustomInput = withStyles(styles)(
           </Grid>
         </Grid>
         <div onClick={handleSumit} className={classes.submit}>
-          <Icon type="search" size="large" color="white" />
+          <Icon type="search" size="nearBig" color="white" />
         </div>
       </div>
     );
