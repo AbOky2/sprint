@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 const SampleNextArrow = ({ className, style, onClick }) => (
   <div
     className={className}

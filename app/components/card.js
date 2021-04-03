@@ -4,8 +4,7 @@ import { singlePath } from 'helpers/query';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { spaceCurrency } from 'helpers/convertAndCheck';
-import { getAddress, getNbPieces } from 'helpers/property';
-import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
+import { getAddress, getNbPieces, getCardImg } from 'helpers/property';
 
 import { Icon } from './form';
 
@@ -179,7 +178,7 @@ const MapsCard = ({
           <Card
             {...mapsProps}
             title={heading}
-            src={NEXT_PUBLIC_UPLOAD_URL + pictures[state]}
+            src={getCardImg(pictures[state])}
             address={getAddress({ city, postal })}
             showLikes={false}
             description={getNbPieces(minPieces, maxPieces)}
@@ -187,17 +186,21 @@ const MapsCard = ({
           />
         </a>
       </Link>
-      <span onClick={() => handlePrev(_id)}>
-        <Icon
-          type="sliderArrow"
-          size="small"
-          color="iconBlue"
-          rotate="180deg"
-        />
-      </span>
-      <span onClick={() => handleNext(_id)}>
-        <Icon type="sliderArrow" size="small" color="iconBlue" />
-      </span>
+      {pictures.length > 1 && (
+        <>
+          <span onClick={() => handlePrev(_id)}>
+            <Icon
+              type="sliderArrow"
+              size="small"
+              color="iconBlue"
+              rotate="180deg"
+            />
+          </span>
+          <span onClick={() => handleNext(_id)}>
+            <Icon type="sliderArrow" size="small" color="iconBlue" />
+          </span>
+        </>
+      )}
     </div>
   );
 };
