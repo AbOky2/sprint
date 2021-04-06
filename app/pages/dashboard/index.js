@@ -57,10 +57,11 @@ const styles = (theme) => ({
       height: 'auto!important',
     },
     '& > div > div > a': {
+      ...theme.ui.bordered,
       display: 'block',
       position: 'relative',
+      height: '100%',
       padding: 32,
-      ...theme.ui.bordered,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
     },
@@ -224,8 +225,8 @@ const Dashboard = ({ user = {}, partners, classes }) => (
                 <Grid container justify="space-between" alignItems="flex-end">
                   <Typography className={classes.whiteColor}>
                     {isBuyer(user)
-                      ? 'N’attendez pas 30 ans pour devenir propriétaire'
-                      : 'Je réserve un logement neuf avec une simple promesse d’embauche. Devenir proprietaire n’a jamais été aussi simple.'}
+                      ? 'Un parcours simplifié 100% digital.'
+                      : 'Vous ne révez pas ! Réservez votre logement dès votre dernière année d’étude.'}
                   </Typography>
                   <Icon type="arrow" color="white" />
                 </Grid>
@@ -246,11 +247,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
                 </Typography>
                 <Grid container justify="space-between" alignItems="flex-end">
                   <Typography className={classes.buyText}>
-                    Je choisis mon logement parmis
-                    <br />
-                    nos 15 000 et 50 000 appartement
-                    <br />
-                    en France.
+                    Des logements étudiants dans toute la France.
                   </Typography>
                   <Icon type="arrow" color="iconBlue" />
                 </Grid>

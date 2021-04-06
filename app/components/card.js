@@ -64,8 +64,10 @@ const useStyles = makeStyles((theme) => ({
   mapsContainer: {
     position: 'absolute',
     width: 200,
-    zIndex: 1,
-    transform: 'translate(-50%, calc(-100% - 4rem))',
+    zIndex: 7,
+    top: 0,
+    left: 0,
+    transform: 'translate(-40%, calc(-100% - 1rem))',
     '& > a > div': {
       border: `1px solid ${theme.palette.lightGray}`,
       '& > div': {

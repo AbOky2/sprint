@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { Icon } from 'components/form';
 import { GoogleMaps, CustomInput } from 'components/form/Input';
+import MultiMaps from 'components/Maps/MultiMaps';
 import { DropdownSelect } from 'components/form/Select';
 import { propertyPiecesSelectMap } from 'helpers/property';
 import withStyles from './styles';
@@ -18,6 +19,8 @@ const searchFields = withStyles(
     handleSumit,
     handleSelect,
     toggleView,
+    data,
+    handlePointChange,
     isMapsView,
   }) => (
     <>
@@ -82,17 +85,20 @@ const searchFields = withStyles(
             />
           </Grid>
         )}
+        {/* <MultiMaps data={data} handlePointChange={handlePointChange} /> */}
       </Grid>
     </>
   )
 );
 searchFields.PropTypes = {
   classes: PropTypes.object.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
   isLocation: PropTypes.bool.isRequired,
   isMapsView: PropTypes.bool.isRequired,
   isMdView: PropTypes.bool.isRequired,
   queryData: PropTypes.object.isRequired,
   toggleView: PropTypes.func.isRequired,
+  handlePointChange: PropTypes.func.isRequired,
   handleMapSearch: PropTypes.func.isRequired,
   handleBudget: PropTypes.func.isRequired,
   handleSumit: PropTypes.func.isRequired,

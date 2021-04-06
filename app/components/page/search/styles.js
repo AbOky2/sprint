@@ -242,10 +242,13 @@ const styles = (theme) => ({
   mapsViewContainer: {
     '& > div': {
       '&:last-of-type': {
-        position: 'relative',
+        position: 'sticky',
+        top: 0,
         paddingLeft: '2.5rem',
-        minHeight: '85vh',
+        minHeight: '80vh',
+        maxHeight: '100vh',
         '& > div': {
+          zIndex: 3,
           '&:first-of-type': {
             ...theme.ui.bordered,
             overflow: 'hidden',

@@ -35,7 +35,7 @@ const SearchPage = ({
   });
   const [currView, setCurrView] = useState(isMapsView);
   const [makeRequest, setMakeRequest] = useState(false);
-  const [state, setState] = useState(properties.docs);
+  const [state, setState] = useState([]);
   const [sortBy, setSortBy] = useState(sort || sortByKeys[0]);
   const [queryData, setQueryData] = useState({
     loc,
@@ -65,6 +65,15 @@ const SearchPage = ({
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
     addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
+  };
+  const handlePointChange = (list) => {
+    console.log('ok');
+    const listId = list
+      .map(({ points = [] }) => points.map((e) => e.id))
+      .flat();
+    const newState = properties.docs.filter((e) => listId.includes(e._id));
+    setState(newState);
+    // setMakeRequest(true);
   };
 
   const isLocation = typeOfAnnonce === typeOfAnnonciesObj.location;
@@ -101,12 +110,13 @@ const SearchPage = ({
   const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
   const View = currView ? MapsView : ListView;
 
-  useEffect(() => {
-    if (makeRequest) {
-      requestData();
-      setMakeRequest(false);
-    }
-  }, [makeRequest]);
+  // useEffect(() => {
+  //   if (makeRequest) {
+  //     requestData();
+  //     setMakeRequest(false);
+  //   }
+  // }, [makeRequest]);
+  // console.log(point);
 
   if (!state) return <NotFound showLink={false} />;
 
@@ -126,6 +136,7 @@ const SearchPage = ({
             isMapsView={currView}
           />
           <View
+            allData={properties.docs}
             data={state}
             liked={liked}
             sortBy={sortBy}
@@ -136,6 +147,7 @@ const SearchPage = ({
             matches={matches}
             isMdView={isMdView}
             handlePage={handlePage}
+            handlePointChange={handlePointChange}
             isMapsView={currView}
           />
         </div>

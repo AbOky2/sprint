@@ -15,6 +15,7 @@ const searchQueryWhitelist = [
   'maxPrice',
   'typeOfProperty',
   'pieces',
+  'point',
 ];
 const typeOfAnnoncies = {
   [typeOfAnnonciesObj.buy]: 'buy',

@@ -38,6 +38,15 @@ code {
   font-size: 14px;
   background: #fff;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  word-break: break-word;
+}
 .relative {
   position: relative;
 }
@@ -211,6 +220,10 @@ a[href^="https://maps.google.com/maps"]
 .gmnoprint span,
 .gm-style-cc {
   display: none;
+}
+.gm-bundled-control {
+  top: 50px;
+  bottom: initial;
 }
 .gm-fullscreen-control,
 .gmnoprint div {

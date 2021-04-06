@@ -95,19 +95,26 @@ class PropertieClass extends DBModel {
     typeOfAnnonce,
     pieces = [],
     loc,
+    point,
+    zoom = 1,
     limit = defaultLimit,
     page = defaultOffset,
     sort = sortByKeys[0],
   }) {
-    let near = [];
-    if (loc) {
+    let near = [],
+      $maxDistance = 1000;
+
+    if (point) {
+      near = point;
+      $maxDistance = Math.abs($maxDistance * (2 - zoom));
+    } else if (loc) {
       const geo = await maps.geocode({
         address: loc,
         country: 'france',
       });
-      if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
+      // if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
     }
-
+    console.log(zoom, $maxDistance);
     const query = {
       $and: [
         pieces.length > 0 ? { pieces: { $in: pieces } } : {},
@@ -120,23 +127,25 @@ class PropertieClass extends DBModel {
                     type: 'Point',
                     coordinates: near,
                   },
-                  $maxDistance: 50000,
+                  $maxDistance,
+                  // $spherical: true,
                 },
               },
             }
           : {},
+        { loc: { $ne: null } },
         { price: { $ne: null } },
-        // { available: true },
+        { available: true },
         { typeOfAnnonce },
       ],
     };
 
     const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
     const list = await this.paginate(query, {
-      limit,
+      limit: 50,
       page,
       forceCountFn: true,
-      sort: { price: priceSort },
+      sort: priceSort,
     });
     return { list };
   }

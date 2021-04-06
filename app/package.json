@@ -25,6 +25,7 @@
     "@svgr/webpack": "^5.5.0",
     "@typeform/embed": "^0.34.6",
     "babel-eslint": "^10.1.0",
+    "points-cluster": "^0.1.4",
     "babel-plugin-inline-react-svg": "^1.1.2",
     "bcrypt": "^5.0.0",
     "clsx": "^1.1.1",

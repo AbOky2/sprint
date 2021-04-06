@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { MultipleMarkers } from 'components/Maps';
+import MultiMaps from 'components/Maps/MultiMaps';
+
 import { MapsCarousel } from 'components/Carrousel';
 import { sortByKeys } from 'helpers/property';
 import { ListWrapper, ListElement } from './partials';
@@ -55,12 +57,14 @@ const MapsView = withStyles(
     liked,
     handleBookmark,
     toggleView,
-    data,
+    data = [],
+    allData = [],
     page,
     matches,
     handlePage,
     isMapsView,
     isMdView,
+    handlePointChange,
     sortBy,
     handleSortSelect,
   }) => {
@@ -69,23 +73,24 @@ const MapsView = withStyles(
       _id: e._id,
       coor: e.loc?.coordinates,
     }));
-    const [curr, setCurr] = useState(data[0]);
+    const [curr, setCurr] = useState(null);
     const [carrouselIndex, setCarrouselIndex] = useState(0);
     const handleChildClick = (id) => {
-      const currIndex = locs.findIndex((e) => e._id == id);
+      const currIndex = locs.findIndex((e) => id.includes(e._id));
       const found = data[currIndex];
 
       setCarrouselIndex(currIndex);
-
       if (found) setCurr(found);
     };
     const handleCarouselChange = (index) => setCurr(data[index]);
-    const handleHover = (id) => () => {
+    const handleMouseEnter = (id) => () => {
+      if (!id) return setCurr(null);
+
       const currIndex = data.findIndex((e) => e._id === id);
       setCurr(data[currIndex]);
     };
-    useEffect(() => setCurr(data[0]), [data]);
-
+    // useEffect(() => setCurr(data[0]), [data]);
+    // console.log(data);
     return (
       <Grid container className={classes.mapsViewContainer}>
         <Grid item xs={5}>
@@ -103,7 +108,8 @@ const MapsView = withStyles(
             {data?.map((elems) => (
               <ListElement
                 key={elems._id}
-                handleHover={handleHover(elems._id)}
+                handleMouseEnter={handleMouseEnter(elems._id)}
+                handleMouseLeave={handleMouseEnter(null)}
                 className={
                   elems._id !== curr?._id
                     ? classes.mapsListContainer
@@ -120,13 +126,21 @@ const MapsView = withStyles(
           </ListWrapper>
         </Grid>
         <Grid item md={7} xs={12}>
-          <MultipleMarkers
+          <MultiMaps
+            data={allData}
+            curr={curr}
+            handleChildClick={handleChildClick}
+            isMobile={isMdView}
+            handlePointChange={handlePointChange}
+          />
+          <div></div>
+          {/* <MultipleMarkers
             data={data}
             curr={curr}
             handleChildClick={handleChildClick}
             isMobile={isMdView}
-          />
-          <Grid container>
+          /> */}
+          {/* <Grid container>
             <MapsCarousel
               index={carrouselIndex}
               handleChange={handleCarouselChange}
@@ -144,7 +158,7 @@ const MapsView = withStyles(
                 />
               ))}
             </MapsCarousel>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
     );
@@ -154,6 +168,7 @@ const MapsView = withStyles(
 const sharedProptypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
+  allData: PropTypes.arrayOf(PropTypes.object),
   sortBy: PropTypes.oneOf(sortByKeys).isRequired,
   liked: PropTypes.array.isRequired,
   isMapsView: PropTypes.bool.isRequired,
@@ -161,6 +176,7 @@ const sharedProptypes = {
   toggleView: PropTypes.func.isRequired,
   handleSortSelect: PropTypes.func.isRequired,
   handleBookmark: PropTypes.func.isRequired,
+  handlePointChange: PropTypes.func.isRequired,
   page: PropTypes.object.isRequired,
   matches: PropTypes.bool.isRequired,
   handlePage: PropTypes.func.isRequired,

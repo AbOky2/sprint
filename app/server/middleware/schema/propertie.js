@@ -39,6 +39,8 @@ const schemas = {
       page: Joi.number().min(1).optional(),
       limit: Joi.number().min(1).optional(),
       loc: Joi.string().optional().allow(''),
+      zoom: Joi.number().min(1).optional(),
+      point: Joi.any(),
       typeOfAnnonce: Joi.string().valid(...typeOfAnnoncies),
       typeOfProperty: Joi.any(),
       sort: Joi.string().optional(),

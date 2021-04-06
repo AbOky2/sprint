@@ -106,9 +106,16 @@ const ListElement = ({
   dimensions,
   price,
   showLikes,
-  handleHover,
+  handleMouseEnter,
+  handleMouseLeave,
 }) => (
-  <Grid item key={_id} className={className} onMouseEnter={handleHover}>
+  <Grid
+    item
+    key={_id}
+    className={className}
+    onMouseEnter={handleMouseEnter}
+    onMouseLeave={handleMouseLeave}
+  >
     <Link href={singlePath({ typeOfAnnonce, _id })}>
       <a>
         <Card
