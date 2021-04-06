@@ -114,7 +114,7 @@ class PropertieClass extends DBModel {
       });
       if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
     }
-    console.log(zoom, $maxDistance);
+
     const query = {
       $and: [
         pieces.length > 0 ? { pieces: { $in: pieces } } : {},
@@ -128,7 +128,6 @@ class PropertieClass extends DBModel {
                     coordinates: near,
                   },
                   $maxDistance,
-                  // $spherical: true,
                 },
               },
             }
@@ -142,7 +141,7 @@ class PropertieClass extends DBModel {
 
     const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
     const list = await this.paginate(query, {
-      limit: 50,
+      limit: 1000,
       page,
       forceCountFn: true,
       sort: { price: priceSort },

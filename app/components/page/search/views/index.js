@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
-import { MultipleMarkers } from 'components/Maps';
 import MultiMaps from 'components/Maps/MultiMaps';
 
 import { MapsCarousel } from 'components/Carrousel';
@@ -89,8 +88,7 @@ const MapsView = withStyles(
       const currIndex = data.findIndex((e) => e._id === id);
       setCurr(data[currIndex]);
     };
-    // useEffect(() => setCurr(data[0]), [data]);
-    // console.log(data);
+
     return (
       <Grid container className={classes.mapsViewContainer}>
         <Grid item xs={5}>

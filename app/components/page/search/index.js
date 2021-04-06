@@ -122,7 +122,7 @@ const SearchPage = ({
   }, [makeRequest]);
 
   if (!state) return <NotFound showLink={false} />;
-  console.log(isMdView, !currView);
+
   return (
     <AdminContentWrapper redirectDashboard href={pages.dashboard}>
       <div>
