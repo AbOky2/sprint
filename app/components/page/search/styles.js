@@ -27,6 +27,13 @@ const styles = (theme) => ({
       },
     },
   },
+  resetSearchMapContainer: {
+    '& > div:first-of-type': {
+      position: 'relative',
+      marginBottom: '5rem',
+      transform: 'initial',
+    },
+  },
   card: {
     width: 'calc(100% - 14px)',
   },
@@ -182,6 +189,20 @@ const styles = (theme) => ({
       marginLeft: 'auto',
       color: theme.palette.blue,
     },
+    [theme.breakpoints.down('sm')]: {
+      position: 'absolute',
+      top: 55,
+      left: '50%',
+      transform: 'translateX(-50%)',
+      '& > svg': {
+        position: 'initial!important',
+        transform: 'initial!important',
+        top: 0,
+      },
+      '& span': {
+        paddingLeft: '.8rem',
+      },
+    },
   },
   listContainer: theme.ui.listContainer,
   mapsListContainer: {
@@ -290,6 +311,7 @@ const styles = (theme) => ({
     marginBottom: '1.6rem',
     '& > div': {
       [theme.breakpoints.down('sm')]: {
+        display: 'none',
         padding: '0!important',
         '&:last-of-type': {
           marginTop: '.8rem',

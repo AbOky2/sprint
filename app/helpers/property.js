@@ -10,16 +10,11 @@ const sortByObj = {
   desc: 'Prix décroissant',
 };
 const propertyPieces = {
-  // 1: 'Studio',
-  // 2: '2 pièces',
-  // 3: '3 pièces',
-  // 4: '4 pièces',
-  // 5: '5 pièces',
-  Studio: 'Studio',
-  '3 pièces': '3 pièces',
-  '2 pièces': '2 pièces',
-  '5 pièces': '5 pièces',
-  '4 pièces': '4 pièces',
+  1: 'Studio',
+  4: '4 pièces',
+  2: '2 pièces',
+  5: '5 pièces',
+  3: '3 pièces',
 };
 const typeOfAnnoncies = Object.values(typeOfAnnonciesObj);
 const typeOfProperties = ['Appartement', 'Maison'];
@@ -28,7 +23,7 @@ const sortBySelectMap = sortByKeys.map((name) => ({
   value: name,
   name: sortByObj[name],
 }));
-const propertyPiecesKeys = Object.keys(propertyPieces);
+const propertyPiecesKeys = [1, 4, 2, 5, 3];
 const propertyPiecesSelectMap = propertyPiecesKeys.map((name) => ({
   value: name,
   name: propertyPieces[name],

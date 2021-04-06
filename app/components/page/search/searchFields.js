@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import { Icon } from 'components/form';
 import { GoogleMaps, CustomInput } from 'components/form/Input';
-import MultiMaps from 'components/Maps/MultiMaps';
 import { DropdownSelect } from 'components/form/Select';
 import { propertyPiecesSelectMap } from 'helpers/property';
 import withStyles from './styles';
@@ -39,18 +38,18 @@ const searchFields = withStyles(
             onChange={handleMapSearch}
             placeholder="Localisation"
           />
-          {isMdView && isMapsView && (
+          {isMdView && (
             <>
               <div onClick={handleSumit} className={classes.submit}>
                 <Icon type="search" size="nearBig" color="white" />
               </div>
-              {/* <span className={classes.changeView} onClick={toggleView}>
+              <span className={classes.changeView} onClick={toggleView}>
                 <Icon
                   type={isMapsView ? 'eyeClosed' : 'eyeOpened'}
                   color="newBlue"
                 />
                 <span>Carte</span>
-              </span> */}
+              </span>
             </>
           )}
         </Grid>
@@ -85,7 +84,6 @@ const searchFields = withStyles(
             />
           </Grid>
         )}
-        {/* <MultiMaps data={data} handlePointChange={handlePointChange} /> */}
       </Grid>
     </>
   )

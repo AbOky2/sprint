@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import Router, { withRouter } from 'next/router';
 import { useMediaQuery } from '@material-ui/core';
@@ -121,11 +122,20 @@ const SearchPage = ({
   }, [makeRequest]);
 
   if (!state) return <NotFound showLink={false} />;
-
+  console.log(isMdView, !currView);
   return (
     <AdminContentWrapper redirectDashboard href={pages.dashboard}>
       <div>
-        <div className={classes.searchMapContainer}>
+        <div
+          className={
+            isMdView && !currView
+              ? clsx(
+                  classes.searchMapContainer,
+                  classes.resetSearchMapContainer
+                )
+              : classes.searchMapContainer
+          }
+        >
           <SearchFields
             isLocation={isLocation}
             queryData={queryData}

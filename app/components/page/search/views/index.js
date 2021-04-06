@@ -134,13 +134,7 @@ const MapsView = withStyles(
             handlePointChange={handlePointChange}
           />
           <div></div>
-          {/* <MultipleMarkers
-            data={data}
-            curr={curr}
-            handleChildClick={handleChildClick}
-            isMobile={isMdView}
-          /> */}
-          {/* <Grid container>
+          <Grid container>
             <MapsCarousel
               index={carrouselIndex}
               handleChange={handleCarouselChange}
@@ -158,7 +152,7 @@ const MapsView = withStyles(
                 />
               ))}
             </MapsCarousel>
-          </Grid> */}
+          </Grid>
         </Grid>
       </Grid>
     );

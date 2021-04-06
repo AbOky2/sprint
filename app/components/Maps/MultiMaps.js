@@ -67,7 +67,7 @@ export class GoogleMap extends React.PureComponent {
   };
 
   render() {
-    const { classes, handleChildClick, curr } = this.props;
+    const { classes, handleChildClick, curr, isMobile } = this.props;
 
     return (
       <div className={classes.mapWrapper}>
@@ -88,6 +88,7 @@ export class GoogleMap extends React.PureComponent {
                   lng={item.points[0].lng}
                   data={curr}
                   show={item.id.includes(curr?._id)}
+                  isMobile={isMobile}
                 />
               );
             }
@@ -100,6 +101,7 @@ export class GoogleMap extends React.PureComponent {
                 points={item.points || []}
                 data={curr}
                 show={item.points?.find((e) => e.id.includes(curr?._id))}
+                isMobile={isMobile}
               />
             );
           })}

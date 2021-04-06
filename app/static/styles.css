@@ -229,3 +229,9 @@ a[href^="https://maps.google.com/maps"]
 .gmnoprint div {
   background-color: #f7f8fa !important;
 }
+@media screen and (max-width: 640px) {
+  .gm-fullscreen-control,
+  .gmnoprint div {
+    display: none !important;
+  }
+}
