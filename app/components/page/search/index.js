@@ -64,8 +64,14 @@ const SearchPage = ({
   };
   const handleSortSelect = () => ({ target: { value } }) => {
     setSortBy(value);
-    setQueryData({ ...queryData, sort: value });
-    setMakeRequest(true);
+    setState(
+      state.sort((a, b) => {
+        if (value === sortByKeys[0]) return +a.price - +b.price;
+        else return +b.price - +a.price;
+      })
+    );
+    // setQueryData({ ...queryData, sort: value });
+    // setMakeRequest(true);
   };
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
