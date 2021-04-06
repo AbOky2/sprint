@@ -132,25 +132,27 @@ const MapsView = withStyles(
             handlePointChange={handlePointChange}
           />
           <div></div>
-          <Grid container>
-            <MapsCarousel
-              index={carrouselIndex}
-              handleChange={handleCarouselChange}
-            >
-              {data?.map(({ city, postal, ...elems }) => (
-                <ListElement
-                  key={elems._id}
-                  className={clsx(
-                    classes.mapsListContainer,
-                    classes.mapsMobileListContainer
-                  )}
-                  showLikes={false}
-                  handleBookmark={handleBookmark}
-                  {...elems}
-                />
-              ))}
-            </MapsCarousel>
-          </Grid>
+          {isMdView && (
+            <Grid container>
+              <MapsCarousel
+                index={carrouselIndex}
+                handleChange={handleCarouselChange}
+              >
+                {data?.map(({ city, postal, ...elems }) => (
+                  <ListElement
+                    key={elems._id}
+                    className={clsx(
+                      classes.mapsListContainer,
+                      classes.mapsMobileListContainer
+                    )}
+                    showLikes={false}
+                    handleBookmark={handleBookmark}
+                    {...elems}
+                  />
+                ))}
+              </MapsCarousel>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     );
