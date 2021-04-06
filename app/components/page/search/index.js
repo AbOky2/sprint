@@ -35,6 +35,7 @@ const SearchPage = ({
   });
   const [currView, setCurrView] = useState(isMapsView);
   const [makeRequest, setMakeRequest] = useState(false);
+  const [allData, setAllData] = useState(properties.docs);
   const [state, setState] = useState([]);
   const [sortBy, setSortBy] = useState(sort || sortByKeys[0]);
   const [queryData, setQueryData] = useState({
@@ -86,6 +87,7 @@ const SearchPage = ({
       page,
     });
     setState(docs);
+    setAllData(docs);
     setPage(pick(pageInfo, pagePropertyWhilist));
 
     Router.push(
@@ -136,7 +138,7 @@ const SearchPage = ({
             isMapsView={currView}
           />
           <View
-            allData={properties.docs}
+            allData={allData}
             data={state}
             liked={liked}
             sortBy={sortBy}
