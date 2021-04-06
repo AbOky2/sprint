@@ -19,7 +19,7 @@ const userContactInfo = {
     .min(5)
     .required()
     .messages(msg({ name: keys.user.phone })),
-}
+};
 
 const update = {
   _id: Joi.any().optional(),
@@ -90,7 +90,24 @@ const schemas = {
     }),
   },
   sponsorship: {
-    post: Joi.object(userContactInfo),
+    post: Joi.object({
+      firstName: Joi.string()
+        .min(1)
+        .required()
+        .messages(msg({ name: keys.user.firstName })),
+      lastName: Joi.string()
+        .min(1)
+        .required()
+        .messages(msg({ name: keys.user.lastName })),
+      email: Joi.string()
+        .email({ tlds: false })
+        .required()
+        .messages(msg({ name: keys.user.email })),
+      phone: Joi.string()
+        .min(5)
+        .optional()
+        .messages(msg({ name: keys.user.phone })),
+    }),
   },
   public: {
     user: {
@@ -166,8 +183,8 @@ const schemas = {
       requestNewLocation: {
         updateUser: userContactInfo,
         message: Joi.string()
-        .min(10)
-        .messages(msg({ name: keys.message }))
+          .min(10)
+          .messages(msg({ name: keys.message })),
       },
       update: Joi.object(update),
     },
