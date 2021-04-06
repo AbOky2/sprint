@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     verticalAlign: 'middle',
     '& path': {
       fill: (props) => props.fill,
+      stroke: (props) => props.stroke,
     },
   },
 });
@@ -27,13 +28,14 @@ const Icon = ({ type, color, size, customSize, strokeColor, rotate }) => {
   const SvgIcon = icons[type];
   const svgSize = SIZES[size];
   const fill = ICON_COLORS[color] ?? color;
-  const classes = useStyles({ fill });
+  const stroke = ICON_COLORS[strokeColor] ?? color;
+  const classes = useStyles({ fill, stroke });
 
   return (
     <SvgIcon
       className={classes.svg}
       style={{
-        ...(strokeColor ? { stroke: strokeColor } : {}),
+        ...(strokeColor ? { stroke } : { stroke: 'transparent' }),
         ...(customSize || {
           width: svgSize,
           height: svgSize,

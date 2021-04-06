@@ -34,7 +34,11 @@ class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta name="google" content="notranslate" />
           <meta name="theme-color" content="#1976D2" />
-          <link rel="shortcut icon" href="/static/favicon.png" />
+          <link
+            rel="shortcut icon"
+            type="image/png"
+            href="/static/favicon.png"
+          />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400:latin"

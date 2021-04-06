@@ -360,7 +360,7 @@ const PropertyPage = ({
               <Icon
                 type="heart"
                 color={liked ? 'red' : 'white'}
-                strokeColor={liked ? 'red' : '#4F80FF'}
+                strokeColor={liked ? 'red' : 'newBlue'}
               />
               {liked ? 'Sauvegardé‎‎ ‎' : 'Sauvegarder'}
             </Grid>

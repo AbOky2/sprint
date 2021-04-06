@@ -1,7 +1,7 @@
 import GoogleMapReact from 'google-map-react';
-import Marker from '../static/img/icons/marker.svg';
-import CustomMarker from '../static/img/icons/customMarker.svg';
-import SelectedCustomMarker from '../static/img/icons/selectedCustomMarker.svg';
+import Marker from '../../static/img/icons/marker.svg';
+import CustomMarker from '../../static/img/icons/customMarker.svg';
+import SelectedCustomMarker from '../../static/img/icons/selectedCustomMarker.svg';
 import { MapsCard } from 'components/card';
 
 const AnyReactComponent = () => (
