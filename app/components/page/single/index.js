@@ -362,7 +362,7 @@ const PropertyPage = ({
                 color={liked ? 'red' : 'white'}
                 strokeColor={liked ? 'red' : '#4F80FF'}
               />
-              {` Sauvegarder`}
+              {liked ? 'Sauvegardé‎‎ ‎' : 'Sauvegarder'}
             </Grid>
           </Grid>
         </div>
