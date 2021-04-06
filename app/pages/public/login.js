@@ -327,7 +327,7 @@ const LoginTab = ({
       >
         <div className="fullwidth text-center">
           <a href="/">
-            <img src="/logo.png" alt="kit le nid" />
+            <img src="/logo.svg" alt="kit le nid" />
           </a>
           <Grid container item alignItems="stretch" justify="center">
             <Grid item md={6} xs={12} className={classes.signinLogo} />
