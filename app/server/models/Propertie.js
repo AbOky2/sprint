@@ -102,7 +102,7 @@ class PropertieClass extends DBModel {
     sort = sortByKeys[0],
   }) {
     let near = [],
-      $maxDistance = 1000;
+      $maxDistance = 10000;
 
     if (point) {
       near = point;
@@ -112,7 +112,7 @@ class PropertieClass extends DBModel {
         address: loc,
         country: 'france',
       });
-      // if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
+      if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
     }
     console.log(zoom, $maxDistance);
     const query = {
@@ -145,7 +145,7 @@ class PropertieClass extends DBModel {
       limit: 50,
       page,
       forceCountFn: true,
-      sort: priceSort,
+      sort: { price: priceSort },
     });
     return { list };
   }

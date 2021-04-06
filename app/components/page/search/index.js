@@ -48,10 +48,13 @@ const SearchPage = ({
 
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
+
   const handleBudget = (value) =>
     setQueryData({ ...queryData, maxPrice: value });
-  const handleMapSearch = (value) =>
+  const handleMapSearch = (value) => {
     setQueryData({ ...queryData, loc: value?.label });
+    setMakeRequest(true);
+  };
   const handleSelect = (arg) => {
     let pieces = isArray(arg) ? arg : [arg];
 
@@ -68,13 +71,11 @@ const SearchPage = ({
     addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
   };
   const handlePointChange = (list) => {
-    console.log('ok');
     const listId = list
       .map(({ points = [] }) => points.map((e) => e.id))
       .flat();
     const newState = properties.docs.filter((e) => listId.includes(e._id));
     setState(newState);
-    // setMakeRequest(true);
   };
 
   const isLocation = typeOfAnnonce === typeOfAnnonciesObj.location;
@@ -112,13 +113,12 @@ const SearchPage = ({
   const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
   const View = currView ? MapsView : ListView;
 
-  // useEffect(() => {
-  //   if (makeRequest) {
-  //     requestData();
-  //     setMakeRequest(false);
-  //   }
-  // }, [makeRequest]);
-  // console.log(point);
+  useEffect(() => {
+    if (makeRequest) {
+      requestData();
+      setMakeRequest(false);
+    }
+  }, [makeRequest]);
 
   if (!state) return <NotFound showLink={false} />;
 
