@@ -17,7 +17,6 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
     border: '2px solid #fff',
     borderRadius: '50%',
-    backgroundColor: '${COLORS.gray64}',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -33,9 +32,13 @@ const styles = (theme) => ({
     textTransform: 'uppercase',
     border: '2px solid #fff',
     borderRadius: '50%',
-    backgroundColor: '${COLORS.gray64}',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
+  },
+  bottomPosition: {
+    '& > div': {
+      transform: 'translate(-40%, calc(15% - 1rem))',
+    },
   },
   markerGroup: {
     display: 'flex',

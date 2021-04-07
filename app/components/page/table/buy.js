@@ -4,9 +4,9 @@ import {
   spaceCurrency,
   ucfirst,
   getDateQuarter,
-} from '../../../helpers/convertAndCheck';
+} from 'helpers/convertAndCheck';
 import { Icon, Btn } from '../../form';
-import { NEXT_PUBLIC_UPLOAD_URL } from '../../../config';
+import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 
 import styles from './styles';
 
@@ -141,7 +141,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                         whiteColor
                         href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
                         download
-                        disabled
+                        disabled={!curr.file}
                       />
                     </Grid>
                   </Grid>
@@ -172,7 +172,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                         text={curr.file ? 'Voir' : '-'}
                         href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
                         download
-                        disabled
+                        disabled={!curr.file}
                         target="_blank"
                         dataMode="popup"
                         whiteColor

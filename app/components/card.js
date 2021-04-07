@@ -97,6 +97,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  mapsContainerBottomCard: {
+    transform: 'translate(-40%, calc(15% - 1rem))',
+  },
 }));
 
 const Card = ({
