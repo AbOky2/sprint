@@ -80,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
         },
         '&:last-of-type': {
           paddingTop: 0,
+          '& p:last-of-type': {
+            textAlign: 'left',
+          },
         },
       },
     },
