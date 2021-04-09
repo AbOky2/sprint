@@ -2,7 +2,9 @@ const Admin = 'admin';
 const Roomer = 'roomer';
 const Buyer = 'buyer';
 const Student = 'student';
-const studentRoleList = [Student, Buyer];
+const YoungGraduate = 'young_graduate';
+const EndOfStudies = 'end_of_studies';
+const studentRoleList = [Student, Buyer, YoungGraduate, EndOfStudies];
 const RoleList = [Admin, ...studentRoleList];
 
 // status
@@ -78,6 +80,16 @@ const ucFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 const userRoleSelect = [
   { name: 'Etudiant', value: Student },
   { name: 'Jeune Actif', value: Buyer },
+  { name: 'Jeune diplômé', value: YoungGraduate },
+  { name: "Fin d'Etudes", value: EndOfStudies },
+];
+
+const profileRequiredFields = [
+  'email',
+  'firstName',
+  'lastName',
+  'phone',
+  'role',
 ];
 
 module.exports = {
@@ -97,6 +109,7 @@ module.exports = {
   guarantorStrategy,
   dashboardPaths,
   userRoleSelect,
+  profileRequiredFields,
 
   // Methods
   ucFirst,

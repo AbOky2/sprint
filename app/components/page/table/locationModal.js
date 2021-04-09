@@ -40,7 +40,7 @@ const ReserveLocation = ({
     curr?.ref
   }</strong>, au sein de la résidence <strong>${ucfirst(
     residenceName
-  )}</strong>  située à <strong>${fullAddress}</strong> , à compter du (../../..) et pour une durée de ... .
+  )}</strong>  située à <strong>${fullAddress}</strong>, à compter du (../../..) et pour une durée de ... .
   <br/><br/>
   Je reste à votre entière disposition pour échanger avec vous et vous transmettre les éléments nécessaires à mon dossier.
   Vous pouvez me joindre sur mon portable au <strong>${
@@ -49,7 +49,7 @@ const ReserveLocation = ({
   <br/><br/>
   Bien cordialement,
   <br/>
-  ${ucfirst(user.firstName)}`;
+  ${ucfirst(user.firstName)} ${ucfirst(user.lastName)}`;
   const datas = [
     { label: 'Destinataire', data: receiver },
     { label: 'Object', data: subject },
@@ -61,7 +61,7 @@ const ReserveLocation = ({
         openModal={curr}
         showActions={false}
         onClose={handleClose}
-        title="Votre demande de location à compléter et à envoyer à :RESA-STUDEA@nexity.fr"
+        title="Votre demande de location à compléter et à envoyer à : RESA-STUDEA@nexity.fr"
         confirmText="Envoyer"
       >
         <Grid

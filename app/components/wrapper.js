@@ -16,16 +16,24 @@ const styles = (theme) => ({
   },
   redirect: {
     display: 'inline-block',
+    position: 'sticky',
+    top: '.5rem',
+    padding: '1rem 1.6rem',
+    marginBottom: '3.2rem',
+    border: `2px solid ${theme.palette.newBlue}`,
+    borderRadius: '1rem',
+    backgroundColor: 'white',
+    zIndex: 35,
     '& h4': {
-      marginBottom: '3.2rem',
       textAlign: 'left',
-      color: '#8692a6',
+      color: theme.palette.newBlue,
       cursor: 'pointer',
+      fontSize: '1.4rem',
       fontWeight: 'bold',
       '&::before': {
         content: "''",
-        border: '1px solid #8692a6',
-        borderWidth: '0 3px 3px 0',
+        border: `1px solid ${theme.palette.newBlue}`,
+        borderWidth: '0 2px 2px 0',
         display: 'inline-block',
         padding: '3px',
         marginRight: '1rem',
@@ -52,7 +60,7 @@ const AdminContentWrapper = withStyles(styles)(
       )}
       {children}
     </Grid>
-  )),
+  ))
 );
 
 export { AdminContentWrapper };

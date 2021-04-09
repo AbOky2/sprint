@@ -44,7 +44,15 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+ul,
+li,
+ol,
+i,
+strong,
+span,
+a,
+div {
   word-break: break-word;
 }
 .relative {

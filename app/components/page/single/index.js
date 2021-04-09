@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     width: 'calc(100% - 14px)',
   },
   title: {
-    color: '#4F80FF',
+    color: theme.palette.newBlue,
   },
   save: {
     color: theme.palette.button,
@@ -35,10 +35,10 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
       width: 'auto',
       padding: '20px 23px',
-      background: '#FFFFFF',
-      border: '2px solid #4F80FF',
+      background: 'white',
+      border: `2px solid ${theme.palette.newBlue}`,
       boxSizing: 'border-box',
-      borderRadius: '10px',
+      borderRadius: '1rem',
       transform: 'translateY(calc(50%))',
       fontWeight: 'bold',
       color: theme.palette.newBlue,
@@ -261,9 +261,9 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: '22px',
         display: 'inline-block',
         alignItems: 'center',
-        color: '#4F80FF',
-        background: '#FFFFFF',
-        border: '1px solid #4F80FF',
+        color: theme.palette.newBlue,
+        background: 'white',
+        border: `1px solid ${theme.palette.newBlue}`,
         boxSizing: 'border-box',
         borderRadius: '10px',
         padding: '1.6rem',
@@ -288,6 +288,24 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'right',
     [theme.breakpoints.down('sm')]: {
       textAlign: 'left',
+    },
+  },
+  ecologyContainer: {
+    position: 'relative',
+    marginTop: '5rem',
+    '& > div:first-of-type': {
+      position: 'absolute',
+      top: '-2.5rem',
+      left: 0,
+      backgroundColor: '#3e8743',
+    },
+    '& > div:last-of-type': {
+      marginLeft: '5rem',
+      backgroundColor: '#f5f5f5',
+      padding: '1rem 2rem',
+      borderRadius: '2.5rem',
+      borderTopLeftRadius: 0,
+      borderBottomRightRadius: 0,
     },
   },
 }));
@@ -398,7 +416,7 @@ const PropertyPage = ({
             </Typography>
             {property.available_date && !isLocation ? (
               <Typography variant="body1">
-                {`Disponible dès le ${property.available_date}`}
+                {`Fin de construction le ${property.available_date}`}
               </Typography>
             ) : (
               ''
@@ -500,6 +518,22 @@ const PropertyPage = ({
           fullAddress={property.fullAddress}
           handleClose={() => handleSelectLot(null)}
         />
+        {/* <Grid container className={classes.ecologyContainer}>
+          <div>
+            <Icon type="pen" />
+          </div>
+          <div>
+            <Typography variant="h3">
+              Engagements Durables : votre logement plus éco-responsable
+            </Typography>
+            <Typography>
+              Nexity intègre à ses logements une charte durable afin d’optimiser
+              la gestion des déchets, réaliser des économies d’eau et d’énergie,
+              utiliser des matériaux à l’empreinte écologique limitée et
+              réintégrer la biodiversité au sein de ses résidences.
+            </Typography>
+          </div>
+        </Grid> */}
       </div>
     </AdminContentWrapper>
   );

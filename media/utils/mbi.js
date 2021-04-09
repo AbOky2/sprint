@@ -122,7 +122,7 @@ const getLotsList = (list, lots) =>
       let contract_end_date = newLot.contract_end_date || null;
       let available_date = newLot.available_date || null;
       const newDate = new Date();
-      const endDate = addMonths(newDate, 3);
+      const endDate = addMonths(newDate, 1);
       isAvailable = false;
 
       if (contract_end_date)

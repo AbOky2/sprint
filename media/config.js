@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 const ROOT_URL = process.env.ROOT_URL || `http://localhost:${PORT}`;
 const IS_DEV = NODE_ENV !== 'production';
 const MONGO_URL = IS_DEV ? MONGO_URL_TEST : MONGO_URL_PROD;
-const PROPERTIES_DIR = 'properties'
+const PROPERTIES_DIR = 'properties';
 const PUBLIC_PROPERTIES_DIR = path.resolve(
   __dirname,
   `./public/${PROPERTIES_DIR}`
@@ -32,5 +32,5 @@ module.exports = {
   FTP_USER,
   FTP_PASSWORD,
   PROPERTIES_DIR,
-PUBLIC_PROPERTIES_DIR
+  PUBLIC_PROPERTIES_DIR,
 };

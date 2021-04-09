@@ -160,6 +160,7 @@ const InputBase = withStyles(styles)(
     label,
     type,
     onChange,
+    onKeyPress,
     value,
     position,
     placeholder,
@@ -181,12 +182,14 @@ const InputBase = withStyles(styles)(
           <NumberFormat
             value={value}
             onChange={onChange(name)}
+            onKeyPress={onKeyPress}
             format="##.##.##.##.##"
           />
         ) : (
           <input
             value={value}
             onChange={onChange(name)}
+            onKeyPress={onKeyPress}
             type={type}
             placeholder={placeholder}
           />
@@ -293,6 +296,7 @@ const CustomInput = withStyles(styles)(
 const samePropTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func,
   classes: PropTypes.object.isRequired,
   showSub: PropTypes.bool.isRequired,
   type: PropTypes.string,
@@ -302,9 +306,10 @@ const samePropTypes = {
   position: PropTypes.oneOf(positionType),
 };
 const sameDefaultProps = {
-  label: undefined,
-  type: 'text',
   value: undefined,
+  label: undefined,
+  onKeyPress: undefined,
+  type: 'text',
   placeholder: '',
   position: null,
   classes: {},

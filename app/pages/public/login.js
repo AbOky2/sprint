@@ -155,78 +155,78 @@ const useStyles = makeStyles((theme) => ({
     color: `${theme.palette.primary.main}!important`,
   },
 }));
-const SignUp = ({ values = {}, handleChange }) => (
+const SignUp = ({ values = {}, ...inputProps }) => (
   <Grid container item>
     <Input
+      {...inputProps}
       label="Nom*"
       placeholder="Nom*"
-      onChange={handleChange}
       name="lastName"
       position="left"
     />
     <Input
+      {...inputProps}
       label="Prénom*"
       placeholder="Prénom*"
-      onChange={handleChange}
       name="firstName"
       position="right"
     />
     <Input
+      {...inputProps}
       label="E-mail*"
       placeholder="Votre e-mail"
-      onChange={handleChange}
       name="email"
       type="email"
       position="left"
     />
     <Input
+      {...inputProps}
       label="Téléphone*"
       placeholder="Téléphone"
-      onChange={handleChange}
       name="phone"
       type="phone"
       position="right"
     />
     <Input
+      {...inputProps}
       label="Mot de passe*"
       placeholder="Mot de passe"
-      onChange={handleChange}
       name="password"
       type="password"
       position="left"
     />
     <Select
+      {...inputProps}
       name="role"
       value={values.role}
-      onChange={handleChange}
       list={userRoleSelect}
       label="Status*"
       position="right"
     />
     <Input
+      {...inputProps}
       value={values.sponsorshipCode}
       label="Code parrain"
       placeholder="Code"
-      onChange={handleChange}
       name="sponsorshipCode"
     />
   </Grid>
 );
-const SignIn = ({ values = {}, handleChange }) => (
+const SignIn = ({ values = {}, ...inputProps }) => (
   <>
     <Input
+      {...inputProps}
       label="E-mail*"
       value={values.email}
-      onChange={handleChange}
       name="email"
       type="email"
       placeholder="Votre e-mail"
       position="left"
     />
     <Input
+      {...inputProps}
       label="Mot de passe*"
       value={values.password}
-      onChange={handleChange}
       name="password"
       type="password"
       placeholder="Mot de passe"
@@ -236,7 +236,8 @@ const SignIn = ({ values = {}, handleChange }) => (
 );
 const propTypes = {
   values: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
 };
 SignIn.propTypes = propTypes;
 SignUp.propTypes = propTypes;
@@ -309,6 +310,7 @@ const LoginTab = ({
 
     authReq(data);
   };
+  const onKeyPress = (e) => e.key === 'Enter' && onClick();
   const handleChange = (name) => ({ target: { value } }) =>
     setState({ ...state, [name]: value });
   const classes = useStyles();
@@ -348,7 +350,10 @@ const LoginTab = ({
                       ? 'Inscrivez-vous gratuitement !'
                       : 'Connexion'}
                   </h1>
-                  <h2>Accéder à tout notre accompagnement.</h2>
+                  <h2>
+                    Rejoignez Kit le nid et accédez gratuitement à toutes nos
+                    offres d’appartements
+                  </h2>
                   <Grid
                     container
                     item
@@ -359,13 +364,15 @@ const LoginTab = ({
                     {isRegisterinView ? (
                       <SignUp
                         values={state}
-                        handleChange={handleChange}
+                        onChange={handleChange}
+                        onKeyPress={onKeyPress}
                         onClick={onClick}
                       />
                     ) : (
                       <SignIn
                         values={state}
-                        handleChange={handleChange}
+                        onChange={handleChange}
+                        onKeyPress={onKeyPress}
                         onClick={onClick}
                       />
                     )}

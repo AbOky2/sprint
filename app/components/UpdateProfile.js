@@ -85,17 +85,22 @@ const UpdateProfile = ({ user, update, logout }) => {
     setState({ ...state, [name]: value });
   const handleOpenModal = () => setOpenModal(true);
   const toggleShowSubMenu = () => setShowSubMenu(!showSubMenu);
-  const handleModalClose = (showMessage) => {
-    if (showMessage && JSON.stringify(user) !== JSON.stringify(state))
-      toast.success('Profil mis à jour');
+  const handleModalClose = (showMessage = false) => {
+    const hasUpdate =
+      showMessage == true && JSON.stringify(user) !== JSON.stringify(state);
+
+    if (hasUpdate) toast.success('Profil mis à jour');
     toggleShowSubMenu();
     setOpenModal(false);
+    if (!hasUpdate) setState(user);
   };
   // eslint-disable-next-line no-return-assign
   const handleLogOut = () => logout(() => (window.location = '/login'));
   const handleSumbit = () => {
     update(state, () => handleModalClose(true));
   };
+  const onKeyPress = (e) => e.key === 'Enter' && handleSumbit(true);
+
   const classes = useStyles();
 
   return (
@@ -144,6 +149,7 @@ const UpdateProfile = ({ user, update, logout }) => {
               value={state.lastName}
               label="Nom*"
               onChange={handleChange}
+              onKeyPress={onKeyPress}
               name="lastName"
               position="left"
             />
@@ -151,6 +157,7 @@ const UpdateProfile = ({ user, update, logout }) => {
               value={state.firstName}
               label="Prénom*"
               onChange={handleChange}
+              onKeyPress={onKeyPress}
               name="firstName"
               position="right"
             />
@@ -158,6 +165,7 @@ const UpdateProfile = ({ user, update, logout }) => {
               value={state.email}
               label="E-mail*"
               onChange={handleChange}
+              onKeyPress={onKeyPress}
               name="email"
               type="email"
               position="left"
@@ -166,6 +174,7 @@ const UpdateProfile = ({ user, update, logout }) => {
               value={state.phone}
               label="Téléphone"
               onChange={handleChange}
+              onKeyPress={onKeyPress}
               name="phone"
               type="phone"
               position="right"
@@ -175,6 +184,7 @@ const UpdateProfile = ({ user, update, logout }) => {
               label="Mot de passe"
               placeholder="Votre mot de passe"
               onChange={handleChange}
+              onKeyPress={onKeyPress}
               name="password"
               type="password"
               position="left"

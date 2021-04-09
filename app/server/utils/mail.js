@@ -52,7 +52,7 @@ const sendNewLocation = async ({ subject, content }) =>
 const sendSponsorship = async ({ sender, receiver }) =>
   sendMail({
     to: receiver.email,
-    subject: 'Code parrainage',
+    subject: 'Kit le nid parrainage',
     content: `Bonjour ${ucfirst(receiver.firstName)},\n\n
       ${ucfirst(sender.firstName)} ${ucfirst(
       sender.lastName
@@ -65,7 +65,7 @@ const sendSponsorship = async ({ sender, receiver }) =>
 const sucessSponsorshipUsed = async ({ sender, receiver }) =>
   sendMail({
     to: receiver.email,
-    subject: 'Code parrainage',
+    subject: 'Kit le nid parrainage',
     content: `Bonjour ${ucfirst(receiver.firstName)},\n\n
       Felicitations ! ${ucfirst(sender.firstName)} ${ucfirst(
       sender.lastName
