@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '& h4': {
       ...theme.typography.h4,
+      color: theme.palette.newBlue,
       marginTop: 0,
       marginBottom: 8,
     },
