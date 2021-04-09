@@ -197,6 +197,8 @@ const useStyles = makeStyles((theme) => ({
   },
   mapContainer: {
     marginTop: 24,
+    borderRadius: '2.5rem',
+    overflow: 'hidden',
     '& > div': {
       minHeight: 400,
     },
@@ -518,7 +520,7 @@ const PropertyPage = ({
           fullAddress={property.fullAddress}
           handleClose={() => handleSelectLot(null)}
         />
-        {/* <Grid container className={classes.ecologyContainer}>
+        <Grid container className={classes.ecologyContainer}>
           <div>
             <Icon type="pen" />
           </div>
@@ -533,7 +535,7 @@ const PropertyPage = ({
               réintégrer la biodiversité au sein de ses résidences.
             </Typography>
           </div>
-        </Grid> */}
+        </Grid>
       </div>
     </AdminContentWrapper>
   );
