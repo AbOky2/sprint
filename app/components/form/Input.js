@@ -182,6 +182,7 @@ const InputBase = withStyles(styles)(
           <NumberFormat
             value={value}
             onChange={onChange(name)}
+            placeholder={placeholder}
             onKeyPress={onKeyPress}
             format="##.##.##.##.##"
           />
