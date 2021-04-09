@@ -520,7 +520,7 @@ const PropertyPage = ({
           fullAddress={property.fullAddress}
           handleClose={() => handleSelectLot(null)}
         />
-        <Grid container className={classes.ecologyContainer}>
+        {/* <Grid container className={classes.ecologyContainer}>
           <div>
             <Icon type="pen" />
           </div>
@@ -535,7 +535,7 @@ const PropertyPage = ({
               réintégrer la biodiversité au sein de ses résidences.
             </Typography>
           </div>
-        </Grid>
+        </Grid> */}
       </div>
     </AdminContentWrapper>
   );
