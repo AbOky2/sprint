@@ -52,7 +52,7 @@ const ReserveLocation = ({
   ${ucfirst(user.firstName)} ${ucfirst(user.lastName)}`;
   const datas = [
     { label: 'Destinataire', data: receiver },
-    { label: 'Object', data: subject },
+    { label: 'Objet', data: subject },
     { label: 'Message', data: message },
   ];
   return (

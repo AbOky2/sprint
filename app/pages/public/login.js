@@ -7,11 +7,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { userActions } from '../../redux/_actions';
-import { Btn, Select, Input } from '../../components/form';
-import withAuth from '../../lib/withAuth';
-import { Student, userRoleSelect } from '../../helpers/user';
-import { pick } from '../../helpers/convertAndCheck';
+import { userActions } from 'redux/_actions';
+import { Btn, Select, Input } from 'components/form';
+import withAuth from 'lib/withAuth';
+import { Student, userRoleSelect } from 'helpers/user';
+import { pick } from 'helpers/convertAndCheck';
+import { cleanAlert } from 'helpers/hooks';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -272,7 +273,8 @@ const LoginTab = ({
 
     if (!isRegisterinView) {
       data = { email: data.email, password: data.password };
-      if (!data.email || !data.password) return;
+      if (!data.email || !data.password)
+        return cleanAlert('Veuillez remplir les champs obligatoires');
       authReq = login;
     } else {
       const pickdata = [
@@ -291,12 +293,12 @@ const LoginTab = ({
         !data.role ||
         !data.phone
       ) {
-        toast.warn('Veuillez remplir les champs obligatoires');
+        cleanAlert('Veuillez remplir les champs obligatoires');
         return;
       }
 
       if (!checked) {
-        toast.warn('Veuillez accepter les conditions générales');
+        cleanAlert('Veuillez accepter les conditions générales');
         return;
       }
       if (data.sponsorshipCode?.length) pickdata.push('sponsorshipCode');

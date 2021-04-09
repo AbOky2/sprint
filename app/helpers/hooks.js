@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 const defaultNodeame = 'SPAN';
@@ -33,4 +34,18 @@ useToggleOpen.defaultProps = {
   nodeName: defaultNodeame,
   isOpen: false,
 };
-export { useToggleOpen };
+
+const cleanAlert = (msg, type = 'warn') => {
+  toast.dismiss();
+  if (toast[type]) return toast[type](msg);
+};
+
+const toasifyType = ['warn', 'info', 'success', 'error', 'dark'];
+cleanAlert.propTypes = {
+  msg: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(toasifyType),
+};
+cleanAlert.defaultProps = {
+  type: 'warn',
+};
+export { useToggleOpen, cleanAlert };

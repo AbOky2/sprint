@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
       fontStyle: 'normal',
       lineHeight: '28px',
       color: 'white',
+      wordBreak: 'keep-all',
     },
     '& svg': {
       marginRight: 20,
