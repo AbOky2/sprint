@@ -18,7 +18,7 @@ const Marker = ({ data, show, isMobile, inGroup }) => {
     <div>
       <div className={className}>
         <Icon className={classes.markerIcon} />
-        {show && !isMobile && <MapsCard {...data} />}
+        {show && !isMobile && data?.showInfoWindow && <MapsCard {...data} />}
       </div>
     </div>
   );

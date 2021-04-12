@@ -10,7 +10,7 @@ const defaultCenter = {
   lng: 2.348329772716056,
 };
 const MAP = {
-  defaultZoom: 11,
+  defaultZoom: 12,
   defaultCenter,
   options: {
     maxZoom: 19,
@@ -47,7 +47,7 @@ export const GoogleMap = (props) => {
       })),
       {
         minZoom: 0,
-        maxZoom: 16,
+        maxZoom: MAP.defaultZoom - 1,
         radius: 60,
       }
     );

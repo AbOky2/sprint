@@ -95,7 +95,7 @@ const MapsView = withStyles(
 
       setCarrouselIndex(currIndex);
       if (found) {
-        setCurr({ ...found, ...getChildPostion() });
+        setCurr({ ...found, showInfoWindow: true, ...getChildPostion() });
       }
     };
     const handleCarouselChange = (index) => setCurr(data[index]);
@@ -103,7 +103,7 @@ const MapsView = withStyles(
       if (!id) return setCurr(null);
 
       const currIndex = data.findIndex((e) => e._id === id);
-      setCurr(data[currIndex]);
+      setCurr({ ...data[currIndex], showInfoWindow: false });
     };
 
     return (
