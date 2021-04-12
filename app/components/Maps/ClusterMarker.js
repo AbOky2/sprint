@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import Marker from './Marker';
 import styles from './styles';
 
+const clusterLimit = 1;
 class ClusterMarker extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
   state = {
-    clusterFaceMarkers: this.props.points.slice(0, 2),
+    clusterFaceMarkers: this.props.points.slice(0, clusterLimit),
   };
 
   render() {
@@ -24,9 +25,9 @@ class ClusterMarker extends React.PureComponent {
             {...props}
           />
         ))}
-        {this.props.points.length > 2 && (
+        {this.props.points.length > clusterLimit && (
           <div className={classes.markerCounter}>
-            +{this.props.points.length - 2}
+            +{this.props.points.length - clusterLimit}
           </div>
         )}
       </div>
