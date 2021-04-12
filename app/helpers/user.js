@@ -79,9 +79,9 @@ const ucFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 const userRoleSelect = [
   { name: 'Etudiant', value: Student },
-  { name: 'Jeune Actif', value: Buyer },
+  { name: 'Jeune actif', value: Buyer },
   { name: 'Jeune diplômé', value: YoungGraduate },
-  { name: "Fin d'Etudes", value: EndOfStudies },
+  { name: "Fin d'etudes", value: EndOfStudies },
 ];
 
 const profileRequiredFields = [

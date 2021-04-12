@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { AdminContentWrapper } from '../../components/wrapper';
-import { ucfirst } from '../../helpers/convertAndCheck';
-import withAuth from '../../lib/withAuth';
+import { AdminContentWrapper } from 'components/wrapper';
+import { ucfirst } from 'helpers/convertAndCheck';
+import withAuth from 'lib/withAuth';
+import { cleanAlert } from 'helpers/hooks';
+import { Btn, Input, Icon } from 'components/form';
+import { addSponsorshipApiMethod } from 'lib/api/customer';
 import FirstDivider from '../../static/img/first_divider.svg';
 import SecondDivider from '../../static/img/second_divider.svg';
-import { Btn, Input, Icon } from '../../components/form';
-import { addSponsorshipApiMethod } from '../../lib/api/customer';
 
 const useStyles = makeStyles((theme) => ({
   tutorialConainer: {
@@ -75,14 +75,14 @@ const PartnerPage = ({ user }) => {
   });
   const handleChange = (name) => ({ target: { value } }) =>
     setState({ ...state, [name]: value });
+  const onKeyPress = (e) => e.key === 'Enter' && handleSubmit();
   const handleSubmit = async () => {
-    // if (!state.email || !state.firstName || !state.lastName || !state.phone)
-    //   return;
     try {
-      await addSponsorshipApiMethod(state);
-      toast.success('Envoyé');
+      const res = await addSponsorshipApiMethod(state);
+      if (res?.user) cleanAlert('Envoyé', 'success');
     } catch (err) {}
   };
+
   const classes = useStyles();
 
   return (
@@ -142,18 +142,21 @@ const PartnerPage = ({ user }) => {
           <Input
             label="Prénom*"
             onChange={handleChange}
+            onKeyPress={onKeyPress}
             name="firstName"
             position="left"
           />
           <Input
             label="Nom*"
             onChange={handleChange}
+            onKeyPress={onKeyPress}
             name="lastName"
             position="right"
           />
           <Input
             label="E-mail*"
             onChange={handleChange}
+            onKeyPress={onKeyPress}
             name="email"
             type="email"
             position="left"
@@ -161,6 +164,7 @@ const PartnerPage = ({ user }) => {
           <Input
             label="Téléphone"
             onChange={handleChange}
+            onKeyPress={onKeyPress}
             name="phone"
             type="phone"
             position="right"

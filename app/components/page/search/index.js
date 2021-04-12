@@ -36,7 +36,7 @@ const SearchPage = ({
   });
   const [currView, setCurrView] = useState(isMapsView);
   const [makeRequest, setMakeRequest] = useState(false);
-  const [allData, setAllData] = useState(properties.docs);
+  const [allData, setAllData] = useState(properties);
   const [state, setState] = useState([]);
   const [sortBy, setSortBy] = useState(sort || sortByKeys[0]);
   const [queryData, setQueryData] = useState({
@@ -90,12 +90,14 @@ const SearchPage = ({
     if (!queryData.maxPrice) queryData.maxPrice = -1;
     if (!queryData.loc) queryData.loc = null;
 
-    const { list: { docs, ...pageInfo } = {} } = await getPropertiesApiMethod({
+    const {
+      list: { docs, near, ...pageInfo } = {},
+    } = await getPropertiesApiMethod({
       ...queryData,
       page,
     });
     setState(docs);
-    setAllData(docs);
+    setAllData({ docs, near });
     setPage(pick(pageInfo, pagePropertyWhilist));
 
     Router.push(

@@ -74,12 +74,29 @@ const MapsView = withStyles(
     }));
     const [curr, setCurr] = useState(null);
     const [carrouselIndex, setCarrouselIndex] = useState(0);
+    const getChildPostion = () => {
+      const bounds = document
+        .getElementById('maps-container')
+        ?.getBoundingClientRect();
+      if (!bounds || !window?.event) return {};
+
+      const e = window.event;
+      const x = e.clientX - bounds.left;
+      const y = e.clientY - bounds.top;
+
+      return {
+        isTop: bounds.height / 2 < bounds.height - y,
+        isLeft: bounds.width / 2 < bounds.width - x,
+      };
+    };
     const handleChildClick = (id) => {
       const currIndex = locs.findIndex((e) => id.includes(e._id));
       const found = data[currIndex];
 
       setCarrouselIndex(currIndex);
-      if (found) setCurr(found);
+      if (found) {
+        setCurr({ ...found, ...getChildPostion() });
+      }
     };
     const handleCarouselChange = (index) => setCurr(data[index]);
     const handleMouseEnter = (id) => () => {

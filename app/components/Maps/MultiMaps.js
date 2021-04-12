@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import supercluster from 'points-cluster';
 import Marker from './Marker';
@@ -16,21 +16,31 @@ const MAP = {
     maxZoom: 19,
   },
 };
-
-export class GoogleMap extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
-  state = {
+export const GoogleMap = (props) => {
+  const {
+    classes,
+    curr,
+    isMobile,
+    data: { docs = [], near = [] },
+    handlePointChange,
+    handleChildClick,
+  } = props;
+  const [state, setState] = useState({
     mapOptions: {
-      center: MAP.defaultCenter,
+      center: near,
       zoom: MAP.defaultZoom,
     },
     clusters: [],
     clustersList: [],
-  };
+  });
+  const [center, setCenter] = useState(near);
 
-  getClusters = () => {
+  // console.log(docs);
+  const [triggerCreateClusters, setTriggerCreateClusters] = useState(false);
+
+  const getClusters = () => {
     const clusters = supercluster(
-      this.props.data.map(({ _id, loc }) => ({
+      docs.map(({ _id, loc }) => ({
         lng: loc?.coordinates[0],
         lat: loc?.coordinates[1],
         id: _id,
@@ -42,12 +52,14 @@ export class GoogleMap extends React.PureComponent {
       }
     );
 
-    return clusters(this.state.mapOptions);
+    return clusters(state.mapOptions);
   };
 
-  createClusters = (props) => {
-    const clusters = this.state.mapOptions.bounds
-      ? this.getClusters(props).map(({ wx, wy, numPoints, points }) => ({
+  const createClusters = (props) => {
+    // console.log(state.mapOptions.bounds);
+
+    const clusters = state.mapOptions.bounds
+      ? getClusters(props).map(({ wx, wy, numPoints, points }) => ({
           lat: wy,
           lng: wx,
           numPoints,
@@ -56,59 +68,70 @@ export class GoogleMap extends React.PureComponent {
         }))
       : [];
 
-    this.setState({ clusters }, () => this.props.handlePointChange(clusters));
+    setState({ ...state, clusters });
   };
 
-  handleMapChange = ({ center, zoom, bounds }) => {
+  const handleMapChange = ({ center, zoom, bounds }) => {
     const mapOptions = { center, zoom, bounds };
-    this.setState({ mapOptions }, () => {
-      this.createClusters(this.props);
-    });
+    setState({ ...state, mapOptions });
+    setTriggerCreateClusters(true);
   };
 
-  render() {
-    const { classes, handleChildClick, curr, isMobile } = this.props;
+  useEffect(() => {
+    let newCenter = [];
 
-    return (
-      <div className={classes.mapWrapper}>
-        <GoogleMapReact
-          defaultZoom={MAP.defaultZoom}
-          defaultCenter={MAP.defaultCenter}
-          options={MAP.options}
-          onChange={this.handleMapChange}
-          onChildClick={handleChildClick}
-          yesIWantToUseGoogleMapApiInternals
-        >
-          {this.state.clusters.map((item) => {
-            if (item.numPoints === 1) {
-              return (
-                <Marker
-                  key={item.id}
-                  lat={item.points[0].lat}
-                  lng={item.points[0].lng}
-                  data={curr}
-                  show={item.id.includes(curr?._id)}
-                  isMobile={isMobile}
-                />
-              );
-            }
+    if (near)
+      newCenter = [curr?.loc?.coordinates[1], curr?.loc?.coordinates[0]];
+    else newCenter = near;
+    setCenter(newCenter);
+  }, [near, curr]);
 
+  useEffect(() => {
+    createClusters(props);
+    handlePointChange(state.clusters);
+    setTriggerCreateClusters(false);
+  }, [triggerCreateClusters]);
+
+  return (
+    <div className={classes.mapWrapper} id="maps-container">
+      <GoogleMapReact
+        defaultZoom={MAP.defaultZoom}
+        defaultCenter={near}
+        options={MAP.options}
+        onChange={handleMapChange}
+        onChildClick={handleChildClick}
+        yesIWantToUseGoogleMapApiInternals
+        center={near}
+      >
+        {state.clusters.map((item) => {
+          if (item.numPoints === 1) {
             return (
-              <ClusterMarker
+              <Marker
                 key={item.id}
-                lat={item.lat}
-                lng={item.lng}
-                points={item.points || []}
+                lat={item.points[0].lat}
+                lng={item.points[0].lng}
                 data={curr}
-                show={item.points?.find((e) => e.id.includes(curr?._id))}
+                show={item.id.includes(curr?._id)}
                 isMobile={isMobile}
               />
             );
-          })}
-        </GoogleMapReact>
-      </div>
-    );
-  }
-}
+          }
+
+          return (
+            <ClusterMarker
+              key={item.id}
+              lat={item.lat}
+              lng={item.lng}
+              points={item.points || []}
+              data={curr}
+              show={item.points?.find((e) => e.id.includes(curr?._id))}
+              isMobile={isMobile}
+            />
+          );
+        })}
+      </GoogleMapReact>
+    </div>
+  );
+};
 
 export default styles(GoogleMap);

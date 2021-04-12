@@ -23,6 +23,7 @@ try {
   // const d = new Date();
   // logger.log('Starting mbi at sync', d);
   // ftp(readMbi);
+  // readMbi();
 } catch (err) {
   logger.error(err);
 }

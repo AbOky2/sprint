@@ -1,35 +1,28 @@
 import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { MapsCard } from 'components/card';
 import CustomMarker from '../../static/img/icons/customMarker.svg';
 import SelectedCustomMarker from '../../static/img/icons/selectedCustomMarker.svg';
-import Styles from './styles';
+import { styles } from './styles';
 
-class Marker extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
-  static defaultProps = {
-    inGroup: false,
-    show: false,
-    isMobile: false,
-  };
+const useStyles = makeStyles(styles);
+const Marker = ({ data, show, isMobile, inGroup }) => {
+  const classes = useStyles({ isTop: data?.isTop, isLeft: data?.isLeft });
+  let className = inGroup ? classes.markerInGroupStyled : classes.markerStyled;
+  const Icon = show ? SelectedCustomMarker : CustomMarker;
+  className = clsx(className, classes.markerPosition);
 
-  render() {
-    const { classes, show, isMobile, data } = this.props;
-    const className = this.props.inGroup
-      ? classes.markerInGroupStyled
-      : classes.markerStyled;
-    const Icon = show ? SelectedCustomMarker : CustomMarker;
-
-    return (
-      <div>
-        <div className={className}>
-          <Icon className={classes.markerIcon} />
-          {show && !isMobile && <MapsCard {...data} />}
-        </div>
+  return (
+    <div>
+      <div className={className}>
+        <Icon className={classes.markerIcon} />
+        {show && !isMobile && <MapsCard {...data} />}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Marker.propTypes = {
   data: PropTypes.object,
@@ -37,5 +30,10 @@ Marker.propTypes = {
   isMobile: PropTypes.bool,
   show: PropTypes.bool,
 };
+Marker.defaultProps = {
+  inGroup: false,
+  show: false,
+  isMobile: false,
+};
 
-export default Styles(Marker);
+export default Marker;

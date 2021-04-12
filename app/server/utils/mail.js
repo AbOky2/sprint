@@ -15,10 +15,10 @@ sgMail.setApiKey(SENDGRID_API_KEY);
  * @param {String} options.content - HTML mail content
  */
 
-const sendMail = async ({ to, subject, content } = {}) =>
+const sendMail = async ({ to, subject, content, name = 'kit le nid' } = {}) =>
   // eslint-disable-next-line no-return-await
   await sgMail.send({
-    from: MAIL_USER,
+    from: { email: MAIL_USER, name },
     to,
     subject,
     html: content,
@@ -51,8 +51,9 @@ const sendNewLocation = async ({ subject, content }) =>
 
 const sendSponsorship = async ({ sender, receiver }) =>
   sendMail({
+    name: 'Kit le nid Parrainage',
     to: receiver.email,
-    subject: 'Kit le nid parrainage',
+    subject: 'Code parrainage',
     content: `Bonjour ${ucfirst(receiver.firstName)},\n\n
       ${ucfirst(sender.firstName)} ${ucfirst(
       sender.lastName
@@ -64,8 +65,9 @@ const sendSponsorship = async ({ sender, receiver }) =>
 
 const sucessSponsorshipUsed = async ({ sender, receiver }) =>
   sendMail({
+    name: 'Kit le nid Parrainage',
     to: receiver.email,
-    subject: 'Kit le nid parrainage',
+    subject: 'Code parrainage',
     content: `Bonjour ${ucfirst(receiver.firstName)},\n\n
       Felicitations ! ${ucfirst(sender.firstName)} ${ucfirst(
       sender.lastName

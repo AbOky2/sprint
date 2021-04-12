@@ -260,7 +260,7 @@ const readMba = () => {
                   data.fullAddress = geo[0].formattedAddress;
                   data.loc = {
                     type: 'Point',
-                    coordinates: [geo[0].longitude, geo[0].latitude],
+                    coordinates: [geo[0].latitude, geo[0].longitude],
                   };
                   if (message) data.available = false;
                   else data.available = true;

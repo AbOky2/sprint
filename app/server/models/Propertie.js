@@ -95,39 +95,41 @@ class PropertieClass extends DBModel {
     typeOfAnnonce,
     pieces = [],
     loc,
-    point,
-    zoom = 1,
     limit = defaultLimit,
     page = defaultOffset,
-    sort = sortByKeys[0],
+    sort,
   }) {
     let near = [],
-      $maxDistance = 10000;
+      $maxDistance = 100000;
 
-    if (point) {
-      near = point;
-      $maxDistance = Math.abs($maxDistance * (2 - zoom));
-    } else if (loc) {
+    if (loc) {
       const geo = await maps.geocode({
         address: loc,
         country: 'france',
       });
-      if (geo && geo[0]) near = [geo[0].longitude, geo[0].latitude];
+      if (geo && geo[0]) near = [geo[0].latitude, geo[0].longitude];
     }
 
     const query = {
       $and: [
         pieces.length > 0 ? { pieces: { $in: pieces } } : {},
         maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
+        // near.length > 0
+        //   ? {
+        //       loc: {
+        //         $geoWithin: { $centerSphere: [near, $maxDistance] },
+        //       },
+        //     }
+        //   : {},
         near.length > 0
           ? {
               loc: {
-                $near: {
+                $nearSphere: {
                   $geometry: {
                     type: 'Point',
                     coordinates: near,
                   },
-                  $maxDistance,
+                  // $maxDistance,
                 },
               },
             }
@@ -138,14 +140,20 @@ class PropertieClass extends DBModel {
         { typeOfAnnonce },
       ],
     };
+    // const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
+    // const list = await this.paginate(query, {
+    //   limit: 1000,
+    //   page,
+    //   forceCountFn: true,
+    //   sort: { price: priceSort },
+    // });
+    const docs = await this.find(query);
+    const list = {
+      docs,
+      near,
+    };
 
-    const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
-    const list = await this.paginate(query, {
-      limit: 1000,
-      page,
-      forceCountFn: true,
-      sort: { price: priceSort },
-    });
+    // console.log(docs);
     return { list };
   }
 }

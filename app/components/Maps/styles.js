@@ -33,9 +33,12 @@ const styles = (theme) => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
-  bottomPosition: {
+  markerPosition: {
     '& > div': {
-      transform: 'translate(-40%, calc(15% - 1rem))',
+      transform: (props) =>
+        `translate(${props.isLeft ? '22%' : '-100%'}, calc(${
+          props.isTop ? '-15%' : '-100%'
+        } - 1rem))`,
     },
   },
   markerGroup: {
@@ -68,5 +71,6 @@ const styles = (theme) => ({
     zIndex: 6,
   },
 });
+export { styles };
 
 export default withStyles(styles);
