@@ -171,11 +171,11 @@ const DropdownSelect = withStyles(styles)(
               md={6}
               alignItems="center"
               className="pointer"
-              onClick={() => handleSelected(elem.value)}
+              onClick={() => handleSelected(elem.value + '')}
             >
               <Checkbox
                 color="primary"
-                checked={selected.includes(elem.value)}
+                checked={selected.includes(elem.value + '')}
               />
               <Typography variant="body2">{elem.name}</Typography>
             </Grid>

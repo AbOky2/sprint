@@ -18,8 +18,6 @@ const searchFields = withStyles(
     handleSumit,
     handleSelect,
     toggleView,
-    data,
-    handlePointChange,
     isMapsView,
   }) => (
     <>
@@ -90,13 +88,11 @@ const searchFields = withStyles(
 );
 searchFields.PropTypes = {
   classes: PropTypes.object.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object),
   isLocation: PropTypes.bool.isRequired,
   isMapsView: PropTypes.bool.isRequired,
   isMdView: PropTypes.bool.isRequired,
   queryData: PropTypes.object.isRequired,
   toggleView: PropTypes.func.isRequired,
-  handlePointChange: PropTypes.func.isRequired,
   handleMapSearch: PropTypes.func.isRequired,
   handleBudget: PropTypes.func.isRequired,
   handleSumit: PropTypes.func.isRequired,
