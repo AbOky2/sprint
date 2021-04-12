@@ -26,7 +26,7 @@ let globalUser = null;
 
 export default function withAuth(
   BaseComponent,
-  { loginRequired = true, logoutRequired = false, adminRequired = false } = {},
+  { loginRequired = true, logoutRequired = false, adminRequired = false } = {}
 ) {
   class App extends React.Component {
     static async getInitialProps(ctx) {
@@ -54,7 +54,9 @@ export default function withAuth(
       }
 
       if (logoutRequired && user) {
-        Router.push(isAdmin(user) ? dashboardPaths.admin : dashboardPaths.student);
+        Router.push(
+          isAdmin(user) ? dashboardPaths.admin : dashboardPaths.student
+        );
       }
     }
 
