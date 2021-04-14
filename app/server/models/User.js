@@ -29,77 +29,80 @@ const logger = require('../logs');
 const { Schema } = mongoose;
 const modelName = 'User';
 
-const mongoSchema = new Schema({
-  picture: {
-    type: String,
-    default: `${ROOT_URL}/static/img/users/default-picture.png`,
-    // required: true,
-  },
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: String,
-    trim: true,
-    index: true,
-    unique: true,
-    sparse: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    sparse: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Propertie' }],
-  sponsorshipCode: {
-    type: String,
-  },
-  slug: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  age: {
-    type: Date,
-    validate: {
-      validator: (v) => isMajor(v),
-      message: msg.notMajor,
+const mongoSchema = new Schema(
+  {
+    picture: {
+      type: String,
+      default: `${ROOT_URL}/static/img/users/default-picture.png`,
+      // required: true,
     },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      trim: true,
+      index: true,
+      unique: true,
+      sparse: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      sparse: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Propertie' }],
+    sponsorshipCode: {
+      type: String,
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    age: {
+      type: Date,
+      validate: {
+        validator: (v) => isMajor(v),
+        message: msg.notMajor,
+      },
+    },
+    school: {
+      type: String,
+    },
+    role: {
+      type: String,
+      enum: RoleList,
+      default: Roomer,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: StatusList,
+      default: Inactive,
+      // required: true,
+    },
+    provider: {
+      type: String,
+    },
+    referrer_url: {
+      type: String,
+    },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
   },
-  school: {
-    type: String,
-  },
-  role: {
-    type: String,
-    enum: RoleList,
-    default: Roomer,
-    required: true,
-  },
-  status: {
-    type: String,
-    enum: StatusList,
-    default: Inactive,
-    // required: true,
-  },
-  provider: {
-    type: String,
-  },
-  referrer_url: {
-    type: String,
-  },
-  resetPasswordToken: String,
-  resetPasswordExpires: Date,
-});
+  { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } }
+);
 
 class UserClass extends DBModel {
   static publicFields() {
@@ -204,7 +207,10 @@ class UserClass extends DBModel {
     offset: page = defaultOffset,
   } = {}) {
     const query = { role: { $ne: Admin } };
-    const list = await this.paginate(query, { forceCountFn: true });
+    const list = await this.paginate(query, {
+      page,
+      sort: { createdAt: 'asc' },
+    });
 
     return { list };
   }

@@ -59,9 +59,10 @@ const styles = (theme) => ({
     padding: '8px',
     marginLeft: '-10px',
     textAlign: 'center',
-    fontSize: '14px',
+    fontSize: '.8rem',
     color: '#fff',
     border: '2px solid #fff',
+
     borderRadius: '50%',
     backgroundColor: 'gray',
   },

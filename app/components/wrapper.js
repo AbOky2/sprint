@@ -24,6 +24,9 @@ const styles = (theme) => ({
     borderRadius: '1rem',
     backgroundColor: 'white',
     zIndex: 35,
+    [theme.breakpoints.down('sm')]: {
+      top: '3.5rem',
+    },
     '& h4': {
       textAlign: 'left',
       color: theme.palette.newBlue,

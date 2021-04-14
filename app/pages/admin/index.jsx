@@ -1,35 +1,70 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import withAuth from '../../lib/withAuth';
-import { getUsersApiMethod } from '../../lib/api/admin';
-import Table from '../../components/admin/table';
+import React, { useState } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import withAuth from 'lib/withAuth';
+import { getUsersApiMethod } from 'lib/api/admin';
+import { userRoleKeyVal } from 'helpers/user';
 
-const Dashboard = () => {
-  const [state, setState] = useState({
-    docs: [],
-  });
+const columns = [
+  { field: 'firstName', headerName: 'prenom', width: 150 },
+  { field: 'lastName', headerName: 'Nom' },
+  { field: 'email', headerName: 'Mail', width: 200 },
+  { field: 'phone', headerName: 'Téléphone', width: 130 },
+  {
+    field: 'sponsorshipCode',
+    headerName: 'Parrain',
+  },
+  {
+    field: 'role',
+    headerName: 'Status',
+    valueGetter: (data) => userRoleKeyVal[data.value],
+  },
+  { field: 'origin', headerName: 'Origin' },
+];
+const Dashboard = ({ studentList = {} } = {}) => {
+  const [state, setState] = useState(studentList);
 
-  const handleChange = useCallback((name, value) => setState({ ...state, [name]: value }), [
-    state,
-    setState,
-  ]);
-  useEffect(() => {
-    (async () => {
-      try {
-        const { list } = await getUsersApiMethod();
-        if (list) {
-          setState(list);
-        }
-      } catch (error) {
-        console.error(error);
+  const handleQuery = async (page) => {
+    try {
+      const { list } = await getUsersApiMethod(page);
+      if (list) {
+        setState(list);
       }
-    })();
-  }, []);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
-      <Table data={state} />
+      <DataGrid
+        rows={state.docs}
+        rowCount={state.totalDocs}
+        columns={columns}
+        pageSize={10}
+        getRowId={(data) => data._id}
+        onPageChange={({ page }) => handleQuery(page + 1)}
+        checkboxSelection
+        paginationMode="server"
+        autoHeight
+      />
     </div>
   );
+};
+
+Dashboard.getInitialProps = async ({ req, res }) => {
+  if (req && !req.user) {
+    res.redirect('/login');
+    return { partners: [] };
+  }
+
+  const headers = {};
+  if (req && req.headers && req.headers.cookie) {
+    headers.cookie = req.headers.cookie;
+  }
+
+  const { list } = await getUsersApiMethod(1, { headers });
+
+  return { studentList: list };
 };
 
 export default withAuth(Dashboard, { adminRequired: true });

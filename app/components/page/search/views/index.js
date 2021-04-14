@@ -55,6 +55,7 @@ const MapsView = withStyles(
     classes,
     liked,
     handleBookmark,
+    queryData,
     toggleView,
     data = [],
     allData = [],
@@ -143,6 +144,7 @@ const MapsView = withStyles(
         <Grid item md={7} xs={12}>
           <MultiMaps
             data={allData}
+            queryData={queryData}
             curr={curr}
             handleChildClick={handleChildClick}
             isMobile={isMdView}
@@ -179,6 +181,7 @@ const MapsView = withStyles(
 const sharedProptypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
+  queryData: PropTypes.object.isRequired,
   allData: PropTypes.arrayOf(PropTypes.object),
   sortBy: PropTypes.oneOf(sortByKeys).isRequired,
   liked: PropTypes.array.isRequired,

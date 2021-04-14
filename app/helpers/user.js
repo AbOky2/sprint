@@ -84,6 +84,11 @@ const userRoleSelect = [
   { name: "Fin d'etudes", value: EndOfStudies },
 ];
 
+const userRoleKeyVal = userRoleSelect.reduce((acc, curr) => {
+  acc[curr.value] = curr.name;
+  return acc;
+}, {});
+
 const profileRequiredFields = [
   'email',
   'firstName',
@@ -110,6 +115,7 @@ module.exports = {
   dashboardPaths,
   userRoleSelect,
   profileRequiredFields,
+  userRoleKeyVal,
 
   // Methods
   ucFirst,

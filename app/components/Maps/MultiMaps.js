@@ -21,6 +21,7 @@ export const GoogleMap = (props) => {
     classes,
     curr,
     isMobile,
+    queryData,
     data: { docs = [], near = [] },
     handlePointChange,
     handleChildClick,
@@ -87,10 +88,15 @@ export const GoogleMap = (props) => {
   }, [near, curr]);
 
   useEffect(() => {
+    // setTriggerCreateClusters(false);
+  }, [queryData]);
+  useEffect(() => {
     createClusters(props);
     handlePointChange(state.clusters);
     setTriggerCreateClusters(false);
   }, [triggerCreateClusters]);
+
+  console.log(state);
 
   return (
     <div className={classes.mapWrapper} id="maps-container">

@@ -157,6 +157,7 @@ const SearchPage = ({
           />
           <View
             allData={allData}
+            queryData={queryData}
             data={state}
             liked={liked}
             sortBy={sortBy}

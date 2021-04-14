@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -51,11 +51,24 @@ const headCells = [
   { id: 'email', numeric: true, disablePadding: false, label: 'Mail' },
   { id: 'phone', numeric: true, disablePadding: false, label: 'Téléphone' },
   { id: 'origin', numeric: true, disablePadding: false, label: 'Origin' },
-  { id: 'sponsorshipCode', numeric: true, disablePadding: false, label: 'Parrain' },
+  {
+    id: 'sponsorshipCode',
+    numeric: true,
+    disablePadding: false,
+    label: 'Parrain',
+  },
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
+  const {
+    classes,
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -129,11 +142,21 @@ const EnhancedTableToolbar = (props) => {
       })}
     >
       {numSelected > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+        <Typography
+          className={classes.title}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
           {numSelected} selectionner
         </Typography>
       ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div" />
+        <Typography
+          className={classes.title}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        />
       )}
 
       {numSelected > 0 ? (
@@ -181,19 +204,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable({ data: { docs: rows = [] } }) {
-  const classes = useStyles();
-  const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+export default function EnhancedTable(
+  { data: { docs: rows = [], totalDocs, limit = 10 }, handleQuery } = {
+    data: {},
+  }
+) {
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('calories');
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(limit);
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.name);
@@ -202,7 +227,6 @@ export default function EnhancedTable({ data: { docs: rows = [] } }) {
     }
     setSelected([]);
   };
-
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
@@ -216,7 +240,7 @@ export default function EnhancedTable({ data: { docs: rows = [] } }) {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
+        selected.slice(selectedIndex + 1)
       );
     }
 
@@ -225,6 +249,7 @@ export default function EnhancedTable({ data: { docs: rows = [] } }) {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+    handleQuery(newPage + 1);
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -233,8 +258,11 @@ export default function EnhancedTable({ data: { docs: rows = [] } }) {
   };
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
+  useEffect(() => {}, [rows]);
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -278,7 +306,12 @@ export default function EnhancedTable({ data: { docs: rows = [] } }) {
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
                         {`${ucfirst(row.firstName)} ${ucfirst(row.lastName)}`}
                       </TableCell>
                       <TableCell align="right">{row.email}</TableCell>
@@ -297,13 +330,13 @@ export default function EnhancedTable({ data: { docs: rows = [] } }) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10]}
           component="div"
-          count={rows.length}
+          count={totalDocs}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
+          // onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
     </div>

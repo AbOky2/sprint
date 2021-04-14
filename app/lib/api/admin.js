@@ -3,9 +3,10 @@ import { toFormData } from '../../helpers/convertAndCheck';
 
 const BASE_PATH = '/api/v1/admin';
 
-export const getUsersApiMethod = () =>
-  sendRequest(`${BASE_PATH}/users`, {
+export const getUsersApiMethod = (page = 1, options = {}) =>
+  sendRequest(`${BASE_PATH}/users?offset=${page}`, {
     method: 'GET',
+    ...options,
   });
 export const getBookListApiMethod = () =>
   sendRequest(`${BASE_PATH}/books`, {
@@ -34,7 +35,7 @@ export const addPartnerApiMethod = (args) =>
     {
       body: toFormData(args),
     },
-    true,
+    true
   );
 export const updatePartnerApiMethod = (id, args) =>
   sendRequest(
@@ -43,7 +44,7 @@ export const updatePartnerApiMethod = (id, args) =>
       method: 'PUT',
       body: toFormData(args),
     },
-    true,
+    true
   );
 
 export const addPartnerTypeMethod = (name) =>
