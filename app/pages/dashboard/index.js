@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import withAuth from 'lib/withAuth';
 import { AdminContentWrapper } from 'components/wrapper';
 import { Icon } from 'components/form';
-import { isBuyer } from 'helpers/user';
+import { isYoungWorker } from 'helpers/user';
 import { ucfirst } from 'helpers/convertAndCheck';
 import { getPartnersApiMethod } from 'lib/api/customer';
 import LocationImg from '../../static/img/location.png';
@@ -224,7 +224,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
                 </Typography>
                 <Grid container justify="space-between" alignItems="flex-end">
                   <Typography className={classes.whiteColor}>
-                    {isBuyer(user)
+                    {isYoungWorker(user)
                       ? 'Un parcours simplifié 100% digital.'
                       : 'Vous ne révez pas ! Réservez votre logement dès votre dernière année d’étude.'}
                   </Typography>

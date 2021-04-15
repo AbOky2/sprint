@@ -14,6 +14,8 @@ const StatusList = [Active, Inactive];
 
 // Methods
 const isAdmin = (user) => user && user.role === Admin;
+const isYoungWorker = (user) =>
+  user && [Buyer, YoungGraduate].includes(user.role);
 const isStudent = (user) => user && studentRoleList.includes(user.role);
 const isBuyer = (user) => user && user.role === Buyer;
 const isRoomer = (user) => user && user.role === Roomer;
@@ -31,6 +33,22 @@ const dashboardPaths = {
   admin: '/admin',
   student: '/dashboard',
 };
+
+const userRoleSelect = [
+  { name: 'Etudiant', value: Student },
+  { name: 'Jeune actif', value: Buyer },
+  { name: 'Jeune diplômé', value: YoungGraduate },
+  { name: "Fin d'etudes", value: EndOfStudies },
+];
+
+const profileRequiredFields = [
+  'email',
+  'firstName',
+  'lastName',
+  'phone',
+  'role',
+];
+
 // Slug
 const slugify = (slug) => {
   let str = slug;
@@ -77,25 +95,10 @@ const isValidateEmail = (email) => {
 };
 const ucFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
-const userRoleSelect = [
-  { name: 'Etudiant', value: Student },
-  { name: 'Jeune actif', value: Buyer },
-  { name: 'Jeune diplômé', value: YoungGraduate },
-  { name: "Fin d'etudes", value: EndOfStudies },
-];
-
 const userRoleKeyVal = userRoleSelect.reduce((acc, curr) => {
   acc[curr.value] = curr.name;
   return acc;
 }, {});
-
-const profileRequiredFields = [
-  'email',
-  'firstName',
-  'lastName',
-  'phone',
-  'role',
-];
 
 module.exports = {
   // Vars
@@ -122,6 +125,7 @@ module.exports = {
   isValidateEmail,
   isAdmin,
   isStudent,
+  isYoungWorker,
   isBuyer,
   generateSlug,
   isRoomer,
