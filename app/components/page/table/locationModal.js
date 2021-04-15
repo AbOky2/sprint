@@ -33,7 +33,7 @@ const ReserveLocation = ({
 }) => {
   const classes = useStyles();
   const receiver = 'resa-tudea@nexity.fr';
-  const subject = `Kit le nid - demande location (<strong> référence ${curr?.ref}</strong> )`;
+  const subject = `Kit le nid - demande location (<strong>LT${curr?.ref} - ${curr?.residence_ref}</strong> )`;
   const message = `Bonjour,
   <br/><br/>
   Je me permets de vous contacter car je suis intéressé(e) par la location de la chambre étudiante dont la référence est <strong>${
@@ -55,6 +55,7 @@ const ReserveLocation = ({
     { label: 'Objet', data: subject },
     { label: 'Message', data: message },
   ];
+
   return (
     <div>
       <Modal
