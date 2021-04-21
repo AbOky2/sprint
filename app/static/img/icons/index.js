@@ -23,6 +23,7 @@ export { default as search } from './search.svg';
 export { default as timing } from './timing.svg';
 export { default as copy } from './copy.svg';
 export { default as addUser } from './add-user.svg';
+export { default as burgerMenu } from './burger-menus.svg';
 export { default as less } from './less.svg';
 export { default as eyeClosed } from './eye-closed.svg';
 export { default as eyeOpened } from './eye-opened.svg';

@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
   contextMenu: {
     display: 'none',
     position: 'absolute',
-    top: 0,
-    width: '100%',
-    transform: 'translateY(calc(-100% - 2rem))',
+    top: '100%',
+    width: 'max-content',
+    right: 0,
     padding: '2rem',
     backgroundColor: 'white',
     borderRadius: '15px',
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
   profileContainer: {
     position: 'relative',
-    padding: '2rem',
+    padding: '1.5rem 2rem',
     backgroundColor: 'white',
     borderRadius: '15px',
     cursor: 'pointer',
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
       top: '50%',
       right: '2rem',
       width: '1.2rem!important',
-      transform: 'translateY(calc(50% - 13px)) rotate(180deg)',
+      transform: 'translateY(calc(50% - 15px)) rotate(90deg)',
     },
     [theme.breakpoints.down('sm')]: {
       maxWidth: '100%',
@@ -56,13 +56,16 @@ const useStyles = makeStyles((theme) => ({
   },
   profileContainerOpen: {
     '& svg:last-of-type': {
-      transform: 'translateY(calc(50% - 13px)) rotate(0deg)',
+      transform: 'translateY(calc(50% - 13px)) rotate(-90deg)',
     },
+  },
+  transparent: {
+    backgroundColor: 'transparent',
   },
   userName: {
     width: 'calc(100% - 30px)',
     marginRight: 'auto',
-    padding: '0 10px',
+    padding: '0 .8rem',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -77,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateProfile = ({ user, update, logout }) => {
+const UpdateProfile = ({ user, update, logout, transparent }) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState(user);
@@ -96,9 +99,7 @@ const UpdateProfile = ({ user, update, logout }) => {
   };
   // eslint-disable-next-line no-return-assign
   const handleLogOut = () => logout(() => (window.location = '/login'));
-  const handleSumbit = () => {
-    update(state, () => handleModalClose(true));
-  };
+  const handleSumbit = () => update(state, () => handleModalClose(true));
   const onKeyPress = (e) => e.key === 'Enter' && handleSumbit(true);
 
   const classes = useStyles();
@@ -124,8 +125,15 @@ const UpdateProfile = ({ user, update, logout }) => {
           justify="space-between"
           className={
             !showSubMenu
-              ? classes.profileContainer
-              : clsx(classes.profileContainer, classes.profileContainerOpen)
+              ? clsx(
+                  classes.profileContainer,
+                  transparent ? classes.transparent : ''
+                )
+              : clsx(
+                  classes.profileContainer,
+                  classes.profileContainerOpen,
+                  transparent ? classes.transparent : ''
+                )
           }
           onClick={toggleShowSubMenu}
         >
@@ -133,7 +141,7 @@ const UpdateProfile = ({ user, update, logout }) => {
           <Typography variant="subtitle1" className={classes.userName}>
             {`${state?.firstName} ${state?.lastName}`}
           </Typography>
-          <Icon type="triangle" size="small" />
+          <Icon type="sliderArrow" size="small" />
         </Grid>
       </div>
       <Modal

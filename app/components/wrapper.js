@@ -5,9 +5,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
   container: {
-    width: 'calc(100% - 100px)',
     margin: 'auto',
-    padding: '5.5rem 0',
+    padding: '0 0 5.5rem',
     [theme.breakpoints.down('sm')]: {
       width: '100%',
       paddingTop: 0,

@@ -5,7 +5,6 @@ body {
   background-color: #f7f8fa !important;
 }
 .main-container {
-  max-width: 1280px;
   margin: auto;
 }
 a,
@@ -174,22 +173,20 @@ div.header {
 .admin-container {
   min-height: 100vh;
 }
-.student-container.admin-container #sidebar {
-  position: fixed;
-  max-width: 215px;
+.student-container.admin-container .content {
+  height: fit-content;
 }
 .spacing {
   padding: 0 24px;
 }
 .admin-container #sidebar {
-  padding-top: 5rem;
+  padding-top: 4rem;
 }
 .admin-container #sidebar h2 {
   margin-bottom: 0;
 }
 .admin-container #sidebar h3 {
   margin-top: 0;
-  margin-bottom: 5rem;
 }
 .admin-container #sidebar ul li {
   list-style: none;

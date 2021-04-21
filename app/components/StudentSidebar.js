@@ -1,31 +1,32 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import clsx from 'clsx';
-import { Grid } from '@material-ui/core';
+import { Grid, Drawer } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { openPopupWidget } from 'react-calendly';
 import { pages } from 'helpers/query';
 import { Icon, Btn } from './form';
-import Calendr from '../static/img/icons/calendr.png';
 import LogoImg from '../static/img/logo.png';
 import UpdateProfile from './UpdateProfile';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    height: 'calc(100vh - 60px)',
-    paddingLeft: '1rem',
+    padding: '4rem 3.5rem 2.4rem',
+    '& > div': {
+      width: 'auto',
+    },
   },
   logoContainer: {
-    marginBottom: '40px',
-    width: '100%',
     textAlign: 'center',
     '& img': {
       width: 35,
     },
   },
   navContainer: {
-    width: '100%',
+    width: 'auto',
+    marginLeft: '6rem',
     '& > div .active-nav-link': {
       backgroundColor: 'rgba(79, 128, 255, 0.19)',
       border: '1px solid #c1cde7',
@@ -33,16 +34,13 @@ const useStyles = makeStyles((theme) => ({
     '& > div a': {
       display: 'flex',
       marginBottom: '9px',
-      padding: 'calc(2rem - 6px)',
+      padding: '.8rem 1.6rem',
       width: '100%',
       alignItems: 'center',
       textAlign: 'left',
-      borderRadius: '13px',
-      border: '1px solid transparent',
       cursor: 'pointer',
     },
     '& > div span': {
-      marginLeft: '25px',
       color: '#1a2e6c',
       fontFamily: 'Open Sans',
       fontWeight: 'bold',
@@ -102,26 +100,43 @@ const useStyles = makeStyles((theme) => ({
       width: 20,
     },
   },
-  sponsorship: {
-    width: '100%',
-    '& > div': {
-      padding: '1.5rem 0',
-      width: '100%',
+  drawer: {
+    padding: '2.7rem',
+  },
+  rightMenu: {
+    '& > div:first-of-type': {
+      marginRight: '2rem',
+      '& > div': {
+        padding: '1.5rem 2.4rem',
+        width: '100%',
+      },
+      '& svg': {
+        marginRight: '1.5rem',
+      },
+      '& span': {
+        fontSize: 14,
+        padding: 0,
+      },
     },
-    '& svg': {
-      marginRight: '1.5rem',
-    },
-    '& span': {
-      fontSize: 14,
-      padding: 0,
+  },
+  rightMenuMobile: {
+    '& > div:first-of-type': {
+      margin: '3rem 0 1.5rem',
     },
   },
   activeLink: {
-    backgroundColor: 'rgba(79, 128, 255, 0.19)',
+    position: 'relative',
+    '&::after': {
+      content: "''",
+      position: 'absolute',
+      bottom: 0,
+      width: 'calc(100% - 2rem)',
+      left: 'calc(1rem)',
+      borderBottom: `1px solid ${theme.palette.newBlue}`,
+    },
     [theme.breakpoints.down('sm')]: {
       backgroundColor: 'initial',
     },
-    border: '1px solid #c1cde7',
     '& svg path': {
       fill: '#4f80ff!important',
     },
@@ -129,8 +144,25 @@ const useStyles = makeStyles((theme) => ({
       color: `${theme.palette.newBlue}!important`,
     },
   },
+  mobileActiveMobile: {
+    '&::after': {
+      display: 'none',
+    },
+  },
 }));
+
 const MenuItems = [
+  { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
+  { href: '/dashboard/search/buy', iconType: 'heart', txt: 'Acheter' },
+  { href: '/dashboard/search/location', iconType: 'heart', txt: 'Louer' },
+  { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
+  {
+    href: '/dashboard/sponsorship',
+    iconType: 'sponsorship',
+    txt: 'Parrainage',
+  },
+];
+const MobileMenuItems = [
   { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
   { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
   {
@@ -139,10 +171,12 @@ const MenuItems = [
     txt: 'Parrainage',
   },
 ];
-export const MobileMenu = () => {
+export const MobileMenu = ({ user = {}, logout, update }) => {
+  const [showMenu, setShowMenu] = useState(false);
   const classes = useStyles();
   const { asPath } = useRouter();
 
+  const toggleMenu = () => setShowMenu(!showMenu);
   return (
     <Grid
       container
@@ -150,28 +184,58 @@ export const MobileMenu = () => {
       justify="space-between"
       className={clsx(classes.navContainer, classes.mobileContainer)}
     >
-      {MenuItems?.map(({ href, txt, iconType }) => (
+      {MobileMenuItems?.map(({ href, txt, iconType }) => (
         <Grid key={href} item>
           <Link href={href}>
-            <a className={asPath === href ? classes.activeLink : null}>
+            <a
+              className={
+                asPath === href
+                  ? clsx(classes.activeLink, classes.mobileActiveMobile)
+                  : null
+              }
+            >
               <Icon type={iconType} />
               <p>{txt}</p>
             </a>
           </Link>
         </Grid>
       ))}
-      <Grid item className={classes.calendar}>
-        <a
-          onClick={() =>
-            openPopupWidget({ url: 'https://calendly.com/kitlenid' })
-          }
-        >
-          <div>
-            <img src={Calendr} alt="" />
-          </div>
-          <p>Rendez-vous</p>
-        </a>
+      <Grid item onClick={toggleMenu} className={classes.calendar}>
+        <Icon type="burgerMenu" />
       </Grid>
+      <Drawer anchor="right" open={showMenu} onClose={toggleMenu}>
+        <div className={classes.drawer}>
+          <Grid className={classes.logoContainer}>
+            <Link href={pages.dashboard}>
+              <a onClick={toggleMenu}>
+                <img src={LogoImg} alt="" />
+              </a>
+            </Link>
+          </Grid>
+          <Grid
+            container
+            item
+            className={clsx(classes.rightMenu, classes.rightMenuMobile)}
+            alignItems="center"
+          >
+            <div>
+              <Btn
+                text="Prendre rendez-vous"
+                iconType="calendar"
+                onClick={() =>
+                  openPopupWidget({ url: 'https://calendly.com/kitlenid' })
+                }
+              />
+            </div>
+          </Grid>
+          <UpdateProfile
+            user={user}
+            logout={logout}
+            update={update}
+            transparent
+          />
+        </div>
+      </Drawer>
     </Grid>
   );
 };
@@ -181,46 +245,50 @@ const StudentProfile = ({ user = {}, logout, update }) => {
   const classes = useStyles();
 
   return (
-    <div id="sidebar">
-      <Grid
-        container
-        direction="column"
-        justify="space-between"
-        className={classes.container}
-      >
-        <Grid container>
-          <Grid className={classes.logoContainer}>
-            <Link href={pages.dashboard}>
-              <a>
-                <img src={LogoImg} alt="" />
-              </a>
-            </Link>
-          </Grid>
-          <Grid className={classes.navContainer}>
-            {MenuItems?.map(({ href, txt, iconType }) => (
-              <Grid key={href} container alignItems="center">
-                <Link href={href}>
-                  <a className={asPath === href ? classes.activeLink : null}>
-                    <Icon type={iconType} />
-                    <span>{txt}</span>
-                  </a>
-                </Link>
-              </Grid>
-            ))}
-          </Grid>
-          <div className={classes.sponsorship}>
-            <Btn
-              text="Prendre rendez-vous"
-              iconType="calendar"
-              onClick={() =>
-                openPopupWidget({ url: 'https://calendly.com/kitlenid' })
-              }
-            />
-          </div>
+    <Grid
+      container
+      alignItems="center"
+      justify="space-between"
+      className={classes.container}
+    >
+      <Grid container item>
+        <Grid className={classes.logoContainer}>
+          <Link href={pages.dashboard}>
+            <a>
+              <img src={LogoImg} alt="" />
+            </a>
+          </Link>
         </Grid>
-        <UpdateProfile user={user} logout={logout} update={update} />
+        <Grid container alignItems="center" className={classes.navContainer}>
+          {MenuItems?.map(({ href, txt }) => (
+            <Grid key={href} item alignItems="center">
+              <Link href={href}>
+                <a className={asPath === href ? classes.activeLink : null}>
+                  <span>{txt}</span>
+                </a>
+              </Link>
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
-    </div>
+      <Grid container item className={classes.rightMenu} alignItems="center">
+        <div>
+          <Btn
+            text="Prendre rendez-vous"
+            iconType="calendar"
+            onClick={() =>
+              openPopupWidget({ url: 'https://calendly.com/kitlenid' })
+            }
+          />
+        </div>
+        <UpdateProfile
+          user={user}
+          logout={logout}
+          update={update}
+          transparent
+        />
+      </Grid>
+    </Grid>
   );
 };
 StudentProfile.propTypes = {

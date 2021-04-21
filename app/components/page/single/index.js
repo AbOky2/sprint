@@ -33,15 +33,18 @@ const useStyles = makeStyles((theme) => ({
       position: 'absolute',
       bottom: 0,
       cursor: 'pointer',
-      width: 'auto',
+      width: '25%',
+      justifyContent: 'center',
       padding: '20px 23px',
       background: 'white',
-      border: `2px solid ${theme.palette.newBlue}`,
       boxSizing: 'border-box',
       borderRadius: '1rem',
       transform: 'translateY(calc(50%))',
       fontWeight: 'bold',
       color: theme.palette.newBlue,
+      [theme.breakpoints.down('sm')]: {
+        width: 'auto',
+      },
     },
     '& svg': {
       marginRight: 15,
@@ -376,7 +379,7 @@ const PropertyPage = ({
             />
           )}
           <Grid container className={classes.save} justify="center">
-            <Grid item container onClick={handleBookmark}>
+            <Grid item container onClick={handleBookmark} alignItems="center">
               <Icon
                 type="heart"
                 color={liked ? 'red' : 'white'}
