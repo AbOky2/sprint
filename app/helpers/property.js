@@ -6,8 +6,8 @@ const typeOfAnnonciesObj = {
   location: 'Location',
 };
 const sortByObj = {
-  asc: 'Prix croissant',
-  desc: 'Prix décroissant',
+  asc: 'Trier par prix croissant',
+  desc: 'Trier par prix décroissant',
 };
 const propertyPieces = {
   1: 'Studio',

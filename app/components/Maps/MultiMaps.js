@@ -25,6 +25,8 @@ export const GoogleMap = (props) => {
     data: { docs = [], near = [] },
     handlePointChange,
     handleChildClick,
+    liked,
+    handleBookmark,
   } = props;
   const [state, setState] = useState({
     mapOptions: {
@@ -36,7 +38,6 @@ export const GoogleMap = (props) => {
   });
   const [center, setCenter] = useState(near);
 
-  // console.log(docs);
   const [triggerCreateClusters, setTriggerCreateClusters] = useState(false);
 
   const getClusters = () => {
@@ -57,8 +58,6 @@ export const GoogleMap = (props) => {
   };
 
   const createClusters = (props) => {
-    // console.log(state.mapOptions.bounds);
-
     const clusters = state.mapOptions.bounds
       ? getClusters(props).map(({ wx, wy, numPoints, points }) => ({
           lat: wy,
@@ -87,16 +86,14 @@ export const GoogleMap = (props) => {
     setCenter(newCenter);
   }, [near, curr]);
 
-  useEffect(() => {
-    // setTriggerCreateClusters(false);
-  }, [queryData]);
+  // useEffect(() => {
+  //   // setTriggerCreateClusters(false);
+  // }, [queryData]);
   useEffect(() => {
     createClusters(props);
     handlePointChange(state.clusters);
     setTriggerCreateClusters(false);
   }, [triggerCreateClusters]);
-
-  console.log(state);
 
   return (
     <div className={classes.mapWrapper} id="maps-container">
@@ -119,6 +116,8 @@ export const GoogleMap = (props) => {
                 data={curr}
                 show={item.id.includes(curr?._id)}
                 isMobile={isMobile}
+                handleBookmark={handleBookmark}
+                liked={liked}
               />
             );
           }
@@ -132,6 +131,8 @@ export const GoogleMap = (props) => {
               data={curr}
               show={item.points?.find((e) => e.id.includes(curr?._id))}
               isMobile={isMobile}
+              handleBookmark={handleBookmark}
+              liked={liked}
             />
           );
         })}

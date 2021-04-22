@@ -12,13 +12,7 @@ import {
 } from 'helpers/property';
 import { singlePath } from 'helpers/query';
 
-const ListHeader = ({
-  classes,
-  isMapsView,
-  toggleView,
-  sortBy,
-  handleSortSelect,
-}) => (
+const ListHeader = ({ classes, isMapsView, sortBy, handleSortSelect }) => (
   <Grid
     container
     item
@@ -35,12 +29,6 @@ const ListHeader = ({
         value={sortBy}
         onChange={handleSortSelect}
       />
-    </Grid>
-    <Grid item md={6} xs={12}>
-      <div className={classes.changeView} onClick={toggleView}>
-        <Icon type={isMapsView ? 'eyeClosed' : 'eyeOpened'} color="newBlue" />
-        <span>{`${isMapsView ? 'Masquer' : 'Afficher'} la carte`}</span>
-      </div>
     </Grid>
   </Grid>
 );

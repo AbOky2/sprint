@@ -176,6 +176,9 @@ div.header {
 .student-container.admin-container .content {
   height: fit-content;
 }
+.student-container.admin-container.no-padding {
+  padding: 0;
+}
 .spacing {
   padding: 0 24px;
 }
@@ -227,11 +230,13 @@ a[href^="https://maps.google.com/maps"]
   display: none;
 }
 .gm-bundled-control {
+  display: none;
   top: 50px;
   bottom: initial;
 }
 .gm-fullscreen-control,
 .gmnoprint div {
+  display: none;
   background-color: #f7f8fa !important;
 }
 @media screen and (max-width: 640px) {

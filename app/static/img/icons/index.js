@@ -6,7 +6,7 @@ export { default as calendar } from './calendar.svg';
 export { default as close } from './close.svg';
 export { default as calendr } from './calendr.svg';
 export { default as location } from './location.svg';
-export { default as heart } from './heart.svg';
+export { default as heart } from './hearts.svg';
 export { default as door } from './door.svg';
 export { default as elevator } from './elevator.svg';
 export { default as room } from './room.svg';

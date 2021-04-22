@@ -211,6 +211,16 @@ const NativeSelects = ({
         value={value}
         onChange={onChange(name)}
         inputProps={{ name }}
+        IconComponent={() => (
+          <span style={{ position: 'absolute', right: '1.5rem' }}>
+            <Icon
+              type="sliderArrow"
+              color="newBlue"
+              size="small"
+              rotate="90deg"
+            />
+          </span>
+        )}
       >
         {list?.map((elem) => (
           <option key={elem.name} value={elem.value}>

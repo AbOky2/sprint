@@ -9,15 +9,14 @@ import { useTheme } from '@material-ui/core/styles';
 import { getPropertiesApiMethod, addBookmarkApiMethod } from 'lib/api/customer';
 import { toggleArray, isArray, pick } from 'helpers/convertAndCheck';
 import { typeOfAnnonciesObj, sortByKeys } from 'helpers/property';
-import { pages } from 'helpers/query';
 import NotFound from 'components/NotFound';
 import { AdminContentWrapper } from 'components/wrapper';
-import { ListView, MapsView } from './views';
+import { MapsView } from './views';
 import SearchFields from './searchFields';
 import withStyles from './styles';
 
 const pagePropertyWhilist = ['page', 'limit', 'totalPages'];
-const isMapsView = true;
+const isMapsView = false;
 const SearchPage = ({
   classes,
   user,
@@ -79,10 +78,10 @@ const SearchPage = ({
   };
   const handlePointChange = (list) => {
     const listId = list
-      .map(({ points = [] }) => points.map((e) => e.id))
+      ?.map(({ points = [] }) => points.map((e) => e.id))
       .flat();
-    const newState = properties.docs.filter((e) => listId.includes(e._id));
-    setState(newState);
+    const newState = properties.docs?.filter((e) => listId.includes(e._id));
+    if (newState) setState(newState);
   };
 
   const isLocation = typeOfAnnonce === typeOfAnnonciesObj.location;
@@ -120,7 +119,6 @@ const SearchPage = ({
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
-  const View = currView ? MapsView : ListView;
 
   useEffect(() => {
     if (makeRequest) {
@@ -132,7 +130,7 @@ const SearchPage = ({
   if (!state) return <NotFound showLink={false} />;
 
   return (
-    <AdminContentWrapper redirectDashboard href={pages.dashboard}>
+    <AdminContentWrapper noRedirect>
       <div>
         <div
           className={
@@ -155,7 +153,7 @@ const SearchPage = ({
             handleSelect={handleSelect}
             isMapsView={currView}
           />
-          <View
+          <MapsView
             allData={allData}
             queryData={queryData}
             data={state}

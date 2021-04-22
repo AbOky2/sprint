@@ -14,6 +14,9 @@ import { singlePath } from 'helpers/query';
 import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
+  title: {
+    marginBottom: '4rem',
+  },
   notFound: {
     '& > div:first-of-type': {
       marginBottom: '40px',
@@ -21,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '2.5rem',
       color: 'white',
       background: 'white',
-      margin: '2.8rem 0 5.6rem',
       boxShadow: '0px 4px 20px rgba(24, 55, 50, 0.04)',
     },
     '& > div:first-of-type h3': {
@@ -76,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
       color: '#ffffff',
     },
   },
-  listContainer: theme.ui.listContainer,
+  // listContainer: theme.ui.listContainer,
 }));
 const BookmarkPage = ({ user, update }) => {
   const [state, setState] = useState(user?.bookmarks);
@@ -88,8 +90,11 @@ const BookmarkPage = ({ user, update }) => {
   return (
     <AdminContentWrapper noRedirect>
       <div>
+        <Typography variant="h1" className={classes.title}>
+          Vos favoris
+        </Typography>
         {state?.length ? (
-          <Grid container>
+          <Grid container spacing={3}>
             {state.map(
               ({
                 _id,
@@ -103,7 +108,14 @@ const BookmarkPage = ({ user, update }) => {
                 dimensions,
                 price,
               }) => (
-                <Grid item key={_id} className={classes.listContainer}>
+                <Grid
+                  item
+                  key={_id}
+                  xs={12}
+                  sm={4}
+                  md={3}
+                  className={classes.listContainer}
+                >
                   <Link href={singlePath({ typeOfAnnonce, _id })}>
                     <a>
                       <Card
@@ -125,7 +137,6 @@ const BookmarkPage = ({ user, update }) => {
           </Grid>
         ) : (
           <div className={classes.notFound}>
-            <Typography variant="h1">Vos favoris</Typography>
             <div>
               <Typography variant="h3">
                 <span role="img" aria-label="cring">

@@ -103,7 +103,7 @@ const theme = createMuiTheme({
   },
 });
 theme.ui.listContainer = {
-  width: '33.33%',
+  width: '25%',
   marginBottom: '2rem',
   '&:nth-child(3n+2)': {
     padding: '0 1rem 0rem',

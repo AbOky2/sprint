@@ -48,23 +48,29 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+const sharedBtn = {
+  display: 'block',
+  position: 'absolute',
+  top: '50%',
+  cursor: 'pointer',
+  zIndex: 3,
+  backgroundColor: 'white',
+  padding: '8px 10px',
+  borderRadius: '100%',
+};
 
 const SampleNextArrow = ({ className, style, onClick }) => (
   <div
     className={className}
     style={{
       ...style,
-      display: 'block',
-      position: 'absolute',
-      top: '50%',
-      cursor: 'pointer',
       transform: 'translateY(-50%)',
       right: '1.6rem',
-      zIndex: 3,
+      ...sharedBtn,
     }}
     onClick={onClick}
   >
-    <Icon type="carrouselArrow" color="white" />
+    <Icon type="sliderArrow" color="newBlue" size="small" />
   </div>
 );
 
@@ -73,17 +79,13 @@ const SamplePrevArrow = ({ className, style, onClick }) => (
     className={className}
     style={{
       ...style,
-      display: 'block',
-      position: 'absolute',
-      top: '50%',
-      cursor: 'pointer',
       transform: 'translateY(-50%) rotate(180deg)',
       left: '1.6rem',
-      zIndex: 3,
+      ...sharedBtn,
     }}
     onClick={onClick}
   >
-    <Icon type="carrouselArrow" color="white" />
+    <Icon type="sliderArrow" color="newBlue" size="small" />
   </div>
 );
 

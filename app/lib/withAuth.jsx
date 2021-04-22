@@ -26,7 +26,12 @@ let globalUser = null;
 
 export default function withAuth(
   BaseComponent,
-  { loginRequired = true, logoutRequired = false, adminRequired = false } = {}
+  {
+    loginRequired = true,
+    logoutRequired = false,
+    adminRequired = false,
+    fullContentWidth = false,
+  } = {}
 ) {
   class App extends React.Component {
     static async getInitialProps(ctx) {
@@ -86,7 +91,7 @@ export default function withAuth(
         );
       return (
         <>
-          <StudentSidebarComp user={user}>
+          <StudentSidebarComp user={user} fullContentWidth={fullContentWidth}>
             <BaseComponent {...this.props} />
           </StudentSidebarComp>
         </>

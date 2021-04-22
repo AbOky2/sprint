@@ -17,11 +17,8 @@ const styles = (theme) => ({
     display: 'inline-block',
     position: 'sticky',
     top: '.5rem',
-    padding: '1rem 1.6rem',
     marginBottom: '3.2rem',
-    border: `2px solid ${theme.palette.newBlue}`,
     borderRadius: '1rem',
-    backgroundColor: 'white',
     zIndex: 35,
     [theme.breakpoints.down('sm')]: {
       top: '3.5rem',
@@ -57,7 +54,7 @@ const AdminContentWrapper = withStyles(styles)(
             else router.back();
           }}
         >
-          <Typography variant="h4">Revenir en arrière</Typography>
+          <Typography variant="h4">Retourner à la recherche</Typography>
         </div>
       )}
       {children}

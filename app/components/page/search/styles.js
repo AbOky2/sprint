@@ -67,6 +67,8 @@ const styles = (theme) => ({
     },
   },
   searchContainer: {
+    maxWidth: '742px',
+    margin: 'auto',
     marginBottom: '1.6rem',
     '& input:focus': {
       border: `solid 1px ${theme.palette.lightGray}`,
@@ -172,18 +174,28 @@ const styles = (theme) => ({
       border: `1px solid ${theme.palette.lightGray}`,
     },
   },
+  changeViewContainer: {
+    position: 'absolute',
+    top: '2.5rem',
+    left: '2.5rem',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
   changeView: {
     ...theme.ui.bordered,
     display: 'flex',
     marginTop: 0,
+    alignItems: 'center',
     padding: '.8rem 1.4rem',
     border: `1px solid ${theme.palette.lightGray}`,
     backgroundColor: 'white',
+    borderRadius: '.8rem',
     textAlign: 'right',
     fontSize: '1rem',
     cursor: 'pointer',
     '& span': {
-      paddingLeft: '1rem',
+      paddingRight: '1rem',
       ...theme.typography.body1,
       fontSize: '1.4rem',
       marginLeft: 'auto',
@@ -206,10 +218,10 @@ const styles = (theme) => ({
   },
   listContainer: theme.ui.listContainer,
   mapsListContainer: {
+    ...theme.ui.bordered,
+    position: 'relative',
     width: '100%',
     border: `1px solid ${theme.palette.lightGray}`,
-    ...theme.ui.bordered,
-    padding: '1rem',
     backgroundColor: 'white',
     marginTop: '.8rem',
     '&:first-of-type': {
@@ -224,17 +236,18 @@ const styles = (theme) => ({
         minHeight: '100%',
         '& > div': {
           ...theme.ui.bordered,
+          position: 'initial',
           width: '100%',
           height: '100%',
           '& > span': {
-            top: 10,
-            left: 10,
+            top: '1.6rem',
+            right: '1.6rem',
           },
         },
       },
       '& > div:last-of-type': {
         width: '60%',
-        padding: '0 1.6rem',
+        padding: '2.5rem 1.6rem',
         '& > p:last-of-type': {
           textAlign: 'left',
         },
@@ -260,22 +273,21 @@ const styles = (theme) => ({
       },
     },
   },
+  listViewContainer: {
+    padding: '0 2.4rem',
+  },
   mapsViewContainer: {
     '& > div': {
       '&:last-of-type': {
         position: 'sticky',
         top: 0,
-        paddingLeft: '2.5rem',
         minHeight: '80vh',
         maxHeight: '100vh',
         '& > div': {
           zIndex: 3,
           '&:first-of-type': {
-            ...theme.ui.bordered,
+            borderTopLeftRadius: '1.5rem',
             overflow: 'hidden',
-          },
-          '&:last-of-type': {
-            display: 'none',
           },
         },
       },
@@ -295,7 +307,11 @@ const styles = (theme) => ({
       },
     },
   },
-  mapsContainer: {},
+  fullMapsViewContainer: {
+    '& > div:last-of-type > div:first-of-type': {
+      borderTopLeftRadius: 0,
+    },
+  },
   pagination: {
     marginTop: '1rem',
   },
@@ -337,7 +353,6 @@ const styles = (theme) => ({
         },
       },
       '&:last-of-type': {
-        paddingLeft: '1rem',
         '& > div': {
           display: 'flex',
           alignItems: 'center',

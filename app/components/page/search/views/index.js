@@ -1,54 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import MultiMaps from 'components/Maps/MultiMaps';
-
 import { MapsCarousel } from 'components/Carrousel';
+import { Icon } from 'components/form';
 import { sortByKeys } from 'helpers/property';
 import { ListWrapper, ListElement } from './partials';
 import withStyles from '../styles';
-
-const ListView = withStyles(
-  ({
-    classes,
-    data,
-    liked,
-    isMapsView,
-    handleBookmark,
-    page,
-    matches,
-    handlePage,
-    toggleView,
-    sortBy,
-    handleSortSelect,
-  }) => (
-    <>
-      <ListWrapper
-        classes={classes}
-        sortBy={sortBy}
-        toggleView={toggleView}
-        isMapsView={isMapsView}
-        handleSortSelect={handleSortSelect}
-        hasData={data.length}
-        page={page}
-        matches={matches}
-        handlePage={handlePage}
-        isMapsView={isMapsView}
-      >
-        {data?.map((elems) => (
-          <ListElement
-            key={elems._id}
-            className={classes.listContainer}
-            liked={liked}
-            handleBookmark={handleBookmark}
-            {...elems}
-          />
-        ))}
-      </ListWrapper>
-    </>
-  )
-);
 
 const MapsView = withStyles(
   ({
@@ -108,40 +67,47 @@ const MapsView = withStyles(
     };
 
     return (
-      <Grid container className={classes.mapsViewContainer}>
-        <Grid item xs={5}>
-          <ListWrapper
-            classes={classes}
-            sortBy={sortBy}
-            toggleView={toggleView}
-            isMapsView={isMapsView}
-            handleSortSelect={handleSortSelect}
-            hasData={data.length}
-            page={page}
-            matches={matches}
-            handlePage={handlePage}
-          >
-            {data?.map((elems) => (
-              <ListElement
-                key={elems._id}
-                handleMouseEnter={handleMouseEnter(elems._id)}
-                handleMouseLeave={handleMouseEnter(null)}
-                className={
-                  elems._id !== curr?._id
-                    ? classes.mapsListContainer
-                    : clsx(
-                        classes.mapsListContainer,
-                        classes.mapsCurrListContainer
-                      )
-                }
-                liked={liked}
-                handleBookmark={handleBookmark}
-                {...elems}
-              />
-            ))}
-          </ListWrapper>
-        </Grid>
-        <Grid item md={7} xs={12}>
+      <Grid
+        container
+        className={clsx(
+          classes.mapsViewContainer,
+          isMapsView ? classes.fullMapsViewContainer : ''
+        )}
+      >
+        {!isMapsView && (
+          <Grid item xs={5} className={classes.listViewContainer}>
+            <ListWrapper
+              classes={classes}
+              sortBy={sortBy}
+              isMapsView={isMapsView}
+              handleSortSelect={handleSortSelect}
+              hasData={data.length}
+              page={page}
+              matches={matches}
+              handlePage={handlePage}
+            >
+              {data?.map((elems) => (
+                <ListElement
+                  key={elems._id}
+                  handleMouseEnter={handleMouseEnter(elems._id)}
+                  handleMouseLeave={handleMouseEnter(null)}
+                  className={
+                    elems._id !== curr?._id
+                      ? classes.mapsListContainer
+                      : clsx(
+                          classes.mapsListContainer,
+                          classes.mapsCurrListContainer
+                        )
+                  }
+                  liked={liked}
+                  handleBookmark={handleBookmark}
+                  {...elems}
+                />
+              ))}
+            </ListWrapper>
+          </Grid>
+        )}
+        <Grid item md={isMapsView ? 12 : 7} xs={12}>
           <MultiMaps
             data={allData}
             queryData={queryData}
@@ -149,8 +115,20 @@ const MapsView = withStyles(
             handleChildClick={handleChildClick}
             isMobile={isMdView}
             handlePointChange={handlePointChange}
+            liked={liked}
+            handleBookmark={handleBookmark}
           />
-          <div></div>
+          <Grid container className={classes.changeViewContainer}>
+            <div className={classes.changeView} onClick={toggleView}>
+              {isMapsView && <span>Afficher la liste</span>}
+              <Icon
+                type="sliderArrow"
+                size="small"
+                color="newBlue"
+                rotate={isMapsView ? '0' : '180deg'}
+              />
+            </div>
+          </Grid>
           {isMdView && (
             <Grid container>
               <MapsCarousel
@@ -195,7 +173,6 @@ const sharedProptypes = {
   matches: PropTypes.bool.isRequired,
   handlePage: PropTypes.func.isRequired,
 };
-ListView.PropTypes = sharedProptypes;
 MapsView.PropTypes = sharedProptypes;
 
-export { ListView, MapsView };
+export { MapsView };

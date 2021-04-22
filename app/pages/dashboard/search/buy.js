@@ -36,4 +36,6 @@ const actionCreators = {
   update: userActions.updateUserDataOnly,
 };
 
-export default withAuth(connect(mapState, actionCreators)(SearchPage));
+export default withAuth(connect(mapState, actionCreators)(SearchPage), {
+  fullContentWidth: true,
+});

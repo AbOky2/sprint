@@ -1,4 +1,5 @@
 import { Grid, Container } from '@material-ui/core';
+import clsx from 'clsx';
 import { connect } from 'react-redux';
 import Hidden from '@material-ui/core/Hidden';
 import { withStyles } from '@material-ui/core/styles';
@@ -14,6 +15,9 @@ const styles = (theme) => ({
       ...theme.space.bodyWrapper,
       paddingBottom: '11rem',
     },
+  },
+  fullContentWidth: {
+    padding: 0,
   },
   studentSidebarFixed: {
     position: 'sticky',
@@ -35,29 +39,38 @@ export const StudentSidebarComp = connect(
   mapState,
   actionCreators
 )(
-  withStyles(styles)(({ children, user, logout, update, classes }) => (
-    <Grid container className="admin-container student-container">
-      <Grid container item className="content">
-        <Grid
-          item
-          xs={12}
-          smup="true"
-          elevation={15}
-          className={classes.studentSidebarFixed}
-        >
-          <Hidden smDown>
-            <StudentSidebar user={user} logout={logout} update={update} />
+  withStyles(styles)(
+    ({ children, user, logout, update, fullContentWidth, classes }) => (
+      <Grid container className="admin-container student-container">
+        <Grid container item className="content">
+          <Grid
+            item
+            xs={12}
+            smup="true"
+            elevation={15}
+            className={classes.studentSidebarFixed}
+          >
+            <Hidden smDown>
+              <StudentSidebar user={user} logout={logout} update={update} />
+            </Hidden>
+          </Grid>
+          <Hidden mdUp>
+            <MobileMenu user={user} logout={logout} update={update} />
           </Hidden>
+          <Container
+            container
+            maxWidth={fullContentWidth ? '' : 'lg'}
+            className={clsx(
+              classes.studentContainer,
+              fullContentWidth ? classes.fullContentWidth : ''
+            )}
+          >
+            {children}
+          </Container>
         </Grid>
-        <Hidden mdUp>
-          <MobileMenu user={user} logout={logout} update={update} />
-        </Hidden>
-        <Container container maxWidth="lg" className={classes.studentContainer}>
-          {children}
-        </Container>
       </Grid>
-    </Grid>
-  ))
+    )
+  )
 );
 
 export const AdminSidebarComp = ({ children }) => (

@@ -8,7 +8,7 @@ import SelectedCustomMarker from '../../static/img/icons/selectedCustomMarker.sv
 import { styles } from './styles';
 
 const useStyles = makeStyles(styles);
-const Marker = ({ data, show, isMobile, inGroup }) => {
+const Marker = ({ data, show, isMobile, inGroup, handleBookmark, liked }) => {
   const classes = useStyles({ isTop: data?.isTop, isLeft: data?.isLeft });
   let className = inGroup ? classes.markerInGroupStyled : classes.markerStyled;
   const Icon = show ? SelectedCustomMarker : CustomMarker;
@@ -18,7 +18,13 @@ const Marker = ({ data, show, isMobile, inGroup }) => {
     <div>
       <div className={className}>
         <Icon className={classes.markerIcon} />
-        {show && !isMobile && data?.showInfoWindow && <MapsCard {...data} />}
+        {show && !isMobile && data?.showInfoWindow && (
+          <MapsCard
+            {...data}
+            onClick={() => handleBookmark(data?._id)}
+            liked={liked?.includes(data?._id)}
+          />
+        )}
       </div>
     </div>
   );

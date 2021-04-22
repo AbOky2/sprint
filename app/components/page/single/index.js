@@ -314,6 +314,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 const PropertyPage = ({
   id,
   user,

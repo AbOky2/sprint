@@ -11,24 +11,24 @@ import { Icon } from './form';
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: '#FFFFFF',
+    padding: '.8rem .85rem',
     border: '1px solid #E2E2E2',
     borderRadius: 15,
     '& > div': {
       '&:first-of-type > div': {
         position: 'relative',
         backgroundSize: 'cover',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
+        borderRadius: 10,
         height: 200,
         '& span': {
           position: 'absolute',
-          top: 24,
-          left: 24,
+          top: '.8rem',
+          right: '.8rem',
           zIndex: 2,
         },
       },
       '&:last-of-type': {
-        padding: 16,
+        padding: '.8rem 0 2.3rem',
         '& > h4': {
           color: theme.palette.newBlue,
           height: '2.7rem',
@@ -72,7 +72,6 @@ const useStyles = makeStyles((theme) => ({
       border: `1px solid ${theme.palette.lightGray}`,
       '& > div': {
         '&:first-of-type': {
-          padding: '.8rem',
           '& > div': {
             height: 150,
             borderRadius: '.8rem',
@@ -134,6 +133,7 @@ const Card = ({
               <Icon
                 type="heart"
                 size="medium"
+                strokeColor={liked ? 'red' : 'newBlue'}
                 color={liked ? 'red' : 'white'}
               />
             </span>
@@ -150,7 +150,7 @@ const Card = ({
         </Typography>
         <Typography variant="body1">{description}</Typography>
         <Typography variant="body1">{dimensions}</Typography>
-        <Typography variant="body1" align="right">
+        <Typography variant="body1">
           <span>à partir de</span>
           {` ${spaceCurrency(price)}€`}
         </Typography>
@@ -188,7 +188,6 @@ const MapsCard = ({
             title={heading}
             src={getCardImg(pictures[state])}
             address={getAddress({ city, postal })}
-            showLikes={false}
             description={getNbPieces(minPieces, maxPieces)}
             typeOfAnnonce={typeOfAnnonce}
           />
