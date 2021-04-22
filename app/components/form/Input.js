@@ -26,7 +26,7 @@ const styles = (theme) => ({
       width: '100%',
       height: '38px',
       borderRadius: '1rem',
-      border: `solid 1px ${theme.palette.gray}`,
+      border: `solid 1px ${theme.palette.lightBlue}`,
       color: '#1A2E6C',
       ...sharedInputStyle,
     },
@@ -35,7 +35,7 @@ const styles = (theme) => ({
     },
     '& input:focus': {
       boxShadow: '0px 4px 10px 3px rgba(0, 0, 0, 0.11)',
-      border: `1px solid ${theme.palette.gray}`,
+      border: `1px solid ${theme.palette.lightBlue}`,
     },
     '& input::placeholder': {
       color: theme.palette.gray,
@@ -91,7 +91,7 @@ const styles = (theme) => ({
       zIndex: 3,
       '& input': {
         borderRadius: '1rem!important',
-        borderLeft: `1px solid ${theme.palette.lightGray}!important`,
+        borderLeft: `1px solid ${theme.palette.lightBlue}!important`,
         '&:first-of-type': {
           margin: '1.6rem 0',
         },

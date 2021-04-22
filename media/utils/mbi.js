@@ -9,6 +9,7 @@ const {
   defaultVat,
   filteredProperties,
   comodityDivider,
+  orientationDivider,
   typeOfProperties,
 } = require('../helpers/property');
 const PropertieModel = require('../models/Propertie');
@@ -95,9 +96,11 @@ const getLotsList = (list, lots) =>
       else if (
         (key.includes(comodityDivider) && res === 'OUI') ||
         (key.includes(comodityDivider) && key.includes('Balcon') && res)
-      ) {
+      )
         advantages.push(key.split(comodityDivider)[1]);
-      } else if (key === 'isNewProperty') newLot[key] = res === 'Neuf';
+      else if (key.includes(orientationDivider) && res === 'OUI')
+        newLot.orientation = key.split(orientationDivider)[1];
+      else if (key === 'isNewProperty') newLot[key] = res === 'Neuf';
       else {
         newLot[key] = res;
       }

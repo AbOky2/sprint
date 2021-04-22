@@ -43,6 +43,9 @@ const styles = (theme) => ({
     '& > div': {
       borderRadius: '10px',
     },
+    '& fieldset': {
+      border: `1px solid ${theme.palette.lightBlue}`,
+    },
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -69,7 +72,7 @@ const styles = (theme) => ({
       backgroundColor: 'white',
       paddingLeft: '.8rem',
       paddingRight: '3rem',
-      border: `solid 1px ${theme.palette.lightGray}`,
+      border: `solid 1px ${theme.palette.lightBlue}`,
       fontStyle: 'normal',
       fontWeight: '600',
       fontSize: '1.6rem',

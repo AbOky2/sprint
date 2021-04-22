@@ -1,4 +1,5 @@
 const comodityDivider = 'comodity__';
+const orientationDivider = 'orientation__';
 
 const lotsResidencesHeader = new Array(21);
 lotsResidencesHeader[1] = 'ref';
@@ -145,6 +146,10 @@ lotsHeader[13] = 'typeOfProperty';
 lotsHeader[16] = 'surface';
 lotsHeader[18] = 'pieces';
 lotsHeader[21] = 'floor';
+lotsHeader[29] = `${orientationDivider}Sud`;
+lotsHeader[30] = `${orientationDivider}Est`;
+lotsHeader[30] = `${orientationDivider}Ouest`;
+lotsHeader[30] = `${orientationDivider}Nord`;
 lotsHeader[26] = `${comodityDivider}WC séparés`;
 lotsHeader[34] = `${comodityDivider}Balcon`;
 lotsHeader[35] = `${comodityDivider}Ascenseur`;
@@ -182,7 +187,7 @@ const availableProperties = {
   ref: 'lot ref',
   vat: 'Tva',
   pictures: 'Les images',
-  advantages: "Les avantages",
+  advantages: 'Les avantages',
   typeOfAnnonce: "Type d'annonce",
   typeOfProperty: 'Type de propriété',
   price: 'Prix',
@@ -194,6 +199,7 @@ const availableProperties = {
   nb_rooms: 'Nombre de rooms',
   expenses: 'Dépenses',
   floor: 'Étage',
+  orientation: 'Orientation',
   south_orientation: 'sud',
   east_orientation: 'est',
   west_orientation: 'ouest',
@@ -247,10 +253,10 @@ const buyDatas = {
     fileName: 'programmes_enrichi',
     header: extraProgramsHeader,
     encoding: 'utf-8',
-  }
+  },
 };
 
-const defaultVat = '20%'
+const defaultVat = '20%';
 const vatCode = {
   '01': '5.5%',
   '02': '7.00%',
@@ -261,12 +267,12 @@ const vatCode = {
   '07': '0.00%',
   '08': '17.6%',
   '09': '18.6%',
-  '10': '0.00%',
-  '13': '8.00%',
-  '20': '5.5%',
-  '22': '10%',
-  '24': '20%',
-}
+  10: '0.00%',
+  13: '8.00%',
+  20: '5.5%',
+  22: '10%',
+  24: '20%',
+};
 
 const rentDatas = {
   encoding: 'utf-8',
@@ -321,4 +327,5 @@ module.exports = {
   typeOfProperties,
   filteredProperties,
   comodityDivider,
+  orientationDivider,
 };

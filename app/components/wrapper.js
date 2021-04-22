@@ -17,7 +17,9 @@ const styles = (theme) => ({
     display: 'inline-block',
     position: 'sticky',
     top: '.5rem',
-    marginBottom: '3.2rem',
+    backgroundColor: '#f7f8fa',
+    padding: '.5rem',
+    marginBottom: '2.4rem',
     borderRadius: '1rem',
     zIndex: 35,
     [theme.breakpoints.down('sm')]: {

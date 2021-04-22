@@ -9,7 +9,6 @@ import {
 } from 'helpers/convertAndCheck';
 import { Icon, Btn } from '../../form';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
-
 import styles from './styles';
 
 const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
@@ -36,20 +35,20 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
             >
               <Icon
                 type={isOpen ? 'less' : 'plus'}
-                color="iconBlue"
+                color="newBlue"
                 size="small"
               />
             </Grid>
           </Grid>
           <Grid item md={2} xs={5} className={classes.header}>
             <Typography variant="h3">
-              <Icon type="door" color="iconBlue" />
+              <Icon type="door" color="newBlue" />
               {` ${elem} pièce${elem > 1 ? 's' : ''}`}
             </Typography>
           </Grid>
           <Grid item md={3} xs={5} className={classes.header}>
             <Typography variant="h3">
-              <Icon type="room" color="iconBlue" />
+              <Icon type="room" color="newBlue" />
               {` de ${current.minSurface}m² à ${current.maxSurface}m²`}
             </Typography>
           </Grid>
@@ -80,7 +79,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
           >
             <Icon
               type={isOpen ? 'less' : 'plus'}
-              color="iconBlue"
+              color="newBlue"
               size="small"
             />
           </Grid>
@@ -115,7 +114,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
             </Grid>
             {current.list.map((curr) => {
               const price = spaceCurrency(curr.price);
-              const available_date = getDateQuarter(curr.available_date);
+              const orientation = curr.orientation ?? '-';
               const typeOfProperty = ucfirst(curr.typeOfProperty);
 
               return (
@@ -142,8 +141,8 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       <span>{curr.floor}</span>
                     </Grid>
                     <Grid container justify="space-between">
-                      <span>Disponibilité</span>
-                      <span>{available_date}</span>
+                      <span>Orientation</span>
+                      <span>{orientation}</span>
                     </Grid>
 
                     <Grid
@@ -160,7 +159,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       />
                     </Grid>
                   </Grid>
-                  <Grid container alignItems="center">
+                  <Grid
+                    container
+                    alignItems="center"
+                    className={classes.contentContainer}
+                  >
                     {/* <Grid item md={1} xs={1} className="text-center">
                       {typeOfProperty}
                     </Grid> */}
@@ -174,7 +177,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       {curr.floor ? `Étage ${curr.floor}` : 'RDC'}
                     </Grid>
                     <Grid item md={1} xs={1} className="text-center">
-                      {available_date}
+                      {orientation}
                     </Grid>
                     <Grid item md={2} xs={2} className="text-center">
                       {curr.nb_parking ? `${curr.nb_parking} inclus` : '-'}

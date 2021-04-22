@@ -65,6 +65,13 @@ export default (theme) => ({
       },
     },
   },
+  contentContainer: {
+    '& > div': {
+      color: theme.palette.blue,
+      fontWeight: 600,
+      lineHeight: '1.9rem',
+    },
+  },
   btnContainer: {
     '& a': {
       padding: '10px 23px',

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(4),
   },
   img: {
-    height: 450,
+    height: '50vh',
     display: 'block',
     overflow: 'hidden',
     width: '100%',

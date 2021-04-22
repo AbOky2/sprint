@@ -13,7 +13,9 @@ import UpdateProfile from './UpdateProfile';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: '4rem 3.5rem 2.4rem',
+    padding: '4rem 3.5rem 1.6rem',
+    marginBottom: '2.4rem',
+    boxShadow: '0px 2px 4px rgba(19, 44, 72, 0.05)',
     '& > div': {
       width: 'auto',
     },
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   navContainer: {
     width: 'auto',
-    marginLeft: '6rem',
+    marginLeft: '1.6rem',
     '& > div .active-nav-link': {
       backgroundColor: 'rgba(79, 128, 255, 0.19)',
       border: '1px solid #c1cde7',
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
       color: '#1a2e6c',
       fontFamily: 'Open Sans',
       fontWeight: 'bold',
-      fontSize: '1.8rem',
+      fontSize: '1.4rem',
       lineHeight: '2.8rem',
     },
     '& > div .active-nav-link span': {
@@ -277,6 +279,7 @@ const StudentProfile = ({ user = {}, logout, update }) => {
           <Btn
             text="Prendre rendez-vous"
             iconType="calendar"
+            whiteColor
             onClick={() =>
               openPopupWidget({ url: 'https://calendly.com/kitlenid' })
             }

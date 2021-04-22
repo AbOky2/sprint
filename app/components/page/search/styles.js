@@ -93,12 +93,12 @@ const styles = (theme) => ({
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0,
           borderRight: 0,
-          border: `solid 1px ${theme.palette.lightGray}`,
-          borderColor: theme.palette.lightGray,
+          border: `solid 1px ${theme.palette.lightBlue}`,
+          borderColor: theme.palette.lightBlue,
           height: '100%',
           [theme.breakpoints.down('sm')]: {
             borderRadius: '1.1rem!important',
-            borderRight: `1px solid ${theme.palette.lightGray}`,
+            borderRight: `1px solid ${theme.palette.lightBlue}`,
             borderBottom: 0,
             minHeight: 46,
           },
@@ -144,12 +144,12 @@ const styles = (theme) => ({
         borderRadius: inputRadius,
       },
       '& > div:first-of-type input': {
-        borderRight: `1px solid ${theme.palette.lightGray}`,
-        borderBottom: `1px solid ${theme.palette.lightGray}`,
+        borderRight: `1px solid ${theme.palette.lightBlue}`,
+        borderBottom: `1px solid ${theme.palette.lightBlue}`,
         borderRadius: '0 !important',
       },
       '& > div:last-of-type input': {
-        borderLeft: `1px solid ${theme.palette.lightGray}`,
+        borderLeft: `1px solid ${theme.palette.lightBlue}`,
         borderTopLeftRadius: '0 !important',
         borderTopRightRadius: '0 !important',
         borderTop: 'none',
@@ -158,7 +158,7 @@ const styles = (theme) => ({
   },
   isLocation: {
     '& > div:last-of-type input': {
-      borderLeft: `1px solid ${theme.palette.lightGray}`,
+      borderLeft: `1px solid ${theme.palette.lightBlue}`,
     },
   },
   notFound: {
@@ -171,7 +171,7 @@ const styles = (theme) => ({
   },
   locationMaxBudget: {
     '& input': {
-      border: `1px solid ${theme.palette.lightGray}`,
+      border: `1px solid ${theme.palette.lightBlue}`,
     },
   },
   changeViewContainer: {
@@ -221,7 +221,7 @@ const styles = (theme) => ({
     ...theme.ui.bordered,
     position: 'relative',
     width: '100%',
-    border: `1px solid ${theme.palette.lightGray}`,
+    border: `1px solid ${theme.palette.lightBlue}`,
     backgroundColor: 'white',
     marginTop: '.8rem',
     '&:first-of-type': {
