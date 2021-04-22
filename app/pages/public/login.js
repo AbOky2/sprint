@@ -137,7 +137,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   checkBoxContainer: {
-    marginTop: '2rem',
+    width: 'fit-content',
+    padding: '0 1.6rem',
+    margin: '2rem auto 0',
+    // marginTop: '2rem',
+    border: `1px solid ${theme.palette.lightGray}`,
+    borderRadius: '.8rem',
     '& > span': {
       paddingLeft: 0,
     },

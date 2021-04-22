@@ -1,4 +1,6 @@
 import { Grid } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import {
   spaceCurrency,
@@ -39,22 +41,35 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
               />
             </Grid>
           </Grid>
-          <Grid item md={2} xs={5}>
-            <Icon type="door" color="iconBlue" />
-            {` ${elem} pièce${elem > 1 ? 's' : ''}`}
+          <Grid item md={2} xs={5} className={classes.header}>
+            <Typography variant="h3">
+              <Icon type="door" color="iconBlue" />
+              {` ${elem} pièce${elem > 1 ? 's' : ''}`}
+            </Typography>
           </Grid>
-          <Grid item md={3} xs={5}>
-            <Icon type="room" color="iconBlue" />
-            {` de ${current.minSurface}m² à ${current.maxSurface}m²`}
+          <Grid item md={3} xs={5} className={classes.header}>
+            <Typography variant="h3">
+              <Icon type="room" color="iconBlue" />
+              {` de ${current.minSurface}m² à ${current.maxSurface}m²`}
+            </Typography>
           </Grid>
-          <Grid item md={3} xs={5}>
-            <span>à partir de</span>
-            <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
+          <Grid
+            item
+            md={3}
+            xs={5}
+            className={clsx(classes.header, classes.headerPricing)}
+          >
+            <Typography variant="h3">
+              <span>à partir de</span>
+              <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
+            </Typography>
           </Grid>
-          <Grid item md={3} xs={5}>
-            {`${countList} logement${countList > 1 ? 's' : ''} disponible${
-              countList > 1 ? 's' : ''
-            }`}
+          <Grid item md={3} xs={5} className={classes.header}>
+            <Typography variant="h3">
+              {`${countList} logement${countList > 1 ? 's' : ''} disponible${
+                countList > 1 ? 's' : ''
+              }`}
+            </Typography>
           </Grid>
           <Grid
             item
@@ -73,14 +88,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
         {isOpen && (
           <div>
             <Grid container className={classes.discoveryContentHeader}>
-              <Grid item md={1} xs={1} className="text-center">
+              {/* <Grid item md={1} xs={1} className="text-center">
                 Type
-              </Grid>
+              </Grid> */}
               <Grid item md={2} xs={2} className="text-center">
                 Prix TVA 20%
-              </Grid>
-              <Grid item md={1} xs={1} className="text-center">
-                Livraison
               </Grid>
               <Grid item md={1} xs={1} className="text-center">
                 Surface
@@ -88,14 +100,17 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
               <Grid item md={2} xs={2} className="text-center">
                 Étage
               </Grid>
+              <Grid item md={1} xs={1} className="text-center">
+                Orientation
+              </Grid>
               <Grid item md={2} xs={2} className="text-center">
                 Parking
               </Grid>
               <Grid item md={2} xs={2} className="text-center">
                 Les +
               </Grid>
-              <Grid item md={1} xs={1} className="text-center">
-                Plan 2D/3D
+              <Grid item md={2} xs={2} className="text-center">
+                Plan 2D
               </Grid>
             </Grid>
             {current.list.map((curr) => {
@@ -146,14 +161,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     </Grid>
                   </Grid>
                   <Grid container alignItems="center">
-                    <Grid item md={1} xs={1} className="text-center">
+                    {/* <Grid item md={1} xs={1} className="text-center">
                       {typeOfProperty}
-                    </Grid>
+                    </Grid> */}
                     <Grid item md={2} xs={2} className="text-center">
                       {`${price}€`}
-                    </Grid>
-                    <Grid item md={1} xs={1} className="text-center">
-                      {available_date}
                     </Grid>
                     <Grid item md={1} xs={1} className="text-center">
                       {`${curr.surface}m²`}
@@ -161,20 +173,26 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     <Grid item md={2} xs={2} className="text-center">
                       {curr.floor ? `Étage ${curr.floor}` : 'RDC'}
                     </Grid>
+                    <Grid item md={1} xs={1} className="text-center">
+                      {available_date}
+                    </Grid>
                     <Grid item md={2} xs={2} className="text-center">
                       {curr.nb_parking ? `${curr.nb_parking} inclus` : '-'}
                     </Grid>
                     <Grid item md={2} xs={2} className="text-center">
-                      {curr.advantages?.join(', ')}
+                      {curr.advantages.length
+                        ? curr.advantages.join(', ')
+                        : '-'}
                     </Grid>
-                    <Grid item md={1} xs={1} className={classes.btnContainer}>
+                    <Grid item md={2} xs={2} className={classes.btnContainer}>
                       <Btn
-                        text={curr.file ? 'Voir' : '-'}
+                        text={curr.file ? 'Voir le plan' : '-'}
                         href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
                         download
                         disabled={!curr.file}
                         target="_blank"
                         dataMode="popup"
+                        boxShadow
                         whiteColor
                       />
                     </Grid>

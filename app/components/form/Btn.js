@@ -45,6 +45,13 @@ const useStyles = makeStyles((theme) => ({
       color: 'white!important',
     },
   },
+  boxShadow: {
+    boxShadow:
+      '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
+    '& > a': {
+      color: theme.palette.newBlue,
+    },
+  },
 }));
 
 const Btn = ({
@@ -57,6 +64,7 @@ const Btn = ({
   whiteColor,
   download,
   disabled,
+  boxShadow,
   target,
 }) => {
   const classes = useStyles();
@@ -64,6 +72,7 @@ const Btn = ({
     ? classes.container
     : clsx(classes.container, classes.whiteColor);
   className = disabled ? clsx(className, classes.disabled) : className;
+  className = boxShadow ? clsx(className, classes.boxShadow) : className;
 
   return (
     <Grid

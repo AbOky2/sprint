@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  subtitle: {
+    color: theme.palette.newGray,
+  },
 }));
 const PartnershipPrice = 400;
 const PartnerPage = ({ user }) => {
@@ -90,12 +93,13 @@ const PartnerPage = ({ user }) => {
       <Typography variant="h1">Parrainer l’un de vos proches</Typography>
       <div className={classes.tutorialConainer}>
         <Typography variant="h2">
-          {`Faites découvrir Kit le nid à vos proches et recevez
-          ${PartnershipPrice}€`}
+          {`Recevez ${PartnershipPrice}€ dès qu’ils effectuent leur achat`}
         </Typography>
         <Typography>
-          Aidez vos proches à concrétiser leur projet immobilier. Votre code
-          parrain : <strong>{user?.slug}</strong>
+          Aidez vos proches à concrétiser leur projet immobilier à l’aide de
+          votre code parrain : <strong>{user?.slug}</strong>
+          <br />
+          Ils pourront l’utiliser au moment de leur inscription sur Kit le nid.
         </Typography>
         <Grid container item justify="center">
           <Grid item md={2} className="text-center">
@@ -103,7 +107,7 @@ const PartnerPage = ({ user }) => {
               <Icon type="addUser" color="iconBlue" size="large" />
             </Grid>
             <Typography variant="h3">Etape 1</Typography>
-            <Typography>
+            <Typography className={classes.subtitle}>
               Renseignez les coordonnées de votre contact ci-dessous.
             </Typography>
           </Grid>
@@ -115,8 +119,9 @@ const PartnerPage = ({ user }) => {
               <Icon type="phone" color="iconBlue" size="large" />
             </Grid>
             <Typography variant="h3">Etape 2</Typography>
-            <Typography>
-              Nous prenons contact avec lui pour lui présenter nos offres.
+            <Typography className={classes.subtitle}>
+              Nous prenons contact avec lui par téléphone pour lui présenter nos
+              offres.
             </Typography>
           </Grid>
           <Grid item md={2}>
@@ -127,7 +132,7 @@ const PartnerPage = ({ user }) => {
               <Icon type="pen" color="iconBlue" size="big" />
             </Grid>
             <Typography variant="h3">Etape 3</Typography>
-            <Typography>
+            <Typography className={classes.subtitle}>
               {`Dès sa signature chez le notaire, vous percevrez
               ${PartnershipPrice}€ par virement.`}
             </Typography>
@@ -140,21 +145,24 @@ const PartnerPage = ({ user }) => {
         </Typography>
         <Grid container item justify="center">
           <Input
-            label="Prénom*"
-            onChange={handleChange}
-            onKeyPress={onKeyPress}
-            name="firstName"
-            position="left"
-          />
-          <Input
             label="Nom*"
+            placeholder="Son nom*"
             onChange={handleChange}
             onKeyPress={onKeyPress}
             name="lastName"
+            position="left"
+          />
+          <Input
+            label="Prénom*"
+            placeholder="Son prénom*"
+            onChange={handleChange}
+            onKeyPress={onKeyPress}
+            name="firstName"
             position="right"
           />
           <Input
             label="E-mail*"
+            placeholder="Son e-mail*"
             onChange={handleChange}
             onKeyPress={onKeyPress}
             name="email"
@@ -163,6 +171,7 @@ const PartnerPage = ({ user }) => {
           />
           <Input
             label="Téléphone"
+            placeholder="Son numéro de téléphone"
             onChange={handleChange}
             onKeyPress={onKeyPress}
             name="phone"

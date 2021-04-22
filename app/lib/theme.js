@@ -4,6 +4,7 @@ const shared = {
   colors: {
     primary: '#1A2E6C',
     newBlue: '#4F80FF',
+    newGray: '#8C97B6',
     lightBlue: '#D2DCF5',
     lighterGray: '#1a2e6c80',
     iconBlue: '#5379EF',
@@ -45,6 +46,7 @@ const theme = createMuiTheme({
     newBlue: shared.colors.newBlue,
     blue: shared.colors.primary,
     gray: shared.colors.gray,
+    newGray: shared.colors.newGray,
     lightGray: shared.colors.lightGray,
     lighterGray: shared.colors.lighterGray,
     lightBlue: shared.colors.lightBlue,
@@ -68,6 +70,7 @@ const theme = createMuiTheme({
     },
     h2: {
       ...shared.fonts.titles,
+      fontFamily: 'Nunito',
       fontSize: '2.6rem',
       lineHeight: '3.5rem',
       letterSpacing: 'normal',
@@ -77,6 +80,7 @@ const theme = createMuiTheme({
     h3: {
       ...shared.fonts.titles,
       ...shared.fonts.others,
+      fontFamily: 'Nunito',
       color: shared.colors.newBlue,
       fontWeight: 'bolder',
       fontSize: '2rem',
@@ -84,6 +88,7 @@ const theme = createMuiTheme({
     h4: {
       ...shared.fonts.titles,
       ...shared.fonts.others,
+      fontFamily: 'Nunito',
       color: shared.colors.primary,
       fontWeight: 'bolder',
     },
@@ -95,8 +100,9 @@ const theme = createMuiTheme({
     },
     body1: {
       fontStyle: 'normal',
+      fontFamily: 'Open Sans',
       fontWeight: '600',
-      fontSize: '1.6rem',
+      fontSize: '1.4rem',
       lineHeight: '2.2rem',
       color: shared.colors.primary,
     },

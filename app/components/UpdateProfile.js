@@ -139,7 +139,7 @@ const UpdateProfile = ({ user, update, logout, transparent }) => {
         >
           <Icon type="user" />
           <Typography variant="subtitle1" className={classes.userName}>
-            {`${state?.firstName} ${state?.lastName}`}
+            {state?.firstName}
           </Typography>
           <Icon type="sliderArrow" size="small" />
         </Grid>

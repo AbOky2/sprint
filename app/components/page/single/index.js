@@ -39,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
       background: 'white',
       boxSizing: 'border-box',
       borderRadius: '1rem',
-      transform: 'translateY(calc(50%))',
+      transform: 'translateY(50%)',
+      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
       fontWeight: 'bold',
       color: theme.palette.newBlue,
       [theme.breakpoints.down('sm')]: {
@@ -76,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
   houseInfo: {
     marginTop: '1.8rem',
+    fontWeight: 600,
     '& > div > div span': {
       color: theme.palette.blue,
     },
@@ -126,11 +128,12 @@ const useStyles = makeStyles((theme) => ({
     },
     '& h6': {
       marginBottom: 10,
-      color: 'rgba(26, 46, 108, 0.5)',
+      color: theme.palette.newGray,
+      fontSize: '1.4rem',
     },
     '& > div:last-of-type h1 span': {
       fontSize: '1.6rem',
-      color: 'rgba(26, 46, 108, 0.5)',
+      color: theme.palette.newGray,
     },
     '& > div:last-of-type > div': {
       marginTop: 22,
@@ -245,7 +248,7 @@ const useStyles = makeStyles((theme) => ({
     '& > p': {
       marginTop: '.8rem',
       textAlign: 'center',
-      color: 'rgba(26, 46, 108, 0.5)',
+      color: theme.palette.newGray,
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
@@ -291,6 +294,9 @@ const useStyles = makeStyles((theme) => ({
   priceCta: {
     width: '100%',
     textAlign: 'right',
+    '& h1': {
+      color: theme.palette.blue,
+    },
     [theme.breakpoints.down('sm')]: {
       textAlign: 'left',
     },
@@ -311,6 +317,25 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '2.5rem',
       borderTopLeftRadius: 0,
       borderBottomRightRadius: 0,
+    },
+  },
+  totalAvailable: {
+    position: 'relative',
+    width: 'fit-content',
+    padding: '1rem 1.6rem',
+    zIndex: 1,
+    '&::before': {
+      content: "''",
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      borderRadius: '.8rem',
+      background:
+        'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
+      width: '100%',
+      height: '100%',
+      opacity: '.1',
+      zIndex: -1,
     },
   },
 }));
@@ -394,9 +419,11 @@ const PropertyPage = ({
           <Grid item md={6}>
             <Typography variant="h1">{property.heading}</Typography>
             <Typography variant="subtitle1">{property.fullAddress}</Typography>
-            {!isLocation && (
-              <Typography variant="h2">Programme immobilier neuf</Typography>
-            )}
+            <Typography className={classes.totalAvailable}>
+              {!isLocation
+                ? `${total} logements disponibles dans ce programme immobilier neuf`
+                : `${total} logements disponibles dans cette résidence`}
+            </Typography>
             <div className={classes.houseInfo}>
               <Grid container>
                 <div>
@@ -454,7 +481,7 @@ const PropertyPage = ({
         <Grid container alignItems="flex-start">
           <Grid item className={classes.setpsContainer}>
             <div>
-              <Typography variant="h3">À propos du logement !</Typography>
+              <Typography variant="h3">À propos de cette résidence</Typography>
               <Typography variant="body1">
                 <span
                   dangerouslySetInnerHTML={{ __html: property.description }}
@@ -491,11 +518,9 @@ const PropertyPage = ({
 
         <Grid container className={classes.discoveryContainer}>
           <Typography variant="h2">
-            {total > 1
-              ? `Découvrez nos ${total} logements${
-                  isLocation ? '' : '  neufs disponibles'
-                } :`
-              : `Découvrez le logements${isLocation ? '' : '  neufs'} :`}
+            {`${total} logements${isLocation ? '' : '  neufs disponibles '}${
+              isLocation ? ' disponibles à la location' : "à l'achat"
+            } dans cette résidence :`}
           </Typography>
           <Grid container id="table">
             {property.typeOfAnnonce === typeOfAnnoncies[0] ? (

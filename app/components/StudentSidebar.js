@@ -44,7 +44,8 @@ const useStyles = makeStyles((theme) => ({
       color: '#1a2e6c',
       fontFamily: 'Open Sans',
       fontWeight: 'bold',
-      fontSize: '1.7rem',
+      fontSize: '1.8rem',
+      lineHeight: '2.8rem',
     },
     '& > div .active-nav-link span': {
       color: '#4f80ff',

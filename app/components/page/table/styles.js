@@ -1,4 +1,17 @@
 export default (theme) => ({
+  header: {
+    '&> h3': {
+      color: theme.palette.newGray,
+    },
+  },
+  headerPricing: {
+    '& > h3 > strong': {
+      color: theme.palette.blue,
+      fontWeight: 'bold',
+      fontSize: '26px',
+      lineHeight: '35px',
+    },
+  },
   discoveryContentHeader: {
     padding: '2.5rem 0',
     fontFamily: 'Nunito',

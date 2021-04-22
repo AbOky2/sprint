@@ -25,7 +25,7 @@ const styles = (theme) => ({
       boxSizing: 'border-box',
       width: '100%',
       height: '38px',
-      borderRadius: '.6rem',
+      borderRadius: '1rem',
       border: `solid 1px ${theme.palette.gray}`,
       color: '#1A2E6C',
       ...sharedInputStyle,
@@ -36,6 +36,9 @@ const styles = (theme) => ({
     '& input:focus': {
       boxShadow: '0px 4px 10px 3px rgba(0, 0, 0, 0.11)',
       border: `1px solid ${theme.palette.gray}`,
+    },
+    '& input::placeholder': {
+      color: theme.palette.gray,
     },
     '& h4': {
       margin: '2rem 0 1rem',
