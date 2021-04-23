@@ -13,7 +13,8 @@ const styles = (theme) => ({
     [theme.breakpoints.down('sm')]: {
       margin: 'auto',
       ...theme.space.bodyWrapper,
-      paddingBottom: '11rem',
+      paddingBottom: '7.5rem',
+      paddingTop: 0,
     },
   },
   fullContentWidth: {

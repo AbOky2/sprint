@@ -18,8 +18,7 @@ import LogoImg from '../../static/img/logo.png';
 const styles = (theme) => ({
   container: {
     padding: '2.8rem',
-    marginTop: '3rem',
-    marginBottom: '6rem',
+    margin: '1.6rem 0 3.2rem',
     backgroundColor: 'white',
     boxShadow: '0px 4px 20px rgb(24 55 50 / 4%)',
     borderRadius: '25px',
@@ -97,6 +96,7 @@ const styles = (theme) => ({
   },
   welcomeSub: {
     display: 'block',
+    fontSize: '2.6rem',
     fontWeight: 'normal',
   },
   subTitle: {

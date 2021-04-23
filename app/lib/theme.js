@@ -63,9 +63,8 @@ const theme = createMuiTheme({
     fontFamily: 'Open Sans',
     secondFontFamily: shared.fonts.secondFontFamily,
     h1: {
+      ...shared.fonts.titles,
       fontFamily: shared.fonts.secondFontFamily,
-      fontStyle: 'normal',
-      fontWeight: 'bolder',
       fontSize: '3rem',
       lineHeight: '4.1rem',
       color: shared.colors.newBlue,
@@ -76,7 +75,6 @@ const theme = createMuiTheme({
       fontSize: '2.6rem',
       lineHeight: '3.5rem',
       letterSpacing: 'normal',
-      fontWeight: 'bolder',
       color: shared.colors.newBlue,
     },
     h3: {
@@ -84,7 +82,6 @@ const theme = createMuiTheme({
       ...shared.fonts.others,
       fontFamily: shared.fonts.secondFontFamily,
       color: shared.colors.newBlue,
-      fontWeight: 'bolder',
       fontSize: '2rem',
     },
     h4: {
@@ -92,13 +89,12 @@ const theme = createMuiTheme({
       ...shared.fonts.others,
       fontFamily: shared.fonts.secondFontFamily,
       color: shared.colors.primary,
-      fontWeight: 'bolder',
     },
     subtitle1: {
       ...shared.fonts.titles,
       ...shared.fonts.others,
       fontWeight: '600',
-      color: 'rgba(26, 46, 108, 0.75)',
+      color: shared.colors.primary,
     },
     body1: {
       fontStyle: 'normal',

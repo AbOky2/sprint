@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { getPartnerApiMethod } from '../../../lib/api/customer';
-import { AdminContentWrapper } from '../../../components/wrapper';
-import { Btn } from '../../../components/form';
-import withAuth from '../../../lib/withAuth';
+import { getPartnerApiMethod } from 'lib/api/customer';
+import { AdminContentWrapper } from 'components/wrapper';
+import { Btn } from 'components/form';
+import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
   coverContainer: {
@@ -42,15 +42,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   subtitle1: {
-    margin: '10px 0 16px',
-    color: '#594F70',
+    margin: '1rem 0 2.4rem',
+    color: theme.palette.newGray,
+    fontWeight: 800,
   },
   partnerContainer: {
     maxWidth: '600px',
     margin: 'auto',
     wordBreak: 'break-all',
     '& > div:first-of-type': {
-      marginBottom: '40px',
+      marginBottom: '4.8rem',
       padding: '3.2rem',
       borderRadius: '2.5rem',
       color: 'white',
@@ -124,7 +125,7 @@ const PartnerPage = ({ partner = {} }) => {
           <div className={classes.partnerInfo}>
             <div className="text-center">
               <Typography variant="h2">{partner?.name}</Typography>
-              <Typography variant="subtitle1" className={classes.subtitle1}>
+              <Typography variant="h3" className={classes.subtitle1}>
                 {partner?.description}
               </Typography>
             </div>
@@ -152,6 +153,7 @@ const PartnerPage = ({ partner = {} }) => {
     </AdminContentWrapper>
   );
 };
+
 PartnerPage.propTypes = {
   partner: PropTypes.object.isRequired,
 };
