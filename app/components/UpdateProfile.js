@@ -38,11 +38,10 @@ const useStyles = makeStyles((theme) => ({
   },
   profileContainer: {
     position: 'relative',
-    padding: '1.5rem 2rem',
+    padding: '1.5rem 2.5rem',
     backgroundColor: 'white',
     borderRadius: '15px',
     cursor: 'pointer',
-    maxWidth: 275,
     '& svg:last-of-type': {
       position: 'absolute',
       top: '50%',
@@ -63,11 +62,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'transparent',
   },
   userName: {
-    width: 'calc(100% - 25px)',
     marginRight: 'auto',
     padding: '0 1.5rem 0 .8rem',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
   userPictureContainer: {

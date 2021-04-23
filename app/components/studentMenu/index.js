@@ -12,7 +12,11 @@ import UpdateProfile from '../UpdateProfile';
 import useStyles from './styles';
 
 const MenuItems = [
-  { href: '/dashboard', iconProps: { type: 'home' }, txt: 'Accueil' },
+  {
+    href: '/dashboard',
+    iconProps: { type: 'home' },
+    txt: 'Accueil',
+  },
   {
     href: '/dashboard/search/buy',
     singleType: '/dashboard/property/buy',
@@ -41,7 +45,6 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
   const classes = useStyles();
   const { asPath } = useRouter();
-
   const toggleMenu = () => setShowMenu(!showMenu);
 
   return (
@@ -57,8 +60,8 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
             <a
               className={
                 asPath === href ||
-                (asPath.includes('search') && asPath.includes(href)) ||
-                asPath.includes(singleType)
+                (href.includes('search') && asPath.includes(href)) ||
+                (singleType && asPath.includes(singleType))
                   ? clsx(classes.activeLink, classes.mobileActiveMobile)
                   : null
               }
@@ -71,6 +74,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
       ))}
       <Grid item onClick={toggleMenu} className={classes.calendar}>
         <Icon type="burgerMenu" />
+        <p>Menu</p>
       </Grid>
       <Drawer anchor="right" open={showMenu} onClose={toggleMenu}>
         <div className={classes.drawer}>
@@ -136,7 +140,7 @@ const StudentProfile = ({ user = {}, logout, update }) => {
                   className={
                     asPath === href ||
                     (href.includes('search') && asPath.includes(href)) ||
-                    asPath.includes(singleType)
+                    (singleType && asPath.includes(singleType))
                       ? classes.activeLink
                       : null
                   }

@@ -4,7 +4,6 @@ const inputRadius = '1.5rem';
 
 const styles = (theme) => ({
   searchMapContainer: {
-    position: 'relative',
     '& > div:first-of-type > div:first-of-type > div:last-of-type > svg ': {
       display: 'none',
     },
@@ -254,6 +253,7 @@ const styles = (theme) => ({
       '& > div:last-of-type': {
         width: '60%',
         padding: '2.5rem 1.6rem',
+        paddingRight: '3.5rem',
         '& > p:last-of-type': {
           textAlign: 'left',
         },

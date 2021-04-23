@@ -67,18 +67,10 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
       padding: '1rem .3rem',
     },
-    '& > div .active-nav-link': {
-      backgroundColor: 'initial',
-      border: 'none',
-      textAlign: 'center',
-    },
-    '& > div .active-nav-link p': {
-      fontWeight: 'bold',
-      color: '#4F80FF',
-    },
     '& > div p': {
       margin: '4px 0 6px',
       fontSize: 10,
+      color: theme.palette.blue,
     },
     '& span': {
       display: 'block',
@@ -88,9 +80,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   calendar: {
-    '& img': {
-      width: 20,
-    },
+    textAlign: 'center',
   },
   drawer: {
     padding: '2.7rem',
@@ -144,6 +134,9 @@ const useStyles = makeStyles((theme) => ({
   mobileActiveMobile: {
     '&::after': {
       display: 'none',
+    },
+    '& p': {
+      color: `${theme.palette.newBlue}!important`,
     },
   },
 }));
