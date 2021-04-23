@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import clsx from 'clsx';
 import Dialog from '@material-ui/core/Dialog';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
@@ -37,10 +38,14 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     margin: '0 auto 1rem',
     padding: '4rem 0 5rem',
-    borderBottom: '1px solid #C1CDE7',
+    borderBottom: `1px solid ${theme.palette.newGray}`,
     [theme.breakpoints.down('sm')]: {
       padding: '2rem 0 4rem',
     },
+  },
+  noDivider: {
+    borderBottom: `none`,
+    paddingBottom: 0,
   },
   btnContainer: {
     marginTop: 30,
@@ -66,6 +71,7 @@ const Modal = ({
   onClose,
   title,
   showActions = true,
+  showDivider = true,
   onClick,
   confirmText = 'Confirmer',
   ...props
@@ -100,7 +106,14 @@ const Modal = ({
         ) : (
           ''
         )}
-        <div className={classes.contentContainer}>{children}</div>
+        <div
+          className={clsx(
+            classes.contentContainer,
+            !showDivider ? classes.noDivider : ''
+          )}
+        >
+          {children}
+        </div>
         {showActions && (
           <Grid container justify="center" className={classes.btnContainer}>
             <Grid item md={6}>
@@ -119,6 +132,7 @@ const Modal = ({
 Modal.propTypes = {
   title: PropTypes.string,
   openModal: PropTypes.bool,
+  showDivider: PropTypes.bool,
   onClick: PropTypes.func,
   onClose: PropTypes.func.isRequired,
   showActions: PropTypes.bool,
@@ -129,6 +143,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
   title: '',
   openModal: false,
+  showDivider: true,
   showActions: true,
   onClick: null,
   confirmText: 'Confirmer',

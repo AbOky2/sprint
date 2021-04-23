@@ -61,6 +61,7 @@ const ReserveLocation = ({
       <Modal
         openModal={curr}
         showActions={false}
+        showDivider={false}
         onClose={handleClose}
         title={
           <>

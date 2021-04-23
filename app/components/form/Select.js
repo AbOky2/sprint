@@ -19,16 +19,6 @@ const positionType = ['', 'left', 'right'];
 
 const styles = (theme) => ({
   container: {
-    '& p': {
-      fontFamily: 'Open Sans',
-      textAlign: 'left',
-      margin: '2rem 0 1rem',
-      fontSize: '1.8rem',
-      fontStyle: 'normal',
-      fontWeight: 'bold',
-      lineHeight: '28px',
-      color: 'rgba(26, 46, 108, 0.75)',
-    },
     '& select': {
       padding: '2.27rem 1.4rem',
       fontSize: '1.4rem',
@@ -46,6 +36,10 @@ const styles = (theme) => ({
     '& fieldset': {
       border: `1px solid ${theme.palette.lightBlue}`,
     },
+  },
+  label: {
+    margin: '2rem 0 .6rem',
+    color: theme.palette.newBlack,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -207,7 +201,7 @@ const NativeSelects = ({
     }
   >
     <FormControl variant="outlined" className={classes.formControl}>
-      {label ? <p>{label}</p> : ''}
+      {label ? <Typography className={classes.label}>{label}</Typography> : ''}
       <Select
         native
         autoWidth
