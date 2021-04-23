@@ -1,14 +1,12 @@
 /* eslint-disable react/no-danger */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { openPopupWidget } from 'react-calendly';
 import { Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import Maps from 'components/Maps';
 import { userActions } from 'redux/_actions';
 import { AdminContentWrapper } from 'components/wrapper';
-import { Icon, Btn } from 'components/form';
+import { Icon } from 'components/form';
 import { addBookmarkApiMethod } from 'lib/api/customer';
 import { typeOfAnnoncies, defaultPropertyImg } from 'helpers/property';
 import Carrousel from 'components/Carrousel';
@@ -17,328 +15,8 @@ import { spaceCurrency } from 'helpers/convertAndCheck';
 import { getNbPieces } from 'helpers/property';
 import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';
-
-const useStyles = makeStyles((theme) => ({
-  card: {
-    width: 'calc(100% - 14px)',
-  },
-  title: {
-    color: theme.palette.newBlue,
-  },
-  save: {
-    color: theme.palette.button,
-    fontSize: '1.8rem',
-    marginBottom: 30,
-    '& > div': {
-      position: 'absolute',
-      bottom: 0,
-      cursor: 'pointer',
-      width: '25%',
-      justifyContent: 'center',
-      padding: '20px 23px',
-      background: 'white',
-      boxSizing: 'border-box',
-      borderRadius: '1rem',
-      transform: 'translateY(50%)',
-      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
-      fontWeight: 'bold',
-      color: theme.palette.newBlue,
-      [theme.breakpoints.down('sm')]: {
-        width: 'auto',
-      },
-    },
-    '& svg': {
-      marginRight: 15,
-    },
-  },
-  subTitle: {
-    margin: '4px 0 22px',
-    color: 'rgba(26, 46, 108, 0.75)',
-  },
-  setpsContainer: {
-    '& h3': {
-      marginBottom: 8,
-    },
-    '& > div:first-of-type': {
-      padding: '3.2rem',
-      borderRadius: '2.5rem',
-      color: 'white',
-      background: 'white',
-      boxShadow: '0px 4px 20px rgba(24, 55, 50, 0.04)',
-      '& li': {
-        marginBottom: 15,
-      },
-      '& span': {
-        padding: '0 5px',
-        marginRight: 10,
-        borderRadius: '3px',
-      },
-    },
-  },
-  houseInfo: {
-    marginTop: '1.8rem',
-    fontWeight: 600,
-    '& > div > div span': {
-      color: theme.palette.blue,
-    },
-    '& > div > div:first-of-type': {
-      marginRight: 40,
-    },
-    '& svg': {
-      marginRight: 8,
-    },
-    [theme.breakpoints.down('sm')]: {
-      '& > div > div': {
-        marginLeft: 'auto',
-        '&:first-of-type': {
-          marginRight: 0,
-        },
-      },
-    },
-  },
-  searchContainer: {
-    marginBottom: 22,
-    '& > div:last-of-type svg': {
-      position: 'absolute',
-      right: 0,
-      top: '50%',
-      width: 40,
-      height: 40,
-      transform: 'translateY(-50%)',
-    },
-    '& > div:nth-child(2) > div > div > div': {
-      backgroundColor: 'white',
-      borderRadius: 0,
-    },
-    '& > div:first-of-type input': {
-      borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
-      borderRight: 'none',
-    },
-    '& > div:last-of-type input': {
-      borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0,
-    },
-  },
-  description: {
-    marginTop: '6rem',
-    marginBottom: '4rem',
-    '& h2, & h1 > div:last-of-type ': {
-      color: theme.palette.blue,
-    },
-    '& h6': {
-      marginBottom: 10,
-      color: theme.palette.newGray,
-      fontSize: '1.4rem',
-    },
-    '& > div:last-of-type h1 span': {
-      fontSize: '1.6rem',
-      color: theme.palette.newGray,
-    },
-    '& > div:last-of-type > div': {
-      marginTop: 22,
-    },
-    [theme.breakpoints.down('sm')]: {
-      '& h2, & h1 ': {
-        marginTop: '1rem',
-      },
-    },
-  },
-
-  extras: {
-    marginTop: '2rem',
-    boxSizing: 'border-box',
-    padding: 32,
-    background: '#F4F5F7',
-    borderRadius: '15px',
-    boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
-    '& svg': {
-      marginRight: '1rem',
-    },
-    '& h3': {
-      color: theme.palette.blue,
-      marginBottom: '.8rem',
-    },
-    '& > div:last-of-type > div h6 ': {
-      color: '#526190',
-    },
-    '& > div:first-of-type': {
-      marginBottom: 20,
-    },
-    '& > div:last-of-type h6': {
-      maxWidth: 'calc(100% - 32px)',
-    },
-    '& > div:last-of-type svg': {
-      marginRight: 8,
-    },
-  },
-
-  extraInfo: {
-    '& > div': {
-      boxSizing: 'border-box',
-      padding: 32,
-      background: '#F4F5F7',
-      borderRadius: '15px',
-      boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
-      '& svg': {
-        marginRight: '1rem',
-      },
-    },
-    '& h3': {
-      color: theme.palette.blue,
-      marginBottom: 32,
-    },
-    '& > div:last-of-type > div h6 ': {
-      color: '#526190',
-    },
-    '& > div:first-of-type': {
-      marginBottom: 20,
-    },
-    '& > div:last-of-type h6': {
-      marginBottom: 9,
-    },
-    '& > div:last-of-type svg': {
-      marginRight: 8,
-    },
-  },
-  mapContainer: {
-    marginTop: 24,
-    borderRadius: '2.5rem',
-    overflow: 'hidden',
-    '& > div': {
-      minHeight: 400,
-    },
-    '& img': {
-      display: 'block',
-      width: '100%',
-    },
-  },
-  discoveryContainer: {
-    marginTop: '4rem',
-    '& h2': {
-      color: theme.palette.blue,
-      marginBottom: '4rem',
-    },
-
-    '& > div > div:last-of-type > div:first-of-type': {
-      borderBottom: '1px solid rgba(26, 46, 108, 0.5)',
-    },
-    '& > div > div': {
-      width: '100%',
-      '& > div:first-of-type': {
-        borderTop: '1px solid rgba(26, 46, 108, 0.5)',
-        padding: '2.5rem 0',
-        '& > div:first-of-type': {
-          display: 'none',
-          padding: '0 2rem',
-        },
-        [theme.breakpoints.down('sm')]: {
-          '& > div': {
-            display: 'none',
-          },
-          '& > div:first-of-type': {
-            display: 'flex',
-          },
-        },
-      },
-    },
-  },
-  phoneContainer: {
-    display: 'inline-block',
-    '& > p': {
-      marginTop: '.8rem',
-      textAlign: 'center',
-      color: theme.palette.newGray,
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-      textAlign: 'center',
-      '& > div': {
-        margin: 'auto!important',
-        textAlign: 'center',
-      },
-    },
-  },
-  modal: {
-    '& > div > div': {
-      '& > span': {
-        fontFamily: 'Open Sans',
-        fontStyle: 'normal',
-        fontWeight: '600',
-        fontSize: '16px',
-        lineHeight: '22px',
-        display: 'inline-block',
-        alignItems: 'center',
-        color: theme.palette.newBlue,
-        background: 'white',
-        border: `1px solid ${theme.palette.newBlue}`,
-        boxSizing: 'border-box',
-        borderRadius: '10px',
-        padding: '1.6rem',
-      },
-    },
-  },
-  anchorLink: {
-    width: 'fit-content',
-    background:
-      'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
-    boxShadow:
-      '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
-    color: 'white',
-    borderRadius: '10px',
-    cursor: 'pointer',
-    fontSize: '1.8rem',
-    fontWeight: '600',
-    padding: '18px 23px',
-  },
-  priceCta: {
-    width: '100%',
-    textAlign: 'right',
-    '& h1': {
-      color: theme.palette.blue,
-    },
-    [theme.breakpoints.down('sm')]: {
-      textAlign: 'left',
-    },
-  },
-  ecologyContainer: {
-    position: 'relative',
-    marginTop: '5rem',
-    '& > div:first-of-type': {
-      position: 'absolute',
-      top: '-2.5rem',
-      left: 0,
-      backgroundColor: '#3e8743',
-    },
-    '& > div:last-of-type': {
-      marginLeft: '5rem',
-      backgroundColor: '#f5f5f5',
-      padding: '1rem 2rem',
-      borderRadius: '2.5rem',
-      borderTopLeftRadius: 0,
-      borderBottomRightRadius: 0,
-    },
-  },
-  totalAvailable: {
-    position: 'relative',
-    width: 'fit-content',
-    padding: '1rem 1.6rem',
-    zIndex: 1,
-    '&::before': {
-      content: "''",
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      borderRadius: '.8rem',
-      background:
-        'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
-      width: '100%',
-      height: '100%',
-      opacity: '.1',
-      zIndex: -1,
-    },
-  },
-}));
+import { BuySidebar, BtnCalendly } from './sidebar';
+import useStyles from './styles';
 
 const PropertyPage = ({
   id,
@@ -460,13 +138,7 @@ const PropertyPage = ({
                   Déposer mon dossier
                 </a>
               ) : (
-                <Btn
-                  text="Être rappelé selon mes dispos"
-                  alignRight
-                  onClick={() =>
-                    openPopupWidget({ url: 'https://calendly.com/kitlenid' })
-                  }
-                />
+                <BtnCalendly />
               )}
               {isLocation ? (
                 ''
@@ -479,7 +151,7 @@ const PropertyPage = ({
           </Grid>
         </Grid>
         <Grid container alignItems="flex-start">
-          <Grid item className={classes.setpsContainer}>
+          <Grid item sm={8} xs={12} className={classes.setpsContainer}>
             <div>
               <Typography variant="h3">À propos de cette résidence</Typography>
               <Typography variant="body1">
@@ -488,31 +160,12 @@ const PropertyPage = ({
                 />
               </Typography>
             </div>
-            {property.advantage?.length ? (
-              <div className={classes.extras}>
-                <Typography variant="h3">Les petits plus :</Typography>
-                <Grid container>
-                  {property.advantage?.map((elem) => (
-                    <Grid
-                      container
-                      item
-                      key={elem}
-                      md={4}
-                      sm={6}
-                      alignItems="center"
-                    >
-                      <Icon type="elevator" color="newBlue" />
-                      <Typography variant="subtitle1">{elem}</Typography>
-                    </Grid>
-                  ))}
-                </Grid>
-              </div>
-            ) : (
-              ''
-            )}
             <div className={classes.mapContainer}>
               <Maps loc={property.loc?.coordinates} />
             </div>
+          </Grid>
+          <Grid sm={4} xs={12}>
+            <BuySidebar property={property} classes={classes} />
           </Grid>
         </Grid>
 

@@ -60,10 +60,17 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         '&:first-of-type': {
           marginRight: 0,
+          '& a': {
+            padding: 0,
+          },
         },
         '&:last-of-type': {
           marginLeft: 0,
           marginBottom: 0,
+          padding: 0,
+        },
+        '& a': {
+          justifyContent: 'center',
         },
       },
     },

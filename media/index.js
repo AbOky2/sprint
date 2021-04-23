@@ -1,4 +1,3 @@
-const fs = require('fs');
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -18,17 +17,16 @@ mongoose.connect(MONGO_URL, options);
 app.use(helmet());
 app.use(express.static('public'));
 
-// const job = new CronJob('0 0 */6 * * *', function () {
-try {
-  // const d = new Date();
-  // logger.log('Starting mbi at sync', d);
-  // ftp(readMbi);
-  // readMbi();
-} catch (err) {
-  logger.error(err);
-}
-// });
-// job.start();
+const job = new CronJob('0 0 */6 * * *', function () {
+  try {
+    const d = new Date();
+    logger.log('Starting mbi at sync', d);
+    ftp(readMbi);
+  } catch (err) {
+    logger.error(err);
+  }
+});
+job.start();
 
 app.listen(PORT, () => {
   console.log(`Example app listening at ${ROOT_URL}`);

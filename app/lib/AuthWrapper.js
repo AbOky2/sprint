@@ -5,7 +5,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { withStyles } from '@material-ui/core/styles';
 import Sidebar from '../components/admin/Sidebar';
 import { userActions } from '../redux/_actions';
-import StudentSidebar, { MobileMenu } from '../components/StudentSidebar';
+import StudentMenu, { MobileMenu } from '../components/StudentMenu';
 
 const styles = (theme) => ({
   studentContainer: {
@@ -19,7 +19,7 @@ const styles = (theme) => ({
   fullContentWidth: {
     padding: 0,
   },
-  studentSidebarFixed: {
+  StudentMenuFixed: {
     position: 'sticky',
     [theme.breakpoints.down('sm')]: {
       display: 'none',
@@ -35,7 +35,7 @@ const actionCreators = {
   logout: userActions.logout,
   update: userActions.update,
 };
-export const StudentSidebarComp = connect(
+export const StudentMenuComp = connect(
   mapState,
   actionCreators
 )(
@@ -48,10 +48,10 @@ export const StudentSidebarComp = connect(
             xs={12}
             smup="true"
             elevation={15}
-            className={classes.studentSidebarFixed}
+            className={classes.StudentMenuFixed}
           >
             <Hidden smDown>
-              <StudentSidebar user={user} logout={logout} update={update} />
+              <StudentMenu user={user} logout={logout} update={update} />
             </Hidden>
           </Grid>
           <Hidden mdUp>

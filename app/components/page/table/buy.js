@@ -2,12 +2,8 @@ import { Grid } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import {
-  spaceCurrency,
-  ucfirst,
-  getDateQuarter,
-} from 'helpers/convertAndCheck';
-import { Icon, Btn } from '../../form';
+import { spaceCurrency } from 'helpers/convertAndCheck';
+import { Icon, Btn } from 'components/form';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import styles from './styles';
 
@@ -19,7 +15,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
 
     return (
       <div key={elem}>
-        <Grid container>
+        <Grid
+          container
+          className="pointer"
+          onClick={() => handleCurrOpen(elem)}
+        >
           <Grid container justify="space-between">
             <Grid item>
               <div>
@@ -28,11 +28,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
               </div>
             </Grid>
-            <Grid
-              item
-              onClick={() => handleCurrOpen(elem)}
-              className="text-center pointer"
-            >
+            <Grid item className="text-center">
               <Icon
                 type={isOpen ? 'less' : 'plus'}
                 color="newBlue"
@@ -70,13 +66,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
               }`}
             </Typography>
           </Grid>
-          <Grid
-            item
-            md={1}
-            xs={5}
-            onClick={() => handleCurrOpen(elem)}
-            className="text-center pointer"
-          >
+          <Grid item md={1} xs={5} className="text-center pointer">
             <Icon
               type={isOpen ? 'less' : 'plus'}
               color="newBlue"
@@ -87,9 +77,6 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
         {isOpen && (
           <div>
             <Grid container className={classes.discoveryContentHeader}>
-              {/* <Grid item md={1} xs={1} className="text-center">
-                Type
-              </Grid> */}
               <Grid item md={2} xs={2} className="text-center">
                 Prix TVA 20%
               </Grid>
@@ -115,7 +102,14 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
             {current.list.map((curr) => {
               const price = spaceCurrency(curr.price);
               const orientation = curr.orientation ?? '-';
-              const typeOfProperty = ucfirst(curr.typeOfProperty);
+              const floor = curr.floor
+                ? curr.floor > 1
+                  ? curr.floor + 'ème étage'
+                  : '1er étage'
+                : 'RDC';
+              const parking = curr.nb_parking
+                ? `${curr.nb_parking} inclus`
+                : '-';
 
               return (
                 <Grid
@@ -124,10 +118,6 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                   className={classes.discoveryContent}
                 >
                   <Grid container>
-                    <Grid container justify="space-between">
-                      <span>Type</span>
-                      <span>{typeOfProperty}</span>
-                    </Grid>
                     <Grid container justify="space-between">
                       <span>Prix</span>
                       <strong>{`${price}€`}</strong>
@@ -143,6 +133,10 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     <Grid container justify="space-between">
                       <span>Orientation</span>
                       <span>{orientation}</span>
+                    </Grid>
+                    <Grid container justify="space-between">
+                      <span>Parking</span>
+                      <span>{parking}</span>
                     </Grid>
 
                     <Grid
@@ -164,9 +158,6 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     alignItems="center"
                     className={classes.contentContainer}
                   >
-                    {/* <Grid item md={1} xs={1} className="text-center">
-                      {typeOfProperty}
-                    </Grid> */}
                     <Grid item md={2} xs={2} className="text-center">
                       {`${price}€`}
                     </Grid>
@@ -174,13 +165,13 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       {`${curr.surface}m²`}
                     </Grid>
                     <Grid item md={2} xs={2} className="text-center">
-                      {curr.floor ? `Étage ${curr.floor}` : 'RDC'}
+                      {floor}
                     </Grid>
                     <Grid item md={1} xs={1} className="text-center">
                       {orientation}
                     </Grid>
                     <Grid item md={2} xs={2} className="text-center">
-                      {curr.nb_parking ? `${curr.nb_parking} inclus` : '-'}
+                      {parking}
                     </Grid>
                     <Grid item md={2} xs={2} className="text-center">
                       {curr.advantages.length

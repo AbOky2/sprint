@@ -308,8 +308,11 @@ const styles = (theme) => ({
     },
   },
   fullMapsViewContainer: {
-    '& > div:last-of-type > div:first-of-type': {
-      borderTopLeftRadius: 0,
+    '& > div:last-of-type': {
+      width: '100%',
+      '& > div:first-of-type': {
+        borderTopLeftRadius: 0,
+      },
     },
   },
   pagination: {

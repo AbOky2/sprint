@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.8rem',
     fontWeight: '600',
     '& a, & > span': {
-      padding: '18px 23px',
+      padding: '1.6rem 2.4rem',
       fontStyle: 'normal',
       lineHeight: '28px',
       color: 'white',

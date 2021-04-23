@@ -22,6 +22,7 @@ const shared = {
       fontSize: '1.8rem',
       lineHeight: '2.8rem',
     },
+    secondFontFamily: 'Nunito',
   },
 };
 
@@ -60,8 +61,9 @@ const theme = createMuiTheme({
   typography: {
     htmlFontSize: 10,
     fontFamily: 'Open Sans',
+    secondFontFamily: shared.fonts.secondFontFamily,
     h1: {
-      fontFamily: 'Nunito',
+      fontFamily: shared.fonts.secondFontFamily,
       fontStyle: 'normal',
       fontWeight: 'bolder',
       fontSize: '3rem',
@@ -70,7 +72,7 @@ const theme = createMuiTheme({
     },
     h2: {
       ...shared.fonts.titles,
-      fontFamily: 'Nunito',
+      fontFamily: shared.fonts.secondFontFamily,
       fontSize: '2.6rem',
       lineHeight: '3.5rem',
       letterSpacing: 'normal',
@@ -80,7 +82,7 @@ const theme = createMuiTheme({
     h3: {
       ...shared.fonts.titles,
       ...shared.fonts.others,
-      fontFamily: 'Nunito',
+      fontFamily: shared.fonts.secondFontFamily,
       color: shared.colors.newBlue,
       fontWeight: 'bolder',
       fontSize: '2rem',
@@ -88,7 +90,7 @@ const theme = createMuiTheme({
     h4: {
       ...shared.fonts.titles,
       ...shared.fonts.others,
-      fontFamily: 'Nunito',
+      fontFamily: shared.fonts.secondFontFamily,
       color: shared.colors.primary,
       fontWeight: 'bolder',
     },

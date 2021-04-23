@@ -1,4 +1,4 @@
-export default (theme) => ({
+const styles = (theme) => ({
   header: {
     '&> h3': {
       color: theme.palette.newGray,
@@ -14,7 +14,7 @@ export default (theme) => ({
   },
   discoveryContentHeader: {
     padding: '2.5rem 0',
-    fontFamily: 'Nunito',
+    fontFamily: theme.typography.secondFontFamily,
     borderTop: '1px solid rgba(26, 46, 108, 0.5)',
     color: theme.palette.newBlue,
     fontStyle: 'normal',
@@ -122,3 +122,5 @@ export default (theme) => ({
     },
   },
 });
+
+export default styles;

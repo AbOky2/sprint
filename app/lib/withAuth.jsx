@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 import * as NProgress from 'nprogress';
-import { StudentSidebarComp, AdminSidebarComp } from './AuthWrapper';
+import { StudentMenuComp } from './AuthWrapper';
 import AdminDrawer from '../components/admin/drawer';
 import { isAdmin, dashboardPaths } from '../helpers/user';
 
@@ -91,9 +91,9 @@ export default function withAuth(
         );
       return (
         <>
-          <StudentSidebarComp user={user} fullContentWidth={fullContentWidth}>
+          <StudentMenuComp user={user} fullContentWidth={fullContentWidth}>
             <BaseComponent {...this.props} />
-          </StudentSidebarComp>
+          </StudentMenuComp>
         </>
       );
     }

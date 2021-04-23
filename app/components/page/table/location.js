@@ -19,8 +19,11 @@ const LocationTable = ({
 
     return (
       <div key={elem}>
-        <Grid container>
-          {/* <Typeform /> */}
+        <Grid
+          container
+          className="pointer"
+          onClick={() => handleCurrOpen(elem)}
+        >
           <Grid container justify="space-between">
             <Grid item>
               <div>
@@ -29,11 +32,7 @@ const LocationTable = ({
                 <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
               </div>
             </Grid>
-            <Grid
-              item
-              onClick={() => handleCurrOpen(elem)}
-              className="text-center pointer"
-            >
+            <Grid item className="text-center">
               <Icon
                 type={isOpen ? 'less' : 'plus'}
                 color="iconBlue"

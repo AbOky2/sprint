@@ -103,7 +103,7 @@ const styles = (theme) => ({
     margin: '1.2rem 0 2.5rem',
   },
   customH2: {
-    fontFamily: 'Nunito',
+    fontFamily: theme.typography.secondFontFamily,
     fontWeight: 'bold',
   },
   presentationCardTitle: {
@@ -293,6 +293,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
     </Grid>
   </AdminContentWrapper>
 );
+
 Dashboard.propTypes = {
   user: PropTypes.object.isRequired,
   partners: PropTypes.arrayOf(PropTypes.object).isRequired,

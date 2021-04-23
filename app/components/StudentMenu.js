@@ -142,6 +142,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '& svg path': {
       fill: '#4f80ff!important',
+      stroke: '#4f80ff!important',
     },
     '& span': {
       color: `${theme.palette.newBlue}!important`,
@@ -154,23 +155,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuItems = [
-  { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
-  { href: '/dashboard/search/buy', iconType: 'heart', txt: 'Acheter' },
-  { href: '/dashboard/search/location', iconType: 'heart', txt: 'Louer' },
-  { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
+const MobileMenuItems = [
+  { href: '/dashboard', iconProps: { type: 'home' }, txt: 'Accueil' },
   {
-    href: '/dashboard/sponsorship',
-    iconType: 'sponsorship',
-    txt: 'Parrainage',
+    href: '/dashboard/search/buy',
+    iconProps: { type: 'home' },
+    txt: 'Acheter',
+  },
+  {
+    href: '/dashboard/search/location',
+    iconProps: { type: 'home' },
+    txt: 'Louer',
+  },
+  {
+    href: '/dashboard/bookmark',
+    iconProps: { type: 'heart', strokeColor: 'primary' },
+    txt: 'Favoris',
   },
 ];
-const MobileMenuItems = [
-  { href: '/dashboard', iconType: 'home', txt: 'Accueil' },
-  { href: '/dashboard/bookmark', iconType: 'heart', txt: 'Favoris' },
+const MenuItems = [
+  ...MobileMenuItems,
   {
     href: '/dashboard/sponsorship',
-    iconType: 'sponsorship',
+    iconProps: { type: 'sponsorship' },
     txt: 'Parrainage',
   },
 ];
@@ -187,7 +194,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
       justify="space-between"
       className={clsx(classes.navContainer, classes.mobileContainer)}
     >
-      {MobileMenuItems?.map(({ href, txt, iconType }) => (
+      {MobileMenuItems?.map(({ href, txt, iconProps }) => (
         <Grid key={href} item>
           <Link href={href}>
             <a
@@ -197,7 +204,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
                   : null
               }
             >
-              <Icon type={iconType} />
+              <Icon {...iconProps} />
               <p>{txt}</p>
             </a>
           </Link>
