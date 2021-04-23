@@ -11,9 +11,9 @@ import { Icon } from 'components/form';
 import { isYoungWorker } from 'helpers/user';
 import { ucfirst } from 'helpers/convertAndCheck';
 import { getPartnersApiMethod } from 'lib/api/customer';
-import LocationImg from '../../static/img/location.png';
-import HouseImg from '../../static/img/house.png';
-import LogoImg from '../../static/img/logo.png';
+import LocationImg from 'static/img/location.png';
+import HouseImg from 'static/img/house.png';
+import LogoImg from 'static/img/logo.png';
 
 const styles = (theme) => ({
   container: {
@@ -262,8 +262,10 @@ const Dashboard = ({ user = {}, partners, classes }) => (
     </Typography>
     <Typography variant="subtitle1" className={classes.partnerDescription}>
       Kit le nid vous propose un ensemble de services complémentaires négociés
-      <br />
-      avec nos patenaires pour mieux vous accompagner pendant vos études.
+      <br /> avec nos partenaires
+      {isYoungWorker(user)
+        ? ' pour mieux vous accompagner pendant vos études.'
+        : '.'}
     </Typography>
     <Grid container>
       {partners?.map((elem) => (

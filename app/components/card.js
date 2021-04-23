@@ -174,10 +174,12 @@ const MapsCard = ({
 }) => {
   const [state, setState] = useState(0);
   const classes = useStyles();
-  const handleNext = () => {
+  const handleNext = (e) => {
+    e.stopPropagation();
     setState(state < pictures.length - 1 ? state + 1 : 0);
   };
-  const handlePrev = () => {
+  const handlePrev = (e) => {
+    e.stopPropagation();
     setState(state === 0 ? pictures.length - 1 : state - 1);
   };
 
@@ -197,7 +199,7 @@ const MapsCard = ({
       </Link>
       {pictures.length > 1 && (
         <>
-          <span onClick={() => handlePrev(_id)}>
+          <span onClick={handlePrev}>
             <Icon
               type="sliderArrow"
               size="small"
@@ -205,7 +207,7 @@ const MapsCard = ({
               rotate="180deg"
             />
           </span>
-          <span onClick={() => handleNext(_id)}>
+          <span onClick={handleNext}>
             <Icon type="sliderArrow" size="small" color="iconBlue" />
           </span>
         </>

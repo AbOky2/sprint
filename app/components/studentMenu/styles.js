@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: '4rem 3.5rem 1.6rem',
+    padding: '1.6rem 3.5rem 1.6rem',
     marginBottom: '2.4rem',
     boxShadow: '0px 2px 4px rgba(19, 44, 72, 0.05)',
     '& > div': {
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   logoContainer: {
     textAlign: 'center',
     '& img': {
-      width: 35,
+      width: 30,
     },
   },
   navContainer: {

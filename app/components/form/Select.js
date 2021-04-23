@@ -60,18 +60,13 @@ const styles = (theme) => ({
     position: 'relative',
     height: '100%',
     '& input': {
-      fontFamily: 'Open Sans',
       width: '100%',
       height: '100%',
       backgroundColor: 'white',
-      paddingLeft: '.8rem',
       paddingRight: '3rem',
       border: `solid 1px ${theme.palette.lightBlue}`,
-      fontStyle: 'normal',
-      fontWeight: '600',
-      fontSize: '1.6rem',
-      lineHeight: '2.2rem',
-      color: 'rgba(26, 46, 108, 0.5)',
+      ...theme.ui.searchInput,
+      paddingLeft: '2.4rem',
       [theme.breakpoints.down('sm')]: {
         padding: '2.1rem 1.4rem',
         borderRadius: '0!important',
@@ -93,7 +88,7 @@ const styles = (theme) => ({
       width: '1.2rem!important',
       height: '100%',
       cursor: 'pointer',
-      transform: 'translateY(-50%) rotate(180deg)',
+      transform: 'translateY(-50%) rotate(90deg)',
     },
     '& > div': {
       display: 'none',
@@ -121,7 +116,7 @@ const styles = (theme) => ({
       display: 'flex',
     },
     '& > svg': {
-      transform: 'translateY(-50%) rotate(0deg)',
+      transform: 'translateY(-50%) rotate(-90deg)',
     },
   },
 });
@@ -158,7 +153,7 @@ const DropdownSelect = withStyles(styles)(
           disabled
         />
         <span />
-        <Icon type="triangle" size="small" color="gray" />
+        <Icon type="sliderArrow" size="small" color="gray" />
         <Grid container>
           {list?.map((elem) => (
             <Grid

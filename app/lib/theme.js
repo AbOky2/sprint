@@ -128,4 +128,11 @@ theme.ui.listContainer = {
     },
   },
 };
+theme.ui.searchInput = {
+  fontFamily: theme.typography.fontFamily,
+  color: `${theme.palette.newGray}!important`,
+  fontSize: '1.4rem!important',
+  fontWeight: '600!important',
+  lineHeight: '2rem!important',
+};
 export { theme, shared };

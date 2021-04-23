@@ -75,7 +75,8 @@ const styles = (theme) => ({
       borderBottomRightRadius: '.6rem',
       borderTopRightRadius: '.6rem',
       ...sharedInputStyle,
-      paddingLeft: '.8rem',
+      paddingLeft: '2.4rem',
+      ...theme.ui.searchInput,
     },
     '& > div:last-of-type': {
       display: 'none',

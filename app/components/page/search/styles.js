@@ -104,7 +104,13 @@ const styles = (theme) => ({
           },
         },
         '&:last-of-type': {
+          '& > div > div': {
+            paddingLeft: '2.4rem',
+          },
           zIndex: 3,
+          '& input': {
+            ...theme.ui.searchInput,
+          },
         },
       },
     },
