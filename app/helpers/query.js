@@ -22,6 +22,7 @@ const typeOfAnnoncies = {
   [typeOfAnnonciesObj.buy]: 'buy',
   [typeOfAnnonciesObj.location]: 'location',
 };
+const singleTypes = Object.values(typeOfAnnoncies);
 const pages = {
   dashboard: '/dashboard',
   single: '/dashboard/property',
@@ -36,4 +37,5 @@ module.exports = {
   defaultLoc,
   searchQueryWhitelist,
   singlePath,
+  singleTypes,
 };

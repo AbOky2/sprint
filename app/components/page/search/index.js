@@ -115,7 +115,6 @@ const SearchPage = ({
     );
   };
   const handleSumit = () => requestData();
-  const handlePage = (e, pageOffset) => requestData(pageOffset);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
@@ -165,7 +164,6 @@ const SearchPage = ({
             page={page}
             matches={matches}
             isMdView={isMdView}
-            handlePage={handlePage}
             handlePointChange={handlePointChange}
             isMapsView={currView}
           />

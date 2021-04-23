@@ -155,15 +155,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MobileMenuItems = [
+const MenuItems = [
   { href: '/dashboard', iconProps: { type: 'home' }, txt: 'Accueil' },
   {
     href: '/dashboard/search/buy',
+    singleType: '/dashboard/property/buy',
     iconProps: { type: 'home' },
     txt: 'Acheter',
   },
   {
     href: '/dashboard/search/location',
+    singleType: '/dashboard/property/location',
     iconProps: { type: 'home' },
     txt: 'Louer',
   },
@@ -172,21 +174,20 @@ const MobileMenuItems = [
     iconProps: { type: 'heart', strokeColor: 'primary' },
     txt: 'Favoris',
   },
-];
-const MenuItems = [
-  ...MobileMenuItems,
   {
     href: '/dashboard/sponsorship',
     iconProps: { type: 'sponsorship' },
     txt: 'Parrainage',
   },
 ];
+
 export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
   const classes = useStyles();
   const { asPath } = useRouter();
 
   const toggleMenu = () => setShowMenu(!showMenu);
+
   return (
     <Grid
       container
@@ -194,12 +195,12 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
       justify="space-between"
       className={clsx(classes.navContainer, classes.mobileContainer)}
     >
-      {MobileMenuItems?.map(({ href, txt, iconProps }) => (
+      {MenuItems?.map(({ href, txt, singleType, iconProps }) => (
         <Grid key={href} item>
           <Link href={href}>
             <a
               className={
-                asPath === href
+                asPath === href || asPath.includes(singleType)
                   ? clsx(classes.activeLink, classes.mobileActiveMobile)
                   : null
               }
@@ -270,10 +271,16 @@ const StudentProfile = ({ user = {}, logout, update }) => {
           </Link>
         </Grid>
         <Grid container alignItems="center" className={classes.navContainer}>
-          {MenuItems?.map(({ href, txt }) => (
+          {MenuItems?.map(({ href, txt, singleType }) => (
             <Grid key={href} item alignItems="center">
               <Link href={href}>
-                <a className={asPath === href ? classes.activeLink : null}>
+                <a
+                  className={
+                    asPath === href || asPath.includes(singleType)
+                      ? classes.activeLink
+                      : null
+                  }
+                >
                   <span>{txt}</span>
                 </a>
               </Link>

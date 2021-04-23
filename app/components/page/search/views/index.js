@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
@@ -7,6 +7,7 @@ import { MapsCarousel } from 'components/Carrousel';
 import { Icon } from 'components/form';
 import { sortByKeys } from 'helpers/property';
 import { ListWrapper, ListElement } from './partials';
+import { defaultLimit } from 'helpers/query';
 import withStyles from '../styles';
 
 const MapsView = withStyles(
@@ -18,15 +19,20 @@ const MapsView = withStyles(
     toggleView,
     data = [],
     allData = [],
-    page,
+    page: defaultPage,
     matches,
-    handlePage,
     isMapsView,
     isMdView,
     handlePointChange,
     sortBy,
     handleSortSelect,
   }) => {
+    const [page, setPage] = useState({
+      pageList: data?.slice(5),
+      limit: defaultLimit,
+      page: defaultPage,
+      totalPages: data?.length,
+    });
     const locs = data?.map((e, index) => ({
       index,
       _id: e._id,
@@ -65,6 +71,28 @@ const MapsView = withStyles(
       const currIndex = data.findIndex((e) => e._id === id);
       setCurr({ ...data[currIndex], showInfoWindow: false });
     };
+    const paginate = (page_number) =>
+      data?.slice((page_number - 1) * page.limit, page_number * page.limit) ||
+      [];
+    const handlePage = (e, pageOffset) =>
+      setPage({ ...page, page: pageOffset });
+    useEffect(
+      () =>
+        setPage({
+          ...page,
+          pageList: paginate(page.page),
+        }),
+      [page.page]
+    );
+    useEffect(
+      () =>
+        setPage({
+          ...page,
+          pageList: data?.slice(0, 5),
+          totalPages: Math.ceil(data?.length / page.limit),
+        }),
+      [data]
+    );
 
     return (
       <Grid
@@ -86,7 +114,7 @@ const MapsView = withStyles(
               matches={matches}
               handlePage={handlePage}
             >
-              {data?.map((elems) => (
+              {page.pageList?.map((elems) => (
                 <ListElement
                   key={elems._id}
                   handleMouseEnter={handleMouseEnter(elems._id)}

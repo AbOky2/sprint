@@ -1,7 +1,6 @@
 import Pagination from '@material-ui/lab/Pagination';
 import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
-import { Icon } from 'components/form';
 import Select from 'components/form/Select';
 import Card from 'components/card';
 import {
@@ -32,8 +31,9 @@ const ListHeader = ({ classes, isMapsView, sortBy, handleSortSelect }) => (
     </Grid>
   </Grid>
 );
+
 const ListFooter = ({ classes, page, matches, isMapsView, handlePage }) =>
-  page.totalPages > 0 && (
+  page?.totalPages > 1 && (
     <Grid container justify="center" className={classes.pagination}>
       <Pagination
         count={page.totalPages}
