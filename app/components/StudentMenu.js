@@ -200,7 +200,9 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
           <Link href={href}>
             <a
               className={
-                asPath === href || asPath.includes(singleType)
+                asPath === href ||
+                (asPath.includes('search') && asPath.includes(href)) ||
+                asPath.includes(singleType)
                   ? clsx(classes.activeLink, classes.mobileActiveMobile)
                   : null
               }
@@ -276,7 +278,9 @@ const StudentProfile = ({ user = {}, logout, update }) => {
               <Link href={href}>
                 <a
                   className={
-                    asPath === href || asPath.includes(singleType)
+                    asPath === href ||
+                    (href.includes('search') && asPath.includes(href)) ||
+                    asPath.includes(singleType)
                       ? classes.activeLink
                       : null
                   }
