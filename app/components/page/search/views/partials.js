@@ -61,23 +61,26 @@ const ListWrapper = ({
       isMapsView={isMapsView}
       handleSortSelect={handleSortSelect}
     />
-    <Grid container>
-      {hasData ? (
-        children
-      ) : (
-        <div className={classes.notFound}>
-          <Typography variant="body1">
-            <span role="img" aria-label="cring">
-              😢
-            </span>
-            Aucun résultat ne correspond à votre critère de recherche.
-          </Typography>
-        </div>
-      )}
-      <ListFooter classes={classes} {...footerProps} />
-    </Grid>
+    <div>
+      <Grid container>
+        {hasData ? (
+          children
+        ) : (
+          <div className={classes.notFound}>
+            <Typography variant="body1">
+              <span role="img" aria-label="cring">
+                😢
+              </span>
+              Aucun résultat ne correspond à votre critère de recherche.
+            </Typography>
+          </div>
+        )}
+        <ListFooter classes={classes} {...footerProps} />
+      </Grid>
+    </div>
   </>
 );
+
 const ListElement = ({
   className,
   liked,
@@ -98,7 +101,6 @@ const ListElement = ({
 }) => (
   <Grid
     item
-    key={_id}
     className={className}
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}

@@ -129,7 +129,7 @@ const SearchPage = ({
   if (!state) return <NotFound showLink={false} />;
 
   return (
-    <AdminContentWrapper noRedirect>
+    <AdminContentWrapper noRedirect noPadding>
       <div>
         <div
           className={

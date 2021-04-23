@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
@@ -9,6 +9,113 @@ import { sortByKeys } from 'helpers/property';
 import { ListWrapper, ListElement } from './partials';
 import { defaultLimit } from 'helpers/query';
 import withStyles from '../styles';
+
+const ListContainer = ({
+  classes,
+  sortBy,
+  curr,
+  isMapsView,
+  handleSortSelect,
+  hasData,
+  page,
+  matches,
+  handlePage,
+  handleMouseEnter,
+  liked,
+  handleBookmark,
+}) => {
+  return (
+    <Grid item xs={5} className={classes.listViewContainer}>
+      <ListWrapper
+        classes={classes}
+        sortBy={sortBy}
+        isMapsView={isMapsView}
+        handleSortSelect={handleSortSelect}
+        hasData={hasData}
+        page={page}
+        matches={matches}
+        handlePage={handlePage}
+      >
+        {page.pageList?.map((elems) => (
+          <ListElement
+            key={elems._id}
+            handleMouseEnter={handleMouseEnter(elems._id)}
+            handleMouseLeave={handleMouseEnter(null)}
+            className={
+              elems._id !== curr?._id
+                ? classes.mapsListContainer
+                : clsx(classes.mapsListContainer, classes.mapsCurrListContainer)
+            }
+            liked={liked}
+            handleBookmark={handleBookmark}
+            {...elems}
+          />
+        ))}
+      </ListWrapper>
+    </Grid>
+  );
+};
+
+const MapsContainer = ({
+  classes,
+  data,
+  pageList,
+  curr,
+  liked,
+  allData,
+  isMdView,
+  queryData,
+  isMapsView,
+  toggleView,
+  index,
+  handleBookmark,
+  handleChildClick,
+  handlePointChange,
+  handleCarouselChange,
+}) => (
+  <Grid item md={isMapsView ? 12 : 7} xs={12}>
+    <MultiMaps
+      data={allData}
+      queryData={queryData}
+      pageList={pageList}
+      curr={curr}
+      handleChildClick={handleChildClick}
+      isMobile={isMdView}
+      handlePointChange={handlePointChange}
+      liked={liked}
+      handleBookmark={handleBookmark}
+    />
+    <Grid container className={classes.changeViewContainer}>
+      <div className={classes.changeView} onClick={toggleView}>
+        {isMapsView && <span>Afficher la liste</span>}
+        <Icon
+          type="sliderArrow"
+          size="small"
+          color="newBlue"
+          rotate={isMapsView ? '0' : '180deg'}
+        />
+      </div>
+    </Grid>
+    {isMdView && (
+      <Grid container>
+        <MapsCarousel index={index} handleChange={handleCarouselChange}>
+          {data?.map(({ city, postal, ...elems }) => (
+            <ListElement
+              key={elems._id}
+              className={clsx(
+                classes.mapsListContainer,
+                classes.mapsMobileListContainer
+              )}
+              showLikes={false}
+              handleBookmark={handleBookmark}
+              {...elems}
+            />
+          ))}
+        </MapsCarousel>
+      </Grid>
+    )}
+  </Grid>
+);
 
 const MapsView = withStyles(
   ({
@@ -104,83 +211,38 @@ const MapsView = withStyles(
         )}
       >
         {!isMapsView && (
-          <Grid item xs={5} className={classes.listViewContainer}>
-            <ListWrapper
-              classes={classes}
-              sortBy={sortBy}
-              isMapsView={isMapsView}
-              handleSortSelect={handleSortSelect}
-              hasData={data.length}
-              page={page}
-              matches={matches}
-              handlePage={handlePage}
-            >
-              {page.pageList?.map((elems) => (
-                <ListElement
-                  key={elems._id}
-                  handleMouseEnter={handleMouseEnter(elems._id)}
-                  handleMouseLeave={handleMouseEnter(null)}
-                  className={
-                    elems._id !== curr?._id
-                      ? classes.mapsListContainer
-                      : clsx(
-                          classes.mapsListContainer,
-                          classes.mapsCurrListContainer
-                        )
-                  }
-                  liked={liked}
-                  handleBookmark={handleBookmark}
-                  {...elems}
-                />
-              ))}
-            </ListWrapper>
-          </Grid>
-        )}
-        <Grid item md={isMapsView ? 12 : 7} xs={12}>
-          <MultiMaps
-            data={allData}
-            queryData={queryData}
-            pageList={page?.pageList?.map((e) => e._id)}
+          <ListContainer
+            classes={classes}
             curr={curr}
-            handleChildClick={handleChildClick}
-            isMobile={isMdView}
-            handlePointChange={handlePointChange}
+            sortBy={sortBy}
+            isMapsView={isMapsView}
+            handleSortSelect={handleSortSelect}
+            handleMouseEnter={handleMouseEnter}
+            hasData={data.length}
+            page={page}
+            matches={matches}
+            handlePage={handlePage}
             liked={liked}
             handleBookmark={handleBookmark}
           />
-          <Grid container className={classes.changeViewContainer}>
-            <div className={classes.changeView} onClick={toggleView}>
-              {isMapsView && <span>Afficher la liste</span>}
-              <Icon
-                type="sliderArrow"
-                size="small"
-                color="newBlue"
-                rotate={isMapsView ? '0' : '180deg'}
-              />
-            </div>
-          </Grid>
-          {isMdView && (
-            <Grid container>
-              <MapsCarousel
-                index={carrouselIndex}
-                handleChange={handleCarouselChange}
-              >
-                {data?.map(({ city, postal, ...elems }) => (
-                  <ListElement
-                    key={elems._id}
-                    className={clsx(
-                      classes.mapsListContainer,
-                      classes.mapsMobileListContainer
-                    )}
-                    showLikes={false}
-                    handleBookmark={handleBookmark}
-                    {...elems}
-                  />
-                ))}
-              </MapsCarousel>
-            </Grid>
-          )}
-        </Grid>
+        )}
+        <MapsContainer
+          classes={classes}
+          index={carrouselIndex}
+          allData={allData}
+          data={data}
+          queryData={queryData}
+          isMapsView={isMapsView}
+          pageList={page?.pageList?.map((e) => e._id)}
+          curr={curr}
+          handleChildClick={handleChildClick}
+          handleCarouselChange={handleCarouselChange}
+          isMobile={isMdView}
+          handlePointChange={handlePointChange}
+          liked={liked}
+          toggleView={toggleView}
+          handleBookmark={handleBookmark}
+        />
       </Grid>
     );
   }

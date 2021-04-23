@@ -280,9 +280,17 @@ const styles = (theme) => ({
     },
   },
   listViewContainer: {
+    height: '100%',
     padding: '0 2.4rem',
+    '& > div:last-of-type': {
+      height: '100%',
+      overflow: 'scroll',
+      paddingBottom: '7rem',
+    },
   },
   mapsViewContainer: {
+    height: 'calc(100vh - 195px)',
+    overflow: 'hidden',
     '& > div': {
       '&:last-of-type': {
         position: 'sticky',

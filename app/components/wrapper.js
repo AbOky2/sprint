@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 import { withRouter } from 'next/router';
 import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -43,12 +44,17 @@ const styles = (theme) => ({
       paddingBottom: '2rem',
     },
   },
+  noPadding: {
+    padding: 0,
+  },
   redirectStyle: redirectStyle(theme),
 });
 
 const AdminContentWrapper = withStyles(styles)(
-  withRouter(({ classes, router, href, noRedirect, children }) => (
-    <Grid className={classes.container}>
+  withRouter(({ classes, router, href, noRedirect, noPadding, children }) => (
+    <Grid
+      className={clsx(classes.container, noPadding ? classes.noPadding : '')}
+    >
       {noRedirect ? (
         ''
       ) : (
