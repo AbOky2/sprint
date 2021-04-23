@@ -140,6 +140,7 @@ const MapsView = withStyles(
           <MultiMaps
             data={allData}
             queryData={queryData}
+            pageList={page?.pageList?.map((e) => e._id)}
             curr={curr}
             handleChildClick={handleChildClick}
             isMobile={isMdView}

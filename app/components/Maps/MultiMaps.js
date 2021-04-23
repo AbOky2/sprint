@@ -22,6 +22,7 @@ export const GoogleMap = (props) => {
     curr,
     isMobile,
     queryData,
+    pageList = [],
     data: { docs = [], near = [] },
     handlePointChange,
     handleChildClick,
@@ -106,36 +107,38 @@ export const GoogleMap = (props) => {
         yesIWantToUseGoogleMapApiInternals
         center={near}
       >
-        {state.clusters.map((item) => {
-          if (item.numPoints === 1) {
+        {state.clusters
+          .filter((e) => pageList.find((i) => e.id.includes(i)))
+          .map((item) => {
+            if (item.numPoints === 1) {
+              return (
+                <Marker
+                  key={item.id}
+                  lat={item.points[0].lat}
+                  lng={item.points[0].lng}
+                  data={curr}
+                  show={item.id.includes(curr?._id)}
+                  isMobile={isMobile}
+                  handleBookmark={handleBookmark}
+                  liked={liked}
+                />
+              );
+            }
+
             return (
-              <Marker
+              <ClusterMarker
                 key={item.id}
-                lat={item.points[0].lat}
-                lng={item.points[0].lng}
+                lat={item.lat}
+                lng={item.lng}
+                points={item.points || []}
                 data={curr}
-                show={item.id.includes(curr?._id)}
+                show={item.points?.find((e) => e.id.includes(curr?._id))}
                 isMobile={isMobile}
                 handleBookmark={handleBookmark}
                 liked={liked}
               />
             );
-          }
-
-          return (
-            <ClusterMarker
-              key={item.id}
-              lat={item.lat}
-              lng={item.lng}
-              points={item.points || []}
-              data={curr}
-              show={item.points?.find((e) => e.id.includes(curr?._id))}
-              isMobile={isMobile}
-              handleBookmark={handleBookmark}
-              liked={liked}
-            />
-          );
-        })}
+          })}
       </GoogleMapReact>
     </div>
   );
