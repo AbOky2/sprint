@@ -29,9 +29,8 @@ const useStyles = makeStyles((theme) => ({
       },
       '&:last-of-type': {
         padding: '.8rem 0 2.3rem',
-        '& > h4': {
-          color: theme.palette.newBlue,
-          height: '2.7rem',
+        '& > h3': {
+          fontWeight: 800,
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
@@ -41,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
           lineHeight: '2.6rem',
           color: 'rgba(26, 46, 108, 0.75)',
           '&:nth-child(2)': {
-            marginBottom: 9,
+            marginBottom: '1rem',
             height: '2.4rem',
             lineHeight: '2.6rem',
             overflow: 'hidden',
@@ -49,8 +48,11 @@ const useStyles = makeStyles((theme) => ({
             textOverflow: 'ellipsis',
             color: theme.palette.lighterGray,
           },
+          '&:nth-child(3)': {
+            color: theme.palette.blue,
+          },
           '&:last-of-type': {
-            color: theme.palette.primary,
+            color: theme.palette.blue,
             '& span': {
               fontSize: '1.6rem',
               lineHeight: '2.2rem',
@@ -141,7 +143,7 @@ const Card = ({
         </div>
       </div>
       <div>
-        <Typography variant="h4">{title}</Typography>
+        <Typography variant="h3">{title}</Typography>
         <Typography
           variant="body1"
           style={{ display: address ? 'block' : 'none' }}

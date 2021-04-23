@@ -3,6 +3,36 @@ import { withRouter } from 'next/router';
 import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
+const redirectStyle = (theme) => ({
+  display: 'inline-block',
+  position: 'sticky',
+  top: '.5rem',
+  backgroundColor: '#f7f8fa',
+  padding: '.5rem',
+  marginBottom: '2.4rem',
+  borderRadius: '1rem',
+  zIndex: 35,
+  [theme.breakpoints.down('sm')]: {
+    top: '3.5rem',
+  },
+  '& h4': {
+    textAlign: 'left',
+    color: theme.palette.newBlue,
+    cursor: 'pointer',
+    fontSize: '1.4rem',
+    fontWeight: 'bold',
+    '&::before': {
+      content: "''",
+      border: `1px solid ${theme.palette.newBlue}`,
+      borderWidth: '0 2px 2px 0',
+      display: 'inline-block',
+      padding: '3px',
+      marginRight: '1rem',
+      transform: 'rotate(135deg);-webkit-transform: rotate(135deg)',
+    },
+  },
+});
+
 const styles = (theme) => ({
   container: {
     margin: 'auto',
@@ -13,36 +43,9 @@ const styles = (theme) => ({
       paddingBottom: '2rem',
     },
   },
-  redirect: {
-    display: 'inline-block',
-    position: 'sticky',
-    top: '.5rem',
-    backgroundColor: '#f7f8fa',
-    padding: '.5rem',
-    marginBottom: '2.4rem',
-    borderRadius: '1rem',
-    zIndex: 35,
-    [theme.breakpoints.down('sm')]: {
-      top: '3.5rem',
-    },
-    '& h4': {
-      textAlign: 'left',
-      color: theme.palette.newBlue,
-      cursor: 'pointer',
-      fontSize: '1.4rem',
-      fontWeight: 'bold',
-      '&::before': {
-        content: "''",
-        border: `1px solid ${theme.palette.newBlue}`,
-        borderWidth: '0 2px 2px 0',
-        display: 'inline-block',
-        padding: '3px',
-        marginRight: '1rem',
-        transform: 'rotate(135deg);-webkit-transform: rotate(135deg)',
-      },
-    },
-  },
+  redirectStyle: redirectStyle(theme),
 });
+
 const AdminContentWrapper = withStyles(styles)(
   withRouter(({ classes, router, href, noRedirect, children }) => (
     <Grid className={classes.container}>
@@ -50,7 +53,7 @@ const AdminContentWrapper = withStyles(styles)(
         ''
       ) : (
         <div
-          className={classes.redirect}
+          className={classes.redirectStyle}
           onClick={(e) => {
             if (href) router.push(href);
             else router.back();
@@ -64,4 +67,4 @@ const AdminContentWrapper = withStyles(styles)(
   ))
 );
 
-export { AdminContentWrapper };
+export { AdminContentWrapper, redirectStyle };

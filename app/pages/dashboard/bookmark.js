@@ -15,7 +15,8 @@ import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    marginBottom: '4rem',
+    marginBottom: '3.2rem',
+    color: theme.palette.blue,
   },
   notFound: {
     '& > div:first-of-type': {
@@ -27,7 +28,9 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: '0px 4px 20px rgba(24, 55, 50, 0.04)',
     },
     '& > div:first-of-type h3': {
-      marginBottom: 16,
+      marginBottom: '1.7rem',
+      color: theme.palette.blue,
+      fontWeight: 800,
       '& span': {
         marginRight: 5,
       },

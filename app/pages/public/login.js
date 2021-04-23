@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userActions } from 'redux/_actions';
 import { Btn, Select, Input } from 'components/form';
+import { redirectStyle } from 'components/wrapper';
 import withAuth from 'lib/withAuth';
 import { Student, userRoleSelect } from 'helpers/user';
 import { pick } from 'helpers/convertAndCheck';
@@ -32,21 +33,14 @@ const useStyles = makeStyles((theme) => ({
       marginTop: 0,
       marginBottom: '1rem',
       textAlign: 'center',
-      fontFamily: 'Open Sans',
-      fontSize: '3rem',
-      fontWeight: 'bold',
       letterSpacing: 'normal',
-      color: '#4f80ff',
     },
-    '& h2': {
-      paddingLeft: '0',
-      marginTop: '0',
+    '& h3': {
+      paddingLeft: 0,
+      marginTop: 0,
       marginBottom: '3rem',
       textAlign: 'center',
-      fontFamily: 'Open Sans',
-      fontSize: '1.8rem',
-      fontWeight: '600',
-      color: 'rgba(26, 46, 108, 0.5)',
+      color: theme.palette.newGray,
       [theme.breakpoints.down('sm')]: {
         marginBottom: '1.5rem ',
       },
@@ -81,6 +75,16 @@ const useStyles = makeStyles((theme) => ({
     '& a': {
       display: 'inline-block',
       color: '#0fc1a9',
+    },
+  },
+  redirect: {
+    ...redirectStyle(theme),
+    position: 'absolute',
+    top: '-5rem',
+    left: 0,
+    [theme.breakpoints.down('sm')]: {
+      top: '-5rem',
+      backgroundColor: 'initial',
     },
   },
   signinFormContainer: {
@@ -140,17 +144,15 @@ const useStyles = makeStyles((theme) => ({
     width: 'fit-content',
     padding: '0 1.6rem',
     margin: '2rem auto 0',
-    // marginTop: '2rem',
     border: `1px solid ${theme.palette.lightGray}`,
     borderRadius: '.8rem',
     '& > span': {
       paddingLeft: 0,
     },
     '& h3': {
+      marginBottom: 0,
       color: 'rgba(26, 46, 108, 0.5)',
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '1rem',
-      },
+      fontSize: '1.4rem',
     },
   },
   resetPassword: {
@@ -160,6 +162,7 @@ const useStyles = makeStyles((theme) => ({
     color: `${theme.palette.primary.main}!important`,
   },
 }));
+
 const SignUp = ({ values = {}, ...inputProps }) => (
   <Grid container item>
     <Input
@@ -337,7 +340,16 @@ const LoginTab = ({
           <a href="/">
             <img src="/logo.svg" alt="kit le nid" />
           </a>
-          <Grid container item alignItems="stretch" justify="center">
+          <Grid
+            container
+            item
+            alignItems="stretch"
+            justify="center"
+            className="relative"
+          >
+            <a href="http://kitlenid.fr" className={classes.redirect}>
+              <Typography variant="h4">Retour</Typography>
+            </a>
             <Grid item md={6} xs={12} className={classes.signinLogo} />
             <Grid
               container
@@ -351,15 +363,15 @@ const LoginTab = ({
             >
               <Grid container alignItems="center">
                 <div className="fullwidth">
-                  <h1>
+                  <Typography variant="h1">
                     {isRegisterinView
                       ? 'Inscrivez-vous gratuitement !'
                       : 'Connexion'}
-                  </h1>
-                  <h2>
-                    Rejoignez Kit le nid et accédez gratuitement à toutes nos
-                    offres d’appartements
-                  </h2>
+                  </Typography>
+                  <Typography variant="h3">
+                    {isRegisterinView &&
+                      'Et accédez à tout notre accompagnement.'}
+                  </Typography>
                   <Grid
                     container
                     item
