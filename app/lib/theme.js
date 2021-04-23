@@ -12,6 +12,7 @@ const shared = {
     lightGray: '#E2E2E2',
     white: '#fff',
     red: '#E02A50',
+    newBlack: '#0E0E2C',
   },
   fonts: {
     titles: {
@@ -51,6 +52,7 @@ const theme = createMuiTheme({
     lightGray: shared.colors.lightGray,
     lighterGray: shared.colors.lighterGray,
     lightBlue: shared.colors.lightBlue,
+    newBlack: shared.colors.newBlack,
     button: shared.colors.button,
   },
   space: {

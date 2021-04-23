@@ -40,13 +40,13 @@ const styles = (theme) => ({
     '& input::placeholder': {
       color: theme.palette.gray,
     },
-    '& h4': {
-      margin: '2rem 0 1rem',
-      color: '#526190',
-    },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
+  },
+  label: {
+    margin: '2rem 0 .6rem',
+    color: theme.palette.newBlack,
   },
   left: {
     paddingRight: '1.3rem',
@@ -179,7 +179,7 @@ const InputBase = withStyles(styles)(
           : classes.container
       }
     >
-      {label ? <Typography variant="h4">{label}</Typography> : ''}
+      {label ? <Typography className={classes.label}>{label}</Typography> : ''}
       {type !== 'textarea' ? (
         type === 'phone' ? (
           <NumberFormat

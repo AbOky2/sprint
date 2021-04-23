@@ -13,10 +13,9 @@ import SecondDivider from '../../static/img/second_divider.svg';
 const useStyles = makeStyles((theme) => ({
   tutorialConainer: {
     background: '#F0F3F9',
-    boxShadow: '0px 4px 20px rgba(24, 55, 50, 0.04)',
     borderRadius: '25px',
-    marginTop: '3.2rem',
-    padding: '4rem',
+    marginTop: '2.3rem',
+    padding: '2.2rem 4rem 4rem',
     '& > div > div > div': {
       height: '100px',
       width: '100px',
@@ -26,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
     },
     '& > p': {
-      margin: '.8rem 0 4.2rem',
+      margin: '.8rem 0 5rem',
     },
     '& h3': {
-      margin: '2.4rem 0 .8rem',
+      margin: '2.4rem 0 2.2rem',
       textAlign: 'center',
     },
     '& > div > div > svg': {
@@ -53,14 +52,16 @@ const useStyles = makeStyles((theme) => ({
     boxShadow:
       '0px 4px 13px rgb(0 0 0 / 10%), inset 0px -3px 10px rgb(149 149 149 / 20%)',
     borderRadius: 15,
-    '& > h3': {
-      marginBottom: '2rem',
-    },
-    '& > div:last-of-type': {
-      marginTop: '1.6rem',
+    '& > div': {
       '& > div': {
-        [theme.breakpoints.down('sm')]: {
-          margin: 'auto',
+        marginTop: '.5rem',
+      },
+      '&:last-of-type': {
+        marginTop: '3.2rem',
+        '& > div': {
+          [theme.breakpoints.down('sm')]: {
+            margin: 'auto',
+          },
         },
       },
     },
@@ -140,29 +141,27 @@ const PartnerPage = ({ user }) => {
         </Grid>
       </div>
       <div className={classes.formContainer}>
-        <Typography variant="h3">
-          Invitez vos proches dès maintenant :
-        </Typography>
+        <Typography variant="h2">Invitez vos proches</Typography>
         <Grid container item justify="center">
           <Input
-            label="Nom*"
-            placeholder="Son nom*"
+            label="Nom"
+            placeholder="Son nom"
             onChange={handleChange}
             onKeyPress={onKeyPress}
             name="lastName"
             position="left"
           />
           <Input
-            label="Prénom*"
-            placeholder="Son prénom*"
+            label="Prénom"
+            placeholder="Son prénom"
             onChange={handleChange}
             onKeyPress={onKeyPress}
             name="firstName"
             position="right"
           />
           <Input
-            label="E-mail*"
-            placeholder="Son e-mail*"
+            label="E-mail"
+            placeholder="Son e-mail"
             onChange={handleChange}
             onKeyPress={onKeyPress}
             name="email"
