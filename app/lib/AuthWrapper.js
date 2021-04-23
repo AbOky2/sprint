@@ -5,7 +5,7 @@ import Hidden from '@material-ui/core/Hidden';
 import { withStyles } from '@material-ui/core/styles';
 import Sidebar from '../components/admin/Sidebar';
 import { userActions } from '../redux/_actions';
-import StudentMenu, { MobileMenu } from '../components/StudentMenu';
+import StudentMenu, { MobileMenu } from '../components/studentMenu';
 
 const styles = (theme) => ({
   studentContainer: {
