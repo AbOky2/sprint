@@ -97,11 +97,13 @@ const PropertyPage = ({
           <Grid item md={6}>
             <Typography variant="h1">{property.heading}</Typography>
             <Typography variant="subtitle1">{property.fullAddress}</Typography>
-            <Typography className={classes.totalAvailable}>
-              {!isLocation
-                ? `${total} logements disponibles dans ce programme immobilier neuf`
-                : `${total} logements disponibles dans cette résidence`}
-            </Typography>
+            <a href="#table" className="inline-block">
+              <Typography className={classes.totalAvailable}>
+                {!isLocation
+                  ? `${total} logements disponibles dans ce programme immobilier neuf`
+                  : `${total} logements disponibles dans cette résidence`}
+              </Typography>
+            </a>
             <div className={classes.houseInfo}>
               <Grid container>
                 <div>

@@ -358,6 +358,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     width: 'fit-content',
     padding: '1rem 1.6rem',
+    cursor: 'pointer',
     zIndex: 1,
     '&::before': {
       content: "''",
