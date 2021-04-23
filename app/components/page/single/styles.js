@@ -72,9 +72,8 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       '& > div > div': {
-        marginLeft: 'auto',
         '&:first-of-type': {
-          marginRight: 0,
+          marginRight: '1.5rem',
         },
       },
     },
@@ -115,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.4rem',
     },
     '& > div:last-of-type h1 span': {
-      fontSize: '1.6rem',
+      fontSize: '1.2rem',
       color: theme.palette.newGray,
     },
     '& > div:last-of-type > div': {
@@ -280,9 +279,10 @@ const useStyles = makeStyles((theme) => ({
   phoneContainer: {
     display: 'inline-block',
     '& > p': {
+      fontSize: '1.2rem',
       marginTop: '.8rem',
       fontFamily: theme.typography.secondFontFamily,
-      textAlign: 'center',
+      textAlign: 'right',
       color: theme.palette.newGray,
     },
     [theme.breakpoints.down('sm')]: {

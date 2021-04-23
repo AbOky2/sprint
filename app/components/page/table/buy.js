@@ -123,12 +123,12 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       <strong>{`${price}€`}</strong>
                     </Grid>
                     <Grid container justify="space-between">
-                      <span>Superficie</span>
+                      <span>Surface</span>
                       <span>{`${curr.surface}m²`}</span>
                     </Grid>
                     <Grid container justify="space-between">
                       <span>Étage</span>
-                      <span>{curr.floor}</span>
+                      <span>{floor}</span>
                     </Grid>
                     <Grid container justify="space-between">
                       <span>Orientation</span>
