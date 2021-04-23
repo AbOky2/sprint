@@ -11,16 +11,15 @@ import {
 } from 'helpers/property';
 import { singlePath } from 'helpers/query';
 
-const ListHeader = ({ classes, isMapsView, sortBy, handleSortSelect }) => (
+const ListHeader = ({ classes, sortBy, handleSortSelect }) => (
   <Grid
     container
     item
-    xs={isMapsView ? 12 : 5}
     alignItems="center"
     justify="space-between"
     className={classes.sortContainer}
   >
-    <Grid item md={6} xs={12}>
+    <Grid item>
       <Select
         name="sort"
         placeholder="Type de bien"

@@ -329,6 +329,7 @@ const styles = (theme) => ({
   sortContainer: {
     marginBottom: '1.6rem',
     '& > div': {
+      minWidth: '42%',
       [theme.breakpoints.down('sm')]: {
         display: 'none',
         padding: '0!important',
@@ -341,7 +342,6 @@ const styles = (theme) => ({
         },
       },
       '&:first-of-type': {
-        paddingRight: '1rem',
         '& select': {
           ...theme.ui.bordered,
           backgroundColor: theme.palette.lightBlue,

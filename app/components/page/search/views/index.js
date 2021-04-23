@@ -88,10 +88,11 @@ const MapsView = withStyles(
       () =>
         setPage({
           ...page,
+          page: 1,
           pageList: data?.slice(0, 5),
           totalPages: Math.ceil(data?.length / page.limit),
         }),
-      [data]
+      [data, data[0]]
     );
 
     return (
