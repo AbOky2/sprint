@@ -15,7 +15,7 @@ import { spaceCurrency } from 'helpers/convertAndCheck';
 import { getNbPieces } from 'helpers/property';
 import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';
-import { BuySidebar, BtnCalendly } from './sidebar';
+import Sidebar, { BtnCalendly } from './sidebar';
 import useStyles from './styles';
 
 const PropertyPage = ({
@@ -165,7 +165,11 @@ const PropertyPage = ({
             </div>
           </Grid>
           <Grid sm={4} xs={12}>
-            <BuySidebar property={property} classes={classes} />
+            <Sidebar
+              isLocation={isLocation}
+              property={property}
+              classes={classes}
+            />
           </Grid>
         </Grid>
 

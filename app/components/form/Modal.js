@@ -17,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
       ...theme.space.bodyWrapper,
       paddingTop: '2rem',
     },
+    '& h2': {
+      color: theme.palette.blue,
+      fontWeight: 800,
+    },
   },
   close: {
     position: 'absolute',

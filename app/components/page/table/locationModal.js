@@ -2,7 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Icon } from 'components/form';
+import { Modal, Icon, Btn } from 'components/form';
 import { ucfirst, stripTags } from 'helpers/convertAndCheck';
 import copy from 'copy-to-clipboard';
 import styles from './styles';
@@ -17,7 +17,7 @@ const Copy = ({ data }) => (
       toast.success('Copié');
     }}
   >
-    <Icon type="copy" color="iconBlue" />
+    <Icon type="copy" size="tiny" color="iconBlue" />
     Copier
   </Grid>
 );
@@ -62,7 +62,12 @@ const ReserveLocation = ({
         openModal={curr}
         showActions={false}
         onClose={handleClose}
-        title="Votre demande de location à compléter et à envoyer à : RESA-STUDEA@nexity.fr"
+        title={
+          <>
+            Votre demande d’informations pré-remplie, à <br />
+            envoyer à : resa-studea@nexity.fr
+          </>
+        }
         confirmText="Envoyer"
       >
         <Grid
@@ -90,6 +95,9 @@ const ReserveLocation = ({
               </Grid>
             ))}
           </Grid>
+        </Grid>
+        <Grid container justify="center">
+          <Btn text="Envoyer ma demande par email" onClick={handleClose} />
         </Grid>
       </Modal>
     </div>

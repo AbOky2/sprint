@@ -149,6 +149,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                         whiteColor
                         href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
                         download
+                        boxShadow
                         disabled={!curr.file}
                       />
                     </Grid>

@@ -82,7 +82,7 @@ const styles = (theme) => ({
   },
   mail: {
     '& > div': {
-      marginBottom: '1.6rem',
+      marginBottom: '2.8rem',
       '&:last-of-type': {
         marginTop: '2.4rem',
       },
@@ -96,7 +96,9 @@ const styles = (theme) => ({
       '& > div:nth-child(2)': {
         padding: '1.5rem 2rem',
         borderRadius: '1rem',
-        border: '1px solid #F4F5F7',
+        fontWeight: 600,
+        border: `1px solid ${theme.palette.lightBlue}`,
+        color: theme.palette.blue,
       },
       '& > div:last-child': {
         paddingLeft: '1rem',
@@ -107,7 +109,10 @@ const styles = (theme) => ({
           borderRadius: '1rem',
           color: theme.palette.newBlue,
           border: `1px solid ${theme.palette.newBlue}`,
+          boxShadow:
+            '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
           cursor: 'pointer',
+          fontWeight: 600,
           [theme.breakpoints.down('sm')]: {
             justifyContent: 'center',
           },

@@ -48,8 +48,9 @@ const useStyles = makeStyles((theme) => ({
   boxShadow: {
     boxShadow:
       '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
-    '& > a': {
+    '& > a, & > span': {
       color: theme.palette.newBlue,
+      fontSize: '1.4rem',
     },
   },
 }));

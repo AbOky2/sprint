@@ -127,7 +127,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  extras: {
+  extraContainer: {
     '& > div': {
       marginTop: '2.4rem',
       boxSizing: 'border-box',
@@ -135,6 +135,9 @@ const useStyles = makeStyles((theme) => ({
       background: '#F4F5F7',
       borderRadius: '15px',
       boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+      '&:first-of-type': {
+        marginTop: 0,
+      },
       '& svg': {
         marginRight: '1rem',
       },
@@ -163,6 +166,17 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '2.4rem',
       '& > div': {
         margin: 'auto',
+      },
+    },
+  },
+  extras: {
+    '& > div > div': {
+      marginBottom: '1.3rem',
+      '&:last-of-type': {
+        marginBottom: 0,
+      },
+      '& p': {
+        marginBottom: '0!important',
       },
     },
   },
@@ -210,8 +224,8 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.newGray,
       marginBottom: '2.4rem',
       '&:first-of-type': {
-        fontFamily: theme.typography.secondFontFamily,
         fontSize: '1.2rem',
+        fontFamily: theme.typography.secondFontFamily,
         fontWeight: 'bold',
         marginBottom: '1.6rem',
       },
