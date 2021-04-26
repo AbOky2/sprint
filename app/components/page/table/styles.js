@@ -6,10 +6,8 @@ const styles = (theme) => ({
   },
   headerPricing: {
     '& > h3 > strong': {
+      ...theme.typography.h2,
       color: theme.palette.blue,
-      fontWeight: 'bold',
-      fontSize: '26px',
-      lineHeight: '35px',
     },
   },
   discoveryContentHeader: {

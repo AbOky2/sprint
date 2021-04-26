@@ -72,10 +72,6 @@ const useStyles = makeStyles((theme) => ({
       letterSpacing: 'normal',
       color: '#8e97a1',
     },
-    '& input:focus': {
-      boxShadow: '0px 4px 10px 3px rgba(0, 0, 0, 0.11)',
-      borderColor: '#06ae88',
-    },
     '& a': {
       display: 'inline-block',
       color: '#0fc1a9',

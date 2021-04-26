@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   openMenu: {
     display: 'block',
+    top: 'calc(100% + .3rem)',
   },
   logoutBtn: {
     marginBottom: '1.5rem',
@@ -62,9 +63,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'transparent',
   },
   userName: {
-    marginRight: 'auto',
+    marginRight: '.8rem',
     padding: '0 1.5rem 0 .8rem',
-    textOverflow: 'ellipsis',
+    lineHeight: '2.8rem',
   },
   userPictureContainer: {
     width: 50,
@@ -134,7 +135,7 @@ const UpdateProfile = ({ user, update, logout, transparent }) => {
           onClick={toggleShowSubMenu}
         >
           <Icon type="user" />
-          <Typography variant="subtitle1" className={classes.userName}>
+          <Typography className={classes.userName}>
             {state?.firstName}
           </Typography>
           <Icon type="sliderArrow" size="small" />
@@ -197,7 +198,7 @@ const UpdateProfile = ({ user, update, logout, transparent }) => {
               name="role"
               value={state.role}
               onChange={handleChange}
-              label="Status"
+              label="Type de profil"
               position="right"
               list={userRoleSelect}
             />

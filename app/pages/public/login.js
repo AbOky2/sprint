@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
-import { Grid, Checkbox, Typography } from '@material-ui/core';
+import { Grid, Container, Checkbox, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -51,27 +51,6 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '1rem ',
       },
     },
-    '& input': {
-      display: 'block',
-      padding: '3rem 1.4rem',
-      boxSizing: 'border-box',
-      width: '100%',
-      height: '38px',
-      borderRadius: '6px',
-      border: 'solid 1px #c7cfd6',
-      fontFamily: 'Open Sans',
-      fontSize: '1.4rem',
-      fontWeight: 'normal',
-      fontStretch: 'normal',
-      fontStyle: 'normal',
-      lineHeight: 'normal',
-      letterSpacing: 'normal',
-      color: '#8e97a1',
-    },
-    '& input:focus': {
-      boxShadow: '0px 4px 10px 3px rgba(0, 0, 0, 0.11)',
-      borderColor: '#06ae88',
-    },
     '& a': {
       display: 'inline-block',
       color: '#0fc1a9',
@@ -93,6 +72,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '1rem',
     borderTopLeftRadius: '0',
     borderBottomLeftRadius: '0',
+    boxShadow:
+      '-3px 4px 13px rgba(0, 0, 0, 0.1), inset 0px -3px 10px rgba(149, 149, 149, 0.2)',
     [theme.breakpoints.down('sm')]: theme.space.bodyWrapper,
   },
   formContainerParent: {
@@ -122,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '2rem 0',
   },
   btnContainer: {
-    marginTop: '3rem',
+    marginTop: '4.8rem',
     '& > div:first-of-type': {
       paddingRight: 5,
       [theme.breakpoints.down('sm')]: {
@@ -147,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
     border: `1px solid ${theme.palette.lightGray}`,
     borderRadius: '.8rem',
     '& > span': {
-      paddingLeft: 0,
+      padding: '.8rem .8rem .8rem 0',
     },
     '& h3': {
       marginBottom: 0,
@@ -329,127 +310,133 @@ const LoginTab = ({
       <Head>
         <title>Login</title>
       </Head>
-      <Grid
-        container
-        justify="center"
-        alignItems="center"
-        id="login"
-        className={classes.container}
-      >
-        <div className="fullwidth text-center">
-          <a href="/">
-            <img src="/logo.svg" alt="kit le nid" />
-          </a>
-          <Grid
-            container
-            item
-            alignItems="stretch"
-            justify="center"
-            className="relative"
-          >
-            <a href="http://kitlenid.fr" className={classes.redirect}>
-              <Typography variant="h4">Retour</Typography>
+      <Container>
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          id="login"
+          className={classes.container}
+        >
+          <div className="fullwidth text-center">
+            <a href="/">
+              <img src="/logo.svg" alt="kit le nid" />
             </a>
-            <Grid item md={6} xs={12} className={classes.signinLogo} />
             <Grid
               container
               item
-              direction="column"
-              justify="space-between"
-              alignItems="center"
-              md={6}
-              xs={12}
-              className={classes.signinFormContainer}
+              alignItems="stretch"
+              justify="center"
+              className="relative"
             >
-              <Grid container alignItems="center">
-                <div className="fullwidth">
-                  <Typography variant="h1">
-                    {isRegisterinView
-                      ? 'Inscrivez-vous gratuitement !'
-                      : 'Connexion'}
-                  </Typography>
-                  <Typography variant="h3">
-                    {isRegisterinView &&
-                      'Et accédez à tout notre accompagnement.'}
-                  </Typography>
-                  <Grid
-                    container
-                    item
-                    justify="center"
-                    alignItems="center"
-                    className={classes.formContainer}
-                  >
-                    {isRegisterinView ? (
-                      <SignUp
-                        values={state}
-                        onChange={handleChange}
-                        onKeyPress={onKeyPress}
-                        onClick={onClick}
-                      />
-                    ) : (
-                      <SignIn
-                        values={state}
-                        onChange={handleChange}
-                        onKeyPress={onKeyPress}
-                        onClick={onClick}
-                      />
-                    )}
-                  </Grid>
-                  {isRegisterinView && (
+              <a href="http://kitlenid.fr" className={classes.redirect}>
+                <Typography variant="h4">Retour</Typography>
+              </a>
+              <Grid item md={6} xs={12} className={classes.signinLogo} />
+              <Grid
+                container
+                item
+                direction="column"
+                justify="space-between"
+                alignItems="center"
+                md={6}
+                xs={12}
+                className={classes.signinFormContainer}
+              >
+                <Grid container alignItems="center">
+                  <div className="fullwidth">
+                    <Typography variant="h1">
+                      {isRegisterinView
+                        ? 'Inscrivez-vous gratuitement !'
+                        : 'Connexion'}
+                    </Typography>
+                    <Typography variant="h3">
+                      {isRegisterinView && (
+                        <>
+                          Et accédez à tout notre
+                          <br /> accompagnement.
+                        </>
+                      )}
+                    </Typography>
                     <Grid
                       container
+                      item
+                      justify="center"
                       alignItems="center"
-                      className={classes.checkBoxContainer}
+                      className={classes.formContainer}
                     >
-                      <Checkbox
-                        color="primary"
-                        inputProps={{ 'aria-label': 'secondary checkbox' }}
-                        onClick={handleCheck}
-                      />
-                      <Typography variant="h3">
-                        J’accepte les conditions générales
-                      </Typography>
+                      {isRegisterinView ? (
+                        <SignUp
+                          values={state}
+                          onChange={handleChange}
+                          onKeyPress={onKeyPress}
+                          onClick={onClick}
+                        />
+                      ) : (
+                        <SignIn
+                          values={state}
+                          onChange={handleChange}
+                          onKeyPress={onKeyPress}
+                          onClick={onClick}
+                        />
+                      )}
                     </Grid>
-                  )}
-                  <Grid
-                    container
-                    justify="center"
-                    className={classes.btnContainer}
-                  >
-                    <Grid item>
-                      <Btn
-                        text={
-                          isRegisterinView
-                            ? 'Créer un compte'
-                            : 'Connectez-vous'
-                        }
-                        onClick={onClick}
-                        className="blueColor full login-btn"
-                      />
+                    {isRegisterinView && (
+                      <Grid
+                        container
+                        alignItems="center"
+                        className={classes.checkBoxContainer}
+                      >
+                        <Checkbox
+                          color="primary"
+                          inputProps={{ 'aria-label': 'secondary checkbox' }}
+                          onClick={handleCheck}
+                        />
+                        <Typography>
+                          Accepter les Conditions générales
+                        </Typography>
+                      </Grid>
+                    )}
+                    <Grid
+                      container
+                      justify="center"
+                      className={classes.btnContainer}
+                    >
+                      <Grid item>
+                        <Btn
+                          text={
+                            isRegisterinView
+                              ? 'Créer un compte'
+                              : 'Connectez-vous'
+                          }
+                          onClick={onClick}
+                          className="blueColor full login-btn"
+                        />
+                      </Grid>
+                      <Grid item>
+                        <Btn
+                          text={
+                            isRegisterinView
+                              ? 'Connectez-vous'
+                              : 'Créer un compte'
+                          }
+                          onClick={toggleView}
+                          whiteColor
+                        />
+                      </Grid>
                     </Grid>
-                    <Grid item>
-                      <Btn
-                        text={
-                          isRegisterinView
-                            ? 'Connectez-vous'
-                            : 'Créer un compte'
-                        }
-                        onClick={toggleView}
-                        whiteColor
-                      />
-                    </Grid>
-                  </Grid>
-                  <Link href="/public/resetPassword">
-                    <a className={classes.resetPassword}>
-                      Mot de passe oublié ?
-                    </a>
-                  </Link>
-                </div>
+                    <Link href="/public/resetPassword">
+                      <a className={classes.resetPassword}>
+                        Mot de passe oublié ?
+                      </a>
+                    </Link>
+                  </div>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-        </div>
-      </Grid>
+          </div>
+        </Grid>
+      </Container>
     </>
   );
 };

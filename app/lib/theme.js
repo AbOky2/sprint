@@ -82,6 +82,7 @@ const theme = createMuiTheme({
     h3: {
       ...shared.fonts.titles,
       ...shared.fonts.others,
+      lineHeight: '2.7rem',
       fontFamily: shared.fonts.secondFontFamily,
       color: shared.colors.newBlue,
       fontSize: '2rem',
@@ -103,7 +104,7 @@ const theme = createMuiTheme({
       fontFamily: 'Open Sans',
       fontWeight: '600',
       fontSize: '1.4rem',
-      lineHeight: '2.2rem',
+      lineHeight: '2.2rem!important',
       color: shared.colors.primary,
     },
   },

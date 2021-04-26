@@ -21,7 +21,9 @@ const styles = (theme) => ({
     padding: 0,
   },
   StudentMenuFixed: {
-    position: 'sticky',
+    position: 'relative',
+    zIndex: 50,
+
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },

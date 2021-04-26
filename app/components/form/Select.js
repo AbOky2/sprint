@@ -20,8 +20,8 @@ const positionType = ['', 'left', 'right'];
 const styles = (theme) => ({
   container: {
     '& select': {
-      padding: '2.27rem 1.4rem',
-      fontSize: '1.4rem',
+      padding: '1.8rem 1.6rem',
+      fontSize: '1.6rem',
       color: '#8e97a1',
     },
   },

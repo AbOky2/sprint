@@ -29,8 +29,24 @@ const styles = (theme) => ({
   resetSearchMapContainer: {
     '& > div:first-of-type': {
       position: 'relative',
-      marginBottom: '5rem',
+      margin: '3.5rem auto',
       transform: 'initial',
+      left: 0,
+      '& > div': {
+        '& > div > svg': {
+          top: '.75rem!important',
+          right: '1rem!important',
+          width: '3.2rem!important',
+          height: '3.2rem!important',
+          background: '#4F80FF',
+          boxShadow:
+            '0px 2.7px 9.45px rgba(14, 108, 218, 0.35), inset 0px 0px 4.05px rgba(24, 72, 196, 0.6)',
+          borderRadius: '.675rem',
+        },
+        '& > span': {
+          display: 'none',
+        },
+      },
     },
   },
   card: {
@@ -92,19 +108,22 @@ const styles = (theme) => ({
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0,
           borderRight: 0,
+          boxShadow: 'none',
           border: `solid 1px ${theme.palette.lightBlue}`,
           borderColor: theme.palette.lightBlue,
           height: '100%',
           [theme.breakpoints.down('sm')]: {
             borderRadius: '1.1rem!important',
             borderRight: `1px solid ${theme.palette.lightBlue}`,
-            borderBottom: 0,
             minHeight: 46,
           },
         },
+        '& input': {
+          width: '100%!important',
+        },
         '&:last-of-type': {
           '& > div > div': {
-            paddingLeft: '2.4rem',
+            paddingLeft: '1.6rem',
           },
           zIndex: 3,
           '& input': {
@@ -120,6 +139,7 @@ const styles = (theme) => ({
       width: 40,
       height: 40,
       transform: 'translateY(calc(-50% - -3px))',
+      display: 'none',
     },
     '& > div:nth-child(2) > div > div > div': {
       backgroundColor: 'white',
@@ -207,6 +227,7 @@ const styles = (theme) => ({
       color: theme.palette.blue,
     },
     [theme.breakpoints.down('sm')]: {
+      display: 'none',
       position: 'absolute',
       top: 55,
       left: '50%',
@@ -228,12 +249,13 @@ const styles = (theme) => ({
     width: '100%',
     border: `1px solid ${theme.palette.lightBlue}`,
     backgroundColor: 'white',
-    marginTop: '.8rem',
+    marginTop: '1.6rem',
     '&:first-of-type': {
       marginTop: 0,
     },
     '& > a > div': {
       display: 'flex',
+      borderRadius: '1.5rem',
       '& > div:first-of-type': {
         display: 'flex',
         jsutifyContent: 'stretch',
@@ -241,6 +263,7 @@ const styles = (theme) => ({
         minHeight: '100%',
         '& > div': {
           ...theme.ui.bordered,
+          borderRadius: '1rem',
           position: 'initial',
           width: '100%',
           height: '100%',
@@ -286,6 +309,23 @@ const styles = (theme) => ({
       height: '100%',
       overflow: 'scroll',
       paddingBottom: '7rem',
+      paddingRight: 5,
+      '&::-webkit-scrollbar': {
+        width: '.7rem',
+        background: 'transparent',
+      },
+      '&::-webkit-scrollbar-track': {
+        width: '.7rem',
+        background: 'transparent',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        background: 'rgba(0, 0, 0, 0.2)',
+        boxShadow: 'inset 0 0 6px rgba(0,0,0,0.00)',
+        borderRadius: '.7rem',
+      },
+      '&::-webkit-scrollbar-thumb:hover': {
+        background: '#555',
+      },
     },
   },
   mapsViewContainer: {
@@ -313,7 +353,7 @@ const styles = (theme) => ({
           paddingLeft: 0,
           minHeight: '65vh',
           '& > div:last-of-type': {
-            display: 'flex!important',
+            display: 'none!important',
             position: 'absolute',
             bottom: '2rem',
           },

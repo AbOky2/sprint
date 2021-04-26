@@ -21,10 +21,10 @@ const styles = (theme) => ({
   container: {
     '& input, & textarea': {
       display: 'block',
-      padding: '3rem 1.4rem',
+      padding: '1.6rem',
       boxSizing: 'border-box',
       width: '100%',
-      height: '38px',
+      height: 'auto',
       borderRadius: '1rem',
       border: `solid 1px ${theme.palette.lightBlue}`,
       color: '#1A2E6C',
@@ -42,6 +42,20 @@ const styles = (theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
+    },
+  },
+  inputContainer: {
+    position: 'relative',
+    cursor: 'pointer',
+    '& > div': {
+      position: 'absolute',
+      display: 'flex',
+      top: 0,
+      right: 0,
+      height: '100%',
+      width: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   },
   label: {
@@ -170,46 +184,63 @@ const InputBase = withStyles(styles)(
     placeholder,
     classes,
     rows = 10,
-  }) => (
-    <Grid
-      item
-      md={position ? 6 : 12}
-      className={
-        position
-          ? clsx(classes.container, classes[position])
-          : classes.container
-      }
-    >
-      {label ? <Typography className={classes.label}>{label}</Typography> : ''}
-      {type !== 'textarea' ? (
-        type === 'phone' ? (
-          <NumberFormat
-            value={value}
-            onChange={onChange(name)}
-            placeholder={placeholder}
-            onKeyPress={onKeyPress}
-            format="##.##.##.##.##"
-          />
+  }) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleShowPassword = () => setShowPassword(!showPassword);
+
+    return (
+      <Grid
+        item
+        md={position ? 6 : 12}
+        className={
+          position
+            ? clsx(classes.container, classes[position])
+            : classes.container
+        }
+      >
+        {label ? (
+          <Typography className={classes.label}>{label}</Typography>
         ) : (
-          <input
-            value={value}
+          ''
+        )}
+        {type !== 'textarea' ? (
+          type === 'phone' ? (
+            <NumberFormat
+              value={value}
+              onChange={onChange(name)}
+              placeholder={placeholder}
+              onKeyPress={onKeyPress}
+              format="##.##.##.##.##"
+            />
+          ) : (
+            <div className={classes.inputContainer}>
+              <input
+                value={value}
+                onChange={onChange(name)}
+                onKeyPress={onKeyPress}
+                type={showPassword ? 'text' : type}
+                placeholder={placeholder}
+              />
+              {type === 'password' && (
+                <div onClick={toggleShowPassword}>
+                  <Icon type={showPassword ? 'eyeOpened' : 'eyeClosed'} />
+                </div>
+              )}
+            </div>
+          )
+        ) : (
+          <textarea
             onChange={onChange(name)}
-            onKeyPress={onKeyPress}
-            type={type}
             placeholder={placeholder}
-          />
-        )
-      ) : (
-        <textarea
-          onChange={onChange(name)}
-          placeholder={placeholder}
-          rows={rows}
-        >
-          {value}
-        </textarea>
-      )}
-    </Grid>
-  )
+            rows={rows}
+          >
+            {value}
+          </textarea>
+        )}
+      </Grid>
+    );
+  }
 );
 const CustomInput = withStyles(styles)(
   ({ classes, handleSumit, showSub, ...inputProps }) => {

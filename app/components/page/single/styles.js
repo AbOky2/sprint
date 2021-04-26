@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '1rem',
       transform: 'translateY(50%)',
       boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
-      fontWeight: 'bold',
+      fontWeight: 600,
       color: theme.palette.newBlue,
       [theme.breakpoints.down('sm')]: {
         width: 'auto',
@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
   setpsContainer: {
     paddingRight: '2.4rem',
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: 0,
+    },
     '& h3': {
       marginBottom: 8,
     },
@@ -96,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
       borderTopRightRadius: 0,
       borderBottomRightRadius: 0,
       borderRight: 'none',
+      width: '100%',
     },
     '& > div:last-of-type input': {
       borderTopLeftRadius: 0,
@@ -108,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
     '& h2, & h1 > div:last-of-type ': {
       color: theme.palette.blue,
     },
-    '& h6': {
+    '& > div:first-of-type > p': {
       marginBottom: 10,
       color: theme.palette.newGray,
       fontSize: '1.4rem',
@@ -118,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.newGray,
     },
     '& > div:last-of-type > div': {
-      marginTop: 22,
+      marginTop: '2.4rem',
     },
     [theme.breakpoints.down('sm')]: {
       '& h2, & h1 ': {
@@ -235,7 +239,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   mapContainer: {
-    marginTop: 24,
+    marginTop: '1.6rem',
     borderRadius: '2.5rem',
     overflow: 'hidden',
     '& > div': {
@@ -284,6 +288,9 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: theme.typography.secondFontFamily,
       textAlign: 'right',
       color: theme.palette.newGray,
+      [theme.breakpoints.down('sm')]: {
+        textAlign: 'center',
+      },
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',

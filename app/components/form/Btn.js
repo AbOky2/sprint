@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     '& a, & > span': {
       padding: '1.6rem 2.4rem',
       fontStyle: 'normal',
+      fontSize: '1.4rem',
       lineHeight: '28px',
       color: 'white',
       wordBreak: 'keep-all',
@@ -31,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
   whiteColor: {
     '& a, & > span': {
-      color: theme.palette.blue,
+      color: theme.palette.newBlue,
     },
-    color: theme.palette.blue,
+    color: theme.palette.newBlue,
     background: 'white',
     boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
   },

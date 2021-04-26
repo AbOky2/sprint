@@ -11,6 +11,7 @@ import withAuth from 'lib/withAuth';
 const useStyles = makeStyles((theme) => ({
   coverContainer: {
     position: 'relative',
+    marginTop: '1rem',
     '& div': {
       position: 'absolute',
       width: 150,
@@ -19,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
       bottom: 0,
       transform: 'translate(-50%, 50%)',
       backgroundColor: 'white',
-      borderRadius: 25,
-      padding: 24,
+      borderRadius: '2.5rem',
+      padding: '2.4rem 0',
       boxSizing: 'border-box',
       [theme.breakpoints.down('sm')]: {
         width: 125,
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   cover: {
     display: 'block',
     width: '100%',
+    borderRadius: '2.5rem',
   },
   partnerInfo: {
     paddingTop: '10rem',

@@ -8,19 +8,20 @@ const redirectStyle = (theme) => ({
   display: 'inline-block',
   position: 'sticky',
   top: '.5rem',
-  backgroundColor: '#f7f8fa',
   padding: '.5rem',
   marginBottom: '2.4rem',
   borderRadius: '1rem',
+  backgroundColor: '#f7f8fa',
   zIndex: 35,
   [theme.breakpoints.down('sm')]: {
-    top: '3.5rem',
+    top: '2.5rem',
   },
   '& h4': {
     textAlign: 'left',
     color: theme.palette.newBlue,
+    fontFamily: theme.typography.fontFamily,
     cursor: 'pointer',
-    fontSize: '1.4rem',
+    fontSize: '1.2rem',
     fontWeight: 'bold',
     '&::before': {
       content: "''",

@@ -17,7 +17,7 @@ import LogoImg from 'static/img/logo.png';
 
 const styles = (theme) => ({
   container: {
-    padding: '2.8rem',
+    padding: '2.4rem',
     margin: '1.6rem 0 3.2rem',
     backgroundColor: 'white',
     boxShadow: '0px 4px 20px rgb(24 55 50 / 4%)',
@@ -98,9 +98,10 @@ const styles = (theme) => ({
     display: 'block',
     fontSize: '2.6rem',
     fontWeight: 'normal',
+    lineHeight: '3.5rem',
   },
   subTitle: {
-    margin: '1.2rem 0 2.5rem',
+    margin: '.4rem 0 2.2rem',
   },
   customH2: {
     fontFamily: theme.typography.secondFontFamily,
@@ -114,15 +115,15 @@ const styles = (theme) => ({
     color: '#526190',
   },
   partnerDescription: {
-    margin: '.5rem 0 2rem',
+    margin: '.4rem 0 2rem',
   },
   partnerListContainer: {
     width: '33.33%',
     '& > a': {
       display: 'block',
       background: '#ffffff',
-      boxShadow: '0px 0px 2px rgb(0 0 0 / 25%)',
       ...theme.ui.bordered,
+      border: `1px solid ${theme.palette.lightBlue}`,
       padding: '2rem',
       marginBottom: '2rem',
     },
@@ -141,17 +142,17 @@ const styles = (theme) => ({
   },
   partnerCardType: {
     display: 'inline-block',
-    padding: '8px 14px',
+    padding: '.8rem 1.4rem',
     borderRadius: '9px',
     fontSize: 12,
     fontWeight: 'bold',
     lineHeight: '16px',
     color: '#BE8B07',
     background: 'rgba(248, 191, 44, 0.2)',
-    margin: '10px 0 8px',
+    margin: '1rem 0 1.6rem',
   },
   partnerCardTitle: {
-    marginBottom: '4px',
+    marginBottom: '.8rem',
     color: '#4F80FF',
   },
   partnerListTextContainer: {
@@ -197,7 +198,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
       <Typography variant="h2" className={classes.customH2}>
         Premiers pas dans votre logement
       </Typography>
-      <Typography variant="subtitle1" className={classes.subTitle}>
+      <Typography className={classes.subTitle}>
         Kit le nid vous accompagne pour votre premier achat, votre location,
         <br />
         et vous aide à avoir un bon garant.
@@ -214,7 +215,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
                 <img src={HouseImg} alt="" />
 
                 <Typography
-                  variant="h4"
+                  variant="h3"
                   className={clsx(
                     classes.whiteColor,
                     classes.presentationCardTitle
@@ -240,7 +241,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
               <a>
                 <img src={LocationImg} alt="" />
                 <Typography
-                  variant="h4"
+                  variant="h3"
                   className={classes.presentationCardTitle}
                 >
                   Location
@@ -279,7 +280,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
               <Typography variant="h5" className={classes.partnerCardType}>
                 {elem.type}
               </Typography>
-              <Typography variant="h4" className={classes.partnerCardTitle}>
+              <Typography variant="h3" className={classes.partnerCardTitle}>
                 {elem.name}
               </Typography>
               <Grid container justify="space-between" alignItems="flex-end">

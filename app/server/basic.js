@@ -104,7 +104,6 @@ const auth = ({ server }) => {
         const { user } = await UserModel.forgotPassword(body);
         res.json({ user });
       } catch (error) {
-        console.log(error.message);
         res.status(401).json({ message: error.message });
       }
     }

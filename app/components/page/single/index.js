@@ -96,7 +96,7 @@ const PropertyPage = ({
         <Grid container justify="space-between" className={classes.description}>
           <Grid item md={6}>
             <Typography variant="h1">{property.heading}</Typography>
-            <Typography variant="subtitle1">{property.fullAddress}</Typography>
+            <Typography>{property.fullAddress}</Typography>
             <a href="#table" className="inline-block">
               <Typography className={classes.totalAvailable}>
                 {!isLocation

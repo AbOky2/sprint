@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
@@ -23,38 +23,36 @@ const ListContainer = ({
   handleMouseEnter,
   liked,
   handleBookmark,
-}) => {
-  return (
-    <Grid item xs={5} className={classes.listViewContainer}>
-      <ListWrapper
-        classes={classes}
-        sortBy={sortBy}
-        isMapsView={isMapsView}
-        handleSortSelect={handleSortSelect}
-        hasData={hasData}
-        page={page}
-        matches={matches}
-        handlePage={handlePage}
-      >
-        {page.pageList?.map((elems) => (
-          <ListElement
-            key={elems._id}
-            handleMouseEnter={handleMouseEnter(elems._id)}
-            handleMouseLeave={handleMouseEnter(null)}
-            className={
-              elems._id !== curr?._id
-                ? classes.mapsListContainer
-                : clsx(classes.mapsListContainer, classes.mapsCurrListContainer)
-            }
-            liked={liked}
-            handleBookmark={handleBookmark}
-            {...elems}
-          />
-        ))}
-      </ListWrapper>
-    </Grid>
-  );
-};
+}) => (
+  <Grid item xs={5} className={classes.listViewContainer}>
+    <ListWrapper
+      classes={classes}
+      sortBy={sortBy}
+      isMapsView={isMapsView}
+      handleSortSelect={handleSortSelect}
+      hasData={hasData}
+      page={page}
+      matches={matches}
+      handlePage={handlePage}
+    >
+      {page.pageList?.map((elems) => (
+        <ListElement
+          key={elems._id}
+          handleMouseEnter={handleMouseEnter(elems._id)}
+          handleMouseLeave={handleMouseEnter(null)}
+          className={
+            elems._id !== curr?._id
+              ? classes.mapsListContainer
+              : clsx(classes.mapsListContainer, classes.mapsCurrListContainer)
+          }
+          liked={liked}
+          handleBookmark={handleBookmark}
+          {...elems}
+        />
+      ))}
+    </ListWrapper>
+  </Grid>
+);
 
 const MapsContainer = ({
   classes,
@@ -135,7 +133,7 @@ const MapsView = withStyles(
     handleSortSelect,
   }) => {
     const [page, setPage] = useState({
-      pageList: data?.slice(5),
+      pageList: data?.slice(10),
       limit: defaultLimit,
       page: defaultPage,
       totalPages: data?.length,
@@ -196,7 +194,7 @@ const MapsView = withStyles(
         setPage({
           ...page,
           page: 1,
-          pageList: data?.slice(0, 5),
+          pageList: data?.slice(0, 10),
           totalPages: Math.ceil(data?.length / page.limit),
         }),
       [data, data[0]]

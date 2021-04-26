@@ -36,13 +36,9 @@ const useStyles = makeStyles((theme) => ({
           textOverflow: 'ellipsis',
         },
         '& > p': {
-          fontSize: '1.6rem',
-          lineHeight: '2.6rem',
           color: 'rgba(26, 46, 108, 0.75)',
           '&:nth-child(2)': {
-            marginBottom: '1rem',
-            height: '2.4rem',
-            lineHeight: '2.6rem',
+            marginBottom: '.9rem',
             overflow: 'hidden',
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
@@ -54,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
           '&:last-of-type': {
             color: theme.palette.blue,
             '& span': {
-              fontSize: '1.6rem',
-              lineHeight: '2.2rem',
               color: theme.palette.lighterGray,
             },
           },
@@ -80,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
           },
         },
         '&:last-of-type': {
-          paddingTop: 0,
           '& p:last-of-type': {
             textAlign: 'left',
           },
