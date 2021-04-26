@@ -31,7 +31,12 @@ const styles = (theme) => ({
     fontSize: '2rem',
     margin: 0,
     '& > div': {
-      borderRadius: '10px',
+      borderRadius: '1rem',
+      '&:hover': {
+        '& fieldset': {
+          borderColor: `${theme.palette.lightBlue}!important`,
+        },
+      },
     },
     '& fieldset': {
       border: `1px solid ${theme.palette.lightBlue}`,

@@ -139,7 +139,6 @@ const styles = (theme) => ({
       width: 40,
       height: 40,
       transform: 'translateY(calc(-50% - -3px))',
-      display: 'none',
     },
     '& > div:nth-child(2) > div > div > div': {
       backgroundColor: 'white',
