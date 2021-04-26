@@ -251,6 +251,17 @@ class UserClass extends DBModel {
     return { user: pick(user, this.publicFields()) };
   }
 
+  static async delete(_id) {
+    try {
+      await this.deleteOne({ _id });
+
+      return await this.listStudents();
+    } catch (error) {
+      logger.error(error);
+      throw new Error('Error white delete');
+    }
+  }
+
   /**
    * Get a User by its slug
    * @param {Object} params

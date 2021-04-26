@@ -8,6 +8,10 @@ export const getUsersApiMethod = (page = 1, options = {}) =>
     method: 'GET',
     ...options,
   });
+export const deleteUserApiMethod = (id) =>
+  sendRequest(`${BASE_PATH}/user/${id}`, {
+    method: 'DELETE',
+  });
 export const getBookListApiMethod = () =>
   sendRequest(`${BASE_PATH}/books`, {
     method: 'GET',

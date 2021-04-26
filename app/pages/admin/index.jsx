@@ -1,28 +1,21 @@
 import React, { useState } from 'react';
-import { DataGrid } from '@material-ui/data-grid';
 import withAuth from 'lib/withAuth';
-import { getUsersApiMethod } from 'lib/api/admin';
-import { userRoleKeyVal } from 'helpers/user';
+import { getUsersApiMethod, deleteUserApiMethod } from 'lib/api/admin';
+import Table from 'components/admin/table';
 
-const columns = [
-  { field: 'firstName', headerName: 'prenom', width: 150 },
-  { field: 'lastName', headerName: 'Nom' },
-  { field: 'email', headerName: 'Mail', width: 200 },
-  { field: 'phone', headerName: 'Téléphone', width: 130 },
-  {
-    field: 'sponsorshipCode',
-    headerName: 'Parrain',
-  },
-  {
-    field: 'role',
-    headerName: 'Status',
-    valueGetter: (data) => userRoleKeyVal[data.value],
-  },
-  { field: 'origin', headerName: 'Origin' },
-];
 const Dashboard = ({ studentList = {} } = {}) => {
   const [state, setState] = useState(studentList);
 
+  const handleDelete = async (id) => {
+    try {
+      const { list } = await deleteUserApiMethod(id);
+      if (list) {
+        setState(list);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const handleQuery = async (page) => {
     try {
       const { list } = await getUsersApiMethod(page);
@@ -36,16 +29,10 @@ const Dashboard = ({ studentList = {} } = {}) => {
 
   return (
     <div>
-      <DataGrid
-        rows={state.docs}
-        rowCount={state.totalDocs}
-        columns={columns}
-        pageSize={10}
-        getRowId={(data) => data._id}
-        onPageChange={({ page }) => handleQuery(page + 1)}
-        checkboxSelection
-        paginationMode="server"
-        autoHeight
+      <Table
+        {...state}
+        handlePaginateList={handleQuery}
+        handleDelete={handleDelete}
       />
     </div>
   );
