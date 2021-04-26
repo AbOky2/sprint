@@ -22,7 +22,7 @@ const styles = (theme) => ({
     '& select': {
       padding: '1.8rem 1.6rem',
       fontSize: '1.6rem',
-      color: '#8e97a1',
+      color: theme.palette.blue,
       '&:focus, &:focus-visible, &:active': {
         backgroundColor: 'initial',
       },
