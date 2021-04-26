@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     minWidth: 700,
   },
 });
-const rowsPerPageOptions = [5, 10, 25];
+const rowsPerPageOptions = [5];
 const SubTableHead = () => (
   <TableHead>
     <TableRow>
@@ -73,30 +73,16 @@ export default function SpanningTable({
   hasRowChecked = false,
   totalDocs,
   limit,
-  test: offset = 1,
   docs,
   handleDelete,
   ...props
 }) {
   const classes = useStyles();
-  const [page, setPage] = React.useState(limit && offset ? offset / limit : 0);
-
-  const handleChangePage = (e, newPage) => {
-    console.log(newPage);
-    handlePaginateList(newPage, () => setPage(newPage));
-  };
+  const handleChangePage = (e, newPage) => handlePaginateList(newPage + 1);
   const handleDelte = (row = {}) => () => {
     if (window.confirm(`Supprimer le compte de ${row?.firstName} ?`))
       handleDelete(row._id);
   };
-  const handleChangeRowsPerPage = useCallback(
-    (e) =>
-      handlePaginateList(
-        { limit: parseInt(e.target.value, 10), offset: 0 },
-        () => setPage(0)
-      ),
-    [setPage, handlePaginateList]
-  );
 
   return (
     <div className="table-container">
@@ -129,9 +115,8 @@ export default function SpanningTable({
         component="div"
         count={totalDocs}
         rowsPerPage={limit}
-        page={props.page}
+        page={props.page - 1}
         onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
       />
       <style jsx>{`
         .table-container {
@@ -155,5 +140,4 @@ SpanningTable.propTypes = {
   hasRowChecked: PropTypes.bool,
   limit: PropTypes.number.isRequired,
   totalDocs: PropTypes.number.isRequired,
-  offset: PropTypes.number.isRequired,
 };
