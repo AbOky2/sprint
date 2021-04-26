@@ -224,7 +224,10 @@ const InputBase = withStyles(styles)(
               />
               {type === 'password' && (
                 <div onClick={toggleShowPassword}>
-                  <Icon type={showPassword ? 'eyeOpened' : 'eyeClosed'} />
+                  <Icon
+                    size="small"
+                    type={showPassword ? 'eyeOpened' : 'eyeClosed'}
+                  />
                 </div>
               )}
             </div>

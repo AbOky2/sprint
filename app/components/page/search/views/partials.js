@@ -102,26 +102,26 @@ const ListElement = ({
   handleMouseEnter,
   handleMouseLeave,
 }) => {
-  const [isVisible, setVisible] = useState(false);
-  const [ratio, setRatio] = useState(false);
-  const domRef = useRef();
-  useEffect(() => {
-    const { current } = domRef;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // if (entry.intersectionRatio > 0.1) {
-          setRatio(entry.intersectionRatio);
-          // console.log(`entry`, entry, `is = ${entry}`);
-          setVisible(entry.isIntersecting);
-          // }
-        });
-      },
-      { threshold: [0.9] }
-    );
-    observer.observe(current);
-    return () => observer.unobserve(current);
-  }, [domRef]);
+  // const [isVisible, setVisible] = useState(false);
+  // const [ratio, setRatio] = useState(false);
+  // const domRef = useRef();
+  // useEffect(() => {
+  //   const { current } = domRef;
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         // if (entry.intersectionRatio > 0.1) {
+  //         setRatio(entry.intersectionRatio);
+  //         // console.log(`entry`, entry, `is = ${entry}`);
+  //         setVisible(entry.isIntersecting);
+  //         // }
+  //       });
+  //     },
+  //     { threshold: [0.9] }
+  //   );
+  //   observer.observe(current);
+  //   return () => observer.unobserve(current);
+  // }, [domRef]);
 
   return (
     <Grid
@@ -129,12 +129,12 @@ const ListElement = ({
       className={clsx(className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      ref={domRef}
-      style={{
-        opacity: isVisible ? 1 : ratio - 0.1,
-        transform: `scale(${isVisible ? 1 : ratio - 0.1})`,
-        transition: 'all 0.15s ease-in-out',
-      }}
+      // ref={domRef}
+      // style={{
+      //   opacity: isVisible ? 1 : ratio - 0.1,
+      //   transform: `scale(${isVisible ? 1 : ratio - 0.1})`,
+      //   transition: 'all 0.15s ease-in-out',
+      // }}
     >
       <Link href={singlePath({ typeOfAnnonce, _id })}>
         <a>

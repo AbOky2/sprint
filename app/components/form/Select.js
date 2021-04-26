@@ -23,6 +23,9 @@ const styles = (theme) => ({
       padding: '1.8rem 1.6rem',
       fontSize: '1.6rem',
       color: '#8e97a1',
+      '&:focus, &:focus-visible, &:active': {
+        backgroundColor: 'initial',
+      },
     },
   },
   formControl: {
