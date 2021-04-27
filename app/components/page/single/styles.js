@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '& h3': {
       marginBottom: 8,
+      fontWeight: 800,
     },
     '& > div:first-of-type': {
       padding: '3.2rem',
@@ -138,6 +139,9 @@ const useStyles = makeStyles((theme) => ({
       background: '#F4F5F7',
       borderRadius: '15px',
       boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+      [theme.breakpoints.down('md')]: {
+        marginTop: '2.5rem!important',
+      },
       '&:first-of-type': {
         marginTop: 0,
       },

@@ -21,7 +21,6 @@ export const GoogleMap = (props) => {
     classes,
     curr,
     isMobile,
-    queryData,
     pageList = [],
     data: { docs = [], near = [] },
     handlePointChange,

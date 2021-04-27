@@ -4,15 +4,16 @@ const useStyles = makeStyles((theme) => ({
   container: {
     padding: '1.6rem 3.5rem 1.6rem',
     marginBottom: '2.4rem',
-    boxShadow: '0px 2px 4px rgba(19, 44, 72, 0.05)',
     '& > div': {
       width: 'auto',
     },
   },
   logoContainer: {
+    display: 'flex',
     textAlign: 'center',
+    alignItems: 'center',
     '& img': {
-      width: 30,
+      width: 20,
     },
   },
   navContainer: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '& > div a': {
       display: 'flex',
-      marginBottom: '9px',
+      margin: '4px 0',
       padding: '.8rem 1.6rem',
       width: '100%',
       alignItems: 'center',

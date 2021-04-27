@@ -1,24 +1,22 @@
 const styles = (theme) => ({
   header: {
-    '&> h3': {
+    '&> p': {
       color: theme.palette.newGray,
+      fontFamily: theme.typography.secondFontFamily,
     },
   },
   headerPricing: {
-    '& > h3 > strong': {
-      ...theme.typography.h2,
+    '& > p > strong': {
       color: theme.palette.blue,
+      fontWeight: 'bold',
     },
   },
   discoveryContentHeader: {
     padding: '2.5rem 0',
     fontFamily: theme.typography.secondFontFamily,
     borderTop: '1px solid rgba(26, 46, 108, 0.5)',
+    ...theme.typography.body1,
     color: theme.palette.newBlue,
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: '1.6rem',
-    lineHeight: '2.2rem',
 
     [theme.breakpoints.down('sm')]: {
       paddingBottom: '2.5rem',

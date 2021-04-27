@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import 'intersection-observer';
+// import 'intersection-observer';
 import clsx from 'clsx';
 import Pagination from '@material-ui/lab/Pagination';
 import { Grid, Typography } from '@material-ui/core';
@@ -110,10 +110,11 @@ const ListElement = ({
   //   const observer = new IntersectionObserver(
   //     (entries) => {
   //       entries.forEach((entry) => {
-  //         // if (entry.intersectionRatio > 0.1) {
-  //         setRatio(entry.intersectionRatio);
+  //         // if (entry.intersectionRatio > 0.9) {
+  //         setRatio(entry.intersectionRatio.toFixed(2));
   //         // console.log(`entry`, entry, `is = ${entry}`);
   //         setVisible(entry.isIntersecting);
+  //         // console.log(entry);
   //         // }
   //       });
   //     },
@@ -121,7 +122,7 @@ const ListElement = ({
   //   );
   //   observer.observe(current);
   //   return () => observer.unobserve(current);
-  // }, [domRef]);
+  // }, []);
 
   return (
     <Grid
@@ -133,7 +134,7 @@ const ListElement = ({
       // style={{
       //   opacity: isVisible ? 1 : ratio - 0.1,
       //   transform: `scale(${isVisible ? 1 : ratio - 0.1})`,
-      //   transition: 'all 0.15s ease-in-out',
+      //   transition: 'all 0.1s ease-in-out',
       // }}
     >
       <Link href={singlePath({ typeOfAnnonce, _id })}>

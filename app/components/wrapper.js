@@ -8,7 +8,7 @@ const redirectStyle = (theme) => ({
   display: 'inline-block',
   position: 'sticky',
   top: '.5rem',
-  padding: '.5rem',
+  padding: '.5rem 1.5rem',
   marginBottom: '2.4rem',
   borderRadius: '1rem',
   backgroundColor: '#f7f8fa',
@@ -66,7 +66,7 @@ const AdminContentWrapper = withStyles(styles)(
             else router.back();
           }}
         >
-          <Typography variant="h4">Retourner à la recherche</Typography>
+          <Typography variant="h4">Retour</Typography>
         </div>
       )}
       {children}

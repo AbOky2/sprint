@@ -18,12 +18,16 @@ const LocationTable = ({
     const current = state[elem];
     const isOpen = currOpen === elem;
     const countList = current.list.length;
-
+    const surface =
+      current.minSurface === current.maxSurface
+        ? ` ${current.minSurface}m²`
+        : ` de ${current.minSurface}m² à ${current.maxSurface}m²`;
     return (
       <div key={elem}>
         <Grid
           container
           className="pointer"
+          alignItems="center"
           onClick={() => handleCurrOpen(elem)}
         >
           <Grid container justify="space-between">
@@ -51,7 +55,7 @@ const LocationTable = ({
           <Grid item md={3} xs={5} className={classes.header}>
             <Typography variant="h3">
               <Icon type="room" color="newBlue" />
-              {` de ${current.minSurface}m² à ${current.maxSurface}m²`}
+              {surface}
             </Typography>
           </Grid>
           <Grid

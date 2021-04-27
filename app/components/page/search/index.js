@@ -9,6 +9,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { getPropertiesApiMethod, addBookmarkApiMethod } from 'lib/api/customer';
 import { toggleArray, isArray, pick } from 'helpers/convertAndCheck';
 import { typeOfAnnonciesObj, sortByKeys } from 'helpers/property';
+import withAuth from 'lib/withAuth';
 import NotFound from 'components/NotFound';
 import { AdminContentWrapper } from 'components/wrapper';
 import { MapsView } from './views';
@@ -36,7 +37,7 @@ const SearchPage = ({
   const [currView, setCurrView] = useState(isMapsView);
   const [makeRequest, setMakeRequest] = useState(false);
   const [allData, setAllData] = useState(properties);
-  const [state, setState] = useState([]);
+  const [state, setState] = useState(allData.docs);
   const [sortBy, setSortBy] = useState(sort || sortByKeys[0]);
   const [queryData, setQueryData] = useState({
     loc,
@@ -45,7 +46,7 @@ const SearchPage = ({
     sort,
     pieces,
   });
-
+  console.log(state, allData.docs);
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
 
@@ -63,12 +64,12 @@ const SearchPage = ({
   };
   const handleSortSelect = () => ({ target: { value } }) => {
     setSortBy(value);
-    setState(
-      state.sort((a, b) => {
-        if (value === sortByKeys[0]) return +a.price - +b.price;
-        else return +b.price - +a.price;
-      })
-    );
+    // setState(
+    //   state.sort((a, b) => {
+    //     if (value === sortByKeys[0]) return +a.price - +b.price;
+    //     else return +b.price - +a.price;
+    //   })
+    // );
     // setQueryData({ ...queryData, sort: value });
     // setMakeRequest(true);
   };

@@ -100,8 +100,12 @@ const PropertyPage = ({
             <a href="#table" className="inline-block">
               <Typography className={classes.totalAvailable}>
                 {!isLocation
-                  ? `${total} logements disponibles dans ce programme immobilier neuf`
-                  : `${total} logements disponibles dans cette résidence`}
+                  ? `${total} logement${total > 1 ? 's' : ''} disponible${
+                      total > 1 ? 's' : ''
+                    } dans ce programme immobilier neuf`
+                  : `${total} logement${total > 1 ? 's' : ''} disponible${
+                      total > 1 ? 's' : ''
+                    } dans cette résidence`}
               </Typography>
             </a>
             <div className={classes.houseInfo}>
@@ -153,7 +157,7 @@ const PropertyPage = ({
           </Grid>
         </Grid>
         <Grid container alignItems="flex-start">
-          <Grid item sm={8} xs={12} className={classes.setpsContainer}>
+          <Grid item md={8} xs={12} className={classes.setpsContainer}>
             <div>
               <Typography variant="h3">À propos de cette résidence</Typography>
               <Typography variant="body1">
@@ -166,7 +170,7 @@ const PropertyPage = ({
               <Maps loc={property.loc?.coordinates} />
             </div>
           </Grid>
-          <Grid sm={4} xs={12}>
+          <Grid md={4} xs={12}>
             <Sidebar
               isLocation={isLocation}
               property={property}
@@ -177,9 +181,17 @@ const PropertyPage = ({
 
         <Grid container className={classes.discoveryContainer}>
           <Typography variant="h2">
-            {`${total} logements${isLocation ? '' : '  neufs disponibles '}${
+            {/* {`${total} logements${isLocation ? '' : '  neufs disponibles '}${
               isLocation ? ' disponibles à la location' : "à l'achat"
-            } dans cette résidence :`}
+            } dans cette résidence :`} */}
+
+            {!isLocation
+              ? `${total} logement${total > 1 ? 's' : ''} ${
+                  total > 1 ? 'neufs disponibles' : 'neuf disponible'
+                } à l’achat dans cette résidence :`
+              : `${total} logement${total > 1 ? 's' : ''} disponible${
+                  total > 1 ? 's' : ''
+                } à la location dans cette résidence :`}
           </Typography>
           <Grid container id="table">
             {property.typeOfAnnonce === typeOfAnnoncies[0] ? (
