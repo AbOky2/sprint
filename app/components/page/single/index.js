@@ -120,7 +120,11 @@ const PropertyPage = ({
 
                 <div>
                   <Icon type="room" color="newBlue" />
-                  <span>{` de ${property.minSurface}m² à ${property.maxSurface}m²`}</span>
+                  <span>{` de ${
+                    property.minSurface !== property.maxSurface
+                      ? `${property.minSurface}m² à ${property.maxSurface}m²`
+                      : `${property.minSurface}m²`
+                  }`}</span>
                 </div>
               </Grid>
             </div>
