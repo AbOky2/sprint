@@ -31,6 +31,7 @@ export default function withAuth(
     logoutRequired = false,
     adminRequired = false,
     fullContentWidth = false,
+    noHeaderMargin = false,
   } = {}
 ) {
   class App extends React.Component {
@@ -91,7 +92,11 @@ export default function withAuth(
         );
       return (
         <>
-          <StudentMenuComp user={user} fullContentWidth={fullContentWidth}>
+          <StudentMenuComp
+            user={user}
+            fullContentWidth={fullContentWidth}
+            noHeaderMargin={noHeaderMargin}
+          >
             <BaseComponent {...this.props} />
           </StudentMenuComp>
         </>

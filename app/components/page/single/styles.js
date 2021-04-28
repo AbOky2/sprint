@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-
+import { btnHover } from 'components/form/Btn';
 const useStyles = makeStyles((theme) => ({
   card: {
     width: 'calc(100% - 14px)',
@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
       fontWeight: 600,
       color: theme.palette.newBlue,
+      ...btnHover.white,
       [theme.breakpoints.down('sm')]: {
         width: 'auto',
       },
@@ -336,6 +337,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.8rem',
     fontWeight: '600',
     padding: '18px 23px',
+    ...btnHover.blue,
   },
   priceCta: {
     width: '100%',

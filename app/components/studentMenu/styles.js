@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
       width: 'auto',
     },
   },
+  noHeaderMargin: {
+    marginBottom: 0,
+  },
   logoContainer: {
     display: 'flex',
     textAlign: 'center',

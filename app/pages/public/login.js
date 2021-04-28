@@ -410,7 +410,6 @@ const LoginTab = ({
                               : 'Connectez-vous'
                           }
                           onClick={onClick}
-                          className="blueColor full login-btn"
                         />
                       </Grid>
                       <Grid item>

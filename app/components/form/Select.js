@@ -21,7 +21,9 @@ const styles = (theme) => ({
   container: {
     '& select': {
       padding: '1.8rem 1.6rem',
-      fontSize: '1.6rem',
+      fontSize: '1.4rem',
+      outline: 'none',
+      lineHeight: '1.9rem',
       color: theme.palette.blue,
       '&:focus, &:focus-visible, &:active': {
         backgroundColor: 'initial',
@@ -43,6 +45,7 @@ const styles = (theme) => ({
     },
     '& fieldset': {
       border: `1px solid ${theme.palette.lightBlue}`,
+      borderWidth: '1px!important',
     },
   },
   label: {

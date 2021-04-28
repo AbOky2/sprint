@@ -43,7 +43,15 @@ export const StudentMenuComp = connect(
   actionCreators
 )(
   withStyles(styles)(
-    ({ children, user, logout, update, fullContentWidth, classes }) => (
+    ({
+      children,
+      user,
+      logout,
+      update,
+      fullContentWidth,
+      noHeaderMargin,
+      classes,
+    }) => (
       <Grid container className="admin-container student-container">
         <Grid container item className="content">
           <Grid
@@ -54,7 +62,12 @@ export const StudentMenuComp = connect(
             className={classes.StudentMenuFixed}
           >
             <Hidden smDown>
-              <StudentMenu user={user} logout={logout} update={update} />
+              <StudentMenu
+                user={user}
+                logout={logout}
+                update={update}
+                noHeaderMargin={noHeaderMargin}
+              />
             </Hidden>
           </Grid>
           <Hidden mdUp>

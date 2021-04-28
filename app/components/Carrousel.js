@@ -7,8 +7,6 @@ import { Icon } from './form';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    borderRadius: '2.5rem',
-    overflow: 'hidden',
     width: '100%',
   },
   mapsContainer: {
@@ -43,8 +41,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     overflow: 'hidden',
     width: '100%',
+    minHeight: 500,
     [theme.breakpoints.down('sm')]: {
       height: 200,
+      minHeight: 'initial',
     },
   },
 }));

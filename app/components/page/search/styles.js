@@ -418,7 +418,7 @@ const styles = (theme) => ({
         '& select': {
           ...theme.ui.bordered,
           backgroundColor: theme.palette.lightBlue,
-          padding: '1.27rem 1.4rem',
+          padding: '1.27rem 2.5rem 1.27rem 1.4rem',
           color: theme.palette.newBlue,
         },
         '& fieldset': {

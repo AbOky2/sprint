@@ -33,7 +33,8 @@ const PaginationItem = ({
   >
     {type === 'next' || type === 'previous' ? (
       <Icon
-        type="carrouselArrow"
+        type="sliderArrow"
+        color="newBlue"
         size="tiny"
         rotate={type === 'previous' ? '180deg' : '0'}
       />

@@ -154,7 +154,7 @@ const LocationTable = ({
                         <Btn
                           text="Réserver"
                           whiteColor
-                          boxShadow
+                          bordered
                           onClick={() => handleSelect(curr)}
                         />
                       </Grid>
@@ -185,7 +185,7 @@ const LocationTable = ({
                           target="_blank"
                           dataMode="popup"
                           text="Envoyer une demande"
-                          boxShadow
+                          bordered
                           whiteColor
                         />
                       </Grid>

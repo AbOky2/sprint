@@ -156,7 +156,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                           whiteColor
                           href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
                           download
-                          boxShadow
+                          bordered
                           disabled={!curr.file}
                         />
                       </Grid>
@@ -194,7 +194,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                           disabled={!curr.file}
                           target="_blank"
                           dataMode="popup"
-                          boxShadow
+                          bordered
                           whiteColor
                         />
                       </Grid>

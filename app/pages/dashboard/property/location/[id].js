@@ -20,4 +20,4 @@ PropertyPage.getInitialProps = async ({ req, res, query: { id } }) => {
   }
 };
 
-export default withAuth(PropertyPage);
+export default withAuth(PropertyPage, { noHeaderMargin: true });

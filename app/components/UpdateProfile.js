@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     padding: '2rem',
     backgroundColor: 'white',
-    borderRadius: '15px',
+    borderRadius: '1.5rem',
     textAlign: 'left',
     fontFamily: 'Open Sans',
     fontStyle: 'normal',
@@ -41,14 +41,14 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     padding: '1.5rem 2.5rem',
     backgroundColor: 'white',
-    borderRadius: '15px',
+    borderRadius: '1.5rem',
     cursor: 'pointer',
     '& svg:last-of-type': {
       position: 'absolute',
       top: '50%',
       right: '2rem',
       width: '1.2rem!important',
-      transform: 'translateY(calc(50% - 15px)) rotate(90deg)',
+      transform: 'translateY(calc(50% - 1.5rem)) rotate(90deg)',
     },
     [theme.breakpoints.down('sm')]: {
       maxWidth: '100%',
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   profileContainerOpen: {
     '& svg:last-of-type': {
-      transform: 'translateY(calc(50% - 13px)) rotate(-90deg)',
+      transform: 'translateY(calc(50% - 1.5rem)) rotate(-90deg)',
     },
   },
   transparent: {
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
   userName: {
     marginRight: '.8rem',
-    padding: '0 1.5rem 0 .8rem',
+    padding: '0 2.5rem 0 .8rem',
     lineHeight: '2.8rem',
   },
   userPictureContainer: {

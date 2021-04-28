@@ -91,7 +91,8 @@ const ReserveLocation = ({
                   dangerouslySetInnerHTML={{ __html: data }}
                 ></Grid>
                 <Grid container item xs={4} md={2}>
-                  <Copy data={data} />
+                  {/* <Copy data={data} /> */}
+                  <Btn whiteColor bordered iconType="copy" text="Copier" />
                 </Grid>
               </Grid>
             ))}

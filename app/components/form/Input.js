@@ -30,6 +30,16 @@ const styles = (theme) => ({
       border: `solid 1px ${theme.palette.lightBlue}`,
       color: '#1A2E6C',
       ...sharedInputStyle,
+      outline: 'none',
+      fontSize: '1.4rem',
+      lineHeight: '1.9rem',
+      '&:focus': {
+        border: `solid 1px ${theme.palette.newBlue}`,
+        transition: 'border .1s ease-out, box-shadow .1s ease-out',
+      },
+      '&::placeholder': {
+        color: theme.palette.newGray,
+      },
     },
     '& textarea': {
       height: 'auto',

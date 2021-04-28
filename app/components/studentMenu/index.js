@@ -127,7 +127,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
   );
 };
 
-const StudentProfile = ({ user = {}, logout, update }) => {
+const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
   const { asPath } = useRouter();
   const classes = useStyles();
 
@@ -136,7 +136,10 @@ const StudentProfile = ({ user = {}, logout, update }) => {
       container
       alignItems="center"
       justify="space-between"
-      className={classes.container}
+      className={clsx(
+        classes.container,
+        noHeaderMargin ? classes.noHeaderMargin : ''
+      )}
     >
       <Grid container item>
         <Grid className={classes.logoContainer}>
