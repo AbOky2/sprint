@@ -91,9 +91,10 @@ const useStyles = makeStyles((theme) => ({
   },
   rightMenu: {
     '& > div:first-of-type': {
-      width: '100%',
-      marginTop: '3rem',
       textAlign: 'center',
+      '& > div': {
+        paddingLeft: '2rem',
+      },
       '& a': {
         ...theme.typography.body1,
         display: 'inline-block',
@@ -119,6 +120,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   rightMenuMobile: {
+    '& > div:first-of-type': {
+      width: '100%',
+      marginTop: '3rem',
+    },
     '& > div:nth-child(2)': {
       margin: '3rem 0 1.5rem',
       width: '100%',
