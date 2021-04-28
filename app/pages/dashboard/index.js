@@ -84,6 +84,7 @@ const styles = (theme) => ({
       display: 'none',
     },
     [theme.breakpoints.down('sm')]: {
+      marginTop: '3rem',
       textAlign: 'center',
       '& > div': {
         display: 'block',
