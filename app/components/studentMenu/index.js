@@ -11,7 +11,7 @@ import LogoImg from 'static/img/logo.png';
 import UpdateProfile from '../UpdateProfile';
 import useStyles from './styles';
 
-const MenuItems = [
+const MobileItems = [
   {
     href: '/dashboard',
     iconProps: { type: 'home' },
@@ -20,13 +20,13 @@ const MenuItems = [
   {
     href: '/dashboard/search/buy',
     singleType: '/dashboard/property/buy',
-    iconProps: { type: 'home' },
+    iconProps: { type: 'buy', style: { padding: 1 } },
     txt: 'Acheter',
   },
   {
     href: '/dashboard/search/location',
     singleType: '/dashboard/property/location',
-    iconProps: { type: 'home' },
+    iconProps: { type: 'locationType' },
     txt: 'Louer',
   },
   {
@@ -34,13 +34,13 @@ const MenuItems = [
     iconProps: { type: 'heart', strokeColor: 'primary' },
     txt: 'Favoris',
   },
-  {
-    href: '/dashboard/sponsorship',
-    iconProps: { type: 'sponsorship' },
-    txt: 'Parrainage',
-  },
 ];
-
+const sponsorship = {
+  href: '/dashboard/sponsorship',
+  iconProps: { type: 'sponsorship' },
+  txt: 'Parrainage',
+};
+const MenuItems = [...MobileItems, sponsorship];
 export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
   const classes = useStyles();
@@ -54,7 +54,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
       justify="space-between"
       className={clsx(classes.navContainer, classes.mobileContainer)}
     >
-      {MenuItems?.map(({ href, txt, singleType, iconProps }) => (
+      {MobileItems?.map(({ href, txt, singleType, iconProps }) => (
         <Grid key={href} item>
           <Link href={href}>
             <a
@@ -91,6 +91,20 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
             className={clsx(classes.rightMenu, classes.rightMenuMobile)}
             alignItems="center"
           >
+            <div>
+              <Link href={sponsorship.href}>
+                <a
+                  className={
+                    asPath === sponsorship.href ||
+                    asPath.includes(sponsorship.href)
+                      ? classes.activeLink
+                      : null
+                  }
+                >
+                  <span>{sponsorship.txt}</span>
+                </a>
+              </Link>
+            </div>
             <div>
               <Btn
                 text="Prendre rendez-vous"

@@ -42,6 +42,9 @@ const styles = (theme) => ({
           boxShadow:
             '0px 2.7px 9.45px rgba(14, 108, 218, 0.35), inset 0px 0px 4.05px rgba(24, 72, 196, 0.6)',
           borderRadius: '.675rem',
+          '& rect': {
+            fill: 'none',
+          },
         },
         '& > span': {
           display: 'none',

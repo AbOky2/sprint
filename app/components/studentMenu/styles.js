@@ -12,8 +12,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     textAlign: 'center',
     alignItems: 'center',
-    '& img': {
-      width: 20,
+    '& a': {
+      margin: 'auto',
+      '& img': {
+        width: 20,
+      },
     },
   },
   navContainer: {
@@ -58,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: '0px 4px 13px rgba(0, 0, 0, 0.1)',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    padding: '.5rem 1rem',
+    padding: '.5rem 2rem',
     boxSizing: 'border-box',
     zIndex: 10,
     '& > div a': {
@@ -88,6 +91,18 @@ const useStyles = makeStyles((theme) => ({
   },
   rightMenu: {
     '& > div:first-of-type': {
+      width: '100%',
+      marginTop: '3rem',
+      textAlign: 'center',
+      '& a': {
+        ...theme.typography.body1,
+        display: 'inline-block',
+        textAlign: 'center',
+        fontSize: '1.4rem',
+        color: theme.palette.blue,
+      },
+    },
+    '& > div:nth-child(2)': {
       marginRight: '2rem',
       '& > div': {
         padding: '1.5rem 2.4rem',
@@ -104,8 +119,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   rightMenuMobile: {
-    '& > div:first-of-type': {
+    '& > div:nth-child(2)': {
       margin: '3rem 0 1.5rem',
+      width: '100%',
       '& span': {
         color: 'white',
       },
