@@ -34,7 +34,7 @@ Marker.propTypes = {
   data: PropTypes.object,
   inGroup: PropTypes.bool,
   isMobile: PropTypes.bool,
-  show: PropTypes.bool,
+  show: PropTypes.any,
 };
 Marker.defaultProps = {
   inGroup: false,

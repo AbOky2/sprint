@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 // import 'intersection-observer';
 import clsx from 'clsx';
-import Pagination from '@material-ui/lab/Pagination';
+import { Pagination } from '@material-ui/lab';
 import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
-import Select from 'components/form/Select';
+import { Icon, Select } from 'components/form';
 import Card from 'components/card';
 import {
   getAddress,
@@ -13,6 +13,37 @@ import {
   getCardImg,
 } from 'helpers/property';
 import { singlePath } from 'helpers/query';
+
+const ellipsis = ['start-ellipsis', 'end-ellipsis'];
+const PaginationItem = ({
+  children,
+  classes,
+  type,
+  selected,
+  disabled,
+  onClick,
+}) => (
+  <Grid
+    className={clsx(
+      classes.paginationItem,
+      selected ? classes.paginationSelectedItem : '',
+      disabled ? classes.paginationDisabledItem : ''
+    )}
+    onClick={!ellipsis.includes(type) && !disabled ? onClick : null}
+  >
+    {type === 'next' || type === 'previous' ? (
+      <Icon
+        type="carrouselArrow"
+        size="tiny"
+        rotate={type === 'previous' ? '180deg' : '0'}
+      />
+    ) : ellipsis.includes(type) ? (
+      '...'
+    ) : (
+      children
+    )}
+  </Grid>
+);
 
 const ListHeader = ({ classes, sortBy, handleSortSelect }) => (
   <Grid
@@ -42,6 +73,13 @@ const ListFooter = ({ classes, page, matches, isMapsView, handlePage }) =>
         page={!isNaN(page.page) ? Number(page.page) : 1}
         siblingCount={matches || isMapsView ? 0 : 1}
         onChange={handlePage}
+        renderItem={({ ...params }) => (
+          <>
+            <PaginationItem {...params} classes={classes}>
+              {params.page}
+            </PaginationItem>
+          </>
+        )}
       />
     </Grid>
   );

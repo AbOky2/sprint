@@ -131,7 +131,6 @@ function ResponsiveDrawer({ children, window, logout }) {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton

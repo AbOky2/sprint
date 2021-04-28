@@ -133,16 +133,23 @@ const styles = (theme) => ({
   submit: {
     cursor: 'pointer',
     position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
+    ...theme.ui.bordered,
+    top: 0,
+    height: '100%',
     right: 0,
     zIndex: 1,
+    '& svg': {
+      display: 'block',
+      position: 'initial!important',
+      transform: 'translateY(.8rem)!important',
+    },
   },
 });
 
 export const GoogleMaps = ({ onChange, value }) => {
   const [inputValue, setInputValue] = useState(value);
   const onInputChange = (e) => setInputValue(e);
+  const onClick = (e) => setInputValue('');
 
   return (
     <GooglePlacesAutocomplete
@@ -157,6 +164,7 @@ export const GoogleMaps = ({ onChange, value }) => {
         onChange,
         onInputChange,
         inputValue,
+        onFocus: onClick,
         isClearable: true,
       }}
     />
@@ -268,6 +276,9 @@ const CustomInput = withStyles(styles)(
       if (salary && contributtion) return;
       calc(value);
     };
+    const onKeyPress = (e) => {
+      if (e.key === 'Enter') handleSumit();
+    };
     const handleChange = (name) => ({ target: { value } }) =>
       setState({ ...state, [name]: value });
 
@@ -298,6 +309,7 @@ const CustomInput = withStyles(styles)(
             placeholder="Budget maximal"
             onChange={onChange}
             className={classes.container}
+            onKeyPress={onKeyPress}
           />
           <Grid container>
             <Typography variant="h4">Quel est votre budget ?</Typography>
@@ -337,7 +349,7 @@ const samePropTypes = {
   onChange: PropTypes.func.isRequired,
   onKeyPress: PropTypes.func,
   classes: PropTypes.object.isRequired,
-  showSub: PropTypes.bool.isRequired,
+  showSub: PropTypes.bool,
   type: PropTypes.string,
   placeholder: PropTypes.string,
   label: PropTypes.string,
@@ -351,6 +363,7 @@ const sameDefaultProps = {
   type: 'text',
   placeholder: '',
   position: null,
+  showSub: false,
   classes: {},
 };
 CustomInput.propTypes = {

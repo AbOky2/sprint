@@ -134,7 +134,7 @@ const StudentProfile = ({ user = {}, logout, update }) => {
         </Grid>
         <Grid container alignItems="center" className={classes.navContainer}>
           {MenuItems?.map(({ href, txt, singleType }) => (
-            <Grid key={href} item alignItems="center">
+            <Grid key={href} item>
               <Link href={href}>
                 <a
                   className={

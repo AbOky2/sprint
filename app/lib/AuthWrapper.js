@@ -61,8 +61,7 @@ export const StudentMenuComp = connect(
             <MobileMenu user={user} logout={logout} update={update} />
           </Hidden>
           <Container
-            container
-            maxWidth={fullContentWidth ? '' : 'lg'}
+            maxWidth={fullContentWidth ? false : 'lg'}
             className={clsx(
               classes.studentContainer,
               fullContentWidth ? classes.fullContentWidth : ''

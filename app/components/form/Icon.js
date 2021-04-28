@@ -4,7 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import * as icons from '../../static/img/icons';
 import { shared } from 'lib/theme';
 
-const SIZES = { small: 16, medium: 24, large: 48, nearBig: 52, big: 67 };
+const SIZES = {
+  tiny: 10,
+  small: 16,
+  medium: 24,
+  large: 48,
+  nearBig: 52,
+  big: 67,
+};
 const ICON_COLORS = {
   ...shared.colors,
   gray: 'gray',

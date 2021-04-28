@@ -24,7 +24,7 @@ const Copy = ({ data }) => (
 
 const useStyles = makeStyles(styles);
 const ReserveLocation = ({
-  user,
+  user = {},
   className,
   curr,
   residenceName,
@@ -49,7 +49,7 @@ const ReserveLocation = ({
   <br/><br/>
   Bien cordialement,
   <br/>
-  ${ucfirst(user.firstName)} ${ucfirst(user.lastName)}`;
+  ${ucfirst(user?.firstName)} ${ucfirst(user?.lastName)}`;
   const datas = [
     { label: 'Destinataire', data: receiver },
     { label: 'Objet', data: subject },

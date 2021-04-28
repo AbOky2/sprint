@@ -371,6 +371,31 @@ const styles = (theme) => ({
   pagination: {
     marginTop: '1rem',
   },
+  paginationItem: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    textAlign: 'center',
+    color: 'rgba(0, 0, 0, 0.87)',
+    height: '32px',
+    margin: '0 3px',
+    padding: '0 6px',
+    fontSize: '1.4rem',
+    minWidth: '32px',
+    boxSizing: 'border-box',
+    textAlign: 'center',
+    fontWeight: '400',
+    lineHeight: '1.43',
+    borderRadius: '16px',
+    userSelect: 'none',
+  },
+  paginationDisabledItem: {
+    opacity: 0.38,
+  },
+  paginationSelectedItem: {
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+  },
   notFound: {
     width: '100%',
     textAlign: 'center',
