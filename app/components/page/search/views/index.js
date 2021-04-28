@@ -179,27 +179,27 @@ const MapsView = withStyles(
     const paginate = (page_number) =>
       data?.slice((page_number - 1) * page.limit, page_number * page.limit) ||
       [];
-    const handlePage = (e, pageOffset) =>
+    const handlePage = (e, pageOffset) => {
+      e.preventDefault();
+      console.log(e);
       setPage({ ...page, page: pageOffset });
-    useEffect(
-      () =>
-        setPage({
-          ...page,
-          pageList: paginate(page.page),
-        }),
-      [page.page]
-    );
-    useEffect(
-      () =>
-        setPage({
-          ...page,
-          page: 1,
-          pageList: data?.slice(0, 10),
-          totalPages: Math.ceil(data?.length / page.limit),
-        }),
-      [data, data[0]]
-    );
-
+    };
+    useEffect(() => {
+      setPage({
+        ...page,
+        pageList: paginate(page.page),
+      });
+    }, [page.page]);
+    useEffect(() => {
+      setPage({
+        ...page,
+        page: 1,
+        pageList: data?.slice(0, 10),
+        totalPages: Math.ceil(data?.length / page.limit),
+      });
+      console.log(data.length, data?.slice(0, 10));
+    }, [data]);
+    // console.log(page, data);
     return (
       <Grid
         container

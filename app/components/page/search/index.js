@@ -46,7 +46,7 @@ const SearchPage = ({
     sort,
     pieces,
   });
-  console.log(state, allData.docs);
+  // console.log(state, allData.docs);
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
 
@@ -83,6 +83,7 @@ const SearchPage = ({
       .flat();
     const newState = properties.docs?.filter((e) => listId.includes(e._id));
     if (newState) setState(newState);
+    console.log(list);
   };
 
   const isLocation = typeOfAnnonce === typeOfAnnonciesObj.location;
@@ -177,7 +178,7 @@ SearchPage.propTypes = {
   user: PropTypes.object.isRequired,
   properties: PropTypes.object.isRequired,
   maxPrice: PropTypes.string,
-  page: PropTypes.string,
+  page: PropTypes.any,
   typeOfAnnonce: PropTypes.string.isRequired,
   pieces: PropTypes.array,
   update: PropTypes.func.isRequired,

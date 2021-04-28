@@ -152,6 +152,7 @@ class PropertieClass extends DBModel {
       docs,
       near,
     };
+
     return { list };
   }
 }

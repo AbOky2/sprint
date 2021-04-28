@@ -167,6 +167,10 @@ const MapsCard = ({
 }) => {
   const [state, setState] = useState(0);
   const classes = useStyles();
+  const handleDoubleClick = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
   const handleNext = (e) => {
     e.stopPropagation();
     setState(state < pictures.length - 1 ? state + 1 : 0);
@@ -192,7 +196,7 @@ const MapsCard = ({
       </Link>
       {pictures.length > 1 && (
         <>
-          <span onClick={handlePrev}>
+          <span onClick={handlePrev} onDoubleClick={handleDoubleClick}>
             <Icon
               type="sliderArrow"
               size="small"
@@ -200,7 +204,7 @@ const MapsCard = ({
               rotate="180deg"
             />
           </span>
-          <span onClick={handleNext}>
+          <span onClick={handleNext} onDoubleClick={handleDoubleClick}>
             <Icon type="sliderArrow" size="small" color="iconBlue" />
           </span>
         </>

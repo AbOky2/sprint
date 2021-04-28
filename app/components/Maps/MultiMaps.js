@@ -77,22 +77,24 @@ export const GoogleMap = (props) => {
     setTriggerCreateClusters(true);
   };
 
-  useEffect(() => {
-    let newCenter = [];
+  // useEffect(() => {
+  //   let newCenter = [];
 
-    if (near)
-      newCenter = [curr?.loc?.coordinates[1], curr?.loc?.coordinates[0]];
-    else newCenter = near;
-    setCenter(newCenter);
-  }, [near, curr]);
+  //   if (near)
+  //     newCenter = [curr?.loc?.coordinates[1], curr?.loc?.coordinates[0]];
+  //   else newCenter = near;
+  //   // setCenter(newCenter);
+  // }, [near, curr]);
 
   // useEffect(() => {
   //   // setTriggerCreateClusters(false);
   // }, [queryData]);
+  useEffect(() => setTriggerCreateClusters(true), [docs]);
   useEffect(() => {
     createClusters(props);
     handlePointChange(state.clusters);
     setTriggerCreateClusters(false);
+    console.log(state.clusters.length);
   }, [triggerCreateClusters]);
 
   return (
