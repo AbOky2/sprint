@@ -7,6 +7,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { Icon } from 'components/form';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { useToggleOpen } from 'helpers/hooks';
+import SubmitIcon from 'static/img/submit.png';
 
 const sharedInputStyle = {
   fontFamily: 'Open Sans',
@@ -136,12 +137,13 @@ const styles = (theme) => ({
     ...theme.ui.bordered,
     top: 0,
     height: '100%',
+    overflow: 'hidden',
     right: 0,
     zIndex: 1,
-    '& svg': {
+    '& img': {
       display: 'block',
-      position: 'initial!important',
-      transform: 'translateY(.8rem)!important',
+      height: '100%',
+      transform: 'translateY(.4rem)!important',
     },
   },
 });
@@ -338,7 +340,7 @@ const CustomInput = withStyles(styles)(
           </Grid>
         </Grid>
         <div onClick={handleSumit} className={classes.submit}>
-          <Icon type="search" size="nearBig" color="white" />
+          <img src={SubmitIcon} />
         </div>
       </div>
     );

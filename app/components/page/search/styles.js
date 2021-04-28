@@ -132,14 +132,6 @@ const styles = (theme) => ({
         },
       },
     },
-    '& > div:last-of-type svg': {
-      position: 'absolute',
-      right: 0,
-      top: '50%',
-      width: 40,
-      height: 40,
-      transform: 'translateY(calc(-50% - -3px))',
-    },
     '& > div:nth-child(2) > div > div > div': {
       backgroundColor: 'white',
       borderRadius: 0,
