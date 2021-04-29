@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import * as icons from '../../static/img/icons';
+import * as icons from 'static/img/icons';
 import { shared } from 'lib/theme';
 
 const SIZES = {

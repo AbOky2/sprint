@@ -86,7 +86,7 @@ const searchFields = withStyles(
     </>
   )
 );
-searchFields.PropTypes = {
+searchFields.propTypes = {
   classes: PropTypes.object.isRequired,
   isLocation: PropTypes.bool.isRequired,
   isMapsView: PropTypes.bool.isRequired,

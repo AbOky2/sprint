@@ -164,7 +164,7 @@ const DropdownSelect = withStyles(styles)(
           disabled
         />
         <span />
-        <Icon type="sliderArrow" size="small" color="gray" />
+        <Icon type="sliderArrow" size="tiny" color="newGray" />
         <Grid container>
           {list?.map((elem) => (
             <Grid

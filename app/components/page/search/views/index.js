@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'next/router';
 import clsx from 'clsx';
 import { Grid } from '@material-ui/core';
 import MultiMaps from 'components/Maps/MultiMaps';
@@ -115,135 +116,152 @@ const MapsContainer = ({
   </Grid>
 );
 
-const MapsView = withStyles(
-  ({
-    classes,
-    liked,
-    handleBookmark,
-    queryData,
-    toggleView,
-    data = [],
-    allData = [],
-    page: defaultPage,
-    matches,
-    isMapsView,
-    isMdView,
-    handlePointChange,
-    sortBy,
-    handleSortSelect,
-  }) => {
-    const [page, setPage] = useState({
-      pageList: data?.slice(10),
-      limit: defaultLimit,
+const MapsView = withRouter(
+  withStyles(
+    ({
+      classes,
+      liked,
+      handleBookmark,
+      queryData,
+      toggleView,
+      data = [],
+      allData = [],
       page: defaultPage,
-      totalPages: data?.length,
-    });
-    const locs = data?.map((e, index) => ({
-      index,
-      _id: e._id,
-      coor: e.loc?.coordinates,
-    }));
-    const [curr, setCurr] = useState(null);
-    const [carrouselIndex, setCarrouselIndex] = useState(0);
-    const getChildPostion = () => {
-      const bounds = document
-        .getElementById('maps-container')
-        ?.getBoundingClientRect();
-      if (!bounds || !window?.event) return {};
+      matches,
+      isMapsView,
+      isMdView,
+      handlePointChange,
+      sortBy,
+      handleSortSelect,
+      router,
+    }) => {
+      const [page, setPage] = useState({
+        pageList: data?.slice(0, defaultLimit),
+        limit: defaultLimit,
+        page: defaultPage,
+        totalPages: data?.length,
+      });
+      const locs = data?.map((e, index) => ({
+        index,
+        _id: e._id,
+        coor: e.loc?.coordinates,
+      }));
+      const [curr, setCurr] = useState(null);
+      const [carrouselIndex, setCarrouselIndex] = useState(0);
+      const getChildPostion = () => {
+        const bounds = document
+          .getElementById('maps-container')
+          ?.getBoundingClientRect();
+        if (!bounds || !window?.event) return {};
 
-      const e = window.event;
-      const x = e.clientX - bounds.left;
-      const y = e.clientY - bounds.top;
+        const e = window.event;
+        const x = e.clientX - bounds.left;
+        const y = e.clientY - bounds.top;
 
-      return {
-        isTop: bounds.height / 2 < bounds.height - y,
-        isLeft: bounds.width / 2 < bounds.width - x,
+        return {
+          isTop: bounds.height / 2 < bounds.height - y,
+          isLeft: bounds.width / 2 < bounds.width - x,
+        };
       };
-    };
-    const handleChildClick = (id) => {
-      const currIndex = locs.findIndex((e) => id.includes(e._id));
-      const found = data[currIndex];
+      const handleChildClick = (id) => {
+        const currIndex = locs.findIndex((e) => id.includes(e._id));
+        const found = data[currIndex];
 
-      setCarrouselIndex(currIndex);
-      if (found) {
-        setCurr({ ...found, showInfoWindow: true, ...getChildPostion() });
-      }
-    };
-    const handleCarouselChange = (index) => setCurr(data[index]);
-    const handleMouseEnter = (id) => () => {
-      if (!id) return setCurr(null);
+        setCarrouselIndex(currIndex);
+        if (found) {
+          setCurr({ ...found, showInfoWindow: true, ...getChildPostion() });
+        }
+      };
+      const handleCarouselChange = (index) => setCurr(data[index]);
+      const handleMouseEnter = (id) => () => {
+        if (!id) return setCurr(null);
 
-      const currIndex = data.findIndex((e) => e._id === id);
-      setCurr({ ...data[currIndex], showInfoWindow: false });
-    };
-    const paginate = (page_number) =>
-      data?.slice((page_number - 1) * page.limit, page_number * page.limit) ||
-      [];
-    const handlePage = (e, pageOffset) => {
-      e.preventDefault();
-      console.log(e);
-      setPage({ ...page, page: pageOffset });
-    };
-    useEffect(() => {
-      setPage({
-        ...page,
-        pageList: paginate(page.page),
-      });
-    }, [page.page]);
-    useEffect(() => {
-      setPage({
-        ...page,
-        page: 1,
-        pageList: data?.slice(0, 10),
-        totalPages: Math.ceil(data?.length / page.limit),
-      });
-      console.log(data.length, data?.slice(0, 10));
-    }, [data]);
-    // console.log(page, data);
-    return (
-      <Grid
-        container
-        className={clsx(
-          classes.mapsViewContainer,
-          isMapsView ? classes.fullMapsViewContainer : ''
-        )}
-      >
-        {!isMapsView && (
-          <ListContainer
+        const currIndex = data.findIndex((e) => e._id === id);
+        setCurr({ ...data[currIndex], showInfoWindow: false });
+      };
+      const paginate = (page_number) =>
+        data?.slice((page_number - 1) * page.limit, page_number * page.limit) ||
+        [];
+      const handlePage = (e, pageOffset) => {
+        e.preventDefault();
+
+        setPage({ ...page, page: pageOffset });
+        router.push(
+          {
+            query: {
+              ...router.query,
+              page: pageOffset,
+            },
+          },
+          undefined,
+          { shallow: true }
+        );
+      };
+
+      useEffect(
+        () =>
+          setPage({
+            ...page,
+            pageList: paginate(page.page),
+          }),
+        [page.page]
+      );
+      useEffect(() => {
+        const currPage = defaultPage || 1;
+
+        setPage({
+          ...page,
+          page: currPage,
+          pageList: paginate(currPage),
+          totalPages: Math.ceil(data?.length / page.limit),
+        });
+      }, [data, data[0], defaultPage]);
+
+      return (
+        <Grid
+          container
+          className={clsx(
+            classes.mapsViewContainer,
+            isMapsView ? classes.fullMapsViewContainer : ''
+          )}
+        >
+          {!isMapsView && (
+            <ListContainer
+              classes={classes}
+              curr={curr}
+              sortBy={sortBy}
+              isMapsView={isMapsView}
+              handleSortSelect={handleSortSelect}
+              handleMouseEnter={handleMouseEnter}
+              hasData={data.length}
+              page={page}
+              matches={matches}
+              handlePage={handlePage}
+              liked={liked}
+              handleBookmark={handleBookmark}
+            />
+          )}
+          <MapsContainer
             classes={classes}
-            curr={curr}
-            sortBy={sortBy}
+            index={carrouselIndex}
+            allData={allData}
+            data={data}
+            queryData={queryData}
             isMapsView={isMapsView}
-            handleSortSelect={handleSortSelect}
-            handleMouseEnter={handleMouseEnter}
-            hasData={data.length}
-            page={page}
-            matches={matches}
-            handlePage={handlePage}
+            pageList={page?.pageList?.map((e) => e._id)}
+            curr={curr}
+            handleChildClick={handleChildClick}
+            handleCarouselChange={handleCarouselChange}
+            isMobile={isMdView}
+            handlePointChange={handlePointChange}
             liked={liked}
+            toggleView={toggleView}
             handleBookmark={handleBookmark}
           />
-        )}
-        <MapsContainer
-          classes={classes}
-          index={carrouselIndex}
-          allData={allData}
-          data={data}
-          queryData={queryData}
-          isMapsView={isMapsView}
-          pageList={page?.pageList?.map((e) => e._id)}
-          curr={curr}
-          handleChildClick={handleChildClick}
-          handleCarouselChange={handleCarouselChange}
-          isMobile={isMdView}
-          handlePointChange={handlePointChange}
-          liked={liked}
-          toggleView={toggleView}
-          handleBookmark={handleBookmark}
-        />
-      </Grid>
-    );
-  }
+        </Grid>
+      );
+    }
+  )
 );
 
 const sharedProptypes = {
@@ -263,6 +281,6 @@ const sharedProptypes = {
   matches: PropTypes.bool.isRequired,
   handlePage: PropTypes.func.isRequired,
 };
-MapsView.PropTypes = sharedProptypes;
+MapsView.propTypes = sharedProptypes;
 
 export { MapsView };

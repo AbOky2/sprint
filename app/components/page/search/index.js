@@ -9,7 +9,6 @@ import { useTheme } from '@material-ui/core/styles';
 import { getPropertiesApiMethod, addBookmarkApiMethod } from 'lib/api/customer';
 import { toggleArray, isArray, pick } from 'helpers/convertAndCheck';
 import { typeOfAnnonciesObj, sortByKeys } from 'helpers/property';
-import withAuth from 'lib/withAuth';
 import NotFound from 'components/NotFound';
 import { AdminContentWrapper } from 'components/wrapper';
 import { MapsView } from './views';
@@ -46,7 +45,7 @@ const SearchPage = ({
     sort,
     pieces,
   });
-  // console.log(state, allData.docs);
+
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
 
@@ -64,13 +63,23 @@ const SearchPage = ({
   };
   const handleSortSelect = () => ({ target: { value } }) => {
     setSortBy(value);
-    // setState(
-    //   state.sort((a, b) => {
-    //     if (value === sortByKeys[0]) return +a.price - +b.price;
-    //     else return +b.price - +a.price;
-    //   })
-    // );
-    // setQueryData({ ...queryData, sort: value });
+    setState(
+      state.sort((a, b) => {
+        if (value === sortByKeys[0]) return +a.price - +b.price;
+        else return +b.price - +a.price;
+      })
+    );
+    setQueryData({ ...queryData, sort: value });
+    Router.push(
+      {
+        query: {
+          ...Router.query,
+          sort: value,
+        },
+      },
+      undefined,
+      { shallow: true }
+    );
     // setMakeRequest(true);
   };
   const handleBookmark = (id) => {
@@ -83,7 +92,6 @@ const SearchPage = ({
       .flat();
     const newState = properties.docs?.filter((e) => listId.includes(e._id));
     if (newState) setState(newState);
-    console.log(list);
   };
 
   const isLocation = typeOfAnnonce === typeOfAnnonciesObj.location;
@@ -163,7 +171,7 @@ const SearchPage = ({
             handleBookmark={handleBookmark}
             handleSortSelect={handleSortSelect}
             toggleView={toggleView}
-            page={page}
+            page={page?.page}
             matches={matches}
             isMdView={isMdView}
             handlePointChange={handlePointChange}
@@ -174,6 +182,7 @@ const SearchPage = ({
     </AdminContentWrapper>
   );
 };
+
 SearchPage.propTypes = {
   user: PropTypes.object.isRequired,
   properties: PropTypes.object.isRequired,

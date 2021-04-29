@@ -22,6 +22,7 @@ const LocationTable = ({
       current.minSurface === current.maxSurface
         ? ` ${current.minSurface}m²`
         : ` de ${current.minSurface}m² à ${current.maxSurface}m²`;
+
     return (
       <div key={elem}>
         <Grid

@@ -105,9 +105,7 @@ const styles = (theme) => ({
         '&:first-of-type': {
           minHeight: 62,
           borderRadius: inputRadius,
-          fontFamily: 'Open Sans',
-          fontSize: '1.6rem',
-          fontWeight: '600',
+          ...theme.ui.searchInput,
           borderTopRightRadius: 0,
           borderBottomRightRadius: 0,
           borderRight: 0,
@@ -122,6 +120,7 @@ const styles = (theme) => ({
           },
         },
         '& input': {
+          ...theme.ui.searchInput,
           width: '100%!important',
         },
         '&:last-of-type': {
@@ -197,6 +196,7 @@ const styles = (theme) => ({
     position: 'absolute',
     top: '2.5rem',
     left: '2.5rem',
+    width: 'fit-content',
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
@@ -386,6 +386,7 @@ const styles = (theme) => ({
     userSelect: 'none',
   },
   paginationDisabledItem: {
+    cursor: 'initial',
     opacity: 0.38,
   },
   paginationSelectedItem: {
@@ -418,7 +419,7 @@ const styles = (theme) => ({
         '& select': {
           ...theme.ui.bordered,
           backgroundColor: theme.palette.lightBlue,
-          padding: '1.27rem 2.5rem 1.27rem 1.4rem',
+          padding: '1.27rem 3.5rem 1.27rem 1.4rem',
           color: theme.palette.newBlue,
         },
         '& fieldset': {

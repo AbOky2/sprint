@@ -94,7 +94,7 @@ export const GoogleMap = (props) => {
     createClusters(props);
     handlePointChange(state.clusters);
     setTriggerCreateClusters(false);
-    console.log(state.clusters.length);
+    // console.log(state.clusters.length);
   }, [triggerCreateClusters]);
 
   return (

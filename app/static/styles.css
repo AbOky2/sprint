@@ -42,6 +42,11 @@ input:focus {
   outline-width: 0 !important;
   outline-style: initial !important;
 }
+input::placeholder,
+textarea::placeholder,
+.css-1wa3eu0-placeholder {
+  color: #8c97b6 !important;
+}
 h1,
 h2,
 h3,

@@ -114,13 +114,6 @@ class PropertieClass extends DBModel {
       $and: [
         pieces.length > 0 ? { pieces: { $in: pieces } } : {},
         maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
-        // near.length > 0
-        //   ? {
-        //       loc: {
-        //         $geoWithin: { $centerSphere: [near, $maxDistance] },
-        //       },
-        //     }
-        //   : {},
         near.length > 0
           ? {
               loc: {
@@ -140,14 +133,8 @@ class PropertieClass extends DBModel {
         { typeOfAnnonce },
       ],
     };
-    // const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
-    // const list = await this.paginate(query, {
-    //   limit: 1000,
-    //   page,
-    //   forceCountFn: true,
-    //   sort: { price: priceSort },
-    // });
-    const docs = await this.find(query);
+    const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
+    const docs = await this.find(query, null, { sort: { price: priceSort } });
     const list = {
       docs,
       near,

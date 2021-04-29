@@ -1,6 +1,7 @@
 /* eslint-disable react/no-danger */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import { Grid, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
 import Maps from 'components/Maps';
@@ -82,7 +83,11 @@ const PropertyPage = ({
               }
             />
           )}
-          <Grid container className={classes.save} justify="center">
+          <Grid
+            container
+            className={clsx(classes.save, liked ? classes.saved : '')}
+            justify="center"
+          >
             <Grid item container onClick={handleBookmark} alignItems="center">
               <Icon
                 type="heart"

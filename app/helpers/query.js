@@ -1,6 +1,6 @@
 const { typeOfAnnonciesObj } = require('./property');
 
-const defaultLimit = 6;
+const defaultLimit = 10;
 const defaultOffset = 1;
 const defaultLoc = {
   location: 'Paris, France',

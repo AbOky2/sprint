@@ -28,7 +28,7 @@ const styles = (theme) => ({
       height: 'auto',
       borderRadius: '1rem',
       border: `solid 1px ${theme.palette.lightBlue}`,
-      color: '#1A2E6C',
+      color: theme.palette.newBlack,
       ...sharedInputStyle,
       outline: 'none',
       fontSize: '1.4rem',
@@ -37,9 +37,6 @@ const styles = (theme) => ({
         border: `solid 1px ${theme.palette.newBlue}`,
         transition: 'border .1s ease-out, box-shadow .1s ease-out',
       },
-      '&::placeholder': {
-        color: theme.palette.newGray,
-      },
     },
     '& textarea': {
       height: 'auto',
@@ -47,9 +44,6 @@ const styles = (theme) => ({
     '& input:focus': {
       boxShadow: '0px 4px 10px 3px rgba(0, 0, 0, 0.11)',
       border: `1px solid ${theme.palette.lightBlue}`,
-    },
-    '& input::placeholder': {
-      color: theme.palette.gray,
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
@@ -178,6 +172,10 @@ export const GoogleMaps = ({ onChange, value }) => {
         inputValue,
         onFocus: onClick,
         isClearable: true,
+        components: {
+          DropdownIndicator: () => null,
+          IndicatorSeparator: () => null,
+        },
       }}
     />
   );

@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { btnHover } from 'components/form/Btn';
+
 const useStyles = makeStyles((theme) => ({
   card: {
     width: 'calc(100% - 14px)',
@@ -32,6 +33,18 @@ const useStyles = makeStyles((theme) => ({
     },
     '& svg': {
       marginRight: 15,
+    },
+  },
+  saved: {
+    '& > div': {
+      color: '#FFFFFF',
+      background:
+        'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
+      boxShadow:
+        '0px 4px 14px rgba(14, 108, 218, 0.75), inset 0px 0px 6px rgba(123, 160, 255, 0.7)',
+      '&:hover': {
+        color: theme.palette.newBlue,
+      },
     },
   },
   subTitle: {
