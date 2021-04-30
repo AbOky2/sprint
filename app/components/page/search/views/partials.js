@@ -103,7 +103,7 @@ const ListWrapper = ({
       isMapsView={isMapsView}
       handleSortSelect={handleSortSelect}
     />
-    <div>
+    <div id="listViewScrollContainer">
       <Grid container>
         {hasData ? (
           children

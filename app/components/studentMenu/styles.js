@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: '1.6rem 3.5rem 1.6rem',
+    padding: '1.6rem 3.5rem',
     marginBottom: '2.4rem',
     '& > div': {
       width: 'auto',

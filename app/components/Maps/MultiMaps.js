@@ -105,6 +105,7 @@ export const GoogleMap = (props) => {
         options={MAP.options}
         onChange={handleMapChange}
         onChildClick={handleChildClick}
+        onClick={() => handleChildClick(null)}
         yesIWantToUseGoogleMapApiInternals
         center={near}
       >

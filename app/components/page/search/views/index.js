@@ -147,6 +147,7 @@ const MapsView = withRouter(
         coor: e.loc?.coordinates,
       }));
       const [curr, setCurr] = useState(null);
+      // const [scrollToBottom, setScrollToBottom] = useState(false);
       const [carrouselIndex, setCarrouselIndex] = useState(0);
       const getChildPostion = () => {
         const bounds = document
@@ -164,13 +165,13 @@ const MapsView = withRouter(
         };
       };
       const handleChildClick = (id) => {
-        const currIndex = locs.findIndex((e) => id.includes(e._id));
+        const currIndex = locs.findIndex((e) => id?.includes(e._id));
         const found = data[currIndex];
+        let newCurr = { showInfoWindow: false, ...getChildPostion() };
 
         setCarrouselIndex(currIndex);
-        if (found) {
-          setCurr({ ...found, showInfoWindow: true, ...getChildPostion() });
-        }
+        if (found) newCurr = { ...found, ...newCurr, showInfoWindow: true };
+        setCurr(newCurr);
       };
       const handleCarouselChange = (index) => setCurr(data[index]);
       const handleMouseEnter = (id) => () => {
@@ -184,7 +185,6 @@ const MapsView = withRouter(
         [];
       const handlePage = (e, pageOffset) => {
         e.preventDefault();
-
         setPage({ ...page, page: pageOffset });
         router.push(
           {
@@ -196,8 +196,18 @@ const MapsView = withRouter(
           undefined,
           { shallow: true }
         );
+        // setScrollToBottom(true);
       };
 
+      // useEffect(() => {
+      //   if (scrollToBottom) {
+      //     const scrollElement = document.getElementById(
+      //       'listViewScrollContainer'
+      //     );
+      //     scrollElement.scrollTop = scrollElement.scrollHeight;
+      //     setScrollToBottom(false);
+      //   }
+      // }, [scrollToBottom]);
       useEffect(
         () =>
           setPage({
