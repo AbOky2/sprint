@@ -3,11 +3,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import { toast } from 'react-toastify';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Input, Select, Modal, Icon } from './form';
-import { userRoleSelect } from '../helpers/user';
-import { toast } from 'react-toastify';
+import { userRoleSelect } from 'helpers/user';
 
 const useStyles = makeStyles((theme) => ({
   contextMenu: {
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateProfile = ({ user, update, logout, transparent }) => {
+const UpdateProfile = ({ text, user, update, logout, transparent }) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState(user);
@@ -136,7 +136,7 @@ const UpdateProfile = ({ user, update, logout, transparent }) => {
         >
           <Icon type="user" />
           <Typography className={classes.userName}>
-            {state?.firstName}
+            {text ? text : state?.firstName}
           </Typography>
           <Icon type="sliderArrow" size="small" />
         </Grid>

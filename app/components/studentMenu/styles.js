@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   drawer: {
-    padding: '2.7rem',
+    padding: '2.7rem 0 0 2.7rem ',
   },
   rightMenu: {
     '& > div:first-of-type': {
@@ -126,12 +126,51 @@ const useStyles = makeStyles((theme) => ({
     '& > div:first-of-type': {
       width: '100%',
       marginTop: '3rem',
+      textAlign: 'left',
+      '& span': {
+        paddingLeft: 5,
+      },
     },
     '& > div:nth-child(2)': {
-      margin: '3rem 0 1.5rem',
-      width: '100%',
+      marginRight: '2rem',
+      margin: '2.4rem 0',
+      transform: 'translateX(-5px)',
+      '& > div:first-of-type': {
+        padding: 0,
+        '& > div:first-of-type': {
+          left: 0,
+        },
+        '& > div:last-of-type': {
+          left: 0,
+          padding: 0,
+          '& > svg': {
+            margin: 0,
+            width: '30px!important',
+            height: '30px!important',
+            '&:last-child': {
+              display: 'none',
+            },
+          },
+          '& > p': {
+            padding: 0,
+            paddingLeft: 4,
+            margin: 0,
+          },
+        },
+        width: '100%',
+      },
+      '& svg': {
+        marginRight: '1.5rem',
+      },
       '& span': {
-        color: 'white',
+        fontSize: 14,
+        padding: 0,
+        color: theme.palette.newBlue,
+      },
+    },
+    '& > div:last-of-type': {
+      '& > div': {
+        paddingLeft: '2.4rem',
       },
     },
   },
@@ -161,6 +200,18 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
     '& p': {
+      color: `${theme.palette.newBlue}!important`,
+    },
+  },
+  mobileDrawerActiveMobile: {
+    '&::after': {
+      display: 'none',
+    },
+    '& svg path': {
+      fill: '#4f80ff!important',
+      stroke: '#4f80ff!important',
+    },
+    '& span': {
       color: `${theme.palette.newBlue}!important`,
     },
   },

@@ -37,10 +37,11 @@ const MobileItems = [
 ];
 const sponsorship = {
   href: '/dashboard/sponsorship',
-  iconProps: { type: 'sponsorship' },
+  iconProps: { type: 'mobileSponsorship' },
   txt: 'Parrainage',
 };
 const MenuItems = [...MobileItems, sponsorship];
+
 export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
   const classes = useStyles();
@@ -97,14 +98,23 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
                   className={
                     asPath === sponsorship.href ||
                     asPath.includes(sponsorship.href)
-                      ? classes.activeLink
+                      ? classes.mobileDrawerActiveMobile
                       : null
                   }
                 >
+                  <Icon {...sponsorship.iconProps} />
+
                   <span>{sponsorship.txt}</span>
                 </a>
               </Link>
             </div>
+            <UpdateProfile
+              text="Mon compte"
+              user={user}
+              logout={logout}
+              update={update}
+              transparent
+            />
             <div>
               <Btn
                 text="Prendre rendez-vous"
@@ -115,12 +125,6 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
               />
             </div>
           </Grid>
-          <UpdateProfile
-            user={user}
-            logout={logout}
-            update={update}
-            transparent
-          />
         </div>
       </Drawer>
     </Grid>

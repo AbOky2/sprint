@@ -12,6 +12,7 @@ export { default as elevator } from './elevator.svg';
 export { default as room } from './room.svg';
 export { default as user } from './user.svg';
 export { default as sponsorship } from './sponsorship.svg';
+export { default as mobileSponsorship } from './mobile-sponsorship.svg';
 export { default as phone } from './phone.svg';
 export { default as jackpot } from './jackpot.svg';
 export { default as partners } from './partners.svg';
