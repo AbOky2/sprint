@@ -145,6 +145,7 @@ const useStyles = makeStyles((theme) => ({
           justifyContent: 'flex-start',
           '& > svg': {
             margin: 0,
+            height: '2.1rem!important',
             '&:last-child': {
               display: 'none',
             },
