@@ -152,7 +152,7 @@ const styles = (theme) => ({
   },
 });
 
-export const GoogleMaps = ({ onChange, value }) => {
+export const GoogleMaps = ({ onChange, value, placeholder }) => {
   const [inputValue, setInputValue] = useState(value);
   const onInputChange = (e) => setInputValue(e);
   const onClick = (e) => setInputValue('');
@@ -166,7 +166,7 @@ export const GoogleMaps = ({ onChange, value }) => {
         },
       }}
       selectProps={{
-        placeholder: 'Localisation',
+        placeholder,
         onChange,
         onInputChange,
         inputValue,

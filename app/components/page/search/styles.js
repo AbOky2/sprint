@@ -29,7 +29,7 @@ const styles = (theme) => ({
   resetSearchMapContainer: {
     '& > div:first-of-type': {
       position: 'relative',
-      margin: '3.5rem auto',
+      margin: '1.6rem auto',
       transform: 'initial',
       left: 0,
       '& > div': {
@@ -323,7 +323,7 @@ const styles = (theme) => ({
     },
   },
   mapsViewContainer: {
-    height: 'calc(100vh - 195px)',
+    height: 'calc(100vh - 160px)',
     overflow: 'hidden',
     '& > div': {
       '&:last-of-type': {
@@ -336,6 +336,9 @@ const styles = (theme) => ({
           '&:first-of-type': {
             borderTopLeftRadius: '1.5rem',
             overflow: 'hidden',
+            [theme.breakpoints.down('sm')]: {
+              borderTopLeftRadius: 0,
+            },
           },
         },
       },
@@ -347,7 +350,6 @@ const styles = (theme) => ({
           paddingLeft: 0,
           minHeight: '65vh',
           '& > div:last-of-type': {
-            display: 'none!important',
             position: 'absolute',
             bottom: '2rem',
           },

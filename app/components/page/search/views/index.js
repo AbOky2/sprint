@@ -248,11 +248,11 @@ const MapsView = withRouter(
             data={data}
             queryData={queryData}
             isMapsView={isMapsView}
+            isMdView={isMdView}
             pageList={page?.pageList?.map((e) => e._id)}
             curr={curr}
             handleChildClick={handleChildClick}
             handleCarouselChange={handleCarouselChange}
-            isMobile={isMdView}
             handlePointChange={handlePointChange}
             liked={liked}
             toggleView={toggleView}

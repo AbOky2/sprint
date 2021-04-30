@@ -34,7 +34,7 @@ const searchFields = withStyles(
             name="loc"
             value={queryData.loc}
             onChange={handleMapSearch}
-            placeholder="Localisation"
+            placeholder={isMdView ? 'Où cherchez-vous ?' : 'Localisation'}
           />
           {isMdView && (
             <>
