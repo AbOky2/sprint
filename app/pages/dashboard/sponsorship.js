@@ -103,7 +103,7 @@ const PartnerPage = ({ user }) => {
           Ils pourront l’utiliser au moment de leur inscription sur Kit le nid.
         </Typography>
         <Grid container item justify="center">
-          <Grid item md={2} className="text-center">
+          <Grid item sm={12} md={2} className="text-center">
             <Grid container justify="center" alignItems="center">
               <Icon type="addUser" color="iconBlue" size="large" />
             </Grid>
@@ -112,10 +112,10 @@ const PartnerPage = ({ user }) => {
               Renseignez les coordonnées de votre contact ci-dessous.
             </Typography>
           </Grid>
-          <Grid item md={2}>
+          <Grid item sm={12} md={2}>
             <FirstDivider />
           </Grid>
-          <Grid item md={2} className="text-center">
+          <Grid item sm={12} md={2} className="text-center">
             <Grid container justify="center" alignItems="center">
               <Icon type="phone" color="iconBlue" size="large" />
             </Grid>
@@ -125,10 +125,10 @@ const PartnerPage = ({ user }) => {
               offres.
             </Typography>
           </Grid>
-          <Grid item md={2}>
+          <Grid item sm={12} md={2}>
             <SecondDivider />
           </Grid>
-          <Grid item md={2} className="text-center">
+          <Grid item sm={12} md={2} className="text-center">
             <Grid container justify="center" alignItems="center">
               <Icon type="pen" color="iconBlue" size="big" />
             </Grid>
