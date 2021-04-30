@@ -6,8 +6,8 @@ import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Input, Select, Modal, Icon } from './form';
 import { userRoleSelect } from 'helpers/user';
+import { Input, Select, Modal, Icon } from './form';
 
 const useStyles = makeStyles((theme) => ({
   contextMenu: {
@@ -32,6 +32,11 @@ const useStyles = makeStyles((theme) => ({
   openMenu: {
     display: 'block',
     top: 'calc(100% + .3rem)',
+    '& > div': {
+      '&:nth-child(2)': {
+        marginBottom: '1.5rem',
+      },
+    },
   },
   logoutBtn: {
     marginBottom: '1.5rem',
@@ -115,6 +120,7 @@ const UpdateProfile = ({ text, user, update, logout, transparent }) => {
             Déconnexion
           </div>
           <div onClick={handleOpenModal}>Modifier vos informations</div>
+          <div onClick={handleOpenModal}>Gestion des cookies</div>
         </div>
         <Grid
           container

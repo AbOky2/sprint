@@ -134,7 +134,6 @@ const useStyles = makeStyles((theme) => ({
     '& > div:nth-child(2)': {
       marginRight: '2rem',
       margin: '2.4rem 0',
-      transform: 'translateX(-5px)',
       '& > div:first-of-type': {
         padding: 0,
         '& > div:first-of-type': {
@@ -146,7 +145,6 @@ const useStyles = makeStyles((theme) => ({
           justifyContent: 'flex-start',
           '& > svg': {
             margin: 0,
-            width: '30px!important',
             '&:last-child': {
               display: 'none',
             },

@@ -249,7 +249,7 @@ a[href^="https://maps.google.com/maps"]
   background-color: #f7f8fa !important;
 }
 .slick-list {
-  border-radius: 2.5rem;
+  border-radius: 1rem;
   overflow: hidden;
 }
 .slick-slide > div > div {
