@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   drawer: {
-    padding: '2.7rem 0 0 2.7rem ',
+    padding: '2.7rem',
   },
   rightMenu: {
     '& > div:first-of-type': {
@@ -143,10 +143,10 @@ const useStyles = makeStyles((theme) => ({
         '& > div:last-of-type': {
           left: 0,
           padding: 0,
+          justifyContent: 'flex-start',
           '& > svg': {
             margin: 0,
             width: '30px!important',
-            height: '30px!important',
             '&:last-child': {
               display: 'none',
             },

@@ -86,12 +86,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
               </a>
             </Link>
           </Grid>
-          <Grid
-            container
-            item
-            className={clsx(classes.rightMenu, classes.rightMenuMobile)}
-            alignItems="center"
-          >
+          <div className={clsx(classes.rightMenu, classes.rightMenuMobile)}>
             <div>
               <Link href={sponsorship.href}>
                 <a
@@ -124,7 +119,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
                 }
               />
             </div>
-          </Grid>
+          </div>
         </div>
       </Drawer>
     </Grid>
