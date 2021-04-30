@@ -45,9 +45,14 @@ const useStyles = makeStyles((theme) => ({
       transition: 'background .1s ease-out, box-shadow .1s ease-out',
 
       '&:hover': {
-        color: theme.palette.newBlue,
-        backgroundColor: 'red',
+        background:
+          'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
+        boxShadow:
+          '0px 4px 14px rgba(14, 108, 218, 0.75), inset 0px 0px 6px rgba(123, 160, 255, 0.7)',
         transition: 'background .1s ease-out, box-shadow .1s ease-out',
+        '& path': {
+          fill: `${theme.palette.red}!important`,
+        },
       },
     },
   },

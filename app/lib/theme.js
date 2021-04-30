@@ -47,6 +47,7 @@ const theme = createMuiTheme({
     },
     newBlue: shared.colors.newBlue,
     blue: shared.colors.primary,
+    red: shared.colors.red,
     gray: shared.colors.gray,
     newGray: shared.colors.newGray,
     lightGray: shared.colors.lightGray,
