@@ -320,6 +320,7 @@ const CustomInput = withStyles(styles)(
             onChange={onChange}
             className={classes.container}
             onKeyPress={onKeyPress}
+            autoComplete="off"
           />
           <Grid container>
             <Typography variant="h4">Quel est votre budget ?</Typography>

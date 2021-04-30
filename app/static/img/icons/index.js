@@ -16,6 +16,7 @@ export { default as phone } from './phone.svg';
 export { default as jackpot } from './jackpot.svg';
 export { default as partners } from './partners.svg';
 export { default as pen } from './pen.svg';
+export { default as validate } from './validate.svg';
 export { default as logo } from './logo.svg';
 export { default as logoFull } from './logo-full.svg';
 export { default as search } from './search.svg';

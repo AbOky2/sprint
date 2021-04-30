@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.newGray,
   },
 }));
-const PartnershipPrice = 400;
+const PartnershipPrice = 800;
 const PartnerPage = ({ user }) => {
   const [state, setState] = useState({
     email: '',

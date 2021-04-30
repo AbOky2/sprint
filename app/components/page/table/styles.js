@@ -98,28 +98,50 @@ const styles = (theme) => ({
       },
       '& > div:last-child': {
         paddingLeft: '1rem',
-        '& > div': {
-          width: 'fit-content',
-          height: 'fit-content',
-          padding: '1.5rem 2rem',
-          borderRadius: '1rem',
-          color: theme.palette.newBlue,
-          border: `1px solid ${theme.palette.newBlue}`,
-          boxShadow:
-            '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
-          cursor: 'pointer',
-          fontWeight: 600,
-          [theme.breakpoints.down('sm')]: {
-            justifyContent: 'center',
-          },
-          '& svg': {
-            marginRight: '1rem',
-            [theme.breakpoints.down('sm')]: {
-              marginRight: 0,
-            },
-          },
-        },
       },
+    },
+  },
+  copy: {
+    width: 'fit-content',
+    height: 'fit-content',
+    padding: '1.5rem 2rem',
+    borderRadius: '1rem',
+    color: theme.palette.newBlue,
+    border: `1px solid ${theme.palette.newBlue}`,
+    boxShadow:
+      '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
+    cursor: 'pointer',
+    fontWeight: 600,
+    transition: 'box-shadow .1s ease-out',
+    '&:hover': {
+      boxShadow:
+        '0px 4px 14px rgba(14, 108, 218, 0.5), inset 0px 0px 6px #1848C4',
+      transition: 'box-shadow .1s ease-out',
+    },
+    [theme.breakpoints.down('sm')]: {
+      justifyContent: 'center',
+    },
+    '& svg': {
+      marginRight: '1rem',
+      [theme.breakpoints.down('sm')]: {
+        marginRight: 0,
+      },
+    },
+  },
+  copied: {
+    background:
+      'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
+    boxShadow:
+      '0px 4px 14px rgba(14, 108, 218, 0.75), inset 0px 0px 6px rgba(123, 160, 255, 0.7)',
+    color: 'white',
+    '& path': {
+      fill: 'white',
+    },
+    '&:hover': {
+      background:
+        'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
+      boxShadow:
+        '0px 4px 14px rgba(14, 108, 218, 0.75), inset 0px 0px 6px rgba(123, 160, 255, 0.7)',
     },
   },
 });
