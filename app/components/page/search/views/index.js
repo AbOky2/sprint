@@ -222,7 +222,8 @@ const MapsView = withRouter(
           container
           className={clsx(
             classes.mapsViewContainer,
-            isMapsView ? classes.fullMapsViewContainer : ''
+            isMapsView ? classes.fullMapsViewContainer : '',
+            isMdView ? classes.mdMapsViewContainer : ''
           )}
         >
           {!isMapsView && (

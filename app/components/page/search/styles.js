@@ -323,7 +323,7 @@ const styles = (theme) => ({
     },
   },
   mapsViewContainer: {
-    height: 'calc(100vh - 160px)',
+    height: 'calc(100vh - 218px)',
     overflow: 'hidden',
     '& > div': {
       '&:last-of-type': {
@@ -364,6 +364,9 @@ const styles = (theme) => ({
         borderTopLeftRadius: 0,
       },
     },
+  },
+  mdMapsViewContainer: {
+    height: 'calc(100vh - 160px)',
   },
   pagination: {
     marginTop: '1rem',
