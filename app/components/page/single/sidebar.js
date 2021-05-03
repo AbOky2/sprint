@@ -34,29 +34,27 @@ const Sidebar = ({ isLocation, property, classes }) => {
 
   return (
     <div className={classes.extraContainer}>
-      {!isLocation && (
-        <div className={classes.transportations}>
-          <Typography variant="h3">Les transports à proximité :</Typography>
-          <Grid container justify="flex-start">
-            {Object.keys(transportations).map((elem) => (
-              <div key={elem}>
-                <h2 style={{ fontSize: '1rem' }}>
-                  {currIcons.includes(tranportationsKeys[elem]) ? (
-                    <Icon type={tranportationsKeys[elem]} noColor />
-                  ) : (
-                    tranportationsKeys[elem]
-                  )}
-                </h2>
-                <ul>
-                  {transportations[elem].map((e) => (
-                    <li key={e.name}>{e.name}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </Grid>
-        </div>
-      )}
+      <div className={classes.transportations}>
+        <Typography variant="h3">Les transports à proximité :</Typography>
+        <Grid container justify="flex-start">
+          {Object.keys(transportations).map((elem) => (
+            <div key={elem}>
+              <h2 style={{ fontSize: '1rem' }}>
+                {currIcons.includes(tranportationsKeys[elem]) ? (
+                  <Icon type={tranportationsKeys[elem]} noColor />
+                ) : (
+                  tranportationsKeys[elem]
+                )}
+              </h2>
+              <ul>
+                {transportations[elem].map((e) => (
+                  <li key={e.name}>{e.name}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </Grid>
+      </div>
       <div className={classes.extras}>
         <Extras property={property} />
       </div>
