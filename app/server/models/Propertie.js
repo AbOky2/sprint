@@ -63,7 +63,7 @@ const mongoSchema = new Schema({
   phone: { type: String },
   contact: { type: String },
   email: { type: String },
-  transport_lines: { type: String },
+  transportations: { type: Object },
   stations: { type: String },
   property_sub_type: { type: String },
   file: { type: String },
@@ -99,8 +99,7 @@ class PropertieClass extends DBModel {
     page = defaultOffset,
     sort,
   }) {
-    let near = [],
-      $maxDistance = 100000;
+    let near = [];
 
     if (loc) {
       const geo = await maps.geocode({
@@ -110,6 +109,7 @@ class PropertieClass extends DBModel {
       if (geo && geo[0]) near = [geo[0].latitude, geo[0].longitude];
     }
 
+    const $maxDistance = 1000 * 1609.34;
     const query = {
       $and: [
         pieces.length > 0 ? { pieces: { $in: pieces } } : {},
@@ -133,6 +133,7 @@ class PropertieClass extends DBModel {
         { typeOfAnnonce },
       ],
     };
+    console.log(near);
     const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
     const docs = await this.find(query, null, { sort: { price: priceSort } });
     const list = {

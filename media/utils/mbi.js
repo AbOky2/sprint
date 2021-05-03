@@ -14,7 +14,7 @@ const {
 } = require('../helpers/property');
 const PropertieModel = require('../models/Propertie');
 const logger = require('../logs');
-const maps = require('./maps');
+const { getStations, geocoder } = require('./maps');
 const { PROPERTIES_DIR, PUBLIC_PROPERTIES_DIR } = require('../config');
 
 const getPictures = (data) => {
@@ -248,26 +248,37 @@ const readMba = () => {
               }
 
               if (!data) return returnLog(message);
+
               const foundElement = await PropertieModel.findByRef(data.lot_ref);
 
               if (!foundElement || !foundElement._id) {
                 let geo = [];
                 if (data.address)
-                  geo = await maps.geocode({
+                  geo = await geocoder.geocode({
                     address: data.address,
                     zipcode: data.postal,
                     countryCode: 'fr',
                   });
 
                 if (geo && geo[0] && geo[0].formattedAddress) {
-                  data.fullAddress = geo[0].formattedAddress;
+                  const {
+                    longitude: lng,
+                    latitude: lat,
+                    formattedAddress,
+                  } = geo[0];
+                  data.fullAddress = formattedAddress;
                   data.loc = {
                     type: 'Point',
-                    coordinates: [geo[0].latitude, geo[0].longitude],
+                    coordinates: [lng, lat],
                   };
+                  const transportations = await getStations({
+                    lng,
+                    lat,
+                  });
                   if (message) data.available = false;
                   else data.available = true;
                   data.unavalableReason = message;
+                  data.transportations = transportations;
                   await PropertieModel.add(data);
                   logger.info(
                     `${i}, 'added'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`
@@ -284,6 +295,13 @@ const readMba = () => {
                 if (message) data.available = false;
                 else data.available = true;
                 data.unavalableReason = message;
+                if (foundElement.loc.coordinates) {
+                  const transportations = await getStations({
+                    lng: foundElement.loc.coordinates[0],
+                    lat: foundElement.loc.coordinates[1],
+                  });
+                  data.transportations = transportations;
+                }
                 await PropertieModel.updateById(foundElement._id, data);
                 logger.info(
                   `${i}, 'updated'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`

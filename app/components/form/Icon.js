@@ -15,6 +15,7 @@ const SIZES = {
 const ICON_COLORS = {
   ...shared.colors,
   gray: 'gray',
+  initial: 'inherit',
 };
 
 export const iconTypes = Object.keys(icons);
@@ -25,18 +26,26 @@ const useStyles = makeStyles({
     display: 'inline-block',
     verticalAlign: 'middle',
     '& path': {
-      fill: (props) => props.fill,
-      stroke: (props) => props.stroke,
+      fill: ({ noColor, fill }) => (!noColor ? fill : ''),
+      stroke: ({ noColor, stroke }) => (!noColor ? stroke : ''),
     },
   },
 });
 
-const Icon = ({ type, color, size, customSize, strokeColor, rotate }) => {
+const Icon = ({
+  type,
+  color,
+  size,
+  customSize,
+  strokeColor,
+  rotate,
+  noColor = false,
+}) => {
   const SvgIcon = icons[type];
   const svgSize = SIZES[size];
   const fill = ICON_COLORS[color] ?? color;
   const stroke = ICON_COLORS[strokeColor] ?? color;
-  const classes = useStyles({ fill, stroke });
+  const classes = useStyles({ fill, stroke, noColor });
 
   return (
     <SvgIcon
@@ -63,6 +72,7 @@ Icon.propTypes = {
   }),
   strokeColor: PropTypes.string,
   rotate: PropTypes.string,
+  noColor: PropTypes.bool,
 };
 Icon.defaultProps = {
   color: 'primary',
@@ -70,6 +80,7 @@ Icon.defaultProps = {
   customSize: undefined,
   strokeColor: undefined,
   rotate: undefined,
+  noColor: false,
 };
 
 export default Icon;

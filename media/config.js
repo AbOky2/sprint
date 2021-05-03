@@ -11,6 +11,7 @@ const {
   FTP_HOST,
   FTP_USER,
   FTP_PASSWORD,
+  HERE_API_KEY,
 } = process.env;
 
 const PORT = process.env.PORT || 3001;
@@ -33,4 +34,5 @@ module.exports = {
   FTP_PASSWORD,
   PROPERTIES_DIR,
   PUBLIC_PROPERTIES_DIR,
+  HERE_API_KEY,
 };

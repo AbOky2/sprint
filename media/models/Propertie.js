@@ -55,7 +55,7 @@ const mongoSchema = new Schema({
   phone: { type: String },
   contact: { type: String },
   email: { type: String },
-  transport_lines: { type: String },
+  transportations: { type: Object },
   stations: { type: String },
   property_sub_type: { type: String },
   file: { type: String },

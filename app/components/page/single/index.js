@@ -190,10 +190,6 @@ const PropertyPage = ({
 
         <Grid container className={classes.discoveryContainer}>
           <Typography variant="h2">
-            {/* {`${total} logements${isLocation ? '' : '  neufs disponibles '}${
-              isLocation ? ' disponibles à la location' : "à l'achat"
-            } dans cette résidence :`} */}
-
             {!isLocation
               ? `${total} logement${total > 1 ? 's' : ''} ${
                   total > 1 ? 'neufs disponibles' : 'neuf disponible'

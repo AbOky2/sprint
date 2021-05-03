@@ -210,6 +210,23 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  transportations: {
+    '& > div ': {
+      textAlign: 'center',
+      marginBottom: 0,
+      '& svg': {
+        marginRight: '0!important',
+      },
+      '& ul': {
+        margin: 0,
+        listStyle: 'none',
+        padding: 0,
+        '& li': {
+          marginBottom: '.5rem',
+        },
+      },
+    },
+  },
   extraInfo: {
     '& > div': {
       boxSizing: 'border-box',

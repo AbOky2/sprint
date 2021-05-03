@@ -16,6 +16,22 @@ const propertyPieces = {
   5: '5 pièces',
   3: '3 pièces',
 };
+const tranportationsKeys = {
+  1: 'ter',
+  2: 'metro',
+  3: 'metro',
+  4: 'ferry',
+  5: 'bus',
+  7: 'metro',
+  8: 'tramway',
+  9: 'ter',
+  10: 'ter',
+  11: 'bus',
+  12: 'train',
+  13: 'bus',
+  14: 'tgv',
+};
+
 const typeOfAnnoncies = Object.values(typeOfAnnonciesObj);
 const typeOfProperties = ['Appartement', 'Maison'];
 const sortByKeys = Object.keys(sortByObj);
@@ -48,6 +64,7 @@ module.exports = {
   propertyPiecesKeys,
   propertyPiecesSelectMap,
   defaultPropertyImg,
+  tranportationsKeys,
   getAddress,
   getNbPieces,
   getCardImg,
