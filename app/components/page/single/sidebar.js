@@ -40,7 +40,7 @@ const Sidebar = ({ isLocation, property, classes }) => {
           <Grid container justify="flex-start">
             {Object.keys(transportations).map((elem) => (
               <div key={elem}>
-                <h2>
+                <h2 style={{ fontSize: '1rem' }}>
                   {currIcons.includes(tranportationsKeys[elem]) ? (
                     <Icon type={tranportationsKeys[elem]} noColor />
                   ) : (
