@@ -326,11 +326,16 @@ const styles = (theme) => ({
     height: 'calc(100vh - 218px)',
     overflow: 'hidden',
     '& > div': {
+      '&:first-of-type': {
+        maxWidth: 550,
+      },
       '&:last-of-type': {
         position: 'sticky',
         top: 0,
         minHeight: '80vh',
         maxHeight: '100vh',
+        maxWidth: '100%',
+        flexGrow: 1,
         '& > div': {
           zIndex: 3,
           '&:first-of-type': {
