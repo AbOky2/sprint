@@ -37,7 +37,7 @@ const Sidebar = ({ isLocation, property, classes }) => {
       {!isLocation && (
         <div className={classes.transportations}>
           <Typography variant="h3">Les transports à proximité :</Typography>
-          <Grid container justify="space-around">
+          <Grid container justify="flex-start">
             {Object.keys(transportations).map((elem) => (
               <div key={elem}>
                 <h2>
