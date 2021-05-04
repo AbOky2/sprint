@@ -155,8 +155,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   extraContainer: {
+    paddingTop: '2.5rem',
     '& > div': {
-      marginTop: '2.4rem',
+      marginTop: '2rem',
       boxSizing: 'border-box',
       padding: 32,
       background: '#F4F5F7',
@@ -286,7 +287,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   mapContainer: {
-    marginTop: '1.6rem',
+    marginTop: '2.5rem',
     borderRadius: '2.5rem',
     overflow: 'hidden',
     '& > div': {

@@ -90,7 +90,11 @@ const useStyles = makeStyles((theme) => ({
       color: '#ffffff',
     },
   },
-  // listContainer: theme.ui.listContainer,
+  listContainer: {
+    '& > a > div': {
+      border: '1px solid #F4F5F7',
+    },
+  },
 }));
 const BookmarkPage = ({ user, update }) => {
   const [state, setState] = useState(user?.bookmarks);
@@ -100,7 +104,7 @@ const BookmarkPage = ({ user, update }) => {
     addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
   };
   return (
-    <AdminContentWrapper noRedirect>
+    <AdminContentWrapper noRedirect mobilePadding>
       <div>
         <Typography variant="h1" className={classes.title}>
           Vos favoris

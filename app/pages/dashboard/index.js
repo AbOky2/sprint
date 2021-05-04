@@ -262,7 +262,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
     <Typography variant="h2" className={classes.customH2}>
       Les services Kit le nid
     </Typography>
-    <Typography variant="subtitle1" className={classes.partnerDescription}>
+    <Typography className={classes.partnerDescription}>
       Kit le nid vous propose un ensemble de services complémentaires négociés
       <br /> avec nos partenaires
       {isYoungWorker(user)

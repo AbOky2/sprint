@@ -239,14 +239,12 @@ a[href^="https://maps.google.com/maps"]
   display: none;
 }
 .gm-bundled-control {
-  display: none;
   top: 50px;
   bottom: initial;
 }
 .gm-fullscreen-control,
 .gmnoprint div {
-  display: none;
-  background-color: #f7f8fa !important;
+  background-color: hsl(220, 23%, 97%) !important;
 }
 .slick-list {
   border-radius: 1rem;
@@ -258,6 +256,6 @@ a[href^="https://maps.google.com/maps"]
 @media screen and (max-width: 640px) {
   .gm-fullscreen-control,
   .gmnoprint div {
-    display: none !important;
+    background-color: hsl(220deg 23% 97% / 54%) !important;
   }
 }

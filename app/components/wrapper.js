@@ -49,29 +49,48 @@ const styles = (theme) => ({
     padding: 0,
   },
   redirectStyle: redirectStyle(theme),
+  mobilePadding: {
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: '1rem',
+    },
+  },
 });
 
 const AdminContentWrapper = withStyles(styles)(
-  withRouter(({ classes, router, href, noRedirect, noPadding, children }) => (
-    <Grid
-      className={clsx(classes.container, noPadding ? classes.noPadding : '')}
-    >
-      {noRedirect ? (
-        ''
-      ) : (
-        <div
-          className={classes.redirectStyle}
-          onClick={(e) => {
-            if (href) router.push(href);
-            else router.back();
-          }}
-        >
-          <Typography variant="h4">Retour</Typography>
-        </div>
-      )}
-      {children}
-    </Grid>
-  ))
+  withRouter(
+    ({
+      classes,
+      router,
+      href,
+      noRedirect,
+      noPadding,
+      mobilePadding,
+      children,
+    }) => (
+      <Grid
+        className={clsx(
+          classes.container,
+          noPadding ? classes.noPadding : '',
+          mobilePadding ? classes.mobilePadding : ''
+        )}
+      >
+        {noRedirect ? (
+          ''
+        ) : (
+          <div
+            className={classes.redirectStyle}
+            onClick={(e) => {
+              if (href) router.push(href);
+              else router.back();
+            }}
+          >
+            <Typography variant="h4">Retour</Typography>
+          </div>
+        )}
+        {children}
+      </Grid>
+    )
+  )
 );
 
 export { AdminContentWrapper, redirectStyle };
