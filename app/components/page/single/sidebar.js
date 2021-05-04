@@ -1,7 +1,7 @@
 import { openPopupWidget } from 'react-calendly';
 import { Grid, Typography } from '@material-ui/core';
 import { Icon, Btn } from 'components/form';
-import { tranportationsKeys } from 'helpers/property';
+import { tranportationsKeys, individualAdvantages } from 'helpers/property';
 
 const BtnCalendly = () => (
   <Btn
@@ -11,53 +11,59 @@ const BtnCalendly = () => (
   />
 );
 
-const Extras = ({ property }) =>
-  property.advantages?.length ? (
-    <>
-      <Typography variant="h3">Les petits plus :</Typography>
-      <Grid container>
-        {property.advantages?.map((elem) => (
-          <Grid key={elem} container item alignItems="center">
-            <Icon type="elevator" color="newBlue" />
-            <Typography>{elem}</Typography>
-          </Grid>
-        ))}
-      </Grid>
-    </>
-  ) : (
-    ''
-  );
-
+const Extras = ({ advantages = [] }) => (
+  <>
+    <Typography variant="h3">Les petits plus :</Typography>
+    <Grid container>
+      {advantages.map((elem) => (
+        <Grid key={elem} container item alignItems="center">
+          <Icon type="elevator" color="newBlue" />
+          <Typography>{elem}</Typography>
+        </Grid>
+      ))}
+    </Grid>
+  </>
+);
 const currIcons = ['bus', 'train', 'rer', 'tramway', 'metro'];
 const Sidebar = ({ isLocation, property, classes }) => {
   const transportations = property.transportations || {};
+  const advantages =
+    property.advantages?.filter((e) => !individualAdvantages.includes(e)) || [];
 
   return (
     <div className={classes.extraContainer}>
-      <div className={classes.transportations}>
-        <Typography variant="h3">Les transports à proximité :</Typography>
-        <Grid container justify="flex-start">
-          {Object.keys(transportations).map((elem) => (
-            <div key={elem}>
-              <h2 style={{ fontSize: '1rem' }}>
-                {currIcons.includes(tranportationsKeys[elem]) ? (
-                  <Icon type={tranportationsKeys[elem]} noColor />
-                ) : (
-                  tranportationsKeys[elem]
-                )}
-              </h2>
-              <ul>
-                {transportations[elem].map((e) => (
-                  <li key={e.name}>{e.name}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </Grid>
-      </div>
-      <div className={classes.extras}>
-        <Extras property={property} />
-      </div>
+      {Object.keys(transportations).length ? (
+        <div className={classes.transportations}>
+          <Typography variant="h3">Les transports à proximité :</Typography>
+          <Grid container justify="flex-start">
+            {Object.keys(transportations).map((elem) => (
+              <div key={elem}>
+                <h2 style={{ fontSize: '1rem' }}>
+                  {currIcons.includes(tranportationsKeys[elem]) ? (
+                    <Icon type={tranportationsKeys[elem]} noColor />
+                  ) : (
+                    tranportationsKeys[elem]
+                  )}
+                </h2>
+                <ul>
+                  {transportations[elem].map((e) => (
+                    <li key={e.name}>{e.name}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </Grid>
+        </div>
+      ) : (
+        ''
+      )}
+      {advantages.length ? (
+        <div className={classes.extras}>
+          <Extras advantages={advantages} />
+        </div>
+      ) : (
+        ''
+      )}
       {isLocation && (
         <div className={classes.fees}>
           <Typography variant="h3">Frais à prévoir :</Typography>

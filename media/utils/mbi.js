@@ -75,6 +75,7 @@ const getExtraInfo = (annonce = {}, lotList = []) => {
       return elem;
     });
   data.pieces = pieces;
+
   return data;
 };
 
@@ -295,13 +296,6 @@ const readMba = () => {
                 if (message) data.available = false;
                 else data.available = true;
                 data.unavalableReason = message;
-                if (foundElement.loc.coordinates) {
-                  const transportations = await getStations({
-                    lng: foundElement.loc.coordinates[0],
-                    lat: foundElement.loc.coordinates[1],
-                  });
-                  data.transportations = transportations;
-                }
                 await PropertieModel.updateById(foundElement._id, data);
                 logger.info(
                   `${i}, 'updated'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`

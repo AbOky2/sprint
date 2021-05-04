@@ -48,6 +48,14 @@ const tranportationsKeys = {
   3: 'Subway',
   7: 'Metro',
 };
+const individualAdvantages = [
+  'Local deux roues',
+  'Câble TV',
+  'Exclusivité',
+  'WC séparés',
+  'Terrasse',
+  'Balcon',
+];
 
 const typeOfAnnoncies = Object.values(typeOfAnnonciesObj);
 const typeOfProperties = ['Appartement', 'Maison'];
@@ -85,4 +93,5 @@ module.exports = {
   getAddress,
   getNbPieces,
   getCardImg,
+  individualAdvantages,
 };

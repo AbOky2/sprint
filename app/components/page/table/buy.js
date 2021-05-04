@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { spaceCurrency } from 'helpers/convertAndCheck';
 import { Icon, Btn } from 'components/form';
+import { individualAdvantages } from 'helpers/property';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import styles from './styles';
 
@@ -117,6 +118,9 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 const parking = curr.nb_parking
                   ? `${curr.nb_parking} inclus`
                   : '-';
+                const advantages = curr.advantages
+                  ?.filter((e) => individualAdvantages.includes(e))
+                  .join(', ');
 
                 return (
                   <Grid
@@ -182,9 +186,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                         {parking}
                       </Grid>
                       <Grid item md={2} xs={2} className="text-center">
-                        {curr.advantages.length
-                          ? curr.advantages.join(', ')
-                          : '-'}
+                        {advantages.length ? advantages : '-'}
                       </Grid>
                       <Grid item md={2} xs={2} className={classes.btnContainer}>
                         <Btn
