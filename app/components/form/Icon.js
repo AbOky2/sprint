@@ -8,6 +8,7 @@ const SIZES = {
   tiny: 10,
   small: 16,
   medium: 24,
+  middle: 41,
   large: 48,
   nearBig: 52,
   big: 67,

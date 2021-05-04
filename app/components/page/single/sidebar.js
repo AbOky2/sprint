@@ -24,7 +24,7 @@ const Extras = ({ advantages = [] }) => (
     </Grid>
   </>
 );
-const currIcons = ['bus', 'train', 'rer', 'tramway', 'metro'];
+const currIcons = ['bus', 'rer', 'tramway', 'metro'];
 const Sidebar = ({ isLocation, property, classes }) => {
   const transportations = property.transportations || {};
   const advantages =
@@ -42,7 +42,11 @@ const Sidebar = ({ isLocation, property, classes }) => {
                 <div key={elem}>
                   <h2 style={{ fontSize: '1rem' }}>
                     {currIcons.includes(tranportationsKeys[elem]) ? (
-                      <Icon type={tranportationsKeys[elem]} noColor size="41" />
+                      <Icon
+                        type={tranportationsKeys[elem]}
+                        noColor
+                        size="middle"
+                      />
                     ) : (
                       tranportationsKeys[elem]
                     )}
