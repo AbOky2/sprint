@@ -1,5 +1,6 @@
 /* eslint-disable react/no-danger */
 import React, { useState, useEffect } from 'react';
+import AnchorLink from 'react-anchor-link-smooth-scroll';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid, Typography } from '@material-ui/core';
@@ -102,7 +103,7 @@ const PropertyPage = ({
           <Grid item md={6}>
             <Typography variant="h1">{property.heading}</Typography>
             <Typography>{property.fullAddress}</Typography>
-            <a href="#table" className="inline-block">
+            <AnchorLink href="#table" className="inline-block">
               <Typography className={classes.totalAvailable}>
                 {!isLocation
                   ? `${total} logement${total > 1 ? 's' : ''} disponible${
@@ -112,7 +113,7 @@ const PropertyPage = ({
                       total > 1 ? 's' : ''
                     } dans cette résidence`}
               </Typography>
-            </a>
+            </AnchorLink>
             <div className={classes.houseInfo}>
               <Grid container>
                 <div>
@@ -149,9 +150,9 @@ const PropertyPage = ({
             )}
             <div className={classes.phoneContainer}>
               {isLocation ? (
-                <a href="#table" className={classes.anchorLink}>
+                <AnchorLink href="#table" className={classes.anchorLink}>
                   Déposer mon dossier
-                </a>
+                </AnchorLink>
               ) : (
                 <BtnCalendly />
               )}

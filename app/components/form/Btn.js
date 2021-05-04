@@ -14,6 +14,9 @@ const btnHover = {
       boxShadow: '0px 5px 20px rgba(6, 39, 79, 0.5), inset 0px 1px 6px #1848C4',
       transition: 'background .1s ease-out, box-shadow .1s ease-out',
     },
+    '&:focus': {
+      color: 'white',
+    },
   },
   white: {
     '&:hover': {
