@@ -40,7 +40,7 @@ const Sidebar = ({ isLocation, property, classes }) => {
               <div key={elem}>
                 <h2 style={{ fontSize: '1rem' }}>
                   {currIcons.includes(tranportationsKeys[elem]) ? (
-                    <Icon type={tranportationsKeys[elem]} noColor />
+                    <Icon type={tranportationsKeys[elem]} noColor size="41" />
                   ) : (
                     tranportationsKeys[elem]
                   )}

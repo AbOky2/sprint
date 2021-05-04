@@ -51,7 +51,7 @@ const styles = (theme) => ({
   redirectStyle: redirectStyle(theme),
   mobilePadding: {
     [theme.breakpoints.down('sm')]: {
-      paddingTop: '1rem',
+      paddingTop: '2rem',
     },
   },
 });
