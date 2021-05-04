@@ -7,7 +7,7 @@ const helmet = require('helmet');
 const { SESSION_SECRET, SESSION_NAME, COOKIE_DOMAIN } = require('../../config');
 
 module.exports = (server, express) => {
-  const limit = '1kb';
+  const limit = '2MB';
   const MongoStore = mongoSessionStore(session);
   const sess = {
     name: SESSION_NAME,
