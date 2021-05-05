@@ -119,27 +119,30 @@ const useStyles = makeStyles((theme) => ({
       '& > div': {
         padding: '1.5rem 0rem',
         width: '100%',
-        [theme.breakpoints.down('md')]: {
+
+        '& > div': {
+          '&:last-of-type': {
+            paddingRight: '0!important',
+          },
+          '& p': {
+            maxWidth: '60px',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            marginRight: '2rem',
+            paddingRight: '0!important',
+          },
+          '& > svg:last-of-type': {
+            right: '-2rem',
+          },
+        },
+        [theme.breakpoints.down('sm')]: {
           padding: '1.5rem 2.4rem',
           '& > div': {
             paddingRight: '2rem!important',
             '& p': {
               maxWidth: 'initial!important',
             },
-          },
-        },
-        '& > div': {
-          paddingRight: 0,
-          '& p': {
-            maxWidth: 65,
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-            marginRight: '2rem',
-            paddingRight: '0',
-          },
-          '& > svg:last-of-type': {
-            right: '-2rem',
           },
         },
       },
