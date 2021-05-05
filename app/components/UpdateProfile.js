@@ -149,9 +149,7 @@ const UpdateProfile = ({
           onClick={toggleShowSubMenu}
         >
           <Icon type="user" />
-          <Typography className={classes.userName}>
-            {text ? text : state?.firstName}
-          </Typography>
+          <Typography className={classes.userName}>Mon profil</Typography>
           <Icon type="sliderArrow" size="small" />
         </Grid>
       </div>

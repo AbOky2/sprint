@@ -125,10 +125,6 @@ const useStyles = makeStyles((theme) => ({
             paddingRight: '0!important',
           },
           '& p': {
-            maxWidth: '60px',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
             marginRight: '2rem',
             paddingRight: '0!important',
           },
