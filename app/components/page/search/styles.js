@@ -325,6 +325,7 @@ const styles = (theme) => ({
   mapsViewContainer: {
     height: 'calc(100vh - 218px)',
     overflow: 'hidden',
+    flexFlow: 'initial',
     '& > div': {
       '&:first-of-type': {
         maxWidth: 550,

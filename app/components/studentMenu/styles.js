@@ -97,6 +97,9 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
       '& > div': {
         paddingLeft: '2rem',
+        '& > span': {
+          paddingLeft: 0,
+        },
       },
       '& a': {
         ...theme.typography.body1,
@@ -107,10 +110,38 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     '& > div:nth-child(2)': {
-      marginRight: '2rem',
+      marginRight: 0,
+      paddingLeft: '2rem',
+      [theme.breakpoints.down('md')]: {
+        paddingLeft: 0,
+      },
+
       '& > div': {
-        padding: '1.5rem 2.4rem',
+        padding: '1.5rem 0rem',
         width: '100%',
+        [theme.breakpoints.down('md')]: {
+          padding: '1.5rem 2.4rem',
+          '& > div': {
+            paddingRight: '2rem!important',
+            '& p': {
+              maxWidth: 'initial!important',
+            },
+          },
+        },
+        '& > div': {
+          paddingRight: 0,
+          '& p': {
+            maxWidth: 65,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            marginRight: '2rem',
+            paddingRight: '0',
+          },
+          '& > svg:last-of-type': {
+            right: '-2rem',
+          },
+        },
       },
       '& svg': {
         marginRight: '1.5rem',
