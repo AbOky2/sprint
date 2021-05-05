@@ -265,7 +265,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
     <Typography className={classes.partnerDescription}>
       Kit le nid vous propose un ensemble de services complémentaires négociés
       <br /> avec nos partenaires
-      {isYoungWorker(user)
+      {!isYoungWorker(user)
         ? ' pour mieux vous accompagner pendant vos études.'
         : '.'}
     </Typography>
