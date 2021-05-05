@@ -51,6 +51,7 @@ export const StudentMenuComp = connect(
       fullContentWidth,
       noHeaderMargin,
       classes,
+      cookieConsent = {},
     }) => (
       <Grid container className="admin-container student-container">
         <Grid container item className="content">
@@ -67,11 +68,17 @@ export const StudentMenuComp = connect(
                 logout={logout}
                 update={update}
                 noHeaderMargin={noHeaderMargin}
+                cookieConsent={cookieConsent}
               />
             </Hidden>
           </Grid>
           <Hidden mdUp>
-            <MobileMenu user={user} logout={logout} update={update} />
+            <MobileMenu
+              user={user}
+              logout={logout}
+              update={update}
+              cookieConsent={cookieConsent}
+            />
           </Hidden>
           <Container
             maxWidth={fullContentWidth ? false : 'lg'}

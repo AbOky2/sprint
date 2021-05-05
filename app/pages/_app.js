@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import PropTypes from 'prop-types';
@@ -37,8 +37,10 @@ const propTypes = {
 };
 
 const MyApp = ({ Component, pageProps }) => {
+  const [cookieConsent, setCookieConsent] = useState({});
   const store = useStore((state) => state);
 
+  const cookieConsentReady = (data) => setCookieConsent(data);
   useEffect(() => {
     return () => {
       const jssStyles = document.querySelector('#jss-server-side');
@@ -47,6 +49,7 @@ const MyApp = ({ Component, pageProps }) => {
       }
     };
   }, []);
+
   return (
     <ThemeProvider theme={theme}>
       {/* ThemeProvider makes the theme available down the React tree thanks to React context. */}
@@ -54,12 +57,12 @@ const MyApp = ({ Component, pageProps }) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <CookieConsent />
+      <CookieConsent onReady={cookieConsentReady} />
       <CssBaseline />
       <div className="main-container">
         <PersistGate persistor={store.__persistor}>
           {!pageProps.user?.isAdmin ? null : <Header {...pageProps} />}
-          <Component {...pageProps} />
+          <Component {...pageProps} cookieConsent={cookieConsent} />
         </PersistGate>
       </div>
       <Notifier />

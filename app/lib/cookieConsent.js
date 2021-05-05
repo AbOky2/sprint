@@ -12,12 +12,13 @@ const didomiConfig = {
     position: 'bottom',
   },
 };
-export default () => (
+export default ({ onReady }) => (
   <DidomiSDK
     config={didomiConfig}
     apiKey="923bcadb-dc92-44c8-b6eb-1dc9fe53085d"
     iabVersion={2}
     sdkPath="https://sdk.privacy-center.org/"
     gdprAppliesGlobally
+    onReady={onReady}
   />
 );

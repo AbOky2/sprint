@@ -67,7 +67,7 @@ export default function withAuth(
     }
 
     render() {
-      const { user } = this.props;
+      const { user, cookieConsent = {} } = this.props;
 
       if (loginRequired && !logoutRequired && !user) {
         return null;
@@ -96,6 +96,7 @@ export default function withAuth(
             user={user}
             fullContentWidth={fullContentWidth}
             noHeaderMargin={noHeaderMargin}
+            cookieConsent={cookieConsent}
           >
             <BaseComponent {...this.props} />
           </StudentMenuComp>

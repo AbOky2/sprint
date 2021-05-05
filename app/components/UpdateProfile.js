@@ -82,13 +82,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateProfile = ({ text, user, update, logout, transparent }) => {
+const UpdateProfile = ({
+  text,
+  user,
+  update,
+  logout,
+  transparent,
+  cookieConsent,
+}) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState(user);
   const handleChange = (name) => ({ target: { value } }) =>
     setState({ ...state, [name]: value });
   const handleOpenModal = () => setOpenModal(true);
+  const handleResetCookieConsent = () => cookieConsent?.notice?.show();
   const toggleShowSubMenu = () => setShowSubMenu(!showSubMenu);
   const handleModalClose = (showMessage = false) => {
     const hasUpdate =
@@ -120,7 +128,7 @@ const UpdateProfile = ({ text, user, update, logout, transparent }) => {
             Déconnexion
           </div>
           <div onClick={handleOpenModal}>Modifier vos informations</div>
-          <div onClick={handleOpenModal}>Gestion des cookies</div>
+          <div onClick={handleResetCookieConsent}>Gestion des cookies</div>
         </div>
         <Grid
           container
