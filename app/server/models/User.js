@@ -357,7 +357,13 @@ class UserClass extends DBModel {
       $or: [{ email: options.email }, { phone: options.phone }],
     });
     if (existingUser) {
-      throw new Error('Cet email est déjà associé à un compte');
+      throw new Error(
+        `${
+          existingUser.email === options.email
+            ? 'Cet email'
+            : 'Ce numéro de téléphone'
+        } est déjà associé à un compte`
+      );
     }
 
     user = (await this.add(options)).user;

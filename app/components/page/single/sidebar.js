@@ -40,7 +40,7 @@ const Sidebar = ({ isLocation, property, classes }) => {
               .sort((a, b) => a < b)
               .map((elem) => (
                 <div key={elem}>
-                  <h2 style={{ fontSize: '1rem' }}>
+                  <h2>
                     {currIcons.includes(tranportationsKeys[elem]) ? (
                       <Icon
                         type={tranportationsKeys[elem]}

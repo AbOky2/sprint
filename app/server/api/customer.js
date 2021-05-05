@@ -33,7 +33,6 @@ router.put(
     async ({ user: sessUser, body } = {}) => {
       const data = { ...body };
       try {
-        // if (data.phone) {data.phone = sms.check(data.phone);}
         const { user } = await UserModel.updateById(sessUser._id, data);
         return { user };
       } catch (error) {
@@ -48,11 +47,7 @@ router.post(
   handleErrors(async ({ user, body }, res) => {
     try {
       await sendSponsorship({ sender: user, receiver: body });
-      // await sms.messages.create({
-      //   body: `${user.firstName} ${user.lastName} send you a sponsorhip code: ${user.slug}`,
-      //   from: '+33645100284',
-      //   to: '+33645100284',
-      // });
+
       res.json({ user });
     } catch (error) {
       console.log(error);

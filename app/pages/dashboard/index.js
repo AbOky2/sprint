@@ -228,7 +228,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
                   <Typography className={classes.whiteColor}>
                     {isYoungWorker(user)
                       ? 'Un parcours simplifié 100% digital.'
-                      : 'Vous ne révez pas ! Réservez votre logement dès votre dernière année d’étude.'}
+                      : 'Vous ne rêvez pas ! Réservez votre logement dès votre dernière année d’étude.'}
                   </Typography>
                   <Icon type="arrow" color="white" />
                 </Grid>

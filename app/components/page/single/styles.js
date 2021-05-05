@@ -216,6 +216,13 @@ const useStyles = makeStyles((theme) => ({
       '& > div': {
         textAlign: 'center',
         marginBottom: 0,
+        '& h2': {
+          fontSize: '1rem',
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: '1.4rem',
+          minHeight: 41,
+        },
         '& svg': {
           marginRight: '0!important',
         },
