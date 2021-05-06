@@ -210,10 +210,13 @@ const styles = (theme) => ({
     '& > div': {
       width: 'fit-content',
       cursor: 'pointer',
+      '&:first-of-type': {
+        padding: '.8rem 1.6rem',
+      },
       '&:nth-child(2)': {
         margin: '1.3rem auto 0',
         background: theme.palette.newBlue,
-        padding: '1rem 1.7rem',
+        padding: '.8rem 1.6rem',
         borderRadius: '1rem',
         boxShadow:
           '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
