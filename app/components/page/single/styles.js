@@ -212,6 +212,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   transportations: {
+    position: 'relative',
     '& > div ': {
       '& > div': {
         textAlign: 'center',
@@ -220,22 +221,42 @@ const useStyles = makeStyles((theme) => ({
           fontSize: '1rem',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
           fontSize: '1.4rem',
           minHeight: 41,
         },
         '& svg': {
           marginRight: '0!important',
         },
-        marginRight: '2rem',
         '& ul': {
           margin: 0,
-          listStyle: 'none',
           padding: 0,
+          listStyle: 'none',
+          maxHeight: '20rem',
+          overflow: 'hidden',
           '& li': {
             marginBottom: '.5rem',
           },
         },
       },
+    },
+  },
+  transportationsWithExtra: {
+    '& ul': {
+      maxHeight: 'initial!important',
+    },
+    '& svg': {
+      margin: '0!important',
+    },
+  },
+  transportDisplayMore: {
+    position: 'absolute',
+    bottom: '2rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    cursor: 'pointer',
+    '& > svg': {
+      margin: 'auto 0!important',
     },
   },
   extraInfo: {

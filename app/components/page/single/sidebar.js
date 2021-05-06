@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import clsx from 'clsx';
 import { openPopupWidget } from 'react-calendly';
 import { Grid, Typography } from '@material-ui/core';
 import { Icon, Btn } from 'components/form';
@@ -26,39 +28,65 @@ const Extras = ({ advantages = [] }) => (
 );
 const currIcons = ['bus', 'rer', 'tramway', 'metro'];
 const Sidebar = ({ isLocation, property, classes }) => {
+  const [showExtra, setShowExtra] = useState(false);
   const transportations = property.transportations || {};
   const advantages =
     property.advantages?.filter((e) => !individualAdvantages.includes(e)) || [];
+  const limit = 8;
+  let maxLength = 0;
+
+  const toggleExtra = () => setShowExtra(!showExtra);
 
   return (
     <div className={classes.extraContainer}>
       {Object.keys(transportations).length ? (
-        <div className={classes.transportations}>
+        <div
+          className={clsx(
+            classes.transportations,
+            showExtra ? classes.transportationsWithExtra : ''
+          )}
+        >
           <Typography variant="h3">Les transports à proximité :</Typography>
           <Grid container justify="flex-start">
             {Object.keys(transportations)
               .sort((a, b) => a < b)
-              .map((elem) => (
-                <div key={elem}>
-                  <h2>
-                    {currIcons.includes(tranportationsKeys[elem]) ? (
-                      <Icon
-                        type={tranportationsKeys[elem]}
-                        noColor
-                        size="middle"
-                      />
-                    ) : (
-                      tranportationsKeys[elem]
-                    )}
-                  </h2>
-                  <ul>
-                    {transportations[elem].map((e) => (
-                      <li key={e.name}>{e.name}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+              .map((elem) => {
+                const list = transportations[elem];
+                maxLength = list.length > maxLength ? list.length : maxLength;
+
+                return (
+                  <Grid item key={elem} xs={4}>
+                    <h2>
+                      {currIcons.includes(tranportationsKeys[elem]) ? (
+                        <Icon
+                          type={tranportationsKeys[elem]}
+                          noColor
+                          size="middle"
+                        />
+                      ) : (
+                        tranportationsKeys[elem]
+                      )}
+                    </h2>
+                    <ul>
+                      {list.map((e) => (
+                        <li key={e.name}>{e.name}</li>
+                      ))}
+                    </ul>
+                  </Grid>
+                );
+              })}
           </Grid>
+          {maxLength > limit ? (
+            <div className={classes.transportDisplayMore} onClick={toggleExtra}>
+              <Icon
+                type="sliderArrow"
+                size="small"
+                rotate={showExtra ? '270deg' : '90deg'}
+              />
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       ) : (
         ''

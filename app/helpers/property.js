@@ -42,7 +42,7 @@ const tranportationsKeys = {
   10: 'InterCity',
   1: 'Inter regional train',
   2: 'Light rail',
-  8: 'monorail',
+  8: 'rer',
   13: 'bus',
   9: 'Regional train',
   3: 'rer',
