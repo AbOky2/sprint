@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
   },
   listContainer: {
     '& > a > div': {
-      border: '1px solid #F4F5F7',
+      border: `1px solid ${theme.palette.hoverGray}`,
     },
   },
 }));

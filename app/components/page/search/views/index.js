@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'next/router';
 import clsx from 'clsx';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import MultiMaps from 'components/Maps/MultiMaps';
 import { MapsCarousel } from 'components/Carrousel';
-import { Icon } from 'components/form';
+import { Icon, Checkbox } from 'components/form';
 import { sortByKeys } from 'helpers/property';
-import { ListWrapper, ListElement } from './partials';
 import { defaultLimit } from 'helpers/query';
+import { ListWrapper, ListElement } from './partials';
 import withStyles from '../styles';
 
 const ListContainer = ({
@@ -63,9 +63,13 @@ const MapsContainer = ({
   liked,
   allData,
   isMdView,
+  reloadMaps,
+  refresh,
   queryData,
   isMapsView,
   toggleView,
+  toggleReloadMaps,
+  toggleRefresh,
   index,
   handleBookmark,
   handleChildClick,
@@ -78,10 +82,13 @@ const MapsContainer = ({
       queryData={queryData}
       pageList={pageList}
       curr={curr}
-      handleChildClick={handleChildClick}
       isMobile={isMdView}
-      handlePointChange={handlePointChange}
       liked={liked}
+      reloadMaps={reloadMaps}
+      refresh={refresh}
+      toggleRefresh={toggleRefresh}
+      handleChildClick={handleChildClick}
+      handlePointChange={handlePointChange}
       handleBookmark={handleBookmark}
     />
     <Grid container className={classes.changeViewContainer}>
@@ -94,6 +101,23 @@ const MapsContainer = ({
           rotate={isMapsView ? '0' : '180deg'}
         />
       </div>
+    </Grid>
+    <Grid container className={classes.reloadMapsContainer} direction="column">
+      <Checkbox
+        checked={reloadMaps}
+        bordered
+        cornered
+        label="Actualiser quand je déplace la carte"
+        onChange={toggleReloadMaps}
+      />
+      {!reloadMaps ? (
+        <Grid container alignItems="center" onClick={() => toggleRefresh(true)}>
+          <Icon type="refresh" size="small" color="white" />
+          <Typography>Rafraichir</Typography>
+        </Grid>
+      ) : (
+        ''
+      )}
     </Grid>
     {isMdView && (
       <Grid container>
@@ -147,7 +171,8 @@ const MapsView = withRouter(
         coor: e.loc?.coordinates,
       }));
       const [curr, setCurr] = useState(null);
-      // const [scrollToBottom, setScrollToBottom] = useState(false);
+      const [reloadMaps, setReloadMaps] = useState(false);
+      const [refresh, setRefresh] = useState(false);
       const [carrouselIndex, setCarrouselIndex] = useState(0);
       const getChildPostion = () => {
         const bounds = document
@@ -164,6 +189,8 @@ const MapsView = withRouter(
           isLeft: bounds.width / 2 < bounds.width - x,
         };
       };
+      const toggleRefresh = (refresh) => setRefresh(refresh);
+      const toggleReloadMaps = (reloadMaps) => setReloadMaps(!!reloadMaps);
       const handleChildClick = (id) => {
         const currIndex = locs.findIndex((e) => id?.includes(e._id));
         const found = data[currIndex];
@@ -196,18 +223,7 @@ const MapsView = withRouter(
           undefined,
           { shallow: true }
         );
-        // setScrollToBottom(true);
       };
-
-      // useEffect(() => {
-      //   if (scrollToBottom) {
-      //     const scrollElement = document.getElementById(
-      //       'listViewScrollContainer'
-      //     );
-      //     scrollElement.scrollTop = scrollElement.scrollHeight;
-      //     setScrollToBottom(false);
-      //   }
-      // }, [scrollToBottom]);
       useEffect(
         () =>
           setPage({
@@ -260,6 +276,8 @@ const MapsView = withRouter(
             queryData={queryData}
             isMapsView={isMapsView}
             isMdView={isMdView}
+            reloadMaps={reloadMaps}
+            refresh={refresh}
             pageList={page?.pageList?.map((e) => e._id)}
             curr={curr}
             handleChildClick={handleChildClick}
@@ -267,6 +285,8 @@ const MapsView = withRouter(
             handlePointChange={handlePointChange}
             liked={liked}
             toggleView={toggleView}
+            toggleReloadMaps={toggleReloadMaps}
+            toggleRefresh={toggleRefresh}
             handleBookmark={handleBookmark}
           />
         </Grid>

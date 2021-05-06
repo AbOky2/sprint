@@ -15,6 +15,7 @@ export { default as rer } from './rer.svg';
 export { default as bus } from './bus.svg';
 export { default as tramway } from './tramway.svg';
 export { default as metro } from './metro.svg';
+export { default as refresh } from './refresh.svg';
 export { default as sponsorship } from './sponsorship.svg';
 export { default as mobileSponsorship } from './mobile-sponsorship.svg';
 export { default as phone } from './phone.svg';

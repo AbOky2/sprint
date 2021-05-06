@@ -25,8 +25,11 @@ export const GoogleMap = (props) => {
     data: { docs = [], near = [] },
     handlePointChange,
     handleChildClick,
+    toggleRefresh,
     liked,
     handleBookmark,
+    reloadMaps = false,
+    refresh = false,
   } = props;
   const [state, setState] = useState({
     mapOptions: {
@@ -35,6 +38,7 @@ export const GoogleMap = (props) => {
     },
     clusters: [],
     clustersList: [],
+    defaultReload: false,
   });
   const [center, setCenter] = useState(near);
 
@@ -71,30 +75,25 @@ export const GoogleMap = (props) => {
     setState({ ...state, clusters });
   };
 
-  const handleMapChange = ({ center, zoom, bounds }) => {
+  const handleMapChange = ({ center, zoom, bounds }, refresh = false) => {
     const mapOptions = { center, zoom, bounds };
-    setState({ ...state, mapOptions });
+    setState({ ...state, mapOptions, defaultReload: true });
+
+    if (state.defaultReload && !reloadMaps && !refresh) return;
     setTriggerCreateClusters(true);
   };
 
-  // useEffect(() => {
-  //   let newCenter = [];
-
-  //   if (near)
-  //     newCenter = [curr?.loc?.coordinates[1], curr?.loc?.coordinates[0]];
-  //   else newCenter = near;
-  //   // setCenter(newCenter);
-  // }, [near, curr]);
-
-  // useEffect(() => {
-  //   // setTriggerCreateClusters(false);
-  // }, [queryData]);
+  useEffect(() => {
+    if (refresh || reloadMaps) {
+      handleMapChange(state.mapOptions, refresh);
+      toggleRefresh && toggleRefresh(false);
+    }
+  }, [reloadMaps, refresh]);
   useEffect(() => setTriggerCreateClusters(true), [docs]);
   useEffect(() => {
     createClusters(props);
     handlePointChange(state.clusters);
     setTriggerCreateClusters(false);
-    // console.log(state.clusters.length);
   }, [triggerCreateClusters]);
 
   return (

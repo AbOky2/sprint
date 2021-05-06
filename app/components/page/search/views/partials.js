@@ -1,5 +1,3 @@
-import { useState, useEffect, useRef } from 'react';
-// import 'intersection-observer';
 import clsx from 'clsx';
 import { Pagination } from '@material-ui/lab';
 import { Grid, Typography } from '@material-ui/core';
@@ -140,59 +138,29 @@ const ListElement = ({
   showLikes,
   handleMouseEnter,
   handleMouseLeave,
-}) => {
-  // const [isVisible, setVisible] = useState(false);
-  // const [ratio, setRatio] = useState(false);
-  // const domRef = useRef();
-  // useEffect(() => {
-  //   const { current } = domRef;
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       entries.forEach((entry) => {
-  //         // if (entry.intersectionRatio > 0.9) {
-  //         setRatio(entry.intersectionRatio.toFixed(2));
-  //         // console.log(`entry`, entry, `is = ${entry}`);
-  //         setVisible(entry.isIntersecting);
-  //         // console.log(entry);
-  //         // }
-  //       });
-  //     },
-  //     { threshold: [0.9] }
-  //   );
-  //   observer.observe(current);
-  //   return () => observer.unobserve(current);
-  // }, []);
-
-  return (
-    <Grid
-      item
-      className={clsx(className)}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      // ref={domRef}
-      // style={{
-      //   opacity: isVisible ? 1 : ratio - 0.1,
-      //   transform: `scale(${isVisible ? 1 : ratio - 0.1})`,
-      //   transition: 'all 0.1s ease-in-out',
-      // }}
-    >
-      <Link href={singlePath({ typeOfAnnonce, _id })}>
-        <a>
-          <Card
-            _id={_id}
-            title={heading}
-            src={getCardImg(pictures?.[0])}
-            address={getAddress({ city, postal })}
-            description={getNbPieces(minPieces, maxPieces)}
-            dimensions={dimensions}
-            price={price}
-            liked={liked?.includes(_id)}
-            onClick={handleBookmark}
-            showLikes={showLikes}
-          />
-        </a>
-      </Link>
-    </Grid>
-  );
-};
+}) => (
+  <Grid
+    item
+    className={clsx(className)}
+    onMouseEnter={handleMouseEnter}
+    onMouseLeave={handleMouseLeave}
+  >
+    <Link href={singlePath({ typeOfAnnonce, _id })}>
+      <a>
+        <Card
+          _id={_id}
+          title={heading}
+          src={getCardImg(pictures?.[0])}
+          address={getAddress({ city, postal })}
+          description={getNbPieces(minPieces, maxPieces)}
+          dimensions={dimensions}
+          price={price}
+          liked={liked?.includes(_id)}
+          onClick={handleBookmark}
+          showLikes={showLikes}
+        />
+      </a>
+    </Link>
+  </Grid>
+);
 export { ListHeader, ListFooter, ListWrapper, ListElement };

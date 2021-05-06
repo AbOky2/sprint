@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
       width: '100px',
       borderRadius: '100%',
       margin: 'auto',
-      background: '#f4f5f7',
+      background: theme.palette.hoverGray,
       boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
     },
     '& > p': {

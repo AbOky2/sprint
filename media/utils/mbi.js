@@ -37,6 +37,37 @@ const getPictures = (data) => {
   );
   return pictures;
 };
+const getGeoInfo = async (data = {}) => {
+  try {
+    if (!data.address) return false;
+    let geo = await geocoder.geocode({
+      address: data.address,
+      zipcode: data.postal,
+      countryCode: 'fr',
+    });
+    if (!geo || !geo[0] || !geo[0].formattedAddress)
+      geo = await geocoder.geocode({
+        address: data.address,
+        countryCode: 'fr',
+      });
+    if (!geo || !geo[0] || !geo[0].formattedAddress) return false;
+
+    const { longitude: lng, latitude: lat, formattedAddress } = geo[0];
+
+    data.fullAddress = formattedAddress;
+    data.loc = {
+      type: 'Point',
+      coordinates: [lng, lat],
+    };
+    data.transportations = await getStations({
+      lng,
+      lat,
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 // Using callback
 const intNumbers = ['price', 'floor', 'pieces'];
 const floatNumbers = ['surface'];
@@ -253,46 +284,29 @@ const readMba = () => {
               const foundElement = await PropertieModel.findByRef(data.lot_ref);
 
               if (!foundElement || !foundElement._id) {
-                let geo = [];
-                if (data.address)
-                  geo = await geocoder.geocode({
-                    address: data.address,
-                    zipcode: data.postal,
-                    countryCode: 'fr',
-                  });
-
-                if (geo && geo[0] && geo[0].formattedAddress) {
-                  const {
-                    longitude: lng,
-                    latitude: lat,
-                    formattedAddress,
-                  } = geo[0];
-                  data.fullAddress = formattedAddress;
-                  data.loc = {
-                    type: 'Point',
-                    coordinates: [lng, lat],
-                  };
-                  const transportations = await getStations({
-                    lng,
-                    lat,
-                  });
+                const hasGeoInfo = await getGeoInfo(data);
+                if (hasGeoInfo) {
                   if (message) data.available = false;
                   else data.available = true;
                   data.unavalableReason = message;
-                  data.transportations = transportations;
                   await PropertieModel.add(data);
                   logger.info(
                     `${i}, 'added'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`
                   );
                 } else {
                   if (!message)
-                    message = `lot_ref: ${data.lot_ref}; address: ${data.postal} | ${data.address};  geo: ${geo}; typeOfAnnonce: ${data.typeOfAnnonce}; 'address not found'`;
+                    message = `lot_ref: ${data.lot_ref}; address: ${data.postal} | ${data.address}; typeOfAnnonce: ${data.typeOfAnnonce}; 'transportations or address not found'`;
                   data.available = false;
                   data.unavalableReason = message;
                   await PropertieModel.add(data);
                   returnLog(readedDatasArray, i, message);
                 }
               } else if (foundElement && foundElement._id) {
+                if (!foundElement.transportations) {
+                  const hasGeoInfo = await getGeoInfo(data);
+                  if (!hasGeoInfo)
+                    message = `lot_ref: ${data.lot_ref}; address: ${data.postal} | ${data.address}; typeOfAnnonce: ${data.typeOfAnnonce}; 'transportations or address not found'`;
+                }
                 if (message) data.available = false;
                 else data.available = true;
                 data.unavalableReason = message;

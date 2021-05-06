@@ -1,5 +1,5 @@
 import { withStyles } from '@material-ui/core';
-
+import { btnHover } from 'components/form/Btn';
 const inputRadius = '1.5rem';
 
 const styles = (theme) => ({
@@ -199,6 +199,33 @@ const styles = (theme) => ({
     width: 'fit-content',
     [theme.breakpoints.down('sm')]: {
       display: 'none',
+    },
+  },
+  reloadMapsContainer: {
+    position: 'absolute',
+    top: '2.5rem',
+    left: '50%',
+    width: 'fit-content',
+    transform: 'translateX(-50%)',
+    '& > div': {
+      width: 'fit-content',
+      cursor: 'pointer',
+      '&:nth-child(2)': {
+        margin: '1.3rem auto 0',
+        background: theme.palette.newBlue,
+        padding: '1rem 1.7rem',
+        borderRadius: '1rem',
+        boxShadow:
+          '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
+        ...btnHover.blue,
+        '& path': {
+          strokeWidth: 0,
+        },
+        '& p': {
+          paddingLeft: '1rem',
+          color: 'white',
+        },
+      },
     },
   },
   changeView: {

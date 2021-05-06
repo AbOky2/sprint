@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import clsx from 'clsx';
 import Icon, { iconTypes, colorTypes } from './Icon';
+import { shared } from 'lib/theme';
 
 const btnHover = {
   blue: {
@@ -20,17 +21,17 @@ const btnHover = {
   },
   white: {
     '&:hover': {
-      background: '#F4F5F7',
+      background: shared.colors.hoverGray,
       boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.12)',
       transition: 'background .1s ease-out, box-shadow .1s ease-out',
       '& svg path': {
-        fill: '#F4F5F7',
+        fill: shared.colors.hoverGray,
       },
     },
   },
   bordered: {
     '&:hover': {
-      background: '#F4F5F7',
+      background: shared.colors.hoverGray,
       boxShadow:
         ' 0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px #1848C4',
       transition: 'background .1s ease-out, box-shadow .1s ease-out',

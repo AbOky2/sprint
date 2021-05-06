@@ -160,7 +160,7 @@ const useStyles = makeStyles((theme) => ({
       marginTop: '2rem',
       boxSizing: 'border-box',
       padding: 32,
-      background: '#F4F5F7',
+      background: theme.palette.hoverGray,
       borderRadius: '15px',
       boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
       [theme.breakpoints.down('md')]: {
@@ -242,7 +242,7 @@ const useStyles = makeStyles((theme) => ({
     '& > div': {
       boxSizing: 'border-box',
       padding: 32,
-      background: '#F4F5F7',
+      background: theme.palette.hoverGray,
       borderRadius: '15px',
       boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
       '& svg': {
