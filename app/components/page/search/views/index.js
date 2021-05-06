@@ -145,9 +145,11 @@ const MapsView = withRouter(
     ({
       classes,
       liked,
+      refresh,
       handleBookmark,
       queryData,
       toggleView,
+      toggleRefresh,
       data = [],
       allData = [],
       page: defaultPage,
@@ -172,7 +174,6 @@ const MapsView = withRouter(
       }));
       const [curr, setCurr] = useState(null);
       const [reloadMaps, setReloadMaps] = useState(false);
-      const [refresh, setRefresh] = useState(false);
       const [carrouselIndex, setCarrouselIndex] = useState(0);
       const getChildPostion = () => {
         const bounds = document
@@ -189,7 +190,6 @@ const MapsView = withRouter(
           isLeft: bounds.width / 2 < bounds.width - x,
         };
       };
-      const toggleRefresh = (refresh) => setRefresh(refresh);
       const toggleReloadMaps = (reloadMaps) => setReloadMaps(!!reloadMaps);
       const handleChildClick = (id) => {
         const currIndex = locs.findIndex((e) => id?.includes(e._id));
@@ -304,6 +304,7 @@ const sharedProptypes = {
   liked: PropTypes.array.isRequired,
   isMapsView: PropTypes.bool.isRequired,
   isMdView: PropTypes.bool.isRequired,
+  refresh: PropTypes.bool.isRequired,
   toggleView: PropTypes.func.isRequired,
   handleSortSelect: PropTypes.func.isRequired,
   handleBookmark: PropTypes.func.isRequired,
@@ -311,6 +312,7 @@ const sharedProptypes = {
   page: PropTypes.object.isRequired,
   matches: PropTypes.bool.isRequired,
   handlePage: PropTypes.func.isRequired,
+  toggleRefresh: PropTypes.func.isRequired,
 };
 MapsView.propTypes = sharedProptypes;
 

@@ -7,17 +7,22 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   container: {
     width: 'fit-content',
+    margin: '2rem 0 .8rem',
     padding: '1.6rem',
     backgroundColor: 'white',
+    cursor: 'pointer',
     '&:hover': {
       backgroundColor: theme.palette.hoverGray,
     },
+    '& p': {
+      width: 'calc(100% - 32px)',
+    },
   },
   bordered: {
-    border: `1px solid ${theme.palette.lightGray}`,
+    border: `1px solid ${theme.palette.lightBlue}`,
   },
   cornered: {
-    borderRadius: '.8rem',
+    borderRadius: '1rem',
   },
   root: {
     padding: '0 1.6rem 0 0',
@@ -29,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 3,
     width: 16,
     height: 16,
-    boxShadow: `inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)`,
+    boxShadow: `inset 0 0 0 1px rgba(79, 128, 255,.2), inset 0 -1px 0 rgba(79, 128, 255,.1)`,
     backgroundColor: '#f5f8fa',
     '$root.Mui-focusVisible &': {
       outline: '2px auto rgba(19,124,189,.6)',

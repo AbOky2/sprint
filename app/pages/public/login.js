@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
-import { Grid, Container, Checkbox, Typography } from '@material-ui/core';
+import { Grid, Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userActions } from 'redux/_actions';
-import { Btn, Select, Input } from 'components/form';
+import { Btn, Select, Input, Checkbox } from 'components/form';
 import { redirectStyle } from 'components/wrapper';
 import withAuth from 'lib/withAuth';
 import { Student, userRoleSelect } from 'helpers/user';
@@ -122,18 +122,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   checkBoxContainer: {
-    width: 'fit-content',
-    padding: '0 1.6rem',
-    margin: '2rem auto 0',
-    border: `1px solid ${theme.palette.lightGray}`,
-    borderRadius: '.8rem',
-    '& > span': {
-      padding: '.8rem .8rem .8rem 0',
+    textAlign: 'left',
+    '& > div > p': {
+      fontSize: '1rem',
+      lineHeight: '1.7rem!important',
     },
-    '& h3': {
-      marginBottom: 0,
-      color: 'rgba(26, 46, 108, 0.5)',
-      fontSize: '1.4rem',
+    '& > p': {
+      fontSize: '.8rem',
+      lineHeight: '1.5rem!important',
+      '& > a': {
+        color: theme.palette.primary.main,
+      },
     },
   },
   resetPassword: {
@@ -388,12 +387,22 @@ const LoginTab = ({
                         className={classes.checkBoxContainer}
                       >
                         <Checkbox
-                          color="primary"
-                          inputProps={{ 'aria-label': 'secondary checkbox' }}
+                          bordered
+                          cornered
+                          label="En envoyant ma demande, j'accepte que le groupe Nexity exploite mes données personnelles dans le cadre de ma demande de contact et de la relation commerciale qui pourrait en découler."
                           onClick={handleCheck}
                         />
                         <Typography>
-                          Accepter les Conditions générales
+                          Vous avez la possibilité de modifier votre
+                          consentement, d'exercer vos droits pour accéder,
+                          rectifier, effacer vos données, limiter leurs
+                          traitements, vous y opposer et demander la portabilité
+                          de celle-ci. Pour cela vous pouvez consulter sur ce
+                          lien notre{' '}
+                          <a href="" target="_blank">
+                            Charte de protection des données à caractère
+                            personnel.
+                          </a>
                         </Typography>
                       </Grid>
                     )}

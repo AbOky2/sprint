@@ -71,6 +71,7 @@ const PropertyPage = ({
   const classes = useStyles();
 
   if (!id) return <NotFound showLink={false} />;
+
   return (
     <AdminContentWrapper>
       <div>

@@ -34,6 +34,7 @@ const SearchPage = ({
     page: defaultPage,
   });
   const [currView, setCurrView] = useState(isMapsView);
+  const [refresh, setRefresh] = useState(false);
   const [makeRequest, setMakeRequest] = useState(false);
   const [allData, setAllData] = useState(properties);
   const [state, setState] = useState(allData.docs);
@@ -46,6 +47,7 @@ const SearchPage = ({
     pieces,
   });
 
+  const toggleRefresh = (refresh) => setRefresh(refresh);
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
 
@@ -168,6 +170,7 @@ const SearchPage = ({
             data={state}
             liked={liked}
             sortBy={sortBy}
+            refresh={refresh}
             handleBookmark={handleBookmark}
             handleSortSelect={handleSortSelect}
             toggleView={toggleView}
@@ -175,6 +178,7 @@ const SearchPage = ({
             matches={matches}
             isMdView={isMdView}
             handlePointChange={handlePointChange}
+            toggleRefresh={toggleRefresh}
             isMapsView={currView}
           />
         </div>
