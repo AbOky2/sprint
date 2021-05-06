@@ -45,11 +45,6 @@ const getGeoInfo = async (data = {}) => {
       zipcode: data.postal,
       countryCode: 'fr',
     });
-    if (!geo || !geo[0] || !geo[0].formattedAddress)
-      geo = await geocoder.geocode({
-        address: data.address,
-        countryCode: 'fr',
-      });
     if (!geo || !geo[0] || !geo[0].formattedAddress) return false;
 
     const { longitude: lng, latitude: lat, formattedAddress } = geo[0];
