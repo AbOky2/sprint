@@ -256,6 +256,7 @@ a[href^="https://maps.google.com/maps"]
 @media screen and (max-width: 640px) {
   .gm-fullscreen-control,
   .gmnoprint div {
+    top: 35vh !important;
     background-color: hsl(220deg 23% 97% / 54%) !important;
   }
 }

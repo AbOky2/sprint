@@ -212,6 +212,9 @@ const styles = (theme) => ({
       cursor: 'pointer',
       '&:first-of-type': {
         padding: '.8rem 1.6rem',
+        '& > p': {
+          width: 'fit-content',
+        },
       },
       '&:nth-child(2)': {
         margin: '1.3rem auto 0',
