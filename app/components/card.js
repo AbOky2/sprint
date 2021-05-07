@@ -120,6 +120,7 @@ const Card = ({
           {showLikes && (
             <span
               onClick={(e) => {
+                e.stopPropagation();
                 e.preventDefault();
                 onClick(_id);
               }}
