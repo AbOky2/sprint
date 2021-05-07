@@ -207,6 +207,9 @@ const styles = (theme) => ({
     left: '50%',
     width: 'fit-content',
     transform: 'translateX(-50%)',
+    [theme.breakpoints.down('sm')]: {
+      top: 0,
+    },
     '& > div': {
       width: 'fit-content',
       cursor: 'pointer',
