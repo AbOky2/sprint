@@ -123,9 +123,17 @@ const useStyles = makeStyles((theme) => ({
   },
   checkBoxContainer: {
     textAlign: 'left',
-    '& > div > p': {
-      fontSize: '1rem',
-      lineHeight: '1.7rem!important',
+    '& > div': {
+      '&:first-of-type': {
+        width: '100%',
+      },
+      '&:last-of-type': {
+        marginTop: 0,
+      },
+      '& > p': {
+        fontSize: '1rem',
+        lineHeight: '1.7rem!important',
+      },
     },
     '& > p': {
       fontSize: '.8rem',
@@ -247,11 +255,11 @@ const LoginTab = ({
   });
 
   const [isRegisterinView, setIsRegisterinView] = useState(!!sponsorshipCode);
+  const [cgtChecked, setCgtChecked] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
 
-  const handleCheck = (event) => {
-    setChecked(event.target.checked);
-  };
+  const handleCheck = (checked) => setChecked(checked);
+  const handleCgtCheck = (checked) => setCgtChecked(checked);
   const toggleView = () => setIsRegisterinView(!isRegisterinView);
 
   const onClick = () => {
@@ -284,7 +292,7 @@ const LoginTab = ({
         return;
       }
 
-      if (!checked) {
+      if (!checked || !cgtChecked) {
         cleanAlert('Veuillez accepter les conditions générales');
         return;
       }
@@ -381,30 +389,38 @@ const LoginTab = ({
                       )}
                     </Grid>
                     {isRegisterinView && (
-                      <Grid
-                        container
-                        alignItems="center"
-                        className={classes.checkBoxContainer}
-                      >
-                        <Checkbox
-                          bordered
-                          cornered
-                          label="En envoyant ma demande, j'accepte que le groupe Nexity exploite mes données personnelles dans le cadre de ma demande de contact et de la relation commerciale qui pourrait en découler."
-                          onClick={handleCheck}
-                        />
-                        <Typography>
-                          Vous avez la possibilité de modifier votre
-                          consentement, d'exercer vos droits pour accéder,
-                          rectifier, effacer vos données, limiter leurs
-                          traitements, vous y opposer et demander la portabilité
-                          de celle-ci. Pour cela vous pouvez consulter sur ce
-                          lien notre{' '}
-                          <a href="" target="_blank">
-                            Charte de protection des données à caractère
-                            personnel.
-                          </a>
-                        </Typography>
-                      </Grid>
+                      <>
+                        <Grid
+                          container
+                          alignItems="center"
+                          className={classes.checkBoxContainer}
+                        >
+                          <Checkbox
+                            bordered
+                            cornered
+                            label="J'accepte les conditions générales"
+                            onChange={handleCgtCheck}
+                          />
+                          <Checkbox
+                            bordered
+                            cornered
+                            label="En envoyant ma demande, j'accepte que le groupe Nexity exploite mes données personnelles dans le cadre de ma demande de contact et de la relation commerciale qui pourrait en découler."
+                            onChange={handleCheck}
+                          />
+                          <Typography>
+                            Vous avez la possibilité de modifier votre
+                            consentement, d'exercer vos droits pour accéder,
+                            rectifier, effacer vos données, limiter leurs
+                            traitements, vous y opposer et demander la
+                            portabilité de celle-ci. Pour cela vous pouvez
+                            consulter sur ce lien notre{' '}
+                            <a href="" target="_blank">
+                              Charte de protection des données à caractère
+                              personnel.
+                            </a>
+                          </Typography>
+                        </Grid>
+                      </>
                     )}
                     <Grid
                       container
