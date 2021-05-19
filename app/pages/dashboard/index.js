@@ -200,9 +200,10 @@ const Dashboard = ({ user = {}, partners, classes }) => (
         Premiers pas dans votre logement
       </Typography>
       <Typography className={classes.subTitle}>
-        Kit le nid vous accompagne pour votre premier achat, votre location,
+        Découvrez nos appartements neufs pour votre premier achat. Vous ne
+        pouvez pas encore acheter ?
         <br />
-        et vous aide à avoir un bon garant.
+        Nous vous proposons des locations étudiantes dans toute la France.
       </Typography>
       <Grid
         container
@@ -260,7 +261,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
       </Grid>
     </div>
     <Typography variant="h2" className={classes.customH2}>
-      Les services Kit le nid
+      Nos offres négociées à la carte
     </Typography>
     <Typography className={classes.partnerDescription}>
       Kit le nid vous propose un ensemble de services complémentaires négociés

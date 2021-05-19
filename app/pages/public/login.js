@@ -196,7 +196,7 @@ const SignUp = ({ values = {}, ...inputProps }) => (
       name="role"
       value={values.role}
       list={userRoleSelect}
-      label="Status*"
+      label="Statu*"
       position="right"
     />
     <Input
