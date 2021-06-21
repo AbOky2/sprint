@@ -17,7 +17,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
       current.minSurface === current.maxSurface
         ? ` ${current.minSurface}m²`
         : ` de ${current.minSurface}m² à ${current.maxSurface}m²`;
-    const vat = parseInt(current.vat);
+    const vat = parseFloat(current.vat);
     const vatInfo = `${vat == defaultVat ? 'Prix TVA ' : 'TVA réduite '} ${
       vat ? vat + '%' : ''
     }`;
