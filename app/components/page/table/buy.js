@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { spaceCurrency } from 'helpers/convertAndCheck';
 import { Icon, Btn } from 'components/form';
-import { individualAdvantages } from 'helpers/property';
+import { individualAdvantages, defaultVat } from 'helpers/property';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import styles from './styles';
 
@@ -17,6 +17,10 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
       current.minSurface === current.maxSurface
         ? ` ${current.minSurface}m²`
         : ` de ${current.minSurface}m² à ${current.maxSurface}m²`;
+    const vat = parseInt(current.vat);
+    const vatInfo = `${vat == defaultVat ? 'Prix TVA ' : 'TVA réduite '} ${
+      vat ? vat + '%' : ''
+    }`;
 
     return (
       <div key={elem}>
@@ -84,7 +88,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
           <div>
             <Grid container className={classes.discoveryContentHeader}>
               <Grid item md={2} xs={2} className="text-center">
-                Prix TVA 20%
+                {vatInfo}
               </Grid>
               <Grid item md={1} xs={1} className="text-center">
                 Surface

@@ -132,13 +132,16 @@ programsHeader[143] = 'stations';
 programsHeader[154] = 'file';
 programsHeader[155] = 'lot_ref';
 
-const extraProgramsHeader = new Array(100);
-extraProgramsHeader[3] = 'program_ref';
-extraProgramsHeader[49] = 'vat';
+const extraLotsHeader = new Array(100);
+extraLotsHeader[3] = 'program_ref';
+extraLotsHeader[6] = 'lot_ref';
+extraLotsHeader[14] = 'vat';
+extraLotsHeader[48] = 'price';
 
 const lotsHeader = new Array(75);
 lotsHeader[1] = 'ref';
 lotsHeader[2] = 'residence_ref';
+lotsHeader[3] = 'lot_ref';
 lotsHeader[11] = `${comodityDivider}Exclusivité`;
 lotsHeader[12] = 'available_date';
 lotsHeader[14] = 'price';
@@ -249,29 +252,29 @@ const buyDatas = {
     header: lotsHeader,
     encoding: 'utf-8',
   },
-  extraPrograms: {
-    fileName: 'programmes_enrichi',
-    header: extraProgramsHeader,
+  extraLots: {
+    fileName: 'lots_enrichi',
+    header: extraLotsHeader,
     encoding: 'utf-8',
   },
 };
 
-const defaultVat = '20%';
+const defaultVat = '20';
 const vatCode = {
-  '01': '5.5%',
-  '02': '7.00%',
-  '03': '13.00%',
-  '04': '19.6%',
-  '05': '20.3%',
-  '06': '33.33%',
-  '07': '0.00%',
-  '08': '17.6%',
-  '09': '18.6%',
-  10: '0.00%',
-  13: '8.00%',
-  20: '5.5%',
-  22: '10%',
-  24: '20%',
+  '01': '5.5',
+  '02': '7.00',
+  '03': '13.00',
+  '04': '19.6',
+  '05': '20.3',
+  '06': '33.33',
+  '07': '0.00',
+  '08': '17.6',
+  '09': '18.6',
+  10: '0.00',
+  13: '8.00',
+  20: '5.5',
+  22: '10',
+  24: '20',
 };
 
 const rentDatas = {

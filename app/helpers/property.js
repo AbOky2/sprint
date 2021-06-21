@@ -31,6 +31,7 @@ const propertyPieces = {
 //   13: 'bus',
 //   14: 'tgv',
 // };
+const defaultVat = 20;
 const tranportationsKeys = {
   11: 'bus',
   5: 'bus',
@@ -90,6 +91,7 @@ module.exports = {
   propertyPiecesSelectMap,
   defaultPropertyImg,
   tranportationsKeys,
+  defaultVat,
   getAddress,
   getNbPieces,
   getCardImg,

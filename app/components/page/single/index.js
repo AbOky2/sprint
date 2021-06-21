@@ -54,6 +54,7 @@ const PropertyPage = ({
             elem.minSurface = newElem.surface;
           if (!elem.maxSurface || elem.maxSurface < newElem.surface)
             elem.maxSurface = newElem.surface;
+          if (!elem.vat || elem.vat < newElem.vat) elem.vat = newElem.vat;
           newState[pieces] = elem;
         } else {
           newState[pieces] = {
@@ -61,6 +62,7 @@ const PropertyPage = ({
             minSurface: newElem.surface,
             maxSurface: newElem.surface,
             minPrice: newElem.price,
+            vat: newElem.vat,
           };
         }
       });

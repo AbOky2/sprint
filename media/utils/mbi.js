@@ -105,7 +105,7 @@ const getExtraInfo = (annonce = {}, lotList = []) => {
   return data;
 };
 
-const getLotsList = (list, lots) =>
+const getLotsList = (list, lots, extraLotsList) =>
   list.reduce((acc, curr) => {
     const newLot = {};
     const result = Object.keys(curr)
@@ -148,6 +148,17 @@ const getLotsList = (list, lots) =>
     newLot.pictures = getPictures(newLot);
     let isAvailable = true;
 
+    if (extraLotsList) {
+      const foundExtraLot = extraLotsList.find(
+        (e) =>
+          e.program_ref === newLot.residence_ref && e.lot_ref === newLot.lot_ref
+      );
+      newLot.vat = foundExtraLot ? foundExtraLot.vat : defaultVat;
+      newLot.price = foundExtraLot
+        ? parseInt(foundExtraLot.price, 10)
+        : newLot.price;
+    }
+
     if (lots.isLocation) {
       let contract_end_date = newLot.contract_end_date || null;
       let available_date = newLot.available_date || null;
@@ -175,7 +186,7 @@ const readMba = () => {
 
   const customMap = async (
     { typeOfAnnonce, fileName, header, lots = {}, encoding = 'binary' },
-    extraProgramsList
+    extraLotsList
   ) => {
     const returnLog = (dataArr, i, msg) => {
       if (i === dataArr.length - 1) logger.info(typeOfAnnonce, 'added');
@@ -187,7 +198,7 @@ const readMba = () => {
       { encoding: lots.encoding }
     );
     if (readedLots) {
-      const lotList = getLotsList(readedLots.split('\n'), lots);
+      const lotList = getLotsList(readedLots.split('\n'), lots, extraLotsList);
 
       // lot parents
       const readedDatas = fs.readFileSync(
@@ -244,14 +255,7 @@ const readMba = () => {
                   newResult[key] = res;
                 }
               });
-              if (extraProgramsList) {
-                const foundExtraProgram = extraProgramsList.find(
-                  (e) => e.program_ref === newResult.program_ref
-                );
-                newResult.vat = foundExtraProgram
-                  ? foundExtraProgram.vat
-                  : defaultVat;
-              }
+
               if (!newResult.lot_ref) return returnLog(readedDatasArray, i);
               newResult.pictures = getPictures(newResult);
               newResult.advantages = advantages;
@@ -323,35 +327,35 @@ const readMba = () => {
     }
   };
   (async () => {
-    const readedExtraPrograms = fs.readFileSync(
-      `${PUBLIC_PROPERTIES_DIR}/${buyDatas.extraPrograms.fileName}.csv`,
-      { encoding: buyDatas.extraPrograms.encoding }
+    const readedExtraLots = fs.readFileSync(
+      `${PUBLIC_PROPERTIES_DIR}/${buyDatas.extraLots.fileName}.csv`,
+      { encoding: buyDatas.extraLots.encoding }
     );
-    let extraProgramsList = [];
-    if (readedExtraPrograms) {
-      extraProgramsList = readedExtraPrograms
-        .split('\n')
-        .reduce((acc, curr) => {
-          const newLot = {};
-          const result = Object.keys(curr)
-            .reduce((res, v) => res.concat(curr[v]), '')
-            .replace(/"/g, '')
-            .split('!#');
+    let extraLotsList = [];
+    if (readedExtraLots) {
+      extraLotsList = readedExtraLots.split('\n').reduce((acc, curr) => {
+        const newLot = {};
+        const result = Object.keys(curr)
+          .reduce((res, v) => res.concat(curr[v]), '')
+          .replace(/"/g, '')
+          .split('!#');
 
-          buyDatas.extraPrograms.header.forEach((key, x) => {
-            const index = x - 1;
-            const res = result[index] ? result[index].trim() : null;
-            if (!res) return;
-            if (key === 'vat')
-              newLot[key] = vatCode.hasOwnProperty(res)
-                ? vatCode[res]
-                : defaultVat;
-            else newLot[key] = res;
-          });
-          return [...acc, newLot];
-        }, []);
+        buyDatas.extraLots.header.forEach((key, x) => {
+          const index = x - 1;
+          const res = result[index] ? result[index].trim() : null;
+          if (!res) return;
+          if (key === 'price') newLot[key] = parseInt(res, 10);
+          if (key === 'vat')
+            newLot[key] = vatCode.hasOwnProperty(res)
+              ? vatCode[res]
+              : defaultVat;
+          else newLot[key] = res;
+        });
+        return [...acc, newLot];
+      }, []);
     }
-    await customMap(buyDatas, extraProgramsList);
+
+    await customMap(buyDatas, extraLotsList);
     await customMap(rentDatas);
   })();
 };
