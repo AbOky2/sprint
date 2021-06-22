@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import PropTypes from 'prop-types';
@@ -12,7 +12,6 @@ import { theme } from '../lib/theme';
 import { wrapper } from '../redux';
 import Notifier from '../components/Notifier';
 import Header from '../components/Header';
-import CookieConsent from 'lib/cookieConsent';
 import 'react-toastify/dist/ReactToastify.css';
 
 Router.events.on('routeChangeStart', () => {
@@ -37,10 +36,8 @@ const propTypes = {
 };
 
 const MyApp = ({ Component, pageProps }) => {
-  const [cookieConsent, setCookieConsent] = useState({});
   const store = useStore((state) => state);
 
-  const cookieConsentReady = (data) => setCookieConsent(data);
   useEffect(() => {
     return () => {
       const jssStyles = document.querySelector('#jss-server-side');
@@ -57,12 +54,11 @@ const MyApp = ({ Component, pageProps }) => {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <CookieConsent onReady={cookieConsentReady} />
       <CssBaseline />
       <div className="main-container">
         <PersistGate persistor={store.__persistor}>
           {!pageProps.user?.isAdmin ? null : <Header {...pageProps} />}
-          <Component {...pageProps} cookieConsent={cookieConsent} />
+          <Component {...pageProps} />
         </PersistGate>
       </div>
       <Notifier />

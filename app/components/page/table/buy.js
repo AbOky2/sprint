@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { spaceCurrency } from 'helpers/convertAndCheck';
 import { Icon, Btn } from 'components/form';
-import { individualAdvantages, defaultVat } from 'helpers/property';
+import { individualAdvantages, reducedVat } from 'helpers/property';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import styles from './styles';
 
@@ -18,9 +18,8 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
         ? ` ${current.minSurface}m²`
         : ` de ${current.minSurface}m² à ${current.maxSurface}m²`;
     const vat = parseFloat(current.vat);
-    const vatInfo = `${vat == defaultVat ? 'Prix TVA ' : 'TVA réduite '} ${
-      vat ? vat + '%' : ''
-    }`;
+    const hasReduction = vat === reducedVat || vat === 0;
+    const conditionalColumn = hasReduction ? 1 : 2;
 
     return (
       <div key={elem}>
@@ -87,8 +86,13 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
         {isOpen && (
           <div>
             <Grid container className={classes.discoveryContentHeader}>
+              {hasReduction && (
+                <Grid item md={2} xs={2} className="text-center">
+                  {`TVA réduite${vat ? ` ${vat}%` : ''}`}
+                </Grid>
+              )}
               <Grid item md={2} xs={2} className="text-center">
-                {vatInfo}
+                Prix TVA 20%
               </Grid>
               <Grid item md={1} xs={1} className="text-center">
                 Surface
@@ -99,10 +103,20 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
               <Grid item md={1} xs={1} className="text-center">
                 Orientation
               </Grid>
-              <Grid item md={2} xs={2} className="text-center">
+              <Grid
+                item
+                md={conditionalColumn}
+                xs={conditionalColumn}
+                className="text-center"
+              >
                 Parking
               </Grid>
-              <Grid item md={2} xs={2} className="text-center">
+              <Grid
+                item
+                md={conditionalColumn}
+                xs={conditionalColumn}
+                className="text-center"
+              >
                 Les +
               </Grid>
               <Grid item md={2} xs={2} className="text-center">
@@ -125,17 +139,30 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 const advantages = curr.advantages
                   ?.filter((e) => individualAdvantages.includes(e))
                   .join(', ');
+                const standardTva = (curr.price / 1.055) * 1.2;
+                const vatPrice =
+                  hasReduction && !vat
+                    ? '-'
+                    : !hasReduction
+                    ? price
+                    : spaceCurrency(Math.round(standardTva)) + '€';
 
                 return (
                   <Grid
-                    key={curr.ref}
+                    key={curr.lot_ref}
                     container
                     className={classes.discoveryContent}
                   >
                     <Grid container>
+                      {hasReduction && (
+                        <Grid container justify="space-between">
+                          <span>{`TVA réduite${vat ? ` ${vat}%` : ''}`}</span>
+                          <strong>{`${price}€`}</strong>
+                        </Grid>
+                      )}
                       <Grid container justify="space-between">
-                        <span>Prix</span>
-                        <strong>{`${price}€`}</strong>
+                        <span>Prix TVA 20%</span>
+                        <strong>{vatPrice}</strong>
                       </Grid>
                       <Grid container justify="space-between">
                         <span>Surface</span>
@@ -174,8 +201,13 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       alignItems="center"
                       className={classes.contentContainer}
                     >
+                      {hasReduction && (
+                        <Grid item md={2} xs={2} className="text-center">
+                          {price}€
+                        </Grid>
+                      )}
                       <Grid item md={2} xs={2} className="text-center">
-                        {`${price}€`}
+                        {vatPrice}
                       </Grid>
                       <Grid item md={1} xs={1} className="text-center">
                         {`${curr.surface}m²`}
@@ -186,10 +218,20 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       <Grid item md={1} xs={1} className="text-center">
                         {orientation}
                       </Grid>
-                      <Grid item md={2} xs={2} className="text-center">
+                      <Grid
+                        item
+                        md={conditionalColumn}
+                        xs={conditionalColumn}
+                        className="text-center"
+                      >
                         {parking}
                       </Grid>
-                      <Grid item md={2} xs={2} className="text-center">
+                      <Grid
+                        item
+                        md={conditionalColumn}
+                        xs={conditionalColumn}
+                        className="text-center"
+                      >
                         {advantages.length ? advantages : '-'}
                       </Grid>
                       <Grid item md={2} xs={2} className={classes.btnContainer}>

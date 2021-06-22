@@ -42,7 +42,7 @@ const sponsorship = {
 };
 const MenuItems = [...MobileItems, sponsorship];
 
-export const MobileMenu = ({ user = {}, logout, update, cookieConsent }) => {
+export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
   const classes = useStyles();
   const { asPath } = useRouter();
@@ -108,7 +108,6 @@ export const MobileMenu = ({ user = {}, logout, update, cookieConsent }) => {
               user={user}
               logout={logout}
               update={update}
-              cookieConsent={cookieConsent}
               transparent
             />
             <div>
@@ -127,13 +126,7 @@ export const MobileMenu = ({ user = {}, logout, update, cookieConsent }) => {
   );
 };
 
-const StudentProfile = ({
-  user = {},
-  logout,
-  update,
-  noHeaderMargin,
-  cookieConsent,
-}) => {
+const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
   const { asPath } = useRouter();
   const classes = useStyles();
 
@@ -190,7 +183,6 @@ const StudentProfile = ({
           user={user}
           logout={logout}
           update={update}
-          cookieConsent={cookieConsent}
           transparent
         />
       </Grid>
