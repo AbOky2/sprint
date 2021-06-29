@@ -1,8 +1,8 @@
-import { Grid } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
+
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import { spaceCurrency } from 'helpers/convertAndCheck';
+import { spaceCurrency, round10 } from 'helpers/convertAndCheck';
 import { Icon, Btn } from 'components/form';
 import { individualAdvantages, reducedVat } from 'helpers/property';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
@@ -130,7 +130,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 const orientation = curr.orientation ?? '-';
                 const floor = curr.floor
                   ? curr.floor > 1
-                    ? curr.floor + 'ème étage'
+                    ? `${curr.floor}ème étage`
                     : '1er étage'
                   : 'RDC';
                 const parking = curr.nb_parking
@@ -145,7 +145,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     ? '-'
                     : !hasReduction
                     ? price
-                    : spaceCurrency(Math.round(standardTva)) + '€';
+                    : `${spaceCurrency(round10(standardTva, 1))}€`;
 
                 return (
                   <Grid
