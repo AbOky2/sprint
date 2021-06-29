@@ -11,7 +11,7 @@ import {
   TablePagination,
 } from '@material-ui/core';
 import { userRoleKeyVal } from 'helpers/user';
-
+import { toDate } from 'helpers/convertAndCheck';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
@@ -26,7 +26,7 @@ const rowsPerPageOptions = [5];
 const SubTableHead = () => (
   <TableHead>
     <TableRow>
-      <TableCell align="right" colSpan={1}></TableCell>
+      <TableCell align="right" colSpan={1} />
       <TableCell align="right" colSpan={1}>
         Prénom
       </TableCell>
@@ -48,6 +48,9 @@ const SubTableHead = () => (
       <TableCell align="right" colSpan={1}>
         Origin
       </TableCell>
+      <TableCell align="right" colSpan={1}>
+        Date d'inscription
+      </TableCell>
     </TableRow>
   </TableHead>
 );
@@ -65,6 +68,7 @@ const Body = ({ row = {}, handleDelte }) => (
     <TableCell align="right">{row.sponsorshipCode}</TableCell>
     <TableCell align="right">{userRoleKeyVal[row.role]}</TableCell>
     <TableCell align="right">{row.origin}</TableCell>
+    <TableCell align="right">{toDate(row.created_at)}</TableCell>
   </TableRow>
 );
 export default function SpanningTable({
@@ -118,18 +122,20 @@ export default function SpanningTable({
         page={props.page - 1}
         onChangePage={handleChangePage}
       />
-      <style jsx>{`
-        .table-container {
-          width: 90vw;
-          height: 95vh;
-        }
-        .table-container > div {
-          height: 30px;
-        }
-        .arrows-container {
-          margin-bottom: 5px;
-        }
-      `}</style>
+      <style jsx>
+        {`
+          .table-container {
+            width: 90vw;
+            height: 95vh;
+          }
+          .table-container > div {
+            height: 30px;
+          }
+          .arrows-container {
+            margin-bottom: 5px;
+          }
+        `}
+      </style>
     </div>
   );
 }

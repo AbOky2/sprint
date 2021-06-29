@@ -3,7 +3,7 @@ const { format, isBefore, differenceInYears, getQuarter } = require('date-fns');
 const isArray = (arr) => Array.isArray(arr);
 const isObject = (arg) =>
   (typeof arg === 'object' || typeof arg === 'function') && arg !== null;
-const toDate = (date) => format(new Date(date), 'dd/MM/yyyy');
+const toDate = (date) => (date ? format(new Date(date), 'dd/MM/yyyy') : '');
 const isMajor = (age) => differenceInYears(new Date(age), new Date()) >= 18;
 const ucfirst = (name = '') =>
   name.charAt(0).toUpperCase() + name.slice(1).toLocaleLowerCase();
