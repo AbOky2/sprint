@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { withRouter } from 'next/router';
 import { Grid, Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -196,15 +195,8 @@ const SignUp = ({ values = {}, ...inputProps }) => (
       name="role"
       value={values.role}
       list={userRoleSelect}
-      label="Statu*"
+      label="Status*"
       position="right"
-    />
-    <Input
-      {...inputProps}
-      value={values.sponsorshipCode}
-      label="Code parrain"
-      placeholder="Code"
-      name="sponsorshipCode"
     />
   </Grid>
 );
@@ -238,23 +230,16 @@ const propTypes = {
 SignIn.propTypes = propTypes;
 SignUp.propTypes = propTypes;
 
-const LoginTab = ({
-  login,
-  register,
-  router: {
-    query: { sponsorshipCode },
-  },
-}) => {
+const LoginTab = ({ login, register }) => {
   const [state, setState] = useState({
     email: '',
     firstName: '',
     lastName: '',
     password: '',
-    sponsorshipCode,
     role: Student,
   });
 
-  const [isRegisterinView, setIsRegisterinView] = useState(!!sponsorshipCode);
+  const [isRegisterinView, setIsRegisterinView] = useState(false);
   const [cgtChecked, setCgtChecked] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
 
@@ -296,7 +281,6 @@ const LoginTab = ({
         cleanAlert('Veuillez accepter les conditions générales');
         return;
       }
-      if (data.sponsorshipCode?.length) pickdata.push('sponsorshipCode');
       if (document.referrer) {
         data.referrer_url = document.referrer;
         pickdata.push('referrer_url');
@@ -476,11 +460,7 @@ const mapState = (state) => {
 const actionCreators = {
   register: userActions.register,
   login: userActions.login,
-  logout: userActions.logout,
 };
-export default withAuth(
-  connect(mapState, actionCreators)(withRouter(LoginTab)),
-  {
-    logoutRequired: true,
-  }
-);
+export default withAuth(connect(mapState, actionCreators)(LoginTab), {
+  logoutRequired: true,
+});

@@ -135,10 +135,10 @@ const schemas = {
         role: Joi.string()
           .valid(...studentRoleList)
           .messages(msg({ name: keys.user.role })),
-        sponsorshipCode: Joi.string()
-          .min(1)
-          .optional()
-          .messages(msg({ name: keys.user.sponsorshipCode })),
+        // sponsorshipCode: Joi.string()
+        //   .min(1)
+        //   .optional()
+        //   .messages(msg({ name: keys.user.sponsorshipCode })),
         referrer_url: Joi.string()
           .min(1)
           .optional()
