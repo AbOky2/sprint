@@ -6,6 +6,7 @@ module.exports = {
     jest: true,
   },
   plugins: ['react', 'import', 'prettier'],
+  ignorePatterns: ['france-maps.js', '**/france-maps.js'],
   rules: {
     'max-len': ['error', 100],
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
@@ -42,11 +43,11 @@ module.exports = {
       },
     ],
   },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "paths": ["."]
-      }
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['.'],
+      },
     },
-  }
+  },
 };

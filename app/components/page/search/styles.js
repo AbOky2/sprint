@@ -1,5 +1,6 @@
 import { withStyles } from '@material-ui/core';
 import { btnHover } from 'components/form/Btn';
+
 const inputRadius = '1.5rem';
 
 const styles = (theme) => ({
@@ -213,6 +214,7 @@ const styles = (theme) => ({
     '& > div': {
       width: 'fit-content',
       cursor: 'pointer',
+      marginTop: 0,
       '&:first-of-type': {
         padding: '.8rem 1.6rem',
         '& > p': {

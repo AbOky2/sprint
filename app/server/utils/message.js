@@ -11,7 +11,8 @@ const variabless = {
 };
 const formatNameValue = (name = '', value) => `${name} ${value}`;
 
-const notFound = (value) => formatNameValue(ucfirst(value), variabless.notFound);
+const notFound = (value) =>
+  formatNameValue(ucfirst(value), variabless.notFound);
 const wrongInfo = (value) => formatNameValue(variabless.wrong, value);
 const invalidInfo = (value) => formatNameValue(variabless.invalid, value);
 const alreadyExist = (name) => formatNameValue(name, variabless.alreadyExist);
@@ -31,7 +32,7 @@ const convertHttpErrors = (err) => {
     error.message = alreadyExist(
       Object.keys(error.keyPattern)
         .map((e) => httpVariabless[e])
-        .join(', '),
+        .join(', ')
     );
   }
 

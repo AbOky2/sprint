@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { partnerTypeList } = require('../../helpers/partner');
 const DBModel = require('./Model');
 const { removeFiles } = require('../utils/upload');
 
@@ -40,12 +39,6 @@ const mongoSchema = new Schema({
     type: String,
     required: true,
   },
-  // position: {
-  //   type: Number,
-  //   required: true,
-  //   // unique: true,
-  //   min: 1,
-  // },
 });
 
 class PartnerClass extends DBModel {

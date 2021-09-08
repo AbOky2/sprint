@@ -90,6 +90,70 @@ class PropertieClass extends DBModel {
     return element;
   }
 
+  static async publicSearch({
+    maxPrice,
+    typeOfAnnonce,
+    pieces = [],
+    loc,
+    limit = defaultLimit,
+    page = defaultOffset,
+    sort,
+  }) {
+    const {
+      geo,
+      near,
+      zoom = 12,
+      adressType,
+      $geometry,
+      number,
+    } = await maps.find(loc);
+    const $maxDistance = 5000;
+    // const $maxDistance = 1 * 1609.34;
+    const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
+    const docs = await this.find(
+      maps.geoQuery({
+        pieces,
+        maxPrice,
+        near,
+        $maxDistance,
+        typeOfAnnonce,
+        $geometry,
+      }),
+      null,
+      {
+        sort: { price: priceSort },
+      }
+    );
+    const list = {
+      docs,
+      zoom,
+      near: [near[1], near[0]],
+      adressType,
+    };
+    if (adressType === 'departement') list.department = { number };
+    else if (geo.city && geo.administrativeLevels) {
+      const department = await maps.find(geo.administrativeLevels.level2long);
+      const q = maps.geoQuery({
+        pieces,
+        maxPrice,
+        near: department.near,
+        $maxDistance,
+        typeOfAnnonce,
+        $geometry: department.$geometry,
+      });
+
+      list.department = {
+        name: geo.administrativeLevels.level2long,
+        number: department.number,
+        lotFound: await this.find(q, null, {
+          sort: { price: priceSort },
+        }),
+      };
+    }
+
+    return { list };
+  }
+
   static async search({
     maxPrice,
     typeOfAnnonce,
@@ -100,16 +164,24 @@ class PropertieClass extends DBModel {
     sort,
   }) {
     let near = [];
+    let zoom = 12;
 
     if (loc) {
-      const geo = await maps.geocode({
+      let geo = await maps.geocoder.geocode({
         address: loc,
         country: 'france',
       });
-      if (geo && geo[0]) near = [geo[0].latitude, geo[0].longitude];
+      if (geo && geo[0]) {
+        geo = geo[0];
+        // near = [geo.latitude, geo.longitude];
+        near = [geo.longitude, geo.latitude];
+        if (!geo.city)
+          zoom = Object.keys(geo.administrativeLevels).length ? 8 : 5;
+      }
     }
 
-    const $maxDistance = 1000 * 1609.34;
+    // const $maxDistance = 1 * 1609.34;
+    const $maxDistance = 8000;
     const query = {
       $and: [
         pieces.length > 0 ? { pieces: { $in: pieces } } : {},
@@ -118,11 +190,11 @@ class PropertieClass extends DBModel {
           ? {
               loc: {
                 $nearSphere: {
+                  $maxDistance,
                   $geometry: {
                     type: 'Point',
                     coordinates: near,
                   },
-                  // $maxDistance,
                 },
               },
             }
@@ -133,12 +205,63 @@ class PropertieClass extends DBModel {
         { typeOfAnnonce },
       ],
     };
-    console.log(near);
     const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
-    const docs = await this.find(query, null, { sort: { price: priceSort } });
+    const docs = await this.find(query, null, {
+      sort: { price: priceSort },
+    });
+    const list = {
+      docs,
+      near: [near[1], near[0]],
+      zoom,
+      total: await this.count(),
+    };
+
+    return { list };
+  }
+
+  static async searchByPoint({
+    maxPrice,
+    typeOfAnnonce,
+    pieces = [],
+    loc,
+    limit = defaultLimit,
+    page = defaultOffset,
+    sort,
+    zoom,
+  }) {
+    const near = [loc.lat, loc.lng];
+    // zoom = 12;
+    const $maxDistance = (19 - zoom) * 10000;
+    const query = {
+      $and: [
+        pieces.length > 0 ? { pieces: { $in: pieces } } : {},
+        maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
+        near.length > 0
+          ? {
+              loc: {
+                $nearSphere: {
+                  $maxDistance,
+                  $geometry: {
+                    type: 'Point',
+                    coordinates: [near[1], near[0]],
+                  },
+                },
+              },
+            }
+          : {},
+        { loc: { $ne: null } },
+        { price: { $ne: null } },
+        { available: true },
+        { typeOfAnnonce },
+      ],
+    };
+
+    const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
+    const docs = await this.find(query);
     const list = {
       docs,
       near,
+      zoom,
     };
 
     return { list };

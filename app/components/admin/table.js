@@ -43,7 +43,7 @@ const SubTableHead = () => (
         Parrain
       </TableCell>
       <TableCell align="right" colSpan={1}>
-        Status
+        Statut
       </TableCell>
       <TableCell align="right" colSpan={1}>
         Origin

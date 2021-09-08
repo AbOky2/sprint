@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const DBModel = require('./Model');
-const { toggleArray } = require('../../helpers/convertAndCheck');
 
 const { Schema } = mongoose;
 
@@ -14,11 +13,6 @@ const mongoSchema = new Schema({
 });
 
 class PartnerClass extends DBModel {
-  /**
-   * @param {Object} options
-   * @param {String} options.title
-   * @param {String} options.color
-   */
   static async add(name) {
     try {
       const elem = await this.findOne({ name });

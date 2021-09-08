@@ -16,21 +16,7 @@ const propertyPieces = {
   5: '5 pièces',
   3: '3 pièces',
 };
-// const tranportationsKeys = {
-//   1: 'ter',
-//   2: 'metro',
-//   3: 'metro',
-//   4: 'ferry',
-//   5: 'bus',
-//   7: 'metro',
-//   8: 'tramway',
-//   9: 'ter',
-//   10: 'ter',
-//   11: 'bus',
-//   12: 'train',
-//   13: 'bus',
-//   14: 'tgv',
-// };
+
 const reducedVat = 5.5;
 const tranportationsKeys = {
   11: 'bus',
@@ -78,7 +64,8 @@ const getNbPieces = (minPieces, maxPieces) =>
     ? `de ${minPieces} à ${maxPieces}  pièces`
     : `${minPieces} pièce${minPieces === 1 ? '' : 's'}`;
 
-getCardImg = (src) => NEXT_PUBLIC_UPLOAD_URL + (src || defaultPropertyImg);
+const getCardImg = (src) =>
+  NEXT_PUBLIC_UPLOAD_URL + (src || defaultPropertyImg);
 
 module.exports = {
   typeOfAnnonciesObj,

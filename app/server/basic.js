@@ -3,12 +3,12 @@ const ExpressBrute = require('express-brute');
 const MongooseStore = require('express-brute-mongoose');
 const BruteForceSchema = require('express-brute-mongoose/dist/schema');
 const { Strategy } = require('passport-local');
-const { UserModel } = require('./models');
-const msg = require('./utils/message');
-const sms = require('./utils/sms');
-const joiSchema = require('./middleware/schema');
-const requestMiddleware = require('./middleware/request');
 const mongoose = require('mongoose');
+const { UserModel, PropertieModel } = require('./models');
+const msg = require('./utils/message');
+const joiSchema = require('./middleware/schema');
+const { listCollection } = require('./middleware/express');
+const requestMiddleware = require('./middleware/request');
 
 const model = mongoose.model(
   'bruteforce',
@@ -35,7 +35,6 @@ const auth = ({ server }) => {
     try {
       if (reqPath === signInPath) user = await UserModel.signIn(data);
       else if (reqPath === signUpPath) {
-        // data.phone = sms.check(data.phone);
         user = await UserModel.signUp(data);
       } else return msg.wrongInfo('path');
 
@@ -79,7 +78,7 @@ const auth = ({ server }) => {
       (req, res, next) => {
         passport.authenticate('local', (err, reqUser, info) => {
           if (err) return next(err);
-          if (!reqUser) return res.status(401).json({ message: info.message });
+          if (!reqUser) return res.status(401).json({ message: info?.message });
 
           req.login(reqUser, (error) => {
             if (error) return next(error);
@@ -89,6 +88,36 @@ const auth = ({ server }) => {
         })(req, res, next);
       }
     )
+  );
+
+  server.post(
+    '/publicSearch',
+    listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
+      const { list } = await PropertieModel.publicSearch({
+        ...args,
+        typeOfProperty:
+          typeOfProperty && typeOfProperty.length > 0
+            ? typeOfProperty.split(',')
+            : [],
+      });
+
+      return { list };
+    }, joiSchema.propertie.student.search)
+  );
+
+  server.post(
+    '/properties',
+    listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
+      const { list } = await PropertieModel.search({
+        ...args,
+        typeOfProperty:
+          typeOfProperty && typeOfProperty.length > 0
+            ? typeOfProperty.split(',')
+            : [],
+      });
+
+      return { list };
+    }, joiSchema.propertie.student.search)
   );
 
   server.get('/auth/logout', (req, res) => {

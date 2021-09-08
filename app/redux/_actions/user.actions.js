@@ -3,6 +3,13 @@ import { signIn, signUp, logOut, resetPassword } from '../../lib/api/public';
 import { updateUserApiMethod } from '../../lib/api/customer';
 import { alertActions } from './alert.actions';
 
+const redirectAfterAccess = (user) => {
+  const { search } = window.location;
+  window.location =
+    user?.role === 'admin'
+      ? '/admin'
+      : `/dashboard${search ? `/search/buy${search}` : ''}`;
+};
 function login(args) {
   const request = (user) => ({ type: userConstants.LOGIN_REQUEST, user });
   const success = (user) => ({ type: userConstants.LOGIN_SUCCESS, user });
@@ -14,7 +21,7 @@ function login(args) {
       .then(({ user }) => {
         if (user && user._id) {
           dispatch(success(user));
-          window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
+          redirectAfterAccess(user);
         }
       })
       .catch((error) => {
@@ -40,7 +47,7 @@ function update(args, callback) {
       (error) => {
         dispatch(failure(error.toString()));
         dispatch(alertActions.error(error.toString()));
-      },
+      }
     );
   };
 }
@@ -73,14 +80,14 @@ function register(user) {
       ({ user }) => {
         if (user && user._id) {
           dispatch(success(user));
-          window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
+          redirectAfterAccess(user);
           dispatch(alertActions.success('Registration successful'));
         }
       },
       (error) => {
         dispatch(failure(error.toString()));
         dispatch(alertActions.error(error.toString()));
-      },
+      }
     );
   };
 }
@@ -92,7 +99,7 @@ function resetPass(args) {
       .then(({ user }) => {
         if (user && user._id) {
           dispatch(success(user));
-          window.location = user?.role === 'admin' ? '/admin' : '/dashboard';
+          redirectAfterAccess(user);
         }
       })
       .catch((error) => {

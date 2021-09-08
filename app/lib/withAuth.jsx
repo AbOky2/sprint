@@ -60,8 +60,12 @@ export default function withAuth(
       }
 
       if (logoutRequired && user) {
+        const { search } = window.location;
+
         Router.push(
-          isAdmin(user) ? dashboardPaths.admin : dashboardPaths.student
+          isAdmin(user)
+            ? dashboardPaths.admin
+            : `${dashboardPaths.student}${search ? `/search/buy${search}` : ''}`
         );
       }
     }
