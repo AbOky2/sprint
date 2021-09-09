@@ -78,7 +78,7 @@ const auth = ({ server }) => {
       (req, res, next) => {
         passport.authenticate('local', (err, reqUser, info) => {
           if (err) return next(err);
-          if (!reqUser) return res.status(401).json({ message: info?.message });
+          if (!reqUser) return res.status(401).json({ message: info.message });
 
           req.login(reqUser, (error) => {
             if (error) return next(error);
