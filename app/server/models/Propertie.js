@@ -165,7 +165,10 @@ class PropertieClass extends DBModel {
         near = [geo.longitude, geo.latitude];
         if (!geo.city)
           zoom = Object.keys(geo.administrativeLevels).length ? 8 : 5;
-        department = geo?.administrativeLevels?.level2long;
+        department =
+          geo && geo.administrativeLevels && geo.administrativeLevels.level2long
+            ? geo.administrativeLevels.level2long
+            : null;
       }
     }
     const $maxDistance = 8000;
