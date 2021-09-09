@@ -10,7 +10,7 @@ const geocoder = NodeGeocoder(options);
 
 const getZoom = (data) => {
   if (!data) return {};
-  const dep = departments[data?.administrativeLevels?.level2long];
+  const dep = departments[data.administrativeLevels.level2long];
 
   if (data.city) return { adressType: 'city', zoom: 13 };
   if (data.administrativeLevels && data.administrativeLevels.level2long)
