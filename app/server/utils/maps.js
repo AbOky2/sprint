@@ -10,15 +10,19 @@ const geocoder = NodeGeocoder(options);
 
 const getZoom = (data) => {
   if (!data) return {};
-  const dep = departments[data.administrativeLevels.level2long];
+  const level2long =
+    data && data.administrativeLevels
+      ? data.administrativeLevels.level2long
+      : null;
+  const dep = departments[level2long] || null;
 
   if (data.city) return { adressType: 'city', zoom: 13 };
-  if (data.administrativeLevels && data.administrativeLevels.level2long)
+  if (level2long)
     return {
       zoom: 11,
       adressType: 'departement',
-      number: dep?.properties?.code,
-      $geometry: dep?.geometry,
+      number: dep.properties.code,
+      $geometry: dep.geometry,
     };
   return { adressType: 'region', zoom: 9 };
 };
@@ -70,7 +74,7 @@ module.exports = {
     const geo = g[0];
 
     return {
-      near: [geo?.longitude, geo?.latitude],
+      near: [geo.longitude, geo.latitude],
       geo,
       ...getZoom(geo),
     };
