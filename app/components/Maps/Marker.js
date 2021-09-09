@@ -17,7 +17,7 @@ const Marker = ({ data, show, isMobile, inGroup, handleBookmark, liked }) => {
   return (
     <div>
       <div className={className}>
-        <img src={src} className={classes.markerIcon} />
+        <img src={src} className={classes.markerIcon} alt="" />
         {show && !isMobile && data?.showInfoWindow && (
           <MapsCard
             {...data}
@@ -31,15 +31,18 @@ const Marker = ({ data, show, isMobile, inGroup, handleBookmark, liked }) => {
 };
 
 Marker.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.object.isRequired,
   inGroup: PropTypes.bool,
   isMobile: PropTypes.bool,
   show: PropTypes.any,
+  handleBookmark: PropTypes.func.isRequired,
+  liked: PropTypes.bool,
 };
 Marker.defaultProps = {
   inGroup: false,
   show: false,
   isMobile: false,
+  liked: false,
 };
 
 export default Marker;

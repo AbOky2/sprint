@@ -5,7 +5,6 @@ const defaultOffset = 1;
 const defaultLoc = {
   location: 'Paris, France',
   buy: 'Paris, France',
-  // buy: 'Île-de-France, France',
 };
 const searchQueryWhitelist = [
   'sort',

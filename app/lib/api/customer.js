@@ -1,5 +1,5 @@
+import { toQueryParams } from 'helpers/convertAndCheck';
 import sendRequest from './sendRequest';
-import { toQueryParams } from '../../helpers/convertAndCheck';
 
 const BASE_PATH = '/api/v1/customer';
 
@@ -16,6 +16,11 @@ export const getCurrentUserkApiMethod = (options = {}) =>
 
 export const getPropertiesApiMethod = (args, options = {}) =>
   sendRequest(`${BASE_PATH}/properties?${toQueryParams(args)}`, {
+    ...options,
+    body: JSON.stringify(args),
+  });
+export const getPropertiesByCoordApiMethod = (args, options = {}) =>
+  sendRequest(`${BASE_PATH}/properties/coord?${toQueryParams(args)}`, {
     ...options,
     body: JSON.stringify(args),
   });

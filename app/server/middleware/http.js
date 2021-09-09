@@ -1,6 +1,7 @@
 const session = require('express-session');
 // const toobusy = require('toobusy-js');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const mongoSessionStore = require('connect-mongo');
 const compression = require('compression');
 const helmet = require('helmet');
@@ -31,7 +32,7 @@ module.exports = (server, express) => {
   //   sess.cookie.secure = true; // sets cookie over HTTPS only
   //   sess.cookie.domain = COOKIE_DOMAIN; // sets domain for production env
   // }
-
+  server.use(cors());
   return [
     // server2Busy,
     helmet({ contentSecurityPolicy: false }),

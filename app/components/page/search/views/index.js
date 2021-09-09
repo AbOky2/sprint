@@ -71,6 +71,7 @@ const MapsContainer = ({
   toggleReloadMaps,
   toggleRefresh,
   index,
+  handleDistance,
   handleBookmark,
   handleChildClick,
   handlePointChange,
@@ -87,6 +88,7 @@ const MapsContainer = ({
       reloadMaps={reloadMaps}
       refresh={refresh}
       toggleRefresh={toggleRefresh}
+      handleDistance={handleDistance}
       handleChildClick={handleChildClick}
       handlePointChange={handlePointChange}
       handleBookmark={handleBookmark}
@@ -157,6 +159,7 @@ const MapsView = withRouter(
       isMapsView,
       isMdView,
       handlePointChange,
+      handleDistance,
       sortBy,
       handleSortSelect,
       router,
@@ -173,7 +176,7 @@ const MapsView = withRouter(
         coor: e.loc?.coordinates,
       }));
       const [curr, setCurr] = useState(null);
-      const [reloadMaps, setReloadMaps] = useState(false);
+      const [reloadMaps, setReloadMaps] = useState(true);
       const [carrouselIndex, setCarrouselIndex] = useState(0);
       const getChildPostion = () => {
         const bounds = document
@@ -283,6 +286,7 @@ const MapsView = withRouter(
             handleChildClick={handleChildClick}
             handleCarouselChange={handleCarouselChange}
             handlePointChange={handlePointChange}
+            handleDistance={handleDistance}
             liked={liked}
             toggleView={toggleView}
             toggleReloadMaps={toggleReloadMaps}
@@ -309,6 +313,7 @@ const sharedProptypes = {
   handleSortSelect: PropTypes.func.isRequired,
   handleBookmark: PropTypes.func.isRequired,
   handlePointChange: PropTypes.func.isRequired,
+  handleDistance: PropTypes.func.isRequired,
   page: PropTypes.object.isRequired,
   matches: PropTypes.bool.isRequired,
   handlePage: PropTypes.func.isRequired,

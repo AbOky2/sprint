@@ -6,6 +6,17 @@ const swithContent = Joi.object({
   position: Joi.number(),
 }).required();
 
+const searchObj = {
+  page: Joi.number().min(1).optional(),
+  limit: Joi.number().min(1).optional(),
+  loc: Joi.string().optional().allow(''),
+  point: Joi.any(),
+  typeOfAnnonce: Joi.string().valid(...typeOfAnnoncies),
+  typeOfProperty: Joi.any(),
+  sort: Joi.string().optional(),
+  maxPrice: Joi.number().min(-1).optional(),
+  pieces: Joi.any().optional(),
+};
 const schemas = {
   admin: {
     propertie: {
@@ -36,16 +47,11 @@ const schemas = {
   },
   student: {
     search: Joi.object().keys({
-      page: Joi.number().min(1).optional(),
-      limit: Joi.number().min(1).optional(),
-      loc: Joi.string().optional().allow(''),
-      zoom: Joi.number().min(1).optional(),
-      point: Joi.any(),
-      typeOfAnnonce: Joi.string().valid(...typeOfAnnoncies),
-      typeOfProperty: Joi.any(),
-      sort: Joi.string().optional(),
-      maxPrice: Joi.number().min(-1).optional(),
-      pieces: Joi.any().optional(),
+      ...searchObj,
+    }),
+    searchByCoord: Joi.object().keys({
+      ...searchObj,
+      zoom: Joi.number().min(0).required(),
     }),
   },
 };

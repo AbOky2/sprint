@@ -6,7 +6,11 @@ import PropTypes from 'prop-types';
 import Router, { withRouter } from 'next/router';
 import { useMediaQuery } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
-import { getPropertiesApiMethod, addBookmarkApiMethod } from 'lib/api/customer';
+import {
+  getPropertiesApiMethod,
+  getPropertiesByCoordApiMethod,
+  addBookmarkApiMethod,
+} from 'lib/api/customer';
 import { toggleArray, isArray, pick } from 'helpers/convertAndCheck';
 import { typeOfAnnonciesObj, sortByKeys } from 'helpers/property';
 import NotFound from 'components/NotFound';
@@ -34,7 +38,12 @@ const SearchPage = ({
     page: defaultPage,
   });
   const [currView, setCurrView] = useState(isMapsView);
+  const [center, setCenter] = useState([]);
+  const [distance, setDistance] = useState(0);
+  const [mapOptions, setMapOptions] = useState({});
+  const [list, setList] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const [makeChangeRequest, setMakeChangeRequest] = useState(false);
   const [makeRequest, setMakeRequest] = useState(false);
   const [allData, setAllData] = useState(properties);
   const [state, setState] = useState(allData.docs);
@@ -47,6 +56,7 @@ const SearchPage = ({
     pieces,
   });
 
+  const handleDistance = (distance) => setDistance(distance);
   const toggleRefresh = (refresh) => setRefresh(refresh);
   const toggleView = () => setCurrView(!currView);
   const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
@@ -68,7 +78,7 @@ const SearchPage = ({
     setState(
       state.sort((a, b) => {
         if (value === sortByKeys[0]) return +a.price - +b.price;
-        else return +b.price - +a.price;
+        return +b.price - +a.price;
       })
     );
     setQueryData({ ...queryData, sort: value });
@@ -82,18 +92,18 @@ const SearchPage = ({
       undefined,
       { shallow: true }
     );
-    // setMakeRequest(true);
   };
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
     addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
   };
-  const handlePointChange = (list) => {
-    const listId = list
-      ?.map(({ points = [] }) => points.map((e) => e.id))
-      .flat();
-    const newState = properties.docs?.filter((e) => listId.includes(e._id));
-    if (newState) setState(newState);
+  const handlePointChange = async (list, mapOptions = {}) => {
+    if (isArray(mapOptions.center)) return;
+
+    setMapOptions(mapOptions);
+    setCenter(mapOptions.center);
+    setList(list);
+    setMakeChangeRequest(true);
   };
 
   const isLocation = typeOfAnnonce === typeOfAnnonciesObj.location;
@@ -102,13 +112,14 @@ const SearchPage = ({
     if (!queryData.loc) queryData.loc = null;
 
     const {
-      list: { docs, near, ...pageInfo } = {},
+      list: { docs, near, zoom, department, ...pageInfo } = {},
     } = await getPropertiesApiMethod({
       ...queryData,
       page,
     });
     setState(docs);
-    setAllData({ docs, near });
+
+    setAllData({ docs, near, zoom, department });
     setPage(pick(pageInfo, pagePropertyWhilist));
 
     Router.push(
@@ -130,6 +141,34 @@ const SearchPage = ({
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
+
+  useEffect(() => setMakeRequest(true), [queryData.loc]);
+  useEffect(() => {
+    (async () => {
+      if (!makeChangeRequest || isArray(center)) return;
+      if (!queryData.maxPrice) queryData.maxPrice = -1;
+      if (!queryData.loc) queryData.loc = null;
+
+      const {
+        list: { docs, near, zoom, ...pageInfo } = {},
+      } = await getPropertiesByCoordApiMethod({
+        ...queryData,
+        loc: center,
+        zoom: mapOptions.zoom,
+        page: 1,
+      });
+
+      const listId = list
+        ?.map(({ points = [] }) => points.map((e) => e.id))
+        .flat();
+      const newState = docs?.filter((e) => listId.includes(e._id));
+      if (newState) setState(newState);
+      setState(docs);
+      setAllData({ docs, near, zoom, department: null });
+      setPage(pick(pageInfo, pagePropertyWhilist));
+      setMakeChangeRequest(false);
+    })();
+  }, [makeChangeRequest]);
 
   useEffect(() => {
     if (makeRequest) {
@@ -179,6 +218,7 @@ const SearchPage = ({
             isMdView={isMdView}
             handlePointChange={handlePointChange}
             toggleRefresh={toggleRefresh}
+            handleDistance={handleDistance}
             isMapsView={currView}
           />
         </div>

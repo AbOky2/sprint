@@ -7,7 +7,6 @@ const {
   sortByKeys,
 } = require('../../helpers/property');
 
-const { defaultLimit, defaultOffset } = require('../../helpers/query');
 const maps = require('../utils/maps');
 
 const { Schema } = mongoose;
@@ -95,8 +94,6 @@ class PropertieClass extends DBModel {
     typeOfAnnonce,
     pieces = [],
     loc,
-    limit = defaultLimit,
-    page = defaultOffset,
     sort,
   }) {
     const {
@@ -108,7 +105,6 @@ class PropertieClass extends DBModel {
       number,
     } = await maps.find(loc);
     const $maxDistance = 5000;
-    // const $maxDistance = 1 * 1609.34;
     const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
     const docs = await this.find(
       maps.geoQuery({
@@ -154,17 +150,10 @@ class PropertieClass extends DBModel {
     return { list };
   }
 
-  static async search({
-    maxPrice,
-    typeOfAnnonce,
-    pieces = [],
-    loc,
-    limit = defaultLimit,
-    page = defaultOffset,
-    sort,
-  }) {
+  static async search({ maxPrice, typeOfAnnonce, pieces = [], loc }) {
     let near = [];
     let zoom = 12;
+    let department = null;
 
     if (loc) {
       let geo = await maps.geocoder.geocode({
@@ -173,47 +162,28 @@ class PropertieClass extends DBModel {
       });
       if (geo && geo[0]) {
         geo = geo[0];
-        // near = [geo.latitude, geo.longitude];
         near = [geo.longitude, geo.latitude];
         if (!geo.city)
           zoom = Object.keys(geo.administrativeLevels).length ? 8 : 5;
+        department = geo?.administrativeLevels?.level2long;
       }
     }
-
-    // const $maxDistance = 1 * 1609.34;
     const $maxDistance = 8000;
-    const query = {
-      $and: [
-        pieces.length > 0 ? { pieces: { $in: pieces } } : {},
-        maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
-        near.length > 0
-          ? {
-              loc: {
-                $nearSphere: {
-                  $maxDistance,
-                  $geometry: {
-                    type: 'Point',
-                    coordinates: near,
-                  },
-                },
-              },
-            }
-          : {},
-        { loc: { $ne: null } },
-        { price: { $ne: null } },
-        { available: true },
-        { typeOfAnnonce },
-      ],
-    };
-    const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
-    const docs = await this.find(query, null, {
-      sort: { price: priceSort },
-    });
     const list = {
-      docs,
+      docs: await this.find(
+        maps.geoQuery({
+          pieces,
+          maxPrice,
+          near,
+          $maxDistance,
+          typeOfAnnonce,
+        }),
+        null
+      ),
       near: [near[1], near[0]],
       zoom,
       total: await this.count(),
+      department,
     };
 
     return { list };
@@ -224,42 +194,20 @@ class PropertieClass extends DBModel {
     typeOfAnnonce,
     pieces = [],
     loc,
-    limit = defaultLimit,
-    page = defaultOffset,
-    sort,
     zoom,
   }) {
     const near = [loc.lat, loc.lng];
-    // zoom = 12;
     const $maxDistance = (19 - zoom) * 10000;
-    const query = {
-      $and: [
-        pieces.length > 0 ? { pieces: { $in: pieces } } : {},
-        maxPrice >= 0 ? { price: { $lte: parseInt(maxPrice, 10) } } : {},
-        near.length > 0
-          ? {
-              loc: {
-                $nearSphere: {
-                  $maxDistance,
-                  $geometry: {
-                    type: 'Point',
-                    coordinates: [near[1], near[0]],
-                  },
-                },
-              },
-            }
-          : {},
-        { loc: { $ne: null } },
-        { price: { $ne: null } },
-        { available: true },
-        { typeOfAnnonce },
-      ],
-    };
-
-    const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
-    const docs = await this.find(query);
     const list = {
-      docs,
+      docs: await this.find(
+        maps.geoQuery({
+          pieces,
+          maxPrice,
+          near: [near[1], near[0]],
+          $maxDistance,
+          typeOfAnnonce,
+        })
+      ),
       near,
       zoom,
     };

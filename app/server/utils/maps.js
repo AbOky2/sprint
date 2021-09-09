@@ -1,5 +1,4 @@
 const NodeGeocoder = require('node-geocoder');
-const navitia = require('navitia');
 const { GOOGLE_GEOLOCATION } = require('../../config');
 const departments = require('../../helpers/france-maps');
 
@@ -55,7 +54,6 @@ const geoQuery = ({
           },
         }
       : { loc: { $ne: null } },
-    // { loc: { $ne: null } },
     { price: { $ne: null } },
     { available: true },
     { typeOfAnnonce },
