@@ -10,11 +10,15 @@ import { userActions } from 'redux/_actions';
 import { AdminContentWrapper } from 'components/wrapper';
 import { Icon } from 'components/form';
 import { addBookmarkApiMethod } from 'lib/api/customer';
-import { typeOfAnnoncies, defaultPropertyImg } from 'helpers/property';
+import {
+  typeOfAnnoncies,
+  defaultPropertyImg,
+  getNbPieces,
+} from 'helpers/property';
 import Carrousel from 'components/Carrousel';
 import NotFound from 'components/NotFound';
 import { spaceCurrency } from 'helpers/convertAndCheck';
-import { getNbPieces } from 'helpers/property';
+
 import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';
 import Sidebar, { BtnCalendly } from './sidebar';
@@ -129,11 +133,13 @@ const PropertyPage = ({
 
                 <div>
                   <Icon type="room" color="newBlue" />
-                  <span>{` de ${
-                    property.minSurface !== property.maxSurface
-                      ? `${property.minSurface}m² à ${property.maxSurface}m²`
-                      : `${property.minSurface}m²`
-                  }`}</span>
+                  <span>
+                    {` de ${
+                      property.minSurface !== property.maxSurface
+                        ? `${property.minSurface}m² à ${property.maxSurface}m²`
+                        : `${property.minSurface}m²`
+                    }`}
+                  </span>
                 </div>
               </Grid>
             </div>
@@ -183,7 +189,7 @@ const PropertyPage = ({
               <Maps loc={property.loc?.coordinates} />
             </div>
           </Grid>
-          <Grid md={4} xs={12}>
+          <Grid item md={4} xs={12}>
             <Sidebar
               isLocation={isLocation}
               property={property}
@@ -229,22 +235,6 @@ const PropertyPage = ({
           fullAddress={property.fullAddress}
           handleClose={() => handleSelectLot(null)}
         />
-        {/* <Grid container className={classes.ecologyContainer}>
-          <div>
-            <Icon type="pen" />
-          </div>
-          <div>
-            <Typography variant="h3">
-              Engagements Durables : votre logement plus éco-responsable
-            </Typography>
-            <Typography>
-              Nexity intègre à ses logements une charte durable afin d’optimiser
-              la gestion des déchets, réaliser des économies d’eau et d’énergie,
-              utiliser des matériaux à l’empreinte écologique limitée et
-              réintégrer la biodiversité au sein de ses résidences.
-            </Typography>
-          </div>
-        </Grid> */}
       </div>
     </AdminContentWrapper>
   );

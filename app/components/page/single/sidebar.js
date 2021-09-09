@@ -19,7 +19,11 @@ const Extras = ({ advantages = [] }) => (
     <Grid container>
       {advantages.map((elem) => (
         <Grid key={elem} container item alignItems="center">
-          <Icon type="checked" color="newBlue" size="20" />
+          <Icon
+            type="checked"
+            color="newBlue"
+            customSize={{ width: 20, height: 20 }}
+          />
           <Typography>{elem}</Typography>
         </Grid>
       ))}

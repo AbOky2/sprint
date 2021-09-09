@@ -182,10 +182,12 @@ export const GoogleMaps = ({ onChange, value, placeholder }) => {
 };
 GoogleMaps.propTypes = {
   onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
   value: PropTypes.string,
 };
 GoogleMaps.defaultProps = {
   value: '',
+  placeholder: '',
 };
 
 const positionType = ['left', 'right'];

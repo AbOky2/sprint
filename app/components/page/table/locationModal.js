@@ -63,7 +63,7 @@ ${ucfirst(user?.firstName)} ${ucfirst(user?.lastName)}`;
   return (
     <div>
       <Modal
-        openModal={curr}
+        openModal={!!curr}
         showActions={false}
         showDivider={false}
         onClose={handleClose}
@@ -93,7 +93,7 @@ ${ucfirst(user?.firstName)} ${ucfirst(user?.lastName)}`;
                   xs={8}
                   md={8}
                   dangerouslySetInnerHTML={{ __html: data }}
-                ></Grid>
+                />
                 <Grid container item xs={4} md={2}>
                   <Copy data={data} classes={classes} />
                 </Grid>

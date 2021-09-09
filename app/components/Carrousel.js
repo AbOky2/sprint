@@ -49,13 +49,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const sharedBtn = {
-  display: 'block',
+  display: 'flex',
   position: 'absolute',
   top: '50%',
   cursor: 'pointer',
   zIndex: 3,
   backgroundColor: 'white',
-  padding: '8px 10px',
+  padding: 8,
   borderRadius: '100%',
 };
 

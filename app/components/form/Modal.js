@@ -83,7 +83,7 @@ const Modal = ({
   return (
     <Dialog
       fullScreen={fullScreen}
-      open={openModal}
+      open={!!openModal}
       onClose={onClose}
       aria-labelledby="responsive-dialog-title"
       disableBackdropClick
@@ -130,7 +130,7 @@ const Modal = ({
 };
 
 Modal.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   openModal: PropTypes.bool,
   showDivider: PropTypes.bool,
   onClick: PropTypes.func,
