@@ -300,10 +300,10 @@ const MapsView = withRouter(
 );
 
 const sharedProptypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object,
   data: PropTypes.arrayOf(PropTypes.object),
   queryData: PropTypes.object.isRequired,
-  allData: PropTypes.arrayOf(PropTypes.object),
+  allData: PropTypes.object.isRequired,
   sortBy: PropTypes.oneOf(sortByKeys).isRequired,
   liked: PropTypes.array.isRequired,
   isMapsView: PropTypes.bool.isRequired,
@@ -314,9 +314,8 @@ const sharedProptypes = {
   handleBookmark: PropTypes.func.isRequired,
   handlePointChange: PropTypes.func.isRequired,
   handleDistance: PropTypes.func.isRequired,
-  page: PropTypes.object.isRequired,
+  page: PropTypes.number,
   matches: PropTypes.bool.isRequired,
-  handlePage: PropTypes.func.isRequired,
   toggleRefresh: PropTypes.func.isRequired,
 };
 MapsView.propTypes = sharedProptypes;

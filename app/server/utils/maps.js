@@ -16,13 +16,13 @@ const getZoom = (data) => {
       : null;
   const dep = departments[level2long] || null;
 
-  if (data.city) return { adressType: 'city', zoom: 13 };
+  if (data.city) return { adressType: 'city', zoom: 13, coord: dep };
   if (level2long)
     return {
       zoom: 11,
       adressType: 'departement',
       number: dep.properties.code,
-      $geometry: dep.geometry,
+      coord: dep,
     };
   return { adressType: 'region', zoom: 9 };
 };

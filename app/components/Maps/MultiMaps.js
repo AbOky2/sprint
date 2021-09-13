@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import supercluster from 'points-cluster';
-import departments from 'helpers/france-maps';
 import Marker from './Marker';
 import ClusterMarker from './ClusterMarker';
 import styles from './styles';
@@ -43,8 +42,7 @@ export const GoogleMap = (props) => {
     clustersList: [],
     defaultReload: false,
   });
-  // const [gMap, setGMap] = useState(null);
-  // const [maplayer, setMapLayer] = useState(department);
+  const [gMap, setGMap] = useState(null);
   const [triggerCreateClusters, setTriggerCreateClusters] = useState(false);
 
   const getClusters = () => {
@@ -85,23 +83,19 @@ export const GoogleMap = (props) => {
     if (state.defaultReload && !reloadMaps && !refresh) return;
     setTriggerCreateClusters(true);
   };
-  // useEffect(() => {
-  //   if (!gMap) return;
-  //   if (department) gMap.data.forEach((e) => gMap.data.remove(e));
-  //   console.log(
-  //     department,
-  //     department ? departments[department]?.geometry.coordinates : []
-  //   );
-  //   gMap.data.add({
-  //     geometry: new google.maps.Data.Polygon(
-  //       department ? departments[department]?.geometry.coordinates : []
-  //     ),
-  //   });
-  // }, [department]);
+  useEffect(() => {
+    if (!gMap) return;
+    if (department) gMap.data.forEach((e) => gMap.data.remove(e));
+    gMap.data.addGeoJson(department);
+    gMap.data.setStyle({
+      fillColor: '#4F80FF',
+      strokeWeight: 1,
+    });
+  }, [department]);
 
   useEffect(
     () => setState({ ...state, mapOptions: { ...state.mapOptions, zoom } }),
-    zoom
+    [zoom]
   );
   useEffect(() => {
     if (refresh || reloadMaps) {
@@ -134,7 +128,7 @@ export const GoogleMap = (props) => {
             handleDistance(
               maps.geometry?.spherical.computeDistanceBetween(sw, myCenter)
             );
-            // setGMap(map);
+            setGMap(map);
           } catch (error) {}
         }}
       >

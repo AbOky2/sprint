@@ -9,11 +9,12 @@ const {
 const requestMiddleware = require('../middleware/request');
 const joiSchema = require('../middleware/schema');
 const { sendSponsorship } = require('../utils/mail');
+const { isStudent } = require('../../helpers/user');
 
 const router = express.Router();
 
 router.use((req, res, next) => {
-  if (!req.user) {
+  if (!isStudent(req.user)) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }

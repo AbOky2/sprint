@@ -31,12 +31,12 @@ const Marker = ({ data, show, isMobile, inGroup, handleBookmark, liked }) => {
 };
 
 Marker.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
   inGroup: PropTypes.bool,
   isMobile: PropTypes.bool,
   show: PropTypes.any,
   handleBookmark: PropTypes.func.isRequired,
-  liked: PropTypes.bool,
+  liked: PropTypes.array,
 };
 Marker.defaultProps = {
   inGroup: false,

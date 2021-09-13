@@ -96,16 +96,10 @@ class PropertieClass extends DBModel {
     loc,
     sort,
   }) {
-    const {
-      geo,
-      near,
-      zoom = 12,
-      adressType,
-      $geometry,
-      number,
-    } = await maps.find(loc);
+    const { geo, near, zoom = 12, adressType, coord, number } = await maps.find(
+      loc
+    );
     const $maxDistance = 5000;
-    const priceSort = sortByKeys.includes(sort) ? sort : sortByKeys[0];
     const docs = await this.find(
       maps.geoQuery({
         pieces,
@@ -113,12 +107,9 @@ class PropertieClass extends DBModel {
         near,
         $maxDistance,
         typeOfAnnonce,
-        $geometry,
+        $geometry: coord?.geometry,
       }),
-      null,
-      {
-        sort: { price: priceSort },
-      }
+      null
     );
     const list = {
       docs,
@@ -135,15 +126,14 @@ class PropertieClass extends DBModel {
         near: department.near,
         $maxDistance,
         typeOfAnnonce,
-        $geometry: department.$geometry,
+        $geometry: department.coord?.geometry,
       });
 
       list.department = {
         name: geo.administrativeLevels.level2long,
         number: department.number,
-        lotFound: await this.find(q, null, {
-          sort: { price: priceSort },
-        }),
+        coord: department.coord,
+        lotFound: await this.find(q, null),
       };
     }
 
@@ -156,19 +146,16 @@ class PropertieClass extends DBModel {
     let department = null;
 
     if (loc) {
-      let geo = await maps.geocoder.geocode({
-        address: loc,
-        country: 'france',
-      });
-      if (geo && geo[0]) {
-        geo = geo[0];
+      const { geo } = await maps.find(loc);
+
+      if (geo) {
         near = [geo.longitude, geo.latitude];
+        const name = geo.administrativeLevels.level2long;
         if (!geo.city)
           zoom = Object.keys(geo.administrativeLevels).length ? 8 : 5;
-        department =
-          geo && geo.administrativeLevels && geo.administrativeLevels.level2long
-            ? geo.administrativeLevels.level2long
-            : null;
+        const dep = await maps.find(name);
+
+        department = dep.coord;
       }
     }
     const $maxDistance = 8000;

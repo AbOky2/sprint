@@ -6,8 +6,8 @@ const {
   deleteCollection,
   handleErrors,
 } = require('../middleware/express');
-const { upload, createImagePath, removeFiles } = require('../utils/upload');
-const { Admin } = require('../../helpers/user');
+const { upload, removeFiles } = require('../utils/upload');
+const { isAdmin } = require('../../helpers/user');
 const sameQueries = require('./utils');
 
 const requestMiddleware = require('../middleware/request');
@@ -16,7 +16,7 @@ const joiSchema = require('../middleware/schema');
 const router = express.Router();
 
 router.use((req, res, next) => {
-  if (!req.user || !req.user.isAdmin) {
+  if (!isAdmin(req.user)) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
