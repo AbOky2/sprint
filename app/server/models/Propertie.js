@@ -144,7 +144,6 @@ class PropertieClass extends DBModel {
     let near = [];
     let zoom = 12;
     let department = null;
-
     if (loc) {
       const { geo } = await maps.find(loc);
 
@@ -153,9 +152,10 @@ class PropertieClass extends DBModel {
         const name = geo.administrativeLevels.level2long;
         if (!geo.city)
           zoom = Object.keys(geo.administrativeLevels).length ? 8 : 5;
-        const dep = await maps.find(name);
-
-        department = dep.coord;
+        if (name) {
+          const dep = await maps.find(name);
+          department = dep.coord;
+        }
       }
     }
     const $maxDistance = 8000;
