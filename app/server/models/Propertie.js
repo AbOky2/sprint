@@ -107,7 +107,7 @@ class PropertieClass extends DBModel {
         near,
         $maxDistance,
         typeOfAnnonce,
-        $geometry: coord?.geometry,
+        $geometry: coord ? coord.geometry : null,
       }),
       null
     );
@@ -126,7 +126,7 @@ class PropertieClass extends DBModel {
         near: department.near,
         $maxDistance,
         typeOfAnnonce,
-        $geometry: department.coord?.geometry,
+        $geometry: department.coord ? department.coord.geometry : null,
       });
 
       list.department = {
