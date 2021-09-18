@@ -39,6 +39,7 @@ Marker.propTypes = {
   liked: PropTypes.array,
 };
 Marker.defaultProps = {
+  data: {},
   inGroup: false,
   show: false,
   isMobile: false,

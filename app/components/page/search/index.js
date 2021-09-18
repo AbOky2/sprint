@@ -59,7 +59,9 @@ const SearchPage = ({
   const handleDistance = (distance) => setDistance(distance);
   const toggleRefresh = (refresh) => setRefresh(refresh);
   const toggleView = () => setCurrView(!currView);
-  const [liked, setLiked] = useState(user?.bookmarks?.map((elem) => elem._id));
+  const [liked, setLiked] = useState(
+    user?.bookmarks?.map((elem) => elem._id) || []
+  );
 
   const handleBudget = (value) =>
     setQueryData({ ...queryData, maxPrice: value });

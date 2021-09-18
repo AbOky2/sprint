@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
 const DBModel = require('./Model');
-const {
-  typeOfAnnoncies,
-  typeOfProperties,
-  sortByKeys,
-} = require('../../helpers/property');
+const { typeOfAnnoncies, typeOfProperties } = require('../../helpers/property');
 
 const maps = require('../utils/maps');
 
@@ -89,16 +85,16 @@ class PropertieClass extends DBModel {
     return element;
   }
 
-  static async publicSearch({
-    maxPrice,
-    typeOfAnnonce,
-    pieces = [],
-    loc,
-    sort,
-  }) {
-    const { geo, near, zoom = 12, adressType, coord, number } = await maps.find(
-      loc
-    );
+  static async publicSearch({ maxPrice, typeOfAnnonce, pieces = [], loc }) {
+    const {
+      geo,
+      near,
+      zoom = 12,
+      adressType,
+      cityCoord,
+      coord,
+      number,
+    } = await maps.find(loc);
     const $maxDistance = 5000;
     const docs = await this.find(
       maps.geoQuery({
@@ -107,11 +103,26 @@ class PropertieClass extends DBModel {
         near,
         $maxDistance,
         typeOfAnnonce,
-        $geometry: coord ? coord.geometry : null,
+        $geometry: cityCoord || (coord ? coord.geometry : null),
       }),
       null
     );
+
     const list = {
+      ...(cityCoord
+        ? {
+            coord: {
+              type: 'Feature',
+              geometry: cityCoord,
+              properties: {
+                fillColor: '#113eb6',
+                strokeWeight: 1,
+              },
+            },
+          }
+        : adressType === 'region'
+        ? { coord }
+        : {}),
       docs,
       zoom,
       near: [near[1], near[0]],
