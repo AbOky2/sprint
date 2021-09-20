@@ -124,6 +124,7 @@ class PropertieClass extends DBModel {
         ? { coord }
         : {}),
       docs,
+      nbLotFound: docs.length,
       zoom,
       near: [near[1], near[0]],
       adressType,
@@ -139,12 +140,18 @@ class PropertieClass extends DBModel {
         typeOfAnnonce,
         $geometry: department.coord ? department.coord.geometry : null,
       });
+      const lotFound = await this.find(q, null);
+      const docsIds = docs.map((e) => e._id + '') || [];
 
+      list.docs = lotFound.sort((a, b) => {
+        if (docsIds.includes(a._id + '')) return -1;
+        else if (docsIds.includes(b._id + '')) return 1;
+        return 0;
+      });
       list.department = {
         name: geo.administrativeLevels.level2long,
         number: department.number,
         coord: department.coord,
-        lotFound: await this.find(q, null),
       };
     }
 

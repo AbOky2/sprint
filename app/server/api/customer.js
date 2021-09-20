@@ -51,7 +51,6 @@ router.post(
 
       res.json({ user });
     } catch (error) {
-      console.log(error);
       res.json({ errors: 'Error while sending', error });
     }
   })

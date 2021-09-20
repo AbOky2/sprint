@@ -19,6 +19,7 @@ export default async function sendRequest(path, options = {}, extra) {
   let data;
   try {
     data = await response.json();
+
     if (data.error || data.message) toast.warn(data.error || data.message);
   } catch (error) {
     throw new Error(error);

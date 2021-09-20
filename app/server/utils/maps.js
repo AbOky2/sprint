@@ -25,6 +25,7 @@ const getZoom = (data) => {
     };
   return { adressType: 'region', zoom: 9, coord: dep };
 };
+
 const geoQuery = ({
   pieces,
   maxPrice,
