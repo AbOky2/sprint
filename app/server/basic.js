@@ -105,21 +105,6 @@ const auth = ({ server }) => {
     }, joiSchema.propertie.student.search)
   );
 
-  server.post(
-    '/properties',
-    listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
-      const { list } = await PropertieModel.search({
-        ...args,
-        typeOfProperty:
-          typeOfProperty && typeOfProperty.length > 0
-            ? typeOfProperty.split(',')
-            : [],
-      });
-
-      return { list };
-    }, joiSchema.propertie.student.search)
-  );
-
   server.get('/auth/logout', (req, res) => {
     req.logout();
     res.json({ success: 'sucess' });
