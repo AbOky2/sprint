@@ -238,8 +238,9 @@ const LoginTab = ({ login, register }) => {
     password: '',
     role: Student,
   });
-
-  const [isRegisterinView, setIsRegisterinView] = useState(false);
+  const [isRegisterinView, setIsRegisterinView] = useState(
+    window?.location?.search?.includes('register')
+  );
   const [cgtChecked, setCgtChecked] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
 
@@ -277,7 +278,7 @@ const LoginTab = ({ login, register }) => {
         return;
       }
 
-      if (!checked || !cgtChecked) {
+      if (!cgtChecked) {
         cleanAlert('Veuillez accepter les conditions générales');
         return;
       }
