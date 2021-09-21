@@ -63,21 +63,6 @@ router.get(
 );
 
 router.post(
-  '/properties',
-  listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
-    const { list } = await PropertieModel.search({
-      ...args,
-      typeOfProperty:
-        typeOfProperty && typeOfProperty.length > 0
-          ? typeOfProperty.split(',')
-          : [],
-    });
-
-    return { list };
-  }, joiSchema.propertie.student.search)
-);
-
-router.post(
   '/properties/coord',
   listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
     const { list } = await PropertieModel.searchByPoint({

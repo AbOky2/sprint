@@ -13,9 +13,8 @@ export const getCurrentUserkApiMethod = (options = {}) =>
     method: 'GET',
     ...options,
   });
-
-export const getPropertiesApiMethod = (args, options = {}) =>
-  sendRequest(`${BASE_PATH}/properties?${toQueryParams(args)}`, {
+export const getPublicPropertiesApiMethod = (args, options = {}) =>
+  sendRequest(`/publicSearch?${toQueryParams(args)}`, {
     ...options,
     body: JSON.stringify(args),
   });
