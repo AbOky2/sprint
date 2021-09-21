@@ -4,7 +4,7 @@ import { searchQueryWhitelist, defaultLoc, defaultOffset } from 'helpers/query';
 import { pick, unPick } from 'helpers/convertAndCheck';
 import { userActions } from 'redux/_actions';
 import withAuth from 'lib/withAuth';
-import { getPropertiesApiMethod } from 'lib/api/customer';
+import { getPublicPropertiesApiMethod } from 'lib/api/customer';
 import Search from 'components/page/search';
 
 const SearchPage = (props) => <Search {...props} />;
@@ -19,7 +19,7 @@ SearchPage.getInitialProps = async ({ req, query }) => {
   queryParams.page = queryParams.page || defaultOffset;
   queryParams.point = [];
 
-  const { list } = await getPropertiesApiMethod(
+  const { list } = await getPublicPropertiesApiMethod(
     unPick(queryParams, ['listView']),
     { headers }
   );

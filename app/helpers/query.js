@@ -3,8 +3,8 @@ const { typeOfAnnonciesObj } = require('./property');
 const defaultLimit = 10;
 const defaultOffset = 1;
 const defaultLoc = {
-  location: 'Paris, France',
-  buy: 'Paris, France',
+  location: 'Île-de-France, France',
+  buy: 'Île-de-France, France',
 };
 const searchQueryWhitelist = [
   'sort',

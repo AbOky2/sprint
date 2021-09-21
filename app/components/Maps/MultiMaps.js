@@ -4,10 +4,11 @@ import supercluster from 'points-cluster';
 import Marker from './Marker';
 import ClusterMarker from './ClusterMarker';
 import styles from './styles';
+import { shared } from 'lib/theme';
 
 const defaultCenter = {
-  lat: 48.786738670953156,
-  lng: 2.348329772716056,
+  // lat: 48.786738670953156,
+  // lng: 2.348329772716056,
 };
 const MAP = {
   defaultZoom: 12,
@@ -23,11 +24,13 @@ export const GoogleMap = (props) => {
     curr,
     isMobile,
     pageList = [],
-    data: { docs = [], near = [], zoom, department },
+    data: { docs = [], near = [], zoom },
+    delimiter: { coord, department } = {},
     handlePointChange,
     handleDistance,
     handleChildClick,
     toggleRefresh,
+    isFirstRequest,
     liked,
     handleBookmark,
     reloadMaps = false,
@@ -77,21 +80,29 @@ export const GoogleMap = (props) => {
   };
 
   const handleMapChange = ({ center, zoom, bounds }, refresh = false) => {
-    const mapOptions = { center, zoom, bounds };
-    setState({ ...state, mapOptions, defaultReload: true });
+    setState({
+      ...state,
+      mapOptions: { center, zoom, bounds },
+      defaultReload: true,
+    });
 
-    if (state.defaultReload && !reloadMaps && !refresh) return;
+    if (state.defaultReload && !reloadMaps && !refresh && !isFirstRequest)
+      return;
+    console.log('ok');
     setTriggerCreateClusters(true);
   };
   useEffect(() => {
     if (!gMap) return;
-    if (department) gMap.data.forEach((e) => gMap.data.remove(e));
-    gMap.data.addGeoJson(department);
-    gMap.data.setStyle({
-      fillColor: '#4F80FF',
+    if (gMap.data) gMap.data.forEach((e) => gMap.data.remove(e));
+    if (department?.name && department?.coord)
+      gMap.data.addGeoJson(department?.coord);
+    if (coord) gMap.data.addGeoJson(coord);
+
+    gMap.data.setStyle((feature) => ({
+      fillColor: feature.getProperty('fillColor') || shared.colors.newBlue,
       strokeWeight: 1,
-    });
-  }, [department]);
+    }));
+  }, [gMap, coord, department]);
 
   useEffect(
     () => setState({ ...state, mapOptions: { ...state.mapOptions, zoom } }),
@@ -105,7 +116,8 @@ export const GoogleMap = (props) => {
   }, [reloadMaps, refresh]);
   useEffect(() => {
     createClusters(props);
-    handlePointChange(state.clusters, state.mapOptions);
+
+    if (!isFirstRequest) handlePointChange(state.clusters, state.mapOptions);
     setTriggerCreateClusters(false);
   }, [triggerCreateClusters]);
 

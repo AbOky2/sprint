@@ -66,11 +66,13 @@ const MapsContainer = ({
   reloadMaps,
   refresh,
   queryData,
+  delimiter,
   isMapsView,
   toggleView,
   toggleReloadMaps,
   toggleRefresh,
   index,
+  isFirstRequest,
   handleDistance,
   handleBookmark,
   handleChildClick,
@@ -81,7 +83,9 @@ const MapsContainer = ({
     <MultiMaps
       data={allData}
       queryData={queryData}
+      delimiter={delimiter}
       pageList={pageList}
+      isFirstRequest={isFirstRequest}
       curr={curr}
       isMobile={isMdView}
       liked={liked}
@@ -151,12 +155,14 @@ const MapsView = withRouter(
       handleBookmark,
       queryData,
       toggleView,
+      delimiter,
       toggleRefresh,
       data = [],
       allData = [],
       page: defaultPage,
       matches,
       isMapsView,
+      isFirstRequest,
       isMdView,
       handlePointChange,
       handleDistance,
@@ -277,6 +283,8 @@ const MapsView = withRouter(
             allData={allData}
             data={data}
             queryData={queryData}
+            delimiter={delimiter}
+            isFirstRequest={isFirstRequest}
             isMapsView={isMapsView}
             isMdView={isMdView}
             reloadMaps={reloadMaps}
@@ -303,6 +311,7 @@ const sharedProptypes = {
   classes: PropTypes.object,
   data: PropTypes.arrayOf(PropTypes.object),
   queryData: PropTypes.object.isRequired,
+  delimiter: PropTypes.object.isRequired,
   allData: PropTypes.object.isRequired,
   sortBy: PropTypes.oneOf(sortByKeys).isRequired,
   liked: PropTypes.array.isRequired,
