@@ -160,6 +160,45 @@ class PropertieClass extends DBModel {
     return { list };
   }
 
+  static async search({ maxPrice, typeOfAnnonce, pieces = [], loc }) {
+    let near = [];
+    let zoom = 12;
+    let department = null;
+    if (loc) {
+      const { geo } = await maps.find(loc);
+
+      if (geo) {
+        near = [geo.longitude, geo.latitude];
+        const name = geo.administrativeLevels.level2long;
+        if (!geo.city)
+          zoom = Object.keys(geo.administrativeLevels).length ? 8 : 5;
+        if (name) {
+          const dep = await maps.find(name);
+          department = dep.coord;
+        }
+      }
+    }
+    const $maxDistance = 8000;
+    const list = {
+      docs: await this.find(
+        maps.geoQuery({
+          pieces,
+          maxPrice,
+          near,
+          $maxDistance,
+          typeOfAnnonce,
+        }),
+        null
+      ),
+      near: [near[1], near[0]],
+      zoom,
+      total: await this.count(),
+      department,
+    };
+
+    return { list };
+  }
+
   static async searchByPoint({
     maxPrice,
     typeOfAnnonce,
