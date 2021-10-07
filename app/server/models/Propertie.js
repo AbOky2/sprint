@@ -122,7 +122,7 @@ class PropertieClass extends DBModel {
           }
         : { coord }),
       docs,
-      nbLotFound: docs.reduce((acc, curr) => acc + curr?.lots.length, 0),
+      nbLotFound: docs.reduce((acc, curr) => acc + curr.lots.length, 0),
       zoom,
       near: [near[1], near[0]],
       adressType,
