@@ -99,7 +99,8 @@ export const GoogleMap = (props) => {
     if (coord) gMap.data.addGeoJson(coord);
 
     gMap.data.setStyle((feature) => ({
-      fillColor: feature.getProperty('fillColor') || shared.colors.newBlue,
+      fillColor:
+        feature.getProperty('fillColor') || shared.colors.mapBlueOverlay,
       strokeWeight: 1,
     }));
   }, [gMap, coord, department]);

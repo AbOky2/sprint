@@ -85,6 +85,13 @@ const menuList = [
     path: '/admin/partners',
     iconType: 'house',
   },
+  {
+    slug: 'lot',
+    text: 'Selection Lot',
+    name: 'Lot mis en avant',
+    path: '/admin/selected_lot',
+    iconType: 'house',
+  },
 ];
 function ResponsiveDrawer({ children, window, logout }) {
   const classes = useStyles();

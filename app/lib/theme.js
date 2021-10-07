@@ -4,6 +4,7 @@ const shared = {
   colors: {
     primary: '#1A2E6C',
     newBlue: '#4F80FF',
+    mapBlueOverlay: '#4f80ff8a',
     newGray: '#8C97B6',
     lightBlue: '#D2DCF5',
     hoverGray: '#F4F5F7',
