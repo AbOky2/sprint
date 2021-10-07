@@ -209,7 +209,8 @@ class UserClass extends DBModel {
     const query = { role: { $ne: Admin } };
     const list = await this.paginate(query, {
       page,
-      sort: { createdAt: 'asc' },
+      limit,
+      sort: { created_at: 'desc' },
     });
 
     return { list };

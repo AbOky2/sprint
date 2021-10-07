@@ -127,6 +127,7 @@ export default function SpanningTable({
           .table-container {
             width: 90vw;
             height: 95vh;
+            margin-top: 65px;
           }
           .table-container > div {
             height: 30px;
