@@ -33,7 +33,7 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="google" content="notranslate" />
-          <meta name="theme-color" content="#1976D2" />
+          <meta name="theme-color" content="#F9FBFF" />
           <link
             rel="shortcut icon"
             type="image/png"
