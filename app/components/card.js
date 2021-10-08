@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { singlePath } from 'helpers/query';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { spaceCurrency } from 'helpers/convertAndCheck';
-import { getAddress, getNbPieces, getCardImg } from 'helpers/property';
+import {
+  getAddress,
+  getNbPieces,
+  getCardImg,
+  spaceCurrency,
+  singlePath,
+} from 'helpers';
 
 import { Icon } from './form';
 

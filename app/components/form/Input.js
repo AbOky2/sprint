@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Icon } from 'components/form';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-import { useToggleOpen } from 'helpers/hooks';
+import { useToggleOpen } from 'helpers';
 import SubmitIcon from 'static/img/submit.png';
 
 const sharedInputStyle = {

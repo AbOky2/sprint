@@ -1,7 +1,12 @@
 import { connect } from 'react-redux';
-import { typeOfAnnonciesObj } from 'helpers/property';
-import { searchQueryWhitelist, defaultLoc, defaultOffset } from 'helpers/query';
-import { pick, unPick } from 'helpers/convertAndCheck';
+import {
+  pick,
+  unPick,
+  typeOfAnnonciesObj,
+  searchQueryWhitelist,
+  defaultLoc,
+  defaultOffset,
+} from 'helpers';
 import { userActions } from 'redux/_actions';
 import withAuth from 'lib/withAuth';
 import { getPublicPropertiesApiMethod } from 'lib/api/customer';

@@ -10,8 +10,7 @@ import { addBookmarkApiMethod } from 'lib/api/customer';
 import Card from 'components/card';
 import { Btn } from 'components/form';
 import { btnHover } from 'components/form/Btn';
-import { getAddress, getNbPieces, getCardImg } from 'helpers/property';
-import { singlePath } from 'helpers/query';
+import { getAddress, getNbPieces, getCardImg, singlePath } from 'helpers';
 import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({

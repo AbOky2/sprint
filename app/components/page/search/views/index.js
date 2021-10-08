@@ -6,54 +6,9 @@ import { Grid, Typography } from '@material-ui/core';
 import MultiMaps from 'components/Maps/MultiMaps';
 import { MapsCarousel } from 'components/Carrousel';
 import { Icon, Checkbox } from 'components/form';
-import { sortByKeys } from 'helpers/property';
-import { defaultLimit } from 'helpers/query';
-import { ListWrapper, ListElement } from './partials';
+import { sortByKeys, defaultLimit } from 'helpers';
+import { ListContainer, ListElement } from './partials';
 import withStyles from '../styles';
-
-const ListContainer = ({
-  classes,
-  sortBy,
-  curr,
-  isMapsView,
-  handleSortSelect,
-  hasData,
-  page,
-  matches,
-  handlePage,
-  handleMouseEnter,
-  liked,
-  handleBookmark,
-}) => (
-  <Grid item xs={5} className={classes.listViewContainer}>
-    <ListWrapper
-      classes={classes}
-      sortBy={sortBy}
-      isMapsView={isMapsView}
-      handleSortSelect={handleSortSelect}
-      hasData={hasData}
-      page={page}
-      matches={matches}
-      handlePage={handlePage}
-    >
-      {page.pageList?.map((elems) => (
-        <ListElement
-          key={elems._id}
-          handleMouseEnter={handleMouseEnter(elems._id)}
-          handleMouseLeave={handleMouseEnter(null)}
-          className={
-            elems._id !== curr?._id
-              ? classes.mapsListContainer
-              : clsx(classes.mapsListContainer, classes.mapsCurrListContainer)
-          }
-          liked={liked}
-          handleBookmark={handleBookmark}
-          {...elems}
-        />
-      ))}
-    </ListWrapper>
-  </Grid>
-);
 
 const MapsContainer = ({
   classes,

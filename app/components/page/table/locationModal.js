@@ -4,7 +4,7 @@ import copy from 'copy-to-clipboard';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Icon, Btn } from 'components/form';
-import { ucfirst, stripTags } from 'helpers/convertAndCheck';
+import { ucfirst, stripTags } from 'helpers';
 import styles from './styles';
 
 const Copy = ({ data, classes }) => {

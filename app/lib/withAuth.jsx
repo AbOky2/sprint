@@ -4,7 +4,7 @@ import Router from 'next/router';
 import * as NProgress from 'nprogress';
 import { StudentMenuComp } from './AuthWrapper';
 import AdminDrawer from '../components/admin/drawer';
-import { isAdmin, dashboardPaths } from '../helpers/user';
+import { isAdmin, dashboardPaths } from 'helpers';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();

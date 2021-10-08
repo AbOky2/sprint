@@ -6,9 +6,9 @@ import Menu from '@material-ui/core/Menu';
 import Avatar from '@material-ui/core/Avatar';
 
 const propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(String).isRequired,
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  options: PropTypes.arrayOf(String),
 };
 
 class MenuWithAvatar extends React.Component {

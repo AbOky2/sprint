@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { spaceCurrency, locationAvailableDate } from 'helpers/convertAndCheck';
+import { spaceCurrency, locationAvailableDate } from 'helpers';
 import { Icon, Btn } from 'components/form';
 import styles from './styles';
 

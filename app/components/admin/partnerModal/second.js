@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import CreatableSelect from 'react-select/creatable';
 import Upload from '../../form/Upload';
-import { partnerTypes, partnerTypeListKeys } from '../../../helpers/partner';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

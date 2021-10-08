@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { userRoleSelect } from 'helpers/user';
+import { userRoleSelect } from 'helpers';
 import { Input, Select, Modal, Icon } from './form';
 
 const useStyles = makeStyles((theme) => ({

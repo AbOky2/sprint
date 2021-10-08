@@ -11,9 +11,8 @@ import {
   Checkbox,
   Typography,
 } from '@material-ui/core';
-import { toggleArray, isArray } from 'helpers/convertAndCheck';
+import { toggleArray, isArray, useToggleOpen } from 'helpers';
 import Icon from './Icon';
-import { useToggleOpen } from 'helpers/hooks';
 
 const positionType = ['', 'left', 'right'];
 

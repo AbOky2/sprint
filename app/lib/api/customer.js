@@ -1,4 +1,4 @@
-import { toQueryParams } from 'helpers/convertAndCheck';
+import { toQueryParams } from 'helpers';
 import sendRequest from './sendRequest';
 
 const BASE_PATH = '/api/v1/customer';

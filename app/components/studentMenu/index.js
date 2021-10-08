@@ -5,7 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { Grid, Drawer } from '@material-ui/core';
 import { openPopupWidget } from 'react-calendly';
-import { pages } from 'helpers/query';
+import { pages } from 'helpers';
 import { Icon, Btn } from '../form';
 import LogoImg from 'static/img/logo.png';
 import UpdateProfile from '../UpdateProfile';

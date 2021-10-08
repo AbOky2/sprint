@@ -9,9 +9,7 @@ import { userActions } from 'redux/_actions';
 import { Btn, Select, Input, Checkbox } from 'components/form';
 import { redirectStyle } from 'components/wrapper';
 import withAuth from 'lib/withAuth';
-import { Student, userRoleSelect } from 'helpers/user';
-import { pick } from 'helpers/convertAndCheck';
-import { cleanAlert } from 'helpers/hooks';
+import { Student, userRoleSelect, cleanAlert, pick } from 'helpers';
 
 const useStyles = makeStyles((theme) => ({
   container: {

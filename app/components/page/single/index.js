@@ -14,10 +14,10 @@ import {
   typeOfAnnoncies,
   defaultPropertyImg,
   getNbPieces,
-} from 'helpers/property';
+  spaceCurrency,
+} from 'helpers';
 import Carrousel from 'components/Carrousel';
 import NotFound from 'components/NotFound';
-import { spaceCurrency } from 'helpers/convertAndCheck';
 
 import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';

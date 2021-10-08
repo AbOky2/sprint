@@ -10,8 +10,7 @@ import {
   IconButton,
   TablePagination,
 } from '@material-ui/core';
-import { userRoleKeyVal } from 'helpers/user';
-import { toDate } from 'helpers/convertAndCheck';
+import { userRoleKeyVal, toDate } from 'helpers';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';

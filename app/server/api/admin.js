@@ -1,5 +1,5 @@
 const express = require('express');
-const { UserModel, PartnerTypeModel } = require('../models');
+const { UserModel, PartnerTypeModel, PromotedModel } = require('../models');
 const {
   listCollection,
   updateCollection,
@@ -43,6 +43,18 @@ router.get(
 
     return { list };
   }, joiSchema.user.admin.user.listByRole)
+);
+router.post(
+  '/promoted',
+  requestMiddleware(joiSchema.partnerType.admin.promotedType.post),
+  handleErrors(async ({ body: { data } }, res) => {
+    try {
+      const { list = [] } = await PromotedModel.add(data);
+      res.json({ list });
+    } catch (error) {
+      res.json({ errors: 'Error while sending', error });
+    }
+  })
 );
 router.post(
   '/partnerType',

@@ -4,7 +4,7 @@ import { Grid } from '@material-ui/core';
 import { Icon } from 'components/form';
 import { GoogleMaps, CustomInput } from 'components/form/Input';
 import { DropdownSelect } from 'components/form/Select';
-import { propertyPiecesSelectMap } from 'helpers/property';
+import { propertyPiecesSelectMap } from 'helpers';
 import withStyles from './styles';
 
 const searchFields = withStyles(

@@ -1,5 +1,5 @@
 import sendRequest from './sendRequest';
-import { toFormData } from '../../helpers/convertAndCheck';
+import { toFormData } from 'helpers';
 
 const BASE_PATH = '/api/v1/admin';
 
@@ -32,6 +32,11 @@ export const deletePartnerApiMethod = (id) =>
 export const deletePartnerTypekApiMethod = (name) =>
   sendRequest(`${BASE_PATH}/partnerType/${name}`, {
     method: 'DELETE',
+  });
+export const togglePromotedApiMethod = (args) =>
+  sendRequest(`${BASE_PATH}/promoted`, {
+    method: 'POST',
+    body: JSON.stringify(args),
   });
 export const addPartnerApiMethod = (args) =>
   sendRequest(

@@ -7,16 +7,11 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CreatableSelect from 'react-select/creatable';
-import { AdminContentWrapper } from '../../components/wrapper';
 import { Modal, Icon } from '../../components/form';
 
-// import { ReactComponent as LotsIcon } from 'assets/img/svg/partners.svg';
-// import { ReactComponent as AddIcon } from 'assets/img/svg/add.svg';
 import {
   getPartnersApiMethod,
   getPartnerTypesApiMethod,
@@ -25,7 +20,6 @@ import {
   deletePartnerTypekApiMethod,
 } from '../../lib/api/admin';
 import withAuth from '../../lib/withAuth';
-import { partnerTypeListKeys, partnerTypes } from '../../helpers/partner';
 import PartnerModal from '../../components/admin/partnerModal';
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +46,12 @@ function ListCard({ data }) {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <img className={classes.media} src={data?.picture} title="Contemplative Reptile" alt="" />
+        <img
+          className={classes.media}
+          src={data?.picture}
+          title="Contemplative Reptile"
+          alt=""
+        />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {data.name}
@@ -86,29 +85,42 @@ const PartnersDashboard = () => {
     editElement: {},
   });
 
-  const handleChange = useCallback((name, value) => setState({ ...state, [name]: value }), [
-    state,
-    setState,
-  ]);
+  const handleChange = useCallback(
+    (name, value) => setState({ ...state, [name]: value }),
+    [state, setState]
+  );
   const toggleState = (name) => handleChange(name, !state[name]);
   const resetState = useCallback(
     () =>
-      setState({ ...state, openModal: false, filter: noFilter, ...defaultAddNew, editElement: {} }),
-    [state, setState],
+      setState({
+        ...state,
+        openModal: false,
+        filter: noFilter,
+        ...defaultAddNew,
+        editElement: {},
+      }),
+    [state, setState]
   );
   const handleClose = () => resetState();
-  const handleActiveFilter = useCallback((name) => setFilter(name), [setFilter]);
+  const handleActiveFilter = useCallback((name) => setFilter(name), [
+    setFilter,
+  ]);
   const onClick = () => toggleState('openModal');
   const reloadPartners = useCallback(async () => {
     const { list } = await getPartnersApiMethod();
     setPartners(list);
     const tmp = await getPartnerTypesApiMethod();
-    setPartnerTypesList(tmp?.list.map(({ name, _id }) => ({ name, label: name, _id })));
+    setPartnerTypesList(
+      tmp?.list.map(({ name, _id }) => ({ name, label: name, _id }))
+    );
 
     resetState();
   }, [resetState, setPartners]);
   const handleEditSelect = (id) => {
-    setState({ openModal: true, editElement: partners.find((e) => e._id === id) });
+    setState({
+      openModal: true,
+      editElement: partners.find((e) => e._id === id),
+    });
   };
   const handleDelete = async (id) => {
     await deletePartnerApiMethod(id);
@@ -117,7 +129,9 @@ const PartnersDashboard = () => {
   const handleDeleteType = async (id) => {
     if (!id) return;
     const { list = [] } = await deletePartnerTypekApiMethod(id);
-    setPartnerTypesList(list.map(({ name, _id }) => ({ name, label: name, _id })));
+    setPartnerTypesList(
+      list.map(({ name, _id }) => ({ name, label: name, _id }))
+    );
     setFilter(noFilter);
   };
   useEffect(() => {
@@ -179,24 +193,33 @@ const PartnersDashboard = () => {
           >
             Tout
           </div>
-          {partnerTypesList.map((elem) => (
+          {partnerTypesList.map((elem, index) => (
             <div
-              key={elem.name}
+              key={`${elem.name}${index}`}
               onClick={() => handleActiveFilter(elem.name)}
-              className={`partner-filter relative ${elem.name === filter ? 'active' : ''}`}
+              className={`partner-filter relative ${
+                elem.name === filter ? 'active' : ''
+              }`}
             >
               {elem.name}
-              <div className="icon-container" onClick={() => handleDeleteType(elem._id)}>
+              <div
+                className="icon-container"
+                onClick={() => handleDeleteType(elem._id)}
+              >
                 <Icon type="plus" size="small" />
               </div>
             </div>
           ))}
         </Grid>
-        <Grid container className="partner-card-list-container" justify="space-arround">
-          {filteredList.map((elem) => (
+        <Grid
+          container
+          className="partner-card-list-container"
+          justify="space-arround"
+        >
+          {filteredList.map((elem, index) => (
             <Grid
               item
-              key={elem._id}
+              key={`${elem._id}${index}`}
               alignItems="center"
               md={4}
               onClick={() => handleEditSelect(elem._id)}

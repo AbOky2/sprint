@@ -22,14 +22,5 @@ export const logOut = () =>
   sendRequest(`/auth/logout`, {
     method: 'GET',
   });
-
-export const getBookDetailApiMethod = ({ slug }) =>
-  sendRequest(`${BASE_PATH}/books/${slug}`, {
-    method: 'GET',
-  });
-
-export const getChapterDetailApiMethod = ({ bookSlug, chapterSlug }, options = {}) =>
-  sendRequest(`${BASE_PATH}/get-chapter-detail?bookSlug=${bookSlug}&chapterSlug=${chapterSlug}`, {
-    method: 'GET',
-    ...options,
-  });
+export const getPromotedApiMethod = () =>
+  sendRequest(`/promoted`, { method: 'GET' });

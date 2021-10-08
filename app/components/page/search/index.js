@@ -11,8 +11,13 @@ import {
   getPropertiesByCoordApiMethod,
   addBookmarkApiMethod,
 } from 'lib/api/customer';
-import { toggleArray, isArray, pick } from 'helpers/convertAndCheck';
-import { typeOfAnnonciesObj, sortByKeys } from 'helpers/property';
+import {
+  toggleArray,
+  isArray,
+  pick,
+  typeOfAnnonciesObj,
+  sortByKeys,
+} from 'helpers';
 import NotFound from 'components/NotFound';
 import { AdminContentWrapper } from 'components/wrapper';
 import { MapsView } from './views';

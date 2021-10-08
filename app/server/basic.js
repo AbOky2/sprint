@@ -4,7 +4,7 @@ const MongooseStore = require('express-brute-mongoose');
 const BruteForceSchema = require('express-brute-mongoose/dist/schema');
 const { Strategy } = require('passport-local');
 const mongoose = require('mongoose');
-const { UserModel, PropertieModel } = require('./models');
+const { UserModel, PropertieModel, PromotedModel } = require('./models');
 const msg = require('./utils/message');
 const joiSchema = require('./middleware/schema');
 const { listCollection } = require('./middleware/express');
@@ -89,7 +89,14 @@ const auth = ({ server }) => {
       }
     )
   );
+  server.get(
+    '/promoted',
+    listCollection(async () => {
+      const { list = [] } = await PromotedModel.list();
 
+      return { list };
+    })
+  );
   server.post(
     '/publicSearch',
     listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {

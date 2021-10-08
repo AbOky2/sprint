@@ -2,9 +2,13 @@ import { Grid, Typography } from '@material-ui/core';
 
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
-import { spaceCurrency, round10 } from 'helpers/convertAndCheck';
+import {
+  spaceCurrency,
+  round10,
+  individualAdvantages,
+  reducedVat,
+} from 'helpers';
 import { Icon, Btn } from 'components/form';
-import { individualAdvantages, reducedVat } from 'helpers/property';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import styles from './styles';
 

@@ -9,8 +9,8 @@ import {
   getNbPieces,
   sortBySelectMap,
   getCardImg,
-} from 'helpers/property';
-import { singlePath } from 'helpers/query';
+  singlePath,
+} from 'helpers';
 
 const ellipsis = ['start-ellipsis', 'end-ellipsis'];
 const PaginationItem = ({
@@ -66,7 +66,12 @@ const ListHeader = ({ classes, sortBy, handleSortSelect }) => (
 
 const ListFooter = ({ classes, page, matches, isMapsView, handlePage }) =>
   page?.totalPages > 1 && (
-    <Grid container justify="center" className={classes.pagination}>
+    <Grid
+      container
+      justify="center"
+      className={classes.pagination}
+      id="pagintationContainer"
+    >
       <Pagination
         count={page.totalPages}
         page={!isNaN(page.page) ? Number(page.page) : 1}
@@ -135,6 +140,7 @@ const ListElement = ({
   maxPieces,
   dimensions,
   price,
+  noRedirect,
   showLikes,
   handleMouseEnter,
   handleMouseLeave,
@@ -145,7 +151,7 @@ const ListElement = ({
     onMouseEnter={handleMouseEnter}
     onMouseLeave={handleMouseLeave}
   >
-    <Link href={singlePath({ typeOfAnnonce, _id })}>
+    <Link href={noRedirect ? '#' : singlePath({ typeOfAnnonce, _id })}>
       <a>
         <Card
           _id={_id}
@@ -163,4 +169,50 @@ const ListElement = ({
     </Link>
   </Grid>
 );
-export { ListHeader, ListFooter, ListWrapper, ListElement };
+
+const ListContainer = ({
+  classes,
+  sortBy,
+  curr,
+  isMapsView,
+  handleSortSelect,
+  hasData,
+  page,
+  matches,
+  handlePage,
+  handleMouseEnter,
+  liked,
+  handleBookmark,
+  noRedirect = false,
+}) => (
+  <Grid item xs={5} className={classes.listViewContainer}>
+    <ListWrapper
+      classes={classes}
+      sortBy={sortBy}
+      isMapsView={isMapsView}
+      handleSortSelect={handleSortSelect}
+      hasData={hasData}
+      page={page}
+      matches={matches}
+      handlePage={handlePage}
+    >
+      {page.pageList?.map((elems) => (
+        <ListElement
+          key={elems._id}
+          noRedirect={noRedirect}
+          handleMouseEnter={handleMouseEnter && handleMouseEnter(elems._id)}
+          handleMouseLeave={handleMouseEnter && handleMouseEnter(null)}
+          className={
+            elems._id !== curr?._id
+              ? classes.mapsListContainer
+              : clsx(classes.mapsListContainer, classes.mapsCurrListContainer)
+          }
+          liked={liked}
+          handleBookmark={handleBookmark}
+          {...elems}
+        />
+      ))}
+    </ListWrapper>
+  </Grid>
+);
+export { ListHeader, ListFooter, ListElement, ListContainer };
