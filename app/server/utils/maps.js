@@ -20,7 +20,7 @@ const getZoom = (data) => {
     return {
       zoom: 11,
       adressType: 'departement',
-      number: dep.properties.code,
+      number: dep ? dep.properties.code : null,
       coord: dep,
     };
   return { adressType: 'region', zoom: 9, coord: dep };
