@@ -237,7 +237,7 @@ export const Select = withStyles(styles)(
 Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object,
   label: PropTypes.string,
   value: PropTypes.string,
   position: PropTypes.oneOf(positionType),

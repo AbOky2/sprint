@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import clsx from 'clsx';
-import { Icon, iconTypes, colorTypes } from 'components';
+import { Icon, iconTypes, colorTypes } from 'components/form/Icon';
 import { shared } from 'lib/theme';
 
 export const btnHover = {

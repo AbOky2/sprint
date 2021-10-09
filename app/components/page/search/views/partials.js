@@ -43,7 +43,7 @@ const PaginationItem = ({
   </Grid>
 );
 
-const ListHeader = ({ classes, sortBy, handleSortSelect }) => (
+const ListHeader = ({ classes = {}, sortBy, handleSortSelect }) => (
   <Grid
     container
     item

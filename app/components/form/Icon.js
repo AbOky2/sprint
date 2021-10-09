@@ -22,6 +22,7 @@ const ICON_COLORS = {
 export const iconTypes = Object.keys(icons);
 export const colorTypes = Object.keys(ICON_COLORS);
 const sizeTypes = Object.keys(SIZES);
+
 const useStyles = makeStyles({
   svg: {
     display: 'inline-block',
