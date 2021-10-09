@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { AdminContentWrapper } from 'components/wrapper';
 import { ucfirst, cleanAlert } from 'helpers';
 import withAuth from 'lib/withAuth';
-import { Btn, Input, Icon } from 'components/form';
+import { Btn, Input, Icon } from 'components';
 import { addSponsorshipApiMethod } from 'lib/api/customer';
 import FirstDivider from '../../static/img/first_divider.svg';
 import SecondDivider from '../../static/img/second_divider.svg';

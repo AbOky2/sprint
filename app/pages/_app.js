@@ -10,8 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ToastContainer } from 'react-toastify';
 import { theme } from '../lib/theme';
 import { wrapper } from '../redux';
-import Notifier from '../components/Notifier';
-import Header from '../components/Header';
+import { Header, Notifier } from 'components';
 import 'react-toastify/dist/ReactToastify.css';
 
 Router.events.on('routeChangeStart', () => {

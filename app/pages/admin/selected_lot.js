@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { GoogleMaps } from 'components/form/Input';
 import { Grid } from '@material-ui/core';
 import Router, { withRouter } from 'next/router';
-import Card from 'components/card';
+import { Card } from 'components';
 import {
   getPublicPropertiesApiMethod,
   togglePromotedApiMethod,

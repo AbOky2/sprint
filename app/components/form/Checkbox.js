@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Grid, Checkbox, Typography } from '@material-ui/core';
+import {
+  Grid,
+  Checkbox as MaterialCheckbox,
+  Typography,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomCheckbox = ({
+export const Checkbox = ({
   checked = false,
   bordered = false,
   cornered = false,
@@ -95,7 +99,7 @@ const CustomCheckbox = ({
       )}
       onClick={toggleCheck}
     >
-      <Checkbox
+      <MaterialCheckbox
         inputProps={{ 'aria-label': 'secondary checkbox' }}
         checked={state}
         className={classes.root}
@@ -112,17 +116,15 @@ const CustomCheckbox = ({
   );
 };
 
-CustomCheckbox.propTypes = {
+Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   checked: PropTypes.bool,
   bordered: PropTypes.bool,
   cornered: PropTypes.bool,
 };
-CustomCheckbox.defaultProps = {
+Checkbox.defaultProps = {
   checked: false,
   bordered: false,
   cornered: false,
 };
-
-export default CustomCheckbox;

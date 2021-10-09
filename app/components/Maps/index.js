@@ -2,7 +2,7 @@ import GoogleMapReact from 'google-map-react';
 import Marker from '../../static/img/icons/marker.svg';
 import CustomMarker from '../../static/img/icons/customMarker.svg';
 import SelectedCustomMarker from '../../static/img/icons/selectedCustomMarker.svg';
-import { MapsCard } from 'components/card';
+import { MapsCard } from 'components';
 
 const AnyReactComponent = () => (
   <div style={{ position: 'relative', width: 20 }}>
@@ -28,7 +28,7 @@ const CustomAnyReactComponent = ({ show, isMobile, data }) => (
   </>
 );
 
-const Maps = ({ loc: [lng, lat] = [] }) => (
+export const Maps = ({ loc: [lng, lat] = [] }) => (
   <GoogleMapReact
     defaultCenter={{
       lat,
@@ -40,7 +40,7 @@ const Maps = ({ loc: [lng, lat] = [] }) => (
   </GoogleMapReact>
 );
 
-const MultipleMarkers = ({
+export const MultipleMarkers = ({
   data = [],
   curr: {
     loc: { coordinates: [lng, lat] } = { coordinates: [] },
@@ -83,5 +83,3 @@ const MultipleMarkers = ({
     })}
   </GoogleMapReact>
 );
-export { MultipleMarkers };
-export default Maps;

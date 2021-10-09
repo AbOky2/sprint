@@ -6,10 +6,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { userActions } from '../../redux/_actions';
-import { Btn, Input } from '../../components/form';
-import { forgotPassword } from '../../lib/api/public';
-import withAuth from '../../lib/withAuth';
+import { userActions } from 'redux/_actions';
+import { Btn, Input } from 'components';
+import { forgotPassword } from 'lib/api';
+import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({
   container: {

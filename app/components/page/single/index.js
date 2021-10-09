@@ -5,19 +5,16 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Grid, Typography } from '@material-ui/core';
 import { connect } from 'react-redux';
-import Maps from 'components/Maps';
 import { userActions } from 'redux/_actions';
 import { AdminContentWrapper } from 'components/wrapper';
-import { Icon } from 'components/form';
-import { addBookmarkApiMethod } from 'lib/api/customer';
+import { addBookmarkApiMethod } from 'lib/api';
 import {
   typeOfAnnoncies,
   defaultPropertyImg,
   getNbPieces,
   spaceCurrency,
 } from 'helpers';
-import Carrousel from 'components/Carrousel';
-import NotFound from 'components/NotFound';
+import { Carrousel, NotFound, Icon, Maps } from 'components';
 
 import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';

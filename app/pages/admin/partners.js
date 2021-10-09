@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Icon } from '../../components/form';
+import { Modal, Icon } from 'components';
 
 import {
   getPartnersApiMethod,

@@ -18,8 +18,7 @@ import {
   typeOfAnnonciesObj,
   sortByKeys,
 } from 'helpers';
-import NotFound from 'components/NotFound';
-import { AdminContentWrapper } from 'components/wrapper';
+import { NotFound, AdminContentWrapper } from 'components';
 import { MapsView } from './views';
 import SearchFields from './searchFields';
 import withStyles from './styles';

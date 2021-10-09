@@ -94,7 +94,7 @@ const settings = {
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
 };
-const SingleCarousel = ({ list = [] }) => {
+export const Carrousel = ({ list = [] }) => {
   const classes = useStyles();
 
   return (
@@ -118,7 +118,7 @@ const SingleCarousel = ({ list = [] }) => {
   );
 };
 
-const MapsCarousel = ({ index = 0, handleChange, children }) => {
+export const MapsCarousel = ({ index = 0, handleChange, children }) => {
   const classes = useStyles();
   const node = useRef();
 
@@ -145,5 +145,3 @@ const MapsCarousel = ({ index = 0, handleChange, children }) => {
     </Slider>
   );
 };
-export { MapsCarousel };
-export default SingleCarousel;

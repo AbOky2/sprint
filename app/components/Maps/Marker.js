@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import { MapsCard } from 'components/card';
+import { MapsCard } from 'components';
 import WhiteMarker from 'static/img/white_marker.png';
 import BlueMarker from 'static/img/blue_marker.png';
 import { styles } from './styles';

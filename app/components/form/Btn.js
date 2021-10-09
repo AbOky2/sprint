@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import clsx from 'clsx';
-import Icon, { iconTypes, colorTypes } from './Icon';
+import { Icon, iconTypes, colorTypes } from 'components';
 import { shared } from 'lib/theme';
 
-const btnHover = {
+export const btnHover = {
   blue: {
     '&:hover': {
       background:
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Btn = ({
+export const Btn = ({
   onClick,
   href,
   text,
@@ -155,5 +155,3 @@ Btn.defaultProps = {
   whiteColor: false,
   download: false,
 };
-export { btnHover };
-export default Btn;

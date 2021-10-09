@@ -5,7 +5,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { getPartnerApiMethod } from 'lib/api/customer';
 import { AdminContentWrapper } from 'components/wrapper';
-import { Btn } from 'components/form';
+import { Btn } from 'components';
 import withAuth from 'lib/withAuth';
 
 const useStyles = makeStyles((theme) => ({

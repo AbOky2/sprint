@@ -8,7 +8,7 @@ import { openPopupWidget } from 'react-calendly';
 import { pages } from 'helpers';
 import { Icon, Btn } from '../form';
 import LogoImg from 'static/img/logo.png';
-import UpdateProfile from '../UpdateProfile';
+import { UpdateProfile } from 'components';
 import useStyles from './styles';
 
 const MobileItems = [

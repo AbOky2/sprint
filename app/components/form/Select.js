@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {
   FormControl,
-  Select,
+  Select as MaterialSelect,
   Grid,
   Checkbox,
   Typography,
 } from '@material-ui/core';
 import { toggleArray, isArray, useToggleOpen } from 'helpers';
-import Icon from './Icon';
+import { Icon } from 'components';
 
 const positionType = ['', 'left', 'right'];
 
@@ -131,7 +131,7 @@ const styles = (theme) => ({
   },
 });
 
-const DropdownSelect = withStyles(styles)(
+export const DropdownSelect = withStyles(styles)(
   ({ onChange, value, position, list, placeholder, classes }) => {
     const [node, open] = useToggleOpen();
     const [selected, setSelected] = useState(
@@ -187,54 +187,54 @@ const DropdownSelect = withStyles(styles)(
     );
   }
 );
-export { DropdownSelect };
-const NativeSelects = ({
-  name,
-  onChange,
-  value,
-  position,
-  list,
-  label,
-  classes,
-}) => (
-  <Grid
-    item
-    md={position ? 6 : 12}
-    xs={12}
-    className={
-      position ? clsx(classes.container, classes[position]) : classes.container
-    }
-  >
-    <FormControl variant="outlined" className={classes.formControl}>
-      {label ? <Typography className={classes.label}>{label}</Typography> : ''}
-      <Select
-        native
-        autoWidth
-        value={value}
-        onChange={onChange(name)}
-        inputProps={{ name }}
-        IconComponent={() => (
-          <span style={{ position: 'absolute', right: '1.5rem' }}>
-            <Icon
-              type="sliderArrow"
-              color="newBlue"
-              size="small"
-              rotate="90deg"
-            />
-          </span>
+
+export const Select = withStyles(styles)(
+  ({ name, onChange, value, position, list, label, classes }) => (
+    <Grid
+      item
+      md={position ? 6 : 12}
+      xs={12}
+      className={
+        position
+          ? clsx(classes.container, classes[position])
+          : classes.container
+      }
+    >
+      <FormControl variant="outlined" className={classes.formControl}>
+        {label ? (
+          <Typography className={classes.label}>{label}</Typography>
+        ) : (
+          ''
         )}
-      >
-        {list?.map((elem) => (
-          <option key={elem.name} value={elem.value}>
-            {elem.name}
-          </option>
-        ))}
-      </Select>
-    </FormControl>
-  </Grid>
+        <MaterialSelect
+          native
+          autoWidth
+          value={value}
+          onChange={onChange(name)}
+          inputProps={{ name }}
+          IconComponent={() => (
+            <span style={{ position: 'absolute', right: '1.5rem' }}>
+              <Icon
+                type="sliderArrow"
+                color="newBlue"
+                size="small"
+                rotate="90deg"
+              />
+            </span>
+          )}
+        >
+          {list?.map((elem) => (
+            <option key={elem.name} value={elem.value}>
+              {elem.name}
+            </option>
+          ))}
+        </MaterialSelect>
+      </FormControl>
+    </Grid>
+  )
 );
 
-NativeSelects.propTypes = {
+Select.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
@@ -243,10 +243,9 @@ NativeSelects.propTypes = {
   position: PropTypes.oneOf(positionType),
   list: PropTypes.arrayOf(PropTypes.object),
 };
-NativeSelects.defaultProps = {
+Select.defaultProps = {
   label: '',
   value: '',
   position: '',
   list: null,
 };
-export default withStyles(styles)(NativeSelects);

@@ -5,7 +5,7 @@ import * as Showdown from 'showdown';
 import { FormElementWrapper } from './formElement';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
-const WysiwygComp = ({ value, onChange, label, showLabel }) => {
+export const Wysiwyg = ({ value, onChange, label, showLabel }) => {
   const [tab, setTab] = useState('write');
 
   const converter = new Showdown.Converter({
@@ -22,7 +22,9 @@ const WysiwygComp = ({ value, onChange, label, showLabel }) => {
           onChange={(value) => onChange(value)}
           onTabChange={setTab}
           value={value}
-          generateMarkdownPreview={(markdown) => Promise.resolve(converter.makeHtml(markdown))}
+          generateMarkdownPreview={(markdown) =>
+            Promise.resolve(converter.makeHtml(markdown))
+          }
           selectedTab={tab}
         />
       </span>
@@ -30,10 +32,9 @@ const WysiwygComp = ({ value, onChange, label, showLabel }) => {
   );
 };
 
-WysiwygComp.propTypes = {
+Wysiwyg.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   showLabel: PropTypes.bool,
   label: PropTypes.string,
 };
-export default WysiwygComp;

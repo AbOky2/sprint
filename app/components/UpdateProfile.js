@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UpdateProfile = ({ text, user, update, logout, transparent }) => {
+export const UpdateProfile = ({ user, update, logout, transparent }) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [state, setState] = useState(user);
@@ -211,4 +211,3 @@ const UpdateProfile = ({ text, user, update, logout, transparent }) => {
     </div>
   );
 };
-export default UpdateProfile;

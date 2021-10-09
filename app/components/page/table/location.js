@@ -4,7 +4,7 @@ import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { spaceCurrency, locationAvailableDate } from 'helpers';
-import { Icon, Btn } from 'components/form';
+import { Icon, Btn } from 'components';
 import styles from './styles';
 
 const LocationTable = ({

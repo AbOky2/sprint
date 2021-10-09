@@ -8,7 +8,7 @@ import {
   individualAdvantages,
   reducedVat,
 } from 'helpers';
-import { Icon, Btn } from 'components/form';
+import { Icon, Btn } from 'components';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import styles from './styles';
 

@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import withAuth from 'lib/withAuth';
 import { AdminContentWrapper } from 'components/wrapper';
-import { Icon } from 'components/form';
+import { Icon } from 'components';
 import { isYoungWorker, ucfirst } from 'helpers';
 import { getPartnersApiMethod } from 'lib/api/customer';
 import LocationImg from 'static/img/location.png';

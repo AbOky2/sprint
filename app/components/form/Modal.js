@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { Icon } from '.';
-import Btn from './Btn';
+import { Btn, Icon } from 'components';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const Modal = ({
+export const Modal = ({
   children,
   openModal,
   onClose,
@@ -148,5 +147,3 @@ Modal.defaultProps = {
   onClick: null,
   confirmText: 'Confirmer',
 };
-
-export default Modal;

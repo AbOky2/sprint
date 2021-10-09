@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import NumberFormat from 'react-number-format';
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
-import { Icon } from 'components/form';
+import { Icon } from 'components';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import { useToggleOpen } from 'helpers';
 import SubmitIcon from 'static/img/submit.png';
@@ -192,7 +192,7 @@ GoogleMaps.defaultProps = {
 
 const positionType = ['left', 'right'];
 
-const InputBase = withStyles(styles)(
+export const Input = withStyles(styles)(
   ({
     name,
     label,
@@ -265,7 +265,7 @@ const InputBase = withStyles(styles)(
     );
   }
 );
-const CustomInput = withStyles(styles)(
+export const CustomInput = withStyles(styles)(
   ({ classes, handleSumit, showSub, ...inputProps }) => {
     const [value, setValue] = useState(inputProps.value);
     const [node, open] = useToggleOpen();
@@ -384,8 +384,5 @@ CustomInput.propTypes = {
   handleSumit: PropTypes.func.isRequired,
 };
 CustomInput.defaultProps = sameDefaultProps;
-InputBase.propTypes = samePropTypes;
-InputBase.defaultProps = sameDefaultProps;
-
-export { CustomInput };
-export default InputBase;
+Input.propTypes = samePropTypes;
+Input.defaultProps = sameDefaultProps;

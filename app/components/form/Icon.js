@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Icon = ({
+export const Icon = ({
   type,
   color,
   size,
@@ -83,5 +83,3 @@ Icon.defaultProps = {
   rotate: undefined,
   noColor: false,
 };
-
-export default Icon;

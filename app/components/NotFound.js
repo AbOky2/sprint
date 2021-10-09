@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Logo from '../static/img/logo.png';
 
-const NotFound = ({ showLink = true }) => (
+export const NotFound = ({ showLink = true }) => (
   <Grid
     container
     justify="center"
@@ -26,4 +26,3 @@ NotFound.propTypes = {
 NotFound.defaultProps = {
   showLink: true,
 };
-export default NotFound;

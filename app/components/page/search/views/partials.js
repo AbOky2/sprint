@@ -2,8 +2,7 @@ import clsx from 'clsx';
 import { Pagination } from '@material-ui/lab';
 import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
-import { Icon, Select } from 'components/form';
-import Card from 'components/card';
+import { Icon, Select, Card } from 'components';
 import {
   getAddress,
   getNbPieces,

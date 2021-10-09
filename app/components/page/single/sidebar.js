@@ -2,7 +2,7 @@ import { useState } from 'react';
 import clsx from 'clsx';
 import { openPopupWidget } from 'react-calendly';
 import { Grid, Typography } from '@material-ui/core';
-import { Icon, Btn } from 'components/form';
+import { Icon, Btn } from 'components';
 import { tranportationsKeys, individualAdvantages } from 'helpers';
 
 const BtnCalendly = () => (

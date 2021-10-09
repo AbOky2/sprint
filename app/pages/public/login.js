@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userActions } from 'redux/_actions';
-import { Btn, Select, Input, Checkbox } from 'components/form';
+import { Btn, Select, Input, Checkbox } from 'components';
 import { redirectStyle } from 'components/wrapper';
 import withAuth from 'lib/withAuth';
 import { Student, userRoleSelect, cleanAlert, pick } from 'helpers';
