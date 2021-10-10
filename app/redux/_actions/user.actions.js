@@ -1,14 +1,16 @@
 import { userConstants } from '../_constants';
 import { signIn, signUp, logOut, resetPassword } from '../../lib/api/public';
 import { updateUserApiMethod } from '../../lib/api/customer';
+import { queryParams } from 'helpers';
 import { alertActions } from './alert.actions';
 
 const redirectAfterAccess = (user) => {
-  const { search } = window.location;
+  const params = queryParams(window.location.href);
+
   window.location =
     user?.role === 'admin'
       ? '/admin'
-      : `/dashboard${search ? `/search/buy${search}` : ''}`;
+      : `/dashboard${params?.id ? `/property/buy/${params.id}` : ''}`;
 };
 function login(args) {
   const request = (user) => ({ type: userConstants.LOGIN_REQUEST, user });

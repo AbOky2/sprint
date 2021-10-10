@@ -5,6 +5,7 @@ import * as NProgress from 'nprogress';
 import { StudentMenuComp } from './AuthWrapper';
 import AdminDrawer from '../components/admin/drawer';
 import { isAdmin, dashboardPaths } from 'helpers';
+import { queryParams } from 'helpers';
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -60,12 +61,14 @@ export default function withAuth(
       }
 
       if (logoutRequired && user) {
-        const { search } = window.location;
+        const params = queryParams(window.location.href);
 
         Router.push(
           isAdmin(user)
             ? dashboardPaths.admin
-            : `${dashboardPaths.student}${search ? `/search/buy${search}` : ''}`
+            : `${dashboardPaths.student}${
+                params?.id ? `/property/buy/${params.id}` : ''
+              }`
         );
       }
     }

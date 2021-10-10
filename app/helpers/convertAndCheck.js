@@ -22,6 +22,17 @@ const toQueryParams = (params) =>
   Object.keys(params)
     .map((k) => `${esc(k)}=${esc(params[k])}`)
     .join('&');
+const queryParams = (url) =>
+  `${url}?`
+    .split('?')[1]
+    .split('&')
+    .reduce(
+      (params, pair) =>
+        ((key, val) => (key ? { ...params, [key]: val } : params))(
+          ...`${pair}=`.split('=').map(decodeURIComponent)
+        ),
+      {}
+    );
 
 const toFormData = (form = {}) => {
   const formData = new FormData();
@@ -116,6 +127,7 @@ module.exports = {
   toggleArray,
   toggleArrayOfObj,
   toQueryParams,
+  queryParams,
   spaceCurrency,
   stripTags,
   round10,
