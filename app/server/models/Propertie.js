@@ -205,16 +205,16 @@ class PropertieClass extends DBModel {
     pieces = [],
     loc,
     zoom,
+    box: $box,
   }) {
     const near = [loc.lat, loc.lng];
-    const $maxDistance = (19 - zoom) * 10000;
     const list = {
       docs: await this.find(
         maps.geoQuery({
           pieces,
           maxPrice,
           near: [near[1], near[0]],
-          $maxDistance,
+          $box,
           typeOfAnnonce,
         })
       ),

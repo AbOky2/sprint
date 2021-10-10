@@ -43,7 +43,6 @@ const SearchPage = ({
   });
   const [currView, setCurrView] = useState(isMapsView);
   const [center, setCenter] = useState([]);
-  const [distance, setDistance] = useState(0);
   const [mapOptions, setMapOptions] = useState({});
   const [list, setList] = useState([]);
   const [refresh, setRefresh] = useState(false);
@@ -68,7 +67,6 @@ const SearchPage = ({
     pieces,
   });
 
-  const handleDistance = (distance) => setDistance(distance);
   const toggleRefresh = (refresh) => setRefresh(refresh);
   const toggleView = () => setCurrView(!currView);
 
@@ -170,6 +168,7 @@ const SearchPage = ({
         ...queryData,
         loc: center,
         zoom: mapOptions.zoom,
+        box: mapOptions.box,
         page: 1,
       });
       const listId = list
@@ -227,6 +226,7 @@ const SearchPage = ({
             liked={liked}
             sortBy={sortBy}
             refresh={refresh}
+            setIsFirstRequest={setIsFirstRequest}
             handleBookmark={handleBookmark}
             handleSortSelect={handleSortSelect}
             toggleView={toggleView}
@@ -235,7 +235,6 @@ const SearchPage = ({
             isMdView={isMdView}
             handlePointChange={handlePointChange}
             toggleRefresh={toggleRefresh}
-            handleDistance={handleDistance}
             isMapsView={currView}
           />
         </div>

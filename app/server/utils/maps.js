@@ -32,6 +32,7 @@ const geoQuery = ({
   near,
   $maxDistance,
   typeOfAnnonce,
+  $box,
   $geometry,
 }) => ({
   $and: [
@@ -44,6 +45,12 @@ const geoQuery = ({
               ? {
                   $geoIntersects: {
                     $geometry,
+                  },
+                }
+              : $box
+              ? {
+                  $geoWithin: {
+                    $box,
                   },
                 }
               : {

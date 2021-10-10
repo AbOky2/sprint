@@ -27,7 +27,7 @@ const MapsContainer = ({
   toggleRefresh,
   index,
   isFirstRequest,
-  handleDistance,
+  setIsFirstRequest,
   handleBookmark,
   handleChildClick,
   handlePointChange,
@@ -40,13 +40,13 @@ const MapsContainer = ({
       delimiter={delimiter}
       pageList={pageList}
       isFirstRequest={isFirstRequest}
+      setIsFirstRequest={setIsFirstRequest}
       curr={curr}
       isMobile={isMdView}
       liked={liked}
       reloadMaps={reloadMaps}
       refresh={refresh}
       toggleRefresh={toggleRefresh}
-      handleDistance={handleDistance}
       handleChildClick={handleChildClick}
       handlePointChange={handlePointChange}
       handleBookmark={handleBookmark}
@@ -117,9 +117,9 @@ const MapsView = withRouter(
       matches,
       isMapsView,
       isFirstRequest,
+      setIsFirstRequest,
       isMdView,
       handlePointChange,
-      handleDistance,
       sortBy,
       handleSortSelect,
       router,
@@ -136,7 +136,7 @@ const MapsView = withRouter(
         coor: e.loc?.coordinates,
       }));
       const [curr, setCurr] = useState(null);
-      const [reloadMaps, setReloadMaps] = useState(true);
+      const [reloadMaps, setReloadMaps] = useState(false);
       const [carrouselIndex, setCarrouselIndex] = useState(0);
       const getChildPostion = () => {
         const bounds = document
@@ -239,6 +239,7 @@ const MapsView = withRouter(
             queryData={queryData}
             delimiter={delimiter}
             isFirstRequest={isFirstRequest}
+            setIsFirstRequest={setIsFirstRequest}
             isMapsView={isMapsView}
             isMdView={isMdView}
             reloadMaps={reloadMaps}
@@ -248,7 +249,6 @@ const MapsView = withRouter(
             handleChildClick={handleChildClick}
             handleCarouselChange={handleCarouselChange}
             handlePointChange={handlePointChange}
-            handleDistance={handleDistance}
             liked={liked}
             toggleView={toggleView}
             toggleReloadMaps={toggleReloadMaps}
@@ -276,7 +276,6 @@ const sharedProptypes = {
   handleSortSelect: PropTypes.func.isRequired,
   handleBookmark: PropTypes.func.isRequired,
   handlePointChange: PropTypes.func.isRequired,
-  handleDistance: PropTypes.func.isRequired,
   page: PropTypes.number,
   matches: PropTypes.bool.isRequired,
   toggleRefresh: PropTypes.func.isRequired,

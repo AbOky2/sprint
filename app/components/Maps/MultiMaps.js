@@ -6,13 +6,7 @@ import ClusterMarker from './ClusterMarker';
 import styles from './styles';
 import { shared } from 'lib/theme';
 
-const defaultCenter = {
-  // lat: 48.786738670953156,
-  // lng: 2.348329772716056,
-};
 const MAP = {
-  defaultZoom: 12,
-  defaultCenter,
   options: {
     minZoom: 5,
     maxZoom: 19,
@@ -27,9 +21,9 @@ export const GoogleMap = (props) => {
     data: { docs = [], near = [], zoom },
     delimiter: { coord, department } = {},
     handlePointChange,
-    handleDistance,
     handleChildClick,
     toggleRefresh,
+    setIsFirstRequest,
     isFirstRequest,
     liked,
     handleBookmark,
@@ -80,17 +74,22 @@ export const GoogleMap = (props) => {
   };
 
   const handleMapChange = ({ center, zoom, bounds }, refresh = false) => {
+    const box = [
+      [bounds?.sw?.lng, bounds?.sw?.lat],
+      [bounds?.ne?.lng, bounds?.ne?.lat],
+    ];
+
     setState({
       ...state,
-      mapOptions: { center, zoom, bounds },
+      mapOptions: { center, zoom, bounds, box },
       defaultReload: true,
     });
 
     if (state.defaultReload && !reloadMaps && !refresh && !isFirstRequest)
       return;
-    console.log('ok');
     setTriggerCreateClusters(true);
   };
+
   useEffect(() => {
     if (!gMap) return;
     if (gMap.data) gMap.data.forEach((e) => gMap.data.remove(e));
@@ -111,6 +110,7 @@ export const GoogleMap = (props) => {
   );
   useEffect(() => {
     if (refresh || reloadMaps) {
+      setIsFirstRequest(false);
       handleMapChange(state.mapOptions, refresh);
       toggleRefresh && toggleRefresh(false);
     }
@@ -133,17 +133,7 @@ export const GoogleMap = (props) => {
         onClick={() => handleChildClick(null)}
         yesIWantToUseGoogleMapApiInternals
         center={near}
-        onGoogleApiLoaded={({ map, maps }) => {
-          try {
-            const bounds = map.getBounds();
-            const sw = bounds.getSouthWest();
-            const myCenter = map.getCenter();
-            handleDistance(
-              maps.geometry?.spherical.computeDistanceBetween(sw, myCenter)
-            );
-            setGMap(map);
-          } catch (error) {}
-        }}
+        onGoogleApiLoaded={({ map }) => setGMap(map)}
       >
         {state.clusters
           .filter((e) => pageList.find((i) => e.id.includes(i)))

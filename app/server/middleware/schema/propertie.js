@@ -52,6 +52,7 @@ const schemas = {
     searchByCoord: Joi.object().keys({
       ...searchObj,
       zoom: Joi.number().min(0).required(),
+      box: Joi.any(),
     }),
   },
 };
