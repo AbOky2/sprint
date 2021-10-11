@@ -57,7 +57,6 @@
     "nprogress": "0.2.0",
     "passport": "0.4.1",
     "passport-local": "^1.0.0",
-    "points-cluster": "^0.1.4",
     "prop-types": "15.7.2",
     "react": "^16.13.1",
     "react-anchor-link-smooth-scroll": "^1.0.12",

@@ -171,10 +171,10 @@ const SearchPage = ({
         box: mapOptions.box,
         page: 1,
       });
-      const listId = list
-        ?.map(({ points = [] }) => points.map((e) => e.id))
-        .flat();
+      const listId =
+        list?.map(({ points = [] }) => points.map((e) => e.id)).flat() || [];
       const newState = docs?.filter((e) => listId.includes(e._id));
+
       if (newState) setState(newState);
       setState(docs);
       setAllData({ docs, near, zoom, department: null });
