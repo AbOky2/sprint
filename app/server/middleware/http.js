@@ -15,13 +15,14 @@ module.exports = (server, express) => {
     secret: SESSION_SECRET,
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
-      ttl: 14 * 24 * 60 * 60, // expires in 14 days
+      // ttl: 14 * 24 * 60 * 60, // expires in 14 days
+      autoRemove: 'disabled', // remove the expiration
     }),
     resave: false,
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
+      // maxAge: 14 * 24 * 60 * 60 * 1000, // expires in 14 days
     },
   };
   // const server2Busy = (req, res, next) =>
