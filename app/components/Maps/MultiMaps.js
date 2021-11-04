@@ -90,6 +90,7 @@ export const GoogleMap = (props) => {
     <div className={classes.mapWrapper} id="maps-container">
       <GoogleMapReact
         defaultZoom={state.mapOptions.zoom}
+        zoom={state.mapOptions.zoom}
         defaultCenter={near}
         options={MAP.options}
         onChange={handleMapChange}
