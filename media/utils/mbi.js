@@ -375,6 +375,7 @@ const readMba = () => {
       },
       { available: false }
     );
+    logger.info(`\n------ FINISHED ------\n`);
   })();
 };
 
