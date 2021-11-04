@@ -197,6 +197,7 @@ const readMba = () => {
       `${PUBLIC_PROPERTIES_DIR}/${lots.fileName}.csv`,
       { encoding: lots.encoding }
     );
+    const foundIds = [];
     if (readedLots) {
       const lotList = getLotsList(readedLots.split('\n'), lots, extraLotsList);
 
@@ -314,6 +315,13 @@ const readMba = () => {
                   `${i}, 'updated'; lot_ref: ${data.lot_ref}; typeOfAnnonce: ${data.typeOfAnnonce};`
                 );
               }
+              const id = data.available
+                ? foundElement && foundElement._id
+                  ? foundElement._id
+                  : data._id
+                : null;
+              if (id) foundIds.push(id);
+
               logger.info(`${i} 'done'`);
             },
             interval * i,
@@ -325,6 +333,7 @@ const readMba = () => {
     } else {
       logger.error(`${PUBLIC_PROPERTIES_DIR}/${lots.fileName}.csv not found`);
     }
+    return foundIds;
   };
   (async () => {
     const readedExtraLots = fs.readFileSync(
@@ -355,8 +364,17 @@ const readMba = () => {
       }, []);
     }
 
-    await customMap(buyDatas, extraLotsList);
-    await customMap(rentDatas);
+    const buyFoundIds = await customMap(buyDatas, extraLotsList);
+    const rentFoundIds = await customMap(rentDatas);
+
+    await PropertieModel.updateMany(
+      {
+        _id: {
+          $nin: [...buyFoundIds, ...rentFoundIds],
+        },
+      },
+      { available: false }
+    );
   })();
 };
 
