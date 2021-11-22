@@ -80,8 +80,9 @@ const AdminContentWrapper = withStyles(styles)(
           <div
             className={classes.redirectStyle}
             onClick={(e) => {
-              if (href) router.push(href);
-              else router.back();
+              //if (href) router.push(href);
+              //else router.back();
+              router.back();
             }}
           >
             <Typography variant="h4">Retour</Typography>
