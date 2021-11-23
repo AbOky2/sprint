@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { withRouter } from 'next/router';
 import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import {useHistory} from 'react-router-dom';
 
 const redirectStyle = (theme) => ({
   display: 'inline-block',
@@ -34,6 +35,8 @@ const redirectStyle = (theme) => ({
     },
   },
 });
+
+let history = useHistory();
 
 const styles = (theme) => ({
   container: {
@@ -80,8 +83,9 @@ const AdminContentWrapper = withStyles(styles)(
           <div
             className={classes.redirectStyle}
             onClick={(e) => {
-              if (href) router.push(href);
-              else router.back();
+              //if (href) router.push(href);
+              //else router.back();
+              history.goBack();
             }}
           >
             <Typography variant="h4">Retour</Typography>
