@@ -3,8 +3,6 @@ import clsx from 'clsx';
 import { withRouter } from 'next/router';
 import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { useNavigate } from "react-router-dom";
-
 
 const redirectStyle = (theme) => ({
   display: 'inline-block',
@@ -37,7 +35,6 @@ const redirectStyle = (theme) => ({
   },
 });
 
-
 const styles = (theme) => ({
   container: {
     margin: 'auto',
@@ -58,8 +55,6 @@ const styles = (theme) => ({
     },
   },
 });
-
-const navigate = useNavigate();
 
 const AdminContentWrapper = withStyles(styles)(
   withRouter(
@@ -86,9 +81,7 @@ const AdminContentWrapper = withStyles(styles)(
             className={classes.redirectStyle}
             onClick={(e) => {
               //if (href) router.push(href);
-              //else router.back();
-              navigate(-1);
-
+              router.back();
             }}
           >
             <Typography variant="h4">Retour</Typography>
