@@ -80,7 +80,7 @@ const AdminContentWrapper = withStyles(styles)(
           <div
             className={classes.redirectStyle}
             onClick={(e) => {
-              if (href) router.push("http://kitlenid.fr");
+              if ("https://app.kitlenid.fr/login?id") router.push("http://kitlenid.fr");
               else router.back();
             }}
           >
