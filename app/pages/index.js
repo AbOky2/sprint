@@ -19,6 +19,7 @@ const defaultProps = {
 class Index extends React.Component {
   render() {
     return (
+    
       <div style={{ padding: '10px 45px' }}>
         <Head>
           <title>Settings</title>
