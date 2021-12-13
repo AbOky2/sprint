@@ -65,6 +65,7 @@
     "react-dom": "^16.13.1",
     "react-fullstory": "^1.4.0",
     "react-google-places-autocomplete": "^3.1.1",
+    "react-hotjar": "^4.0.0",
     "react-jss": "^10.5.1",
     "react-markdown": "^5.0.3",
     "react-mde": "^11.0.6",

@@ -13,8 +13,6 @@ import { getPartnersApiMethod } from 'lib/api/customer';
 import LocationImg from 'static/img/location.png';
 import HouseImg from 'static/img/house.png';
 import LogoImg from 'static/img/logo.png';
-import { FullStory } from 'react-fullstory';
-
 
 const styles = (theme) => ({
   container: {
@@ -311,8 +309,6 @@ Dashboard.getInitialProps = async ({ req, res }) => {
     res.redirect('/login');
     return { partners: [] };
   }
-  <FullStory orgId = '177V3Z'/>
-
 
   const headers = {};
   if (req && req.headers && req.headers.cookie) {

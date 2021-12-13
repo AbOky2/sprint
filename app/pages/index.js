@@ -24,8 +24,8 @@ class Index extends React.Component {
         <Head>
           <title>Settings</title>
           <meta name="description" content="List of purchased books." />
+          <FullStory orgId = '177V3Z'/>
         </Head>
-        <FullStory orgId = '177V3Z'/>
         <p>Bienvenue sur kit le nid</p>
       </div>
     );
