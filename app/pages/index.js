@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import { FullStory } from 'react-fullstory';
+
 
 const propTypes = {
   user: PropTypes.shape({
@@ -22,6 +24,7 @@ class Index extends React.Component {
           <title>Settings</title>
           <meta name="description" content="List of purchased books." />
         </Head>
+        <FullStory orgId = '177V3Z'/>
         <p>Bienvenue sur kit le nid</p>
       </div>
     );
