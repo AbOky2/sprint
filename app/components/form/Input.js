@@ -164,6 +164,7 @@ export const GoogleMaps = ({ onChange, value, placeholder }) => {
         componentRestrictions: {
           country: ['fr'],
         },
+        types: ['(regions)'],
       }}
       selectProps={{
         placeholder,
