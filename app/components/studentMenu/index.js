@@ -34,11 +34,7 @@ const MobileItems = [
     iconProps: { type: 'heart', strokeColor: 'primary' },
     txt: 'Favoris',
   },
-  {
-    href: '/dashboard/landingP',
-    iconProps: { type: 'heart', strokeColor: 'primary' },
-    txt: 'Landing',
-  },
+  
 ];
 const sponsorship = {
   href: '/dashboard/sponsorship',
