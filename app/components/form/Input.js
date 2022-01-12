@@ -164,6 +164,7 @@ export const GoogleMaps = ({ onChange, value, placeholder }) => {
         componentRestrictions: {
           country: ['fr'],
         },
+        types: ['(regions)'],
       }}
       selectProps={{
         placeholder,
@@ -285,7 +286,7 @@ export const CustomInput = withStyles(styles)(
     const onChange = ({ target: { value } }) => {
       const { salary, contributtion } = state;
 
-      if (salary && contributtion) return;
+      //if (salary && contributtion) return;
       calc(value);
     };
     const onKeyPress = (e) => {
@@ -345,8 +346,8 @@ export const CustomInput = withStyles(styles)(
               onChange={handleChange('contributtion')}
             />
             <Typography>
-              Ce calcul est réalisé avec les hypothèses suivantes : durée de
-              prêt : 25 ans taux d’intérêt : 1,5%
+              Ce calcul est réalisé avec les hypothèses suivantes : <br/>durée de
+              prêt : 25 ans <br/>taux d’intérêt : 1,5%
             </Typography>
           </Grid>
         </Grid>

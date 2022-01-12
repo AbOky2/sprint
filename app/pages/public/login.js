@@ -234,7 +234,7 @@ const LoginTab = ({ login, register }) => {
     firstName: '',
     lastName: '',
     password: '',
-    role: Student,
+    role: '',
   });
   const [isRegisterinView, setIsRegisterinView] = useState(
     window?.location?.search?.includes('register')

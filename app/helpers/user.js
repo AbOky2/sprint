@@ -35,10 +35,10 @@ const dashboardPaths = {
 };
 
 const userRoleSelect = [
-  { name: 'Etudiant', value: Student },
   { name: 'Jeune actif', value: Buyer },
-  { name: 'Jeune diplômé', value: YoungGraduate },
-  { name: "Fin d'etudes", value: EndOfStudies },
+  { name: "En recherche d'emploi", value: YoungGraduate },
+  { name: "Etudiant en dernière année", value: EndOfStudies },
+  { name: 'Etudiant', value: Student },
 ];
 
 const profileRequiredFields = [

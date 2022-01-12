@@ -34,6 +34,7 @@ const MobileItems = [
     iconProps: { type: 'heart', strokeColor: 'primary' },
     txt: 'Favoris',
   },
+  
 ];
 const sponsorship = {
   href: '/dashboard/sponsorship',

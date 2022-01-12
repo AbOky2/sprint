@@ -1,10 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import withAuth from 'lib/withAuth';
 import { getUsersApiMethod, deleteUserApiMethod } from 'lib/api/admin';
 import Table from 'components/admin/table';
+import { CSVLink } from 'react-csv';
+import { userRoleKeyVal, toDate } from 'helpers';
 
 const Dashboard = ({ studentList = {} } = {}) => {
   const [state, setState] = useState(studentList);
+  const [data, setData] = useState([]);
+  console.log(state)
+ useEffect(() => {
+    setData(state?.docs?.map(item => ({
+      firstName: item.firstName, 
+      lastName:item.lastName,
+      email : item.email,
+      phone : item.phone,
+      sponsorshipCode : item.sponsorshipCode,  
+      role : userRoleKeyVal[item.role],
+      origin : item.origin,
+      date : toDate(item.created_at)
+    })))
+    
+  }, [state])
 
   const handleDelete = async (id) => {
     try {
@@ -29,6 +46,7 @@ const Dashboard = ({ studentList = {} } = {}) => {
 
   return (
     <div>
+      <CSVLink data ={data}> Exporter en CSV </CSVLink> 
       <Table
         {...state}
         handlePaginateList={handleQuery}

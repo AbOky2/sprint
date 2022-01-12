@@ -90,7 +90,7 @@ const PartnerPage = ({ user }) => {
 
   return (
     <AdminContentWrapper noRedirect mobilePadding>
-      <Typography variant="h1">Parrainer l’un de vos proches</Typography>
+      <Typography variant="h1">Parrainez l’un de vos proches</Typography>
       <div className={classes.tutorialConainer}>
         <Typography variant="h2">
           {`Recevez ${PartnershipPrice}€ dès qu’ils effectuent leur achat`}
