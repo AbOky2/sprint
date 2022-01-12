@@ -31,7 +31,7 @@ function fetchData() {
 const morningJob = new CronJob('0 0 */6 * * *', fetchData);
 morningJob.start();
 
-const afternoonJob = new CronJob('0 15 * * *', fetchData);
+const afternoonJob = new CronJob('0 14 * * *', fetchData);
 afternoonJob.start();
 
 app.listen(PORT, () => {
