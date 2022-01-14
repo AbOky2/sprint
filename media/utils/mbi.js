@@ -181,7 +181,7 @@ const getLotsList = (list, lots, extraLotsList) =>
     return newLot.surface > 1 && isAvailable ? [...acc, newLot] : acc;
   }, []);
 
-const readMba = () => {
+const readMba = ({ updateUnavalaible = false }) => {
   const lotRefs = [];
 
   const customMap = async (
@@ -367,14 +367,15 @@ const readMba = () => {
     const buyFoundIds = await customMap(buyDatas, extraLotsList);
     const rentFoundIds = await customMap(rentDatas);
 
-    await PropertieModel.updateMany(
-      {
-        _id: {
-          $nin: [...buyFoundIds, ...rentFoundIds],
+    if (updateUnavalaible)
+      await PropertieModel.updateMany(
+        {
+          _id: {
+            $nin: [...buyFoundIds, ...rentFoundIds],
+          },
         },
-      },
-      { available: false }
-    );
+        { available: false }
+      );
     logger.info(`\n------ FINISHED ------\n`);
   })();
 };

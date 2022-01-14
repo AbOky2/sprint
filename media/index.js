@@ -17,12 +17,11 @@ mongoose.connect(MONGO_URL, options);
 app.use(helmet());
 app.use(express.static('public'));
 
-function fetchData() {
+function fetchData(args) {
   try {
     const d = new Date();
     logger.log('Starting mbi at sync', d);
-    ftp(readMbi);
-    readMbi();
+    ftp(readMbi, args);
   } catch (err) {
     logger.error(err);
   }
@@ -31,7 +30,9 @@ function fetchData() {
 const morningJob = new CronJob('0 0 */8 * * *', fetchData);
 morningJob.start();
 
-const afternoonJob = new CronJob('0 16 * * *', fetchData);
+const afternoonJob = new CronJob('0 16 * * *', () =>
+  fetchData({ updateUnavalaible: true })
+);
 afternoonJob.start();
 
 app.listen(PORT, () => {

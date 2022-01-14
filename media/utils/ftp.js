@@ -11,7 +11,7 @@ const {
 } = require('../config');
 
 const fileNamePrefix = 'mbi_neuf_ancien_';
-module.exports = (cbl) => {
+module.exports = (cbl, args) => {
   const c = new ftpClient();
   c.connect({ host: FTP_HOST, user: FTP_USER, password: FTP_PASSWORD });
 
@@ -51,7 +51,7 @@ module.exports = (cbl) => {
             c.end();
             if (cbl) {
               logger.info('Starting mbi');
-              return cbl();
+              return cbl(args);
             }
             return logger.info('Done without starting mbi');
           }
@@ -63,7 +63,7 @@ module.exports = (cbl) => {
                 c.end();
                 if (cbl) {
                   logger.info('Starting mbi');
-                  return cbl();
+                  return cbl(args);
                 }
                 return logger.info('Done without starting mbi');
               }
