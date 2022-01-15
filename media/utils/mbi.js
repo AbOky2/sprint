@@ -181,6 +181,7 @@ const getLotsList = (list, lots, extraLotsList) =>
     return newLot.surface > 1 && isAvailable ? [...acc, newLot] : acc;
   }, []);
 
+let dailyUpdated = [];
 const readMba = (args) => {
   const lotRefs = [];
 
@@ -367,15 +368,19 @@ const readMba = (args) => {
     const buyFoundIds = await customMap(buyDatas, extraLotsList);
     const rentFoundIds = await customMap(rentDatas);
 
-    if (args && args.updateUnavalaible)
+    dailyUpdated = [...dailyUpdated, ...buyFoundIds, rentFoundIds];
+
+    if (args && args.updateUnavalaible) {
       await PropertieModel.updateMany(
         {
           _id: {
-            $nin: [...buyFoundIds, ...rentFoundIds],
+            $nin: dailyUpdated,
           },
         },
         { available: false }
       );
+      dailyUpdated = [];
+    }
     logger.info(`\n------ FINISHED ------\n`);
   })();
 };
