@@ -9,7 +9,7 @@ import { userActions } from 'redux/_actions';
 import { Btn, Select, Input, Checkbox } from 'components';
 import { redirectStyle } from 'components/wrapper';
 import withAuth from 'lib/withAuth';
-import { Student, userRoleSelect, cleanAlert, pick } from 'helpers';
+import { Buyer, userRoleSelect, cleanAlert, pick } from 'helpers';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -234,7 +234,7 @@ const LoginTab = ({ login, register }) => {
     firstName: '',
     lastName: '',
     password: '',
-    role: '',
+    role: Buyer,
   });
   const [isRegisterinView, setIsRegisterinView] = useState(
     window?.location?.search?.includes('register')
@@ -294,7 +294,7 @@ const LoginTab = ({ login, register }) => {
   const handleChange = (name) => ({ target: { value } }) =>
     setState({ ...state, [name]: value });
   const classes = useStyles();
-
+  console.log(state);
   return (
     <>
       <Head>
