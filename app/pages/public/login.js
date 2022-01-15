@@ -294,7 +294,7 @@ const LoginTab = ({ login, register }) => {
   const handleChange = (name) => ({ target: { value } }) =>
     setState({ ...state, [name]: value });
   const classes = useStyles();
-  console.log(state);
+
   return (
     <>
       <Head>
