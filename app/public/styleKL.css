@@ -1,0 +1,543 @@
+      body {
+        padding: 0;
+      }
+      .promotion-wrapper {
+        display: flex;
+        margin-bottom: 1rem;
+        align-items: center;
+      }
+      .pac-container::after {
+        background-image: none !important;
+        height: 0;
+      }
+      .cluster img {
+        opacity: 0;
+      }
+      .cluster > div {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+      .cluster > div span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+        height: 75%;
+        color: #4f80ff;
+        font-family: "Nunito";
+        background-color: white;
+        font-size: 1rem;
+        border-radius: 100%;
+        font-weight: 800;
+        box-shadow: 0px 3.91111px 13.6889px rgba(14, 108, 218, 0.17),
+          inset 0px 0px 5.86667px rgba(24, 72, 196, 0.3);
+      }
+      .promotion-wrapper h2 {
+        margin-bottom: 0 !important;
+      }
+      .promotion-wrapper img {
+        width: 25px;
+        margin-left: 0.5rem;
+      }
+      .noScroll {
+        overflow: hidden !important;
+      }
+      .navbar-dropdown span.navbar-logo {
+        margin-right: 0.5rem;
+      }
+      .navbar-brand {
+        position: relative;
+        top: -0.5rem;
+      }
+      .mbr-section-btn a.btn:not(.btn-form) {
+        box-shadow: initial;
+      }
+      .mbr-section-btn a.btn.btn-primary:not(.btn-form) {
+        box-shadow: 0px 10px 44px -5px rgb(14 108 218 / 35%);
+      }
+      .color-gray {
+        color: #849cd9 !important;
+      }
+      .search-btn {
+        position: relative;
+        overflow: hidden;
+      }
+      .search-btn input {
+        background: #ffffff;
+        border: 1px solid #d2dcf5;
+        box-sizing: border-box;
+        border-radius: 10px;
+        padding: 1rem;
+        width: 100%;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 28px;
+        font-family: "Open Sans";
+        color: #b4c3e8;
+      }
+      .search-btn input::placeholder,
+      .search-btn::-webkit-input-placeholder {
+        font-weight: 600;
+        color: #b4c3e8;
+      }
+      .search-btn input:focus::-webkit-input-placeholder {
+        color: transparent;
+      }
+      .search-btn input:focus:-moz-placeholder {
+        color: transparent;
+      }
+      .search-btn input:focus::-moz-placeholder {
+        color: transparent;
+      }
+      .search-btn input:focus:-ms-input-placeholder {
+        color: transparent;
+      }
+      .search-btn img {
+        position: absolute;
+        top: 3px;
+        right: 0;
+        height: 100%;
+        width: 5rem;
+        cursor: pointer;
+      }
+      .first-heading {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 48px;
+        line-height: 64px;
+        color: #113eb6 !important;
+      }
+      .first-heading > strong {
+        color: #4f80ff !important;
+      }
+      .heading-slogan {
+        margin-bottom: 24px !important;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 35px;
+        color: #849cd9;
+      }
+      .second-heading {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 22px;
+        color: #113eb6 !important;
+      }
+      #search-container > div:last-of-type h2 {
+        margin: 3rem 0 1rem;
+      }
+      .card-container {
+        display: grid;
+        grid-template-columns: calc(33% - 1rem) calc(33% - 1rem) calc(
+            33% - 1rem
+          );
+        grid-gap: 1rem;
+        margin-bottom: 0;
+        padding: 0;
+      }
+      .card-container li {
+        border: 0.704545px solid #f4f5f7;
+        border-radius: 10.5682px;
+        font-family: "Open Sans";
+        box-sizing: border-box;
+        background: #ffffff;
+        font-size: 9.86364px;
+        align-items: center;
+        line-height: 13px;
+        font-weight: 600;
+        padding: 5.5px;
+      }
+      .card-container li div {
+        border-radius: 5px;
+        width: 100%;
+        height: 121.89px;
+        margin-bottom: 6px;
+        background-size: cover;
+      }
+      .card-container li h3 {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 14.0909px;
+        line-height: 19px;
+        color: #113eb6;
+        margin: 0;
+      }
+      .card-container li span {
+        display: block;
+        margin-bottom: 6.5px;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 9.86364px;
+        line-height: 13px;
+        color: #8c97b6;
+      }
+      .card-container li p {
+        color: #1a2e6c;
+        font-weight: 600;
+        font-size: 9.86364px;
+        line-height: 13px;
+      }
+      #header4-t {
+        padding-top: 8rem;
+      }
+      #header4-t > div > div > div:first-of-type {
+        padding-right: 3rem;
+      }
+      #header4-t > div > div > div:last-of-type {
+        padding-left: 3rem;
+      }
+      #map {
+        height: calc(100% - 50px);
+        border-bottom-right-radius: 0.9rem;
+        border-bottom-left-radius: 0.9rem;
+      }
+      #maps-container {
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        align-items: stretch;
+        height: 100%;
+        padding: 0 1rem 1rem;
+        padding-bottom: 0;
+      }
+      #maps-container > div {
+        position: relative;
+        height: 100%;
+      }
+      #maps-container > div:last-of-type > div:last-of-type {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        text-align: center;
+        padding: 0 2rem;
+        width: 100%;
+      }
+      #maps-container > div:last-of-type > div:last-of-type > div {
+        padding: 1rem 2rem;
+        border-radius: 0.9rem;
+        background-color: white;
+        box-shadow: 0px 2.14237px 7.4983px rgba(0, 0, 0, 0.08);
+      }
+      #maps-container > div:last-of-type > div:last-of-type h3,
+      #maps-container > div:last-of-type > div:last-of-type h3 span {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 27px;
+        color: #113eb6;
+      }
+      #maps-container > div:last-of-type > div:last-of-type a {
+        font-family: "Open Sans";
+        font-weight: 600;
+        font-size: 14px;
+        color: #4f80ff;
+        line-height: 28px;
+      }
+      #maps-container > div:last-of-type > div:last-of-type a svg {
+        margin-left: 0.3rem;
+      }
+      #maps-container .bird {
+        position: absolute;
+        top: 0;
+        left: 10%;
+        transform: translateY(-100%);
+        width: 60px;
+        z-index: 2;
+      }
+      .gm-fullscreen-control {
+        display: none;
+      }
+      #navbarSupportedContent {
+        justify-content: start;
+        margin-left: 55px;
+      }
+      #navbarSupportedContent ul li a {
+        margin-right: 26px !important;
+        font-family: "Open Sans";
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 28px;
+        text-align: center;
+        color: #113eb6 !important;
+      }
+      .gm-svpc,
+      .gmnoprint .gm-style-mtc {
+        display: none;
+      }
+      .gmnoprint {
+        transform: translateY(-75%);
+      }
+      #maps-container .gm-style .gm-style-iw-d {
+        overflow: initial !important;
+      }
+      .gm-style-iw + div {
+        display: none;
+      }
+      button.gm-ui-hover-effect {
+        visibility: hidden;
+      }
+      .gm-style .gm-style-iw-t::after {
+        display: none;
+      }
+      #maps-container .card-container {
+        display: block;
+        width: 154px;
+      }
+      #maps-container .card-container li {
+        border: none;
+        list-style: none;
+        padding: 0.5rem;
+        margin: 0;
+      }
+      #maps-container .slider::marker {
+        content: "";
+        display: none;
+      }
+      #maps-container .slider > div {
+        height: 100px;
+        border-radius: 10px;
+      }
+      #maps-container .card-container li p {
+        margin-bottom: 0;
+      }
+      #maps-container .gm-style .gm-style-iw-c {
+        padding: 0 !important;
+        border-radius: 15px;
+      }
+      #maps-container .card-container li h3 {
+        color: #4f80ff;
+      }
+      #maps-container .card-container li > p span {
+        display: initial;
+      }
+      .mobile-inline {
+        display: block;
+      }
+      .title_block > h2 {
+        padding-top: 0.5rem;
+      }
+      #search-container {
+        padding-right: 1rem;
+      }
+      @media only screen and (max-width: 991px) {
+        .gmnoprint {
+          display: none !important;
+        }
+        .cid-spVxHaIWZX svg {
+          margin-left: 0 !important;
+        }
+        .first-heading {
+          max-width: 80%;
+        }
+        #navbarSupportedContent {
+          margin-left: 0;
+        }
+        #mobile-search-near-residences {
+          max-width: 100vw;
+          width: 100% !important;
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+        }
+        #mobile-search-near-residences .slider > div {
+          height: 120px;
+        }
+        .heading-slogan-container {
+          display: flex;
+          position: relative;
+        }
+        .heading-slogan-container > p {
+          width: 70%;
+        }
+        .heading-slogan-container > div img {
+          position: absolute;
+          width: 120px;
+          top: -35%;
+        }
+        .card-container {
+          display: block;
+        }
+        .card-container li {
+          padding: 0;
+          margin: 0 0.5rem;
+          border: none;
+          background-color: transparent;
+          min-width: 50vw;
+        }
+        #maps-container .card-container li {
+          width: 40vw;
+        }
+        #map .card-container li {
+          min-width: auto;
+        }
+        .card-container li div {
+          border-radius: 10px;
+        }
+        .card-container li h3 {
+          font-size: 1rem;
+          color: #4f80ff;
+          line-height: 22px;
+        }
+        .card-container li span {
+          font-size: 11px;
+          line-height: 15px;
+        }
+        .card-container li p {
+          font-size: 10px;
+          line-height: 14px;
+          margin-bottom: 0;
+        }
+        .card-container li h3,
+        .card-container li span,
+        .card-container li p {
+          text-align: left;
+        }
+        #lastest-near-residences {
+          grid-template-columns: 50% 50% 50%;
+          overflow-x: scroll;
+        }
+        #maps-container {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          background-color: white;
+          padding: 0;
+          height: 100%;
+          overflow: scroll;
+          z-index: 1001;
+        }
+        #maps-container.show {
+          display: flex;
+          width: 100%;
+        }
+        #maps-container > div {
+          height: auto;
+        }
+        #maps-container > div:first-of-type {
+          padding: 1rem 1rem 0;
+          background-color: white;
+          box-shadow: 0px 0px 15px rgb(66 57 57);
+          border-bottom-left-radius: 1rem;
+          border-bottom-right-radius: 1rem;
+        }
+        #map {
+          height: calc(100% + 1rem);
+        }
+        #maps-container > div:last-of-type {
+          position: fixed;
+          flex: 1;
+          width: 100%;
+          bottom: 0;
+          position: relative;
+          top: -1rem;
+          z-index: -1;
+        }
+        #maps-container > div:first-of-type .search-btn {
+          display: flex;
+          align-items: center;
+        }
+        #maps-container > div:first-of-type .search-btn > div {
+          position: relative;
+          flex: 1;
+        }
+        #maps-container > div:first-of-type .search-btn span {
+          font-family: "Nunito";
+          font-style: normal;
+          font-weight: bold;
+          margin-left: 1rem;
+          line-height: 22px;
+          color: #1a2e6c;
+        }
+        #maps-container > div:last-of-type > div:last-of-type {
+          padding: 1rem 1rem;
+        }
+        #maps-container > div:last-of-type > div:last-of-type > div {
+          padding: 1rem 1rem;
+          background-color: #4f80ff;
+        }
+        #maps-container > div:last-of-type > div:last-of-type > div a {
+          font-size: 11px;
+          line-height: 15px;
+          color: white;
+        }
+        #maps-container > div:last-of-type > div:last-of-type a svg path {
+          fill: white;
+        }
+        .first-heading {
+          font-size: 29px;
+          line-height: 36px;
+        }
+        .heading-slogan {
+          font-size: 17px;
+          line-height: 23px;
+        }
+        .search-btn input {
+          border: 2px solid #d2dcf5;
+          line-height: 19px;
+        }
+        #header4-t > div > div > div:first-of-type {
+          padding-right: 0;
+        }
+        .slider.slick-slide {
+          opacity: 0.5;
+        }
+        .slider.slick-slide.slick-current {
+          opacity: 1;
+        }
+        #header4-t {
+          padding-top: 2.7rem;
+          padding-bottom: 2rem;
+        }
+        #content7-18 {
+          padding-top: 0;
+        }
+        .mobile-lot-list {
+          margin-top: 1.66rem;
+        }
+        .mobile-lot-list > h3,
+        .mobile-lot-list h3 span {
+          font-family: "Nunito";
+          font-style: normal;
+          font-weight: 800;
+          font-size: 16px;
+          line-height: 26px;
+          color: #1a2e6c;
+        }
+        .mobile-lot-list h3 span {
+          color: #4f80ff;
+        }
+        .desktop-only {
+          display: none !important;
+        }
+        .mobile-inline {
+          display: inline-block;
+        }
+        .mobile-align-left {
+          text-align: left;
+        }
+        .pac-container {
+          z-index: 1002;
+        }
+        .menu .navbar-brand .navbar-logo img {
+          height: 2rem !important;
+        }
+      }
+      @media only screen and (max-width: 420px) {
+        .heading-slogan-container > div img {
+          top: -75%;
+        }
+      }
