@@ -13,6 +13,7 @@ import { getPartnersApiMethod } from 'lib/api/customer';
 import LocationImg from 'static/img/location.png';
 import HouseImg from 'static/img/house.png';
 import LogoImg from 'static/img/logo.png';
+import { pageLink } from 'constants/index';
 
 const styles = (theme) => ({
   container: {
@@ -306,7 +307,7 @@ Dashboard.propTypes = {
 
 Dashboard.getInitialProps = async ({ req, res }) => {
   if (req && !req.user) {
-    res.redirect('/login');
+    res.redirect(pageLink.home);
     return { partners: [] };
   }
 

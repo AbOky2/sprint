@@ -8,6 +8,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { userRoleSelect } from 'helpers';
 import { Input, Select, Modal, Icon } from './form';
+import { pageLink } from 'constants/index';
 
 const useStyles = makeStyles((theme) => ({
   contextMenu: {
@@ -100,7 +101,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
     if (!hasUpdate) setState(user);
   };
   // eslint-disable-next-line no-return-assign
-  const handleLogOut = () => logout(() => (window.location = '/login'));
+  const handleLogOut = () => logout(() => (window.location = pageLink.home));
   const handleSumbit = () => update(state, () => handleModalClose(true));
   const onKeyPress = (e) => e.key === 'Enter' && handleSumbit(true);
 
