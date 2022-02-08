@@ -1,7 +1,8 @@
-require('dotenv').config();
+// require('dotenv').config();
 const withImages = require('next-images');
 
 module.exports = withImages({
+  swcMinify: true,
   env: {
     URL_APP: process.env.URL_APP,
     PRODUCTION_URL_APP: process.env.PRODUCTION_URL_APP,
@@ -18,9 +19,9 @@ module.exports = withImages({
       use: ['@svgr/webpack'],
     });
     // eslint-disable-next-line no-param-reassign
-    config.node = {
-      fs: 'empty',
-    };
+    // config.node = {
+    //   fs: 'empty',
+    // };
 
     return config;
   },

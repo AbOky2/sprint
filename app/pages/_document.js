@@ -2,6 +2,7 @@
 import React from 'react';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/styles';
+import Script from 'next/script';
 // import htmlescape from 'htmlescape';
 
 class MyDocument extends Document {
@@ -163,8 +164,6 @@ class MyDocument extends Document {
           />
 
           <link rel="stylesheet" href="styleKL.css" />
-
-          <script src="monJs.js"> </script>
         </Head>
         <body>
           <Main />
@@ -172,24 +171,21 @@ class MyDocument extends Document {
           {/* eslint-disable-next-line react/no-danger */}
           {/* <script dangerouslySetInnerHTML={{ __html: `__ENV__ = ${htmlescape(env)}` }} /> */}
           <NextScript />
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+          <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
           <script
             type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7NrR47b_NReW4PF6kCDd1vGSUrm9xkzo&libraries=geometry&libraries=places"
           ></script>
           <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
           <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-          <script src="assets/web/assets/jquery/jquery.min.js"></script>
           <script src="assets/popper/popper.min.js"></script>
           <script src="assets/tether/tether.min.js"></script>
           <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-          <script
-            type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-          ></script>
           <script src="assets/smoothscroll/smooth-scroll.js"></script>
           <script src="assets/dropdown/js/nav-dropdown.js"></script>
           <script src="assets/dropdown/js/navbar-dropdown.js"></script>
-          <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
           <script src="assets/theme/js/script.js"></script>
           <script src="assets/theme/js/custom-map.js"></script>
         </body>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { pageLink } from 'constants/index';
 
 export default function Header() {
   return (
@@ -48,7 +47,7 @@ export default function Header() {
               mobile-only
               signin-mobile
             "
-            href={`${pageLink.login}?register`}
+            href="/login?register"
           >
             Je m'inscris
           </a>
@@ -82,15 +81,12 @@ export default function Header() {
           </div>
 
           <div className="navbar-buttons mbr-section-btn">
-            <a
-              className="btn btn-primary-outline display-4"
-              href={pageLink.login}
-            >
+            <a className="btn btn-primary-outline display-4" href="/login">
               Se connecter
             </a>
             <a
               className="redirect-btn btn btn-primary display-4"
-              href={`${pageLink.login}?register`}
+              href="/login?register"
             >
               S'inscrire
             </a>
