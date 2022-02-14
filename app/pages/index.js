@@ -20,7 +20,7 @@ const defaultProps = {
 class Index extends React.Component {
   render() {
     return (
-      <div style={{ padding: '10px 45px' }}>
+      <div>
         <Head>
           <title>Kit le nid</title>
           <meta name="description" content="List of purchased books." />

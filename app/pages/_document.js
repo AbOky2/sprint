@@ -30,7 +30,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en" style={{ height: '100%' }}>
+      <Html>
         <Head>
           <meta charSet="utf-8" />
           <meta name="google" content="notranslate" />
@@ -72,7 +72,7 @@ class MyDocument extends Document {
             charSet="UTF-8"
             href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
           />
-          <link href="/static/styles.css" rel="stylesheet" />
+          
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_MEASUREMENT_ID}`}

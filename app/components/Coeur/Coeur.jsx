@@ -2,20 +2,20 @@ import React from 'react'
 
 export default function Coeur() {
     return (
-        <div>
-            <section className="header4 firmm4_header4 cid-srUDSjEkHN" id="header4-t">
-      <div className="container">
-        <div className="row justify-content-center flex-row-reverse">
-          <div className="col-lg-6 col-md-7 col-sm-9 col-12 order-1">
-            <div className="title_block text-white">
-              <h2
-                className="
-                  mbr-section-title mbr-fonts-style
-                  display-1
-                  mobile-align-left
-                  first-heading
-                "
-              >
+        <>
+         <section className="header4 firmm4_header4 cid-srUDSjEkHN" id="header4-t">
+              <div className="container">
+              <div className="row justify-content-center flex-row-reverse">
+                <div className="col-lg-6 col-md-7 col-sm-9 col-12 order-1">
+                  <div className="title_block text-white">
+                    <h2
+                      className="
+                        mbr-section-title mbr-fonts-style
+                        display-1
+                        mobile-align-left
+                        first-heading
+                      "
+                    >
                 Mon premier achat <br/>
                 <strong className="mbr-text">immobilier.</strong>
               </h2>
@@ -29,8 +29,8 @@ export default function Coeur() {
                     heading-slogan
                   "
                 >
-                  Devenez propriétaire pour seulement
-                  <strong className="mobile-inline">700€ par mois !*</strong>
+                  Devenez propriétaire pour seulement 
+                  <strong className="mobile-inline"> 700€ par mois !*</strong>
                 </p>
                 <div>
                   <img
@@ -863,6 +863,6 @@ export default function Coeur() {
 
     
             
-        </div>
+        </>
     )
 }
