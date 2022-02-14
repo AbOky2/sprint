@@ -10,6 +10,7 @@ import { Btn, Select, Input, Checkbox } from 'components';
 import { redirectStyle } from 'components/wrapper';
 import withAuth from 'lib/withAuth';
 import { Buyer, userRoleSelect, cleanAlert, pick } from 'helpers';
+import { pageLink } from 'constants/index';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -291,8 +292,10 @@ const LoginTab = ({ login, register }) => {
     authReq(data);
   };
   const onKeyPress = (e) => e.key === 'Enter' && onClick();
-  const handleChange = (name) => ({ target: { value } }) =>
-    setState({ ...state, [name]: value });
+  const handleChange =
+    (name) =>
+    ({ target: { value } }) =>
+      setState({ ...state, [name]: value });
   const classes = useStyles();
 
   return (
@@ -309,9 +312,11 @@ const LoginTab = ({ login, register }) => {
           className={classes.container}
         >
           <div className="fullwidth text-center">
-            <a href="/">
-              <img src="/logo.svg" alt="kit le nid" />
-            </a>
+            <Link href={pageLink.home}>
+              <a>
+                <img src="/logo.svg" alt="kit le nid" />
+              </a>
+            </Link>
             <Grid
               container
               item
@@ -319,7 +324,7 @@ const LoginTab = ({ login, register }) => {
               justify="center"
               className="relative"
             >
-              <a href="http://kitlenid.fr" className={classes.redirect}>
+              <a href={pageLink.home} className={classes.redirect}>
                 <Typography variant="h4">Retour</Typography>
               </a>
               <Grid item md={6} xs={12} className={classes.signinLogo} />

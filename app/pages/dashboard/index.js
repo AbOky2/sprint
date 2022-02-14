@@ -13,6 +13,7 @@ import { getPartnersApiMethod } from 'lib/api/customer';
 import LocationImg from 'static/img/location.png';
 import HouseImg from 'static/img/house.png';
 import LogoImg from 'static/img/logo.png';
+import { pageLink } from 'constants/index';
 
 const styles = (theme) => ({
   container: {
@@ -91,6 +92,8 @@ const styles = (theme) => ({
       },
       '& img': {
         height: 50,
+        display: 'inline-block',
+        width: 'auto',
       },
     },
   },
@@ -182,7 +185,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
   <AdminContentWrapper noRedirect>
     <div className={classes.heading}>
       <div>
-        <img src={LogoImg} alt="" />
+        <img src={'static/img/logo.png'} alt="" />
       </div>
       <Typography variant="h1">
         {`Bonjour ${ucfirst(user?.firstName)} `}
@@ -306,7 +309,7 @@ Dashboard.propTypes = {
 
 Dashboard.getInitialProps = async ({ req, res }) => {
   if (req && !req.user) {
-    res.redirect('/login');
+    res.redirect(pageLink.home);
     return { partners: [] };
   }
 

@@ -2,6 +2,8 @@ $(() => {
   const app_url = 'https://app.kitlenid.fr';
   const media_url = 'https://media.kitlenid.fr';
 
+  $('#landing-loader').css('display', 'none');
+  $('html').css('font-size', 'inherit');
   const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
     center: { lat: 48.8587741, lng: 2.2069771 },

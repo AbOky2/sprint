@@ -90,6 +90,7 @@ export default function Header() {
         <script src="assets/theme/js/script.js"></script>
         <script src="assets/theme/js/custom-map.js"></script>
       </Head>
+      <div id="landing-loader">loading...</div>
       <section
         className="menu firmm4_menu1 cid-sAFX1m4jsM"
         once="menu"
