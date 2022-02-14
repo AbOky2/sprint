@@ -69,10 +69,10 @@ export default function Header() {
         />
 
         <link rel="stylesheet" href="styleKL.css" />
-        <script
+        {/* <script
           type="text/javascript"
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7NrR47b_NReW4PF6kCDd1vGSUrm9xkzo&libraries=geometry&libraries=places"
-        ></script>
+        ></script> */}
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
         {/* <script src="assets/web/assets/jquery/jquery.min.js"></script> */}
