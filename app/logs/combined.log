@@ -9,3 +9,6 @@
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-13T19:43:11.964Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-13T20:02:11.726Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-14T09:32:09.705Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-14T10:30:19.891Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-14T10:36:07.720Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-14T10:44:01.476Z"}

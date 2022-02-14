@@ -92,6 +92,8 @@ const styles = (theme) => ({
       },
       '& img': {
         height: 50,
+        display: 'inline-block',
+        width: 'auto'
       },
     },
   },
@@ -183,7 +185,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
   <AdminContentWrapper noRedirect>
     <div className={classes.heading}>
       <div>
-        <img src={LogoImg} alt="" />
+        <img src={'static/img/logo.png'} alt="" />
       </div>
       <Typography variant="h1">
         {`Bonjour ${ucfirst(user?.firstName)} `}
