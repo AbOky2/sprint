@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { pageLink } from 'constants/index';
+
 
 export default function Header() {
   return (
@@ -149,7 +151,7 @@ export default function Header() {
                 data-app-modern-menu="true"
               >
                 <li className="nav-item">
-                  <Link href="/">
+                  <Link href={pageLink.home}>
                     <a className="nav-link link text-secondary text-primary display-4">
                       Accueil
                     </a>
