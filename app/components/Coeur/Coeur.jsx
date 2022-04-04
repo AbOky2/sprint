@@ -1,8 +1,102 @@
 import React from 'react';
+import Demo from '/Users/yoskoissaoki/Desktop/KitLeNidFevrier/kit-le-nid/app/pages/dashboard/demo'
+import Head from 'next/head';
+import { Grid, Typography } from '@material-ui/core';
+import {Icon} from 'components';
+
+
 
 export default function Coeur() {
   return (
     <>
+    <Head>
+        <title>ok</title>
+        <meta charSet="UTF-8" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
+        <link
+          rel="shortcut icon"
+          href="assets/images/icon-128x128.png"
+          type="image/x-icon"
+        />
+        <meta
+          name="description"
+          content="La première offre d’accompagnement dédiée aux jeunes du groupe Nexity. N’attendez pas d’avoir 30 ans pour devenir propriétaire !"
+        />
+
+        <title>Kit le Nid</title>
+        <link
+          rel="stylesheet"
+          href="assets/web/assets/mobirise-icons2/mobirise2.css"
+        />
+        <link rel="stylesheet" href="assets/web/assets/shared.css" />
+        <link
+          href="https://fonts.googleapis.com/css?family=Space+Grotesk:400italic,600italic,700italic,400,600,700"
+          rel="stylesheet"
+          type="text/css"
+        />
+        <link rel="stylesheet" href="assets/tether/tether.min.css" />
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+        <link
+          rel="stylesheet"
+          href="assets/bootstrap/css/bootstrap-grid.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/bootstrap/css/bootstrap-reboot.min.css"
+        />
+        <link rel="stylesheet" href="assets/dropdown/css/style.css" />
+        <link rel="stylesheet" href="assets/socicon/css/styles.css" />
+        <link
+          rel="preload"
+          as="style"
+          href="assets/mobirise/css/mbr-additional.css"
+        />
+        <link
+          rel="stylesheet"
+          href="assets/mobirise/css/mbr-additional.css"
+          type="text/css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
+        />
+
+        <link rel="stylesheet" href="styleKL.css" />
+        {/* <script
+          type="text/javascript"
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7NrR47b_NReW4PF6kCDd1vGSUrm9xkzo&libraries=geometry&libraries=places"
+        ></script> */}
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+        {/* <script src="assets/web/assets/jquery/jquery.min.js"></script> */}
+        <script src="assets/popper/popper.min.js"></script>
+        <script src="assets/tether/tether.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script
+          type="text/javascript"
+          src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+        ></script>
+        <script src="assets/smoothscroll/smooth-scroll.js"></script>
+        <script src="assets/dropdown/js/nav-dropdown.js"></script>
+        <script src="assets/dropdown/js/navbar-dropdown.js"></script>
+        <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+        <script src="assets/theme/js/script.js"></script>
+        <script src="assets/theme/js/custom-map.js"></script>
+      </Head>
+      <div id="landing-loader">loading...</div>
+
+    
       <section className="header4 firmm4_header4 cid-srUDSjEkHN" id="header4-t">
         <div className="container">
           <div className="row justify-content-center flex-row-reverse">
@@ -16,8 +110,9 @@ export default function Coeur() {
                         first-heading
                       "
                 >
-                  Mon premier achat <br />
-                  <strong className="mbr-text">immobilier.</strong>
+                  
+                  Devenir propriétaire devient <br />
+                  <strong className="mbr-text">plus accessible.</strong>
                 </h2>
                 <div className="heading-slogan-container">
                   <p
@@ -34,7 +129,7 @@ export default function Coeur() {
                   </p>
                   <div>
                     <img
-                      src="assets/images/mobile-bird.svg"
+                      src="assets/images/maison.jpg"
                       alt="bird"
                       className="mobile-only"
                     />
@@ -143,28 +238,13 @@ export default function Coeur() {
           <div className="row align-items-center justify-content-center flex-row-reverse">
             <div className="col-12 col-md-6 col-sm-8 col-lg order-1">
               <div className="text-wrapper">
-                <div className="promotion-wrapper">
-                  <h2
-                    className="
-                    mbr-section-title mbr-fonts-style
-                    display-5
-                    second-heading
-                  "
-                  >
-                    Une offre de Nexity immobilier
-                  </h2>
-                  <img
-                    src="assets/images/nexity-logo.svg"
-                    alt="nexity logo"
-                    className="nexity-logo"
-                  />
-                </div>
-                <h4 className="mbr-section-title mbr-fonts-style display-5">
+                
+                <h4 className="mbr-section-title mbr-fonts-style display-5" style={{fontFamily:"Space Grotesk"}}>
                   <strong>
                     L’achat dans une résidence neuve avec Kit le nid
                   </strong>
                 </h4>
-                <p className="mbr-text mbr-fonts-style display-7">
+                <p className="mbr-text mbr-fonts-style display-7" style={{color:"#849CD9", fontFamily:"Space Grotesk", fontSize:"14px", weight:"500px"}}>
                   <strong>
                     Construire son projet immobilier avec Kit le nid c’est
                     bénéficier&nbsp;:
@@ -180,10 +260,10 @@ export default function Coeur() {
                         </div>
                       </div>
                       <div className="card_info">
-                        <h4 className="card_title mbr-fonts-style display-7">
+                        <h4 className="card_title mbr-fonts-style display-7"  style={{fontFamily:"Space Grotesk"}}>
                           <strong>Des logements dans toute la France</strong>
                         </h4>
-                        <p className="card_text mbr-fonts-style display-4">
+                        <p className="card_text mbr-fonts-style display-4" style={{fontFamily:"Space Grotesk", color:"#849CD9"}}>
                           Plus de 3 000 logements neufs disponibles.
                         </p>
                       </div>
@@ -197,10 +277,10 @@ export default function Coeur() {
                         </div>
                       </div>
                       <div className="card_info">
-                        <h4 className="card_title mbr-fonts-style display-7">
+                        <h4 className="card_title mbr-fonts-style display-7" style={{fontFamily:"Space Grotesk"}}>
                           <strong>Parcours 100% gratuit</strong>
                         </h4>
-                        <p className="card_text mbr-fonts-style display-4">
+                        <p className="card_text mbr-fonts-style display-4" style={{fontFamily:"Space Grotesk", color:"#849CD9"}}>
                           Un parcours simplifié pour votre premier achat sans
                           frais d'agence, ni frais de dossier.
                         </p>
@@ -215,10 +295,10 @@ export default function Coeur() {
                         </div>
                       </div>
                       <div className="card_info">
-                        <h4 className="card_title mbr-fonts-style display-7">
+                        <h4 className="card_title mbr-fonts-style display-7" style={{fontFamily:"Space Grotesk"}}>
                           <strong>Accompagnement</strong>
                         </h4>
-                        <p className="card_text mbr-fonts-style display-4">
+                        <p className="card_text mbr-fonts-style display-4" style={{fontFamily:"Space Grotesk", color:"#849CD9"}}>
                           Un accompagnement personnalisé avec un unique
                           conseiller,
                           <strong>
@@ -237,10 +317,10 @@ export default function Coeur() {
                         </div>
                       </div>
                       <div className="card_info">
-                        <h4 className="card_title mbr-fonts-style display-7">
+                        <h4 className="card_title mbr-fonts-style display-7" style={{fontFamily:"Space Grotesk"}}>
                           <strong>Accès libre aux plans</strong>
                         </h4>
-                        <p className="card_text mbr-fonts-style display-4">
+                        <p className="card_text mbr-fonts-style display-4" style={{fontFamily:"Space Grotesk", color:"#849CD9"}}>
                           Tous les plans des appartements sont téléchargeables
                           sur notre plateforme.
                           <br />
@@ -695,165 +775,27 @@ export default function Coeur() {
                   </p>
                 </div>
               </div>
+              <div>
+              <Grid item md={8} xs={12}
+          style={{background : 'white', borderRadius:'12px', marginBottom:"20px", marginTop:"16px", padding:'24px', border:"1px solid #EAEFFA"}}>
+            <Icon 
+            type='chiffre3'
+            size='large'
+            />
+            <Typography style={{ color:'red', marginTop:"-8px", fontWeight:"bold"}} zeroMinWidth>
+            Loremos at odio porttitor efficitur. Quisque id enim orci.
+            
+            </Typography>
+            
+          </Grid>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </section>  
 
-      <section
-        className="firmm4_features2 features2 cid-srUGxpOhOb"
-        id="features2-v"
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-12 title_block">
-              <h4
-                className="
-                mbr-section-subtitle mbr-fonts-style
-                align-center
-                display-5
-              "
-              >
-                Votre location en attendant de devenir propriétaire.
-              </h4>
-              <h3
-                className="
-                mbr-section-title mbr-fonts-style
-                align-center
-                mb-0
-                display-7
-              "
-              >
-                <strong>Un accès privilégié avec Kit le nid</strong>
-              </h3>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
-      <section className="firmm4_content5 cid-srUF4V59HG" id="content5-u">
-        <div className="container callout">
-          <div className="row align-items-center justify-content-center">
-            <div className="col-12 col-md-6 col-sm-8 col-lg order-1">
-              <div className="text-wrapper">
-                <h4 className="card-title mbr-fonts-style display-7">
-                  <strong>
-                    Du studio au deux pièces entièrement meublés&nbsp;&nbsp;
-                  </strong>
-                </h4>
-                <p className="mbr-text mbr-fonts-style display-7">
-                  Trouvez la résidence la plus adaptée à votre budget.
-                  <br />
-                </p>
-                <div className="mbr-section-btn">
-                  <a
-                    className="btn btn-md btn-primary display-4"
-                    href="https://app.kitlenid.fr/"
-                  >
-                    Trouver ma location
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 col-md-7 col-sm-8 col-lg-6">
-              <div className="image-wrapper">
-                <img src="assets/images/studea-559x383.png" alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="firmm4_content4 cid-srUGPVXNeV" id="content4-w">
-        <div className="container">
-          <div className="row align-items-center justify-content-center flex-row-reverse">
-            <div className="col-12 col-md-6 col-sm-8 col-lg order-1">
-              <div className="text-wrapper">
-                <h4 className="card-title mbr-fonts-style display-5">
-                  <strong>Nos services partenaires</strong>
-                </h4>
-                <p className="mbr-text mbr-fonts-style display-7">
-                  Kit le nid vous propose un ensemble d’offres avantageuses pour
-                  mieux répondre à vos besoins lors de vos études :<br />• un
-                  accès à votre mutuelle santé à prix réduit
-                  <br />• un garant solide pour votre location
-                  <br />
-                </p>
-              </div>
-            </div>
-            <div className="col-12 col-md-7 col-sm-8 col-lg-6">
-              <div className="image-wrapper">
-                <img src="assets/images/partners-2-576x468.png" alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="firmm4_content5 cid-spb6ndnLou" id="content5-9">
-        <div className="container callout">
-          <div className="row align-items-center justify-content-center flex-row-reverse">
-            <div className="col-12 col-md-6 col-sm-8 col-lg order-1">
-              <div className="text-wrapper">
-                <h4 className="card-title mbr-fonts-style display-2">
-                  <strong>Découvrez notre guide du premier achat.</strong>
-                </h4>
-                <p className="mbr-text mbr-fonts-style display-7">
-                  N’attendez pas d’avoir 30 ans pour devenir propriétaire.
-                  Découvrez comment avec notre guide gratuit.
-                  <br />
-                </p>
-                <div className="mbr-section-btn">
-                  <a
-                    className="btn btn-md btn-primary-outline display-4"
-                    href="assets/files/Guideachat.pdf"
-                  >
-                    Télécharger notre guide !
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className="col-12 col-md-7 col-sm-8 col-lg-6">
-              <div className="image-wrapper">
-                <img src="assets/images/book-1013x927.png" alt="" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="header3 firmm4_header3 cid-srUHO8vBnq" id="header3-x">
-        <div className="animation">
-          <div className="circle1"></div>
-          <div className="circle2"></div>
-          <div className="circle3"></div>
-          <div className="circle4"></div>
-        </div>
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="title__block text-white text-center col-lg-8 col-md-8 col-12">
-              <h1 className="mbr-section-title mbr-fonts-style display-5">
-                <strong>
-                  Intéressé ? Rejoignez Kit le nid dès maintenant !
-                </strong>
-              </h1>
-              <p className="mbr-text mbr-fonts-style display-7">
-                Laissez Kit le nid vous accompagner pendant ces étapes clés de
-                votre vie.
-                <br />
-              </p>
-              <div className="mbr-section-btn">
-                <a
-                  className="btn btn-md btn-primary display-4"
-                  href="https://app.kitlenid.fr/"
-                >
-                  Trouver mon appartement
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

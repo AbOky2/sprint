@@ -55,11 +55,11 @@ const useStyles = makeStyles((theme) => ({
     '& > div:first-of-type': {
       marginBottom: '4.8rem',
       padding: '3.2rem',
-      borderRadius: '2.5rem',
+      borderRadius: '12px',
       color: 'white',
       background: 'white',
       margin: '4.8rem 0 5.6rem',
-      boxShadow: '0px 4px 20px rgba(24, 55, 50, 0.04)',
+      border:'1px solid #EAEFFA'
     },
     '& > div p:last-child': {
       marginBottom: 0,

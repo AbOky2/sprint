@@ -30,7 +30,7 @@ body {
   width: 75%;
   height: 75%;
   color: #4f80ff;
-  font-family: 'Nunito';
+  font-family: 'Space Grotesk';
   background-color: white;
   font-size: 1rem;
   border-radius: 100%;
@@ -70,16 +70,16 @@ body {
 }
 .search-btn input {
   background: #ffffff;
-  border: 1px solid #d2dcf5;
+  border: 2px solid #EFF4FF;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1rem;
   width: 100%;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 28px;
-  font-family: 'Open Sans';
+  font-family: 'Space Grotesk';
   color: #b4c3e8;
 }
 .search-btn input::placeholder,
@@ -108,7 +108,7 @@ body {
   cursor: pointer;
 }
 .first-heading {
-  font-family: 'Nunito';
+  font-family: 'Space Grotesk';
   font-style: normal;
   font-weight: 800;
   font-size: 48px;
@@ -120,7 +120,7 @@ body {
 }
 .heading-slogan {
   margin-bottom: 24px !important;
-  font-family: 'Nunito';
+  font-family: 'Space Grotesk';
   font-style: normal;
   font-weight: 600;
   font-size: 26px;
@@ -128,7 +128,7 @@ body {
   color: #849cd9;
 }
 .second-heading {
-  font-family: 'Nunito';
+  font-family: 'Space Grotesk';
   font-style: normal;
   font-weight: 800;
   font-size: 16px;
@@ -165,7 +165,7 @@ body {
   background-size: cover;
 }
 .card-container li h3 {
-  font-family: 'Nunito';
+  font-family: 'Space Grotesk';
   font-style: normal;
   font-weight: 800;
   font-size: 14.0909px;
@@ -232,7 +232,7 @@ body {
 }
 #maps-container > div:last-of-type > div:last-of-type h3,
 #maps-container > div:last-of-type > div:last-of-type h3 span {
-  font-family: 'Nunito';
+  font-family: 'Space Grotesk';
   font-style: normal;
   font-weight: 800;
   font-size: 20px;
@@ -332,6 +332,13 @@ button.gm-ui-hover-effect {
 }
 #search-container {
   padding-right: 1rem;
+}
+
+.mbr-section-title .mbr-fonts-style .display-1 .mobile-align-left .first-heading{
+  width: 341px;
+  height: 68px;
+  top: 77px;
+  left: 17px;
 }
 @media only screen and (max-width: 991px) {
   .gmnoprint {
@@ -456,7 +463,7 @@ button.gm-ui-hover-effect {
     flex: 1;
   }
   #maps-container > div:first-of-type .search-btn span {
-    font-family: 'Nunito';
+    font-family: 'Space Grotesk';
     font-style: normal;
     font-weight: bold;
     margin-left: 1rem;
@@ -511,7 +518,7 @@ button.gm-ui-hover-effect {
   }
   .mobile-lot-list > h3,
   .mobile-lot-list h3 span {
-    font-family: 'Nunito';
+    font-family: 'Space Grotesk';
     font-style: normal;
     font-weight: 800;
     font-size: 16px;

@@ -1,4 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
+import "@fontsource/space-grotesk";
 
 const shared = {
   colors: {
@@ -66,18 +67,18 @@ const theme = createMuiTheme({
   },
   typography: {
     htmlFontSize: 10,
-    fontFamily: 'Open Sans',
+    fontFamily: 'Space Grotesk',
     secondFontFamily: shared.fonts.secondFontFamily,
     h1: {
       ...shared.fonts.titles,
-      fontFamily: shared.fonts.secondFontFamily,
+      fontFamily: 'Space Grotesk',
       fontSize: '3rem',
       lineHeight: '4.1rem',
       color: shared.colors.newBlue,
     },
     h2: {
       ...shared.fonts.titles,
-      fontFamily: shared.fonts.secondFontFamily,
+      fontFamily: 'Space Grotesk',
       fontSize: '2.6rem',
       lineHeight: '3.5rem',
       letterSpacing: 'normal',
@@ -87,14 +88,14 @@ const theme = createMuiTheme({
       ...shared.fonts.titles,
       ...shared.fonts.others,
       lineHeight: '2.7rem',
-      fontFamily: shared.fonts.secondFontFamily,
+      fontFamily: 'Space Grotesk',
       color: shared.colors.newBlue,
       fontSize: '2rem',
     },
     h4: {
       ...shared.fonts.titles,
       ...shared.fonts.others,
-      fontFamily: shared.fonts.secondFontFamily,
+      fontFamily: 'Space Grotesk',
       color: shared.colors.primary,
     },
     subtitle1: {
@@ -105,8 +106,8 @@ const theme = createMuiTheme({
     },
     body1: {
       fontStyle: 'normal',
-      fontFamily: 'Open Sans',
-      fontWeight: '600',
+      fontFamily: 'Space Grotesk',
+      fontWeight: '500',
       fontSize: '1.4rem',
       lineHeight: '2.2rem!important',
       color: shared.colors.primary,

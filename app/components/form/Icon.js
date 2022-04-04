@@ -12,6 +12,7 @@ const SIZES = {
   large: 48,
   nearBig: 52,
   big: 67,
+  extra:100,
 };
 const ICON_COLORS = {
   ...shared.colors,
@@ -25,7 +26,7 @@ const sizeTypes = Object.keys(SIZES);
 
 const useStyles = makeStyles({
   svg: {
-    display: 'inline-block',
+    display: 'flex',
     verticalAlign: 'middle',
     '& path': {
       fill: ({ noColor, fill }) => (!noColor ? fill : ''),

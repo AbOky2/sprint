@@ -15,7 +15,7 @@ const BtnCalendly = () => (
 
 const Extras = ({ advantages = [] }) => (
   <>
-    <Typography variant="h3">Les petits plus :</Typography>
+    <Typography variant="h2" style={{fontFamily:'space grotesk', fontWeight:'bold', textAlign:'center'}}>Les petits plus </Typography>
     <Grid container>
       {advantages.map((elem) => (
         <Grid key={elem} container item alignItems="center">
@@ -50,7 +50,7 @@ const Sidebar = ({ isLocation, property, classes }) => {
             showExtra ? classes.transportationsWithExtra : ''
           )}
         >
-          <Typography variant="h3">Les transports à proximité :</Typography>
+          <Typography variant="h2" style={{fontWeight:'bold', textAlign:"center", lineHeight:'23px', fontSize:'18px', display:'flex', alignItems:'flex-start', margin:'8px 0px', padding:'24px 24px 24px 56px'}}>Transports à proximité</Typography>
           <Grid container justify="flex-start">
             {Object.keys(transportations)
               .sort((a, b) => a < b)
@@ -95,13 +95,7 @@ const Sidebar = ({ isLocation, property, classes }) => {
       ) : (
         ''
       )}
-      {advantages.length ? (
-        <div className={classes.extras}>
-          <Extras advantages={advantages} />
-        </div>
-      ) : (
-        ''
-      )}
+      
       {isLocation && (
         <div className={classes.fees}>
           <Typography variant="h3">Frais à prévoir :</Typography>
@@ -119,11 +113,7 @@ const Sidebar = ({ isLocation, property, classes }) => {
           <Typography variant="h3">Total des frais : 1284€ TTC</Typography>
         </div>
       )}
-      {!isLocation && (
-        <span>
-          <BtnCalendly />
-        </span>
-      )}
+      
     </div>
   );
 };

@@ -1,19 +1,20 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import withAuth from 'lib/withAuth';
 import { AdminContentWrapper } from 'components/wrapper';
-import { Icon } from 'components';
+import { Btn, Icon } from 'components';
 import { isYoungWorker, ucfirst } from 'helpers';
 import { getPartnersApiMethod } from 'lib/api/customer';
 import LocationImg from 'static/img/location.png';
 import HouseImg from 'static/img/house.png';
 import LogoImg from 'static/img/logo.png';
 import { pageLink } from 'constants/index';
+import signIn from 'next-auth/react'
 
 const styles = (theme) => ({
   container: {
@@ -165,7 +166,7 @@ const styles = (theme) => ({
       width: 'calc(100% - 3rem)',
       margin: 0,
       ...theme.typography.body1,
-      color: '#5379EF',
+      color: '#6976A0',
       height: '6.5rem',
       overflow: 'hidden',
     },
@@ -192,7 +193,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
         <span role="img" aria-label="">
           🎉
         </span>
-        <span className={classes.welcomeSub}>
+        <span onClick={signIn} className={classes.welcomeSub}>
           Bienvenue sur votre espace personnel Kit le Nid.
         </span>
       </Typography>
@@ -262,7 +263,7 @@ const Dashboard = ({ user = {}, partners, classes }) => (
         </Grid>
       </Grid>
     </div>
-    <Typography variant="h2" className={classes.customH2}>
+    <Typography variant="h2">
       Nos offres négociées à la carte
     </Typography>
     <Typography className={classes.partnerDescription}>
@@ -279,18 +280,21 @@ const Dashboard = ({ user = {}, partners, classes }) => (
             <a>
               <div
                 className={classes.partnerListImgContainer}
-                style={{ backgroundImage: `url(${elem.picture})` }}
+                style={{ backgroundImage: `url(${elem.picture})`, border:"1px solid #EAEFFA", borderRadius:"12px", width:"112px", height:"117px"}}
               />
-              <Typography variant="h5" className={classes.partnerCardType}>
+             {/* <Typography variant="h5" className={classes.partnerCardType}>
                 {elem.type}
-              </Typography>
+              </Typography>*/}
+
               <Typography variant="h3" className={classes.partnerCardTitle}>
                 {elem.name}
               </Typography>
               <Grid container justify="space-between" alignItems="flex-end">
                 <div className={classes.partnerListTextContainer}>
                   <ReactMarkdown>{elem.description}</ReactMarkdown>
-                  <Icon type="arrow" color="iconBlue" />
+                </div>
+                <div style={{border:"1px solid #3679FF", borderRadius:"12px", width:"130px", height:"40px", textAlign:"center", padding:"8px", color:" #3679FF"}}>
+                    Decouvrir
                 </div>
               </Grid>
             </a>

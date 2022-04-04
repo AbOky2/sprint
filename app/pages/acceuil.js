@@ -5,7 +5,6 @@ import Footer from 'components/Footer/Footer';
 export default function Acceuil() {
   return (
     <>
-      <Header />
       <Coeur />
       <Footer />
     </>

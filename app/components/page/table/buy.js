@@ -26,16 +26,16 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
     const conditionalColumn = hasReduction ? 1 : 2;
 
     return (
-      <div key={elem}>
+      <div key={elem}  style={{border:'1px solid #3679FF', borderRadius:'12px',  background:'white', boxSizing:'border-box', marginBottom:'16px'}}>
         <Grid
           container
           className="pointer"
           alignItems="center"
           onClick={() => handleCurrOpen(elem)}
         >
-          <Grid container justify="space-between">
+          <Grid container justify="space-between" >
             <Grid item>
-              <div>
+              <div style={{color:'rgba(79, 128, 255, 1)', fontWeight:'700', fontSize:'14px', lineHeight:'17px'}}>
                 {` ${elem} pièce${elem > 1 ? 's' : ''} à partir de `}
 
                 <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
@@ -152,7 +152,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     : `${spaceCurrency(round10(standardTva, 1))}€`;
 
                 return (
-                  <Grid
+                  <Grid 
                     key={curr.lot_ref}
                     container
                     className={classes.discoveryContent}
@@ -191,11 +191,12 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                         className={classes.btnContainer}
                       >
                         <Btn
-                          text={curr.file ? 'Voir' : '-'}
+                          text={curr.file ? 'Telecharger le plan en 2D' : '-'}
                           whiteColor
                           href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
                           download
-                          bordered
+                          
+                          
                           disabled={!curr.file}
                         />
                       </Grid>
@@ -246,7 +247,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                           disabled={!curr.file}
                           target="_blank"
                           dataMode="popup"
-                          bordered
+                    
                           whiteColor
                         />
                       </Grid>
