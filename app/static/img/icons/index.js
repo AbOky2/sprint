@@ -41,9 +41,33 @@ export { default as carrouselArrow } from './carrousel-arrow.svg';
 export { default as sliderArrow } from './slider-arrow.svg';
 export { default as partageV2 } from './partageV2.svg';
 export { default as logoK } from './logo principal.svg';
-export {default as logoNew} from './KLNX.svg'
-export {default as rect} from './recKL.svg'
-export {default as chiffre3} from './3.svg'
+export {default as logoNew} from './KLNX.svg';
+export {default as rect} from './recKL.svg';
+export {default as chiffre3} from './3.svg';
+export {default as item1} from './item1.svg';
+export {default as item2} from './item2.svg';
+export {default as item3} from './item3.svg';
+export {default as item4} from './item4.svg';
+export {default as cercle1} from './cercle1.svg';
+export {default as cercle2} from './cercle2.svg';
+export {default as cercle3} from './cercle3.svg';
+export {default as cercle4} from './cercle4.svg';
+export {default as numero1} from './1.svg';
+export {default as numero2} from './2.svg';
+export {default as numero3} from './3.svg';
+export {default as numero4} from './4.svg';
+export {default as recherche} from './rechercheButtom.svg';
+export {default as leK} from './leK.svg';
+export {default as NexityLogo} from './NexityLogo.svg';
+
+
+
+
+
+
+
+
+
 
 
 

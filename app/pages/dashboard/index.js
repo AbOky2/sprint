@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, Grid, TextField, Typography } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
@@ -99,9 +99,10 @@ const styles = (theme) => ({
     },
   },
   welcomeSub: {
+    color:"#849CD9",
     display: 'block',
-    fontSize: '2.6rem',
-    fontWeight: 'normal',
+    fontSize: '18px',
+    fontWeight: 'Regular',
     lineHeight: '3.5rem',
   },
   subTitle: {
@@ -110,6 +111,24 @@ const styles = (theme) => ({
   customH2: {
     fontFamily: theme.typography.secondFontFamily,
     fontWeight: 'bold',
+  },
+
+  nouveauH2:{
+    fontWeight:"bold",
+    fontSize:"22px",
+    lineHeight:"23px",
+    color:"#1A2E6C",
+
+  },
+  nouveauGrid:{
+    display:"flex", flexDirection:"row-reverse", marginBottom:"16px"
+  },
+  gridPoints:{
+    background:'white', width:"100%", borderRadius:"12px", border:"1px solid #EAEFFA", padding:"24px", marginBottom:"16px"
+
+  },
+  numeroPoints:{
+    background:'rgba(248, 191, 44, 1)', width:'34px', heigth:"44px", borderRadius:"50%", padding:"12px", marginBottom:"10px"
   },
   presentationCardTitle: {
     color: theme.palette.newBlue,
@@ -184,124 +203,184 @@ const styles = (theme) => ({
 
 const Dashboard = ({ user = {}, partners, classes }) => (
   <AdminContentWrapper noRedirect>
-    <div className={classes.heading}>
+    <div className={classes.heading} style={{marginBottom:"33px"}}>
       <div>
-        <img src={'static/img/logo.png'} alt="" />
+        <img src={'static/img/logo-full.png'} alt="" />
+      
       </div>
-      <Typography variant="h1">
-        {`Bonjour ${ucfirst(user?.firstName)} `}
-        <span role="img" aria-label="">
-          🎉
+      <Typography variant="h1" style={{color: "#113EB6", fontWeight:"bold", lineHeight:"28px"}}>
+      Devenir propriétaire devient &nbsp;
+        <span style={{color:"#3679FF"}}>
+         plus accessible.
         </span>
         <span onClick={signIn} className={classes.welcomeSub}>
           Bienvenue sur votre espace personnel Kit le Nid.
         </span>
       </Typography>
     </div>
-    <div className={classes.container}>
-      <Typography variant="h2" className={classes.customH2}>
-        Premiers pas dans votre logement
-      </Typography>
-      <Typography className={classes.subTitle}>
-        Découvrez nos appartements neufs pour votre premier achat. Vous ne
-        pouvez pas encore acheter ?
-        <br />
-        Nous vous proposons des locations étudiantes dans toute la France.
-      </Typography>
-      <Grid
-        container
-        justify="space-between"
-        className={classes.presentationContainer}
-      >
-        <Grid item md={12} md={6}>
-          <div>
-            <Link href="/dashboard/search/buy">
-              <a>
-                <img src={HouseImg} alt="" />
 
-                <Typography
-                  variant="h3"
-                  className={clsx(
-                    classes.whiteColor,
-                    classes.presentationCardTitle
-                  )}
-                >
-                  Mon premier achat
-                </Typography>
-                <Grid container justify="space-between" alignItems="flex-end">
-                  <Typography className={classes.whiteColor}>
-                    {isYoungWorker(user)
-                      ? 'Un parcours simplifié 100% digital.'
-                      : 'Vous ne rêvez pas ! Réservez votre logement dès votre dernière année d’étude.'}
-                  </Typography>
-                  <Icon type="arrow" color="white" />
-                </Grid>
-              </a>
-            </Link>
-          </div>
-        </Grid>
-        <Grid item md={12} md={6}>
-          <div>
-            <Link href="/dashboard/search/location">
-              <a>
-                <img src={LocationImg} alt="" />
-                <Typography
-                  variant="h3"
-                  className={classes.presentationCardTitle}
-                >
-                  Location
-                </Typography>
-                <Grid container justify="space-between" alignItems="flex-end">
-                  <Typography className={classes.buyText}>
-                    Des logements étudiants dans toute la France.
-                  </Typography>
-                  <Icon type="arrow" color="iconBlue" />
-                </Grid>
-              </a>
-            </Link>
-          </div>
-        </Grid>
-      </Grid>
+    <div style={{border: "2px solid #EFF4FF", background:"white", width:"80%", height:"55px", borderRadius:"12px", position:"absolute", marginTop:"2px", marginLeft:"22px", display:"flex", flexDirection:"row-reverse"}}>
+      <div style={{background:"linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)", width:'39px', height:"39px", borderRadius:"12px", padding:"7px", marginTop:"7px", marginRight:"9px"}}>
+      <Icon 
+      type='recherche'
+      color='white'
+      /></div>
+
     </div>
-    <Typography variant="h2">
-      Nos offres négociées à la carte
-    </Typography>
-    <Typography className={classes.partnerDescription}>
-      Kit le nid vous propose un ensemble de services complémentaires négociés
-      <br /> avec nos partenaires
-      {!isYoungWorker(user)
-        ? ' pour mieux vous accompagner pendant vos études.'
-        : '.'}
-    </Typography>
-    <Grid container>
-      {partners?.map((elem) => (
-        <Grid key={elem._id} item className={classes.partnerListContainer}>
-          <Link href={`/dashboard/partners/${elem._id}`}>
-            <a>
-              <div
-                className={classes.partnerListImgContainer}
-                style={{ backgroundImage: `url(${elem.picture})`, border:"1px solid #EAEFFA", borderRadius:"12px", width:"112px", height:"117px"}}
-              />
-             {/* <Typography variant="h5" className={classes.partnerCardType}>
-                {elem.type}
-              </Typography>*/}
+    <img src={'static/img/maison.jpg'} alt="" style={{marginTop:"22px", width:"100%"}} />
 
-              <Typography variant="h3" className={classes.partnerCardTitle}>
-                {elem.name}
-              </Typography>
-              <Grid container justify="space-between" alignItems="flex-end">
-                <div className={classes.partnerListTextContainer}>
-                  <ReactMarkdown>{elem.description}</ReactMarkdown>
-                </div>
-                <div style={{border:"1px solid #3679FF", borderRadius:"12px", width:"130px", height:"40px", textAlign:"center", padding:"8px", color:" #3679FF"}}>
-                    Decouvrir
-                </div>
-              </Grid>
-            </a>
-          </Link>
-        </Grid>
-      ))}
+ 
+    <Typography variant="h2" style={{color:"rgba(26, 46, 108, 1)", fontWeight:"bold", fontSize:"18px", textAlign:"center", marginTop:"16px"}}>
+      L’achat dans une résidence neuve avec Kit le nid <span className={classes.welcomeSub} style={{textAlign:"center", fontSize:"14px", lineHeight:"18px"}}>
+    Construire son projet immobilier avec Kit le nid c’est bénéficier : 
+     </span>
+    </Typography>
+    
+
+    
+    <Grid container style={{marginTop:"23px"}} spacing={4}>
+      <Grid item className={classes.nouveauGrid}>
+        <Typography className={classes.nouveauH2} style={{marginLeft:"16px"}}>
+          Des logements neufs dans toutes la France
+          <span className={classes.welcomeSub} style={{fontSize:"14px", lineHeight:"18px",  marginTop:"6px"}}>
+          Plus de 3 000 logements neufs disponibles.    
+           </span>
+        </Typography>
+       <div style={{background:"rgba(220, 230, 255, 1)", borderRadius:"50%", width:"53px", heigth:"53px", padding:"13px"}}>
+         <Icon
+         type='item1'
+         noColor
+          /></div>
+      </Grid>
+
+      <Grid item className={classes.nouveauGrid}>
+        <Typography className={classes.nouveauH2} style={{marginLeft:"16px"}}>
+        Parcours 100% gratuit
+        <span className={classes.welcomeSub} style={{fontSize:"14px", lineHeight:"18px",  marginTop:"6px"}}>
+        Un parcours simplifié pour votre premier achat sans frais d’agence, ni frais de dossier.
+         </span>
+        </Typography>
+        <div style={{background:"rgba(254, 242, 213, 1)", borderRadius:"50%", width:"53px", heigth:"53px",  padding:"12px"}}>
+         <Icon
+         type='item2'
+         noColor
+          /></div>
+
+      </Grid>
+
+
+      <Grid item className={classes.nouveauGrid}>
+        <Typography className={classes.nouveauH2} style={{marginLeft:"16px"}}>
+        Accompagnement
+        <span className={classes.welcomeSub} style={{fontSize:"13px", lineHeight:"18px", marginTop:"6px"}}>
+        Un accompagnement personnalisé avec un unique conseiller, pour les étudiants et les jeunes actifs.         </span>
+        </Typography>
+        <div style={{background:"rgba(245, 234, 249, 1)", borderRadius:"50%", width:"53px", heigth:"53px",  padding:"12px"}}>
+         <Icon
+         type='item3'
+         noColor
+          /></div>
+
+      </Grid>
+
+
+      <Grid item className={classes.nouveauGrid} style={{marginBottom:"27px"}}>
+        <Typography className={classes.nouveauH2} style={{marginLeft:"16px"}}>
+        Accès libre aux plans
+        <span className={classes.welcomeSub} style={{ fontSize:"14px", lineHeight:"18px",  marginTop:"6px"}}>
+        Tous les plans des appartements sont téléchargeables sur notre plateforme.
+         </span>
+        </Typography>
+        <div style={{background:"rgba(237, 248, 240, 1)", borderRadius:"50%", width:"53px", heigth:"53px", padding:"12px"}}>
+         <Icon
+         type='item4'
+         noColor
+          />
+          </div>
+
+      </Grid>
+
     </Grid>
+   
+
+   <Grid container>
+     <Grid className={classes.gridPoints}>
+       <div className={classes.numeroPoints}>
+
+       <Icon
+       type='numero1'
+       noColor
+       size=''
+        />       </div>
+
+       <Typography variant='h2' style={{fontSize:"18px", marginBottom:"8px"}}>
+       Rejoignez la plateforme Kit le Nid
+       </Typography>
+       <Typography style={{color:"rgba(132, 156, 217, 1)", fontWeight:"bold"}}>
+       Inscrivez-vous et développez votre projet avec nos conseillers.
+       </Typography>
+     </Grid>
+   </Grid>
+
+   <Grid container>
+     <Grid className={classes.gridPoints}>
+       <div className={classes.numeroPoints}>
+
+       <Icon
+       type='numero2'
+       noColor
+       size=''
+        />       </div>
+
+       <Typography variant='h2' style={{fontSize:"18px", marginBottom:"8px"}}>
+       Sélectionnez votre logement
+       </Typography>
+       <Typography style={{color:"rgba(132, 156, 217, 1)", fontWeight:"bold"}}>
+       Choisissez et réservez votre appartement en ligne.
+       </Typography>
+     </Grid>
+   </Grid>
+
+   <Grid container>
+     <Grid className={classes.gridPoints}>
+       <div className={classes.numeroPoints}>
+
+       <Icon
+       type='numero3'
+       noColor
+       size=''
+        />       </div>
+
+       <Typography variant='h2' style={{fontSize:"18px", marginBottom:"8px"}}>
+       Profitez d’un financement simplifié
+              </Typography>
+       <Typography style={{color:"rgba(132, 156, 217, 1)", fontWeight:"bold"}}>
+       Kit le nid vous accompagne dans toutes vos démarches de prêt.
+       </Typography>
+     </Grid>
+   </Grid>
+
+
+   <Grid container>
+     <Grid className={classes.gridPoints}>
+       <div className={classes.numeroPoints}>
+
+       <Icon
+       type='numero4'
+       noColor
+       size=''
+        />       </div>
+
+       <Typography variant='h2' style={{fontSize:"18px", marginBottom:"8px"}}>
+       Personnalisez votre bien avec nos équipes
+       </Typography>
+       <Typography style={{color:"rgba(132, 156, 217, 1)", fontWeight:"bold"}}>
+       Trouvez les meilleures solutions de décoration et d’aménagement pour votre appartement en attendant sa livraison.
+       </Typography>
+     </Grid>
+   </Grid>
+
+
   </AdminContentWrapper>
 );
 

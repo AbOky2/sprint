@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: '2rem',
     },
     '& h2': {
-      color: theme.palette.blue,
+      color: "linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%);",
       fontWeight: 800,
     },
   },
