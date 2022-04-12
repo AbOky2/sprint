@@ -187,7 +187,6 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
 
                       <Grid
                         item
-                        className="text-center"
                         className={classes.btnContainer}
                       >
                         <Btn

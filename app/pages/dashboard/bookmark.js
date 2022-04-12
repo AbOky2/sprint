@@ -13,6 +13,7 @@ import withAuth from 'lib/withAuth';
 import Demo from './demo'
 import Demo2 from './demo2'
 import Demo3 from './demo3'
+import Partager from './partageButtom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -113,7 +114,7 @@ const BookmarkPage = ({ user, update }) => {
  
   return (
 
-<Demo2 />
+<Partager />
     /*
     <AdminContentWrapper noRedirect mobilePadding>
       <div>

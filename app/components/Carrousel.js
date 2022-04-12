@@ -42,10 +42,12 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     width: '100%',
     minHeight: 500,
+    /*
     [theme.breakpoints.down('sm')]: {
       height: 200,
       minHeight: 'initial',
     },
+  */
   },
 }));
 const sharedBtn = {

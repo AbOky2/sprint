@@ -149,14 +149,21 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
         openModal={openModal}
         onClose={handleModalClose}
         onClick={handleSumbit}
-        title="Vos informations"
-        confirmText="Mettre à jour"
+        title="Mon Profil"
+        confirmText="Enregistrer"
       >
         <Grid container item justify="center" className="form-container">
           <Grid container item>
+            <div style={{background:"linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)", width:"86px", height:"86px", borderRadius:"50%", padding:"15px", marginBottom:"19px"}}>
+              <Icon
+              type='leK'
+              size='large'
+              noColor
+               />
+
+            </div>
             <Input
               value={state.lastName}
-              label="Nom*"
               onChange={handleChange}
               onKeyPress={onKeyPress}
               name="lastName"
@@ -164,7 +171,6 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
             />
             <Input
               value={state.firstName}
-              label="Prénom*"
               onChange={handleChange}
               onKeyPress={onKeyPress}
               name="firstName"
@@ -172,7 +178,6 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
             />
             <Input
               value={state.email}
-              label="E-mail*"
               onChange={handleChange}
               onKeyPress={onKeyPress}
               name="email"
@@ -181,7 +186,6 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
             />
             <Input
               value={state.phone}
-              label="Téléphone"
               onChange={handleChange}
               onKeyPress={onKeyPress}
               name="phone"
@@ -190,7 +194,6 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
             />
             <Input
               value={state.password}
-              label="Mot de passe"
               placeholder="Votre mot de passe"
               onChange={handleChange}
               onKeyPress={onKeyPress}
@@ -202,7 +205,6 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               name="role"
               value={state.role}
               onChange={handleChange}
-              label="Type de profil"
               position="right"
               list={userRoleSelect}
             />

@@ -23,6 +23,7 @@ const styles = (theme) => ({
     '& input, & textarea': {
       display: 'block',
       padding: '1.6rem',
+      marginBottom:'8px',
       boxSizing: 'border-box',
       width: '100%',
       height: 'auto',
