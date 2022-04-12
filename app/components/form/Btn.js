@@ -12,7 +12,6 @@ export const btnHover = {
     '&:hover': {
       background:
         'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
-      boxShadow: '0px 5px 20px rgba(6, 39, 79, 0.5), inset 0px 1px 6px #1848C4',
       transition: 'background .1s ease-out, box-shadow .1s ease-out',
     },
     '&:focus': {
@@ -22,7 +21,6 @@ export const btnHover = {
   white: {
     '&:hover': {
       background: shared.colors.hoverGray,
-      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.12)',
       transition: 'background .1s ease-out, box-shadow .1s ease-out',
       '& svg path': {
         fill: shared.colors.hoverGray,
@@ -32,8 +30,6 @@ export const btnHover = {
   bordered: {
     '&:hover': {
       background: shared.colors.hoverGray,
-      boxShadow:
-        ' 0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px #1848C4',
       transition: 'background .1s ease-out, box-shadow .1s ease-out',
     },
   },
@@ -41,23 +37,19 @@ export const btnHover = {
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: 'fit-content',
-    background:
-      'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
-    boxShadow:
-      '0px 4px 14px rgba(14, 108, 218, 0.35), inset 0px 0px 6px rgba(24, 72, 196, 0.6)',
+    width: 'auto',
+    background: 'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%);',
     transition: 'background .1s ease-out, box-shadow .1s ease-out',
     color: 'white',
-    borderRadius: '1rem',
+    borderRadius: '12px',
     cursor: 'pointer',
-    fontSize: '1.8rem',
-    fontWeight: '600',
+    fontWeight: '700',
+    fontFamily:'Space Grotesk',
     ...btnHover.blue,
     '& a, & > span': {
       padding: '1.6rem 2.4rem',
       fontStyle: 'normal',
       fontSize: '1.4rem',
-      lineHeight: '28px',
       color: 'white',
       wordBreak: 'keep-all',
     },
@@ -71,12 +63,21 @@ const useStyles = makeStyles((theme) => ({
     },
     color: theme.palette.newBlue,
     background: 'white',
-    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
     ...btnHover.white,
+  },
+  planColor:{
+    '& a, & > span': {
+      color: shared.colors.red,
+    },
+    background: 'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%);',
+    color: shared.colors.red,
+    
+
+
+    
   },
   disabled: {
     background: theme.palette.lighterGray,
-    opacity: 0.5,
     pointerEvents: 'none',
     '& a, & > span': {
       color: 'white!important',

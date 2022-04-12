@@ -18,15 +18,9 @@ const useStyles = makeStyles((theme) => ({
       cursor: 'pointer',
       width: '25%',
       justifyContent: 'center',
-      padding: '1.6rem 2.4rem',
-      background: 'white',
-      boxSizing: 'border-box',
-      borderRadius: '1rem',
       transform: 'translateY(50%)',
-      boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.08)',
       fontWeight: 600,
-      color: theme.palette.newBlue,
-      ...btnHover.white,
+      color: 'transparent',
       [theme.breakpoints.down('sm')]: {
         width: 'auto',
       },
@@ -37,23 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   saved: {
     '& > div': {
-      color: '#FFFFFF',
-      background:
-        'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
-      boxShadow:
-        '0px 4px 14px rgba(14, 108, 218, 0.75), inset 0px 0px 6px rgba(123, 160, 255, 0.7)',
-      transition: 'background .1s ease-out, box-shadow .1s ease-out',
-
-      '&:hover': {
-        background:
-          'linear-gradient(180deg, #3563DC 0%, #3E6FEF 4.34%, #3062E3 94.05%, #154AD2 100%)',
-        boxShadow:
-          '0px 4px 14px rgba(14, 108, 218, 0.75), inset 0px 0px 6px rgba(123, 160, 255, 0.7)',
-        transition: 'background .1s ease-out, box-shadow .1s ease-out',
-        '& path': {
-          fill: `${theme.palette.red}!important`,
-        },
-      },
+      color: 'transparent',
     },
   },
   subTitle: {
@@ -74,7 +52,6 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: '2.5rem',
       color: 'white',
       background: 'white',
-      boxShadow: '0px 4px 20px rgba(24, 55, 50, 0.04)',
       '& li': {
         marginBottom: 15,
       },
@@ -155,14 +132,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   extraContainer: {
-    paddingTop: '2.5rem',
+    paddingTop: '16px',
     '& > div': {
       marginTop: '2rem',
       boxSizing: 'border-box',
-      padding: 32,
-      background: theme.palette.hoverGray,
-      borderRadius: '15px',
-      boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+      padding: 24,
+      background: 'white',
+      borderRadius: '12px',
+      border:'1px solid #EAEFFA',
       [theme.breakpoints.down('md')]: {
         marginTop: '2.5rem!important',
       },
@@ -264,8 +241,7 @@ const useStyles = makeStyles((theme) => ({
       boxSizing: 'border-box',
       padding: 32,
       background: theme.palette.hoverGray,
-      borderRadius: '15px',
-      boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
+      borderRadius: '12px',
       '& svg': {
         marginRight: '1rem',
       },
@@ -316,7 +292,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mapContainer: {
     marginTop: '2.5rem',
-    borderRadius: '2.5rem',
+    borderRadius: '12px',
     overflow: 'hidden',
     '& > div': {
       minHeight: 400,
@@ -334,12 +310,11 @@ const useStyles = makeStyles((theme) => ({
     },
 
     '& > div > div:last-of-type > div:first-of-type': {
-      borderBottom: '1px solid rgba(26, 46, 108, 0.5)',
+    /*{ borderBottom: '1px solid rgba(205, 210, 216, 1)',}*/
     },
     '& > div > div': {
       width: '100%',
       '& > div:first-of-type': {
-        borderTop: '1px solid rgba(26, 46, 108, 0.5)',
         padding: '2.5rem 0',
         '& > div:first-of-type': {
           display: 'none',
@@ -380,7 +355,7 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     '& > div > div': {
       '& > span': {
-        fontFamily: 'Open Sans',
+        fontFamily: 'Space Grotesk',
         fontStyle: 'normal',
         fontWeight: '600',
         fontSize: '16px',

@@ -99,32 +99,50 @@ const auth = ({ server }) => {
   );
   server.post(
     '/publicSearch',
-    listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
-      const { list } = await PropertieModel.publicSearch({
-        ...args,
-        typeOfProperty:
-          typeOfProperty && typeOfProperty.length > 0
-            ? typeOfProperty.split(',')
-            : [],
-      });
+    listCollection(
+      async ({
+        req: {
+          body: { typeOfProperty, ...rest },
+          user,
+        },
+      }) => {
+        const args = {
+          ...rest,
+          typeOfProperty:
+            typeOfProperty && typeOfProperty.length > 0
+              ? typeOfProperty.split(',')
+              : [],
+        };
+        const { list } = await PropertieModel.publicSearch(args);
+        if (user) await UserModel.updateLastSearch(user._id, args);
 
-      return { list };
-    }, joiSchema.propertie.student.search)
+        // console.log({ args, user });
+        return { list };
+      },
+      joiSchema.propertie.student.search
+    )
   );
 
   server.post(
     '/properties',
-    listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
-      const { list } = await PropertieModel.search({
-        ...args,
-        typeOfProperty:
-          typeOfProperty && typeOfProperty.length > 0
-            ? typeOfProperty.split(',')
-            : [],
-      });
+    listCollection(
+      async ({
+        req: {
+          body: { typeOfProperty, ...args },
+        },
+      }) => {
+        const { list } = await PropertieModel.search({
+          ...args,
+          typeOfProperty:
+            typeOfProperty && typeOfProperty.length > 0
+              ? typeOfProperty.split(',')
+              : [],
+        });
 
-      return { list };
-    }, joiSchema.propertie.student.search)
+        return { list };
+      },
+      joiSchema.propertie.student.search
+    )
   );
 
   server.get('/auth/logout', (req, res) => {

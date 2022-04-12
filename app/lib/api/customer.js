@@ -8,6 +8,11 @@ export const getPartnersApiMethod = (options = {}) =>
     method: 'GET',
     ...options,
   });
+export const getUserLatestSearchApiMethod = (options = {}) =>
+  sendRequest(`${BASE_PATH}/userlatest-search`, {
+    method: 'GET',
+    ...options,
+  });
 export const getCurrentUserkApiMethod = (options = {}) =>
   sendRequest(`${BASE_PATH}/currentUser`, {
     method: 'GET',

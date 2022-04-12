@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import Link from 'next/link';
@@ -10,6 +10,10 @@ import { addBookmarkApiMethod } from 'lib/api/customer';
 import { Card, Btn, btnHover } from 'components';
 import { getAddress, getNbPieces, getCardImg, singlePath } from 'helpers';
 import withAuth from 'lib/withAuth';
+import Demo from './demo'
+import Demo2 from './demo2'
+import Demo3 from './demo3'
+
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -96,11 +100,21 @@ const useStyles = makeStyles((theme) => ({
 const BookmarkPage = ({ user, update }) => {
   const [state, setState] = useState(user?.bookmarks);
   const classes = useStyles();
+  
   const handleBookmark = (id) => {
     setState(state.filter((elem) => elem._id !== id));
     addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
   };
+  const [visible, setVisible] = useState(false);
+  useEffect(() =>{
+    setTimeout(() => setVisible(true), 10);
+    return () => setVisible(false);
+  }, []);
+ 
   return (
+
+<Demo2 />
+    /*
     <AdminContentWrapper noRedirect mobilePadding>
       <div>
         <Typography variant="h1" className={classes.title}>
@@ -164,6 +178,10 @@ const BookmarkPage = ({ user, update }) => {
                 boutton “sauvegarder” quand vous êtes sur la page d’un logement.
               </Typography>
             </div>
+
+              <Demo>
+              <Demo2/>
+              </Demo>
             <div>
               <Grid container justify="center" className={classes.btnContainer}>
                 <Btn
@@ -181,6 +199,7 @@ const BookmarkPage = ({ user, update }) => {
         )}
       </div>
     </AdminContentWrapper>
+    */
   );
 };
 
