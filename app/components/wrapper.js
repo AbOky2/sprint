@@ -8,13 +8,11 @@ const redirectStyle = (theme) => ({
   display: 'inline-block',
   position: 'sticky',
   top: '.5rem',
-  padding: '.5rem 1.5rem',
-  marginBottom: '2.4rem',
-  borderRadius: '1rem',
-  backgroundColor: '#f7f8fa',
+  width:"30px", height:"30px", borderRadius:"50%",
+  backgroundColor: 'white',
   zIndex: 35,
   [theme.breakpoints.down('sm')]: {
-    top: '2.5rem',
+    top: '21px',
   },
   '& h4': {
     textAlign: 'left',
@@ -31,6 +29,7 @@ const redirectStyle = (theme) => ({
       padding: '3px',
       marginRight: '1rem',
       transform: 'rotate(135deg);-webkit-transform: rotate(135deg)',
+      marginLeft:"1.2rem"
     },
   },
 });
@@ -85,7 +84,7 @@ const AdminContentWrapper = withStyles(styles)(
               //else router.back();
             }}
           >
-            <Typography variant="h4">Retour</Typography>
+            <Typography variant="h4"></Typography>
           </div>
         )}
         {children}

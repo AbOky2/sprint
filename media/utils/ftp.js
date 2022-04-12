@@ -18,17 +18,20 @@ module.exports = (cbl, args) => {
   c.on('ready', () => {
     const date = format(new Date(), 'yyyyMMdd');
     const todayMbiFileName = `${fileNamePrefix}${date}.zip`;
+    console.log('initiating download');
     c.get(todayMbiFileName, (err, stream) => {
       if (err) {
         logger.error(err);
         return c.end();
       }
+      console.log('stream');
       if (!stream) {
         logger.error(`${todayMbiFileName} not found`);
         return c.end();
       }
       stream.pipe(fs.createWriteStream(todayMbiFileName));
       stream.on('end', () => {
+        console.log('end');
         const zip = new AdmZip(todayMbiFileName);
         logger.info('Moving started');
         zip.extractAllTo(PUBLIC_PROPERTIES_DIR, true);

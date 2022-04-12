@@ -98,6 +98,12 @@ const mongoSchema = new Schema(
     referrer_url: {
       type: String,
     },
+    lastSearch: {
+      type: [Object],
+    },
+    lastViewed: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Propertie' }],
+    },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
   },
@@ -121,6 +127,8 @@ class UserClass extends DBModel {
       'role',
       'status',
       'age',
+      'lastSearch',
+      'lastViewed',
     ];
   }
 
@@ -344,6 +352,44 @@ class UserClass extends DBModel {
     user = user.toObject();
     if (isMatch) return pick(user, this.publicFields());
     throw new Error(msg.invalidInfo('password'));
+  }
+
+  static async getLastSearch(userId) {
+    const userSearch = await this.findById(userId)
+      .select('lastSearch lastViewed')
+      .populate('lastViewed')
+      .lean();
+
+    return { userSearch };
+  }
+
+  static async updateLastSearch(userId, args) {
+    const user = await this.findById(userId);
+    let lastSearch = user.lastSearch?.slice(0, 5) || [];
+
+    if (JSON.stringify(args) !== JSON.stringify(lastSearch[0]))
+      lastSearch = [args, ...lastSearch];
+
+    const rest = await this.updateOne(
+      { _id: userId },
+      { $set: { lastSearch } }
+    );
+
+    return rest;
+  }
+
+  static async updateLastViewed(userId, propertyId) {
+    const user = await this.findById(userId);
+
+    let lastViewed = user.lastViewed?.slice(0, 5) || [];
+    if (propertyId !== lastViewed[0]) lastViewed = [propertyId, ...lastViewed];
+    console.log(propertyId !== lastViewed[0], lastViewed);
+    const rest = await this.updateOne(
+      { _id: userId },
+      { $set: { lastViewed } }
+    );
+
+    return rest;
   }
 
   static async signUp(options) {

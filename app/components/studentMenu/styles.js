@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
       fill: '#4f80ff',
     },
     '& > div svg path': {
-      fill: '#1a2e6c',
+      // fill: '#1a2e6c',
     },
   },
   mobileContainer: {

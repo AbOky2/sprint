@@ -29,7 +29,7 @@ const defautlMiddleware = (req, res, next) => next();
 const getCollection = (listFn) => [
   requestMiddleware(joiSchema.request.get, 'params'),
   handleErrors(async (req, res) =>
-    res.json(await listFn({ id: req.params.id }))
+    res.json(await listFn({ id: req.params.id, user: req.user }))
   ),
 ];
 const updateCollection = (middleware = defautlMiddleware, listFn) => [

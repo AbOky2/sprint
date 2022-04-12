@@ -7,6 +7,7 @@ $(document).ready(() => {
     center: { lat: 48.8587741, lng: 2.2069771 },
     gestureHandling: 'greedy',
   });
+
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   );

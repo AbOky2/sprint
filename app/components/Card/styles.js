@@ -2,25 +2,24 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
+    display: 'flex',
     backgroundColor: '#FFFFFF',
-    padding: '.8rem .85rem',
+    padding: '1.6rem 1.6rem',
     border: '1px solid #E2E2E2',
+    marginBottom: '.8rem',
+    gap: '.8rem',
     borderRadius: 15,
     '& > div': {
       '&:first-of-type > div': {
         position: 'relative',
         backgroundSize: 'cover',
         borderRadius: 10,
-        height: 200,
-        '& span': {
-          position: 'absolute',
-          top: '.8rem',
-          right: '.8rem',
-          zIndex: 2,
-        },
+        width: 110,
+        height: 110,
       },
       '&:last-of-type': {
-        padding: '.8rem 0 2.3rem',
+        position: 'relative',
+        flex: '1 1 auto',
         '& > h3': {
           fontWeight: 800,
           overflow: 'hidden',
@@ -45,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
               color: theme.palette.lighterGray,
             },
           },
+        },
+        '& .like': {
+          position: 'absolute',
+          bottom: '.8rem',
+          right: '.8rem',
+          zIndex: 2,
         },
       },
     },

@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 export default function Coeur() {
@@ -9,12 +10,7 @@ export default function Coeur() {
                 <div className="col-lg-6 col-md-7 col-sm-9 col-12 order-1">
                   <div className="title_block text-white">
                     <h2
-                      className="
-                        mbr-section-title mbr-fonts-style
-                        display-1
-                        mobile-align-left
-                        first-heading
-                      "
+                      className="mbr-section-title mbr-fonts-style display-1 mobile-align-left first-heading"
                     >
                 Mon premier achat <br/>
                 <strong className="mbr-text">immobilier.</strong>

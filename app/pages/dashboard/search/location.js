@@ -26,7 +26,9 @@ SearchPage.getInitialProps = async ({ req, query }) => {
 
   const { list } = await getPublicPropertiesApiMethod(
     unPick(queryParams, ['listView']),
-    { headers }
+    {
+      headers,
+    }
   );
   return { properties: list, ...queryParams };
 };
