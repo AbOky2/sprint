@@ -76,19 +76,19 @@ export default function withAuth(
     render() {
       const { user } = this.props;
 
-      if (loginRequired && !logoutRequired && !user) {
-        return null;
-      }
+      // if (loginRequired && !logoutRequired && !user) {
+      //   return null;
+      // }
 
-      if (adminRequired && !isAdmin(user)) {
-        return null;
-      }
+      // if (adminRequired && !isAdmin(user)) {
+      //   return null;
+      // }
 
-      if (logoutRequired && user) {
-        return null;
-      }
+      // if (logoutRequired && user) {
+      //   return null;
+      // }
 
-      if (!user) return <BaseComponent {...this.props} />;
+      // if (!user) return <BaseComponent {...this.props} />;
       if (isAdmin(user))
         return (
           <>

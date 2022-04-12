@@ -1,15 +1,13 @@
 import React from 'react';
-import Demo from '/Users/yoskoissaoki/Desktop/KitLeNidFevrier/kit-le-nid/app/pages/dashboard/demo'
+import Demo from 'pages/dashboard/demo';
 import Head from 'next/head';
 import { Grid, Typography } from '@material-ui/core';
-import {Icon} from 'components';
-
-
+import { Icon } from 'components';
 
 export default function Coeur() {
   return (
     <>
-    <Head>
+      <Head>
         <title>ok</title>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -96,7 +94,6 @@ export default function Coeur() {
       </Head>
       <div id="landing-loader">loading...</div>
 
-    
       <section className="header4 firmm4_header4 cid-srUDSjEkHN" id="header4-t">
         <div className="container">
           <div className="row justify-content-center flex-row-reverse">
@@ -110,7 +107,6 @@ export default function Coeur() {
                         first-heading
                       "
                 >
-                  
                   Devenir propriétaire devient <br />
                   <strong className="mbr-text">plus accessible.</strong>
                 </h2>
@@ -238,13 +234,23 @@ export default function Coeur() {
           <div className="row align-items-center justify-content-center flex-row-reverse">
             <div className="col-12 col-md-6 col-sm-8 col-lg order-1">
               <div className="text-wrapper">
-                
-                <h4 className="mbr-section-title mbr-fonts-style display-5" style={{fontFamily:"Space Grotesk"}}>
+                <h4
+                  className="mbr-section-title mbr-fonts-style display-5"
+                  style={{ fontFamily: 'Space Grotesk' }}
+                >
                   <strong>
                     L’achat dans une résidence neuve avec Kit le nid
                   </strong>
                 </h4>
-                <p className="mbr-text mbr-fonts-style display-7" style={{color:"#849CD9", fontFamily:"Space Grotesk", fontSize:"14px", weight:"500px"}}>
+                <p
+                  className="mbr-text mbr-fonts-style display-7"
+                  style={{
+                    color: '#849CD9',
+                    fontFamily: 'Space Grotesk',
+                    fontSize: '14px',
+                    weight: '500px',
+                  }}
+                >
                   <strong>
                     Construire son projet immobilier avec Kit le nid c’est
                     bénéficier&nbsp;:
@@ -260,10 +266,19 @@ export default function Coeur() {
                         </div>
                       </div>
                       <div className="card_info">
-                        <h4 className="card_title mbr-fonts-style display-7"  style={{fontFamily:"Space Grotesk"}}>
+                        <h4
+                          className="card_title mbr-fonts-style display-7"
+                          style={{ fontFamily: 'Space Grotesk' }}
+                        >
                           <strong>Des logements dans toute la France</strong>
                         </h4>
-                        <p className="card_text mbr-fonts-style display-4" style={{fontFamily:"Space Grotesk", color:"#849CD9"}}>
+                        <p
+                          className="card_text mbr-fonts-style display-4"
+                          style={{
+                            fontFamily: 'Space Grotesk',
+                            color: '#849CD9',
+                          }}
+                        >
                           Plus de 3 000 logements neufs disponibles.
                         </p>
                       </div>
@@ -277,10 +292,19 @@ export default function Coeur() {
                         </div>
                       </div>
                       <div className="card_info">
-                        <h4 className="card_title mbr-fonts-style display-7" style={{fontFamily:"Space Grotesk"}}>
+                        <h4
+                          className="card_title mbr-fonts-style display-7"
+                          style={{ fontFamily: 'Space Grotesk' }}
+                        >
                           <strong>Parcours 100% gratuit</strong>
                         </h4>
-                        <p className="card_text mbr-fonts-style display-4" style={{fontFamily:"Space Grotesk", color:"#849CD9"}}>
+                        <p
+                          className="card_text mbr-fonts-style display-4"
+                          style={{
+                            fontFamily: 'Space Grotesk',
+                            color: '#849CD9',
+                          }}
+                        >
                           Un parcours simplifié pour votre premier achat sans
                           frais d'agence, ni frais de dossier.
                         </p>
@@ -295,10 +319,19 @@ export default function Coeur() {
                         </div>
                       </div>
                       <div className="card_info">
-                        <h4 className="card_title mbr-fonts-style display-7" style={{fontFamily:"Space Grotesk"}}>
+                        <h4
+                          className="card_title mbr-fonts-style display-7"
+                          style={{ fontFamily: 'Space Grotesk' }}
+                        >
                           <strong>Accompagnement</strong>
                         </h4>
-                        <p className="card_text mbr-fonts-style display-4" style={{fontFamily:"Space Grotesk", color:"#849CD9"}}>
+                        <p
+                          className="card_text mbr-fonts-style display-4"
+                          style={{
+                            fontFamily: 'Space Grotesk',
+                            color: '#849CD9',
+                          }}
+                        >
                           Un accompagnement personnalisé avec un unique
                           conseiller,
                           <strong>
@@ -317,10 +350,19 @@ export default function Coeur() {
                         </div>
                       </div>
                       <div className="card_info">
-                        <h4 className="card_title mbr-fonts-style display-7" style={{fontFamily:"Space Grotesk"}}>
+                        <h4
+                          className="card_title mbr-fonts-style display-7"
+                          style={{ fontFamily: 'Space Grotesk' }}
+                        >
                           <strong>Accès libre aux plans</strong>
                         </h4>
-                        <p className="card_text mbr-fonts-style display-4" style={{fontFamily:"Space Grotesk", color:"#849CD9"}}>
+                        <p
+                          className="card_text mbr-fonts-style display-4"
+                          style={{
+                            fontFamily: 'Space Grotesk',
+                            color: '#849CD9',
+                          }}
+                        >
                           Tous les plans des appartements sont téléchargeables
                           sur notre plateforme.
                           <br />
@@ -776,26 +818,36 @@ export default function Coeur() {
                 </div>
               </div>
               <div>
-              <Grid item md={8} xs={12}
-          style={{background : 'white', borderRadius:'12px', marginBottom:"20px", marginTop:"16px", padding:'24px', border:"1px solid #EAEFFA"}}>
-            <Icon 
-            type='chiffre3'
-            size='large'
-            />
-            <Typography style={{ color:'red', marginTop:"-8px", fontWeight:"bold"}} zeroMinWidth>
-            Loremos at odio porttitor efficitur. Quisque id enim orci.
-            
-            </Typography>
-            
-          </Grid>
+                <Grid
+                  item
+                  md={8}
+                  xs={12}
+                  style={{
+                    background: 'white',
+                    borderRadius: '12px',
+                    marginBottom: '20px',
+                    marginTop: '16px',
+                    padding: '24px',
+                    border: '1px solid #EAEFFA',
+                  }}
+                >
+                  <Icon type="chiffre3" size="large" />
+                  <Typography
+                    style={{
+                      color: 'red',
+                      marginTop: '-8px',
+                      fontWeight: 'bold',
+                    }}
+                    zeroMinWidth
+                  >
+                    Loremos at odio porttitor efficitur. Quisque id enim orci.
+                  </Typography>
+                </Grid>
               </div>
             </div>
           </div>
         </div>
-      </section>  
-
-     
-
+      </section>
     </>
   );
 }

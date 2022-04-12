@@ -29,25 +29,7 @@ export const Card = ({
   return (
     <div className={classes.container}>
       <div>
-        <div style={{ backgroundImage: `url(${src})` }}>
-          {showLikes && (
-            <span
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                onClick(_id);
-              }}
-              className="pointer"
-            >
-              <Icon
-                type="heart"
-                size="medium"
-                strokeColor={liked ? 'red' : 'newBlue'}
-                color={liked ? 'red' : 'white'}
-              />
-            </span>
-          )}
-        </div>
+        <div style={{ backgroundImage: `url(${src})` }}></div>
       </div>
       <div>
         <Typography variant="h3">{title}</Typography>
@@ -58,11 +40,32 @@ export const Card = ({
           {address}
         </Typography>
         <Typography variant="body1">{description}</Typography>
-        <Typography variant="body1">{dimensions}</Typography>
+        {/* <Typography variant="body1">{dimensions}</Typography> */}
         <Typography variant="body1">
           <span>à partir de</span>
           {` ${spaceCurrency(price)}€`}
         </Typography>
+        <Typography variant="body1">
+          <span>soit</span>
+          {` ${spaceCurrency(price)}€ / mois`}
+        </Typography>
+        {showLikes && (
+          <span
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              onClick(_id);
+            }}
+            className="pointer like"
+          >
+            <Icon
+              type="heart"
+              size="medium"
+              strokeColor={liked ? 'red' : 'newBlue'}
+              color={liked ? 'red' : 'white'}
+            />
+          </span>
+        )}
       </div>
     </div>
   );

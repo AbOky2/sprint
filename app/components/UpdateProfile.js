@@ -1,14 +1,11 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import { toast } from 'react-toastify';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { userRoleSelect } from 'helpers';
-import { Input, Select, Modal, Icon } from './form';
 import { pageLink } from 'constants/index';
+import { Input, Select, Modal, Icon } from './form';
 
 const useStyles = makeStyles((theme) => ({
   contextMenu: {
@@ -142,7 +139,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
           }
           onClick={toggleShowSubMenu}
         >
-          <Icon type="user" />
+          {/* <Icon type="user" /> */}
           <Typography className={classes.userName}>Mon profil</Typography>
           <Icon type="sliderArrow" size="small" />
         </Grid>

@@ -16,9 +16,11 @@ export { default as bus } from './bus.svg';
 export { default as tramway } from './tramway.svg';
 export { default as metro } from './metro.svg';
 export { default as refresh } from './refresh.svg';
+export { default as profile } from './profile.svg';
 export { default as sponsorship } from './sponsorship.svg';
 export { default as mobileSponsorship } from './mobile-sponsorship.svg';
 export { default as phone } from './phone.svg';
+export { default as mail } from './mail.svg';
 export { default as jackpot } from './jackpot.svg';
 export { default as partners } from './partners.svg';
 export { default as pen } from './pen.svg';
@@ -27,6 +29,7 @@ export { default as validate } from './validate.svg';
 export { default as logo } from './logo.svg';
 export { default as logoFull } from './logo-full.svg';
 export { default as search } from './search.svg';
+export { default as menu } from './menu.svg';
 export { default as timing } from './timing.svg';
 export { default as copy } from './copy.svg';
 export { default as addUser } from './add-user.svg';
@@ -41,11 +44,6 @@ export { default as carrouselArrow } from './carrousel-arrow.svg';
 export { default as sliderArrow } from './slider-arrow.svg';
 export { default as partageV2 } from './partageV2.svg';
 export { default as logoK } from './logo principal.svg';
-export {default as logoNew} from './KLNX.svg'
-export {default as rect} from './recKL.svg'
-export {default as chiffre3} from './3.svg'
-
-
-
-
-
+export { default as logoNew } from './KLNX.svg';
+export { default as rect } from './recKL.svg';
+export { default as chiffre3 } from './3.svg';

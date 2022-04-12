@@ -12,7 +12,7 @@ const SIZES = {
   large: 48,
   nearBig: 52,
   big: 67,
-  extra:100,
+  extra: 100,
 };
 const ICON_COLORS = {
   ...shared.colors,
@@ -53,14 +53,14 @@ export const Icon = ({
   return (
     <SvgIcon
       className={classes.svg}
-      style={{
-        ...(strokeColor ? { stroke } : { stroke: 'transparent' }),
-        ...(customSize || {
-          width: svgSize,
-          height: svgSize,
-        }),
-        ...(rotate ? { transform: `rotate(${rotate})` } : {}),
-      }}
+      // style={{
+      //   ...(strokeColor ? { stroke } : { stroke: 'transparent' }),
+      //   ...(customSize || {
+      //     width: svgSize,
+      //     height: svgSize,
+      //   }),
+      //   ...(rotate ? { transform: `rotate(${rotate})` } : {}),
+      // }}
     />
   );
 };
@@ -78,7 +78,7 @@ Icon.propTypes = {
   noColor: PropTypes.bool,
 };
 Icon.defaultProps = {
-  color: 'primary',
+  color: '',
   size: 'medium',
   customSize: undefined,
   strokeColor: undefined,
