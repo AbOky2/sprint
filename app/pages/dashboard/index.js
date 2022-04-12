@@ -24,6 +24,7 @@ import LocationImg from 'static/img/location.png';
 import HouseImg from 'static/img/house.png';
 import LogoImg from 'static/img/logo.png';
 import { pageLink } from 'constants/index';
+
 import { ListElement } from 'components/page/search/views/partials';
 import { useEffect, useState } from 'react';
 import { userActions } from 'redux/_actions';
@@ -119,7 +120,7 @@ const styles = (theme) => ({
       '& img': {
         height: 50,
         display: 'inline-block',
-        width: 'auto',
+        width: 'auto'
       },
     },
   },
@@ -300,6 +301,7 @@ const AuthContext = ({
           handleBookmark={handleBookmark}
         />
       ))}
+
     </div>
     <div className={classes.advisorContainer}>
       <Typography variant="h2">Votre conseiller</Typography>

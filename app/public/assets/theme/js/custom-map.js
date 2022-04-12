@@ -1,18 +1,16 @@
-$(() => {
+$(document).ready(() => {
   const app_url = 'https://app.kitlenid.fr';
   const media_url = 'https://media.kitlenid.fr';
 
-  $('#landing-loader').css('display', 'none');
-  $('html').css('font-size', 'inherit');
   const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 8,
     center: { lat: 48.8587741, lng: 2.2069771 },
     gestureHandling: 'greedy',
   });
-  const isMobile =
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    );
+
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
 
   const ucFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1);
   const spaceCurrency = (x) =>
@@ -219,16 +217,10 @@ $(() => {
         lat: near[0] || docs[0]?.loc.coordinates[1],
         lng: near[1] || docs[0]?.loc.coordinates[0],
       });
-    const locations = docs.map(
-      ({
-        loc: {
-          coordinates: [lng, lat],
-        },
-      }) => ({
-        lat,
-        lng,
-      })
-    );
+    const locations = docs.map(({ loc: { coordinates: [lng, lat] } }) => ({
+      lat,
+      lng,
+    }));
 
     markers = locations.map((location, i) => {
       const marker = new google.maps.Marker({
