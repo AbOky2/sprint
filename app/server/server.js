@@ -15,6 +15,7 @@ const options = {
 };
 mongoose.connect(MONGO_URL, options);
 const URL_MAP = {
+  '/acceuil': '/',
   '/login': '/public/login',
   '/': '/dashboard',
 };

@@ -14,10 +14,10 @@ const { isStudent } = require('../../helpers/user');
 const router = express.Router();
 
 router.use((req, res, next) => {
-  if (!isStudent(req.user)) {
-    res.status(401).json({ error: 'Unauthorized' });
-    return;
-  }
+  // if (!isStudent(req.user)) {
+  //   res.status(401).json({ error: 'Unauthorized' });
+  //   return;
+  // }
 
   next();
 });
@@ -27,6 +27,19 @@ router.get('/currentUser', ({ user }, res) => {
   }
   res.json({ user });
 });
+
+router.get(
+  '/userlatest-search',
+  // eslint-disable-next-line no-return-await
+  async ({ user }, res) => {
+    try {
+      const { userSearch } = await UserModel.getLastSearch(user._id);
+      return res.json({ userSearch });
+    } catch (error) {
+      return error;
+    }
+  }
+);
 router.put(
   '/user',
   profileCollection(
@@ -64,17 +77,24 @@ router.get(
 
 router.post(
   '/properties/coord',
-  listCollection(async ({ req: { body: { typeOfProperty, ...args } } }) => {
-    const { list } = await PropertieModel.searchByPoint({
-      ...args,
-      typeOfProperty:
-        typeOfProperty && typeOfProperty.length > 0
-          ? typeOfProperty.split(',')
-          : [],
-    });
+  listCollection(
+    async ({
+      req: {
+        body: { typeOfProperty, ...args },
+      },
+    }) => {
+      const { list } = await PropertieModel.searchByPoint({
+        ...args,
+        typeOfProperty:
+          typeOfProperty && typeOfProperty.length > 0
+            ? typeOfProperty.split(',')
+            : [],
+      });
 
-    return { list };
-  }, joiSchema.propertie.student.searchByCoord)
+      return { list };
+    },
+    joiSchema.propertie.student.searchByCoord
+  )
 );
 
 router.get(
@@ -89,7 +109,12 @@ router.get(
 router.get(
   '/property/:id',
   // eslint-disable-next-line no-return-await
-  getCollection(async ({ id }) => await PropertieModel.get(id))
+  getCollection(async ({ id, user = {} }) => {
+    const rest = await PropertieModel.findById(id);
+    console.log({ id });
+    await UserModel.updateLastViewed(user._id, id);
+    return rest;
+  })
 );
 
 router.get(

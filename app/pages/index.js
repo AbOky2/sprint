@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import Header from 'components/Header/Header';
+import Coeur from 'components/Coeur/Coeur';
+import Footer from 'components/Footer/Footer';
 
 const propTypes = {
   user: PropTypes.shape({
@@ -17,12 +20,14 @@ const defaultProps = {
 class Index extends React.Component {
   render() {
     return (
-      <div style={{ padding: '10px 45px' }}>
+      <div>
         <Head>
-          <title>Settings</title>
+          <title>Kit le nid</title>
           <meta name="description" content="List of purchased books." />
         </Head>
-        <p>Bienvenue sur kit le nid</p>
+        <Header />
+        <Coeur />
+        <Footer />
       </div>
     );
   }

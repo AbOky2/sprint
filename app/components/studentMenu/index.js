@@ -6,9 +6,9 @@ import clsx from 'clsx';
 import { Grid, Drawer } from '@material-ui/core';
 import { openPopupWidget } from 'react-calendly';
 import { pages } from 'helpers';
-import { Icon, Btn } from '../form';
 import LogoImg from 'static/img/logo.png';
 import { UpdateProfile } from 'components';
+import { Icon, Btn } from '../form';
 import useStyles from './styles';
 
 const MobileItems = [
@@ -20,21 +20,20 @@ const MobileItems = [
   {
     href: '/dashboard/search/buy',
     singleType: '/dashboard/property/buy',
-    iconProps: { type: 'buy', style: { padding: 1 } },
-    txt: 'Acheter',
+    iconProps: { type: 'search', style: { padding: 1 } },
+    txt: 'Recherche',
+  },
+  {
+    href: '/dashboard/bookmark',
+    iconProps: { type: 'heart' },
+    txt: 'Favoris',
   },
   {
     href: '/dashboard/search/location',
     singleType: '/dashboard/property/location',
-    iconProps: { type: 'locationType' },
+    iconProps: { type: 'profile' },
     txt: 'Louer',
   },
-  {
-    href: '/dashboard/bookmark',
-    iconProps: { type: 'heart', strokeColor: 'primary' },
-    txt: 'Favoris',
-  },
-  
 ];
 const sponsorship = {
   href: '/dashboard/sponsorship',
@@ -59,15 +58,8 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
       {MobileItems?.map(({ href, txt, singleType, iconProps }) => (
         <Grid key={href} item>
           <Link href={href}>
-            <a
-              className={
-                asPath === href ||
-                (href.includes('search') && asPath.includes(href)) ||
-                (singleType && asPath.includes(singleType))
-                  ? clsx(classes.activeLink, classes.mobileActiveMobile)
-                  : null
-              }
-            >
+            <a>
+              {console.log(iconProps)}
               <Icon {...iconProps} />
               <p>{txt}</p>
             </a>
@@ -75,18 +67,11 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
         </Grid>
       ))}
       <Grid item onClick={toggleMenu} className={classes.calendar}>
-        <Icon type="burgerMenu" />
+        <Icon type="menu" />
         <p>Menu</p>
       </Grid>
       <Drawer anchor="right" open={showMenu} onClose={toggleMenu}>
         <div className={classes.drawer}>
-          <Grid className={classes.logoContainer}>
-            <Link href={pages.dashboard}>
-              <a onClick={toggleMenu}>
-                <img src={LogoImg} alt="" />
-              </a>
-            </Link>
-          </Grid>
           <div className={clsx(classes.rightMenu, classes.rightMenuMobile)}>
             <div>
               <Link href={sponsorship.href}>
@@ -98,8 +83,6 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
                       : null
                   }
                 >
-                  <Icon {...sponsorship.iconProps} />
-
                   <span>{sponsorship.txt}</span>
                 </a>
               </Link>
@@ -111,7 +94,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
               update={update}
               transparent
             />
-            <div>
+            {/* <div>
               <Btn
                 text="Prendre rendez-vous"
                 iconType="calendar"
@@ -119,7 +102,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
                   openPopupWidget({ url: 'https://calendly.com/kitlenid' })
                 }
               />
-            </div>
+            </div> */}
           </div>
         </div>
       </Drawer>

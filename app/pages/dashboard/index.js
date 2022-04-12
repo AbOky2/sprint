@@ -8,13 +8,27 @@ import { connect } from 'react-redux';
 import withAuth from 'lib/withAuth';
 import { AdminContentWrapper } from 'components/wrapper';
 import { Btn, Icon } from 'components';
-import { isYoungWorker, ucfirst } from 'helpers';
-import { getPartnersApiMethod } from 'lib/api/customer';
+import {
+  isYoungWorker,
+  toArr,
+  toggleArray,
+  toQueryParams,
+  ucfirst,
+} from 'helpers';
+import {
+  addBookmarkApiMethod,
+  getPartnersApiMethod,
+  getUserLatestSearchApiMethod,
+} from 'lib/api/customer';
 import LocationImg from 'static/img/location.png';
 import HouseImg from 'static/img/house.png';
 import LogoImg from 'static/img/logo.png';
 import { pageLink } from 'constants/index';
-import signIn from 'next-auth/react'
+
+import { ListElement } from 'components/page/search/views/partials';
+import { useEffect, useState } from 'react';
+import { userActions } from 'redux/_actions';
+// import signIn from 'next-auth/react';
 
 const styles = (theme) => ({
   container: {
@@ -84,6 +98,18 @@ const styles = (theme) => ({
     '& > div': {
       display: 'none',
     },
+    '& > h1': {
+      fontFamily: 'Space Grotesk',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      fontSize: '2.8rem',
+      lineHeight: '2.8rem',
+      textAlign: 'center',
+      color: theme.palette.newDarkBlue,
+      '& > span': {
+        color: theme.palette.normalBlue,
+      },
+    },
     [theme.breakpoints.down('sm')]: {
       marginTop: '3rem',
       textAlign: 'center',
@@ -94,16 +120,62 @@ const styles = (theme) => ({
       '& img': {
         height: 50,
         display: 'inline-block',
-        width: 'auto',
+        width: 'auto'
       },
     },
   },
   welcomeSub: {
-    color:"#849CD9",
-    display: 'block',
-    fontSize: '18px',
-    fontWeight: 'Regular',
-    lineHeight: '3.5rem',
+    fontFamily: 'Space Grotesk',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '1.6rem',
+    lineHeight: '2rem',
+    color: theme.palette.newLightBlue,
+  },
+  lastSearch: {
+    position: 'relative',
+    border: '2px solid #EFF4FF',
+    boxSizing: 'border-box',
+    borderRadius: '12px',
+    marginTop: '8px',
+    padding: '1.8rem',
+    background: '#FFFFFF',
+    '& h2': {
+      marginBottom: '4px',
+      color: theme.palette.normalBlue,
+    },
+    '& span': {
+      position: 'absolute',
+      top: '50%',
+      right: '1.6rem',
+      transform: 'translateY(-50%)',
+    },
+  },
+  lastViewdContainer: {
+    margin: '24px 0',
+    '& h2': {
+      marginBottom: '8px',
+    },
+  },
+  advisorContainer: {
+    '& h2': {
+      marginBottom: '4px',
+    },
+  },
+  advisorInfo: {
+    flexGrow: '1',
+    paddingLeft: '1.6rem',
+    '& h2': {
+      color: theme.palette.normalBlue,
+    },
+    '& p:last-of-type': {
+      marginBottom: 0,
+    },
+  },
+  advisorContact: {
+    '& svg:first-of-type': {
+      marginRight: '1.4rem',
+    },
   },
   subTitle: {
     margin: '.4rem 0 2.2rem',
@@ -200,6 +272,83 @@ const styles = (theme) => ({
     },
   },
 });
+
+const AuthContext = ({
+  classes,
+  liked = [],
+  userSearch = {},
+  handleBookmark,
+}) => (
+  <div className={classes.authContext}>
+    <Typography variant="h2">Vos recherches récentes</Typography>
+    {userSearch.lastSearch
+      ?.slice(0, 3)
+      .map(({ loc, maxPrice, page, pieces, sort, ...search }, index) => (
+        <Link
+          key={index}
+          href={`/dashboard/search/${
+            search.typeOfAnnonce === 'Location' ? 'location' : 'buy'
+          }/?${toQueryParams({
+            loc,
+          })}`}
+        >
+          <a>
+            <div className={classes.lastSearch}>
+              <Typography variant="h2">{loc}</Typography>
+              <Typography>
+                {`${
+                  pieces ? toArr(pieces).join(', ') : 'Toute type de'
+                } pièces | ${
+                  maxPrice && maxPrice > 0 ? `${maxPrice}€` : 'Prix indéfini'
+                }`}
+              </Typography>
+              <span classes={classes.iconContainer}>
+                <Icon type="sliderArrow" size="small" />
+              </span>
+            </div>
+          </a>
+        </Link>
+      ))}
+    <div className={classes.lastViewdContainer}>
+      <Typography variant="h2">Vos récentes consultations</Typography>
+      {userSearch.lastViewed?.slice(0, 3).map((elem, index) => (
+        <ListElement
+          key={index}
+          liked={liked}
+          {...elem}
+          handleBookmark={handleBookmark}
+        />
+      ))}
+
+    </div>
+    <div className={classes.advisorContainer}>
+      <Typography variant="h2">Votre conseiller</Typography>
+      <Grid container alignItems="center">
+        <Grid item>
+          <img src="static/img/advisor.png" alt="" />
+        </Grid>
+        <Grid item className={classes.advisorInfo}>
+          <Grid container justify="space-between">
+            <Grid item>
+              <Grid container justify="space-between">
+                <div>
+                  <Typography variant="h2">Raphael Altman</Typography>
+                  <Typography>raltman@nexity.fr</Typography>
+                  <Typography>06 99 77 65 16</Typography>
+                </div>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container className={classes.advisorContact}>
+                <Icon type="phone" />
+                <Icon type="mail" />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </div>
+  </div>
 
 const Dashboard = ({ user = {}, partners, classes }) => (
   <AdminContentWrapper noRedirect>
@@ -384,17 +533,64 @@ const Dashboard = ({ user = {}, partners, classes }) => (
   </AdminContentWrapper>
 );
 
+const Dashboard = ({ classes, user = {}, userSearch, update }) => {
+  const [liked, setLiked] = useState(
+    user?.bookmarks?.map((elem) => elem._id) || []
+  );
+  const isAuth = true;
+  const handleBookmark = (id) => {
+    setLiked(toggleArray(liked, id));
+    addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
+  };
+
+  return (
+    <AdminContentWrapper noRedirect>
+      <div className={classes.heading}>
+        <div>
+          <img src="static/img/kitlenid_bynexity.png" alt="" />
+        </div>
+        <Typography variant="h1">
+          {isAuth
+            ? 'Ravis de vous revoir '
+            : 'Devenir propriétaire devient plus '}
+          <span>
+            {isAuth ? (
+              <>
+                <br />
+                {`${ucfirst(user?.firstName)}  !`}
+              </>
+            ) : (
+              'accessible.'
+            )}
+          </span>
+          <p className={classes.welcomeSub}>
+            {!isAuth &&
+              'Réalisez votre premier achat immobilier pour seulement 700€ par mois !*'}
+          </p>
+        </Typography>
+      </div>
+      <AuthContext
+        classes={classes}
+        liked={liked}
+        userSearch={userSearch}
+        handleBookmark={handleBookmark}
+      />
+    </AdminContentWrapper>
+  );
+};
+
 Dashboard.propTypes = {
   user: PropTypes.object.isRequired,
   partners: PropTypes.arrayOf(PropTypes.object).isRequired,
+  update: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
 Dashboard.getInitialProps = async ({ req, res }) => {
-  if (req && !req.user) {
-    res.redirect(pageLink.home);
-    return { partners: [] };
-  }
+  // if (req && !req.user) {
+  //   res.redirect(pageLink.home);
+  //   return { partners: [] };
+  // }
 
   const headers = {};
   if (req && req.headers && req.headers.cookie) {
@@ -402,10 +598,23 @@ Dashboard.getInitialProps = async ({ req, res }) => {
   }
 
   const { list } = await getPartnersApiMethod({ headers });
-  return { partners: list };
+  console.log(list, 'list');
+  let userSearch = {};
+  if (req && req.user) {
+    userSearch = await getUserLatestSearchApiMethod({
+      headers,
+    }).userSearch;
+  }
+  console.log(userSearch, 'userSearch');
+  return { partners: list, userSearch };
 };
 const mapState = (state) => {
   const { user } = state?.authentication;
   return { user };
 };
-export default withAuth(withStyles(styles)(connect(mapState)(Dashboard)));
+const actionCreators = {
+  update: userActions.updateUserDataOnly,
+};
+export default withAuth(
+  withStyles(styles)(connect(mapState, actionCreators)(Dashboard))
+);
