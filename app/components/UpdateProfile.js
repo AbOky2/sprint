@@ -100,7 +100,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
     if (!hasUpdate) setState(user);
   };
   // eslint-disable-next-line no-return-assign
-  const handleLogOut = () => logout(() => (window.location = pageLink.home));
+  const handleLogOut = () => logout(() => window.location.reload());
   const handleSumbit = () => update(state, () => handleModalClose(true));
   const onKeyPress = (e) => e.key === 'Enter' && handleSumbit(true);
 
@@ -153,13 +153,18 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
       >
         <Grid container item justify="center" className="form-container">
           <Grid container item>
-            <div style={{background:"linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)", width:"86px", height:"86px", borderRadius:"50%", padding:"15px", marginBottom:"19px"}}>
-              <Icon
-              type='leK'
-              size='large'
-              noColor
-               />
-
+            <div
+              style={{
+                background:
+                  'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
+                width: '86px',
+                height: '86px',
+                borderRadius: '50%',
+                padding: '15px',
+                marginBottom: '19px',
+              }}
+            >
+              <Icon type="leK" size="large" noColor />
             </div>
             <Input
               value={state.lastName}

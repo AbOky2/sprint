@@ -1,1 +1,0 @@
-{"$clusterTime":{"clusterTime":"7085715295502860291","signature":{"hash":"vtUvX8U0o0JIARIfB34TgbyLaYI=","keyId":"7051639548962406402"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7085715295502860291","service":"user-service","timestamp":"2022-04-12T13:54:15.265Z"}

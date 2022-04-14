@@ -8,8 +8,9 @@ import { openPopupWidget } from 'react-calendly';
 import { isFn, pages } from 'helpers';
 import LogoImg from 'static/img/logo.png';
 import { UpdateProfile } from 'components';
-import { Icon, Btn } from '../form';
+import { Icon, Btn, Modal } from '../form';
 import useStyles from './styles';
+import { Authentification } from 'components/authentification';
 
 const MobileItems = [
   {
@@ -23,17 +24,17 @@ const MobileItems = [
     iconProps: { type: 'search', style: { padding: 1 } },
     txt: 'Recherche',
   },
-  {
-    href: '/dashboard/bookmark',
-    iconProps: { type: 'heart' },
-    txt: 'Favoris',
-  },
-  {
-    href: '/dashboard/search/location',
-    singleType: '/dashboard/property/location',
-    iconProps: { type: 'profile' },
-    txt: 'Mon profil',
-  },
+  // {
+  //   href: '/dashboard/bookmark',
+  //   iconProps: { type: 'heart' },
+  //   txt: 'Favoris',
+  // },
+  // {
+  //   href: '/dashboard/search/location',
+  //   singleType: '/dashboard/property/location',
+  //   iconProps: { type: 'profile' },
+  //   txt: 'Mon profil',
+  // },
 ];
 const sponsorship = {
   href: '/dashboard/sponsorship',
@@ -44,9 +45,13 @@ const MenuItems = [...MobileItems, sponsorship];
 
 export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [changeName, setChangeName] = useState(false);
   const classes = useStyles();
   const { asPath } = useRouter();
   const toggleMenu = () => setShowMenu(!showMenu);
+  const toggleModal = () => setShowModal(!showModal);
+  const handleSumbit = () => console.log('submit');
 
   return (
     <Grid
@@ -66,13 +71,21 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
           <Grid key={href} item>
             <Link href={href}>
               <a>
-                <Icon {...iconProps} />
-                <p>{txt}</p>
+                <Grid container alignItems="center" direction="column">
+                  <Icon {...iconProps} />
+                  <p>{txt}</p>
+                </Grid>
               </a>
             </Link>
           </Grid>
         );
       })}
+      <Grid item onClick={toggleModal} justifyContent="center">
+        <Grid container alignItems="center" direction="column">
+          <Icon type="profile" />
+          <p>Connexion</p>
+        </Grid>
+      </Grid>
       <Grid item onClick={toggleMenu} className={classes.calendar}>
         <Icon type="menu" />
         <p>Menu</p>
@@ -113,6 +126,19 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
           </div>
         </div>
       </Drawer>
+      {console.log(changeName)}
+      <Modal
+        openModal={showModal}
+        onClose={toggleModal}
+        onClick={handleSumbit}
+        showActions={false}
+        title={
+          changeName ? 'Finalise ton inscription' : 'Connexion ou inscription'
+        }
+        // confirmText="Enregistrer"
+      >
+        <Authentification setChangeName={setChangeName} />
+      </Modal>
     </Grid>
   );
 };
