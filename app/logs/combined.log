@@ -12,3 +12,12 @@
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-14T10:30:19.891Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-14T10:36:07.720Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-02-14T10:44:01.476Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-12T12:21:32.215Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-12T12:22:02.865Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-12T12:23:16.929Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-12T12:24:03.148Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-12T12:27:14.679Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-12T12:33:22.834Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-12T12:34:50.877Z"}
+{"$clusterTime":{"clusterTime":"7085715295502860291","signature":{"hash":"vtUvX8U0o0JIARIfB34TgbyLaYI=","keyId":"7051639548962406402"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7085715295502860291","service":"user-service","timestamp":"2022-04-12T13:54:15.265Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-13T13:48:53.784Z"}

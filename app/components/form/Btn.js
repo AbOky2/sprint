@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '12px',
     cursor: 'pointer',
     fontWeight: '700',
-    fontFamily:'Space Grotesk',
+    fontFamily: 'Space Grotesk',
     ...btnHover.blue,
     '& a, & > span': {
       padding: '1.6rem 2.4rem',
@@ -65,16 +65,12 @@ const useStyles = makeStyles((theme) => ({
     background: 'white',
     ...btnHover.white,
   },
-  planColor:{
+  planColor: {
     '& a, & > span': {
       color: shared.colors.red,
     },
     background: 'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%);',
     color: shared.colors.red,
-    
-
-
-    
   },
   disabled: {
     background: theme.palette.lighterGray,
