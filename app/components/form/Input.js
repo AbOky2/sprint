@@ -23,7 +23,7 @@ const styles = (theme) => ({
     '& input, & textarea': {
       display: 'block',
       padding: '1.6rem',
-      marginBottom:'8px',
+      marginBottom: '8px',
       boxSizing: 'border-box',
       width: '100%',
       height: 'auto',
@@ -210,7 +210,7 @@ export const Input = withStyles(styles)(
     const [showPassword, setShowPassword] = useState(false);
 
     const toggleShowPassword = () => setShowPassword(!showPassword);
-
+    console.log({ value });
     return (
       <Grid
         item
@@ -293,8 +293,10 @@ export const CustomInput = withStyles(styles)(
     const onKeyPress = (e) => {
       if (e.key === 'Enter') handleSumit();
     };
-    const handleChange = (name) => ({ target: { value } }) =>
-      setState({ ...state, [name]: value });
+    const handleChange =
+      (name) =>
+      ({ target: { value } }) =>
+        setState({ ...state, [name]: value });
 
     useEffect(() => {
       const { salary, contributtion } = state;
@@ -347,8 +349,9 @@ export const CustomInput = withStyles(styles)(
               onChange={handleChange('contributtion')}
             />
             <Typography>
-              Ce calcul est réalisé avec les hypothèses suivantes : <br/>durée de
-              prêt : 25 ans <br/>taux d’intérêt : 1,5%
+              Ce calcul est réalisé avec les hypothèses suivantes : <br />
+              durée de prêt : 25 ans <br />
+              taux d’intérêt : 1,5%
             </Typography>
           </Grid>
         </Grid>

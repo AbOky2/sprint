@@ -10,15 +10,22 @@ import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { Btn, Icon } from 'components';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    padding: '4rem 10rem',
+  wrapper: {
+    paddingTop: '2rem',
+    paddingLeft: '2rem',
+    width: 'calc(100% - 2rem)',
+    height: 'calc(100% - 2rem)',
+  },
+  title: {
+    paddingTop: '4rem',
+    textAlign: 'center',
+    borderBottom: `1px solid ${theme.palette.grayBlue}`,
     [theme.breakpoints.down('sm')]: {
       width: '100%',
       ...theme.space.bodyWrapper,
       paddingTop: '2rem',
     },
     '& h2': {
-      color: "linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%);",
       fontWeight: 800,
     },
   },
@@ -28,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     right: 35,
     cursor: 'pointer',
     [theme.breakpoints.down('sm')]: {
-      top: '1rem',
+      top: '2rem',
       right: '1rem',
     },
   },
@@ -37,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     margin: '0 auto 1rem',
     padding: '4rem 0 5rem',
-    borderBottom: `1px solid ${theme.palette.newGray}`,
     [theme.breakpoints.down('sm')]: {
       padding: '2rem 0 4rem',
     },
@@ -84,22 +90,20 @@ export const Modal = ({
       fullScreen={fullScreen}
       open={!!openModal}
       onClose={onClose}
-      aria-labelledby="responsive-dialog-title"
-      disableBackdropClick
-      fullWidth
-      overlaystyle={{
-        background: `linear-gradient(109.69deg, rgba(204, 149, 223, 0.3) 6.69%,
-          rgba(79, 128, 255, 0.3) 63.14%)`,
-      }}
-      maxWidth="lg"
-      {...props}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+      // disableBackdropClick
+      // fullWidth
+      // maxWidth="lg"
+      className={clsx(classes.wrapper)}
+      // {...props}
     >
       <div className={classes.close} onClick={onClose}>
         <Icon type="close" />
       </div>
-      <div className={classes.container}>
+      <div>
         {title ? (
-          <Typography variant="h2" className="text-center">
+          <Typography variant="h2" className={classes.title}>
             {title}
           </Typography>
         ) : (

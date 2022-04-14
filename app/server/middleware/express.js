@@ -3,6 +3,7 @@ const logger = require('../logs');
 const msg = require('../utils/message');
 const joiSchema = require('./schema');
 const requestMiddleware = require('./request');
+const { UserModel } = require('../models');
 /**
  * Creates a middleware that tries to execute a function
  * and catch eventual errors to send them as a json response
@@ -70,6 +71,44 @@ const listCollection = (
     );
   }),
 ];
+const storeSignUpInfos = handleErrors((req, res, next) => {
+  const { firstName, lastName, birthday, postalCode, centersOfInterest } =
+    req.query;
+  console.log('AAA');
+  if (firstName || lastName || birthday || postalCode || centersOfInterest) {
+    console.log('BBB');
+    req.session.signUpInfos = {
+      firstName,
+      lastName,
+      birthday,
+      postalCode,
+      centersOfInterest: Array.isArray(centersOfInterest)
+        ? centersOfInterest
+        : [centersOfInterest],
+    };
+  }
+  console.log('CCC');
+  next();
+});
+const consumeSignUpInfos = handleErrors(async (req, res, next) => {
+  if (req.session.signUpInfos) {
+    const { firstName, lastName, birthday, postalCode, centersOfInterest } =
+      req.session.signUpInfos;
+    const { user } = await UserModel.updateBySlug({
+      slug: req.user.slug,
+      firstName,
+      lastName,
+      dateOfBirth: birthday,
+      postalCode,
+      influencer: {
+        centersOfInterest,
+      },
+    });
+    req.user = user;
+    delete req.session.signUpInfos;
+  }
+  next();
+});
 
 const authCheck = (roleName) =>
   handleErrors(({ user }, res, next) => {
@@ -93,6 +132,8 @@ module.exports = {
   handleErrors,
   listCollection,
   getCollection,
+  storeSignUpInfos,
+  consumeSignUpInfos,
   deleteCollection,
   updateCollection,
   profileCollection,

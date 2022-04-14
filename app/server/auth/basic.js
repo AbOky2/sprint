@@ -4,11 +4,11 @@ const MongooseStore = require('express-brute-mongoose');
 const BruteForceSchema = require('express-brute-mongoose/dist/schema');
 const { Strategy } = require('passport-local');
 const mongoose = require('mongoose');
-const { UserModel, PropertieModel, PromotedModel } = require('./models');
-const msg = require('./utils/message');
-const joiSchema = require('./middleware/schema');
-const { listCollection } = require('./middleware/express');
-const requestMiddleware = require('./middleware/request');
+const { UserModel, PropertieModel, PromotedModel } = require('../models');
+const msg = require('../utils/message');
+const joiSchema = require('../middleware/schema');
+const { listCollection } = require('../middleware/express');
+const requestMiddleware = require('../middleware/request');
 
 const model = mongoose.model(
   'bruteforce',
@@ -97,6 +97,12 @@ const auth = ({ server }) => {
       return { list };
     })
   );
+  server.post('/userExist', async (req, res, next) => {
+    let user = {};
+    if (req.body.email) user = await UserModel.findById(req.body.email);
+
+    res.json({ found: !!user.email });
+  });
   server.post(
     '/publicSearch',
     listCollection(
