@@ -5,7 +5,7 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { Grid, Drawer } from '@material-ui/core';
 import { openPopupWidget } from 'react-calendly';
-import { pages } from 'helpers';
+import { isFn, pages } from 'helpers';
 import LogoImg from 'static/img/logo.png';
 import { UpdateProfile } from 'components';
 import { Icon, Btn } from '../form';
@@ -32,7 +32,7 @@ const MobileItems = [
     href: '/dashboard/search/location',
     singleType: '/dashboard/property/location',
     iconProps: { type: 'profile' },
-    txt: 'Louer',
+    txt: 'Mon profil',
   },
 ];
 const sponsorship = {
@@ -55,17 +55,24 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
       justify="space-between"
       className={clsx(classes.navContainer, classes.mobileContainer)}
     >
-      {MobileItems?.map(({ href, txt, singleType, iconProps }) => (
-        <Grid key={href} item>
-          <Link href={href}>
-            <a>
-              {console.log(iconProps)}
-              <Icon {...iconProps} />
-              <p>{txt}</p>
-            </a>
-          </Link>
-        </Grid>
-      ))}
+      {MobileItems?.map((props) => {
+        let { href, txt, singleType, iconProps } = props;
+        if (!user._id) {
+          if (href === '/dashboard/bookmark') return null;
+          txt = 'Connexion';
+        }
+
+        return (
+          <Grid key={href} item>
+            <Link href={href}>
+              <a>
+                <Icon {...iconProps} />
+                <p>{txt}</p>
+              </a>
+            </Link>
+          </Grid>
+        );
+      })}
       <Grid item onClick={toggleMenu} className={classes.calendar}>
         <Icon type="menu" />
         <p>Menu</p>

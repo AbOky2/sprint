@@ -28,6 +28,8 @@ import { pageLink } from 'constants/index';
 import { ListElement } from 'components/page/search/views/partials';
 import { useEffect, useState } from 'react';
 import { userActions } from 'redux/_actions';
+import { signIn } from 'lib/api';
+import { SearchDrawer } from 'components/searchDrawer';
 // import signIn from 'next-auth/react';
 
 const styles = (theme) => ({
@@ -120,7 +122,7 @@ const styles = (theme) => ({
       '& img': {
         height: 50,
         display: 'inline-block',
-        width: 'auto'
+        width: 'auto',
       },
     },
   },
@@ -185,22 +187,32 @@ const styles = (theme) => ({
     fontWeight: 'bold',
   },
 
-  nouveauH2:{
-    fontWeight:"bold",
-    fontSize:"22px",
-    lineHeight:"23px",
-    color:"#1A2E6C",
-
+  nouveauH2: {
+    fontWeight: 'bold',
+    fontSize: '22px',
+    lineHeight: '23px',
+    color: '#1A2E6C',
   },
-  nouveauGrid:{
-    display:"flex", flexDirection:"row-reverse", marginBottom:"16px"
+  nouveauGrid: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    marginBottom: '16px',
   },
-  gridPoints:{
-    background:'white', width:"100%", borderRadius:"12px", border:"1px solid #EAEFFA", padding:"24px", marginBottom:"16px"
-
+  gridPoints: {
+    background: 'white',
+    width: '100%',
+    borderRadius: '12px',
+    border: '1px solid #EAEFFA',
+    padding: '24px',
+    marginBottom: '16px',
   },
-  numeroPoints:{
-    background:'rgba(248, 191, 44, 1)', width:'34px', heigth:"44px", borderRadius:"50%", padding:"12px", marginBottom:"10px"
+  numeroPoints: {
+    background: 'rgba(248, 191, 44, 1)',
+    width: '34px',
+    heigth: '44px',
+    borderRadius: '50%',
+    padding: '12px',
+    marginBottom: '10px',
   },
   presentationCardTitle: {
     color: theme.palette.newBlue,
@@ -319,7 +331,6 @@ const AuthContext = ({
           handleBookmark={handleBookmark}
         />
       ))}
-
     </div>
     <div className={classes.advisorContainer}>
       <Typography variant="h2">Votre conseiller</Typography>
@@ -349,195 +360,266 @@ const AuthContext = ({
       </Grid>
     </div>
   </div>
+);
 
-const Dashboard = ({ user = {}, partners, classes }) => (
-  <AdminContentWrapper noRedirect>
-    <div className={classes.heading} style={{marginBottom:"33px"}}>
-      <div>
-        <img src={'static/img/logo-full.png'} alt="" />
-      
+const NoAuthDashboard = ({ user = {}, partners, classes }) => (
+  <>
+    <div
+      style={{
+        border: '2px solid #EFF4FF',
+        background: 'white',
+        width: '80%',
+        height: '55px',
+        borderRadius: '12px',
+        position: 'absolute',
+        marginTop: '2px',
+        marginLeft: '22px',
+        display: 'flex',
+        flexDirection: 'row-reverse',
+      }}
+    >
+      <div
+        style={{
+          background:
+            'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)',
+          width: '39px',
+          height: '39px',
+          borderRadius: '12px',
+          padding: '7px',
+          marginTop: '7px',
+          marginRight: '9px',
+        }}
+      >
+        <Icon type="recherche" color="white" />
       </div>
-      <Typography variant="h1" style={{color: "#113EB6", fontWeight:"bold", lineHeight:"28px"}}>
-      Devenir propriétaire devient &nbsp;
-        <span style={{color:"#3679FF"}}>
-         plus accessible.
-        </span>
-        <span onClick={signIn} className={classes.welcomeSub}>
-          Bienvenue sur votre espace personnel Kit le Nid.
-        </span>
-      </Typography>
     </div>
+    <img
+      src={'static/img/maison.jpg'}
+      alt=""
+      style={{ marginTop: '22px', width: '100%' }}
+    />
 
-    <div style={{border: "2px solid #EFF4FF", background:"white", width:"80%", height:"55px", borderRadius:"12px", position:"absolute", marginTop:"2px", marginLeft:"22px", display:"flex", flexDirection:"row-reverse"}}>
-      <div style={{background:"linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)", width:'39px', height:"39px", borderRadius:"12px", padding:"7px", marginTop:"7px", marginRight:"9px"}}>
-      <Icon 
-      type='recherche'
-      color='white'
-      /></div>
-
-    </div>
-    <img src={'static/img/maison.jpg'} alt="" style={{marginTop:"22px", width:"100%"}} />
-
- 
-    <Typography variant="h2" style={{color:"rgba(26, 46, 108, 1)", fontWeight:"bold", fontSize:"18px", textAlign:"center", marginTop:"16px"}}>
-      L’achat dans une résidence neuve avec Kit le nid <span className={classes.welcomeSub} style={{textAlign:"center", fontSize:"14px", lineHeight:"18px"}}>
-    Construire son projet immobilier avec Kit le nid c’est bénéficier : 
-     </span>
+    <Typography
+      variant="h2"
+      style={{
+        color: 'rgba(26, 46, 108, 1)',
+        fontWeight: 'bold',
+        fontSize: '18px',
+        textAlign: 'center',
+        marginTop: '16px',
+      }}
+    >
+      L’achat dans une résidence neuve avec Kit le nid{' '}
+      <span
+        className={classes.welcomeSub}
+        style={{ textAlign: 'center', fontSize: '14px', lineHeight: '18px' }}
+      >
+        Construire son projet immobilier avec Kit le nid c’est bénéficier :
+      </span>
     </Typography>
-    
 
-    
-    <Grid container style={{marginTop:"23px"}} spacing={4}>
+    <Grid container style={{ marginTop: '23px' }} spacing={4}>
       <Grid item className={classes.nouveauGrid}>
-        <Typography className={classes.nouveauH2} style={{marginLeft:"16px"}}>
+        <Typography
+          className={classes.nouveauH2}
+          style={{ marginLeft: '16px' }}
+        >
           Des logements neufs dans toutes la France
-          <span className={classes.welcomeSub} style={{fontSize:"14px", lineHeight:"18px",  marginTop:"6px"}}>
-          Plus de 3 000 logements neufs disponibles.    
-           </span>
+          <span
+            className={classes.welcomeSub}
+            style={{ fontSize: '14px', lineHeight: '18px', marginTop: '6px' }}
+          >
+            Plus de 3 000 logements neufs disponibles.
+          </span>
         </Typography>
-       <div style={{background:"rgba(220, 230, 255, 1)", borderRadius:"50%", width:"53px", heigth:"53px", padding:"13px"}}>
-         <Icon
-         type='item1'
-         noColor
-          /></div>
+        <div
+          style={{
+            background: 'rgba(220, 230, 255, 1)',
+            borderRadius: '50%',
+            width: '53px',
+            heigth: '53px',
+            padding: '13px',
+          }}
+        >
+          <Icon type="item1" noColor />
+        </div>
       </Grid>
 
       <Grid item className={classes.nouveauGrid}>
-        <Typography className={classes.nouveauH2} style={{marginLeft:"16px"}}>
-        Parcours 100% gratuit
-        <span className={classes.welcomeSub} style={{fontSize:"14px", lineHeight:"18px",  marginTop:"6px"}}>
-        Un parcours simplifié pour votre premier achat sans frais d’agence, ni frais de dossier.
-         </span>
+        <Typography
+          className={classes.nouveauH2}
+          style={{ marginLeft: '16px' }}
+        >
+          Parcours 100% gratuit
+          <span
+            className={classes.welcomeSub}
+            style={{ fontSize: '14px', lineHeight: '18px', marginTop: '6px' }}
+          >
+            Un parcours simplifié pour votre premier achat sans frais d’agence,
+            ni frais de dossier.
+          </span>
         </Typography>
-        <div style={{background:"rgba(254, 242, 213, 1)", borderRadius:"50%", width:"53px", heigth:"53px",  padding:"12px"}}>
-         <Icon
-         type='item2'
-         noColor
-          /></div>
-
+        <div
+          style={{
+            background: 'rgba(254, 242, 213, 1)',
+            borderRadius: '50%',
+            width: '53px',
+            heigth: '53px',
+            padding: '12px',
+          }}
+        >
+          <Icon type="item2" noColor />
+        </div>
       </Grid>
-
 
       <Grid item className={classes.nouveauGrid}>
-        <Typography className={classes.nouveauH2} style={{marginLeft:"16px"}}>
-        Accompagnement
-        <span className={classes.welcomeSub} style={{fontSize:"13px", lineHeight:"18px", marginTop:"6px"}}>
-        Un accompagnement personnalisé avec un unique conseiller, pour les étudiants et les jeunes actifs.         </span>
+        <Typography
+          className={classes.nouveauH2}
+          style={{ marginLeft: '16px' }}
+        >
+          Accompagnement
+          <span
+            className={classes.welcomeSub}
+            style={{ fontSize: '13px', lineHeight: '18px', marginTop: '6px' }}
+          >
+            Un accompagnement personnalisé avec un unique conseiller, pour les
+            étudiants et les jeunes actifs.{' '}
+          </span>
         </Typography>
-        <div style={{background:"rgba(245, 234, 249, 1)", borderRadius:"50%", width:"53px", heigth:"53px",  padding:"12px"}}>
-         <Icon
-         type='item3'
-         noColor
-          /></div>
-
+        <div
+          style={{
+            background: 'rgba(245, 234, 249, 1)',
+            borderRadius: '50%',
+            width: '53px',
+            heigth: '53px',
+            padding: '12px',
+          }}
+        >
+          <Icon type="item3" noColor />
+        </div>
       </Grid>
 
-
-      <Grid item className={classes.nouveauGrid} style={{marginBottom:"27px"}}>
-        <Typography className={classes.nouveauH2} style={{marginLeft:"16px"}}>
-        Accès libre aux plans
-        <span className={classes.welcomeSub} style={{ fontSize:"14px", lineHeight:"18px",  marginTop:"6px"}}>
-        Tous les plans des appartements sont téléchargeables sur notre plateforme.
-         </span>
+      <Grid
+        item
+        className={classes.nouveauGrid}
+        style={{ marginBottom: '27px' }}
+      >
+        <Typography
+          className={classes.nouveauH2}
+          style={{ marginLeft: '16px' }}
+        >
+          Accès libre aux plans
+          <span
+            className={classes.welcomeSub}
+            style={{ fontSize: '14px', lineHeight: '18px', marginTop: '6px' }}
+          >
+            Tous les plans des appartements sont téléchargeables sur notre
+            plateforme.
+          </span>
         </Typography>
-        <div style={{background:"rgba(237, 248, 240, 1)", borderRadius:"50%", width:"53px", heigth:"53px", padding:"12px"}}>
-         <Icon
-         type='item4'
-         noColor
-          />
-          </div>
-
+        <div
+          style={{
+            background: 'rgba(237, 248, 240, 1)',
+            borderRadius: '50%',
+            width: '53px',
+            heigth: '53px',
+            padding: '12px',
+          }}
+        >
+          <Icon type="item4" noColor />
+        </div>
       </Grid>
-
     </Grid>
-   
 
-   <Grid container>
-     <Grid className={classes.gridPoints}>
-       <div className={classes.numeroPoints}>
+    <Grid container>
+      <Grid className={classes.gridPoints}>
+        <div className={classes.numeroPoints}>
+          <Icon type="numero1" noColor size="" />{' '}
+        </div>
 
-       <Icon
-       type='numero1'
-       noColor
-       size=''
-        />       </div>
+        <Typography
+          variant="h2"
+          style={{ fontSize: '18px', marginBottom: '8px' }}
+        >
+          Rejoignez la plateforme Kit le Nid
+        </Typography>
+        <Typography
+          style={{ color: 'rgba(132, 156, 217, 1)', fontWeight: 'bold' }}
+        >
+          Inscrivez-vous et développez votre projet avec nos conseillers.
+        </Typography>
+      </Grid>
+    </Grid>
 
-       <Typography variant='h2' style={{fontSize:"18px", marginBottom:"8px"}}>
-       Rejoignez la plateforme Kit le Nid
-       </Typography>
-       <Typography style={{color:"rgba(132, 156, 217, 1)", fontWeight:"bold"}}>
-       Inscrivez-vous et développez votre projet avec nos conseillers.
-       </Typography>
-     </Grid>
-   </Grid>
+    <Grid container>
+      <Grid className={classes.gridPoints}>
+        <div className={classes.numeroPoints}>
+          <Icon type="numero2" noColor size="" />{' '}
+        </div>
 
-   <Grid container>
-     <Grid className={classes.gridPoints}>
-       <div className={classes.numeroPoints}>
+        <Typography
+          variant="h2"
+          style={{ fontSize: '18px', marginBottom: '8px' }}
+        >
+          Sélectionnez votre logement
+        </Typography>
+        <Typography
+          style={{ color: 'rgba(132, 156, 217, 1)', fontWeight: 'bold' }}
+        >
+          Choisissez et réservez votre appartement en ligne.
+        </Typography>
+      </Grid>
+    </Grid>
 
-       <Icon
-       type='numero2'
-       noColor
-       size=''
-        />       </div>
+    <Grid container>
+      <Grid className={classes.gridPoints}>
+        <div className={classes.numeroPoints}>
+          <Icon type="numero3" noColor size="" />{' '}
+        </div>
 
-       <Typography variant='h2' style={{fontSize:"18px", marginBottom:"8px"}}>
-       Sélectionnez votre logement
-       </Typography>
-       <Typography style={{color:"rgba(132, 156, 217, 1)", fontWeight:"bold"}}>
-       Choisissez et réservez votre appartement en ligne.
-       </Typography>
-     </Grid>
-   </Grid>
+        <Typography
+          variant="h2"
+          style={{ fontSize: '18px', marginBottom: '8px' }}
+        >
+          Profitez d’un financement simplifié
+        </Typography>
+        <Typography
+          style={{ color: 'rgba(132, 156, 217, 1)', fontWeight: 'bold' }}
+        >
+          Kit le nid vous accompagne dans toutes vos démarches de prêt.
+        </Typography>
+      </Grid>
+    </Grid>
 
-   <Grid container>
-     <Grid className={classes.gridPoints}>
-       <div className={classes.numeroPoints}>
+    <Grid container>
+      <Grid className={classes.gridPoints}>
+        <div className={classes.numeroPoints}>
+          <Icon type="numero4" noColor size="" />{' '}
+        </div>
 
-       <Icon
-       type='numero3'
-       noColor
-       size=''
-        />       </div>
-
-       <Typography variant='h2' style={{fontSize:"18px", marginBottom:"8px"}}>
-       Profitez d’un financement simplifié
-              </Typography>
-       <Typography style={{color:"rgba(132, 156, 217, 1)", fontWeight:"bold"}}>
-       Kit le nid vous accompagne dans toutes vos démarches de prêt.
-       </Typography>
-     </Grid>
-   </Grid>
-
-
-   <Grid container>
-     <Grid className={classes.gridPoints}>
-       <div className={classes.numeroPoints}>
-
-       <Icon
-       type='numero4'
-       noColor
-       size=''
-        />       </div>
-
-       <Typography variant='h2' style={{fontSize:"18px", marginBottom:"8px"}}>
-       Personnalisez votre bien avec nos équipes
-       </Typography>
-       <Typography style={{color:"rgba(132, 156, 217, 1)", fontWeight:"bold"}}>
-       Trouvez les meilleures solutions de décoration et d’aménagement pour votre appartement en attendant sa livraison.
-       </Typography>
-     </Grid>
-   </Grid>
-
-
-  </AdminContentWrapper>
+        <Typography
+          variant="h2"
+          style={{ fontSize: '18px', marginBottom: '8px' }}
+        >
+          Personnalisez votre bien avec nos équipes
+        </Typography>
+        <Typography
+          style={{ color: 'rgba(132, 156, 217, 1)', fontWeight: 'bold' }}
+        >
+          Trouvez les meilleures solutions de décoration et d’aménagement pour
+          votre appartement en attendant sa livraison.
+        </Typography>
+      </Grid>
+    </Grid>
+  </>
 );
 
 const Dashboard = ({ classes, user = {}, userSearch, update }) => {
   const [liked, setLiked] = useState(
     user?.bookmarks?.map((elem) => elem._id) || []
   );
-  const isAuth = true;
+  const [showSearch, setShowSearch] = useState(false);
+  const isAuth = user?._id;
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
     addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
@@ -547,7 +629,7 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
     <AdminContentWrapper noRedirect>
       <div className={classes.heading}>
         <div>
-          <img src="static/img/kitlenid_bynexity.png" alt="" />
+          <img src={'static/img/logo-full.png'} alt="" />
         </div>
         <Typography variant="h1">
           {isAuth
@@ -569,12 +651,44 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
           </p>
         </Typography>
       </div>
-      <AuthContext
-        classes={classes}
-        liked={liked}
-        userSearch={userSearch}
-        handleBookmark={handleBookmark}
-      />
+      <div
+        onClick={() => setShowSearch(!showSearch)}
+        style={{
+          border: '2px solid #EFF4FF',
+          background: 'white',
+          height: '55px',
+          borderRadius: '12px',
+          marginTop: '2px',
+          display: 'flex',
+          flexDirection: 'row-reverse',
+        }}
+      >
+        <div
+          style={{
+            background:
+              'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)',
+            width: '39px',
+            height: '39px',
+            borderRadius: '12px',
+            padding: '7px',
+            marginTop: '7px',
+            marginRight: '9px',
+          }}
+        >
+          <Icon type="recherche" color="white" />
+        </div>
+      </div>
+      {isAuth ? (
+        <AuthContext
+          classes={classes}
+          liked={liked}
+          userSearch={userSearch}
+          handleBookmark={handleBookmark}
+        />
+      ) : (
+        <NoAuthDashboard classes={classes} />
+      )}
+      <SearchDrawer showSearch={showSearch} setShowSearch={setShowSearch} />
     </AdminContentWrapper>
   );
 };
@@ -586,26 +700,22 @@ Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-Dashboard.getInitialProps = async ({ req, res }) => {
-  // if (req && !req.user) {
-  //   res.redirect(pageLink.home);
-  //   return { partners: [] };
-  // }
-
+Dashboard.getInitialProps = async ({ req }) => {
   const headers = {};
   if (req && req.headers && req.headers.cookie) {
     headers.cookie = req.headers.cookie;
   }
 
   const { list } = await getPartnersApiMethod({ headers });
-  console.log(list, 'list');
+
   let userSearch = {};
   if (req && req.user) {
-    userSearch = await getUserLatestSearchApiMethod({
-      headers,
-    }).userSearch;
+    userSearch = (
+      await getUserLatestSearchApiMethod({
+        headers,
+      })
+    )?.userSearch;
   }
-  console.log(userSearch, 'userSearch');
   return { partners: list, userSearch };
 };
 const mapState = (state) => {

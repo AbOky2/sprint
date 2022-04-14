@@ -89,7 +89,7 @@ class MyDocument extends Document {
             `,
             }}
           />
-          <script src="assets/web/assets/jquery/jquery.min.js"></script>
+          {/* <script src="assets/web/assets/jquery/jquery.min.js"></script> */}
 
           <script
             dangerouslySetInnerHTML={{
@@ -182,14 +182,14 @@ class MyDocument extends Document {
           ></script>
           <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
           <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
-          <script src="assets/popper/popper.min.js"></script>
+          {/* <script src="assets/popper/popper.min.js"></script>
           <script src="assets/tether/tether.min.js"></script>
           <script src="assets/bootstrap/js/bootstrap.min.js"></script>
           <script src="assets/smoothscroll/smooth-scroll.js"></script>
           <script src="assets/dropdown/js/nav-dropdown.js"></script>
           <script src="assets/dropdown/js/navbar-dropdown.js"></script>
           <script src="assets/theme/js/script.js"></script>
-          <script src="assets/theme/js/custom-map.js"></script>
+          <script src="assets/theme/js/custom-map.js"></script> */}
         </body>
       </Html>
     );

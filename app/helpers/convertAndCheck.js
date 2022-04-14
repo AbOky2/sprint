@@ -1,6 +1,7 @@
 const { format, isBefore, differenceInYears, getQuarter } = require('date-fns');
 
 const isArray = (arr) => Array.isArray(arr);
+const isFn = (fn) => typeof fn === 'function';
 const isObject = (arg) =>
   (typeof arg === 'object' || typeof arg === 'function') && arg !== null;
 const toArr = (arg) => (isArray(arg) ? arg : [arg]);
@@ -114,6 +115,7 @@ const round10 = (val, expo) => {
 };
 
 module.exports = {
+  isFn,
   toArr,
   toDate,
   isMajor,
