@@ -114,6 +114,7 @@ export const BudgetStep = withStyles()(
                 prefix="  "
                 {...inputProps}
                 value={value}
+                focus={true}
                 placeholder="  Budget maximal"
                 onChange={onChange}
                 className={classes.container}

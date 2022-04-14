@@ -65,6 +65,7 @@ export const LocationStep = ({
               }}
               selectProps={{
                 placeholder: 'Location',
+                focus: true,
                 onChange,
                 onInputChange,
                 inputValue,
