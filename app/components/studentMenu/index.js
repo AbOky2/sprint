@@ -45,7 +45,7 @@ const MenuItems = [...MobileItems, sponsorship];
 
 export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [changeName, setChangeName] = useState(false);
   const classes = useStyles();
   const { asPath } = useRouter();
