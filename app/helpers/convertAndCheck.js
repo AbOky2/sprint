@@ -1,3 +1,5 @@
+const { overrideTailwindClasses } = require('tailwind-override');
+
 const { format, isBefore, differenceInYears, getQuarter } = require('date-fns');
 
 const isArray = (arr) => Array.isArray(arr);
@@ -113,8 +115,11 @@ const round10 = (val, expo) => {
   value = value.toString().split('e');
   return +`${value[0]}e${value[1] ? +value[1] + exp : exp}`;
 };
+const clsx = (...classNamesString) =>
+  overrideTailwindClasses(classNamesString.filter(Boolean).join(' '));
 
 module.exports = {
+  clsx,
   isFn,
   toArr,
   toDate,

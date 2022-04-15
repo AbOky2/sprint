@@ -1,4 +1,5 @@
 export * from './Btn';
+export * from './Typo';
 export * from './Icon';
 export * from './Modal';
 export * from './Input';
