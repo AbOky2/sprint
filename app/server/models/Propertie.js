@@ -107,7 +107,7 @@ class PropertieClass extends DBModel {
       }),
       null
     );
-
+    console.log({ docs, typeOfAnnonce });
     const list = {
       ...(cityCoord
         ? {

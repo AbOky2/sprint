@@ -82,26 +82,28 @@ const SearchPage = ({
     pieces = pieces.map((e) => parseInt(e, 10));
     setQueryData({ ...queryData, pieces });
   };
-  const handleSortSelect = () => ({ target: { value } }) => {
-    setSortBy(value);
-    setState(
-      state.sort((a, b) => {
-        if (value === sortByKeys[0]) return +a.price - +b.price;
-        return +b.price - +a.price;
-      })
-    );
-    setQueryData({ ...queryData, sort: value });
-    Router.push(
-      {
-        query: {
-          ...Router.query,
-          sort: value,
+  const handleSortSelect =
+    () =>
+    ({ target: { value } }) => {
+      setSortBy(value);
+      setState(
+        state.sort((a, b) => {
+          if (value === sortByKeys[0]) return +a.price - +b.price;
+          return +b.price - +a.price;
+        })
+      );
+      setQueryData({ ...queryData, sort: value });
+      Router.push(
+        {
+          query: {
+            ...Router.query,
+            sort: value,
+          },
         },
-      },
-      undefined,
-      { shallow: true }
-    );
-  };
+        undefined,
+        { shallow: true }
+      );
+    };
   const handleBookmark = (id) => {
     setLiked(toggleArray(liked, id));
     addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
@@ -120,12 +122,11 @@ const SearchPage = ({
     if (!queryData.maxPrice) queryData.maxPrice = -1;
     if (!queryData.loc) return (queryData.loc = null);
 
-    const {
-      list: { docs, near, zoom, coord, department, ...pageInfo } = {},
-    } = await getPublicPropertiesApiMethod({
-      ...queryData,
-      page,
-    });
+    const { list: { docs, near, zoom, coord, department, ...pageInfo } = {} } =
+      await getPublicPropertiesApiMethod({
+        ...queryData,
+        page,
+      });
 
     setState(docs);
     setAllData({ docs, near, zoom, department, coord });
@@ -162,15 +163,14 @@ const SearchPage = ({
       if (!queryData.maxPrice) queryData.maxPrice = -1;
       if (!queryData.loc) queryData.loc = null;
 
-      const {
-        list: { docs, near, zoom, ...pageInfo } = {},
-      } = await getPropertiesByCoordApiMethod({
-        ...queryData,
-        loc: center,
-        zoom: mapOptions.zoom,
-        box: mapOptions.box,
-        page: 1,
-      });
+      const { list: { docs, near, zoom, ...pageInfo } = {} } =
+        await getPropertiesByCoordApiMethod({
+          ...queryData,
+          loc: center,
+          zoom: mapOptions.zoom,
+          box: mapOptions.box,
+          page: 1,
+        });
       const listId =
         list?.map(({ points = [] }) => points.map((e) => e.id)).flat() || [];
       const newState = docs?.filter((e) => listId.includes(e._id));
@@ -192,7 +192,7 @@ const SearchPage = ({
   }, [makeRequest]);
 
   if (!state) return <NotFound showLink={false} />;
-
+  console.log({ loc, list, state });
   return (
     <AdminContentWrapper noRedirect noPadding>
       <div>

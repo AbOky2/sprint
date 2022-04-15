@@ -66,7 +66,7 @@ const geoQuery = ({
         }
       : { loc: { $ne: null } },
     { price: { $ne: null } },
-    { available: true },
+    // { available: true },
     { typeOfAnnonce },
   ],
 });

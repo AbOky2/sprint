@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import { theme } from '../lib/theme';
 import { wrapper } from '../redux';
 import { Header, Notifier } from 'components';
+import '../static/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 Router.events.on('routeChangeStart', () => {

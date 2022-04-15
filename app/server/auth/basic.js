@@ -119,6 +119,7 @@ const auth = ({ server }) => {
               ? typeOfProperty.split(',')
               : [],
         };
+        console.log(args);
         const { list } = await PropertieModel.publicSearch(args);
         if (user) await UserModel.updateLastSearch(user._id, args);
 

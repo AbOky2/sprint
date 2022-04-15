@@ -1,2 +1,7 @@
 {"level":"error","service":"user-service","timestamp":"2022-04-14T16:03:07.593Z"}
 {"level":"error","service":"user-service","timestamp":"2022-04-14T16:08:25.461Z"}
+{"$clusterTime":{"clusterTime":"7086500814956527617","signature":{"hash":"Bb9EqGx3TDXzWbJB2CSe4J27Us0=","keyId":"7051639548962406402"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7086500814956527617","service":"user-service","timestamp":"2022-04-14T16:42:32.325Z"}
+{"$clusterTime":{"clusterTime":"7086500840726331393","signature":{"hash":"xOPkEd7boU/HbNA1wf8ZMQRX+AE=","keyId":"7051639548962406402"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7086500840726331393","service":"user-service","timestamp":"2022-04-14T16:42:32.367Z"}
+{"$clusterTime":{"clusterTime":"7086500853611233281","signature":{"hash":"u4KBZoAPkWm4wdGG9ZoPfiIBeB0=","keyId":"7051639548962406402"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7086500853611233281","service":"user-service","timestamp":"2022-04-14T16:42:36.624Z"}
+{"$clusterTime":{"clusterTime":"7086500892265938949","signature":{"hash":"NnFPgr1FuFN+VRaNWJh10rn6DwE=","keyId":"7051639548962406402"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7086500892265938949","service":"user-service","timestamp":"2022-04-14T16:42:45.948Z"}
+{"level":"error","service":"user-service","timestamp":"2022-04-14T16:58:02.531Z"}
