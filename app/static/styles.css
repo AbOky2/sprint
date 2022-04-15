@@ -1,6 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  /* Primary */
+  --color-primary: #3679ff;
+  --color-gradient-primary: linear-gradient(
+    180deg,
+    #81a3f9 -0.06%,
+    #3462d8 108.09%
+  );
+
+  /* Secondary */
+  --color-gradient-secondary: linear-gradient(
+    219.21deg,
+    #c399db -0.38%,
+    #5882f7 106.68%
+  );
+  /* Tertiary */
+  --color-tertiary: #849cd9;
+}
 
 html {
   /* font-size: 10px; */

@@ -5,6 +5,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: {
+          DEFAULT: 'var(--color-primary)',
+        },
+        secondary: {
+          DEFAULT: 'var(--color-secondary)',
+        },
+        tertiary: {
+          DEFAULT: 'var(--color-tertiary)',
+        },
+      },
       fontSize: {
         _68: '68px',
         _38: '38px',
