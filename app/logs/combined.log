@@ -37,3 +37,6 @@
 {"level":"error","service":"user-service","timestamp":"2022-04-14T16:58:02.531Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T09:10:27.305Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T09:12:25.477Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-19T14:23:38.466Z"}
+{"level":"error","service":"user-service","timestamp":"2022-04-19T14:25:00.127Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-20T16:21:37.385Z"}
