@@ -221,30 +221,30 @@ const PropertyPage = ({
 
 
 
-
-        <Grid container alignItems="flex-start">
-          <Grid item md={8} xs={12} className={classes.setpsContainer}>
-            <div  style={{borderRadius:"12px", border:"1px solid #EAEFFA", boxSizing:"border-box", padding:"24px", display:'flex', alignItems:'flex-start', flexDirection:'column', marginBottom:'-30px'}}>
-              <Typography variant="h3" style={{color:'rgba(54, 121, 255, 1)', fontWeight:'700', fontSize:'18px', lineHeight:'23px', margin:'8px 0px'}}>À propos de cette résidence</Typography>
-              <Typography variant="body1" style={{color:'#6976A0', fontWeight:"600"}}>
+        <div className='grid'>
+          <div className='grid grid-flow-row md:grid-flow-col'>
+            <div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mt-9 mb-5">
+              <p className="flex-grow-0 flex-shrink-0 w-_295 text-left text-_titre text-2xl font-semibold">
+                À propos de cette résidence</p>
+                <p className="self-stretch flex-grow-0 flex-shrink-0 w-[295px] text-sm font-normal text-left text-[#6976a0] text-_gris">
                 <span
                   dangerouslySetInnerHTML={{ __html: property.description }}
                 />
-              </Typography>
+              </p>
             </div>
             <Sidebar
               isLocation={isLocation}
               property={property}
               classes={classes}
             />
-            <div className={classes.mapContainer} style={{marginTop:'16px', border:'1px solid #EAEFFA'}}>
+            <div className="flex flex-col h-_343 justify-start items-start  gap-2 rounded-2xl bg-white border border-_bordureBleu mt-9 mb-5">
               <Maps loc={property.loc?.coordinates} />
             </div>
-          </Grid>
+          </div>
          
             
              
-        </Grid>
+        </div>
 
       </div>
     </AdminContentWrapper>

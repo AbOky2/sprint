@@ -6,3 +6,7 @@
 {"$clusterTime":{"clusterTime":"7086500892265938949","signature":{"hash":"NnFPgr1FuFN+VRaNWJh10rn6DwE=","keyId":"7051639548962406402"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7086500892265938949","service":"user-service","timestamp":"2022-04-14T16:42:45.948Z"}
 {"level":"error","service":"user-service","timestamp":"2022-04-14T16:58:02.531Z"}
 {"level":"error","service":"user-service","timestamp":"2022-04-19T14:25:00.127Z"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T00:20:38.154Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T00:31:29.746Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T00:56:32.882Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T01:08:08.397Z","value":"[object Object]"}

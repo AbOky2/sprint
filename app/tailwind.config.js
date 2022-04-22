@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        _spaceGrotesk:'Space Grotesk',
+       
+
+      },
       colors: {
         primary: {
           DEFAULT: 'var(--color-primary)',
@@ -15,6 +20,15 @@ module.exports = {
         tertiary: {
           DEFAULT: 'var(--color-tertiary)',
         },
+        _bleuMarine:"#1A2E6C",
+        _grisBleu: "#849CD9",
+        _titre:"#113EB6",
+        _rougeStudea:"#C23D3B",
+        _gris:"#6976A0",
+        _bordureBleu:"#EAEFFA",
+        _pieces:"#0E215C",
+        _switchButton:"#191f2c",
+
       },
       fontSize: {
         _68: '68px',
@@ -44,10 +58,23 @@ module.exports = {
         _1006:'1006px',
         _216:'216px',
         _174:'174px',
+        _53:'53px',
+        _274:'274px',
+        _39:'39px',
+        _264:'264px',
+        _312:'312px',
+        _341:'341px',
+        _23:'23px',
+        _164:'164px',
+
+
+
+
         
 
       },
       height:{
+        _23:'23px',
         _68: '68px',
         _295:'295px',
         _411:"411px",
@@ -59,6 +86,11 @@ module.exports = {
         _402:'402px',
         _601:'601px',
         _120:'120px',
+        _53:'53px',
+        _39:'39px',
+        _46:'46px',
+        _343:'343px',
+
       },
 
       top:{
@@ -82,6 +114,10 @@ module.exports = {
         _814:'814px',
         _1369:'1369px',
         _1229:'1229px',
+        _463:"463px",
+        _413:"413px",
+        _7:"7px",
+        _15:'15px',
         
 
       },
@@ -123,6 +159,11 @@ module.exports = {
         _425:'425px',
         _793:'793px',
         _579:'579px',
+        _295:'295px',
+        _303:'303px',
+        _123:'123px',
+
+
 
 
       }

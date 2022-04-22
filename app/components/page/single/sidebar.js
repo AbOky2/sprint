@@ -97,21 +97,20 @@ const Sidebar = ({ isLocation, property, classes }) => {
       )}
       
       {isLocation && (
-        <div className={classes.fees}>
-          <Typography variant="h3">Frais à prévoir :</Typography>
-          <Typography>
-            Il s’agit de frais uniques, à débourser une seule et unique fois.
-          </Typography>
-          <Typography>
-            Honoraires d’organisation de la visite + Constitution du dossier +
-            Rédaction du bail à la charge du locataire :<span> 502€ TTC</span>
-          </Typography>
-          <Typography>
-            Honoraires de réalisation d'état des lieux à la charge du locataire
-            :<span> 188€ TTC</span>
-          </Typography>
-          <Typography variant="h3">Total des frais : 1284€ TTC</Typography>
-        </div>
+        <div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mt-9 mb-5">
+        <p className="flex-grow-0 flex-shrink-0 w-[295px] font-bold text-left text-[#3679ff] text-_rougeStudea text-2xl">
+          Frais à prevoir:
+        </p>
+        <p className="self-stretch flex-grow-0 flex-shrink-0 w-[295px] text-sm font-normal text-left text-[#6976a0] text-_gris">
+           Il s’agit de frais uniques, à débourser une seule et unique fois.
+     
+         <br/>Honoraires d’organisation de la visite + Constitution du dossier + Rédaction du bail à la charge du locataire : <strong className=' text-_rougeStudea font-semibold'>502€ TTC</strong>
+     
+         <br/>Honoraires de réalisation d’état des lieux à la charge du locataire :<strong className=' text-_rougeStudea font-semibold'> 188€ TTC</strong><br/>
+     
+        <br/>  <strong className=' text-_rougeStudea font-semibold'>Total des frais : 1284€ TTC</strong>
+          </p>
+      </div>
       )}
       
     </div>
