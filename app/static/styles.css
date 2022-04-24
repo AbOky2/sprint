@@ -4,6 +4,7 @@
 :root {
   /* Primary */
   --color-primary: #3679ff;
+  --color-primary-400: #113eb6;
   --color-gradient-primary: linear-gradient(
     180deg,
     #81a3f9 -0.06%,
@@ -11,6 +12,7 @@
   );
 
   /* Secondary */
+  --color-secondary: #3679ff;
   --color-gradient-secondary: linear-gradient(
     219.21deg,
     #c399db -0.38%,

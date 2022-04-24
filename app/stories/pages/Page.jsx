@@ -2,6 +2,14 @@ import { fontWeight } from '@mui/system';
 import React from 'react';
 import { Typo } from '../../components/form/Typo';
 
+const Offers = [
+  {
+    icon: '',
+    title: '',
+    subTitle: '',
+  },
+];
+
 export const Page = () => {
   const [user, setUser] = React.useState();
 
@@ -745,6 +753,9 @@ Deroulement Studea
         <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
           Être rappelé selon mes dispos
         </p>
+      </div>
+      <div>
+        <Typo variant="h2">Des logements dans toute la France</Typo>
       </div>
     </div>
     <div className="flex justify-end items-center w-_664 absolute left-_569 top-_987 gap-3 p-4 rounded-xl bg-white border border-blue-500">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typo, TypoTypesList } from '../../components/form/Typo';
+import { Typo, TypoVariantsList } from '../../components/form/Typo';
 
 export default {
   title: 'Ui/Typo',
@@ -10,7 +10,7 @@ export default {
 };
 
 const Template = () =>
-  TypoTypesList.map((type) => (
+  TypoVariantsList.map((type) => (
     <div>
       <Typo type={type} className="mb-4 capitalize">
         {type}
