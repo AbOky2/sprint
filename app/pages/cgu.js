@@ -14,7 +14,6 @@ export default function Cgu() {
 
 
  
-{/*Menu-------
 <div>
   <div className='my-8'>
   <p className="w-_341 text-xl font-light text-_titre">
@@ -287,7 +286,7 @@ Pour être éligible au PTZ : il doit s’agir de votre premier achat en réside
 </div>
 
 
-</div>*/}
+</div>
 
 
 
@@ -298,7 +297,7 @@ Pour être éligible au PTZ : il doit s’agir de votre premier achat en réside
 
 
 
-{/*
+
  Deroulement
 
 <div className="flex flex-col space-x-3 items-start justify-center p-4 bg-white border rounded-xl border-blue-500 w-96">
@@ -380,12 +379,12 @@ Pour être éligible au PTZ : il doit s’agir de votre premier achat en réside
     </p>
   </div>
 
-</div>*/}
+</div>
 
 
 
 
-{/*
+
 Deroulement Studea
 
 <div className="flex flex-col space-x-3 items-start justify-center p-4 bg-white border rounded-xl border-_rougeStudea w-96">
@@ -466,7 +465,7 @@ Deroulement Studea
     </p>
   </div>
 
-</div> */}
+</div> 
 
 
 
@@ -474,7 +473,7 @@ Deroulement Studea
 
 
 
-{/*
+
 <div className="px-4">
   <div className="flex justify-center items-start x-_388 h-_808 relative gap-3 p-4 rounded-xl bg-white border border-gray-400 mb-4">
     <p className="flex-grow w-_259 text-sm font-bold text-left text-blue-500">
@@ -607,7 +606,7 @@ Deroulement Studea
   
 </div>
 
- */}
+ 
 
 
 
@@ -620,7 +619,7 @@ Deroulement Studea
 
 
 
-{/*Bien Desktop
+Bien Desktop
 <div>
   <div className=" w-_536 h-_175">
     <p className="absolute left-_584 top-_736 text-2xl font-bold">
@@ -943,7 +942,7 @@ Deroulement Studea
 </div>;
 
 
-*/}
+
 
 
 
@@ -952,7 +951,7 @@ Deroulement Studea
 
 
  
- {/* Bien
+ Bien
  
 <div className=''>
  <p className="text-[48px] text-left text-blue-500 font-bold text-3xl"
@@ -1131,9 +1130,9 @@ Deroulement Studea
 </div>
  
  
- */}
 
-{/*
+
+
 Bien Studea
 
 <div className=''>
@@ -1217,12 +1216,12 @@ Bien Studea
      </p>
  </div>
 
-</div> */}
+</div> 
  
  
  
  
-{/*Recherce 
+Recherce 
    <div className="relative p-4">
      <div>
        <img src='./static/img/logo.png'/>
@@ -1264,7 +1263,7 @@ Bien Studea
          Nb de pièce     
        </button>
     </div>
-   </div> */}  
+   </div> 
 
 
 

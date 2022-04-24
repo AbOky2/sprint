@@ -15,19 +15,21 @@ const BtnCalendly = () => (
 
 const Extras = ({ advantages = [] }) => (
   <>
-    <Typography variant="h2" style={{fontFamily:'space grotesk', fontWeight:'bold', textAlign:'center'}}>Les petits plus </Typography>
-    <Grid container>
+  <p className="flex-grow-0 flex-shrink-0 w-[295px] font-bold text-left text-[#3679ff] text-_rougeStudea text-2xl">
+Les petits plus </p>
+<div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mt-9 mb-5">
       {advantages.map((elem) => (
-        <Grid key={elem} container item alignItems="center">
+        <div key={elem} alignItems="center">
           <Icon
             type="checked"
-            color="newBlue"
+            color='newRed'
+            
             customSize={{ width: 20, height: 20 }}
           />
-          <Typography>{elem}</Typography>
-        </Grid>
+          <p>{elem}</p>
+        </div>
       ))}
-    </Grid>
+    </div>
   </>
 );
 const currIcons = ['bus', 'rer', 'tramway', 'metro'];
@@ -50,7 +52,16 @@ const Sidebar = ({ isLocation, property, classes }) => {
             showExtra ? classes.transportationsWithExtra : ''
           )}
         >
-          <Typography variant="h2" style={{fontWeight:'bold', textAlign:"center", lineHeight:'23px', fontSize:'18px', display:'flex', alignItems:'flex-start', margin:'8px 0px', padding:'24px 24px 24px 56px'}}>Transports à proximité</Typography>
+        {isLocation ? (
+            <p className="flex-grow-0 flex-shrink-0 w-[295px] text-2xl font-bold text-center text-_rougeStudea mb-5">
+            Transports à proximité</p>
+        ): (
+          <p className="flex-grow-0 flex-shrink-0 w-[295px] text-2xl font-bold text-center text-_aPropos mb-5">
+          Transports à proximité</p>
+
+        )}
+       
+
           <Grid container justify="flex-start">
             {Object.keys(transportations)
               .sort((a, b) => a < b)

@@ -26,7 +26,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
     const conditionalColumn = hasReduction ? 1 : 2;
 
     return (
-      <div key={elem}  style={{border:'1px solid #3679FF', borderRadius:'12px',  background:'white', boxSizing:'border-box', marginBottom:'16px'}}>
+      <div key={elem} className="flex flex-col space-x-3 items-start justify-center p-4 bg-white border rounded-xl border-_aPropos w-96 mb-4">
         <Grid
           container
           className="pointer"
@@ -164,40 +164,42 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                           <strong>{`${price}€`}</strong>
                         </Grid>
                       )}
-                      <Grid container justify="space-between">
-                        <span>Prix TVA 20%</span>
-                        <strong>{vatPrice}</strong>
-                      </Grid>
-                      <Grid container justify="space-between">
-                        <span>Surface</span>
-                        <span>{`${curr.surface}m²`}</span>
-                      </Grid>
-                      <Grid container justify="space-between">
-                        <span>Étage</span>
-                        <span>{floor}</span>
-                      </Grid>
-                      <Grid container justify="space-between">
-                        <span>Orientation</span>
-                        <span>{orientation}</span>
-                      </Grid>
-                      <Grid container justify="space-between">
-                        <span>Parking</span>
-                        <span>{parking}</span>
-                      </Grid>
-
+                      <div className='flex flex-row  mb-4'>
+                            <p className="w-44 h-5 text-xl font-medium">Prix TVA 20%</p>
+                            <p className="w-44 h-5 text-xl font-medium">{vatPrice}</p>
+                      </div>
+                      <div className='flex flex-row  mb-4'>
+                            <p className="w-44 h-5 text-xl font-medium">Surface</p>
+                            <p className="w-44 h-5 text-xl font-medium">{`${curr.surface}m²`}</p>
+                      </div>
+                      <div className='flex flex-row  mb-4'>
+                            <p className="w-44 h-5 text-xl font-medium">Étage</p>
+                            <p className="w-44 h-5 text-xl font-medium">{floor}</p>
+                      </div>
+                      <div className='flex flex-row  mb-4'>
+                            <p className="w-44 h-5 text-xl font-medium">Orientation</p>
+                            <p className="w-44 h-5 text-xl font-medium">{orientation}</p>
+                      </div>
+                      <div className='flex flex-row  mb-4'>
+                            <p className="w-44 h-5 text-xl font-medium">Parking</p>
+                            <p className="w-44 h-5 text-xl font-medium">{parking}</p>
+                      </div>
+                      
+                      
+        
                       <Grid
                         item
                         className={classes.btnContainer}
                       >
-                        <Btn
-                          text={curr.file ? 'Telecharger le plan en 2D' : '-'}
-                          whiteColor
-                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
-                          download
-                          
-                          
-                          disabled={!curr.file}
-                        />
+                        
+                        <a
+                              className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-10 mt-8" href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                              style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }}
+                            >
+                              <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
+                                {curr.file ? 'Telecharger le plan en 2D' : '-'}
+                              </p>
+                            </a>
                       </Grid>
                     </Grid>
                     <Grid

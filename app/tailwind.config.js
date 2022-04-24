@@ -28,6 +28,7 @@ module.exports = {
         _bordureBleu:"#EAEFFA",
         _pieces:"#0E215C",
         _switchButton:"#191f2c",
+        _aPropos : "#3679FF",
 
       },
       fontSize: {
