@@ -164,28 +164,30 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                           <strong>{`${price}€`}</strong>
                         </Grid>
                       )}
-                      <div className='flex flex-row  mb-4'>
-                            <p className="w-44 h-5 text-xl font-medium">Prix TVA 20%</p>
-                            <p className="w-44 h-5 text-xl font-medium">{vatPrice}</p>
+                   <div className='flex flex-col items-center md:items-end w-full'>
+
+                      <div className='flex flex-row justify-between mb-1'>
+                            <p className="w-44 h-5 text-sm font-medium">Prix TVA 20%</p>
+                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{vatPrice}</p>
                       </div>
-                      <div className='flex flex-row  mb-4'>
-                            <p className="w-44 h-5 text-xl font-medium">Surface</p>
-                            <p className="w-44 h-5 text-xl font-medium">{`${curr.surface}m²`}</p>
+                      <div className='flex flex-row justify-between mb-1'>
+                            <p className="w-44 h-5 text-sm font-medium">Surface</p>
+                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{`${curr.surface}m²`}</p>
                       </div>
-                      <div className='flex flex-row  mb-4'>
-                            <p className="w-44 h-5 text-xl font-medium">Étage</p>
-                            <p className="w-44 h-5 text-xl font-medium">{floor}</p>
+                      <div className='flex flex-row justify-between mb-1'>
+                            <p className="w-44 h-5 text-sm font-medium">Étage</p>
+                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{floor}</p>
                       </div>
-                      <div className='flex flex-row  mb-4'>
-                            <p className="w-44 h-5 text-xl font-medium">Orientation</p>
-                            <p className="w-44 h-5 text-xl font-medium">{orientation}</p>
+                      <div className='flex flex-row justify-between mb-1'>
+                            <p className="w-44 h-5 text-sm font-medium">Orientation</p>
+                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{orientation}</p>
                       </div>
-                      <div className='flex flex-row  mb-4'>
-                            <p className="w-44 h-5 text-xl font-medium">Parking</p>
-                            <p className="w-44 h-5 text-xl font-medium">{parking}</p>
+                      <div className='flex flex-row justify-between mb-1'>
+                            <p className="w-44 h-5 text-sm font-medium">Parking</p>
+                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{parking}</p>
                       </div>
                       
-                      
+                  </div>
         
                       <Grid
                         item

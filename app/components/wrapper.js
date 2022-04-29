@@ -26,10 +26,10 @@ const redirectStyle = (theme) => ({
       border: `1px solid ${theme.palette.newBlue}`,
       borderWidth: '0 2px 2px 0',
       display: 'inline-block',
-      padding: '3px',
-      marginRight: '1rem',
+      padding: '5px',
       transform: 'rotate(135deg);-webkit-transform: rotate(135deg)',
-      marginLeft:"1.2rem"
+      marginLeft:"12px",
+      marginBottom:"7px"
     },
   },
 });

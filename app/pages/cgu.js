@@ -457,9 +457,7 @@ Deroulement Studea
 <p className="w-44 h-5 text-xs font-medium">-</p></div>
 
 
-<div
-    className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-10 mt-8 bg-_rougeStudea"
-  >
+<div className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-10 mt-8 bg-_rougeStudea" >
     <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
       Réserver
     </p>
@@ -604,6 +602,355 @@ Deroulement Studea
     </p>
   </div>
   
+
+  <div>
+  <img
+    src="ralph-ravi-kayden-2d4laqalbda-unsplash.jpeg"
+    className="w-[382px] h-[266px] object-cover"
+  />
+  <svg
+    width={56}
+    height={56}
+    viewBox="0 0 56 56"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-9 h-9 relative"
+    preserveAspectRatio="none"
+  >
+    <g filter="url(#filter0_dd_535_5156)">
+      <circle cx={28} cy={20} r={18} fill="white" />
+    </g>
+    <path
+      d="M28 28L27.5134 28.8736C27.8159 29.0421 28.1841 29.0421 28.4866 28.8736L28 28ZM28 15.1622L27.0797 15.5533C27.2365 15.9225 27.5989 16.1622 28 16.1622C28.4011 16.1622 28.7635 15.9225 28.9203 15.5533L28 15.1622ZM18 16.9723C18 20.4457 20.5603 23.4617 22.8347 25.4884C24.0037 26.5302 25.1681 27.3728 26.0381 27.9542C26.474 28.2456 26.8385 28.473 27.0958 28.6286C27.2246 28.7064 27.3267 28.7664 27.3977 28.8076C27.4332 28.8281 27.461 28.844 27.4805 28.8551C27.4902 28.8606 27.4979 28.8649 27.5034 28.868C27.5061 28.8696 27.5084 28.8708 27.51 28.8717C27.5109 28.8722 27.5116 28.8726 27.5121 28.8729C27.5124 28.8731 27.5127 28.8733 27.5129 28.8733C27.5132 28.8735 27.5134 28.8736 28 28C28.4866 27.1264 28.4868 27.1265 28.4869 27.1265C28.4869 27.1265 28.487 27.1266 28.487 27.1266C28.4871 27.1266 28.4869 27.1266 28.4867 27.1264C28.4862 27.1261 28.4851 27.1256 28.4836 27.1247C28.4804 27.1229 28.4752 27.12 28.4679 27.1158C28.4533 27.1075 28.4305 27.0945 28.4001 27.0769C28.3393 27.0417 28.2481 26.9881 28.1307 26.9172C27.8959 26.7751 27.5572 26.5639 27.1494 26.2914C26.3319 25.745 25.2463 24.9585 24.1653 23.9953C21.9397 22.012 20 19.5141 20 16.9723H18ZM28.9203 14.7711C27.7391 11.9915 25.0468 10.7046 22.607 11.057C21.3826 11.2339 20.2163 11.8255 19.359 12.8473C18.4989 13.8723 18 15.2691 18 16.9723H20C20 15.668 20.3761 14.7465 20.891 14.1329C21.4087 13.5159 22.1174 13.1485 22.893 13.0365C24.4532 12.8111 26.2609 13.6266 27.0797 15.5533L28.9203 14.7711ZM36 16.9723C36 19.5141 34.0603 22.012 31.8347 23.9953C30.7537 24.9585 29.6681 25.745 28.8506 26.2914C28.4428 26.5639 28.1041 26.7751 27.8693 26.9172C27.7519 26.9881 27.6607 27.0417 27.5999 27.0769C27.5695 27.0945 27.5467 27.1075 27.5321 27.1158C27.5248 27.12 27.5196 27.1229 27.5164 27.1247C27.5149 27.1256 27.5138 27.1261 27.5133 27.1264C27.5131 27.1266 27.5129 27.1266 27.513 27.1266C27.513 27.1266 27.5131 27.1265 27.5131 27.1265C27.5132 27.1265 27.5134 27.1264 28 28C28.4866 28.8736 28.4868 28.8735 28.4871 28.8733C28.4873 28.8733 28.4876 28.8731 28.4879 28.8729C28.4884 28.8726 28.4891 28.8722 28.49 28.8717C28.4916 28.8708 28.4939 28.8696 28.4966 28.868C28.5021 28.8649 28.5098 28.8606 28.5195 28.8551C28.539 28.844 28.5668 28.8281 28.6023 28.8076C28.6733 28.7664 28.7754 28.7064 28.9042 28.6286C29.1615 28.473 29.526 28.2456 29.9619 27.9542C30.8319 27.3728 31.9963 26.5302 33.1653 25.4884C35.4397 23.4617 38 20.4457 38 16.9723H36ZM28.9203 15.5533C29.7391 13.6266 31.5468 12.8111 33.107 13.0365C33.8826 13.1485 34.5913 13.5159 35.109 14.1329C35.6239 14.7465 36 15.668 36 16.9723H38C38 15.2691 37.5011 13.8723 36.641 12.8473C35.7837 11.8255 34.6174 11.2339 33.393 11.057C30.9532 10.7046 28.2609 11.9915 27.0797 14.7711L28.9203 15.5533Z"
+      fill="url(#paint0_linear_535_5156)"
+    />
+    <defs>
+      <filter
+        id="filter0_dd_535_5156"
+        x={0}
+        y={0}
+        width={56}
+        height={56}
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feflood flood-opacity={0} result="BackgroundImageFix" />
+        <fecolormatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <femorphology
+          radius={6}
+          operator="erode"
+          in="SourceAlpha"
+          result="effect1_dropShadow_535_5156"
+        />
+        <feoffset dy={8} />
+        <fegaussianblur stdDeviation={8} />
+        <fecolormatrix
+          type="matrix"
+          values="0 0 0 0 0.0941176 0 0 0 0 0.152941 0 0 0 0 0.294118 0 0 0 0.08 0"
+        />
+        <feblend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_535_5156" />
+        <fecolormatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <femorphology
+          radius={6}
+          operator="erode"
+          in="SourceAlpha"
+          result="effect2_dropShadow_535_5156"
+        />
+        <feoffset dy={6} />
+        <fegaussianblur stdDeviation={4} />
+        <fecolormatrix
+          type="matrix"
+          values="0 0 0 0 0.0941176 0 0 0 0 0.152941 0 0 0 0 0.294118 0 0 0 0.12 0"
+        />
+        <feblend
+          mode="normal"
+          in2="effect1_dropShadow_535_5156"
+          result="effect2_dropShadow_535_5156"
+        />
+        <feblend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow_535_5156"
+          result="shape"
+        />
+      </filter>
+      <lineargradient
+        id="paint0_linear_535_5156"
+        x1={28}
+        y1="11.2059"
+        x2={28}
+        y2="29.2941"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0.0434107" stop-color="#81A3F9" />
+        <stop offset={1} stop-color="#3462D8" />
+      </lineargradient>
+    </defs>
+  </svg>
+  <svg
+    width={56}
+    height={56}
+    viewBox="0 0 56 56"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-9 h-9 relative"
+    preserveAspectRatio="none"
+  >
+    <g filter="url(#filter0_dd_535_5157)">
+      <circle cx={28} cy={20} r={18} fill="white" />
+    </g>
+    <path
+      d="M34 29C35.6569 29 37 27.6569 37 26C37 24.3431 35.6569 23 34 23C32.3431 23 31 24.3431 31 26C31 27.6569 32.3431 29 34 29Z"
+      stroke="url(#paint0_linear_535_5157)"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M25 21.5L31 24.5"
+      stroke="url(#paint1_linear_535_5157)"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M22 23C23.6569 23 25 21.6569 25 20C25 18.3431 23.6569 17 22 17C20.3431 17 19 18.3431 19 20C19 21.6569 20.3431 23 22 23Z"
+      stroke="url(#paint2_linear_535_5157)"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M31 15.5L25 18.5"
+      stroke="url(#paint3_linear_535_5157)"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M34 17C35.6569 17 37 15.6569 37 14C37 12.3431 35.6569 11 34 11C32.3431 11 31 12.3431 31 14C31 15.6569 32.3431 17 34 17Z"
+      stroke="url(#paint4_linear_535_5157)"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <defs>
+      <filter
+        id="filter0_dd_535_5157"
+        x={0}
+        y={0}
+        width={56}
+        height={56}
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feflood flood-opacity={0} result="BackgroundImageFix" />
+        <fecolormatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <femorphology
+          radius={6}
+          operator="erode"
+          in="SourceAlpha"
+          result="effect1_dropShadow_535_5157"
+        />
+        <feoffset dy={8} />
+        <fegaussianblur stdDeviation={8} />
+        <fecolormatrix
+          type="matrix"
+          values="0 0 0 0 0.0941176 0 0 0 0 0.152941 0 0 0 0 0.294118 0 0 0 0.08 0"
+        />
+        <feblend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_535_5157" />
+        <fecolormatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <femorphology
+          radius={6}
+          operator="erode"
+          in="SourceAlpha"
+          result="effect2_dropShadow_535_5157"
+        />
+        <feoffset dy={6} />
+        <fegaussianblur stdDeviation={4} />
+        <fecolormatrix
+          type="matrix"
+          values="0 0 0 0 0.0941176 0 0 0 0 0.152941 0 0 0 0 0.294118 0 0 0 0.12 0"
+        />
+        <feblend
+          mode="normal"
+          in2="effect1_dropShadow_535_5157"
+          result="effect2_dropShadow_535_5157"
+        />
+        <feblend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow_535_5157"
+          result="shape"
+        />
+      </filter>
+      <lineargradient
+        id="paint0_linear_535_5157"
+        x1={34}
+        y1="22.7022"
+        x2={34}
+        y2="29.4853"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0.0434107" stop-color="#81A3F9" />
+        <stop offset={1} stop-color="#3462D8" />
+      </lineargradient>
+      <lineargradient
+        id="paint1_linear_535_5157"
+        x1={28}
+        y1="21.3511"
+        x2={28}
+        y2="24.7426"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0.0434107" stop-color="#81A3F9" />
+        <stop offset={1} stop-color="#3462D8" />
+      </lineargradient>
+      <lineargradient
+        id="paint2_linear_535_5157"
+        x1={22}
+        y1="16.7022"
+        x2={22}
+        y2="23.4853"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0.0434107" stop-color="#81A3F9" />
+        <stop offset={1} stop-color="#3462D8" />
+      </lineargradient>
+      <lineargradient
+        id="paint3_linear_535_5157"
+        x1={28}
+        y1="15.3511"
+        x2={28}
+        y2="18.7426"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0.0434107" stop-color="#81A3F9" />
+        <stop offset={1} stop-color="#3462D8" />
+      </lineargradient>
+      <lineargradient
+        id="paint4_linear_535_5157"
+        x1={34}
+        y1="10.7022"
+        x2={34}
+        y2="17.4853"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0.0434107" stop-color="#81A3F9" />
+        <stop offset={1} stop-color="#3462D8" />
+      </lineargradient>
+    </defs>
+  </svg>
+  <svg
+    width={56}
+    height={56}
+    viewBox="0 0 56 56"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-9 h-9 relative"
+    preserveAspectRatio="none"
+  >
+    <g filter="url(#filter0_dd_535_5158)">
+      <circle cx={28} cy={20} r={18} fill="white" />
+    </g>
+    <path
+      d="M30.2929 27.7071C30.6834 28.0976 31.3166 28.0976 31.7071 27.7071C32.0976 27.3166 32.0976 26.6834 31.7071 26.2929L30.2929 27.7071ZM24 20L23.2929 19.2929C22.9024 19.6834 22.9024 20.3166 23.2929 20.7071L24 20ZM31.7071 13.7071C32.0976 13.3166 32.0976 12.6834 31.7071 12.2929C31.3166 11.9024 30.6834 11.9024 30.2929 12.2929L31.7071 13.7071ZM31.7071 26.2929L24.7071 19.2929L23.2929 20.7071L30.2929 27.7071L31.7071 26.2929ZM24.7071 20.7071L31.7071 13.7071L30.2929 12.2929L23.2929 19.2929L24.7071 20.7071Z"
+      fill="url(#paint0_linear_535_5158)"
+    />
+    <defs>
+      <filter
+        id="filter0_dd_535_5158"
+        x={0}
+        y={0}
+        width={56}
+        height={56}
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feflood flood-opacity={0} result="BackgroundImageFix" />
+        <fecolormatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <femorphology
+          radius={6}
+          operator="erode"
+          in="SourceAlpha"
+          result="effect1_dropShadow_535_5158"
+        />
+        <feoffset dy={8} />
+        <fegaussianblur stdDeviation={8} />
+        <fecolormatrix
+          type="matrix"
+          values="0 0 0 0 0.0941176 0 0 0 0 0.152941 0 0 0 0 0.294118 0 0 0 0.08 0"
+        />
+        <feblend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_535_5158" />
+        <fecolormatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <femorphology
+          radius={6}
+          operator="erode"
+          in="SourceAlpha"
+          result="effect2_dropShadow_535_5158"
+        />
+        <feoffset dy={6} />
+        <fegaussianblur stdDeviation={4} />
+        <fecolormatrix
+          type="matrix"
+          values="0 0 0 0 0.0941176 0 0 0 0 0.152941 0 0 0 0 0.294118 0 0 0 0.12 0"
+        />
+        <feblend
+          mode="normal"
+          in2="effect1_dropShadow_535_5158"
+          result="effect2_dropShadow_535_5158"
+        />
+        <feblend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect2_dropShadow_535_5158"
+          result="shape"
+        />
+      </filter>
+      <lineargradient
+        id="paint0_linear_535_5158"
+        x1="27.5"
+        y1="12.3051"
+        x2="27.5"
+        y2="28.1324"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop offset="0.0434107" stop-color="#81A3F9" />
+        <stop offset={1} stop-color="#3462D8" />
+      </lineargradient>
+    </defs>
+  </svg>
+</div>;
 </div>
 
  
@@ -1136,8 +1483,8 @@ Bien Desktop
 Bien Studea
 
 <div className=''>
- <p className="text-[48px] text-left text-_rougeStudea font-bold text-3xl font-_spaceGrotesk"
- >Studea Joinville Centre</p>
+ <p className="text-[48px] text-left text-_rougeStudea font-bold text-3xl font-_spaceGrotesk">
+   Studea Joinville Centre</p>
  
  <p className="text-sm font-medium text-left text-_gris">40 rue de Paris, 94340 Joinville-le-Pont, France</p>
  
@@ -1150,9 +1497,7 @@ Bien Studea
  
  </div>
  
- <div
-   className="flex justify-center items-center w-[343px] relative gap-2.5 px-[120px] py-4 rounded-xl bg-_rougeStudea"
- >
+ <div className="flex justify-center items-center w-[343px] relative gap-2.5 px-[120px] py-4 rounded-xl bg-_rougeStudea">
    <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white font-_spaceGrotesk">
      Déposer mon dossier
    </p>
@@ -1302,8 +1647,7 @@ Recherche Studea
        </div>
         
         <div className=" w-_164 h-_46 relative">
-          <div className=" w-_164 h-_39 -left-0.5 -top-0.5 rounded-xl bg-_switchButton flex flex-row my-96 mx-36">
-                    
+           <div className=" w-_164 h-_39 -left-0.5 -top-0.5 rounded-xl bg-_switchButton flex flex-row my-96 mx-36">
                     <div>
                     <svg
                       width={24}
@@ -1336,10 +1680,9 @@ Recherche Studea
                         stroke-linejoin="round"
                       />
                     </svg></div>
-                    
-          <div>
+                   <div>
                   <p className="left-4 top-3 text-sm font-bold text-white text-center p-2 mx-4">Mode carte</p>
-          </div>
+                </div>
         </div>
         </div>
      

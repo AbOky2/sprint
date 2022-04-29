@@ -20,3 +20,7 @@
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T15:20:28.803Z","value":"[object Object]"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T15:55:36.789Z","value":"[object Object]"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T17:03:37.948Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-28T12:06:13.598Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"ralph-ravi-kayden-2d4laqalbda-unsplash.jpeg\"","timestamp":"2022-04-28T12:31:41.911Z","value":"ralph-ravi-kayden-2d4laqalbda-unsplash.jpeg"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-28T13:18:36.655Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-29T16:28:10.671Z","value":"[object Object]"}

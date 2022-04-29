@@ -6,11 +6,17 @@ import { Icon, Btn } from 'components';
 import { tranportationsKeys, individualAdvantages } from 'helpers';
 
 const BtnCalendly = () => (
-  <Btn
-    text="Être rappelé selon mes dispos"
-    alignRight
+  
+  
+  <div
+    className="flex justify-center items-center relative gap-2.5 py-4 rounded-xl mb-1 mt-8 cursor-pointer"
     onClick={() => openPopupWidget({ url: 'https://calendly.com/kitlenid' })}
-  />
+
+    style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }}
+  >
+    <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
+    Être rappelé selon mes dispos </p>
+  </div>
 );
 
 const Extras = ({ advantages = [] }) => (
@@ -44,14 +50,10 @@ const Sidebar = ({ isLocation, property, classes }) => {
   const toggleExtra = () => setShowExtra(!showExtra);
 
   return (
-    <div className={classes.extraContainer}>
+    <div>
       {Object.keys(transportations).length ? (
-        <div
-          className={clsx(
-            classes.transportations,
-            showExtra ? classes.transportationsWithExtra : ''
-          )}
-        >
+        
+        <div className="flex flex-col justify-center items-center relative gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mb-5 mt-12">
         {isLocation ? (
             <p className="flex-grow-0 flex-shrink-0 w-[295px] text-2xl font-bold text-center text-_rougeStudea mb-5">
             Transports à proximité</p>
@@ -108,7 +110,7 @@ const Sidebar = ({ isLocation, property, classes }) => {
       )}
       
       {isLocation && (
-        <div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mt-9 mb-5">
+        <div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mb-5">
         <p className="flex-grow-0 flex-shrink-0 w-[295px] font-bold text-left text-[#3679ff] text-_rougeStudea text-2xl">
           Frais à prevoir:
         </p>

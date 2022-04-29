@@ -66,3 +66,9 @@ export { default as numero4 } from './4.svg';
 export { default as recherche } from './rechercheButtom.svg';
 export { default as leK } from './leK.svg';
 export { default as NexityLogo } from './NexityLogo.svg';
+export { default as LogoVV } from './LogoVV.svg';
+export { default as Decouverte } from './Decouverte.svg';
+export { default as House } from './House1.svg';
+export { default as carte } from './carteV2.svg';
+export { default as liste } from './listV2.svg';
+

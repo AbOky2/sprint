@@ -91,21 +91,28 @@ const PropertyPage = ({
           <Grid
            
             className={clsx(classes.save, liked ? classes.saved : '')}
-            style={{display:'flex', flexDirection:'row-reverse', position:"absolute", top:"64px", left:'380px'}}
+            style={{display:'flex', flexDirection:'row-reverse', justifyContent:"end"}}
           >
-            <div onClick={handleBookmark} style={{display:'flex', flexDirection:'row-reverse', background:"transparent"}}>
-              <div style={{backgroundColor:'white', width:"30px", height:"30px", borderRadius:"50%", padding:'7px'}}>
+            <div onClick={handleBookmark} 
+            className="flex flex-row-reverse  mr-4 "
+            style={{ top:'-83%'}}
+            >
+
+              <div
+              className=' bg-white rounded-full w-9 h-9 py-2 px-1.5'>
               <Icon
                 type="heart"
-                size='small'
+                size='large'
                 color={liked ? 'newBlue' : 'white'}
                 strokeColor={liked ? 'newBlue' : 'newBlue'}
               /></div>
-              <div style={{backgroundColor:'white', width:"30px", height:"30px", borderRadius:"50%", padding:'2px', marginRight:'8px'}}>
+              <div 
+              className=' bg-white rounded-full w-9 h-9 py-1.5 px-1 justify-between mx-2'>
               <Icon
               type="partageV2"
               noColor
               />
+              
               </div>
 
             </div>
@@ -170,7 +177,7 @@ const PropertyPage = ({
               {isLocation ? (
                 ''
               ) : (
-                <p className="w-[191px] h-2.5 text-sm font-medium text-[#6976a0] text-center text-gray-500 mt-2">
+                <p className="w-[191px] h-2.5 text-sm font-medium text-center text-_gris">
                 ou appeler le 06 65 07 11 66
                 </p>
               )}
