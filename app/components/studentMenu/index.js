@@ -11,6 +11,7 @@ import { UpdateProfile } from 'components';
 import { Icon, Btn, Modal } from '../form';
 import useStyles from './styles';
 import { Authentification } from 'components/authentification';
+import {Partenaires} from 'components/Partenaires/index';
 
 const MobileItems = [
   {
@@ -41,16 +42,27 @@ const sponsorship = {
   iconProps: { type: 'mobileSponsorship' },
   txt: 'Parrainage',
 };
+
+const partenaires = {
+  //href: '/dashboard/demo2',
+  iconProps: { type: 'mobileSponsorship' },
+  txt: 'Partenaires',
+};
+
+
 const MenuItems = [...MobileItems, sponsorship];
 
 export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showModal1, setShowModal1] = useState(false);
   const [changeName, setChangeName] = useState(false);
   const classes = useStyles();
   const { asPath } = useRouter();
   const toggleMenu = () => setShowMenu(!showMenu);
   const toggleModal = () => setShowModal(!showModal);
+  const toggleModal1 = () => setShowModal1(!showModal);
+
   const handleSumbit = () => console.log('submit');
 
   return (
@@ -64,7 +76,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
         let { href, txt, singleType, iconProps } = props;
         if (!user._id) {
           if (href === '/dashboard/bookmark') return null;
-          txt = 'Connexion';
+          txt = 'Recherche';
         }
 
         return (
@@ -106,6 +118,20 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
                   <span>{sponsorship.txt}</span>
                 </a>
               </Link>
+            <br/>
+              <div>
+                <a
+                onClick={toggleModal1}
+                  className={
+                    asPath === partenaires.href ||
+                    asPath.includes(partenaires.href)
+                      ? classes.mobileDrawerActiveMobile
+                      : null
+                  }
+                >
+                  <span>{partenaires.txt}</span>
+                </a>
+              </div>
             </div>
             <UpdateProfile
               text="Mon compte"
@@ -138,6 +164,19 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
         // confirmText="Enregistrer"
       >
         <Authentification setChangeName={setChangeName} />
+      </Modal>
+
+
+      <Modal
+        openModal={showModal1}
+        onClose={toggleModal1}
+        onClick={handleSumbit}
+        showActions={false}
+        title='Partenaires'
+   
+        // confirmText="Enregistrer"
+      >
+        <Partenaires />
       </Modal>
     </Grid>
   );

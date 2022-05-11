@@ -24,3 +24,12 @@
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"ralph-ravi-kayden-2d4laqalbda-unsplash.jpeg\"","timestamp":"2022-04-28T12:31:41.911Z","value":"ralph-ravi-kayden-2d4laqalbda-unsplash.jpeg"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-28T13:18:36.655Z","value":"[object Object]"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-29T16:28:10.671Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-05-09T08:10:32.563Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-05-09T08:10:54.261Z","value":"[object Object]"}
+{"level":"error","service":"user-service","timestamp":"2022-05-10T12:06:07.925Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-10T12:06:54.395Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-10T13:40:48.675Z"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"${elem._id}\"","timestamp":"2022-05-10T15:44:50.313Z","value":"${elem._id}"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"image-88-2.png\"","timestamp":"2022-05-10T15:46:25.835Z","value":"image-88-2.png"}
+{"level":"error","service":"user-service","timestamp":"2022-05-10T15:46:25.853Z"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"image-88-2.png\"","timestamp":"2022-05-10T15:47:04.634Z","value":"image-88-2.png"}

@@ -291,7 +291,8 @@ const AuthContext = ({
   userSearch = {},
   handleBookmark,
 }) => (
-  <div className={classes.authContext}>
+  <div className={classes.authContext}
+  >
     <Typography variant="h2">Vos recherches récentes</Typography>
     {userSearch.lastSearch
       ?.slice(0, 3)
@@ -321,7 +322,8 @@ const AuthContext = ({
           </a>
         </Link>
       ))}
-    <div className={classes.lastViewdContainer}>
+    <div className={classes.lastViewdContainer}
+    >
       <Typography variant="h2">Vos récentes consultations</Typography>
       {userSearch.lastViewed?.slice(0, 3).map((elem, index) => (
         <ListElement
@@ -364,253 +366,260 @@ const AuthContext = ({
 
 const NoAuthDashboard = ({ user = {}, partners, classes }) => (
   <>
-    <div
-      style={{
-        border: '2px solid #EFF4FF',
-        background: 'white',
-        width: '80%',
-        height: '55px',
-        borderRadius: '12px',
-        position: 'absolute',
-        marginTop: '2px',
-        marginLeft: '22px',
-        display: 'flex',
-        flexDirection: 'row-reverse',
-      }}
-    >
-      <div
-        style={{
-          background:
-            'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)',
-          width: '39px',
-          height: '39px',
-          borderRadius: '12px',
-          padding: '7px',
-          marginTop: '7px',
-          marginRight: '9px',
-        }}
-      >
-        <Icon type="recherche" color="white" />
-      </div>
+    
+<div className=''>
+  
+  
+  <div className='flex flex-col mx-4 lg:flex lg:flex-col lg:order-first lg:justify-between lg:items-end'>
+   
+    <div className='lg:order-last -mx-4 mb-10 my-12 '>
+      <img src="static/img/icons/House1.svg" className=" w-_388 h-_175 rounded-xl object-cover lg:w-_515 lg:h-_460 mx-2" />
     </div>
-    <img
-      src={'static/img/maison.jpg'}
-      alt=""
-      style={{ marginTop: '22px', width: '100%' }}
+</div>
+<div className='flex flex-row-reverse items-start mx-4 mb-4'
+>
+  <div className=' mx-4 '>
+  <p className="text-_bleuMarine font-_spaceGrotesk text-xl font-bold">
+      Des logements dans toute la France
+  </p>
+  <p className=" text-_grisBleu font-_spaceGrotesk mt-1">
+  Accéder à notre carte avec plus de 2 500 logements neufs disponibles.  </p>
+  </div>
+ <div>
+  <svg
+    width={53}
+    height={53}
+    viewBox="0 0 53 53"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-_53 h-_53 relative"
+    preserveAspectRatio="none"
+  >
+    <circle cx="26.5" cy="26.5" r="26.5" fill="#DCE6FF" />
+    <path
+      d="M33.6585 24.7013L26.6585 18.5763C26.2815 18.2464 25.7185 18.2464 25.3415 18.5763L18.3415 24.7013C18.1245 24.8912 18 25.1655 18 25.4539V34.0001C18 34.5524 18.4477 35.0001 19 35.0001H23C23.5523 35.0001 24 34.5524 24 34.0001V30.0001C24 29.4478 24.4477 29.0001 25 29.0001H27C27.5523 29.0001 28 29.4478 28 30.0001V34.0001C28 34.5524 28.4477 35.0001 29 35.0001H33C33.5523 35.0001 34 34.5524 34 34.0001V25.4539C34 25.1655 33.8755 24.8912 33.6585 24.7013Z"
+      stroke="#6A7CA8"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
     />
+  </svg></div>
 
-    <Typography
-      variant="h2"
-      style={{
-        color: 'rgba(26, 46, 108, 1)',
-        fontWeight: 'bold',
-        fontSize: '18px',
-        textAlign: 'center',
-        marginTop: '16px',
-      }}
-    >
-      L’achat dans une résidence neuve avec Kit le nid{' '}
-      <span
-        className={classes.welcomeSub}
-        style={{ textAlign: 'center', fontSize: '14px', lineHeight: '18px' }}
-      >
-        Construire son projet immobilier avec Kit le nid c’est bénéficier :
-      </span>
-    </Typography>
+  </div>
 
-    <Grid container style={{ marginTop: '23px' }} spacing={4}>
-      <Grid item className={classes.nouveauGrid}>
-        <Typography
-          className={classes.nouveauH2}
-          style={{ marginLeft: '16px' }}
-        >
-          Des logements neufs dans toutes la France
-          <span
-            className={classes.welcomeSub}
-            style={{ fontSize: '14px', lineHeight: '18px', marginTop: '6px' }}
-          >
-            Plus de 3 000 logements neufs disponibles.
-          </span>
-        </Typography>
-        <div
-          style={{
-            background: 'rgba(220, 230, 255, 1)',
-            borderRadius: '50%',
-            width: '53px',
-            heigth: '53px',
-            padding: '13px',
-          }}
-        >
-          <Icon type="item1" noColor />
+  <div className='flex flex-row-reverse items-start mx-4 mb-4'>
+  <div className='mx-4'>
+  <p className=" text-_bleuMarine font-_spaceGrotesk text-xl font-bold">Accès libre aux plans</p>
+  <p className=" text-_grisBleu font-_spaceGrotesk  mt-1">
+  Télécharger gratuitement les plans des appartements et les plaquettes de présentation de nos résidences.  </p></div>
+  <div>
+  <svg
+    width={53}
+    height={53}
+    viewBox="0 0 53 53"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-_53 h-_53 relative"
+    preserveAspectRatio="none"
+  >
+    <circle cx="26.5" cy="26.5" r="26.5" fill="#FEF2D5" />
+    <path
+      d="M30 18H22C21.4477 18 21 18.4477 21 19V35C21 35.5523 21.4477 36 22 36H30C30.5523 36 31 35.5523 31 35V19C31 18.4477 30.5523 18 30 18Z"
+      stroke="#DCC07E"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M26 33H26.002V33.002H26V33Z"
+      stroke="#DCC07E"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg></div>
+</div>
+
+<div className='flex flex-row-reverse items-start mx-4 mb-4'>
+  <div className='mx-4'>
+  <p className=" text-_bleuMarine font-_spaceGrotesk text-xl font-bold">Un unique conseiller dédié</p>
+  <p className=" text-_grisBleu font-_spaceGrotesk  mt-1">
+  Une même personne pour vous accompagner, de la recherche de votre appartement jusqu’à votre emménagement. 
+  </p></div>
+  <div>
+  <svg
+    width={53}
+    height={53}
+    viewBox="0 0 53 53"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-[53px] h-[53px] relative"
+    preserveAspectRatio="none"
+  >
+    <circle cx="26.5" cy="26.5" r="26.5" fill="#F5EAF9" />
+    <path
+      d="M21 35C21 33.3431 23.2386 32 26 32C28.7614 32 31 33.3431 31 35"
+      stroke="#B985CC"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M32 29.2495C33.7659 29.7124 35 30.7697 35 31.9999"
+      stroke="#B985CC"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M20 29.2495C18.2341 29.7124 17 30.7697 17 31.9999"
+      stroke="#B985CC"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M26 29C27.6569 29 29 27.6569 29 26C29 24.3431 27.6569 23 26 23C24.3431 23 23 24.3431 23 26C23 27.6569 24.3431 29 26 29Z"
+      stroke="#B985CC"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M32 25.2361C32.6137 24.6868 33 23.8885 33 23C33 21.3431 31.6569 20 30 20C29.2316 20 28.5308 20.2889 28 20.7639"
+      stroke="#B985CC"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M20 25.2361C19.3863 24.6868 19 23.8885 19 23C19 21.3431 20.3431 20 22 20C22.7684 20 23.4692 20.2889 24 20.7639"
+      stroke="#B985CC"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg></div>
+  </div>
+
+
+  <div className='flex flex-row-reverse items-start mx-4 mb-12'>
+    <div className='mx-4'>
+  <p className=" text-_bleuMarine font-_spaceGrotesk text-xl font-bold">Des aides pour votre premier achat </p>
+  <p className="text-_grisBleu font-_spaceGrotesk mt-1">
+  Prêt à Taux Zéro - TVA 5,5 %
+Des remises(2) sur 100% des logements Nexity.  </p></div>
+  <div>
+  <svg
+    width={53}
+    height={53}
+    viewBox="0 0 53 53"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className=" w-_53 h-_53 relative"
+    preserveAspectRatio="none"
+  >
+    <circle cx="26.5" cy="26.5" r="26.5" fill="#EDF8F0" />
+    <path
+      d="M29 21L35 18V33L29 36V21Z"
+      stroke="#93C8A2"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M23 33L29 36V21L23 18V33Z"
+      stroke="#93C8A2"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M17 21L23 18V33L17 36V21Z"
+      stroke="#93C8A2"
+      stroke-width={2}
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg></div>
+</div>
+
+<p class=" text-2xl font-semibold text-_bleuMarine mx-4">Nos services partenaires pour les étudiants</p>
+<div class="text-md text-_grisBleu p-3 mx-4">Kit le nid vous propose un ensemble d’offres avantageuses pour mieux répondre à vos besoins lors de vos études :
+<ul>
+  <li>
+  une location en résidence étudiante
+  </li>
+  <li>
+  une mutuelle santé 
+  </li>
+  <li>
+  un garant solide pour vous
+  </li>
+</ul>
+ </div>
+
+<div class="relative" style={{height: "487.03px"}}>
+    <div class="w-40 h-40 absolute bg-indigo-50  rounded-xl" style={{left: "110.90px", top: "260.36px"}}/>
+    <div class="w-40 h-40 absolute bg-indigo-50  rounded-xl" style={{left: "200.66px", top: "48.79px"}}/>
+    <div class="w-20 h-20 absolute bg-green-50  rounded-xl" style={{left: "382.59px", top: "311.62px"}}/>
+    <div class="w-20 h-20 absolute bg-yellow-100  rounded-xl" style={{left: "370.76px" ,top: "0px"}}/>
+    <div class="w-20 h-20 absolute bg-purple-100  rounded-xl border-purple-100 border-opacity-10" style={{left: "0px", top: "201.83px"}}/>
+    <div class="w-40 h-40 absolute" style={{left: "180.76px" ,top: "320.68px"}}>
+        <div class="flex items-center justify-center flex-1 h-full px-4 py-14 bg-white rounded-xl">
+            <div class="inline-flex flex-col space-y-2 items-center justify-end flex-1 h-full">
+                <img class="w-28 h-4" src="static/img/LogoCautioneo.svg"/>
+                <div class="w-full h-8">
+                    <div class="flex items-center justify-center flex-1 h-full pl-3 pr-3.5 pt-1.5 pb-1 bg-indigo-600 bg-opacity-10 rounded-lg">
+                        <p class="flex-1 h-full text-sm font-bold text-center text-indigo-600">3 mois offerts</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </Grid>
-
-      <Grid item className={classes.nouveauGrid}>
-        <Typography
-          className={classes.nouveauH2}
-          style={{ marginLeft: '16px' }}
-        >
-          Parcours 100% gratuit
-          <span
-            className={classes.welcomeSub}
-            style={{ fontSize: '14px', lineHeight: '18px', marginTop: '6px' }}
-          >
-            Un parcours simplifié pour votre premier achat sans frais d’agence,
-            ni frais de dossier.
-          </span>
-        </Typography>
-        <div
-          style={{
-            background: 'rgba(254, 242, 213, 1)',
-            borderRadius: '50%',
-            width: '53px',
-            heigth: '53px',
-            padding: '12px',
-          }}
-        >
-          <Icon type="item2" noColor />
+    </div>
+    <div class="w-40 h-40 absolute" style={{left: "130.59px", top: "90.90px"}}>
+        <div class="flex items-center justify-center flex-1 h-full px-5 py-10 bg-white rounded-xl">
+            <div class="inline-flex flex-col space-y-0.5 items-center justify-end flex-1 h-full">
+                <img class="w-full h-1/2" src="static/img/LogoHeyme.svg"/>
+                <div class="w-3/4 h-10">
+                    <div class="flex items-center justify-center flex-1 h-full px-5 py-1.5 bg-red-500 bg-opacity-10 rounded-xl">
+                        <p class="flex-1 h-full text-base font-bold text-center text-red-500">-15%</p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </Grid>
+    </div>
+</div>
 
-      <Grid item className={classes.nouveauGrid}>
-        <Typography
-          className={classes.nouveauH2}
-          style={{ marginLeft: '16px' }}
-        >
-          Accompagnement
-          <span
-            className={classes.welcomeSub}
-            style={{ fontSize: '13px', lineHeight: '18px', marginTop: '6px' }}
-          >
-            Un accompagnement personnalisé avec un unique conseiller, pour les
-            étudiants et les jeunes actifs.{' '}
-          </span>
-        </Typography>
-        <div
-          style={{
-            background: 'rgba(245, 234, 249, 1)',
-            borderRadius: '50%',
-            width: '53px',
-            heigth: '53px',
-            padding: '12px',
-          }}
-        >
-          <Icon type="item3" noColor />
-        </div>
-      </Grid>
 
-      <Grid
-        item
-        className={classes.nouveauGrid}
-        style={{ marginBottom: '27px' }}
-      >
-        <Typography
-          className={classes.nouveauH2}
-          style={{ marginLeft: '16px' }}
-        >
-          Accès libre aux plans
-          <span
-            className={classes.welcomeSub}
-            style={{ fontSize: '14px', lineHeight: '18px', marginTop: '6px' }}
-          >
-            Tous les plans des appartements sont téléchargeables sur notre
-            plateforme.
-          </span>
-        </Typography>
-        <div
-          style={{
-            background: 'rgba(237, 248, 240, 1)',
-            borderRadius: '50%',
-            width: '53px',
-            heigth: '53px',
-            padding: '12px',
-          }}
-        >
-          <Icon type="item4" noColor />
-        </div>
-      </Grid>
-    </Grid>
 
-    <Grid container>
-      <Grid className={classes.gridPoints}>
-        <div className={classes.numeroPoints}>
-          <Icon type="numero1" noColor size="" />{' '}
-        </div>
 
-        <Typography
-          variant="h2"
-          style={{ fontSize: '18px', marginBottom: '8px' }}
-        >
-          Rejoignez la plateforme Kit le Nid
-        </Typography>
-        <Typography
-          style={{ color: 'rgba(132, 156, 217, 1)', fontWeight: 'bold' }}
-        >
-          Inscrivez-vous et développez votre projet avec nos conseillers.
-        </Typography>
-      </Grid>
-    </Grid>
+<div className="flex flex-col justify-start items-start relative gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mt-5 mb-5 mx-4">
+    <p className="flex-grow-0 flex-shrink-0 w-72 text-lg font-bold text-left text-_titre">
+      Découverz notre guide du premier achat.
+    </p>
+    <p className="self-stretch flex-grow-0 flex-shrink-0 w-72 text-sm font-medium text-left text-_grisBleu">
+      Kit le nid et La Banque Postale s’unissent pour t’aider à voler de tes propres ailes.
+    </p>
+    <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2.5 px-10 py-3 rounded-xl border border-_aPropos">
+      <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-_aPropos">
+        Télécharger notre guide
+      </p>
+      
+    </div>
+   
+  </div>
 
-    <Grid container>
-      <Grid className={classes.gridPoints}>
-        <div className={classes.numeroPoints}>
-          <Icon type="numero2" noColor size="" />{' '}
-        </div>
 
-        <Typography
-          variant="h2"
-          style={{ fontSize: '18px', marginBottom: '8px' }}
-        >
-          Sélectionnez votre logement
-        </Typography>
-        <Typography
-          style={{ color: 'rgba(132, 156, 217, 1)', fontWeight: 'bold' }}
-        >
-          Choisissez et réservez votre appartement en ligne.
-        </Typography>
-      </Grid>
-    </Grid>
 
-    <Grid container>
-      <Grid className={classes.gridPoints}>
-        <div className={classes.numeroPoints}>
-          <Icon type="numero3" noColor size="" />{' '}
-        </div>
+  
+<div className=' text-_grisBleu font-thin text-sm mt-32 -mb-10'>
+(1) Mensualités données à titre indicatif uniquement et non contractuelles, pour l’achat d’un appartement de 187.000 €, sur une base de durée de 25 ans, à un taux d’intérêt fixe moyen constaté sur le marché de 1.4%, hors frais, hors assurance et avec un apport personnel de 7.500€. 
+Pour être éligible au PTZ : il doit s’agir de votre premier achat en résidence principale et votre revenu fiscal de référence sur l’année 2 ans avant la réservation de l’appartement doit être inférieur à 37 000 €
+</div>
 
-        <Typography
-          variant="h2"
-          style={{ fontSize: '18px', marginBottom: '8px' }}
-        >
-          Profitez d’un financement simplifié
-        </Typography>
-        <Typography
-          style={{ color: 'rgba(132, 156, 217, 1)', fontWeight: 'bold' }}
-        >
-          Kit le nid vous accompagne dans toutes vos démarches de prêt.
-        </Typography>
-      </Grid>
-    </Grid>
 
-    <Grid container>
-      <Grid className={classes.gridPoints}>
-        <div className={classes.numeroPoints}>
-          <Icon type="numero4" noColor size="" />{' '}
-        </div>
-
-        <Typography
-          variant="h2"
-          style={{ fontSize: '18px', marginBottom: '8px' }}
-        >
-          Personnalisez votre bien avec nos équipes
-        </Typography>
-        <Typography
-          style={{ color: 'rgba(132, 156, 217, 1)', fontWeight: 'bold' }}
-        >
-          Trouvez les meilleures solutions de décoration et d’aménagement pour
-          votre appartement en attendant sa livraison.
-        </Typography>
-      </Grid>
-    </Grid>
+</div>
   </>
 );
 
@@ -628,13 +637,14 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
   return (
     <AdminContentWrapper noRedirect>
       <div className={classes.heading}>
-        <div>
-          <img src={'static/img/logo-full.png'} alt="" />
-        </div>
+              <div className=' px-40 md:px-80'>
+              <Icon
+                type="LogoVV"
+              /></div>
         <Typography variant="h1">
           {isAuth
             ? 'Ravis de vous revoir '
-            : 'Devenir propriétaire devient plus '}
+            : 'La première ofrre Jeune pour  '}
           <span>
             {isAuth ? (
               <>
@@ -642,7 +652,7 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
                 {`${ucfirst(user?.firstName)}  !`}
               </>
             ) : (
-              'accessible.'
+              'devenir propriétaire.'
             )}
           </span>
           <p className={classes.welcomeSub}>
@@ -651,18 +661,10 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
           </p>
         </Typography>
       </div>
-      <div
+      {isAuth ?(
+        <div
         onClick={() => setShowSearch(!showSearch)}
-        style={{
-          border: '2px solid #EFF4FF',
-          background: 'white',
-          height: '55px',
-          borderRadius: '12px',
-          marginTop: '2px',
-          display: 'flex',
-          flexDirection: 'row-reverse',
-        }}
-      >
+        className='flex flex-row-reverse mt-4 rounded-xl h-_53 bg-white border border-_bordureBleu  w-_426 sm:w-_295 md:w-_536 mb-4'>
         <div
           style={{
             background:
@@ -673,11 +675,31 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
             padding: '7px',
             marginTop: '7px',
             marginRight: '9px',
-          }}
-        >
+          }}>
           <Icon type="recherche" color="white" />
         </div>
       </div>
+
+      ):(
+        <div
+        onClick={() => setShowSearch(!showSearch)}
+        className='flex flex-row-reverse mt-4 rounded-xl h-_53 bg-white border border-_bordureBleu absolute w-_426 sm:w-_295 md:w-_536'>
+        <div
+          style={{
+            background:
+              'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)',
+            width: '39px',
+            height: '39px',
+            borderRadius: '12px',
+            padding: '7px',
+            marginTop: '7px',
+            marginRight: '9px',
+          }}>
+          <Icon type="recherche" color="white" />
+        </div>
+      </div>
+      )}
+      
       {isAuth ? (
         <AuthContext
           classes={classes}

@@ -24,14 +24,15 @@ export const LocationStep = ({
   return (
     <Slide direction="up" in={showSearch} container={containerRef.current}>
       <div
+      className=' w-full'
         style={{
           background:
             'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
           paddingTop: '48px',
           borderRadius: '5px',
-          width: '375px',
           alignContent: 'center',
         }}
+      
       >
         <Box
           sx={{
@@ -47,12 +48,14 @@ export const LocationStep = ({
           }}
         >
           <Box tabIndex={-1} sx={{ mt: 1, p: 1 }}>
-            <Grid container justifyContent="space-between">
-              localisation
-              <div type="button" onClick={() => setShowSearch(false)}>
+            <div className='flex flex-row'>
+          <div className=''>
+              localisation</div>
+              <div className=' mx-36'
+              type="button" onClick={() => setShowSearch(false)}>
                 X
               </div>
-            </Grid>
+            </div>
             <br />
 
             <GooglePlacesAutocomplete

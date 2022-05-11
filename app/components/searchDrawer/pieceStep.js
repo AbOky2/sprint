@@ -51,12 +51,12 @@ export const PieceStep = withStyles()(
     return (
       <Slide direction="up" in={showSearch} container={containerRef.current}>
         <div
+        className='w-full'
           style={{
             background:
               'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
             paddingTop: '50px',
             borderRadius: '5px',
-            width: '375px',
             alignContent: 'center',
           }}
         >

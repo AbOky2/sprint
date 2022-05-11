@@ -37,7 +37,7 @@ export default function About() {
     Réalisez votre premier achat immobilier pour seulement 700€ par mois !*
   </p></div>
 
-  <div className='flex flex-col mx-4'>
+  <div className='flex flex-col mx-4 lg:flex lg:flex-col lg:order-first lg:justify-between lg:items-end'>
     <div class='flex items-center border-2 rounded-3xl py-2 shadow-sm bg-white absolute w-96'>
           <input type='text' placeholder='Recherche'
           className='pl-5 bg-transparent outline-none flex-grow'/>
@@ -66,9 +66,8 @@ export default function About() {
                  ></path>
            </svg>
        </div>
-    <div className=' my-12'>
-    
-      <img src="./maison.jpg" className="w-_344 h-_175 rounded-xl object-cover" />
+    <div className=' my-10  lg:order-last'>
+      <img src="static/img/icons/House1.svg" className="w-_344 h-_175 rounded-xl object-cover lg:w-_515 lg:h-_460 lg:rounded-2xl" />
     </div>
 </div>
 <div className='flex flex-row-reverse items-start mx-8 mb-4'
@@ -297,9 +296,9 @@ Des remises(2) sur 100% des logements Nexity.  </p></div>
       Kit le nid et La Banque Postale s’unissent pour t’aider à voler de tes propres ailes.
     </p>
     <div className="flex justify-center items-center flex-grow-0 flex-shrink-0 relative gap-2.5 px-10 py-3 rounded-xl border border-_aPropos">
-      <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-_aPropos">
+      <a className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-_aPropos cursor-pointer" href="assets/files/Guideachat.pdf">
         Télécharger notre guide
-      </p>
+      </a>
       
     </div>
    

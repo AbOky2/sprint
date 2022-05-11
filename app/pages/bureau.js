@@ -120,7 +120,7 @@ export default function Bureau() {
   <p className=" w-_489 text-lg font-semibold text-left text-black">
     <br />
   </p>
-  <p className=" w-_1243 text-lg font-light text-left text-_grisBleu">
+  <p className=" w-_1243 text-lg font-light text-left text-_gris">
     <span className="w-_1243 text-lg font-light text-left text-_grisBleu">
       (1) Mensualités données à titre indicatif uniquement et non contractuelles, pour l’achat d’un
       appartement de 187.000 €, sur une base de durée de 25 ans, à un taux d’intérêt fixe moyen

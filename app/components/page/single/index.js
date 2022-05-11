@@ -132,36 +132,42 @@ const PropertyPage = ({
                     {property.heading}</p>
             )}</div>
             <p className="text-sm font-medium text-left text-gray-600">{property.fullAddress}</p>
-            
+           
+            {isLocation ?(
             <div className='m-2 border-4 border-r-0 border-t-0 border-b-0 border-_rougeStudea mt-9'>
-                  <p className="text-lg font-bold text-left text-_pieces mx-4">                    {getNbPieces(property.minPieces, property.maxPieces)}
-                              <br/>{` de ${
+                  <p className="text-lg font-bold text-left text-_pieces mx-4">{getNbPieces(property.minPieces, property.maxPieces)}
+                      <br/>{` de ${
                       property.minSurface !== property.maxSurface
                         ? `${property.minSurface}m² à ${property.maxSurface}m²`
                         : `${property.minSurface}m²`
                     }`}
+                  </p>
+                  
+                    <p className="text-2xl font-medium text-left text-_rougeStudea mx-4">
+                    à partir de
+                    {` ${spaceCurrency(property.price)}€ CC/mois`} </p>
+                  </div>): ( 
+                    <div className='m-2 border-4 border-r-0 border-t-0 border-b-0 border-_aPropos mt-9'>
+                    <p className="text-lg font-bold text-left text-_pieces mx-4">{getNbPieces(property.minPieces, property.maxPieces)}
+                        <br/>{` de ${
+                        property.minSurface !== property.maxSurface
+                          ? `${property.minSurface}m² à ${property.maxSurface}m²`
+                          : `${property.minSurface}m²`
+                      }`}
                     </p>
-
-                {isLocation ?(
-                  <p className="text-2xl font-medium text-left text-_rougeStudea mx-4">
-                  à partir de
-                  {` ${spaceCurrency(property.price)}€ CC/mois`} </p>
-
-
-                ): ( 
-                  <p className="text-2xl font-medium text-left text-_titre mx-4">
-                      à partir de
-                {` ${spaceCurrency(property.price)}€`} </p>)}
-
-              
-            {property.available_date && !isLocation ? (
-              <p className="self-stretch flex-grow-0 flex-shrink-0 w-[295px] text-2xl font-normal text-left text-_gris mx-3">
-              {`Fin de construction le ${property.available_date}`}
-                          </p>
-            ) : (
-              ''
-            )}
-            </div>
+                    <p className="text-2xl font-medium text-left text-_titre mx-4">
+                        à partir de
+                    {` ${spaceCurrency(property.price)}€`} </p>
+                    </div>
+                    )}
+                  {property.available_date && !isLocation ? (
+                    <p className="self-stretch flex-grow-0 flex-shrink-0 w-[295px] text-2xl font-normal text-left text-_gris mx-3">
+                    {`Fin de construction le ${property.available_date}`}
+                                </p>
+                  ) : (
+                    ''
+                  )}
+           
           </Grid>
           <div>
             

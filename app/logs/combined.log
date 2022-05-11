@@ -59,9 +59,35 @@
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T15:20:28.803Z","value":"[object Object]"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T15:55:36.789Z","value":"[object Object]"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-22T17:03:37.948Z","value":"[object Object]"}
+<<<<<<< HEAD
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-28T11:40:17.742Z"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-28T12:06:13.598Z","value":"[object Object]"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"ralph-ravi-kayden-2d4laqalbda-unsplash.jpeg\"","timestamp":"2022-04-28T12:31:41.911Z","value":"ralph-ravi-kayden-2d4laqalbda-unsplash.jpeg"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-28T13:18:36.655Z","value":"[object Object]"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-29T15:40:54.562Z"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-04-29T16:28:10.671Z","value":"[object Object]"}
+=======
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T13:37:19.407Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T14:22:19.207Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T14:23:38.306Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T14:24:14.809Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T14:24:33.531Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T14:25:29.879Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T14:26:23.974Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-04-15T14:27:16.400Z"}
+>>>>>>> 82a4c82c92cf286a8bd5b61c718c4e5ccdaabe8d
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-09T08:07:58.417Z"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-05-09T08:10:32.563Z","value":"[object Object]"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-05-09T08:10:54.261Z","value":"[object Object]"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-10T08:04:45.950Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-10T12:03:32.195Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-10T12:06:07.925Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-10T12:06:54.395Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-10T12:10:03.815Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-10T13:40:48.675Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-10T14:53:11.830Z"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"${elem._id}\"","timestamp":"2022-05-10T15:44:50.313Z","value":"${elem._id}"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"image-88-2.png\"","timestamp":"2022-05-10T15:46:25.835Z","value":"image-88-2.png"}
+{"level":"error","service":"user-service","timestamp":"2022-05-10T15:46:25.853Z"}
+{"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"image-88-2.png\"","timestamp":"2022-05-10T15:47:04.634Z","value":"image-88-2.png"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-11T08:57:06.443Z"}

@@ -65,13 +65,13 @@ export const BudgetStep = withStyles()(
               'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
             paddingTop: '230px',
             borderRadius: '5px',
-            width: '375px',
+           width:"full",
             alignContent: 'center',
           }}
         >
           <Box
             sx={{
-              height: '524px',
+              
               display: 'flex',
               flexDirection: 'column',
               top: '48px',

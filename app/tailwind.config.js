@@ -2,7 +2,14 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './stories/**/*.{js,ts,jsx,tsx}',
   ],
+  purge: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './stories/**/*.{js,ts,jsx,tsx}',
+  ],
+  variants: ['responsive'],
   theme: {
     extend: {
       fontFamily:{
@@ -13,6 +20,7 @@ module.exports = {
       colors: {
         primary: {
           DEFAULT: 'var(--color-primary)',
+          400: 'var(--color-primary-400)',
         },
         secondary: {
           DEFAULT: 'var(--color-secondary)',
@@ -37,10 +45,11 @@ module.exports = {
 
       },
       fontSize: {
+        _28: '28px',
+        _34: '34px',
         _68: '68px',
         _38: '38px',
         _28: '28px',
-       
       },
       lineHeight: {
         _100: '100%',
