@@ -91,3 +91,7 @@
 {"level":"error","service":"user-service","timestamp":"2022-05-10T15:46:25.853Z"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"image-88-2.png\"","timestamp":"2022-05-10T15:47:04.634Z","value":"image-88-2.png"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-11T08:57:06.443Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-12T09:18:28.562Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-12T10:43:06.016Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-12T12:27:14.138Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-05-12T13:32:48.371Z"}

@@ -24,8 +24,6 @@ export default function About() {
                 
               /></div>
   <div className='my-8 mx-4'>
-  
-
   <p className="w-_341 text-xl font-light text-_titre">
   Etudiants, Jeunes Actifs. 
   </p>
