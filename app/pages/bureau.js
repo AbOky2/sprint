@@ -102,7 +102,7 @@ export default function Bureau() {
 
   <div className='flex flex-row-reverse items-start mx-8 mb-4'>
   <div className='mx-4'>
-  <p className=" text-_bleuMarine font-_spaceGrotesk text-xl font-bold">Accès libre aux plans</p>
+  <p className=" text-_bleuMarine font-_spaceGrotesk text-xl font-bold">Accès libre aux</p>
   <p className=" text-_grisBleu font-_spaceGrotesk  mt-1">
   Télécharger gratuitement les plans des appartements et les plaquettes de présentation de nos résidences.  </p></div>
   <div>
