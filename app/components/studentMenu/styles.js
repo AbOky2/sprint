@@ -60,11 +60,11 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     left: 0,
     width: '100%',
-    backgroundColor: 'white',
-    boxShadow: '0px 4px 13px rgba(0, 0, 0, 0.1)',
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
-    padding: '.5rem 2rem',
+    backgroundColor: '#FCFCFD',
+    border:'1px solid',
+    borderColor:'#EAEFFA',
+    
+    padding: '.3rem 2rem',
     boxSizing: 'border-box',
     zIndex: 10,
     '& > div a': {

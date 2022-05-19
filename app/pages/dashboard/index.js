@@ -713,7 +713,7 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
       ) : (
         <NoAuthDashboard classes={classes} />
       )}
-      <SearchDrawer showSearch={showSearch} setShowSearch={setShowSearch} />
+      <SearchDrawer showSearch={showSearch} setShowSearch={setShowSearch}/>
     </AdminContentWrapper>
   );
 };

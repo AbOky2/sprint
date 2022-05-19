@@ -187,26 +187,23 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      alignItems="center"
-      justify="space-between"
-      className={clsx(
-        classes.container,
-        noHeaderMargin ? classes.noHeaderMargin : ''
-      )}
+    <div
+     className='m-4 '
     >
-      <Grid container item>
-        <Grid className={classes.logoContainer}>
+      <div className='flex justify-between'>
+        <div >
           <Link href={pages.dashboard}>
             <a>
-              <img src={LogoImg} alt="" />
+            <Icon
+            type='LogoVV'
+            size='large'
+            />
             </a>
           </Link>
-        </Grid>
-        <Grid container alignItems="center" className={classes.navContainer}>
+        </div>
+        <div className="flex flex-row font-_spaceGrotesk text-xl font-bold  text-[#113eb6] content-end gap-5">
           {MenuItems?.map(({ href, txt, singleType }) => (
-            <Grid key={href} item>
+            <div key={href} item>
               <Link href={href}>
                 <a
                   className={
@@ -217,15 +214,12 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
                       : null
                   }
                 >
-                  <span>{txt}</span>
+                  <span className='font-bold text-[#113eb6] text-3xl'>{txt}</span>
                 </a>
               </Link>
-            </Grid>
+            </div>
           ))}
-        </Grid>
-      </Grid>
-      <Grid container item className={classes.rightMenu} alignItems="center">
-        <div>
+          {/*  <div>
           <Btn
             text="Prendre rendez-vous"
             iconType="calendr"
@@ -234,15 +228,26 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
               openPopupWidget({ url: 'https://calendly.com/kitlenid' })
             }
           />
-        </div>
-        <UpdateProfile
-          user={user}
-          logout={logout}
-          update={update}
-          transparent
-        />
-      </Grid>
-    </Grid>
+            </div>*/}
+            
+              <div>  
+                <p className="absolute  text-3xl font-bold text-center text-[#113eb6]">
+                Blog
+              </p>
+              </div>
+              <div className=' text-red-800 -p-3'>  
+              <UpdateProfile
+                      user={user}
+                      logout={logout}
+                      update={update}
+                      transparent
+                    />
+              </div>
+            
+          </div>
+      </div>
+      
+    </div>
   );
 };
 StudentProfile.propTypes = {
