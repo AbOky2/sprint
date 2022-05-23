@@ -33,3 +33,10 @@
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"image-88-2.png\"","timestamp":"2022-05-10T15:46:25.835Z","value":"image-88-2.png"}
 {"level":"error","service":"user-service","timestamp":"2022-05-10T15:46:25.853Z"}
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"image-88-2.png\"","timestamp":"2022-05-10T15:47:04.634Z","value":"image-88-2.png"}
+{"level":"error","service":"user-service","timestamp":"2022-05-20T07:36:19.540Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-20T07:36:42.955Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-20T08:10:34.962Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-20T09:45:32.208Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-20T13:44:00.039Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-20T13:44:09.450Z"}
+{"level":"error","service":"user-service","timestamp":"2022-05-20T13:48:14.898Z"}

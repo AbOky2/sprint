@@ -1,7 +1,6 @@
 import React from 'react'
 import Header from 'components/Header/Header'
 import Footer from 'components/Footer/Footer'
-import { fontWeight } from '@mui/system';
 import {Icon} from 'components';
 
 export default function Bureau() {

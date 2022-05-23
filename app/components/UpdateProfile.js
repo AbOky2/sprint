@@ -110,11 +110,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
     <div>
       <div className="relative">
         <div
-          className={
-            !showSubMenu
-              ? classes.contextMenu
-              : clsx(classes.contextMenu, classes.openMenu)
-          }
+         
         >
           <div onClick={handleLogOut} className={classes.logoutBtn}>
             Déconnexion
@@ -144,10 +140,9 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
           <Icon type="sliderArrow" size="small" />
         </Grid>
       </div>
-      <Modal
+      <div
         openModal={openModal}
         onClose={handleModalClose}
-        onClick={handleSumbit}
         title="Mon Profil"
         confirmText="Enregistrer"
       >
@@ -172,6 +167,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               onKeyPress={onKeyPress}
               name="lastName"
               position="left"
+              placeholder="Nom"
             />
             <Input
               value={state.firstName}
@@ -179,6 +175,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               onKeyPress={onKeyPress}
               name="firstName"
               position="right"
+              placeholder='Prenom'
             />
             <Input
               value={state.email}
@@ -187,6 +184,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               name="email"
               type="email"
               position="left"
+              placeholder='email'
             />
             <Input
               value={state.phone}
@@ -195,6 +193,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               name="phone"
               type="phone"
               position="right"
+              placeholder='telephone'
             />
             <Input
               value={state.password}
@@ -211,10 +210,15 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               onChange={handleChange}
               position="right"
               list={userRoleSelect}
+              placeholder='role'
             />
           </Grid>
+          <div className="flex justify-between items-center w-[167px] relative px-[47px] py-2 rounded-xl border-2 border-[#eff4ff]" style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }} onClick={handleSumbit}>
+                <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">Enregistrer</p>
+              </div>;
+
         </Grid>
-      </Modal>
+      </div>
     </div>
   );
 };

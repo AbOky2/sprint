@@ -25,6 +25,11 @@ const MobileItems = [
     iconProps: { type: 'search', style: { padding: 1 } },
     txt: 'Recherche',
   },
+  {
+    href: '/dashboard/profile/profile',
+    iconProps: { type: 'house', style: { padding: 1 } },
+    txt: 'Mon Profile',
+  },
   // {
   //   href: '/dashboard/bookmark',
   //   iconProps: { type: 'heart' },

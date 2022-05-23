@@ -35,11 +35,12 @@ const searchFields = withStyles(
             value={queryData.loc}
             onChange={handleMapSearch}
             placeholder={isMdView ? 'Où cherchez-vous ?' : 'Localisation'}
+            
           />
           {isMdView && (
             <>
               <div onClick={handleSumit} className={classes.submit}>
-                <Icon type="search" size="nearBig" color="white" />
+                <Icon type="recherche" size='small'color='white'  />
               </div>
               <span className={classes.changeView} onClick={toggleView}>
                 <Icon
