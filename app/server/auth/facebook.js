@@ -1,11 +1,15 @@
 const { Strategy: FacebookStrategy } = require('passport-facebook');
 const passport = require('passport');
 const FB = require('fb');
+const {
+  storeSignUpInfos,
+  consumeSignUpInfos,
+} = require('../middleware/express');
 
 const User = require('../models/User');
 // const { redirecAfterAuth } = require('./index');
 
-function auth({ ROOT_URL, app }) {
+function auth({ ROOT_URL, server }) {
   const uri = '/auth/facebook/oauth2callback';
   const redirectUri = ROOT_URL + uri;
   const verify = async (accessToken, refreshToken, profile, verified) => {
@@ -67,17 +71,22 @@ function auth({ ROOT_URL, app }) {
     )
   );
 
-  app.get(
+  server.get(
     '/auth/facebook',
+    storeSignUpInfos,
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function (req, res) {
       res.redirect('/');
     }
   );
 
-  app.get(
+  server.get(
     uri,
-    passport.authenticate('facebook', { failureRedirect: '/login' })
+    consumeSignUpInfos,
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+      res.redirect('/');
+    }
     // redirecAfterAuth
   );
 }

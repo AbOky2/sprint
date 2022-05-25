@@ -59,7 +59,7 @@ const mongoSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      // required: true,
     },
     bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Propertie' }],
     sponsorshipCode: {
@@ -235,7 +235,7 @@ class UserClass extends DBModel {
     user.firstName = ucFirst(user.firstName);
     user.lastName = ucFirst(user.lastName);
 
-    user.password = await bcrypt.hash(user.password, salt);
+    if (user.password) user.password = await bcrypt.hash(user.password, salt);
     user = await this.create({ ...options, slug });
 
     if (email) {
@@ -324,7 +324,8 @@ class UserClass extends DBModel {
     if (!user) {
       user = (
         await this.add({
-          role,
+          // set role
+          role: 'student',
           email,
           password,
           firstName,
