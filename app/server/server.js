@@ -36,7 +36,7 @@ app.prepare().then(async () => {
   server.use(httpMiddleware(server, express));
 
   auth({ server, ROOT_URL });
-  googleAuth({ server, ROOT_URL });
+  // googleAuth({ server, ROOT_URL });
   // instagramAuth({ app, ROOT_URL });
   // facebookAuth({ server, ROOT_URL });
   api(server);
