@@ -78,11 +78,12 @@ function auth({ ROOT_URL, server }) {
       done(err);
     }
   });
+  console.log(process.env.GOOGLE_CLIENT_ID);
   passport.use(
     new Strategy(
       {
-        clientID: process.env.Google_clientId,
-        clientSecret: process.env.Google_clientSecret,
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: `${ROOT_URL}/oauth2callback`,
       },
       verify
