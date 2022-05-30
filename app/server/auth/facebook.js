@@ -18,8 +18,8 @@ function auth({ ROOT_URL, server }) {
     console.log('PROFILE', profile);
     const fbUser = FB.extend({
       accessToken,
-      appId: process.env.Facebook_clientId,
-      appSecret: process.env.Facebook_clientSecret,
+      appId: process.env.FACEBOOK_CLIENT_ID,
+      appSecret: process.env.FACEBOOK_CLIENT_SECRET,
       version: 'v3.2',
     });
     const userFb = await fbUser.api(
@@ -71,8 +71,8 @@ function auth({ ROOT_URL, server }) {
   passport.use(
     new FacebookStrategy(
       {
-        clientID: process.env.Facebook_clientId,
-        clientSecret: process.env.Facebook_clientSecret,
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
         callbackURL: redirectUri,
         scope: [
           'email',
