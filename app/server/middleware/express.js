@@ -91,6 +91,7 @@ const storeSignUpInfos = handleErrors((req, res, next) => {
   next();
 });
 const consumeSignUpInfos = handleErrors(async (req, res, next) => {
+  console.log('$$$$Passe dans consume', req.session);
   if (req.session.signUpInfos) {
     const { firstName, lastName, birthday, postalCode, centersOfInterest } =
       req.session.signUpInfos;
@@ -104,6 +105,7 @@ const consumeSignUpInfos = handleErrors(async (req, res, next) => {
         centersOfInterest,
       },
     });
+    console.log('FINISH THERE');
     req.user = user;
     delete req.session.signUpInfos;
   }

@@ -9,7 +9,7 @@ const {
   consumeSignUpInfos,
 } = require('../middleware/express');
 
-function auth({ ROOT_URL, app }) {
+function auth({ ROOT_URL, server }) {
   const verify = async (accessToken, refreshToken, profile, verified) => {
     let email;
     let avatarUrl;
@@ -17,21 +17,21 @@ function auth({ ROOT_URL, app }) {
     let lastName;
 
     /* TESTING YOUTUBE */
-    const oauth2Client = new google.auth.OAuth2(
-      process.env.Google_clientId,
-      process.env.Google_clientSecret
-    );
+    // const oauth2Client = new google.auth.OAuth2(
+    //   process.env.Google_clientId,
+    //   process.env.Google_clientSecret
+    // );
 
-    oauth2Client.setCredentials({
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    });
-    const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
-    const stats = await youtube.channels.list({
-      part: 'statistics',
-      mine: true,
-    });
-    console.log(stats.data.items);
+    // oauth2Client.setCredentials({
+    //   access_token: accessToken,
+    //   refresh_token: refreshToken,
+    // });
+    // const youtube = google.youtube({ version: 'v3', auth: oauth2Client });
+    // const stats = await youtube.channels.list({
+    //   part: 'statistics',
+    //   mine: true,
+    // });
+    // console.log(stats.data.items);
     /* END TESTING YOUTUBE */
 
     if (profile.emails) {
@@ -52,7 +52,7 @@ function auth({ ROOT_URL, app }) {
       firstName = profile.displayName;
     }
     try {
-      const user = await UserModel.signInOrSignUp({
+      const user = await UserModel.signInOrSignUpViaSocialMedia({
         provider: profile.provider,
         socialUserId: profile.id,
         email,
@@ -61,42 +61,57 @@ function auth({ ROOT_URL, app }) {
         lastName,
         avatarUrl,
       });
+      console.log('email: ', email);
       verified(null, user);
     } catch (err) {
       verified(err);
-      console.log(err); // eslint-disable-line
+      console.log('Error catch: ', err); // eslint-disable-line
     }
   };
+
+  passport.serializeUser((user, done) => done(null, user._id));
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await UserModel.getById(id);
+      console.log('Passe avec user: ', user);
+      done(null, user);
+    } catch (err) {
+      done(err);
+    }
+  });
+  console.log(process.env.GOOGLE_CLIENT_ID);
   passport.use(
     new Strategy(
       {
-        clientID: process.env.Google_clientId,
-        clientSecret: process.env.Google_clientSecret,
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: `${ROOT_URL}/oauth2callback`,
       },
       verify
     )
   );
 
-  app.get(
-    '/auth/youtube',
+  server.use(passport.initialize());
+  server.use(passport.session());
+
+  server.get(
+    '/auth/google',
+    storeSignUpInfos,
     passport.authenticate('google', {
-      scope: [
-        'profile',
-        'email',
-        'https://www.googleapis.com/auth/youtube.readonly',
-      ],
-      prompt: 'select_account',
+      scope: ['profile', 'email'],
     })
   );
 
-  app.get(
+  server.get(
     '/oauth2callback',
     passport.authenticate('google', {
       failureRedirect: '/login',
     }),
-    consumeSignUpInfos
+    consumeSignUpInfos,
     // redirecAfterAuth
+    (req, res) => {
+      res.redirect('/');
+    }
   );
 }
 

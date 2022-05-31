@@ -30,7 +30,7 @@ function fetchData(args) {
 const morningJob = new CronJob('0 0 */8 * * *', fetchData);
 morningJob.start();
 
-const afternoonJob = new CronJob('0 16 * * *', () =>
+const afternoonJob = new CronJob('0 11 * * *', () =>
   fetchData({ updateUnavalaible: true })
 );
 afternoonJob.start();

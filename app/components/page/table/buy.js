@@ -26,16 +26,26 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
     const conditionalColumn = hasReduction ? 1 : 2;
 
     return (
-      <div key={elem} className="flex flex-col space-x-3 items-start justify-center p-4 bg-white border rounded-xl border-_aPropos w-96 mb-4">
+      <div
+        key={elem}
+        className="flex flex-col space-x-3 items-start justify-center p-4 bg-white border rounded-xl border-_aPropos w-96 mb-4"
+      >
         <Grid
           container
           className="pointer"
           alignItems="center"
           onClick={() => handleCurrOpen(elem)}
         >
-          <Grid container justify="space-between" >
+          <Grid container justify="space-between">
             <Grid item>
-              <div style={{color:'rgba(79, 128, 255, 1)', fontWeight:'700', fontSize:'14px', lineHeight:'17px'}}>
+              <div
+                style={{
+                  color: 'rgba(79, 128, 255, 1)',
+                  fontWeight: '700',
+                  fontSize: '14px',
+                  lineHeight: '17px',
+                }}
+              >
                 {` ${elem} pièce${elem > 1 ? 's' : ''} à partir de `}
 
                 <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
@@ -152,7 +162,7 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     : `${spaceCurrency(round10(standardTva, 1))}€`;
 
                 return (
-                  <Grid 
+                  <Grid
                     key={curr.lot_ref}
                     container
                     className={classes.discoveryContent}
@@ -164,44 +174,58 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                           <strong>{`${price}€`}</strong>
                         </Grid>
                       )}
-                   <div className='flex flex-col items-center md:items-end w-full'>
+                      <div className="flex flex-col items-center md:items-end w-full">
+                        <div className="flex flex-row justify-between mb-1">
+                          <p className="w-44 h-5 text-sm font-medium">
+                            Prix TVA 20%
+                          </p>
+                          <p className="w-44 h-5 text-sm font-medium justify-end flex">
+                            {vatPrice}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between mb-1">
+                          <p className="w-44 h-5 text-sm font-medium">
+                            Surface
+                          </p>
+                          <p className="w-44 h-5 text-sm font-medium justify-end flex">{`${curr.surface}m²`}</p>
+                        </div>
+                        <div className="flex flex-row justify-between mb-1">
+                          <p className="w-44 h-5 text-sm font-medium">Étage</p>
+                          <p className="w-44 h-5 text-sm font-medium justify-end flex">
+                            {floor}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between mb-1">
+                          <p className="w-44 h-5 text-sm font-medium">
+                            Orientation
+                          </p>
+                          <p className="w-44 h-5 text-sm font-medium justify-end flex">
+                            {orientation}
+                          </p>
+                        </div>
+                        <div className="flex flex-row justify-between mb-1">
+                          <p className="w-44 h-5 text-sm font-medium">
+                            Parking
+                          </p>
+                          <p className="w-44 h-5 text-sm font-medium justify-end flex">
+                            {parking}
+                          </p>
+                        </div>
+                      </div>
 
-                      <div className='flex flex-row justify-between mb-1'>
-                            <p className="w-44 h-5 text-sm font-medium">Prix TVA 20%</p>
-                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{vatPrice}</p>
-                      </div>
-                      <div className='flex flex-row justify-between mb-1'>
-                            <p className="w-44 h-5 text-sm font-medium">Surface</p>
-                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{`${curr.surface}m²`}</p>
-                      </div>
-                      <div className='flex flex-row justify-between mb-1'>
-                            <p className="w-44 h-5 text-sm font-medium">Étage</p>
-                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{floor}</p>
-                      </div>
-                      <div className='flex flex-row justify-between mb-1'>
-                            <p className="w-44 h-5 text-sm font-medium">Orientation</p>
-                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{orientation}</p>
-                      </div>
-                      <div className='flex flex-row justify-between mb-1'>
-                            <p className="w-44 h-5 text-sm font-medium">Parking</p>
-                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{parking}</p>
-                      </div>
-                      
-                  </div>
-        
-                      <Grid
-                        item
-                        className={classes.btnContainer}
-                      >
-                        
+                      <Grid item className={classes.btnContainer}>
                         <a
-                              className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-10 mt-8" href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
-                              style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }}
-                            >
-                              <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
-                                {curr.file ? 'Telecharger le plan en 2D' : '-'}
-                              </p>
-                            </a>
+                          className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-10 mt-8"
+                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                          style={{
+                            background:
+                              'linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)',
+                          }}
+                        >
+                          <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
+                            {curr.file ? 'Telecharger le plan en 2D' : '-'}
+                          </p>
+                        </a>
                       </Grid>
                     </Grid>
                     <Grid
@@ -250,7 +274,6 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                           disabled={!curr.file}
                           target="_blank"
                           dataMode="popup"
-                    
                           whiteColor
                         />
                       </Grid>
