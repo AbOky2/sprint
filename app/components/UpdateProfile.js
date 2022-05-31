@@ -100,7 +100,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
     if (!hasUpdate) setState(user);
   };
   // eslint-disable-next-line no-return-assign
-  const handleLogOut = () => logout(() => window.location.reload());
+  const handleLogOut = () => logout(() => (window.location = '/login'));
   const handleSumbit = () => update(state, () => handleModalClose(true));
   const onKeyPress = (e) => e.key === 'Enter' && handleSumbit(true);
 

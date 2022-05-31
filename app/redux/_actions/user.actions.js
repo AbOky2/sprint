@@ -64,8 +64,10 @@ function updateUserDataOnly(args, callback) {
   };
 }
 
-async function logout() {
-  await logOut();
+function logout() {
+  logOut().then(() => {
+    window.location = '/login';
+  });
   return { type: userConstants.LOGOUT };
 }
 

@@ -25,7 +25,7 @@ const NEXT_PUBLIC_ROOT_URL = 'http://localhost:3000';
 const NEXT_PUBLIC_UPLOAD_URL = 'http://localhost:3001';
 const NODE_ENV = 'dev';
 const MONGO_URL_TEST =
-  'mongodb+srv://kacoulib:Test123$@cluster0.mmxy7.mongodb.net/kit-le-nid?retryWrites=true&w=majority';
+  'mongodb+srv://dbtest:dbtest@cluster0.h9mof.mongodb.net/?retryWrites=true&w=majority';
 const GOOGLE_CLIENT_ID =
   '667557981280-0guq4m234dku0huhquhb48h1biel89uf.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = '_6usf8BxG55vvdv87yWS1jMz';

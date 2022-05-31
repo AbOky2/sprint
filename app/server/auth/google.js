@@ -61,6 +61,7 @@ function auth({ ROOT_URL, server }) {
         lastName,
         avatarUrl,
       });
+      console.log('email: ', email);
       verified(null, user);
     } catch (err) {
       verified(err);
@@ -109,7 +110,7 @@ function auth({ ROOT_URL, server }) {
     consumeSignUpInfos,
     // redirecAfterAuth
     (req, res) => {
-      res.redirect('/login');
+      res.redirect('/');
     }
   );
 }
