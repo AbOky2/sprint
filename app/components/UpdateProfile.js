@@ -100,7 +100,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
     if (!hasUpdate) setState(user);
   };
   // eslint-disable-next-line no-return-assign
-  const handleLogOut = () => logout(() => window.location.reload());
+  const handleLogOut = () => logout(() => (window.location = '/login'));
   const handleSumbit = () => update(state, () => handleModalClose(true));
   const onKeyPress = (e) => e.key === 'Enter' && handleSumbit(true);
 
@@ -110,7 +110,11 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
     <div>
       <div className="relative">
         <div
-         
+          className={
+            !showSubMenu
+              ? classes.contextMenu
+              : clsx(classes.contextMenu, classes.openMenu)
+          }
         >
           <div onClick={handleLogOut} className={classes.logoutBtn}>
             Déconnexion
@@ -140,22 +144,24 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
           <Icon type="sliderArrow" size="small" />
         </Grid>
       </div>
-      <div
+      <Modal
         openModal={openModal}
         onClose={handleModalClose}
+        onClick={handleSumbit}
         title="Mon Profil"
         confirmText="Enregistrer"
       >
         <Grid container item justify="center" className="form-container">
           <Grid container item>
             <div
+            className='mx-2'
               style={{
                 background:
                   'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
                 width: '86px',
                 height: '86px',
                 borderRadius: '50%',
-                padding: '15px',
+                padding: '27px',
                 marginBottom: '19px',
               }}
             >
@@ -175,7 +181,8 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               onKeyPress={onKeyPress}
               name="firstName"
               position="right"
-              placeholder='Prenom'
+              placeholder="Prenom"
+
             />
             <Input
               value={state.email}
@@ -184,7 +191,8 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               name="email"
               type="email"
               position="left"
-              placeholder='email'
+              placeholder="email"
+
             />
             <Input
               value={state.phone}
@@ -193,7 +201,8 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               name="phone"
               type="phone"
               position="right"
-              placeholder='telephone'
+              placeholder="Telephone"
+
             />
             <Input
               value={state.password}
@@ -210,15 +219,10 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               onChange={handleChange}
               position="right"
               list={userRoleSelect}
-              placeholder='role'
             />
           </Grid>
-          <div className="flex justify-between items-center w-[167px] relative px-[47px] py-2 rounded-xl border-2 border-[#eff4ff]" style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }} onClick={handleSumbit}>
-                <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">Enregistrer</p>
-              </div>;
-
         </Grid>
-      </div>
+      </Modal>
     </div>
   );
 };

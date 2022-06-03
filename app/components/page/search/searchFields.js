@@ -40,7 +40,7 @@ const searchFields = withStyles(
           {isMdView && (
             <>
               <div onClick={handleSumit} className={classes.submit}>
-                <Icon type="recherche" size='small'color='white'  />
+                <Icon type="recherche" size='small' color='white'  />
               </div>
               <span className={classes.changeView} onClick={toggleView}>
                 <Icon

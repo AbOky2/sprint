@@ -13,6 +13,8 @@ import useStyles from './styles';
 import { Authentification } from 'components/authentification';
 import {Partenaires} from 'components/Partenaires/index';
 
+
+
 const MobileItems = [
   {
     href: '/dashboard',
@@ -25,11 +27,7 @@ const MobileItems = [
     iconProps: { type: 'search', style: { padding: 1 } },
     txt: 'Recherche',
   },
-  {
-    href: '/dashboard/profile/profile',
-    iconProps: { type: 'house', style: { padding: 1 } },
-    txt: 'Mon Profile',
-  },
+ 
   // {
   //   href: '/dashboard/bookmark',
   //   iconProps: { type: 'heart' },
@@ -59,6 +57,7 @@ const MenuItems = [...MobileItems, sponsorship];
 
 export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const isAuth = user?._id;
   const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
   const [changeName, setChangeName] = useState(false);
@@ -66,11 +65,14 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
   const { asPath } = useRouter();
   const toggleMenu = () => setShowMenu(!showMenu);
   const toggleModal = () => setShowModal(!showModal);
-  const toggleModal1 = () => setShowModal1(!showModal);
+  const toggleModal1 = () => setShowModal1(!showModal1);
 
   const handleSumbit = () => console.log('submit');
 
+  
+
   return (
+    <>
     <Grid
       container
       alignItems="center"
@@ -97,17 +99,60 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
           </Grid>
         );
       })}
-      <Grid item onClick={toggleModal} justifyContent="center">
+
+      
+       {isAuth?(
+        <div >
+          <a href="/dashboard/favoris">
+          <Icon
+              type="heart"
+              noColor
+              />
+            <p>Favoris</p> 
+          </a>
+        </div>
+      ):(
+        ""
+      )}
+
+      {isAuth?(
+        <div >
+          <a href="/dashboard/bookmark">
+          <Icon
+              type="profile"
+              noColor
+              />
+            <p>Mon Profil</p> 
+            
+       {/* { href: '/dashboard/bookmark',
+        iconProps: { type: 'profile', style: { padding: 1 } },
+        txt: 'Mon Profile',} */}
+          </a>
+        
+        </div>
+      ):(
+        ""
+      )}
+
+{isAuth?(
+        ''
+       
+      ):(
+        <Grid item onClick={toggleModal} justifyContent="center">
         <Grid container alignItems="center" direction="column">
           <Icon type="profile" />
           <p>Connexion</p>
         </Grid>
       </Grid>
+
+      )}
+
+      
       <Grid item onClick={toggleMenu} className={classes.calendar}>
         <Icon type="menu" />
         <p>Menu</p>
       </Grid>
-      <Drawer anchor="right" open={showMenu} onClose={toggleMenu}>
+      <Drawer anchor="bottom" open={showMenu} onClose={toggleMenu}>
         <div className={classes.drawer}>
           <div className={clsx(classes.rightMenu, classes.rightMenuMobile)}>
             <div>
@@ -124,7 +169,7 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
                 </a>
               </Link>
             <br/>
-              <div>
+            
                 <a
                 onClick={toggleModal1}
                   className={
@@ -136,16 +181,22 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
                 >
                   <span>{partenaires.txt}</span>
                 </a>
-              </div>
+                <br/>
+                <Link href='https://kitlenid.fr/blog'>
+                <a>
+                  Blog
+                </a>
+              </Link>
+              
             </div>
-            <UpdateProfile
+           {/* <UpdateProfile
               text="Mon compte"
               user={user}
               logout={logout}
               update={update}
               transparent
             />
-            {/* <div>
+             <div>
               <Btn
                 text="Prendre rendez-vous"
                 iconType="calendar"
@@ -157,6 +208,8 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
           </div>
         </div>
       </Drawer>
+
+      
       {console.log(changeName)}
       <Modal
         openModal={showModal}
@@ -184,7 +237,11 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
         <Partenaires />
       </Modal>
     </Grid>
+
+    </>
   );
+
+
 };
 
 const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
@@ -193,7 +250,7 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
 
   return (
     <div
-     className='m-4 '
+     className='m-4'
     >
       <div className='flex justify-between'>
         <div >
@@ -206,7 +263,7 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
             </a>
           </Link>
         </div>
-        <div className="flex flex-row font-_spaceGrotesk text-xl font-bold  text-[#113eb6] content-end gap-5">
+        <div className="flex font-_spaceGrotesk text-xl font-bold  text-[#113eb6] content-end gap-7">
           {MenuItems?.map(({ href, txt, singleType }) => (
             <div key={href} item>
               <Link href={href}>
@@ -236,17 +293,18 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
             </div>*/}
             
               <div>  
-                <p className="absolute  text-3xl font-bold text-center text-[#113eb6]">
+                <Link href='https://kitlenid.fr/blog'>
+                <a className=" text-3xl font-bold text-center text-[#113eb6]">
                 Blog
-              </p>
+              </a></Link>
               </div>
               <div className=' text-red-800 -p-3'>  
-              <UpdateProfile
+             {/* <UpdateProfile
                       user={user}
                       logout={logout}
                       update={update}
                       transparent
-                    />
+                    />*/}
               </div>
             
           </div>
