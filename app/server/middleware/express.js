@@ -74,9 +74,7 @@ const listCollection = (
 const storeSignUpInfos = handleErrors((req, res, next) => {
   const { firstName, lastName, birthday, postalCode, centersOfInterest } =
     req.query;
-  console.log('AAA');
   if (firstName || lastName || birthday || postalCode || centersOfInterest) {
-    console.log('BBB');
     req.session.signUpInfos = {
       firstName,
       lastName,
@@ -87,11 +85,9 @@ const storeSignUpInfos = handleErrors((req, res, next) => {
         : [centersOfInterest],
     };
   }
-  console.log('CCC');
   next();
 });
 const consumeSignUpInfos = handleErrors(async (req, res, next) => {
-  console.log('$$$$Passe dans consume', req.session);
   if (req.session.signUpInfos) {
     const { firstName, lastName, birthday, postalCode, centersOfInterest } =
       req.session.signUpInfos;
@@ -105,8 +101,8 @@ const consumeSignUpInfos = handleErrors(async (req, res, next) => {
         centersOfInterest,
       },
     });
-    console.log('FINISH THERE');
     req.user = user;
+    res.user = user;
     delete req.session.signUpInfos;
   }
   next();

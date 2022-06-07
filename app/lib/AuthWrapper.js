@@ -31,12 +31,15 @@ const styles = (theme) => ({
 });
 
 const mapState = (state) => {
-  const { loggingIn, user } = state?.authentication;
+  var { loggingIn, user } = state?.authentication;
   return { loggingIn, user };
 };
 const actionCreators = {
   logout: userActions.logout,
+  login: userActions.login,
+  register: userActions.register,
   update: userActions.update,
+  authSocialMedia: userActions.loginSocialMedia,
 };
 export const StudentMenuComp = connect(
   mapState,
@@ -47,6 +50,9 @@ export const StudentMenuComp = connect(
       children,
       user,
       logout,
+      login,
+      register,
+      authSocialMedia,
       update,
       fullContentWidth,
       noHeaderMargin,
@@ -71,7 +77,14 @@ export const StudentMenuComp = connect(
             </Hidden>
           </Grid>
           <Hidden mdUp>
-            <MobileMenu user={user} logout={logout} update={update} />
+            <MobileMenu
+              user={user}
+              logout={logout}
+              login={login}
+              register={register}
+              authSocialMedia={authSocialMedia}
+              update={update}
+            />
           </Hidden>
           <Container
             maxWidth={fullContentWidth ? false : 'lg'}

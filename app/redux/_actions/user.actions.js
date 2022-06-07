@@ -1,16 +1,19 @@
 import { userConstants } from '../_constants';
-import { signIn, signUp, logOut, resetPassword } from '../../lib/api/public';
-import { updateUserApiMethod } from '../../lib/api/customer';
+import {
+  signIn,
+  signUp,
+  logOut,
+  resetPassword,
+  authSocialMedia,
+} from '../../lib/api/public';
+import { updateUserApiMethod, getUserByEmail } from '../../lib/api/customer';
 import { queryParams } from 'helpers';
 import { alertActions } from './alert.actions';
 
 const redirectAfterAccess = (user) => {
   const params = queryParams(window.location.href);
 
-  window.location =
-    user?.role === 'admin'
-      ? '/admin'
-      : `/dashboard${params?.id ? `/property/buy/${params.id}` : ''}`;
+  window.location = user?.role === 'admin' ? '/admin' : window.location.href; // : `/dashboard${params?.id ? `/property/buy/${params.id}` : ''}`;
 };
 function login(args) {
   const request = (user) => ({ type: userConstants.LOGIN_REQUEST, user });
@@ -20,6 +23,33 @@ function login(args) {
     dispatch(request({ username: args.username }));
 
     signIn(args)
+      .then(({ user }) => {
+        if (user && user._id) {
+          dispatch(success(user));
+          redirectAfterAccess(user);
+        }
+      })
+      .catch((error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      });
+  };
+}
+
+function loginSocialMedia(args) {
+  const request = (provider) => ({
+    type: userConstants.AUTH_SOCIAL_REQUEST,
+    provider,
+  });
+  const success = (user) => ({ type: userConstants.AUTH_SOCIAL_SUCCESS, user });
+  const failure = (error) => ({
+    type: userConstants.AUTH_SOCIAL_FAILURE,
+    error,
+  });
+  return (dispatch) => {
+    dispatch(request(args.provider));
+
+    authSocialMedia(args)
       .then(({ user }) => {
         if (user && user._id) {
           dispatch(success(user));
@@ -61,6 +91,24 @@ function updateUserDataOnly(args, callback) {
     dispatch(request({ username: args.username }));
     dispatch(success(args));
     if (callback) callback();
+  };
+}
+
+function checkUser(args) {
+  const request = (user) => ({ type: userConstants.CHECK_REQUEST, user });
+  const success = (user) => ({ type: userConstants.CHECK_SUCCESS, user });
+  const failure = (error) => ({ type: userConstants.CHECK_FAILURE, error });
+  return (dispatch) => {
+    dispatch(request({ username: args.email }));
+    getUserByEmail(args).then(
+      ({ userExist }) => {
+        dispatch(success(userExist));
+      },
+      (error) => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
   };
 }
 
@@ -117,4 +165,6 @@ export const userActions = {
   update,
   resetPass,
   updateUserDataOnly,
+  checkUser,
+  loginSocialMedia,
 };

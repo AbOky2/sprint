@@ -25,6 +25,7 @@ const getStations = async ({ lng = '49.0477928', lat = '2.0329494' } = {}) => {
         const transports = curr.Transports.Transport;
 
         transports.forEach((e) => {
+          console.log(e);
           const r = acc[e.mode];
           if (r) {
             if (!r.find((a) => a.name == e.name)) acc[e.mode] = [...r, e];

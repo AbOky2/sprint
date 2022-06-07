@@ -15,6 +15,8 @@ import {
   spaceCurrency,
 } from 'helpers';
 import { Carrousel, NotFound, Icon, Maps } from 'components';
+import { Modal } from '../../form';
+import { Authentification } from '../../authentification';
 
 import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';
@@ -25,10 +27,15 @@ const PropertyPage = ({
   id,
   user,
   update,
+  login,
+  register,
+  authSocialMedia,
   property = {},
   isLocation = false,
 }) => {
   const [state, setState] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
   const [selectedLot, setSelectedLot] = useState(null);
   const [total, setTotal] = useState(0);
   const [currOpen, setCurrOpen] = useState('');
@@ -41,6 +48,13 @@ const PropertyPage = ({
   };
   const handleSelectLot = (elem) => setSelectedLot(elem);
   const handleCurrOpen = (e) => setCurrOpen(currOpen === e ? null : e);
+  const [changeName, setChangeName] = useState(false);
+  const toggleMenu = () => setShowMenu(!showMenu);
+  const toggleModal = () => setShowModal(!showModal);
+  const handleSumbit = (url) => console.log('URL: ', url);
+  const setShowAuthModal = (url) =>
+    !user ? setShowModal(true) : window.open(url);
+
   useEffect(() => {
     (async () => {
       const newState = {};
@@ -220,21 +234,42 @@ const PropertyPage = ({
             {property.typeOfAnnonce === typeOfAnnoncies[0] ? (
               <BuyTable
                 state={state}
+                user={user}
                 property={property}
                 currOpen={currOpen}
                 handleCurrOpen={handleCurrOpen}
+                setShowAuthModal={setShowAuthModal}
               />
             ) : (
               <LocationTable
                 state={state}
+                user={user}
                 property={property}
                 currOpen={currOpen}
                 handleSelect={handleSelectLot}
                 handleCurrOpen={handleCurrOpen}
+                setShowAuthModal={setShowAuthModal}
               />
             )}
           </Grid>
         </Grid>
+        <Modal
+          openModal={showModal}
+          onClose={toggleModal}
+          onClick={handleSumbit}
+          showActions={false}
+          title={
+            changeName ? 'Finalise ton inscription' : 'Connexion ou inscription'
+          }
+          // confirmText="Enregistrer"
+        >
+          <Authentification
+            setChangeName={setChangeName}
+            login={login}
+            register={register}
+            authSocialMedia={authSocialMedia}
+          />
+        </Modal>
         <LocationModal
           className={classes.modal}
           user={user}
@@ -345,5 +380,8 @@ const mapState = (state) => {
 
 const actionCreators = {
   update: userActions.updateUserDataOnly,
+  login: userActions.login,
+  register: userActions.register,
+  authSocialMedia: userActions.loginSocialMedia,
 };
 export default connect(mapState, actionCreators)(PropertyPage);

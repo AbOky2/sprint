@@ -17,6 +17,17 @@ export const authentication = (state = initialState, action) => {
         loggedIn: true,
         user: action.user,
       };
+
+    case userConstants.AUTH_SOCIAL_REQUEST:
+      return {
+        loggingIn: true,
+        user: action.user,
+      };
+    case userConstants.AUTH_SOCIAL_SUCCESS:
+      return {
+        loggedIn: true,
+        user: action.user,
+      };
     case userConstants.REGISTER_SUCCESS:
       return {
         loggedIn: true,
@@ -28,6 +39,8 @@ export const authentication = (state = initialState, action) => {
         user: action.user,
       };
     case userConstants.LOGIN_FAILURE:
+      return {};
+    case userConstants.AUTH_SOCIAL_FAILURE:
       return {};
     case userConstants.LOGOUT:
       return {};

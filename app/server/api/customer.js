@@ -40,6 +40,20 @@ router.get(
     }
   }
 );
+
+router.post(
+  '/user',
+  // eslint-disable-next-line no-return-await
+  async ({ body } = {}, res) => {
+    try {
+      const { userExist } = await UserModel.getByEmail(body);
+      return res.json({ userExist });
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 router.put(
   '/user',
   profileCollection(
@@ -112,7 +126,7 @@ router.get(
   getCollection(async ({ id, user = {} }) => {
     const rest = await PropertieModel.findById(id);
     console.log({ id });
-    await UserModel.updateLastViewed(user._id, id);
+    if (user._id) await UserModel.updateLastViewed(user._id, id);
     return rest;
   })
 );

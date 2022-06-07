@@ -12,7 +12,14 @@ import { Icon, Btn } from 'components';
 import { NEXT_PUBLIC_UPLOAD_URL } from 'config';
 import styles from './styles';
 
-const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
+const LocationTable = ({
+  classes,
+  state,
+  user,
+  currOpen,
+  handleCurrOpen,
+  setShowAuthModal,
+}) =>
   Object.keys(state).map((elem) => {
     const current = state[elem];
     const isOpen = currOpen === elem;
@@ -216,7 +223,10 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       <Grid item className={classes.btnContainer}>
                         <a
                           className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-10 mt-8"
-                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                          // href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                          onClick={() =>
+                            setShowAuthModal(NEXT_PUBLIC_UPLOAD_URL + curr.file)
+                          }
                           style={{
                             background:
                               'linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)',
@@ -269,7 +279,10 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       <Grid item md={2} xs={2} className={classes.btnContainer}>
                         <Btn
                           text={curr.file ? 'Voir le plan' : '-'}
-                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                          // href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                          onClick={() =>
+                            setShowAuthModal(NEXT_PUBLIC_UPLOAD_URL + curr.file)
+                          }
                           download
                           disabled={!curr.file}
                           target="_blank"

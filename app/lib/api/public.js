@@ -10,6 +10,16 @@ export const signUp = (args) =>
   sendRequest(`/auth/signup`, {
     body: JSON.stringify(args),
   });
+
+export const authSocialMedia = (args) =>
+  sendRequest(`/auth/${args.provider}`, {
+    body: JSON.stringify(args),
+  });
+
+export const getUserByEmail = (args) =>
+  sendRequest(`/api/v1/customer/user`, {
+    body: JSON.stringify(args),
+  });
 export const resetPassword = (args) =>
   sendRequest(`/auth/resetPassword`, {
     body: JSON.stringify(args),

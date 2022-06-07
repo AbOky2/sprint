@@ -210,6 +210,11 @@ class UserClass extends DBModel {
     return this.getId({ slug });
   }
 
+  static async getByEmail({ email }) {
+    const userDoc = await this.findOne({ email });
+    return !userDoc ? { userExist: false } : { userExist: true };
+  }
+
   static async listStudents({
     limit = defaultLimit,
     offset: page = defaultOffset,
@@ -325,7 +330,7 @@ class UserClass extends DBModel {
       user = (
         await this.add({
           // set role
-          role: 'student',
+          role: 'buyer',
           email,
           password,
           firstName,

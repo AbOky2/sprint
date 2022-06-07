@@ -43,7 +43,14 @@ const sponsorship = {
 };
 const MenuItems = [...MobileItems, sponsorship];
 
-export const MobileMenu = ({ user = {}, logout, update }) => {
+export const MobileMenu = ({
+  user = {},
+  logout,
+  update,
+  login,
+  authSocialMedia,
+  register,
+}) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [changeName, setChangeName] = useState(false);
@@ -137,7 +144,12 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
         }
         // confirmText="Enregistrer"
       >
-        <Authentification setChangeName={setChangeName} />
+        <Authentification
+          setChangeName={setChangeName}
+          login={login}
+          register={register}
+          authSocialMedia={authSocialMedia}
+        />
       </Modal>
     </Grid>
   );

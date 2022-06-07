@@ -24,7 +24,10 @@ const LocationTable = ({
         : ` de ${current.minSurface}m² à ${current.maxSurface}m²`;
 
     return (
-      <div key={elem} className="flex flex-col justify-center p-4 bg-white border rounded-xl border-_rougeStudea w-96 items-center">
+      <div
+        key={elem}
+        className="flex flex-col justify-center p-4 bg-white border rounded-xl border-_rougeStudea w-96 items-center"
+      >
         <Grid
           container
           className="pointer"
@@ -33,18 +36,14 @@ const LocationTable = ({
         >
           <Grid container justify="space-between">
             <Grid item>
-              <div className=' text-_rougeStudea'>
+              <div className=" text-_rougeStudea">
                 {` ${elem} pièce${elem > 1 ? 's' : ''} à partir de `}
 
                 <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
               </div>
             </Grid>
             <Grid item className="text-center">
-              <Icon
-                type={isOpen ? 'less' : 'plus'}
-                color="red"
-                size="small"
-              />
+              <Icon type={isOpen ? 'less' : 'plus'} color="red" size="small" />
             </Grid>
           </Grid>
           <Grid item md={2} xs={5} className={classes.header}>
@@ -71,7 +70,7 @@ const LocationTable = ({
             </p>
           </Grid>
           <Grid item md={3} xs={5} className={classes.header}>
-          <p className="text-2xl font-medium text-left text-_rougeStudea mx-4">
+            <p className="text-2xl font-medium text-left text-_rougeStudea mx-4">
               {`${countList} logement${countList > 1 ? 's' : ''} disponible${
                 countList > 1 ? 's' : ''
               }`}
@@ -127,72 +126,79 @@ const LocationTable = ({
                     key={curr.ref}
                     container
                     className={classes.discoveryContent}
-                    
                   >
-                       <div className='flex flex-col items-center md:items-end w-full'>
-                            <div className='flex flex-row justify-between mb-1'>
-                            <p className="w-44 h-5 text-sm font-medium ">Loyer Mensuel</p>
-                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{curr.price} €</p>
-                            </div>
-                            <div className='flex flex-row  mb-1'>
-                            <p className="w-44 h-5 text-sm font-medium">Surface</p>
-                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{`${curr.surface}m²`}</p>
-                              <span></span>
-                            </div>
-                            <div className='flex flex-row mb-1'>
-                            <p className="w-44 h-5 text-sm font-medium">Étage</p>
-                            <p className="w-44 h-5 text-sm font-medium justify-end flex">{floor} </p>
-                              
-                            </div>
-                            <div className='flex flex-row mb-1'>
-                              <p className="w-44 h-5 text-sm font-medium">disponibilité</p>
-                              <p className="w-44 h-5 text-sm font-medium justify-end flex">{availableDate}</p>
-                              
-                            </div>
-                            <div
-                              className="text-center" item
-                            >
-                              
-                              <div className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-1 mt-8 bg-_rougeStudea cursor-pointer" onClick={() =>handleSelect(curr)} >
-                              <button className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white" >
-                                Réserver.
-                              </button></div>
-                            </div>
+                    <div className="flex flex-col items-center md:items-end w-full">
+                      <div className="flex flex-row justify-between mb-1">
+                        <p className="w-44 h-5 text-sm font-medium ">
+                          Loyer Mensuel
+                        </p>
+                        <p className="w-44 h-5 text-sm font-medium justify-end flex">
+                          {curr.price} €
+                        </p>
+                      </div>
+                      <div className="flex flex-row  mb-1">
+                        <p className="w-44 h-5 text-sm font-medium">Surface</p>
+                        <p className="w-44 h-5 text-sm font-medium justify-end flex">{`${curr.surface}m²`}</p>
+                        <span></span>
+                      </div>
+                      <div className="flex flex-row mb-1">
+                        <p className="w-44 h-5 text-sm font-medium">Étage</p>
+                        <p className="w-44 h-5 text-sm font-medium justify-end flex">
+                          {floor}{' '}
+                        </p>
+                      </div>
+                      <div className="flex flex-row mb-1">
+                        <p className="w-44 h-5 text-sm font-medium">
+                          disponibilité
+                        </p>
+                        <p className="w-44 h-5 text-sm font-medium justify-end flex">
+                          {availableDate}
+                        </p>
+                      </div>
+                      <div className="text-center" item>
+                        <div
+                          className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-1 mt-8 bg-_rougeStudea cursor-pointer"
+                          onClick={() => handleSelect(curr)}
+                        >
+                          <button className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
+                            Réserver.
+                          </button>
+                        </div>
+                      </div>
+                    </div>
 
-                       </div>
-                       
-                          <Grid
-                            container
-                            alignItems="center"
-                            className={classes.contentContainer}
-                          >
-                            <Grid item md={2} xs={5} className="text-center">
-                              <strong>{curr.price}</strong>€
-                            </Grid>
-                            <Grid item md={2} xs={5} className="text-center">
-                              {`${curr.guarantee}€`}
-                            </Grid>
-                            <Grid item md={2} xs={5} className="text-center">
-                              {`${curr.surface}m²`}
-                            </Grid>
-                            <Grid item md={2} xs={5} className="text-center">
-                              {floor}
-                            </Grid>
-                            <Grid item md={2} xs={5} className="text-center">
-                              {availableDate}
-                            </Grid>
-                            
-                            <Grid item md={2} xs={5} className={classes.btnContainer}>
-                              <Btn
-                                onClick={() => handleSelect(curr)}
-                                target="_blank"
-                                dataMode="popup"
-                                text="Envoyer une demande"
-                                bordered
-                                whiteColor
-                              />
-                            </Grid>
-                          </Grid>
+                    <Grid
+                      container
+                      alignItems="center"
+                      className={classes.contentContainer}
+                    >
+                      <Grid item md={2} xs={5} className="text-center">
+                        <strong>{curr.price}</strong>€
+                      </Grid>
+                      <Grid item md={2} xs={5} className="text-center">
+                        {`${curr.guarantee}€`}
+                      </Grid>
+                      <Grid item md={2} xs={5} className="text-center">
+                        {`${curr.surface}m²`}
+                      </Grid>
+                      <Grid item md={2} xs={5} className="text-center">
+                        {floor}
+                      </Grid>
+                      <Grid item md={2} xs={5} className="text-center">
+                        {availableDate}
+                      </Grid>
+
+                      <Grid item md={2} xs={5} className={classes.btnContainer}>
+                        <Btn
+                          onClick={() => handleSelect(curr)}
+                          target="_blank"
+                          dataMode="popup"
+                          text="Envoyer une demande"
+                          bordered
+                          whiteColor
+                        />
+                      </Grid>
+                    </Grid>
                   </Grid>
                 );
               })}

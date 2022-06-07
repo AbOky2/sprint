@@ -6,30 +6,30 @@ import { Icon, Btn } from 'components';
 import { tranportationsKeys, individualAdvantages } from 'helpers';
 
 const BtnCalendly = () => (
-  
-  
   <div
     className="flex justify-center items-center relative gap-2.5 py-4 rounded-xl mb-1 mt-8 cursor-pointer"
     onClick={() => openPopupWidget({ url: 'https://calendly.com/kitlenid' })}
-
-    style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }}
+    style={{
+      background: 'linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)',
+    }}
   >
     <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
-    Être rappelé selon mes dispos </p>
+      Être rappelé selon mes dispos{' '}
+    </p>
   </div>
 );
 
 const Extras = ({ advantages = [] }) => (
   <>
-  <p className="flex-grow-0 flex-shrink-0 w-[295px] font-bold text-left text-[#3679ff] text-_rougeStudea text-2xl">
-Les petits plus </p>
-<div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mt-9 mb-5">
+    <p className="flex-grow-0 flex-shrink-0 w-[295px] font-bold text-left text-[#3679ff] text-_rougeStudea text-2xl">
+      Les petits plus{' '}
+    </p>
+    <div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mt-9 mb-5">
       {advantages.map((elem) => (
         <div key={elem} alignItems="center">
           <Icon
             type="checked"
-            color='newRed'
-            
+            color="newRed"
             customSize={{ width: 20, height: 20 }}
           />
           <p>{elem}</p>
@@ -52,17 +52,16 @@ const Sidebar = ({ isLocation, property, classes }) => {
   return (
     <div>
       {Object.keys(transportations).length ? (
-        
         <div className="flex flex-col justify-center items-center relative gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mb-5 mt-12">
-        {isLocation ? (
+          {isLocation ? (
             <p className="flex-grow-0 flex-shrink-0 w-[295px] text-2xl font-bold text-center text-_rougeStudea mb-5">
-            Transports à proximité</p>
-        ): (
-          <p className="flex-grow-0 flex-shrink-0 w-[295px] text-2xl font-bold text-center text-_aPropos mb-5">
-          Transports à proximité</p>
-
-        )}
-       
+              Transports à proximité
+            </p>
+          ) : (
+            <p className="flex-grow-0 flex-shrink-0 w-[295px] text-2xl font-bold text-center text-_aPropos mb-5">
+              Transports à proximité
+            </p>
+          )}
 
           <Grid container justify="flex-start">
             {Object.keys(transportations)
@@ -85,9 +84,30 @@ const Sidebar = ({ isLocation, property, classes }) => {
                       )}
                     </h2>
                     <ul>
-                      {list.map((e) => (
-                        <li key={e.name}>{e.name}</li>
-                      ))}
+                      {list.map((e) =>
+                        e.name.length < 5 ? (
+                          <li
+                            key={e.name}
+                            style={{
+                              backgroundColor: e.At.color,
+                              color: e.At.textColor,
+                              minWidth: '2em',
+                              borderRadius: e.name.length < 3 ? '50px' : '2px',
+                              fontSize: '0.9em',
+                              textAlign: 'center',
+                              fontFamily: 'Arial',
+                              marginTop: '20px',
+                              padding: '6px',
+                              float: 'left',
+                              clear: 'left',
+                            }}
+                          >
+                            <b>{e.name}</b>
+                          </li>
+                        ) : (
+                          <></>
+                        )
+                      )}
                     </ul>
                   </Grid>
                 );
@@ -108,24 +128,35 @@ const Sidebar = ({ isLocation, property, classes }) => {
       ) : (
         ''
       )}
-      
+
       {isLocation && (
         <div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu mb-5">
-        <p className="flex-grow-0 flex-shrink-0 w-[295px] font-bold text-left text-[#3679ff] text-_rougeStudea text-2xl">
-          Frais à prevoir:
-        </p>
-        <p className="self-stretch flex-grow-0 flex-shrink-0 w-[295px] text-sm font-normal text-left text-[#6976a0] text-_gris">
-           Il s’agit de frais uniques, à débourser une seule et unique fois.
-     
-         <br/>Honoraires d’organisation de la visite + Constitution du dossier + Rédaction du bail à la charge du locataire : <strong className=' text-_rougeStudea font-semibold'>502€ TTC</strong>
-     
-         <br/>Honoraires de réalisation d’état des lieux à la charge du locataire :<strong className=' text-_rougeStudea font-semibold'> 188€ TTC</strong><br/>
-     
-        <br/>  <strong className=' text-_rougeStudea font-semibold'>Total des frais : 1284€ TTC</strong>
+          <p className="flex-grow-0 flex-shrink-0 w-[295px] font-bold text-left text-[#3679ff] text-_rougeStudea text-2xl">
+            Frais à prevoir:
           </p>
-      </div>
+          <p className="self-stretch flex-grow-0 flex-shrink-0 w-[295px] text-sm font-normal text-left text-[#6976a0] text-_gris">
+            Il s’agit de frais uniques, à débourser une seule et unique fois.
+            <br />
+            Honoraires d’organisation de la visite + Constitution du dossier +
+            Rédaction du bail à la charge du locataire :{' '}
+            <strong className=" text-_rougeStudea font-semibold">
+              502€ TTC
+            </strong>
+            <br />
+            Honoraires de réalisation d’état des lieux à la charge du locataire
+            :
+            <strong className=" text-_rougeStudea font-semibold">
+              {' '}
+              188€ TTC
+            </strong>
+            <br />
+            <br />{' '}
+            <strong className=" text-_rougeStudea font-semibold">
+              Total des frais : 1284€ TTC
+            </strong>
+          </p>
+        </div>
       )}
-      
     </div>
   );
 };
