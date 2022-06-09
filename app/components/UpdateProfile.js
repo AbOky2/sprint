@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 export const UpdateProfile = ({ user, update, logout, transparent }) => {
   const [showSubMenu, setShowSubMenu] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [state, setState] = useState(user);
+  const [state, setState] = useState(user || {});
   const handleChange =
     (name) =>
     ({ target: { value } }) =>

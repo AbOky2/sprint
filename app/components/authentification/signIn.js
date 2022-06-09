@@ -71,7 +71,7 @@ export const SignIn = ({
     </Grid>
     {!invokePasswordInput ? (
       <>
-        <GoogleLogin
+        {/* <GoogleLogin
           clientId={GOOGLE_CLIENT_ID}
           render={(renderProps) => (
             <Grid
@@ -88,8 +88,8 @@ export const SignIn = ({
           onSuccess={handleLogin}
           onFailure={handleLogin}
           cookiePolicy={'single_host_origin'}
-        />
-        <FacebookAuth
+        /> */}
+        {/* <FacebookAuth
           appId="487070945537857"
           callback={handleLogin}
           component={({ onClick }) => (
@@ -103,24 +103,39 @@ export const SignIn = ({
               <Typography variant="body1">continuer avec Facebook</Typography>
             </Grid>
           )}
-        />
+        /> */}
 
-        {/* <Grid container alignItems="center" className={classes.socialAuth}>
+        <Grid
+          onClick={() =>
+            window.open('http://localhost:3000/auth/facebook', '_self')
+          }
+          container
+          alignItems="center"
+          className={classes.socialAuth}
+        >
           <Icon type="facebook" />
           <Typography variant="body1">continuer avec Facebook</Typography>
-        </Grid> */}
-        <Grid container alignItems="center" className={classes.socialAuth}>
-          <Icon type="instagram" />
-          <Typography variant="body1">continuer avec Instagram</Typography>
         </Grid>
-        <Grid container alignItems="center" className={classes.socialAuth}>
+        <Grid
+          onClick={() =>
+            window.open('http://localhost:3000/auth/google', '_self')
+          }
+          container
+          alignItems="center"
+          className={classes.socialAuth}
+        >
           <Icon type="google" />
           <Typography variant="body1">continuer avec Google</Typography>
         </Grid>
+        {/* <Grid container alignItems="center" className={classes.socialAuth}>
+          <Icon type="instagram" />
+          <Typography variant="body1">continuer avec Instagram</Typography>
+        </Grid>
+        
         <Grid container alignItems="center" className={classes.socialAuth}>
           <Icon type="apple" />
           <Typography variant="body1">continuer avec Apple</Typography>
-        </Grid>
+        </Grid> */}
       </>
     ) : (
       <></>

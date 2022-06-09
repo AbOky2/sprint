@@ -23,6 +23,11 @@ export const authentication = (state = initialState, action) => {
         loggingIn: true,
         user: action.user,
       };
+    case userConstants.CHECK_USER_SESSION:
+      return {
+        loggingIn: true,
+        user: action.user,
+      };
     case userConstants.AUTH_SOCIAL_SUCCESS:
       return {
         loggedIn: true,

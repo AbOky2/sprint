@@ -6,6 +6,9 @@ import { StudentMenuComp } from './AuthWrapper';
 import AdminDrawer from '../components/admin/drawer';
 import { isAdmin, dashboardPaths } from 'helpers';
 import { queryParams } from 'helpers';
+import { userActions } from '../redux/_actions';
+import { connect } from 'react-redux';
+
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start();
@@ -37,6 +40,7 @@ export default function withAuth(
 ) {
   class App extends React.Component {
     static async getInitialProps(ctx) {
+
       const isFromServer = typeof window === 'undefined';
       const user = ctx.req ? ctx.req.user && ctx.req.user : globalUser;
 
@@ -54,7 +58,10 @@ export default function withAuth(
     }
 
     componentDidMount() {
+      console.log("PROPS ", this.props)
       const { user, isFromServer } = this.props;
+      this.props.checkUserSession(user);
+
 
       if (isFromServer) {
         globalUser = user;
@@ -126,5 +133,15 @@ export default function withAuth(
   App.propTypes = propTypes;
   App.defaultProps = defaultProps;
 
-  return App;
+  // const mapState = (state) => {
+  //   console.log("State: ", state)
+  //   const { loggingIn, user } = state.authentication;
+  //   return { loggingIn, user };
+  // };
+
+  const mapDispatchToProps = (dispatch) => ({
+    checkUserSession: (user) => dispatch(userActions.checkUserSession(user)),
+  });
+
+  return connect(null, mapDispatchToProps)(App);
 }

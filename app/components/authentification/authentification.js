@@ -87,7 +87,7 @@ export const Authentification = ({
       token = socialData.accessToken;
     } else token = socialData.tokenId;
 
-    authSocialMedia({ provider: provider, token: token });
+    authSocialMedia({ provider: provider, token: token }, redirect);
   };
 
   const handleCheckEmailExist = () => {

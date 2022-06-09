@@ -35,7 +35,9 @@ const PropertyPage = ({
 }) => {
   const [state, setState] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [redirectURL, setRedirectURL] = useState(null);
 
+  console.log('Property: ', property);
   const [selectedLot, setSelectedLot] = useState(null);
   const [total, setTotal] = useState(0);
   const [currOpen, setCurrOpen] = useState('');
@@ -47,13 +49,17 @@ const PropertyPage = ({
     addBookmarkApiMethod({ id }).then(({ user }) => update(user));
   };
   const handleSelectLot = (elem) => setSelectedLot(elem);
+  const handleShowModal = (value, url) => {
+    setRedirectURL(url);
+    setShowModal(value);
+  };
   const handleCurrOpen = (e) => setCurrOpen(currOpen === e ? null : e);
   const [changeName, setChangeName] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
   const toggleModal = () => setShowModal(!showModal);
   const handleSumbit = (url) => console.log('URL: ', url);
   const setShowAuthModal = (url) =>
-    !user ? setShowModal(true) : window.open(url);
+    !user ? handleShowModal(true, url) : window.open(url);
 
   useEffect(() => {
     (async () => {
@@ -268,6 +274,7 @@ const PropertyPage = ({
             login={login}
             register={register}
             authSocialMedia={authSocialMedia}
+            redirect={redirectURL}
           />
         </Modal>
         <LocationModal

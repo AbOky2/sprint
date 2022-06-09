@@ -10,12 +10,13 @@ import { updateUserApiMethod, getUserByEmail } from '../../lib/api/customer';
 import { queryParams } from 'helpers';
 import { alertActions } from './alert.actions';
 
-const redirectAfterAccess = (user) => {
+const redirectAfterAccess = ({ user, redirect }) => {
   const params = queryParams(window.location.href);
-
+  console.log('Redirect: ', redirect);
+  if (redirect) window.open(redirect);
   window.location = user?.role === 'admin' ? '/admin' : window.location.href; // : `/dashboard${params?.id ? `/property/buy/${params.id}` : ''}`;
 };
-function login(args) {
+function login(args, redirect) {
   const request = (user) => ({ type: userConstants.LOGIN_REQUEST, user });
   const success = (user) => ({ type: userConstants.LOGIN_SUCCESS, user });
   const failure = (error) => ({ type: userConstants.LOGIN_FAILURE, error });
@@ -25,8 +26,9 @@ function login(args) {
     signIn(args)
       .then(({ user }) => {
         if (user && user._id) {
+          console.log('args: ', redirect);
           dispatch(success(user));
-          redirectAfterAccess(user);
+          redirectAfterAccess({ user, redirect });
         }
       })
       .catch((error) => {
@@ -36,7 +38,7 @@ function login(args) {
   };
 }
 
-function loginSocialMedia(args) {
+function loginSocialMedia(args, redirect) {
   const request = (provider) => ({
     type: userConstants.AUTH_SOCIAL_REQUEST,
     provider,
@@ -53,7 +55,7 @@ function loginSocialMedia(args) {
       .then(({ user }) => {
         if (user && user._id) {
           dispatch(success(user));
-          redirectAfterAccess(user);
+          redirectAfterAccess({ user, redirect });
         }
       })
       .catch((error) => {
@@ -130,7 +132,7 @@ function register(user) {
       ({ user }) => {
         if (user && user._id) {
           dispatch(success(user));
-          redirectAfterAccess(user);
+          redirectAfterAccess({ user });
           dispatch(alertActions.success('Registration successful'));
         }
       },
@@ -149,7 +151,7 @@ function resetPass(args) {
       .then(({ user }) => {
         if (user && user._id) {
           dispatch(success(user));
-          redirectAfterAccess(user);
+          redirectAfterAccess({ user });
         }
       })
       .catch((error) => {
@@ -158,6 +160,12 @@ function resetPass(args) {
       });
   };
 }
+
+const checkUserSession = (user) => ({
+  type: userConstants.CHECK_USER_SESSION,
+  user,
+});
+
 export const userActions = {
   login,
   logout,
@@ -167,4 +175,5 @@ export const userActions = {
   updateUserDataOnly,
   checkUser,
   loginSocialMedia,
+  checkUserSession,
 };

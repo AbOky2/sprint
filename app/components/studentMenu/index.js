@@ -69,7 +69,7 @@ export const MobileMenu = ({
     >
       {MobileItems?.map((props) => {
         let { href, txt, singleType, iconProps } = props;
-        if (!user._id) {
+        if (user && !user._id) {
           if (href === '/dashboard/bookmark') return null;
           txt = 'Connexion';
         }
