@@ -61,11 +61,13 @@ export const MobileMenu = ({ user = {}, logout, update }) => {
   const [showModal, setShowModal] = useState(false);
   const [showModal1, setShowModal1] = useState(false);
   const [changeName, setChangeName] = useState(false);
+  const [showModalMenu, setShowModalMenu] = useState(false)
   const classes = useStyles();
   const { asPath } = useRouter();
   const toggleMenu = () => setShowMenu(!showMenu);
   const toggleModal = () => setShowModal(!showModal);
   const toggleModal1 = () => setShowModal1(!showModal1);
+  const toggleModalMenu=() => setShowModalMenu(!showModalMenu)
 
   const handleSumbit = () => console.log('submit');
 

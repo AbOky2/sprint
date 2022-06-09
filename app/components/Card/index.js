@@ -39,7 +39,7 @@ export const Card = ({
 
     {isMdView? (
 
-<div className='bg-white rounded-xl border border-_grisBleu flex w-full gap-5 p-4'>
+<div className='bg-white rounded-xl border border-_grisBleu flex w-full gap-5 p-4 mb-4'>
 
     
 <div className="w-[109px] h-[109px] p-4 rounded-[10px] bg-[#c4c4c4] object-contain bg-cover" style={{ backgroundImage: `url(${src})` }}></div>
@@ -80,8 +80,8 @@ export const Card = ({
 
 </div>
     ):(
-      <div className=' bg-red-500 flex flex-row justify-between'>
-      <div className='bg-white rounded-xl border border-_grisBleu flex w-[400px] gap-7 p-4'>
+      
+      <div className='bg-white rounded-xl border border-_grisBleu flex w-[400px] gap-7 p-4 mb-4'>
 
     
       <div className="w-[209px] h-[109px] p-4 rounded-[10px] bg-[#c4c4c4] object-contain bg-cover" style={{ backgroundImage: `url(${src})` }}></div>
@@ -120,7 +120,7 @@ export const Card = ({
       </div>
 
 
-    </div></div>
+    </div>
 
     )}
 

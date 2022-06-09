@@ -26,11 +26,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
     const conditionalColumn = hasReduction ? 1 : 2;
 
     return (
-      <div key={elem} className="flex flex-col space-x-3 items-start justify-center p-4 bg-white border rounded-xl border-_aPropos w-96 mb-4">
+      <div key={elem} className="flex flex-col items-center justify-center p-4  bg-white border rounded-xl border-_aPropos mb-4">
         <Grid
           container
           className="pointer"
-          alignItems="center"
+          justify = "space-between"
           onClick={() => handleCurrOpen(elem)}
         >
           <Grid container justify="space-between" >
@@ -48,13 +48,15 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 size="small"
               />
             </Grid>
-          </Grid>
-          <Grid item md={2} xs={5} className={classes.header}>
-            <Typography>
-              <Icon type="door" color="newBlue" />
-              {` ${elem} pièce${elem > 1 ? 's' : ''}`}
-            </Typography>
-          </Grid>
+          </Grid> 
+         
+          <div style={{color:'rgba(79, 128, 255, 1)', fontWeight:'700', fontSize:'14px', lineHeight:'17px'}}>
+                {` ${elem} pièce${elem > 1 ? 's' : ''} à partir de `}
+
+                <strong>{` ${spaceCurrency(current.minPrice)}€`}</strong>
+              </div>
+          
+          {/*
           <Grid item md={3} xs={5} className={classes.header}>
             <Typography>
               <Icon type="room" color="newBlue" />
@@ -79,39 +81,39 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
               }`}
             </Typography>
           </Grid>
-          <Grid item md={1} xs={5} className="text-center pointer">
+          > */}<div className="text-center pointer flex  mx-11 ">
             <Icon
               type={isOpen ? 'less' : 'plus'}
               color="newBlue"
               size="small"
             />
-          </Grid>
+          </div>
         </Grid>
         {isOpen && (
-          <div>
+          <div >
             <Grid container className={classes.discoveryContentHeader}>
               {hasReduction && (
-                <Grid item md={2} xs={2} className="text-center">
+                <Grid item md={2} xs={2} className="text-center text-xs">
                   {`TVA réduite${vat ? ` ${vat}%` : ''}`}
                 </Grid>
               )}
-              <Grid item md={2} xs={2} className="text-center">
+              <Grid item md={2} xs={2} className="text-center text-xs">
                 Prix TVA 20%
               </Grid>
-              <Grid item md={1} xs={1} className="text-center">
+              <Grid item md={1} xs={1} className="text-center text-xs">
                 Surface
               </Grid>
-              <Grid item md={2} xs={2} className="text-center">
+              <Grid item md={2} xs={2} className="text-center text-xs">
                 Étage
               </Grid>
-              <Grid item md={1} xs={1} className="text-center">
+              <Grid item md={1} xs={1} className="text-center text-xs">
                 Orientation
               </Grid>
               <Grid
                 item
                 md={conditionalColumn}
                 xs={conditionalColumn}
-                className="text-center"
+                className="text-center text-xs"
               >
                 Parking
               </Grid>
@@ -119,11 +121,11 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                 item
                 md={conditionalColumn}
                 xs={conditionalColumn}
-                className="text-center"
+                className="text-center text-xs"
               >
                 Les +
               </Grid>
-              <Grid item md={2} xs={2} className="text-center">
+              <Grid item md={2} xs={2} className="text-center text-xs">
                 Plan 2D
               </Grid>
             </Grid>
@@ -151,21 +153,23 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                     ? price
                     : `${spaceCurrency(round10(standardTva, 1))}€`;
 
+
+                  //issylesmoulineux
                 return (
                   <Grid 
                     key={curr.lot_ref}
                     container
                     className={classes.discoveryContent}
                   >
-                    <Grid container>
-                      {hasReduction && (
-                        <Grid container justify="space-between">
-                          <span>{`TVA réduite${vat ? ` ${vat}%` : ''}`}</span>
-                          <strong>{`${price}€`}</strong>
-                        </Grid>
-                      )}
-                   <div className='flex flex-col items-center md:items-end w-full'>
-
+                    <div className='flex flex-col items-center'>
+                     
+                      <div className='flex flex-col items-center w-full '>
+                          {hasReduction && (
+                          <div className='flex flex-row justify-between mb-1'>
+                          <p className="w-44 h-5 text-sm font-medium">{`TVA réduite${vat ? ` ${vat}%` : ''}`}</p>
+                          <p className="w-44 h-5 text-sm font-medium justify-end flex">{`${price}€`}</p>
+                        </div>
+                        )}
                       <div className='flex flex-row justify-between mb-1'>
                             <p className="w-44 h-5 text-sm font-medium">Prix TVA 20%</p>
                             <p className="w-44 h-5 text-sm font-medium justify-end flex">{vatPrice}</p>
@@ -186,24 +190,26 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                             <p className="w-44 h-5 text-sm font-medium">Parking</p>
                             <p className="w-44 h-5 text-sm font-medium justify-end flex">{parking}</p>
                       </div>
-                      
                   </div>
         
-                      <Grid
-                        item
-                        className={classes.btnContainer}
-                      >
-                        
-                        <a
-                              className="flex justify-center items-center w-_344 relative gap-2.5 px-32 py-4 rounded-xl mb-10 mt-8" href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
-                              style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }}
-                            >
-                              <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
-                                {curr.file ? 'Telecharger le plan en 2D' : '-'}
-                              </p>
-                            </a>
-                      </Grid>
-                    </Grid>
+                    <div
+                      item
+                      className=' flex justify-center'>
+                      
+                      <a
+                            className="flex justify-center items-center w-_344  gap-2.5 px-32 py-4 rounded-xl mb-10 mt-8" href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                            style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }}
+                          >
+                            <p className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">
+                              {curr.file ? 'Telecharger le plan en 2D' : '-'}
+                            </p>
+                          </a>
+                    </div>
+                    </div>
+
+
+
+                    
                     <Grid
                       container
                       alignItems="center"
@@ -242,18 +248,19 @@ const LocationTable = ({ classes, state, currOpen, handleCurrOpen }) =>
                       >
                         {advantages.length ? advantages : '-'}
                       </Grid>
-                      <Grid item md={2} xs={2} className={classes.btnContainer}>
-                        <Btn
-                          text={curr.file ? 'Voir le plan' : '-'}
-                          href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
-                          download
-                          disabled={!curr.file}
-                          target="_blank"
-                          dataMode="popup"
-                    
-                          whiteColor
-                        />
-                      </Grid>
+                      <div
+                      item
+                      >
+                      
+                      <a
+                            className="flex justify-center w-28 h-7 p-1 mx-2 rounded-xl " href={NEXT_PUBLIC_UPLOAD_URL + curr.file}
+                            style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }}
+                          >
+                            <p className=" text-sm font-bold text-left text-white">
+                              {curr.file ? 'Telecharger le plan en 2D' : '-'}
+                            </p>
+                          </a>
+                    </div>
                     </Grid>
                   </Grid>
                 );

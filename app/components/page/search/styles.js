@@ -1,7 +1,7 @@
 import { withStyles } from '@material-ui/core';
 import { btnHover } from 'components/form/Btn';
 
-const inputRadius = '1.5rem';
+const inputRadius = '20px';
 
 const styles = (theme) => ({
   searchMapContainer: {
@@ -35,14 +35,13 @@ const styles = (theme) => ({
       left: 0,
       '& > div': {
         '& > div > svg': {
-          top: '.75rem!important',
+          top: '.50rem!important',
           right: '1rem!important',
           width: '3.2rem!important',
           height: '3.2rem!important',
-          background: '#4F80FF',
-          boxShadow:
-            '0px 2.7px 9.45px rgba(14, 108, 218, 0.35), inset 0px 0px 4.05px rgba(24, 72, 196, 0.6)',
-          borderRadius: '.675rem',
+          background: 'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)',
+         padding: '8px',
+          borderRadius: '12px',
           '& rect': {
             fill: 'none',
           },
@@ -86,7 +85,7 @@ const styles = (theme) => ({
     },
   },
   searchContainer: {
-    maxWidth: '742px',
+    maxWidth: '942px',
     margin: 'auto',
     marginBottom: '1.6rem',
     '& input:focus': {
@@ -111,7 +110,7 @@ const styles = (theme) => ({
           borderBottomRightRadius: 0,
           borderRight: 0,
           boxShadow: 'none',
-          border: '1px solid #EFF4FF',
+          border: '2px solid #EAEFFA',
           borderColor: theme.palette.lightBlue,
           height: '100%',
           [theme.breakpoints.down('sm')]: {
@@ -191,7 +190,7 @@ const styles = (theme) => ({
   },
   locationMaxBudget: {
     '& input': {
-      border: `1px solid ${theme.palette.lightBlue}`,
+      border: `2px solid ${theme.palette.lightBlue}`,
     },
   },
   changeViewContainer: {
@@ -277,15 +276,7 @@ const styles = (theme) => ({
   },
   listContainer: theme.ui.listContainer,
   mapsListContainer: {
-    ...theme.ui.bordered,
-    position: 'relative',
-    width: '100%',
-    border: `1px solid ${theme.palette.lightBlue}`,
-    backgroundColor: 'white',
-    marginTop: '1.6rem',
-    '&:first-of-type': {
-      marginTop: 0,
-    },
+   
     '& > a > div': {
       display: 'flex',
       borderRadius: '1.5rem',

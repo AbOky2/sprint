@@ -20,6 +20,8 @@ import { BuyTable, LocationTable } from '../table';
 import LocationModal from '../table/locationModal';
 import Sidebar, { BtnCalendly } from './sidebar';
 import useStyles from './styles';
+import { useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 import "@fontsource/space-grotesk";
 const PropertyPage = ({
   id,
@@ -28,6 +30,11 @@ const PropertyPage = ({
   property = {},
   isLocation = false,
 }) => {
+
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [state, setState] = useState({});
   const [selectedLot, setSelectedLot] = useState(null);
   const [total, setTotal] = useState(0);
@@ -93,12 +100,12 @@ const PropertyPage = ({
             className={clsx(classes.save, liked ? classes.saved : '')}
             style={{display:'flex', flexDirection:'row-reverse', justifyContent:"end"}}
           >
-            <div onClick={handleBookmark} 
-            className="flex flex-row-reverse  mr-4 "
-            style={{ top:'-83%'}}
+            <div  
+            className="flex flex-row-reverse  mr-4  "
+            style={{ top:'-88%'}}
             >
 
-              <div
+              <div onClick={handleBookmark}
               className=' bg-white rounded-full w-9 h-9 py-2 px-1.5'>
               <Icon
                 type="heart"
@@ -118,7 +125,11 @@ const PropertyPage = ({
             </div>
           </Grid>
         </div>
-        <Grid container justify="space-between" className={classes.description}>
+
+
+
+        {isMdView?(
+<Grid container justify="space-between" className={classes.description}>
           <Grid item md={6}>
             <div className='mb-5'>
             {isLocation ?(
@@ -190,6 +201,111 @@ const PropertyPage = ({
             </div>
           </div>
         </Grid>
+        ):
+        
+  
+
+// Resolution pour PC 
+
+        (<Grid container justify="space-between" className=' mx-64 mt-8 ' >
+        <Grid item md={6}>
+          <div className='mb-5'>
+          {isLocation ?(
+                         <p className=" text-left text-_rougeStudea font-bold text-3xl">
+                         {property.heading}</p>
+
+          ):(
+                  <p className="text-[48px] text-left text-blue-500 font-bold text-3xl lg:text-center"
+                  style={{color:"linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)"}}
+                  >              
+                  {property.heading}</p>
+          )}</div>
+          <p className="text-sm font-bold text-center text-[#6976a0] mb-6">{property.fullAddress}</p>
+         
+          {isLocation ?(
+          <div className='m-2 border-4 border-r-0 border-t-0 border-b-0 border-_rougeStudea mt-9'>
+                <p className="text-lg font-bold text-left text-_pieces mx-4">{getNbPieces(property.minPieces, property.maxPieces)}
+                    <br/>{` de ${
+                    property.minSurface !== property.maxSurface
+                      ? `${property.minSurface}m² à ${property.maxSurface}m²`
+                      : `${property.minSurface}m²`
+                  }`}
+                </p>
+                
+                  <p className="text-2xl font-medium text-left text-_rougeStudea mx-4">
+                  à partir de
+                  {` ${spaceCurrency(property.price)}€ CC/mois`} </p>
+                </div>): 
+                
+                (<>
+                <div className='flex justify-between gap-4 '>
+                    <div className="w-[259px] h-24 relative rounded-xl bg-white border border-[#eaeffa]">
+                      <p className="absolute left-[65px] top-6 text-lg font-bold text-center text-[#0e215c]">
+                      {getNbPieces(property.minPieces, property.maxPieces)}
+                        <br/>{` de ${
+                        property.minSurface !== property.maxSurface
+                          ? `${property.minSurface}m² à ${property.maxSurface}m²`
+                          : `${property.minSurface}m²`
+                      }`}
+                      </p>
+                    
+                    </div>
+
+                    <div className="w-[259px] h-24 relative  rounded-xl bg-white border border-[#eaeffa]">
+                    <p className="w-[200px] h-[23px] absolute left-[30px] top-[23px] text-lg font-bold text-center text-[#3679ff]">
+                      à partir de {` ${spaceCurrency(property.price)}€`}
+                    </p>
+                    <p className="w-[200px] h-[23px] absolute left-[30px] top-[50px] text-lg font-bold text-center text-[#3679ff]">
+                      soit 700 €/mois
+                    </p>
+                    </div>
+                  
+                  </div>
+                  </>
+                  
+                  
+                  // <div className='m-2 border-4 border-r-0 border-t-0 border-b-0 border-_aPropos mt-9'>
+                  // <p className="text-lg font-bold text-left text-_pieces mx-4">
+                  // </p>
+                  // <p className="text-2xl font-medium text-left text-_titre mx-4">
+                  //     à partir de
+                  // {` ${spaceCurrency(property.price)}€`} </p>
+                  // </div>
+                  )}
+                {property.available_date && !isLocation ? (
+                  <p className="self-stretch flex-grow-0 lg:text-center mt-6 flex-shrink-0 w-[295px] text-2xl font-normal text-left text-_gris mx-3">
+                  {`Fin de construction le ${property.available_date}`}
+                              </p>
+                ) : (
+                  ''
+                )}
+         
+        </Grid>
+        <div>
+          
+          <div className=' w-96 lg:mx-36'>
+            {isLocation ? (
+               <div className="flex justify-center items-center w-[343px] relative gap-2.5 px-[120px] py-4 rounded-xl bg-_rougeStudea">
+              <AnchorLink href="#table" className="flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white font-_spaceGrotesk">
+                Déposer mon dossier
+              </AnchorLink></div>
+            ) : (
+              <BtnCalendly />
+            )}
+            {isLocation ? (
+              ''
+            ) : (
+              <p className="w-[191px] h-2.5 text-sm font-medium text-center text-_gris">
+              ou appeler le 06 65 07 11 66
+              </p>
+            )}
+          </div>
+        </div>
+      </Grid>
+
+         
+        )}
+        
 
 
 
@@ -235,9 +351,43 @@ const PropertyPage = ({
           fullAddress={property.fullAddress}
           handleClose={() => handleSelectLot(null)}
         />
+        
+ <div className='grid '>
+          <div className='grid lg:grid-cols-2 lg:gap-4'>
+            <div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu -mb-9 lg:mb-0 lg:w-_344">
+              {isLocation?(
+                <p className="flex-grow-0 flex-shrink-0 w-_295 text-left text-_rougeStudea text-xl font-semibold">
+                À propos de cette résidence</p>
 
+              ):(
+                <p className="flex-grow-0 flex-shrink-0 w-_295 text-left text-_aPropos text-2xl font-semibold">
+                À propos de cette résidence</p>
 
-    <div className='p-6 gap-2'
+              )}
+              
+                <p className="self-stretch flex-grow-0 flex-shrink-0 text-sm font-normal text-left  text-_gris">
+                <span
+                  dangerouslySetInnerHTML={{ __html: property.description }}
+                />
+              </p>
+            </div>
+
+            <div className="">
+            <Sidebar
+              isLocation={isLocation}
+              property={property}
+              classes={classes}
+            /> </div>
+            <div className="flex flex-col h-_343 justify-start items-start  gap-2 rounded-2xl bg-white border border-_bordureBleu lg:w-_702">
+              <Maps loc={property.loc?.coordinates} />
+            </div>
+          </div>
+         
+            
+             
+        </div>
+
+    <div className='p-6 gap-2 lg:w-_344'
           style={{background : 'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)', borderRadius:'12px', marginBottom:"20px", marginTop:"16px", padding:'24px'}}>
                         <svg
                   width={34}
@@ -278,40 +428,7 @@ const PropertyPage = ({
                 </p>
    </div>
 
-        <div className='grid'>
-          <div className='grid grid-flow-row md:grid-flow-col'>
-            <div className="flex flex-col justify-start items-start  gap-2 p-6 rounded-xl bg-white border border-_bordureBleu -mb-9">
-              {isLocation?(
-                <p className="flex-grow-0 flex-shrink-0 w-_295 text-left text-_rougeStudea text-xl font-semibold">
-                À propos de cette résidence</p>
-
-              ):(
-                <p className="flex-grow-0 flex-shrink-0 w-_295 text-left text-_aPropos text-2xl font-semibold">
-                À propos de cette résidence</p>
-
-              )}
-              
-                <p className="self-stretch flex-grow-0 flex-shrink-0 w-[295px] text-sm font-normal text-left text-[#6976a0] text-_gris">
-                <span
-                  dangerouslySetInnerHTML={{ __html: property.description }}
-                />
-              </p>
-            </div>
-
-
-            <Sidebar
-              isLocation={isLocation}
-              property={property}
-              classes={classes}
-            />
-            <div className="flex flex-col h-_343 justify-start items-start  gap-2 rounded-2xl bg-white border border-_bordureBleu">
-              <Maps loc={property.loc?.coordinates} />
-            </div>
-          </div>
-         
-            
-             
-        </div>
+       
 
       </div>
     </AdminContentWrapper>

@@ -74,7 +74,7 @@ const styles = (theme) => ({
       height: '100%',
       backgroundColor: 'white',
       paddingRight: '3rem',
-      border: `solid 1px ${theme.palette.lightBlue}`,
+      border: `solid 2px ${theme.palette.lightBlue}`,
       ...theme.ui.searchInput,
       paddingLeft: '2.4rem',
       [theme.breakpoints.down('sm')]: {
@@ -96,7 +96,7 @@ const styles = (theme) => ({
       top: '50%',
       right: '1rem',
       width: '1.2rem!important',
-      height: '100%',
+      height: '30%',
       cursor: 'pointer',
       transform: 'translateY(-50%) rotate(90deg)',
     },

@@ -39,7 +39,8 @@ const searchFields = withStyles(
           />
           {isMdView && (
             <>
-              <div onClick={handleSumit} className={classes.submit}>
+            
+              <div onClick={handleSumit} className="">
                 <Icon type="recherche" size='small' color='white'  />
               </div>
               <span className={classes.changeView} onClick={toggleView}>

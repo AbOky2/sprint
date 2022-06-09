@@ -247,7 +247,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               list={userRoleSelect}
             />
           <div onClick={handleLogOut}
-            className="mt-5 bg-red-600 text-white flex justify-between items-center relative px-[47px] py-2 rounded-xl border-2 border-[#eff4ff]"
+            className="mt-5 bg-red-700 cursor-pointer text-white flex justify-between items-center relative px-[47px] py-2 rounded-xl border-2 border-[#eff4ff]"
           >
             Déconnexion
           </div>

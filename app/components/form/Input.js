@@ -355,8 +355,8 @@ export const CustomInput = withStyles(styles)(
             </Typography>
           </Grid>
         </Grid>
-        <div onClick={handleSumit} className={classes.submit}>
-          <img src={SubmitIcon} />
+        <div onClick={handleSumit} style={{background:'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)'}}className='bg-blue-700 w-[50px] h-[50px] p-3 rounded-xl absolute top-6 left-60'>
+        <Icon type="recherche" size='small' color='white'  />
         </div>
       </div>
     );

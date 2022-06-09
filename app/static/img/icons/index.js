@@ -72,4 +72,5 @@ export { default as House } from './House1.svg';
 export { default as carte } from './carteV2.svg';
 export { default as liste } from './listV2.svg';
 
+
 export { default as profilLogo } from './profileLogo.svg';
