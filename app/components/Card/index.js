@@ -11,6 +11,10 @@ import {
 
 import { Icon } from 'components';
 import useStyles from './styles';
+import { useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+
+
 
 export const Card = ({
   _id,
@@ -25,49 +29,158 @@ export const Card = ({
   showLikes = true,
 }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <div className={classes.container}>
-      <div>
-        <div style={{ backgroundImage: `url(${src})` }}></div>
-      </div>
-      <div>
-        <Typography variant="h3">{title}</Typography>
-        <Typography
-          variant="body1"
-          style={{ display: address ? 'block' : 'none' }}
+
+    <>
+
+    {isMdView? (
+
+<div className='bg-white rounded-xl border border-_grisBleu flex w-full gap-5 p-4 mb-4'>
+
+    
+<div className="w-[109px] h-[109px] p-4 rounded-[10px] bg-[#c4c4c4] object-contain bg-cover" style={{ backgroundImage: `url(${src})` }}></div>
+<div className=''>
+        <div
+        className="text-xs font-[700] text-left text-[#3679ff] text-[18px] leading-5"
+        >   {title}
+        </div>
+        <div className='text-xs text-[#6976a0] mt-2'> {address}</div>
+        <div className='text-[#1a2e6c] text-lg'>{description}</div>
+        <div className='text-[#6976a0] text-sm'> à partir de 
+        <strong className='text-xs text-[#1a2e6c]'>{` ${spaceCurrency(price)}€`}</strong>
+        </div>
+        <div className='text-[#6976a0] text-sm'> soit
+        <strong className='text-xs text-[#1a2e6c]'>{` ${spaceCurrency(price)}€ / mois`}</strong>
+        </div>
+</div>
+<div className=' flex flex-col-reverse order-last'>
+    {showLikes && (
+        <span
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            onClick(_id);
+          }}
+          className="pointer like"
         >
-          {address}
-        </Typography>
-        <Typography variant="body1">{description}</Typography>
-        {/* <Typography variant="body1">{dimensions}</Typography> */}
-        <Typography variant="body1">
-          <span>à partir de</span>
-          {` ${spaceCurrency(price)}€`}
-        </Typography>
-        <Typography variant="body1">
-          <span>soit</span>
-          {` ${spaceCurrency(price)}€ / mois`}
-        </Typography>
-        {showLikes && (
-          <span
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              onClick(_id);
-            }}
-            className="pointer like"
-          >
-            <Icon
-              type="heart"
-              size="medium"
-              strokeColor={liked ? 'red' : 'newBlue'}
-              color={liked ? 'red' : 'white'}
-            />
-          </span>
-        )}
+          <Icon
+            type="heart"
+            size="medium"
+            strokeColor={liked ? 'red' : 'newBlue'}
+            color={liked ? 'red' : 'white'}
+          />
+        </span>
+      )}
+</div>
+
+
+</div>
+    ):(
+      
+      <div className='bg-white rounded-xl border border-_grisBleu flex w-[400px] gap-7 p-4 mb-4'>
+
+    
+      <div className="w-[209px] h-[109px] p-4 rounded-[10px] bg-[#c4c4c4] object-contain bg-cover" style={{ backgroundImage: `url(${src})` }}></div>
+      <div className=''>
+              <div
+              className="text-xs font-[700] text-left text-[#3679ff] text-[18px] leading-5"
+              >   {title}
+              </div>
+              <div className='text-xs text-[#6976a0] mt-2'> {address}</div>
+              <div className='text-[#1a2e6c] text-lg'>{description}</div>
+              <div className='text-[#6976a0] text-sm'> à partir de 
+              <strong className='text-xs text-[#1a2e6c]'>{` ${spaceCurrency(price)}€`}</strong>
+              </div>
+              <div className='text-[#6976a0] text-sm'> soit
+              <strong className='text-xs text-[#1a2e6c]'>{` ${spaceCurrency(price)}€ / mois`}</strong>
+              </div>
       </div>
+      <div className=' flex flex-col-reverse order-last'>
+          {showLikes && (
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  onClick(_id);
+                }}
+                className="pointer like"
+              >
+                <Icon
+                  type="heart"
+                  size="medium"
+                  strokeColor={liked ? 'red' : 'newBlue'}
+                  color={liked ? 'red' : 'white'}
+                />
+              </span>
+            )}
+      </div>
+
+
     </div>
+
+    )}
+
+   
+
+
+
+
+
+
+
+
+
+
+{/* 
+    // <div className={classes.container}>
+    //   <div className='bg-black' >
+    //     <div style={{ backgroundImage: `url(${src})` }}></div>
+    //   </div>
+    //   <div className=' text-_aPropos bg-blue-600'>
+    //   <p className=" text-lg font-bold text-left text-[#3679ff]">{title}</p>
+    //     <Typography
+    //       variant="body1"
+    //       style={{ display: address ? 'block' : 'none' }}
+    //     >
+    //       {address}
+    //     </Typography>
+    //     <Typography variant="body1">{description}</Typography>
+    //      <Typography variant="body1">{dimensions}</Typography> 
+    //     <Typography variant="body1">
+    //       <span>à partir de</span>
+    //       {` ${spaceCurrency(price)}€`}
+    //     </Typography>
+    //     <Typography variant="body1">
+    //       <span>soit</span>
+    //       {` ${spaceCurrency(price)}€ / mois`}
+    //     </Typography>
+    //     {showLikes && (
+    //       <span
+    //         onClick={(e) => {
+    //           e.stopPropagation();
+    //           e.preventDefault();
+    //           onClick(_id);
+    //         }}
+    //         className="pointer like"
+    //       >
+    //         <Icon
+    //           type="heart"
+    //           size="medium"
+    //           strokeColor={liked ? 'red' : 'newBlue'}
+    //           color={liked ? 'red' : 'white'}
+    //         />
+    //       </span>
+    //     )}
+    //   </div>
+    // </div> 
+  */}
+
+
+    </>
   );
 };
 

@@ -59,19 +59,20 @@ export const BudgetStep = withStyles()(
 
     return (
       <Slide direction="up" in={checked} container={containerRef.current}>
-        <div
-          style={{
-            background:
-              'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
-            paddingTop: '230px',
-            borderRadius: '5px',
-            width: '375px',
-            alignContent: 'center',
-          }}
-        >
+         <div
+      className=' w-full'
+        style={{
+          background:
+            'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
+          paddingTop: '48px',
+          borderRadius: '5px',
+          alignContent: 'center',
+        }}
+      
+      >
           <Box
             sx={{
-              height: '524px',
+              
               display: 'flex',
               flexDirection: 'column',
               top: '48px',
@@ -83,32 +84,39 @@ export const BudgetStep = withStyles()(
             }}
           >
             <Box tabIndex={-1} sx={{ mt: 1, p: 1 }}>
-              <div style={{ marginBottom: '20px', display: 'inline-flex' }}>
-                {' '}
-                Budget
-                <button
-                  style={{
-                    marginBottom: '10px',
-                    marginLeft: '216px',
-                    background: 'white',
-                    border: 'transparent',
-                  }}
-                  type="button"
-                  onClick={() => setStep(1)}
-                >
-                  X
-                </button>
-              </div>
-              <br />
-              Votre Budget
+            <div className='flex flex-row-reverse justify-between'>
+                <p className="flex-grow-0 flex-shrink-0 text-base font-bold text-center text-[#3679ff]">
+                    Budget ?
+                  </p>
+                  <div className=' '
+                  type="button" onClick={() => setStep(0)}>
+                    <svg
+                          width={24}
+                          height={24}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="flex-grow-0 flex-shrink-0 w-6 h-6 relative"
+                          preserveAspectRatio="xMidYMid meet">
+                      <path
+                        d="M20 12C20 16.4183 16.4183 20 12 20V22C17.5228 22 22 17.5228 22 12H20ZM12 20C7.58172 20 4 16.4183 4 12H2C2 17.5228 6.47715 22 12 22V20ZM4 12C4 7.58172 7.58172 4 12 4V2C6.47715 2 2 6.47715 2 12H4ZM12 4C16.4183 4 20 7.58172 20 12H22C22 6.47715 17.5228 2 12 2V4Z"
+                        fill="#14181F"
+                      />
+                      <path
+                        d="M11.7071 9.70711C12.0976 9.31658 12.0976 8.68342 11.7071 8.29289C11.3166 7.90237 10.6834 7.90237 10.2929 8.29289L11.7071 9.70711ZM8 12L7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071L8 12ZM10.2929 15.7071C10.6834 16.0976 11.3166 16.0976 11.7071 15.7071C12.0976 15.3166 12.0976 14.6834 11.7071 14.2929L10.2929 15.7071ZM16 13C16.5523 13 17 12.5523 17 12C17 11.4477 16.5523 11 16 11V13ZM10.2929 8.29289L7.29289 11.2929L8.70711 12.7071L11.7071 9.70711L10.2929 8.29289ZM7.29289 12.7071L10.2929 15.7071L11.7071 14.2929L8.70711 11.2929L7.29289 12.7071ZM16 11L8 11L8 13L16 13V11Z"
+                        fill="#14181F"
+                      />
+                    </svg>
+                    
+                  </div>
+            </div>
+            <br />
+
+            <p className="text-base mb-2 font-bold text-left text-[#0e215c]">Votre budget</p>
+
               <NumberFormat
-                style={{
-                  border: '2px solid #EFF4FF',
-                  width: '327px',
-                  height: '42px',
-                  borderRadius: '12px',
-                  marginTop: '8px',
-                }}
+               className="w-full h-[52px] rounded-xl bg-white border-2 border-[#eff4ff]"
+
                 thousandSeparator=" "
                 suffix=" €"
                 prefix="  "
@@ -117,22 +125,33 @@ export const BudgetStep = withStyles()(
                 focus={true}
                 placeholder="  Budget maximal"
                 onChange={onChange}
-                className={classes.container}
                 onKeyPress={onKeyPress}
                 autoComplete="off"
               />
               <br />
               <br />
-              Votre salaire mensuel net (avant impôt)
-              <br />
+
+              <div className="flex justify-center mb-4 items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5 p-4 rounded-xl bg-[#eff4ff] border border-[#3679ff]">
+                      <p className="flex-grow-0 flex-shrink-0 text-base text-left text-[#3679ff]">
+                        <span className="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#3679ff]">
+                          Vous ne connaissez pas{" "}
+                        </span>
+                        <br />
+                        <span className="flex-grow-0 flex-shrink-0 text-base font-bold text-left text-[#3679ff]">
+                          votre budget ?{" "}
+                        </span>
+                        <br />
+                        <span className="flex-grow-0 flex-shrink-0 text-base text-left text-[#3679ff]">
+                          Utiliser notre simulateur ci-dessous.
+                        </span>
+                      </p>
+              </div>
+
+              <p className="text-base mb-2 font-bold text-left text-[#0e215c]">Votre salaire mensuel net (avant impôt)</p>
+
               <NumberFormat
-                style={{
-                  border: '2px solid #EFF4FF',
-                  width: '327px',
-                  height: '42px',
-                  borderRadius: '12px',
-                  marginTop: '8px',
-                }}
+               className="w-full mb-4 h-[52px] rounded-xl bg-white border-2 border-[#eff4ff]"
+
                 thousandSeparator=" "
                 suffix=" €"
                 prefix="   "
@@ -140,18 +159,12 @@ export const BudgetStep = withStyles()(
                 onChange={handleChange1('salary')}
                 placeholder="  Votre salaire net mensuel"
               />
-              <br />
-              <br />
-              Votre apport
-              <br />
+              
+              <p className="text-base mb-2 font-bold text-left text-[#0e215c]">Votre apport</p>
+
+           
               <NumberFormat
-                style={{
-                  border: '2px solid #EFF4FF',
-                  width: '327px',
-                  height: '42px',
-                  borderRadius: '12px',
-                  marginTop: '8px',
-                }}
+               className="w-full h-[52px] rounded-xl bg-white border-2 border-[#eff4ff]"
                 thousandSeparator=" "
                 suffix=" €"
                 prefix="    "

@@ -154,13 +154,14 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
         <Grid container item justify="center" className="form-container">
           <Grid container item>
             <div
+            className='mx-2'
               style={{
                 background:
                   'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
                 width: '86px',
                 height: '86px',
                 borderRadius: '50%',
-                padding: '15px',
+                padding: '27px',
                 marginBottom: '19px',
               }}
             >
@@ -172,6 +173,7 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               onKeyPress={onKeyPress}
               name="lastName"
               position="left"
+              placeholder="Nom"
             />
             <Input
               value={state.firstName}
@@ -179,6 +181,8 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               onKeyPress={onKeyPress}
               name="firstName"
               position="right"
+              placeholder="Prenom"
+
             />
             <Input
               value={state.email}
@@ -187,6 +191,8 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               name="email"
               type="email"
               position="left"
+              placeholder="email"
+
             />
             <Input
               value={state.phone}
@@ -195,6 +201,8 @@ export const UpdateProfile = ({ user, update, logout, transparent }) => {
               name="phone"
               type="phone"
               position="right"
+              placeholder="Telephone"
+
             />
             <Input
               value={state.password}

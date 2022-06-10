@@ -14,6 +14,11 @@ import Demo from './demo'
 import Demo2 from './demo2'
 import Demo3 from './demo3'
 import Partager from './partageButtom'
+import Profile from '../../components/UpdateProfile'
+import clsx from 'clsx';
+import { Input, Select, Modal, Icon } from '../../components/form';
+import { userRoleSelect } from 'helpers';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -98,23 +103,168 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const BookmarkPage = ({ user, update }) => {
-  const [state, setState] = useState(user?.bookmarks);
-  const classes = useStyles();
-  
-  const handleBookmark = (id) => {
-    setState(state.filter((elem) => elem._id !== id));
-    addBookmarkApiMethod({ id }).then(({ user: currUser }) => update(currUser));
-  };
-  const [visible, setVisible] = useState(false);
-  useEffect(() =>{
-    setTimeout(() => setVisible(true), 10);
-    return () => setVisible(false);
-  }, []);
- 
-  return (
 
-<Partager />
+
+
+
+
+export const UpdateProfile = ({ user, update, logout, transparent }) => {
+  const [showSubMenu, setShowSubMenu] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [state, setState] = useState(user);
+  const handleChange =
+    (name) =>
+    ({ target: { value } }) =>
+      setState({ ...state, [name]: value });
+  const handleOpenModal = () => setOpenModal(true);
+  const toggleShowSubMenu = () => setShowSubMenu(!showSubMenu);
+  const handleModalClose = (showMessage = false) => {
+    const hasUpdate =
+      showMessage == true && JSON.stringify(user) !== JSON.stringify(state);
+
+    if (hasUpdate) toast.success('Profil mis à jour');
+    toggleShowSubMenu();
+    setOpenModal(false);
+    if (!hasUpdate) setState(user);
+  };
+  // eslint-disable-next-line no-return-assign
+  const handleLogOut = () => logout(() => (window.location = '/login'));
+
+  const handleSumbit = () => update(state, () => handleModalClose(true));
+  const onKeyPress = (e) => e.key === 'Enter' && handleSumbit(true);
+
+  const classes = useStyles();
+
+  return (
+    <div className=''>
+      <div className="relative">
+        <div
+          className={
+            !showSubMenu
+              ? classes.contextMenu
+              : clsx(classes.contextMenu, classes.openMenu)
+          }
+        >
+         
+        </div>
+        <Grid
+          container
+          alignItems="center"
+          justify="space-between"
+          className=''
+          onClick={toggleShowSubMenu}
+        >
+          {/* <Icon type="user" /> */}
+          <div className="w-[287px] h-[30px] mb-[39px]">
+            <p className="w-[287px] h-[30px] absolute left-4 top-8 text-[28px] font-bold text-left text-_aPropos">
+              Mon profil
+            </p>
+          </div>
+
+          <div className='flex justify-center gap-9 mx-4 mt-7 mb-5 sm:gap-14'>
+                    <div>
+                      <p className=" text-xl font-extrabold text-left text-[#272832]">Mes informations</p>
+                      </div>
+                      <div
+                        className="flex justify-between items-center relative px-[47px] py-2 rounded-xl border-2 border-[#eff4ff]"
+                        style={{ background: "linear-gradient(to bottom, #81a3f9 -0.06%, #3462d8 108.09%)" }}
+                      >
+                        <button type="submit" className=" cursor-pointer flex-grow-0 flex-shrink-0 text-sm font-bold text-left text-white">Enregistrer</button>
+                      </div>
+        </div>
+        </Grid>
+      </div>
+      <div
+      
+        onClick={handleSumbit}
+        title="Mon Profil"
+        confirmText="Enregistrer"
+      >
+        <Grid container item justify="center" className="form-container">
+          <Grid container item>
+            <div
+              style={{
+                background:
+                  'linear-gradient(219.21deg, #C399DB -0.38%, #5882F7 106.68%)',
+                width: '86px',
+                height: '86px',
+                borderRadius: '50%',
+                padding: '22px',
+                marginBottom: '19px',
+                
+              }}
+            >
+              <Icon type="leK" size="large" noColor />
+            </div>
+            <Input
+              value={state.lastName}
+              onChange={handleChange}
+              onKeyPress={onKeyPress}
+              name="lastName"
+              position="left"
+              placeholder='Nom'
+            />
+            <Input
+              value={state.firstName}
+              onChange={handleChange}
+              onKeyPress={onKeyPress}
+              name="firstName"
+              position="right"
+              placeholder="Prenom"
+            />
+            <Input
+              value={state.email}
+              onChange={handleChange}
+              onKeyPress={onKeyPress}
+              name="email"
+              type="email"
+              position="left"
+              placeholder='Email'
+            />
+            <Input
+              value={state.phone}
+              onChange={handleChange}
+              onKeyPress={onKeyPress}
+              name="phone"
+              type="phone"
+              position="right"
+              placeholder='Telephone'
+            />
+            <Input
+              value={state.password}
+              placeholder="Votre mot de passe"
+              onChange={handleChange}
+              onKeyPress={onKeyPress}
+              name="password"
+              type="password"
+              position="left"
+            />
+            <Select
+              name="role"
+              value={state.role}
+              onChange={handleChange}
+              position="right"
+              list={userRoleSelect}
+            />
+          <div onClick={handleLogOut}
+            className="mt-5 bg-red-700 cursor-pointer text-white flex justify-between items-center relative px-[47px] py-2 rounded-xl border-2 border-[#eff4ff]"
+          >
+            Déconnexion
+          </div>
+          </Grid>
+        </Grid>
+      </div>
+    </div>
+  );
+};
+
+
+
+
+
+
+
+
     /*
     <AdminContentWrapper noRedirect mobilePadding>
       <div>
@@ -201,12 +351,12 @@ const BookmarkPage = ({ user, update }) => {
       </div>
     </AdminContentWrapper>
     */
-  );
-};
+  
 
-BookmarkPage.propTypes = {
+UpdateProfile.propTypes = {
   user: PropTypes.object.isRequired,
   update: PropTypes.func.isRequired,
+  logout:PropTypes.func.isRequired,
 };
 const mapState = (state) => {
   const { loggingIn, user } = state.authentication;
@@ -215,5 +365,7 @@ const mapState = (state) => {
 
 const actionCreators = {
   update: userActions.updateUserDataOnly,
+  logout: userActions.logout,
+
 };
-export default withAuth(connect(mapState, actionCreators)(BookmarkPage));
+export default withAuth(connect(mapState, actionCreators)(UpdateProfile));

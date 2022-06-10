@@ -11,6 +11,9 @@ import { UpdateProfile } from 'components';
 import { Icon, Btn, Modal } from '../form';
 import useStyles from './styles';
 import { Authentification } from 'components/authentification';
+import {Partenaires} from 'components/Partenaires/index';
+
+
 
 const MobileItems = [
   {
@@ -24,6 +27,7 @@ const MobileItems = [
     iconProps: { type: 'search', style: { padding: 1 } },
     txt: 'Recherche',
   },
+ 
   // {
   //   href: '/dashboard/bookmark',
   //   iconProps: { type: 'heart' },
@@ -41,6 +45,14 @@ const sponsorship = {
   iconProps: { type: 'mobileSponsorship' },
   txt: 'Parrainage',
 };
+
+const partenaires = {
+  //href: '/dashboard/demo2',
+  iconProps: { type: 'mobileSponsorship' },
+  txt: 'Partenaires',
+};
+
+
 const MenuItems = [...MobileItems, sponsorship];
 
 export const MobileMenu = ({
@@ -52,15 +64,24 @@ export const MobileMenu = ({
   register,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const isAuth = user?._id;
   const [showModal, setShowModal] = useState(false);
+  const [showModal1, setShowModal1] = useState(false);
   const [changeName, setChangeName] = useState(false);
+  const [showModalMenu, setShowModalMenu] = useState(false)
   const classes = useStyles();
   const { asPath } = useRouter();
   const toggleMenu = () => setShowMenu(!showMenu);
   const toggleModal = () => setShowModal(!showModal);
+  const toggleModal1 = () => setShowModal1(!showModal1);
+  const toggleModalMenu=() => setShowModalMenu(!showModalMenu)
+
   const handleSumbit = () => console.log('submit');
 
+  
+
   return (
+    <>
     <Grid
       container
       alignItems="center"
@@ -71,7 +92,7 @@ export const MobileMenu = ({
         let { href, txt, singleType, iconProps } = props;
         if (user && !user._id) {
           if (href === '/dashboard/bookmark') return null;
-          txt = 'Connexion';
+          txt = 'Recherche';
         }
 
         return (
@@ -87,17 +108,60 @@ export const MobileMenu = ({
           </Grid>
         );
       })}
-      <Grid item onClick={toggleModal} justifyContent="center">
+
+      
+       {isAuth?(
+        <div >
+          <a href="/dashboard/favoris">
+          <Icon
+              type="heart"
+              noColor
+              />
+            <p>Favoris</p> 
+          </a>
+        </div>
+      ):(
+        ""
+      )}
+
+      {isAuth?(
+        <div >
+          <a href="/dashboard/bookmark">
+          <Icon
+              type="profile"
+              noColor
+              />
+            <p>Mon Profil</p> 
+            
+       {/* { href: '/dashboard/bookmark',
+        iconProps: { type: 'profile', style: { padding: 1 } },
+        txt: 'Mon Profile',} */}
+          </a>
+        
+        </div>
+      ):(
+        ""
+      )}
+
+{isAuth?(
+        ''
+       
+      ):(
+        <Grid item onClick={toggleModal} justifyContent="center">
         <Grid container alignItems="center" direction="column">
           <Icon type="profile" />
           <p>Connexion</p>
         </Grid>
       </Grid>
+
+      )}
+
+      
       <Grid item onClick={toggleMenu} className={classes.calendar}>
         <Icon type="menu" />
         <p>Menu</p>
       </Grid>
-      <Drawer anchor="right" open={showMenu} onClose={toggleMenu}>
+      <Drawer anchor="bottom" open={showMenu} onClose={toggleMenu}>
         <div className={classes.drawer}>
           <div className={clsx(classes.rightMenu, classes.rightMenuMobile)}>
             <div>
@@ -113,15 +177,35 @@ export const MobileMenu = ({
                   <span>{sponsorship.txt}</span>
                 </a>
               </Link>
+            <br/>
+            
+                <a
+                onClick={toggleModal1}
+                  className={
+                    asPath === partenaires.href ||
+                    asPath.includes(partenaires.href)
+                      ? classes.mobileDrawerActiveMobile
+                      : null
+                  }
+                >
+                  <span>{partenaires.txt}</span>
+                </a>
+                <br/>
+                <Link href='https://kitlenid.fr/blog'>
+                <a>
+                  Blog
+                </a>
+              </Link>
+              
             </div>
-            <UpdateProfile
+           {/* <UpdateProfile
               text="Mon compte"
               user={user}
               logout={logout}
               update={update}
               transparent
             />
-            {/* <div>
+             <div>
               <Btn
                 text="Prendre rendez-vous"
                 iconType="calendar"
@@ -133,6 +217,8 @@ export const MobileMenu = ({
           </div>
         </div>
       </Drawer>
+
+      
       {console.log(changeName)}
       <Modal
         openModal={showModal}
@@ -151,8 +237,25 @@ export const MobileMenu = ({
           authSocialMedia={authSocialMedia}
         />
       </Modal>
+
+
+      <Modal
+        openModal={showModal1}
+        onClose={toggleModal1}
+        onClick={handleSumbit}
+        showActions={false}
+        title='Partenaires'
+   
+        // confirmText="Enregistrer"
+      >
+        <Partenaires />
+      </Modal>
     </Grid>
+
+    </>
   );
+
+
 };
 
 const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
@@ -160,26 +263,23 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      alignItems="center"
-      justify="space-between"
-      className={clsx(
-        classes.container,
-        noHeaderMargin ? classes.noHeaderMargin : ''
-      )}
+    <div
+     className='m-4'
     >
-      <Grid container item>
-        <Grid className={classes.logoContainer}>
+      <div className='flex justify-between'>
+        <div >
           <Link href={pages.dashboard}>
             <a>
-              <img src={LogoImg} alt="" />
+            <Icon
+            type='LogoVV'
+            size='large'
+            />
             </a>
           </Link>
-        </Grid>
-        <Grid container alignItems="center" className={classes.navContainer}>
+        </div>
+        <div className="flex font-_spaceGrotesk text-xl font-bold  text-[#113eb6] content-end gap-7">
           {MenuItems?.map(({ href, txt, singleType }) => (
-            <Grid key={href} item>
+            <div key={href} item>
               <Link href={href}>
                 <a
                   className={
@@ -190,15 +290,12 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
                       : null
                   }
                 >
-                  <span>{txt}</span>
+                  <span className='font-bold text-[#113eb6] text-3xl'>{txt}</span>
                 </a>
               </Link>
-            </Grid>
+            </div>
           ))}
-        </Grid>
-      </Grid>
-      <Grid container item className={classes.rightMenu} alignItems="center">
-        <div>
+          {/*  <div>
           <Btn
             text="Prendre rendez-vous"
             iconType="calendr"
@@ -207,15 +304,27 @@ const StudentProfile = ({ user = {}, logout, update, noHeaderMargin }) => {
               openPopupWidget({ url: 'https://calendly.com/kitlenid' })
             }
           />
-        </div>
-        <UpdateProfile
-          user={user}
-          logout={logout}
-          update={update}
-          transparent
-        />
-      </Grid>
-    </Grid>
+            </div>*/}
+            
+              <div>  
+                <Link href='https://kitlenid.fr/blog'>
+                <a className=" text-3xl font-bold text-center text-[#113eb6]">
+                Blog
+              </a></Link>
+              </div>
+              <div className=' text-red-800 -p-3'>  
+             {/* <UpdateProfile
+                      user={user}
+                      logout={logout}
+                      update={update}
+                      transparent
+                    />*/}
+              </div>
+            
+          </div>
+      </div>
+      
+    </div>
   );
 };
 StudentProfile.propTypes = {

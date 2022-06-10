@@ -28,6 +28,7 @@ export const SearchDrawer = ({ showSearch, setShowSearch }) => {
       id="test1"
       style={{
         position: 'fixed',
+        width:'100%',
         height: '100%',
         top: '0',
         left: '0',

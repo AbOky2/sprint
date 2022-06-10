@@ -15,7 +15,7 @@ const styles = (theme) => ({
     padding: '2.5rem 0',
     fontFamily: theme.typography.secondFontFamily,
     borderTop: '1px solid rgba(26, 46, 108, 0.5)',
-    ...theme.typography.body1,
+    width:'800px',
     color: theme.palette.newBlue,
 
     [theme.breakpoints.down('sm')]: {
@@ -58,9 +58,9 @@ const styles = (theme) => ({
   },
   contentContainer: {
     '& > div': {
-      color: theme.palette.blue,
-      fontWeight: 600,
-      lineHeight: '1.9rem',
+      fontWeight: 400,
+      lineHeight: '17px',
+      fontSize:'14px',
     },
   },
   btnContainer: {

@@ -3,12 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
-    backgroundColor: '#FFFFFF',
-    padding: '1.6rem 1.6rem',
+    
+    backgroundColor: 'red',
+    padding: '34px',
     border: '1px solid #E2E2E2',
     marginBottom: '.8rem',
-    gap: '.8rem',
-    borderRadius: 15,
+    gap:'22px',
+    borderRadius: 12,
+    objectFit:'containt',
+    
     '& > div': {
       '&:first-of-type > div': {
         position: 'relative',

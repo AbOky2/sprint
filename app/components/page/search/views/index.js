@@ -53,6 +53,23 @@ const MapsContainer = ({
     />
     <Grid container className={classes.changeViewContainer}>
       {isMapsView? (
+        
+
+        <div className=" w-40 h-12 -left-0.5 rounded-xl bg-_switchButton flex flex-row my-96 mx-36 cursor-pointer" onClick={toggleView}>
+        <p className="left-4 top-2 text-sm font-bold text-white text-center p-3 mx-4">Mode Liste</p>
+        <div 
+        className=' py-3 -mx-3'
+        >
+        <Icon
+          type="liste"
+          size="small"
+          color='white'
+        /></div>
+        </div>
+
+      ):
+      
+      (
         <div className=" w-40 h-12 -left-0.5 -top-0.5 rounded-xl bg-_switchButton flex flex-row my-96 mx-36 cursor-pointer" onClick={toggleView}>
       
       
@@ -68,23 +85,6 @@ const MapsContainer = ({
        /></div>
      </div>
 
-      ):
-      
-      (
-<div className=" w-40 h-12 -left-0.5 rounded-xl bg-_switchButton flex flex-row my-96 mx-36 cursor-pointer" onClick={toggleView}>
-      
-      
-      <p className="left-4 top-2 text-sm font-bold text-white text-center p-3 mx-4">Mode Liste</p>
-       
-       <div 
-       className=' py-3 -mx-3'
-       >
-       <Icon
-         type="liste"
-         size="small"
-         color='white'
-       /></div>
-     </div>
 
 
       )}
