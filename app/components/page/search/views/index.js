@@ -244,7 +244,7 @@ const MapsView = withRouter(
             isMdView ? classes.mdMapsViewContainer : ''
           )}
         >
-          {!isMapsView && (
+          {/* {!isMapsView && (
             <ListContainer
               classes={classes}
               curr={curr}
@@ -259,7 +259,7 @@ const MapsView = withRouter(
               liked={liked}
               handleBookmark={handleBookmark}
             />
-          )}
+          )} */}
           <MapsContainer
             classes={classes}
             index={carrouselIndex}

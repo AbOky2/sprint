@@ -438,3 +438,15 @@
 {"kind":"ObjectId","level":"error","path":"_id","reason":{},"service":"user-service","stringValue":"\"[object Object]\"","timestamp":"2022-06-09T12:52:01.139Z","value":"[object Object]"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-09T13:48:23.540Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-09T15:17:49.281Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T08:40:58.043Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T08:55:01.078Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T09:04:27.145Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T10:28:29.758Z"}
+{"$clusterTime":{"clusterTime":"7107585376348274693","signature":{"hash":"xvn6Ke0tu+yo4EZgW2bFAil0nGs=","keyId":"7080592202677616644"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7107585376348274693","service":"user-service","timestamp":"2022-06-10T12:21:18.856Z"}
+{"$clusterTime":{"clusterTime":"7107585466542587905","signature":{"hash":"nxs68lOC8UZftcsK3jCR5ul0/Ws=","keyId":"7080592202677616644"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7107585466542587905","service":"user-service","timestamp":"2022-06-10T12:21:39.830Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T12:29:27.914Z"}
+{"$clusterTime":{"clusterTime":"7107587854544404485","signature":{"hash":"VIxO/n73pUcRRlRbVr6RNXCH8z0=","keyId":"7080592202677616644"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7107587854544404485","service":"user-service","timestamp":"2022-06-10T12:30:55.753Z"}
+{"$clusterTime":{"clusterTime":"7107588331285774337","signature":{"hash":"M+KoXG2XgZcwQy29yFxhsRD70P0=","keyId":"7080592202677616644"}},"code":2,"codeName":"BadValue","level":"error","name":"MongoError","ok":0,"operationTime":"7107588331285774337","service":"user-service","timestamp":"2022-06-10T12:32:47.542Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T13:17:55.677Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T14:37:53.870Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T15:28:23.918Z"}
