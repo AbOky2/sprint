@@ -88,15 +88,19 @@ const styles = (theme) => ({
   },
   custom: {
     position: 'relative',
-    height: '100%',
+    height: '40%',
     '&  input': {
       width: '100%',
-      padding: '2rem',
+      // padding: '2rem',
+      marginTop: '0.3rem',
       borderBottomRightRadius: '.6rem',
       borderTopRightRadius: '.6rem',
       ...sharedInputStyle,
       paddingLeft: '2.4rem',
       ...theme.ui.searchInput,
+    },
+    '&  input::placeholder': {
+      fontSize: '1rem',
     },
     '& > div:last-of-type': {
       display: 'none',
@@ -161,13 +165,73 @@ export const GoogleMaps = ({ onChange, value, placeholder }) => {
   return (
     <GooglePlacesAutocomplete
       apiOptions={{ language: 'fr', region: 'fr' }}
+      minLengthAutocomplete={2}
       autocompletionRequest={{
         componentRestrictions: {
           country: ['fr'],
         },
         types: ['(regions)'],
       }}
+      styles={{
+        description: {
+          fontWeight: 'bold',
+          backgroundColor: 'red',
+        },
+        predefinedPlacesDescription: {
+          color: '#1faadb',
+        },
+      }}
       selectProps={{
+        styles: {
+          input: (provided) => ({
+            ...provided,
+            color: '#8C97B6',
+            width: '100%',
+            border: 'none',
+            outline: 'none',
+          }),
+          placeholder: (provided) => ({
+            ...provided,
+            color: '#8C97B6',
+            fontSize: '1rem',
+            width: '100%',
+            fontWeight: '600!important',
+            outline: 'none',
+          }),
+          control: (provided) => ({
+            ...provided,
+            outline: 'none',
+            border: 'none',
+            fontSize: '1rem',
+            marginLeft: '1.7rem',
+            boxShadow: 'none',
+          }),
+          option: (provided) => ({
+            ...provided,
+            color: '#8C97B6',
+            fontSize: '1rem',
+          }),
+          menuList: (provided) => ({
+            ...provided,
+          }),
+          menu: (provided) => ({
+            ...provided,
+            color: '#8C97B6',
+            fontSize: '1rem',
+            marginLeft: '1.7rem',
+          }),
+          noOptionsMessage: (provided) => ({
+            ...provided,
+            color: '#8C97B6',
+            fontSize: '1rem',
+          }),
+          singleValue: (provided) => ({
+            ...provided,
+            color: '#8C97B6',
+            border: 'none',
+            fontSize: '1rem',
+          }),
+        },
         placeholder,
         onChange,
         onInputChange,
@@ -322,7 +386,7 @@ export const CustomInput = withStyles(styles)(
             suffix=" €"
             {...inputProps}
             value={value}
-            placeholder="Budget maximal"
+            placeholder="Quel est votre budget?"
             onChange={onChange}
             className={classes.container}
             onKeyPress={onKeyPress}
@@ -355,8 +419,15 @@ export const CustomInput = withStyles(styles)(
             </Typography>
           </Grid>
         </Grid>
-        <div onClick={handleSumit} style={{background:'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)'}}className='bg-blue-700 w-[50px] h-[50px] p-3 rounded-xl absolute top-6 left-60'>
-        <Icon type="recherche" size='small' color='white'  />
+        <div
+          onClick={handleSumit}
+          style={{
+            background:
+              'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)',
+          }}
+          className="bg-blue-700 w-[50px] h-[50px] p-3 rounded-xl absolute top-[-0.9rem] left-[15.2rem]"
+        >
+          <Icon type="recherche" size="small" color="white" />
         </div>
       </div>
     );

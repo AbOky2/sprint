@@ -68,19 +68,23 @@ const styles = (theme) => ({
   },
   customSelectContainer: {
     position: 'relative',
-    height: '100%',
+    height: '40%',
     '& input': {
       width: '100%',
-      height: '100%',
+      height: '60%',
       backgroundColor: 'white',
       paddingRight: '3rem',
-      border: `solid 2px ${theme.palette.lightBlue}`,
+      marginTop: '0.6rem',
+      border: 'none', // border: `solid 2px ${theme.palette.lightBlue}`,
       ...theme.ui.searchInput,
-      paddingLeft: '2.4rem',
+      paddingLeft: '1.8rem',
       [theme.breakpoints.down('sm')]: {
         padding: '2.1rem 1.4rem',
         borderRadius: '0!important',
       },
+    },
+    '&  input::placeholder': {
+      fontSize: '1rem',
     },
     '& > span': {
       position: 'absolute',
