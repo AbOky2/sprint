@@ -472,3 +472,6 @@
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-16T08:18:15.789Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-16T12:36:36.152Z"}
 {"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-16T12:42:03.752Z"}
+{"level":"info","message":"> Ready on http://localhost:3000","service":"user-service","timestamp":"2022-06-10T09:48:44.270Z"}
+{"level":"info","message":"> Ready on http://212.47.235.69:3000","service":"user-service","timestamp":"2022-06-10T10:12:50.167Z"}
+{"level":"info","message":"> Ready on http://212.47.235.69:3000","service":"user-service","timestamp":"2022-06-10T10:14:36.358Z"}
