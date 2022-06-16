@@ -18,7 +18,14 @@ const positionType = ['', 'left', 'right'];
 
 const styles = (theme) => ({
   container: {
+    // [theme.breakpoints.down('sm')]: {
+    //   height: '0.5rem',
+    // },
     '& select': {
+      [theme.breakpoints.down('sm')]: {
+        padding: '1.4rem 1.2rem',
+        fontSize: '1.2rem',
+      },
       padding: '1.8rem 1.6rem',
       fontSize: '1.4rem',
       outline: 'none',
@@ -72,7 +79,7 @@ const styles = (theme) => ({
     '& input': {
       width: '100%',
       height: '60%',
-      backgroundColor: 'white',
+      backgroundColor: 'transparent',
       paddingRight: '3rem',
       marginTop: '0.6rem',
       border: 'none', // border: `solid 2px ${theme.palette.lightBlue}`,

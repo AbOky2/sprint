@@ -24,8 +24,6 @@ export const SearchBar = ({}) => {
     setQueryData({ ...queryData, pieces });
   };
   const isLocation = queryData.typeOfAnnonce === typeOfAnnonciesObj.location;
-  const handleChange = ({ name, value }) =>
-    setState({ ...queryData, [name]: value });
   const handleFinish = () => {
     Router.push({
       pathname: 'dashboard/search/buy',
@@ -38,39 +36,7 @@ export const SearchBar = ({}) => {
   };
   const handleBudget = (value) =>
     setQueryData({ ...queryData, maxPrice: value });
-  const requestData = async (page = 1) => {
-    if (!queryData.maxPrice) queryData.maxPrice = -1;
-    if (!queryData.loc) return (queryData.loc = null);
 
-    const { list: { docs, near, zoom, coord, department, ...pageInfo } = {} } =
-      await getPublicPropertiesApiMethod({
-        ...queryData,
-        page,
-      });
-
-    setState(docs);
-    setAllData({ docs, near, zoom, department, coord });
-    setDelimiter({ department, coord });
-    setPage(pick(pageInfo, pagePropertyWhilist));
-
-    Router.push(
-      {
-        query: {
-          listView: currView,
-          page: pageInfo.page,
-          loc: queryData.loc,
-          sort: sortBy,
-          maxPrice: queryData.maxPrice,
-          ...(isLocation ? {} : { pieces: queryData.pieces }),
-        },
-      },
-      undefined,
-      { shallow: true }
-    );
-  };
-  const handleSumit = () => requestData();
-
-  console.log('Data: ', queryData);
   return (
     <Grid className="flex container w-[936px] h-[97px] absolute left-[106.5px] border-2 top-[398.5px] rounded-[20px] bg-white">
       <Grid item md={3}>

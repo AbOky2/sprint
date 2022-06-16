@@ -123,6 +123,18 @@ const styles = (theme) => ({
         color: theme.palette.normalBlue,
       },
     },
+    '& > h2': {
+      fontFamily: 'Space Grotesk',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      fontSize: '2.2rem',
+      lineHeight: '2.8rem',
+      textAlign: 'center',
+      color: theme.palette.newDarkBlue,
+      '& > span': {
+        color: theme.palette.normalBlue,
+      },
+    },
     [theme.breakpoints.down('sm')]: {
       marginTop: '3rem',
       textAlign: 'center',
@@ -154,8 +166,18 @@ const styles = (theme) => ({
     padding: '1.8rem',
     background: '#FFFFFF',
     '& h2': {
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '18px',
+        lineHeight: '23px',
+      },
       marginBottom: '4px',
       color: theme.palette.normalBlue,
+    },
+    '& p': {
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '14px',
+        lineHeight: '18px',
+      },
     },
     '& span': {
       position: 'absolute',
@@ -167,21 +189,47 @@ const styles = (theme) => ({
   lastViewdContainer: {
     margin: '24px 0',
     '& h2': {
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '20px',
+        lineHeight: '23px',
+      },
       marginBottom: '8px',
+    },
+  },
+  lastSearchContainer: {
+    '& h2': {
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '20px',
+        lineHeight: '23px',
+      },
+      marginBottom: '4px',
     },
   },
   advisorContainer: {
     '& h2': {
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '20px',
+        lineHeight: '23px',
+      },
       marginBottom: '4px',
     },
   },
   advisorInfo: {
     flexGrow: '1',
     paddingLeft: '1.6rem',
+    paddingTop: '1rem',
     '& h2': {
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '18px',
+        lineHeight: '23px',
+      },
       color: theme.palette.normalBlue,
     },
-    '& p:last-of-type': {
+    '& p': {
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '14px',
+        lineHeight: '18px',
+      },
       marginBottom: 0,
     },
   },
@@ -302,46 +350,52 @@ const AuthContext = ({
   userSearch = {},
   handleBookmark,
 }) => (
-  <div className="mt-60">
-    <Typography variant="h2">Vos recherches récentes</Typography>
-    {userSearch.lastSearch
-      ?.slice(0, 3)
-      .map(({ loc, maxPrice, page, pieces, sort, ...search }, index) => (
-        <Link
-          key={index}
-          href={`/dashboard/search/${
-            search.typeOfAnnonce === 'Location' ? 'location' : 'buy'
-          }/?${toQueryParams({
-            loc,
-          })}`}
-        >
-          <a>
-            <div className={classes.lastSearch}>
-              <Typography variant="h2">{loc}</Typography>
-              <Typography>
-                {`${
-                  pieces ? toArr(pieces).join(', ') : 'Toute type de'
-                } pièces | ${
-                  maxPrice && maxPrice > 0 ? `${maxPrice}€` : 'Prix indéfini'
-                }`}
-              </Typography>
-              <span classes={classes.iconContainer}>
-                <Icon type="sliderArrow" size="small" />
-              </span>
-            </div>
-          </a>
-        </Link>
-      ))}
+  <div className="mt-10 xl:mt-60 lg:mt-60 md:mt-10">
+    <div className={classes.lastSearchContainer}>
+      <Typography variant="h2">Vos recherches récentes</Typography>
+      {userSearch.lastSearch
+        ?.slice(0, 3)
+        .map(({ loc, maxPrice, page, pieces, sort, ...search }, index) => (
+          <Link
+            key={index}
+            href={`/dashboard/search/${
+              search.typeOfAnnonce === 'Location' ? 'location' : 'buy'
+            }/?${toQueryParams({
+              loc,
+            })}`}
+          >
+            <a>
+              <div className={classes.lastSearch}>
+                <Typography variant="h2" className="text-xs">
+                  {loc}
+                </Typography>
+                <Typography>
+                  {`${
+                    pieces ? toArr(pieces).join(', ') : 'Toute type de'
+                  } pièces | ${
+                    maxPrice && maxPrice > 0 ? `${maxPrice}€` : 'Prix indéfini'
+                  }`}
+                </Typography>
+                <span classes={classes.iconContainer}>
+                  <Icon type="sliderArrow" size="small" />
+                </span>
+              </div>
+            </a>
+          </Link>
+        ))}
+    </div>
     <div className={classes.lastViewdContainer}>
       <Typography variant="h2">Vos récentes consultations</Typography>
-      {userSearch.lastViewed?.slice(0, 3).map((elem, index) => (
-        <ListElement
-          key={index}
-          liked={liked}
-          {...elem}
-          handleBookmark={handleBookmark}
-        />
-      ))}
+      <Grid container justifyContent="space-between">
+        {userSearch.lastViewed?.slice(0, 3).map((elem, index) => (
+          <ListElement
+            key={index}
+            liked={liked}
+            {...elem}
+            handleBookmark={handleBookmark}
+          />
+        ))}
+      </Grid>
     </div>
     <div className={classes.advisorContainer}>
       <Typography variant="h2">Votre conseiller</Typography>
@@ -1137,6 +1191,8 @@ const NoAuthDashboard = ({ user = {}, partners, classes }) => {
 };
 
 const Dashboard = ({ classes, user = {}, userSearch, update }) => {
+  const theme = useTheme();
+  const isMdView = useMediaQuery(theme.breakpoints.down('sm'));
   const [liked, setLiked] = useState(
     user?.bookmarks?.map((elem) => elem._id) || []
   );
@@ -1150,10 +1206,10 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
   return (
     <AdminContentWrapper noRedirect>
       <div className={classes.heading}>
-        <div className=" px-40 md:px-80">
+        <div className="flex justify-center px-20 md:px-80">
           <Icon type="LogoVV" />
         </div>
-        <Typography variant="h1">
+        <Typography variant="h2">
           {isAuth ? 'Ravis de vous revoir ' : 'La première ofrre Jeune pour  '}
           <span>
             {isAuth ? (
@@ -1172,29 +1228,32 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
         </Typography>
       </div>
       {isAuth ? (
-        <div className="absolute z-10 top-[-15%]">
-          <SearchBar />
-        </div>
+        isMdView ? (
+          <div
+            onClick={() => setShowSearch(!showSearch)}
+            className="flex flex-row-reverse mt-4 rounded-xl h-_53 bg-white border border-_bordureBleu   sm:w-_295 md:w-_536"
+          >
+            <div
+              style={{
+                background:
+                  'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)',
+                width: '39px',
+                height: '39px',
+                borderRadius: '12px',
+                padding: '7px',
+                marginTop: '7px',
+                marginRight: '9px',
+              }}
+            >
+              <Icon type="recherche" color="white" />
+            </div>
+          </div>
+        ) : (
+          <div className="absolute z-10 top-[-15%]">
+            <SearchBar />
+          </div>
+        )
       ) : (
-        // <div
-        //   onClick={() => setShowSearch(!showSearch)}
-        //   className="flex flex-row-reverse mt-4 rounded-xl h-_53 bg-white border border-_bordureBleu  w-_426 sm:w-_295 md:w-_536 mb-4"
-        // >
-        //   <div
-        //     style={{
-        //       background:
-        //         'linear-gradient(180deg, #81A3F9 -0.06%, #3462D8 108.09%)',
-        //       width: '39px',
-        //       height: '39px',
-        //       borderRadius: '12px',
-        //       padding: '7px',
-        //       marginTop: '7px',
-        //       marginRight: '9px',
-        //     }}
-        //   >
-        //     <Icon type="recherche" color="white" />
-        //   </div>
-        // </div>
         <div
           onClick={() => setShowSearch(!showSearch)}
           className="flex flex-row-reverse mt-4 rounded-xl h-_53 bg-white border border-_bordureBleu absolute w-_426 sm:w-_295 md:w-_536"
@@ -1226,7 +1285,7 @@ const Dashboard = ({ classes, user = {}, userSearch, update }) => {
       ) : (
         <NoAuthDashboard classes={classes} />
       )}
-      {/* <SearchDrawer showSearch={showSearch} setShowSearch={setShowSearch} /> */}
+      <SearchDrawer showSearch={showSearch} setShowSearch={setShowSearch} />
     </AdminContentWrapper>
   );
 };
@@ -1247,13 +1306,15 @@ Dashboard.getInitialProps = async ({ req }) => {
   const { list } = await getPartnersApiMethod({ headers });
 
   let userSearch = {};
-  if (req && req.user) {
+  if (req && req.user)
+    // console.log('START RESEARCH!');
     userSearch = (
       await getUserLatestSearchApiMethod({
         headers,
       })
     )?.userSearch;
-  }
+  console.log('END');
+
   return { partners: list, userSearch };
 };
 const mapState = (state) => {
